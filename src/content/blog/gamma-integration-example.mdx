@@ -1,0 +1,62 @@
+---
+title: "Gamma Presentation Integration Example"
+slug: "gamma-integration-example"
+publishedAt: "2025-10-23T12:00:00Z"
+author: "Nino Chavez"
+excerpt: "This is an example blog post demonstrating Gamma presentation integration. Replace the gammaId below with your actual Gamma presentation ID."
+category: "Examples"
+tags: ["gamma", "presentations", "examples"]
+featured: false
+source: "gamma"
+gammaId: "REPLACE-WITH-YOUR-GAMMA-ID"
+presentationType: "gamma"
+---
+
+## How to Use This Template
+
+This is an example blog post showing how to integrate Gamma presentations into your blog.
+
+To create your own Gamma presentation post:
+
+1. **Get your Gamma presentation ID:**
+   - Open your presentation in Gamma
+   - Click the Share button
+   - Look for the embed code or share URL
+   - Extract the presentation ID from the URL (the part after `/docs/` or `/embed/`)
+
+2. **Update the frontmatter:**
+   - Replace `REPLACE-WITH-YOUR-GAMMA-ID` with your actual Gamma presentation ID
+   - Update the title, excerpt, category, and tags
+   - Set `source: "gamma"` and `presentationType: "gamma"`
+
+3. **Optional: Add supporting content:**
+   - You can add additional markdown content below to provide context
+   - The presentation will render first, followed by any markdown content
+
+The presentation will automatically embed above this content with a responsive 16:9 aspect ratio.
+
+## Example Frontmatter
+
+```yaml
+---
+title: "Q4 2024 Performance Review"
+slug: "q4-2024-review"
+publishedAt: "2025-10-23T12:00:00Z"
+author: "Nino Chavez"
+excerpt: "Quarterly performance highlights and strategic initiatives for the upcoming quarter"
+category: "Business"
+tags: ["presentations", "quarterly-review", "performance"]
+featured: true
+source: "gamma"
+gammaId: "YOUR-ACTUAL-GAMMA-ID-HERE"
+presentationType: "gamma"
+---
+```
+
+## Features
+
+- **Responsive Design:** Presentations automatically adapt to screen sizes
+- **Loading State:** Shows a loading indicator while the presentation loads
+- **Visual Badge:** Posts with presentations display a presentation badge on the blog list
+- **Standalone or Hybrid:** Use presentations alone or combine with markdown content
+- **SEO Friendly:** All metadata (title, excerpt, tags) are indexed for search
