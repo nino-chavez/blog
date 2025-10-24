@@ -29,9 +29,13 @@ export interface BlogPostFrontmatter {
   readTime?: string; // Reading time estimate (e.g., "5 min read")
 
   // Source attribution (for multi-platform content)
-  source?: 'ghost' | 'linkedin' | 'medium' | 'devto';
+  source?: 'ghost' | 'linkedin' | 'medium' | 'devto' | 'gamma';
   linkedinUrl?: string; // Original LinkedIn post URL
   externalUrl?: string; // Generic external source URL
+
+  // Gamma presentation integration
+  gammaId?: string; // Gamma presentation ID for embedding
+  presentationType?: 'gamma'; // Type of presentation (future: support other platforms)
 
   // SEO metadata
   seo?: {

@@ -18,9 +18,11 @@ interface BlogPostMetadata {
   author?: string;
   readTime?: string;
   featureImage?: string;
-  source?: 'ghost' | 'linkedin' | 'medium' | 'devto';
+  source?: 'ghost' | 'linkedin' | 'medium' | 'devto' | 'gamma';
   linkedinUrl?: string;
   externalUrl?: string;
+  gammaId?: string;
+  presentationType?: 'gamma';
 }
 
 interface BlogManifest {
@@ -136,6 +138,8 @@ async function generateManifest() {
       source: frontmatter.source,
       linkedinUrl: frontmatter.linkedinUrl,
       externalUrl: frontmatter.externalUrl,
+      gammaId: frontmatter.gammaId,
+      presentationType: frontmatter.presentationType,
     };
 
     posts.push(post);

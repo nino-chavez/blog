@@ -1,6 +1,42 @@
 {
   "posts": [
     {
+      "slug": "gamma-integration-example",
+      "title": "Gamma Presentation Integration Example",
+      "publishedAt": "2025-10-23T12:00:00Z",
+      "excerpt": "This is an example blog post demonstrating Gamma presentation integration. Replace the gammaId below with your actual Gamma presentation ID.",
+      "category": "Examples",
+      "tags": [
+        "gamma",
+        "presentations",
+        "examples"
+      ],
+      "featured": false,
+      "author": "Nino Chavez",
+      "readTime": "2 min read",
+      "source": "gamma",
+      "gammaId": "REPLACE-WITH-YOUR-GAMMA-ID",
+      "presentationType": "gamma",
+      "featureImage": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=2000&q=80"
+    },
+    {
+      "slug": "agentic-software-isn-t-magic-it-s-a-new-interface-for-an-old-problem",
+      "title": "\"Agentic Software\" Isn't Magic. It's a New Interface for an Old Problem.",
+      "publishedAt": "2025-10-21T02:45:06.077Z",
+      "excerpt": "My feed is saturated with 'agentic software.' The promise is magic: autonomous agents executing complex, multi-step plans. But let's cut the hype. This isn't magic.",
+      "category": "AI & Automation",
+      "tags": [
+        "ai",
+        "consulting",
+        "field-notes"
+      ],
+      "featured": true,
+      "author": "Nino Chavez",
+      "readTime": "3 min read",
+      "source": "gemini",
+      "featureImage": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=2000&q=80"
+    },
+    {
       "slug": "the-new-consulting-model-adapt-or-die",
       "title": "The New Consulting Model: Adapt or Die",
       "publishedAt": "2025-10-16T00:00:00.000Z",
@@ -2309,6 +2345,7 @@
     "AI & Automation",
     "Commerce",
     "Consulting",
+    "Examples",
     "Field Notes",
     "Insights",
     "Leadership",
@@ -2317,6 +2354,7 @@
     "Reflections"
   ],
   "tags": [
+    "ai",
     "ai-coding",
     "ai-workflows",
     "architecture",
@@ -2325,19 +2363,24 @@
     "consulting-practice",
     "craft",
     "devops",
+    "examples",
+    "field-notes",
+    "gamma",
     "leadership",
     "personal-growth",
+    "presentations",
     "systems-thinking",
     "testing"
   ],
   "categoryCounts": {
-    "AI & Automation": 78,
+    "AI & Automation": 79,
     "Field Notes": 5,
     "Reflections": 17,
     "Leadership": 14,
     "Meta": 11,
     "Consulting": 1,
     "Philosophy": 8,
+    "Examples": 1,
     "Commerce": 8,
     "Insights": 1
   },
@@ -2347,14 +2390,19 @@
     "leadership": 30,
     "systems-thinking": 52,
     "personal-growth": 59,
+    "ai": 1,
+    "consulting": 2,
+    "field-notes": 1,
     "architecture": 18,
     "devops": 4,
     "commerce-strategy": 11,
     "testing": 6,
     "consulting-practice": 12,
     "ai-coding": 7,
-    "consulting": 1
+    "gamma": 1,
+    "presentations": 1,
+    "examples": 1
   },
-  "totalPosts": 153,
-  "lastGenerated": "2025-10-20T17:19:03.798Z"
+  "totalPosts": 155,
+  "lastGenerated": "2025-10-23T23:14:35.371Z"
 }

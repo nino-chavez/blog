@@ -8,6 +8,7 @@ import ReadingProgress from '../components/ReadingProgress';
 import RelatedPosts from '../components/RelatedPosts';
 import SourceBadge from '../components/SourceBadge';
 import SocialShare from '../components/SocialShare';
+import GammaEmbed from '../components/GammaEmbed';
 import { getPostBySlug } from '../utils/mdx-loader';
 import type { BlogPost } from '../utils/mdx-loader';
 import { getCategoryColors } from '../utils/category-colors';
@@ -189,6 +190,13 @@ export default function BlogPostPage() {
               </div>
             )}
           </header>
+
+              {/* Gamma Presentation (if present) */}
+              {post.gammaId && (
+                <div className="mb-8">
+                  <GammaEmbed id={post.gammaId} title={post.title} />
+                </div>
+              )}
 
               {/* Article Content with Enhanced Typography */}
               <div className="prose max-w-none text-lg">

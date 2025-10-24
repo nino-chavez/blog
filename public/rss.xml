@@ -5,10 +5,32 @@
     <link>https://blog.ninochavez.co</link>
     <description>Architecture, commerce, and the signals that matter in the age of AI.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 21 Oct 2025 20:08:48 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 23 Oct 2025 23:14:35 GMT</lastBuildDate>
     <atom:link href="https://blog.ninochavez.co/rss.xml" rel="self" type="application/rss+xml" />
     <managingEditor>nino@signalreflex.studio (Nino Chavez)</managingEditor>
     <webMaster>nino@signalreflex.studio (Nino Chavez)</webMaster>
+  <item>
+    <title>Gamma Presentation Integration Example</title>
+    <link>https://blog.ninochavez.co/gamma-integration-example</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/gamma-integration-example</guid>
+    <pubDate>Thu, 23 Oct 2025 12:00:00 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>This is an example blog post demonstrating Gamma presentation integration. Replace the gammaId below with your actual Gamma presentation ID.</description>
+    <category>gamma</category>
+    <category>presentations</category>
+    <category>examples</category>
+  </item>
+  <item>
+    <title>&quot;Agentic Software&quot; Isn&apos;t Magic. It&apos;s a New Interface for an Old Problem.</title>
+    <link>https://blog.ninochavez.co/agentic-software-isn-t-magic-it-s-a-new-interface-for-an-old-problem</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/agentic-software-isn-t-magic-it-s-a-new-interface-for-an-old-problem</guid>
+    <pubDate>Tue, 21 Oct 2025 02:45:06 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>My feed is saturated with &apos;agentic software.&apos; The promise is magic: autonomous agents executing complex, multi-step plans. But let&apos;s cut the hype. This isn&apos;t magic.</description>
+    <category>ai</category>
+    <category>consulting</category>
+    <category>field-notes</category>
+  </item>
   <item>
     <title>The New Consulting Model: Adapt or Die</title>
     <link>https://blog.ninochavez.co/the-new-consulting-model-adapt-or-die</link>
@@ -472,26 +494,6 @@ We’re not just debugging code anymore.
 We’re debugging the system that teaches itself how to review.</description>
     <category>ai-workflows</category>
     <category>personal-growth</category>
-  </item>
-  <item>
-    <title>Designing for Environments, Not Just Themes: A Volleyball App UX Case Study</title>
-    <link>https://blog.ninochavez.co/designing-for-environments-not-just-themes-a-volleyball-app-ux-case-study</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/designing-for-environments-not-just-themes-a-volleyball-app-ux-case-study</guid>
-    <pubDate>Tue, 29 Jul 2025 00:43:00 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>Most apps toggle between &quot;light&quot; and &quot;dark.&quot; Ours needed more.</description>
-    <category>testing</category>
-  </item>
-  <item>
-    <title>One Week, One Developer, One Production System: How I Used AI to Build and Harden the LPO Bracket Manager</title>
-    <link>https://blog.ninochavez.co/one-week-one-developer-one-production-system-how-i-used-ai-to-build-and-harden-the-lpo-bracket-manag</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/one-week-one-developer-one-production-system-how-i-used-ai-to-build-and-harden-the-lpo-bracket-manag</guid>
-    <pubDate>Mon, 28 Jul 2025 18:41:00 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>In just seven days, I built a production-grade bracket and pool play management system — solo — using AI copilots, a structured prompt workflow, and modern web tooling. This isn’t a demo or proof...</description>
-    <category>architecture</category>
-    <category>devops</category>
-    <category>ai-coding</category>
   </item>
   </channel>
 </rss>
