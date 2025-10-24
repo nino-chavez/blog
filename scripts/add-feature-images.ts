@@ -162,13 +162,14 @@ function getDeterministicImage(category: string | undefined, slug: string): stri
 
 async function addFeatureImages() {
   const manifestPath = path.join(__dirname, '../src/data/blog-manifest.json');
-  
+  const publicManifestPath = path.join(__dirname, '../public/manifest.json');
+
   // Read the manifest
   const manifestContent = fs.readFileSync(manifestPath, 'utf-8');
   const manifest: Manifest = JSON.parse(manifestContent);
-  
+
   let updatedCount = 0;
-  
+
   // Process each post
   manifest.posts.forEach((post) => {
     if (!post.featureImage) {
@@ -177,16 +178,19 @@ async function addFeatureImages() {
       console.log(`✓ Added image to: ${post.slug} (${post.category || 'no category'})`);
     }
   });
-  
+
   // Update lastGenerated timestamp
   manifest.lastGenerated = new Date().toISOString();
-  
-  // Write back to file
+
+  // Write back to BOTH files (src/data and public)
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), 'utf-8');
-  
+  fs.writeFileSync(publicManifestPath, JSON.stringify(manifest, null, 2), 'utf-8');
+
   console.log(`\n✅ Updated ${updatedCount} posts with feature images`);
   console.log(`📝 Total posts: ${manifest.posts.length}`);
   console.log(`🖼️  Posts with images: ${manifest.posts.filter(p => p.featureImage).length}`);
+  console.log(`💾 Updated: src/data/blog-manifest.json`);
+  console.log(`🌐 Updated: public/manifest.json`);
 }
 
 // Run the script

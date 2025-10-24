@@ -32,7 +32,8 @@
       "featured": true,
       "author": "Nino Chavez",
       "readTime": "6 min read",
-      "source": "claude-sonnet-4"
+      "source": "claude-sonnet-4",
+      "featureImage": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=2000&q=80"
     },
     {
       "slug": "agentic-software-isn-t-magic-it-s-a-new-interface-for-an-old-problem",
@@ -48,7 +49,8 @@
       "featured": true,
       "author": "Nino Chavez",
       "readTime": "3 min read",
-      "source": "gemini"
+      "source": "gemini",
+      "featureImage": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=2000&q=80"
     },
     {
       "slug": "the-new-consulting-model-adapt-or-die",
@@ -64,7 +66,8 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/new-consulting-model-adapt-die-nino-chavez-w7dcc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/new-consulting-model-adapt-die-nino-chavez-w7dcc",
+      "featureImage": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=2000&q=80"
     },
     {
       "slug": "the-consultants-dilemma-the-tax-of-many-hats",
@@ -79,7 +82,8 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/consultants-dilemma-tax-many-hats-nino-chavez-fwrkc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/consultants-dilemma-tax-many-hats-nino-chavez-fwrkc",
+      "featureImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=2000&q=80"
     },
     {
       "slug": "the-emperor-has-no-rag-why-your-genai-strategy-is-built-on-sand-unless-you-ask-these-questions",
@@ -94,7 +98,8 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/emperor-has-rag-why-your-genai-strategy-built-sand-unless-nino-chavez-zxlmc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/emperor-has-rag-why-your-genai-strategy-built-sand-unless-nino-chavez-zxlmc",
+      "featureImage": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=2000&q=80"
     },
     {
       "slug": "beyond-the-copilot-architecting-for-autonomy-with-claude-sonnet-45",
@@ -110,7 +115,8 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/beyond-copilot-architecting-autonomy-claude-sonnet-45-nino-chavez-k0djc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/beyond-copilot-architecting-autonomy-claude-sonnet-45-nino-chavez-k0djc",
+      "featureImage": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=2000&q=80"
     },
     {
       "slug": "ai-wont-take-your-job-it-will-redefine-it-your-reskilling-starts-now",
@@ -125,7 +131,8 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/ai-wont-take-your-job-redefine-reskilling-starts-now-nino-chavez-lgkcc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/ai-wont-take-your-job-redefine-reskilling-starts-now-nino-chavez-lgkcc",
+      "featureImage": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=2000&q=80"
     },
     {
       "slug": "i-let-a-bunch-of-ai-agents-rebuild-my-app-heres-what-actually-worked",
@@ -140,7 +147,8 @@
       "author": "Nino Chavez",
       "readTime": "5 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/i-let-bunch-ai-agents-rebuild-my-app-heres-what-actually-nino-chavez-uadgc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/i-let-bunch-ai-agents-rebuild-my-app-heres-what-actually-nino-chavez-uadgc",
+      "featureImage": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=2000&q=80"
     },
     {
       "slug": "moores-law-is-sputtering-so-whats-really-next-for-tech",
@@ -153,7 +161,8 @@
       "author": "Nino Chavez",
       "readTime": "1 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/moores-law-sputtering-so-whats-really-next-tech-nino-chavez-boykc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/moores-law-sputtering-so-whats-really-next-tech-nino-chavez-boykc",
+      "featureImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=2000&q=80"
     },
     {
       "slug": "shipping-with-ai",
@@ -166,7 +175,8 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/shipping-ai-nino-chavez-gr6tc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/shipping-ai-nino-chavez-gr6tc",
+      "featureImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=2000&q=80"
     },
     {
       "slug": "observability-for-agent-commerce",
@@ -197,7 +207,8 @@
       "author": "Nino Chavez",
       "readTime": "6 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/710-year-evolution-web-nino-chavez-fjl2c"
+      "linkedinUrl": "https://www.linkedin.com/pulse/710-year-evolution-web-nino-chavez-fjl2c",
+      "featureImage": "https://images.unsplash.com/photo-1655720033654-a4239dd42d10?w=2000&q=80"
     },
     {
       "slug": "llm-codegen-and-the-three-little-pigs",
@@ -210,7 +221,8 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/llm-codegen-three-little-pigs-nino-chavez-hrncc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/llm-codegen-three-little-pigs-nino-chavez-hrncc",
+      "featureImage": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=2000&q=80"
     },
     {
       "slug": "the-coming-code-why-ai-native-software-needs-standards-and-how-to-prepare",
@@ -225,7 +237,8 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/coming-code-why-ai-native-software-needs-standards-how-nino-chavez-bsqyc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/coming-code-why-ai-native-software-needs-standards-how-nino-chavez-bsqyc",
+      "featureImage": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=2000&q=80"
     },
     {
       "slug": "the-elitist-trap",
@@ -239,7 +252,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "1 min read"
+      "readTime": "1 min read",
+      "featureImage": "https://images.unsplash.com/photo-1542435503-956c469947f6?w=2000&q=80"
     },
     {
       "slug": "when-your-framework-outgrows-your-ability-to-explain-it",
@@ -254,7 +268,8 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/when-your-framework-outgrows-ability-explain-nino-chavez-anxgc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/when-your-framework-outgrows-ability-explain-nino-chavez-anxgc",
+      "featureImage": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=2000&q=80"
     },
     {
       "slug": "aegis-framework-constitutional-crisis-we-declared-martial-law-on-ourselves",
@@ -267,7 +282,8 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/aegis-framework-constitutional-crisis-we-declared-martial-nino-chavez-t6bpc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/aegis-framework-constitutional-crisis-we-declared-martial-nino-chavez-t6bpc",
+      "featureImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=2000&q=80"
     },
     {
       "slug": "i-didnt-write-a-test-i-asked-the-system-to-reflect",
@@ -283,7 +299,8 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/i-didnt-write-test-asked-system-reflect-nino-chavez-09psc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/i-didnt-write-test-asked-system-reflect-nino-chavez-09psc",
+      "featureImage": "https://images.unsplash.com/photo-1655720033654-a4239dd42d10?w=2000&q=80"
     },
     {
       "slug": "the-storefront-isnt-dead-its-becoming-an-ai-optimized-validation-engine-in-a-shifting-commerce-lands",
@@ -298,7 +315,8 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/storefront-isnt-dead-its-becoming-ai-optimized-engine-nino-chavez-flfnc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/storefront-isnt-dead-its-becoming-ai-optimized-engine-nino-chavez-flfnc",
+      "featureImage": "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=2000&q=80"
     },
     {
       "slug": "pay-no-attention-to-the-man-behind-the-curtain",
@@ -311,7 +329,8 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/pay-attention-man-behind-curtain-nino-chavez-doqmc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/pay-attention-man-behind-curtain-nino-chavez-doqmc",
+      "featureImage": "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=2000&q=80"
     },
     {
       "slug": "genai-os",
@@ -355,7 +374,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "3 min read"
+      "readTime": "3 min read",
+      "featureImage": "https://images.unsplash.com/photo-1635322966219-b75ed372eb01?w=2000&q=80"
     },
     {
       "slug": "the-work-before-the-words",
@@ -417,7 +437,8 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/putting-my-money-where-mouth-nino-chavez-udeyc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/putting-my-money-where-mouth-nino-chavez-udeyc",
+      "featureImage": "https://images.unsplash.com/photo-1655720033654-a4239dd42d10?w=2000&q=80"
     },
     {
       "slug": "the-paradox-of-velocity-in-ai-coding",
@@ -446,7 +467,8 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/next-compiler-semantic-nino-chavez-vulyc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/next-compiler-semantic-nino-chavez-vulyc",
+      "featureImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=2000&q=80"
     },
     {
       "slug": "what-my-jsx-free-react-app-really-taught-me-about-ai-coding",
@@ -462,7 +484,8 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/what-my-jsx-free-react-app-really-taught-me-ai-coding-nino-chavez-3faoc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/what-my-jsx-free-react-app-really-taught-me-ai-coding-nino-chavez-3faoc",
+      "featureImage": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=2000&q=80"
     },
     {
       "slug": "why-my-react-app-doesnt-use-jsx-and-what-that-taught-me-about-building-with-ai",
@@ -477,7 +500,8 @@
       "author": "Nino Chavez",
       "readTime": "4 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/why-my-react-app-doesnt-use-jsx-what-taught-me-building-nino-chavez-6e1ic"
+      "linkedinUrl": "https://www.linkedin.com/pulse/why-my-react-app-doesnt-use-jsx-what-taught-me-building-nino-chavez-6e1ic",
+      "featureImage": "https://images.unsplash.com/photo-1635322966219-b75ed372eb01?w=2000&q=80"
     },
     {
       "slug": "i-still-dont-really-know-jsx-and-i-dont-think-it-matters",
@@ -491,7 +515,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "3 min read"
+      "readTime": "3 min read",
+      "featureImage": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=2000&q=80"
     },
     {
       "slug": "i-dont-believe-the-agentic-ai-hype-and-heres-why-thats-not-ignorance",
@@ -504,7 +529,8 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/i-dont-believe-agentic-ai-hype-heres-why-thats-ignorance-nino-chavez-ft3oc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/i-dont-believe-agentic-ai-hype-heres-why-thats-ignorance-nino-chavez-ft3oc",
+      "featureImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=2000&q=80"
     },
     {
       "slug": "the-modern-js-stack-is-a-masterpiece-of-power-and-a-catastrophe-of-experience",
@@ -519,7 +545,8 @@
       "author": "Nino Chavez",
       "readTime": "5 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/modern-js-stack-masterpiece-power-catastrophe-nino-chavez-pdubc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/modern-js-stack-masterpiece-power-catastrophe-nino-chavez-pdubc",
+      "featureImage": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=2000&q=80"
     },
     {
       "slug": "even-the-ai-is-confused",
@@ -548,7 +575,8 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/light-bulb-moment-ive-been-doing-ai-coding-wrong-sort-nino-chavez-gthjc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/light-bulb-moment-ive-been-doing-ai-coding-wrong-sort-nino-chavez-gthjc",
+      "featureImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=2000&q=80"
     },
     {
       "slug": "the-drift-beneath-the-velocity",
@@ -593,7 +621,8 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/ai-ops-docs-as-contracts-nino-chavez-atmuc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/ai-ops-docs-as-contracts-nino-chavez-atmuc",
+      "featureImage": "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=2000&q=80"
     },
     {
       "slug": "skip-the-api-building-a-local-chatgpt-bridge-for-vs-code",
@@ -624,7 +653,8 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/from-qa-bottleneck-autonomous-confidence-how-i-built-fully-chavez-rudde"
+      "linkedinUrl": "https://www.linkedin.com/pulse/from-qa-bottleneck-autonomous-confidence-how-i-built-fully-chavez-rudde",
+      "featureImage": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=2000&q=80"
     },
     {
       "slug": "from-ai-copilot-to-ai-enforcer",
@@ -685,7 +715,8 @@
       "author": "Nino Chavez",
       "readTime": "5 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/from-prompt-product-building-demo-mode-week-2-nino-chavez-uzdic"
+      "linkedinUrl": "https://www.linkedin.com/pulse/from-prompt-product-building-demo-mode-week-2-nino-chavez-uzdic",
+      "featureImage": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=2000&q=80"
     },
     {
       "slug": "when-control-matters-behind-the-decision-to-build-feature-toggles-into-the-bracket-app",
@@ -698,7 +729,8 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/when-control-matters-behind-decision-build-feature-toggles-chavez-gmttc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/when-control-matters-behind-decision-build-feature-toggles-chavez-gmttc",
+      "featureImage": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=2000&q=80"
     },
     {
       "slug": "when-fast-isnt-fast-enough-the-shift-from-ai-coding-to-ai-concurrency",
@@ -715,7 +747,8 @@
       "author": "Nino Chavez",
       "readTime": "4 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/when-fast-isnt-enough-shift-from-ai-coding-nino-chavez-xipgc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/when-fast-isnt-enough-shift-from-ai-coding-nino-chavez-xipgc",
+      "featureImage": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=2000&q=80"
     },
     {
       "slug": "show-your-work-designing-ai-enforced-safeguards",
@@ -728,7 +761,8 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/show-your-work-designing-ai-enforced-safeguards-nino-chavez-os7mc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/show-your-work-designing-ai-enforced-safeguards-nino-chavez-os7mc",
+      "featureImage": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=2000&q=80"
     },
     {
       "slug": "fix-it-once-prevent-it-forever-how-i-made-a-dropdown-bug-impossible-to-reintroduce",
@@ -743,7 +777,8 @@
       "author": "Nino Chavez",
       "readTime": "4 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/fix-once-prevent-forever-how-i-made-dropdown-bug-nino-chavez-04yyc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/fix-once-prevent-forever-how-i-made-dropdown-bug-nino-chavez-04yyc",
+      "featureImage": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=2000&q=80"
     },
     {
       "slug": "who-reviewed-the-reviewer",
@@ -773,7 +808,8 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/designing-environments-just-themes-volleyball-app-ux-case-nino-chavez-jqkqc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/designing-environments-just-themes-volleyball-app-ux-case-nino-chavez-jqkqc",
+      "featureImage": "https://images.unsplash.com/photo-1655720033654-a4239dd42d10?w=2000&q=80"
     },
     {
       "slug": "one-week-one-developer-one-production-system-how-i-used-ai-to-build-and-harden-the-lpo-bracket-manag",
@@ -790,7 +826,8 @@
       "author": "Nino Chavez",
       "readTime": "5 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/one-week-developer-production-system-how-i-used-ai-build-nino-chavez-mdkkc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/one-week-developer-production-system-how-i-used-ai-build-nino-chavez-mdkkc",
+      "featureImage": "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=2000&q=80"
     },
     {
       "slug": "tokens-are-dev-hours",
@@ -805,7 +842,8 @@
       ],
       "featured": true,
       "author": "Nino Chavez",
-      "readTime": "4 min read"
+      "readTime": "4 min read",
+      "featureImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=2000&q=80"
     },
     {
       "slug": "the-ai-engineer-has-joined-the-team",
@@ -838,7 +876,8 @@
       "author": "Nino Chavez",
       "readTime": "4 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/docs-code-isnt-enough-how-ai-ready-knowledge-layers-compress-chavez-agawc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/docs-code-isnt-enough-how-ai-ready-knowledge-layers-compress-chavez-agawc",
+      "featureImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=2000&q=80"
     },
     {
       "slug": "from-fear-to-flow-my-accidental-journey-into-ai-powered-development",
@@ -854,7 +893,8 @@
       "author": "Nino Chavez",
       "readTime": "8 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/from-fear-flow-my-accidental-journey-ai-powered-nino-chavez-ohfdc"
+      "linkedinUrl": "https://www.linkedin.com/pulse/from-fear-flow-my-accidental-journey-ai-powered-nino-chavez-ohfdc",
+      "featureImage": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=2000&q=80"
     },
     {
       "slug": "from-fear-to-flow",
@@ -1414,7 +1454,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read"
+      "readTime": "2 min read",
+      "featureImage": "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=2000&q=80"
     },
     {
       "slug": "the-cleanup-economy",
@@ -1698,7 +1739,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "3 min read"
+      "readTime": "3 min read",
+      "featureImage": "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=2000&q=80"
     },
     {
       "slug": "writing-helped-me-notice-i-was-seeing-differently",
@@ -1742,7 +1784,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "3 min read"
+      "readTime": "3 min read",
+      "featureImage": "https://images.unsplash.com/photo-1432821596592-e2c18b78144f?w=2000&q=80"
     },
     {
       "slug": "if-the-storefront-is-dead-where-do-you-compete-now",
@@ -1756,7 +1799,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read"
+      "readTime": "2 min read",
+      "featureImage": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=2000&q=80"
     },
     {
       "slug": "why-this-made-you-ask",
@@ -1942,7 +1986,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "3 min read"
+      "readTime": "3 min read",
+      "featureImage": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=2000&q=80"
     },
     {
       "slug": "the-rules-i-actually-follow",
@@ -1998,7 +2043,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read"
+      "readTime": "2 min read",
+      "featureImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=2000&q=80"
     },
     {
       "slug": "why-i-use-ai-every-day-and-why-i-started-writing-about-it",
@@ -2012,7 +2058,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read"
+      "readTime": "2 min read",
+      "featureImage": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=2000&q=80"
     },
     {
       "slug": "grid-level-thinking-wasnt-the-plan",
@@ -2027,7 +2074,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read"
+      "readTime": "2 min read",
+      "featureImage": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=2000&q=80"
     },
     {
       "slug": "power-without-purpose-is-just-a-bill",
@@ -2041,7 +2089,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read"
+      "readTime": "2 min read",
+      "featureImage": "https://images.unsplash.com/photo-1655720033654-a4239dd42d10?w=2000&q=80"
     },
     {
       "slug": "plug-in-then-rethink-the-system",
@@ -2055,7 +2104,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read"
+      "readTime": "2 min read",
+      "featureImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=2000&q=80"
     },
     {
       "slug": "wired-for-power-everyone-got-the-current-not-everyone-built-the-city",
@@ -2070,7 +2120,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "1 min read"
+      "readTime": "1 min read",
+      "featureImage": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=2000&q=80"
     },
     {
       "slug": "wired-for-power-ai-is-the-grid-youre-the-architect",
@@ -2084,7 +2135,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "1 min read"
+      "readTime": "1 min read",
+      "featureImage": "https://images.unsplash.com/photo-1655720033654-a4239dd42d10?w=2000&q=80"
     },
     {
       "slug": "the-entry-level-developer-evolution-not-extinction",
@@ -2098,7 +2150,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read"
+      "readTime": "2 min read",
+      "featureImage": "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=2000&q=80"
     },
     {
       "slug": "you-cant-engineer-growth",
@@ -2111,7 +2164,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read"
+      "readTime": "2 min read",
+      "featureImage": "https://images.unsplash.com/photo-1542435503-956c469947f6?w=2000&q=80"
     },
     {
       "slug": "how-i-built-signal-reflex-in-a-week",
@@ -2125,7 +2179,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "3 min read"
+      "readTime": "3 min read",
+      "featureImage": "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=2000&q=80"
     },
     {
       "slug": "almost-flickday",
@@ -2166,7 +2221,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read"
+      "readTime": "2 min read",
+      "featureImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=2000&q=80"
     },
     {
       "slug": "why-they-call-me-uncle-nino-an-evolving-leadership-style",
@@ -2180,7 +2236,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read"
+      "readTime": "2 min read",
+      "featureImage": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=2000&q=80"
     },
     {
       "slug": "start-smart-not-perfect",
@@ -2193,7 +2250,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read"
+      "readTime": "2 min read",
+      "featureImage": "https://images.unsplash.com/photo-1455849318743-b2233052fcff?w=2000&q=80"
     },
     {
       "slug": "why-i-shoot-senior-nights",
@@ -2206,7 +2264,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "3 min read"
+      "readTime": "3 min read",
+      "featureImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2000&q=80"
     },
     {
       "slug": "how-i-use-ai-in-consulting-for-real",
@@ -2220,7 +2279,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read"
+      "readTime": "2 min read",
+      "featureImage": "https://images.unsplash.com/photo-1655720033654-a4239dd42d10?w=2000&q=80"
     },
     {
       "slug": "why-i-started-signal-reflex",
@@ -2234,7 +2294,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "1 min read"
+      "readTime": "1 min read",
+      "featureImage": "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=2000&q=80"
     },
     {
       "slug": "about-me",
@@ -2249,7 +2310,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "1 min read"
+      "readTime": "1 min read",
+      "featureImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=2000&q=80"
     },
     {
       "slug": "the-storefront-is-dead",
@@ -2263,7 +2325,8 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read"
+      "readTime": "2 min read",
+      "featureImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=2000&q=80"
     },
     {
       "slug": "about",
@@ -2355,5 +2418,5 @@
     "meta": 1
   },
   "totalPosts": 156,
-  "lastGenerated": "2025-10-24T14:13:25.297Z"
+  "lastGenerated": "2025-10-24T20:11:59.884Z"
 }
