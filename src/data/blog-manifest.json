@@ -1,23 +1,39 @@
 {
   "posts": [
     {
-      "slug": "gamma-integration-example",
-      "title": "Gamma Presentation Integration Example",
-      "publishedAt": "2025-10-23T12:00:00Z",
-      "excerpt": "This is an example blog post demonstrating Gamma presentation integration. Replace the gammaId below with your actual Gamma presentation ID.",
-      "category": "Examples",
+      "slug": "from-gsd-to-just-handle-it",
+      "title": "From 'Get Shit Done' to 'Just Handle It'",
+      "publishedAt": "2025-10-24T08:00:00-08:00",
+      "excerpt": "I used to wear 'GSD' like a badge. But somewhere along the way, I realized my old mantra was creating the exact dependency I was supposed to prevent.",
+      "category": "Leadership",
       "tags": [
-        "gamma",
-        "presentations",
-        "examples"
+        "leadership",
+        "meta",
+        "personal-growth",
+        "systems-thinking"
       ],
-      "featured": false,
+      "featured": true,
       "author": "Nino Chavez",
-      "readTime": "2 min read",
-      "source": "gamma",
-      "gammaId": "REPLACE-WITH-YOUR-GAMMA-ID",
-      "presentationType": "gamma",
-      "featureImage": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=2000&q=80"
+      "readTime": "5 min read",
+      "featureImage": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=2000"
+    },
+    {
+      "slug": "debunking-the-svelte-ai-myth-69-production-components-dont-lie",
+      "title": "Debunking the 'Svelte + AI' Myth: 69 Production Components Don't Lie",
+      "publishedAt": "2025-10-23T19:00:00.000Z",
+      "excerpt": "Blog posts claim 'LLMs struggle with Svelte 5.' Our evidence? Two production apps, 69 components, and Agent-OS v3.0.0 optimized for Svelte. The data doesn't match the narrative.",
+      "category": "AI & Automation",
+      "tags": [
+        "ai",
+        "svelte",
+        "web-development",
+        "field-notes"
+      ],
+      "featured": true,
+      "author": "Nino Chavez",
+      "readTime": "6 min read",
+      "source": "claude-sonnet-4",
+      "featureImage": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=2000&q=80"
     },
     {
       "slug": "agentic-software-isn-t-magic-it-s-a-new-interface-for-an-old-problem",
@@ -2345,7 +2361,6 @@
     "AI & Automation",
     "Commerce",
     "Consulting",
-    "Examples",
     "Field Notes",
     "Insights",
     "Leadership",
@@ -2363,46 +2378,45 @@
     "consulting-practice",
     "craft",
     "devops",
-    "examples",
     "field-notes",
-    "gamma",
     "leadership",
+    "meta",
     "personal-growth",
-    "presentations",
+    "svelte",
     "systems-thinking",
-    "testing"
+    "testing",
+    "web-development"
   ],
   "categoryCounts": {
-    "AI & Automation": 79,
+    "AI & Automation": 80,
     "Field Notes": 5,
     "Reflections": 17,
-    "Leadership": 14,
+    "Leadership": 15,
     "Meta": 11,
     "Consulting": 1,
     "Philosophy": 8,
-    "Examples": 1,
     "Commerce": 8,
     "Insights": 1
   },
   "tagCounts": {
     "ai-workflows": 60,
     "craft": 6,
-    "leadership": 30,
-    "systems-thinking": 52,
-    "personal-growth": 59,
-    "ai": 1,
+    "leadership": 31,
+    "systems-thinking": 53,
+    "personal-growth": 60,
+    "ai": 2,
     "consulting": 2,
-    "field-notes": 1,
+    "field-notes": 2,
     "architecture": 18,
     "devops": 4,
     "commerce-strategy": 11,
     "testing": 6,
     "consulting-practice": 12,
+    "svelte": 1,
+    "web-development": 1,
     "ai-coding": 7,
-    "gamma": 1,
-    "presentations": 1,
-    "examples": 1
+    "meta": 1
   },
-  "totalPosts": 155,
-  "lastGenerated": "2025-10-23T23:14:35.371Z"
+  "totalPosts": 156,
+  "lastGenerated": "2025-10-24T14:13:25.446Z"
 }

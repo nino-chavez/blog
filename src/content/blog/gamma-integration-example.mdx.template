@@ -3,6 +3,7 @@ title: "Gamma Presentation Integration Example"
 slug: "gamma-integration-example"
 publishedAt: "2025-10-23T12:00:00Z"
 author: "Nino Chavez"
+status: "draft"
 excerpt: "This is an example blog post demonstrating Gamma presentation integration. Replace the gammaId below with your actual Gamma presentation ID."
 category: "Examples"
 tags: ["gamma", "presentations", "examples"]

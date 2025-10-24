@@ -49,7 +49,7 @@ export default function BlogPostPage() {
       <>
         <HeaderNav onSearch={setSearchQuery} searchQuery={searchQuery} />
         <BlogLayout>
-          <div className="max-w-4xl mx-auto space-y-8 pt-24">
+          <div className="max-w-3xl mx-auto space-y-8 pt-12">
           <button
             onClick={() => navigate('/')}
             className="group flex items-center gap-2 text-zinc-400 hover:text-athletic-court-orange transition-all duration-reaction font-medium"
@@ -72,7 +72,7 @@ export default function BlogPostPage() {
       <>
         <HeaderNav onSearch={setSearchQuery} searchQuery={searchQuery} />
         <BlogLayout>
-          <div className="max-w-4xl mx-auto space-y-8 pt-24">
+          <div className="max-w-3xl mx-auto space-y-8 pt-12">
           <button
             onClick={() => navigate('/')}
             className="group flex items-center gap-2 text-zinc-400 hover:text-athletic-court-orange transition-all duration-reaction font-medium"
@@ -108,7 +108,7 @@ export default function BlogPostPage() {
       <BlogLayout>
         <ReadingProgress />
 
-        <div className="max-w-4xl mx-auto pt-24">
+        <div className="max-w-3xl mx-auto pt-12">
         <div className="space-y-6">
             <button
               onClick={() => navigate('/')}
@@ -120,7 +120,7 @@ export default function BlogPostPage() {
 
             <article className="space-y-6">
               {/* Featured Image Hero */}
-              <div className="relative -mx-4 md:-mx-8 lg:mx-0 aspect-[21/9] overflow-hidden rounded-2xl border border-zinc-800">
+              <div className="relative -mx-4 md:-mx-8 lg:mx-0 aspect-video overflow-hidden rounded-2xl border border-zinc-800">
                 <img
                   src={post.featureImage || '/og_image.png'}
                   alt={post.title}

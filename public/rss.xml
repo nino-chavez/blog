@@ -5,20 +5,33 @@
     <link>https://blog.ninochavez.co</link>
     <description>Architecture, commerce, and the signals that matter in the age of AI.</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Oct 2025 23:14:35 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 24 Oct 2025 14:13:25 GMT</lastBuildDate>
     <atom:link href="https://blog.ninochavez.co/rss.xml" rel="self" type="application/rss+xml" />
     <managingEditor>nino@signalreflex.studio (Nino Chavez)</managingEditor>
     <webMaster>nino@signalreflex.studio (Nino Chavez)</webMaster>
   <item>
-    <title>Gamma Presentation Integration Example</title>
-    <link>https://blog.ninochavez.co/gamma-integration-example</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/gamma-integration-example</guid>
-    <pubDate>Thu, 23 Oct 2025 12:00:00 GMT</pubDate>
+    <title>From &apos;Get Shit Done&apos; to &apos;Just Handle It&apos;</title>
+    <link>https://blog.ninochavez.co/from-gsd-to-just-handle-it</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/from-gsd-to-just-handle-it</guid>
+    <pubDate>Fri, 24 Oct 2025 16:00:00 GMT</pubDate>
     <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>This is an example blog post demonstrating Gamma presentation integration. Replace the gammaId below with your actual Gamma presentation ID.</description>
-    <category>gamma</category>
-    <category>presentations</category>
-    <category>examples</category>
+    <description>I used to wear &apos;GSD&apos; like a badge. But somewhere along the way, I realized my old mantra was creating the exact dependency I was supposed to prevent.</description>
+    <category>leadership</category>
+    <category>meta</category>
+    <category>personal-growth</category>
+    <category>systems-thinking</category>
+  </item>
+  <item>
+    <title>Debunking the &apos;Svelte + AI&apos; Myth: 69 Production Components Don&apos;t Lie</title>
+    <link>https://blog.ninochavez.co/debunking-the-svelte-ai-myth-69-production-components-dont-lie</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/debunking-the-svelte-ai-myth-69-production-components-dont-lie</guid>
+    <pubDate>Thu, 23 Oct 2025 19:00:00 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>Blog posts claim &apos;LLMs struggle with Svelte 5.&apos; Our evidence? Two production apps, 69 components, and Agent-OS v3.0.0 optimized for Svelte. The data doesn&apos;t match the narrative.</description>
+    <category>ai</category>
+    <category>svelte</category>
+    <category>web-development</category>
+    <category>field-notes</category>
   </item>
   <item>
     <title>&quot;Agentic Software&quot; Isn&apos;t Magic. It&apos;s a New Interface for an Old Problem.</title>
@@ -481,19 +494,6 @@
     <author>nino@signalreflex.studio (Nino Chavez)</author>
     <description>This one started like a lot of bugs do: Dropdowns weren’t updating after a bulk import. The data was there, the page reloaded, but the dropdowns stayed stale. Console warnings, frustrated...</description>
     <category>architecture</category>
-  </item>
-  <item>
-    <title>Who Reviewed the Reviewer?</title>
-    <link>https://blog.ninochavez.co/who-reviewed-the-reviewer</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/who-reviewed-the-reviewer</guid>
-    <pubDate>Tue, 29 Jul 2025 02:03:56 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>This post is about that realization. About what happens when AI becomes the default reviewer, and starts learning from its own reflections.
-
-We’re not just debugging code anymore.
-We’re debugging the system that teaches itself how to review.</description>
-    <category>ai-workflows</category>
-    <category>personal-growth</category>
   </item>
   </channel>
 </rss>

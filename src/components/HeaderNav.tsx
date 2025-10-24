@@ -57,7 +57,7 @@ export default function HeaderNav({ onSearch, searchQuery }: HeaderNavProps) {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/98 backdrop-blur-xl border-b border-zinc-800/30">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 gap-2 min-w-0">
+        <div className="flex items-center justify-between h-20 gap-2 min-w-0">
           {/* Logo/Title with icon on mobile */}
           <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             {/* Mobile Icon */}
@@ -73,7 +73,7 @@ export default function HeaderNav({ onSearch, searchQuery }: HeaderNavProps) {
             </div>
             
             {/* Desktop Title */}
-            <h1 className="hidden sm:block text-base lg:text-lg font-bold bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange bg-clip-text text-transparent whitespace-nowrap">
+            <h1 className="hidden sm:block text-base lg:text-lg font-bold bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange bg-clip-text text-transparent whitespace-nowrap leading-relaxed pb-0.5">
               Signal Dispatch
             </h1>
             <span className="hidden lg:inline text-sm text-zinc-500 whitespace-nowrap">

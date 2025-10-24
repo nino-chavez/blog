@@ -74,6 +74,7 @@ export function getManifest(): BlogManifest {
 /**
  * Get a single blog post by slug
  * Reuses the same import.meta.glob modules to avoid duplicate imports
+ * Merges featureImage from manifest if not present in frontmatter
  */
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   try {
@@ -87,9 +88,14 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
 
     const module = await importFn();
 
+    // Find corresponding manifest entry to get feature image
+    const manifestPost = manifestData.posts.find(p => p.slug === slug);
+
     return {
       ...module.frontmatter,
       slug,
+      // Merge featureImage from manifest if not in frontmatter
+      featureImage: module.frontmatter.featureImage || manifestPost?.featureImage,
       content: module.default as ComponentType,
     } as BlogPost;
   } catch (error) {
