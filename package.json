@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsx scripts/generate-manifest.ts && tsx scripts/add-feature-images.ts && tsx scripts/generate-rss.ts && tsx scripts/generate-sitemap.ts && tsc -b && vite build",
+    "build": "tsx scripts/generate-manifest.ts && tsx scripts/add-feature-images.ts && tsx scripts/generate-rss.ts && tsx scripts/generate-sitemap.ts && tsc -b && vite build && tsx scripts/trigger-rebuild.ts",
     "manifest": "tsx scripts/generate-manifest.ts",
     "rss": "tsx scripts/generate-rss.ts",
     "sitemap": "tsx scripts/generate-sitemap.ts",
     "seo": "npm run manifest && npm run rss && npm run sitemap",
     "create-post": "tsx scripts/create-blog-post.ts",
+    "trigger-rebuild": "tsx scripts/trigger-rebuild.ts",
     "lint": "eslint .",
     "preview": "vite preview"
   },
