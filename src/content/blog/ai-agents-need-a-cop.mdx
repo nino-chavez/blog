@@ -1,0 +1,62 @@
+---
+title: "My AI Agents Have Rules. They Break Them. So I Built a Cop."
+publishedAt: "2025-10-28T13:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "Instructions aren't enough. To make agentic workflows reliable, I had to build a meta-agent to police my coding agents. Welcome to the unglamorous world of AI Ops."
+category: "AI & Automation"
+tags: ["agentic software", "ai ops", "governance", "llm"]
+featured: false
+---
+
+I have a rule. It’s written in a document called `CLAUDE.md` that I feed to my AI coding agent every time it works on my photography gallery project. The rule is simple, and I think, completely unambiguous.
+
+**NO EMOJIS IN UI.**
+
+It’s a non-negotiable design principle for this specific project. We use a specific icon library. Emojis break the aesthetic. The instructions are clear. The agent agrees to them.
+
+And then it adds a ⚡ to a button label.
+
+What do you do when your instructions aren't enough? When the rules of the "cage" you so carefully constructed are ignored, not out of malice, but because the agent is a force of nature trained on a universe of emoji-filled websites? You can’t reason with it. You can’t put it on a performance improvement plan. You have to build a cop.
+
+### The Failure of Instructions
+
+This is the messy reality of AI Ops. The instruction documents I write—the `GEMINI.md` and `CLAUDE.md` files that live in every project—are the legal code. They define the project's soul, its constraints, its business logic. They are the bars of the cage I wrote about previously.
+
+But laws require enforcement.
+
+For weeks, I was the enforcement. I was the manual code reviewer, the tired guard checking every commit for violations. "No, no emojis." "No, you can't use a hard-coded hex value, you have to use the design token." "No, that animation timing is arbitrary, use one of the pre-defined motion tokens."
+
+It was tedious. It was slow. And it completely defeated the purpose of having autonomous agents in the first place.
+
+### Building the Linter-Bot
+
+My first thought was to build a traditional linter. A set of complex regexes or maybe even an AST parser to scan the generated code for rule violations. It felt like a lot of work. Brittle, too. A new rule would mean a new parser.
+
+Then it clicked. What’s the best tool for understanding natural language rules and comparing them against code? Another AI.
+
+So I built a meta-agent. A linter-bot.
+
+It’s a simple script, really. When one of my primary coding agents proposes a change, this script kicks in before the code is ever committed. It takes two documents:
+
+1.  The project's instruction file (`CLAUDE.md`).
+2.  The newly generated code.
+
+It feeds both to a third, cheaper, faster model (like Claude 3 Haiku) with a dead-simple prompt:
+
+> "Does the following code violate any of the rules in the provided instruction document? Answer only YES or NO. If YES, cite the specific rule that was broken."
+
+Suddenly, I had an automated code reviewer. A cop.
+
+### Is This Just a Bureaucracy of Bots?
+
+I have to admit, there’s a part of me that hates this. Am I just building a digital bureaucracy? An AI to watch the AI? What happens when the linter-bot is wrong? Or when I need an agent to police the linter-bot?
+
+It feels like a stop-gap. A patch on a leaky bucket. Maybe the real problem is that the primary agents just aren't good enough yet. They can write incredible code, but they struggle with context and constraint adherence over long tasks. This whole AI Ops layer might just be a temporary crutch until the models get better.
+
+Maybe.
+
+But the results are hard to argue with. The linter-bot catches about 80% of rule violations automatically. My review process has gone from a 15-minute manual scan to a 30-second glance at the linter's output. It tells me an agent used an emoji, and I can reject the change with a single click. It works.
+
+It’s not the elegant, self-correcting, fully autonomous system I dreamed of. It’s a pragmatic, slightly clunky script that acts as a robotic gatekeeper. It’s the unglamorous, operational plumbing required to make any of this agentic software hype actually function in the real world.
+
+For today, that’s enough. This is the bridge between the promise of AI agents and the reality of shipping clean, compliant code. And for now, the cop is on the beat.
