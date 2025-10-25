@@ -18,6 +18,23 @@
       "featureImage": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=2000"
     },
     {
+      "slug": "the-posture-problem",
+      "title": "The Posture Problem",
+      "publishedAt": "2025-10-24T12:00:00.000Z",
+      "excerpt": "Awareness isn't the fix. It's just the ticket to the stadium. The real work is what comes after the breakthrough.",
+      "category": "Meta",
+      "tags": [
+        "personal-growth",
+        "therapy",
+        "patterns",
+        "practice"
+      ],
+      "featured": true,
+      "author": "Nino Chavez",
+      "readTime": "3 min read",
+      "featureImage": "https://images.unsplash.com/photo-1734634248767-16fd30f19cfa?q=80&w=2000"
+    },
+    {
       "slug": "debunking-the-svelte-ai-myth-69-production-components-dont-lie",
       "title": "Debunking the 'Svelte + AI' Myth: 69 Production Components Don't Lie",
       "publishedAt": "2025-10-23T19:00:00.000Z",
@@ -2381,10 +2398,13 @@
     "field-notes",
     "leadership",
     "meta",
+    "patterns",
     "personal-growth",
+    "practice",
     "svelte",
     "systems-thinking",
     "testing",
+    "therapy",
     "web-development"
   ],
   "categoryCounts": {
@@ -2392,7 +2412,7 @@
     "Field Notes": 5,
     "Reflections": 17,
     "Leadership": 15,
-    "Meta": 11,
+    "Meta": 12,
     "Consulting": 1,
     "Philosophy": 8,
     "Commerce": 8,
@@ -2403,7 +2423,7 @@
     "craft": 6,
     "leadership": 31,
     "systems-thinking": 53,
-    "personal-growth": 60,
+    "personal-growth": 61,
     "ai": 2,
     "consulting": 2,
     "field-notes": 2,
@@ -2415,8 +2435,11 @@
     "svelte": 1,
     "web-development": 1,
     "ai-coding": 7,
-    "meta": 1
+    "meta": 1,
+    "therapy": 1,
+    "patterns": 1,
+    "practice": 1
   },
-  "totalPosts": 156,
-  "lastGenerated": "2025-10-24T20:11:59.884Z"
+  "totalPosts": 157,
+  "lastGenerated": "2025-10-25T01:05:45.605Z"
 }

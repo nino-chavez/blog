@@ -5,7 +5,7 @@
     <link>https://blog.ninochavez.co</link>
     <description>Architecture, commerce, and the signals that matter in the age of AI.</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 Oct 2025 14:13:25 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 25 Oct 2025 01:05:45 GMT</lastBuildDate>
     <atom:link href="https://blog.ninochavez.co/rss.xml" rel="self" type="application/rss+xml" />
     <managingEditor>nino@signalreflex.studio (Nino Chavez)</managingEditor>
     <webMaster>nino@signalreflex.studio (Nino Chavez)</webMaster>
@@ -20,6 +20,18 @@
     <category>meta</category>
     <category>personal-growth</category>
     <category>systems-thinking</category>
+  </item>
+  <item>
+    <title>The Posture Problem</title>
+    <link>https://blog.ninochavez.co/the-posture-problem</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/the-posture-problem</guid>
+    <pubDate>Fri, 24 Oct 2025 12:00:00 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>Awareness isn&apos;t the fix. It&apos;s just the ticket to the stadium. The real work is what comes after the breakthrough.</description>
+    <category>personal-growth</category>
+    <category>therapy</category>
+    <category>patterns</category>
+    <category>practice</category>
   </item>
   <item>
     <title>Debunking the &apos;Svelte + AI&apos; Myth: 69 Production Components Don&apos;t Lie</title>
@@ -485,15 +497,6 @@
     <author>nino@signalreflex.studio (Nino Chavez)</author>
     <description>This isn’t magic. It’s thoughtful infrastructure.</description>
 
-  </item>
-  <item>
-    <title>Fix It Once, Prevent It Forever: How I Made a Dropdown Bug Impossible to Reintroduce</title>
-    <link>https://blog.ninochavez.co/fix-it-once-prevent-it-forever-how-i-made-a-dropdown-bug-impossible-to-reintroduce</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/fix-it-once-prevent-it-forever-how-i-made-a-dropdown-bug-impossible-to-reintroduce</guid>
-    <pubDate>Tue, 29 Jul 2025 05:16:00 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>This one started like a lot of bugs do: Dropdowns weren’t updating after a bulk import. The data was there, the page reloaded, but the dropdowns stayed stale. Console warnings, frustrated...</description>
-    <category>architecture</category>
   </item>
   </channel>
 </rss>
