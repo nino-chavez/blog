@@ -7,6 +7,12 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://blog.ninochavez.co/intent-driven-engineering-by-the-numbers</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://blog.ninochavez.co/the-do-more-with-less-paradox</loc>
     <lastmod>2025-10-30</lastmod>
     <changefreq>monthly</changefreq>
@@ -75,12 +81,6 @@
   <url>
     <loc>https://blog.ninochavez.co/the-ai-engineer-has-joined-the-team</loc>
     <lastmod>2025-07-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://blog.ninochavez.co/intent-driven-engineering-by-the-numbers</loc>
-    <lastmod>2025-01-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
