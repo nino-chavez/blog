@@ -5,10 +5,55 @@
     <link>https://blog.ninochavez.co</link>
     <description>Architecture, commerce, and the signals that matter in the age of AI.</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Oct 2025 01:05:45 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 05 Nov 2025 16:18:38 GMT</lastBuildDate>
     <atom:link href="https://blog.ninochavez.co/rss.xml" rel="self" type="application/rss+xml" />
     <managingEditor>nino@signalreflex.studio (Nino Chavez)</managingEditor>
     <webMaster>nino@signalreflex.studio (Nino Chavez)</webMaster>
+  <item>
+    <title>The &apos;Do More With Less&apos; Paradox</title>
+    <link>https://blog.ninochavez.co/the-do-more-with-less-paradox</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/the-do-more-with-less-paradox</guid>
+    <pubDate>Thu, 30 Oct 2025 00:00:00 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>If AI does all the junior work, where do the senior engineers come from? I used to see this as a pipeline problem. Now I&apos;m wondering if we&apos;re not even using a ladder anymore.</description>
+    <category>ai-assisted-development</category>
+    <category>systems-thinking</category>
+    <category>leadership</category>
+  </item>
+  <item>
+    <title>When Did I Become the Employee?</title>
+    <link>https://blog.ninochavez.co/self-service-paradox-revised</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/self-service-paradox-revised</guid>
+    <pubDate>Wed, 29 Oct 2025 00:00:00 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>I&apos;m not just paying for the service anymore. I&apos;m doing the work. And somewhere between the self-checkout and the self-install kit, I stopped noticing when &apos;convenience&apos; became unpaid labor.</description>
+    <category>systems-thinking</category>
+    <category>personal-growth</category>
+  </item>
+  <item>
+    <title>My AI Agents Have Rules. They Break Them. So I Built a Cop.</title>
+    <link>https://blog.ninochavez.co/ai-agents-need-a-cop</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/ai-agents-need-a-cop</guid>
+    <pubDate>Tue, 28 Oct 2025 13:00:00 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>Instructions aren&apos;t enough. To make agentic workflows reliable, I had to build a meta-agent to police my coding agents. Welcome to the unglamorous world of AI Ops.</description>
+    <category>agentic software</category>
+    <category>ai ops</category>
+    <category>governance</category>
+    <category>llm</category>
+  </item>
+  <item>
+    <title>I Don&apos;t Trust My AI Agents, So I Build Them Cages</title>
+    <link>https://blog.ninochavez.co/building-cages-for-ai-agents</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/building-cages-for-ai-agents</guid>
+    <pubDate>Sun, 26 Oct 2025 13:00:00 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>Agentic software is powerful, but it needs guardrails. I&apos;m finding the most important work isn&apos;t coding, but architecting the systems that constrain the code.</description>
+    <category>agentic software</category>
+    <category>systems design</category>
+    <category>ai ops</category>
+    <category>governance</category>
+  </item>
   <item>
     <title>From &apos;Get Shit Done&apos; to &apos;Just Handle It&apos;</title>
     <link>https://blog.ninochavez.co/from-gsd-to-just-handle-it</link>
@@ -459,44 +504,6 @@
     <description>Just like cloud killed the server rack, AI is killing fixed tools. I built a full E2E test system from scratch—faster, cheaper, tailored—using nothing but schema, rules, and AI prompts. Why buy tools when you can generate them just-in-time?</description>
     <category>ai-workflows</category>
     <category>consulting-practice</category>
-  </item>
-  <item>
-    <title>From Prompt to Product: Building Demo Mode in Week 2</title>
-    <link>https://blog.ninochavez.co/from-prompt-to-product-building-demo-mode-in-week-2</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/from-prompt-to-product-building-demo-mode-in-week-2</guid>
-    <pubDate>Wed, 30 Jul 2025 06:53:00 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>🧱 Week 1: Build the foundation</description>
-    <category>testing</category>
-  </item>
-  <item>
-    <title>When Control Matters: Behind the Decision to Build Feature Toggles Into the Bracket App</title>
-    <link>https://blog.ninochavez.co/when-control-matters-behind-the-decision-to-build-feature-toggles-into-the-bracket-app</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/when-control-matters-behind-the-decision-to-build-feature-toggles-into-the-bracket-app</guid>
-    <pubDate>Wed, 30 Jul 2025 02:24:00 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>Sometimes the feature isn’t for the user.</description>
-
-  </item>
-  <item>
-    <title>WHEN FAST ISN’T FAST ENOUGH: The shift from AI coding to AI concurrency</title>
-    <link>https://blog.ninochavez.co/when-fast-isnt-fast-enough-the-shift-from-ai-coding-to-ai-concurrency</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/when-fast-isnt-fast-enough-the-shift-from-ai-coding-to-ai-concurrency</guid>
-    <pubDate>Wed, 30 Jul 2025 02:22:00 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>There’s a strange kind of bottleneck that only shows up after you’ve gotten fast.</description>
-    <category>architecture</category>
-    <category>testing</category>
-    <category>ai-coding</category>
-  </item>
-  <item>
-    <title>Show Your Work: Designing AI-Enforced Safeguards</title>
-    <link>https://blog.ninochavez.co/show-your-work-designing-ai-enforced-safeguards</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/show-your-work-designing-ai-enforced-safeguards</guid>
-    <pubDate>Tue, 29 Jul 2025 20:12:00 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>This isn’t magic. It’s thoughtful infrastructure.</description>
-
   </item>
   </channel>
 </rss>
