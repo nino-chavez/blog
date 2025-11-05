@@ -5,7 +5,7 @@
     <link>https://blog.ninochavez.co</link>
     <description>Architecture, commerce, and the signals that matter in the age of AI.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Nov 2025 16:34:50 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 05 Nov 2025 16:40:19 GMT</lastBuildDate>
     <atom:link href="https://blog.ninochavez.co/rss.xml" rel="self" type="application/rss+xml" />
     <managingEditor>nino@signalreflex.studio (Nino Chavez)</managingEditor>
     <webMaster>nino@signalreflex.studio (Nino Chavez)</webMaster>
@@ -13,7 +13,7 @@
     <title>Intent-Driven Engineering: By The Numbers</title>
     <link>https://blog.ninochavez.co/intent-driven-engineering-by-the-numbers</link>
     <guid isPermaLink="true">https://blog.ninochavez.co/intent-driven-engineering-by-the-numbers</guid>
-    <pubDate>Sat, 01 Nov 2025 00:00:00 GMT</pubDate>
+    <pubDate>Wed, 05 Nov 2025 13:00:00 GMT</pubDate>
     <author>nino@signalreflex.studio (Nino Chavez)</author>
     <description>I built a $2.5M platform in 80 hours using GenAI tools. Here&apos;s what the numbers actually say about productivity, cost, and what happens when you stop pretending software takes as long as it used to.</description>
     <category>GenAI</category>
