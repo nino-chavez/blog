@@ -37,7 +37,7 @@ interface Manifest {
 const unsplashCache: Record<string, any> = JSON.parse(fs.readFileSync(path.join(__dirname, '../.unsplash-cache.json'), 'utf-8'));
 
 async function getRelevantImage(query: string): Promise<string | undefined> {
-  if (unsplashCache[query] && unsplashCache[query].results.length > 0) {
+  if (unsplashCache[query] && unsplashCache[query].results && unsplashCache[query].results.length > 0) {
     const results = unsplashCache[query].results;
     const randomIndex = crypto.randomInt(0, results.length);
     return results[randomIndex].urls.regular;
@@ -49,7 +49,7 @@ async function getRelevantImage(query: string): Promise<string | undefined> {
     const data = await response.json();
     unsplashCache[query] = data;
     fs.writeFileSync(path.join(__dirname, '../.unsplash-cache.json'), JSON.stringify(unsplashCache, null, 2));
-    if (data.results.length > 0) {
+    if (data.results && data.results.length > 0) {
       const randomIndex = crypto.randomInt(0, data.results.length);
       return data.results[randomIndex].urls.regular;
     }
