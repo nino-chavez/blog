@@ -59,7 +59,7 @@ export default function HeaderNav({ onSearch, searchQuery }: HeaderNavProps) {
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 gap-2 min-w-0">
           {/* Logo/Title with icon on mobile */}
-          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+          <a href="/" className="flex items-center gap-2 sm:gap-3 flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity">
             {/* Mobile Icon */}
             <div className="sm:hidden group relative">
               <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange p-[2px]">
@@ -71,7 +71,7 @@ export default function HeaderNav({ onSearch, searchQuery }: HeaderNavProps) {
                 Signal Dispatch
               </span>
             </div>
-            
+
             {/* Desktop Title */}
             <h1 className="hidden sm:block text-base lg:text-lg font-bold bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange bg-clip-text text-transparent whitespace-nowrap leading-relaxed pb-0.5">
               Signal Dispatch
@@ -79,7 +79,7 @@ export default function HeaderNav({ onSearch, searchQuery }: HeaderNavProps) {
             <span className="hidden lg:inline text-sm text-zinc-500 whitespace-nowrap">
               · Strategy, insights, and the signals that matter
             </span>
-          </div>
+          </a>
 
           {/* Right Side: Search + Icons */}
           <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0 min-w-0">
