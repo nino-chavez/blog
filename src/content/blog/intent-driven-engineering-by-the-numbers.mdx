@@ -45,8 +45,8 @@ Let me show you the receipts.
 
 **The Architecture:**
 - Multi-tenant SaaS (production-ready, not a toy)
-- Real-time WebSocket updates (<100ms latency)
-- Advanced TypeScript patterns (ServiceResult<T>, strict mode enforced)
+- Real-time WebSocket updates (&lt;100ms latency)
+- Advanced TypeScript patterns (`ServiceResult<T>`, strict mode enforced)
 - Four LLM provider integrations (Claude, GPT-4, Gemini, Perplexity)
 - Complex data modeling (multi-dimensional AEO scoring framework)
 
@@ -132,7 +132,7 @@ Let me check:
 **TypeScript Strict Mode:** Enabled. No cheating with `any` types.
 **Test Coverage:** 40+ test files (unit, integration, E2E).
 **Security:** Row Level Security on all tables. Proper auth flows.
-**Error Handling:** ServiceResult<T> pattern enforced across the codebase.
+**Error Handling:** `ServiceResult<T>` pattern enforced across the codebase.
 **Production Deployment:** Live on Vercel. Database on Supabase. Works.
 **Code Quality:** Passes all linters. No build errors. TypeScript compilation clean.
 
@@ -231,7 +231,7 @@ Let me be specific about what changed.
 
 That's not hyperbole. Here's a real example:
 
-**Intent:** "Create a real-time query execution system that streams results from multiple LLM providers, tracks token usage, parses citations from responses, calculates cost per query, and updates the UI with <100ms latency."
+**Intent:** "Create a real-time query execution system that streams results from multiple LLM providers, tracks token usage, parses citations from responses, calculates cost per query, and updates the UI with &lt;100ms latency."
 
 **Claude Code Output (30 minutes):**
 - `lib/services/queryService.ts` (query execution engine)
