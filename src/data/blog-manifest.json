@@ -52,24 +52,6 @@
       "featureImage": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200&q=80"
     },
     {
-      "slug": "so-now-what-from-theory-to-practice-in-the-ai-era",
-      "title": "So Now What? From Theory to Practice in the AI Era",
-      "publishedAt": "2025-11-10T13:00:00.000Z",
-      "excerpt": "AI is infrastructure. The multipliers are real. The old models are dying. But there's a bubble too. Both can be true. Here's what you actually do about it.",
-      "category": "AI & Automation",
-      "tags": [
-        "GenAI",
-        "Strategy",
-        "Consulting",
-        "Engineering",
-        "Field Notes"
-      ],
-      "featured": true,
-      "author": "Nino Chavez",
-      "readTime": "21 min read",
-      "featureImage": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80"
-    },
-    {
       "slug": "ai-isnt-a-bubble-its-infrastructure",
       "title": "AI Isn't a Bubble. It's Infrastructure.",
       "publishedAt": "2025-11-09T13:00:00.000Z",
@@ -101,8 +83,7 @@
       ],
       "featured": true,
       "author": "Nino Chavez",
-      "readTime": "12 min read",
-      "featureImage": "https://images.unsplash.com/photo-1723022208597-a641bdadf60c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw2fHxJbnRlbnQtRHJpdmVuJTIwRW5naW5lZXJpbmclM0ElMjBCeSUyMFRoZSUyME51bWJlcnMlMjBBSSUyMCUyNiUyMEF1dG9tYXRpb24lMjBHZW5BSSUyMFByb2R1Y3Rpdml0eSUyMEVuZ2luZWVyaW5nJTIwRmllbGQlMjBOb3Rlc3xlbnwwfHx8fDE3NjIzNTk1MTh8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "12 min read"
     },
     {
       "slug": "the-do-more-with-less-paradox",
@@ -216,8 +197,7 @@
       "featured": true,
       "author": "Nino Chavez",
       "readTime": "6 min read",
-      "source": "claude-sonnet-4",
-      "featureImage": "https://images.unsplash.com/photo-1585384107568-5bc588c7eefd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw0fHxEZWJ1bmtpbmclMjB0aGUlMjAlMjdTdmVsdGUlMjAlMkIlMjBBSSUyNyUyME15dGglM0ElMjA2OSUyMFByb2R1Y3Rpb24lMjBDb21wb25lbnRzJTIwRG9uJTI3dCUyMExpZSUyMEFJJTIwJTI2JTIwQXV0b21hdGlvbiUyMGFpJTIwc3ZlbHRlJTIwd2ViLWRldmVsb3BtZW50JTIwZmllbGQtbm90ZXN8ZW58MHx8fHwxNzYxNDQwNTQ5fDA&ixlib=rb-4.1.0&q=80&w=1080"
+      "source": "claude-sonnet-4"
     },
     {
       "slug": "agentic-software-isn-t-magic-it-s-a-new-interface-for-an-old-problem",
@@ -233,8 +213,7 @@
       "featured": true,
       "author": "Nino Chavez",
       "readTime": "3 min read",
-      "source": "gemini",
-      "featureImage": "https://images.unsplash.com/photo-1585384107568-5bc588c7eefd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwyfHwlMjJBZ2VudGljJTIwU29mdHdhcmUlMjIlMjBJc24lMjd0JTIwTWFnaWMuJTIwSXQlMjdzJTIwYSUyME5ldyUyMEludGVyZmFjZSUyMGZvciUyMGFuJTIwT2xkJTIwUHJvYmxlbS4lMjBBSSUyMCUyNiUyMEF1dG9tYXRpb24lMjBhaSUyMGNvbnN1bHRpbmclMjBmaWVsZC1ub3Rlc3xlbnwwfHx8fDE3NjE0NDA1NDl8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "source": "gemini"
     },
     {
       "slug": "the-new-consulting-model-adapt-or-die",
@@ -250,8 +229,7 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/new-consulting-model-adapt-die-nino-chavez-w7dcc",
-      "featureImage": "https://images.unsplash.com/photo-1655437448150-1bd20e2d402e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw1fHxUaGUlMjBOZXclMjBDb25zdWx0aW5nJTIwTW9kZWwlM0ElMjBBZGFwdCUyMG9yJTIwRGllJTIwQUklMjAlMjYlMjBBdXRvbWF0aW9uJTIwY29uc3VsdGluZyUyMGFyY2hpdGVjdHVyZXxlbnwwfHx8fDE3NjE0NDA1NDl8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/new-consulting-model-adapt-die-nino-chavez-w7dcc"
     },
     {
       "slug": "the-consultants-dilemma-the-tax-of-many-hats",
@@ -266,8 +244,7 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/consultants-dilemma-tax-many-hats-nino-chavez-fwrkc",
-      "featureImage": "https://images.unsplash.com/photo-1529958030586-3aae4ca485ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw0fHxUaGUlMjBDb25zdWx0YW50JTI3cyUyMERpbGVtbWElM0ElMjBUaGUlMjBUYXglMjBvZiUyME1hbnklMjBIYXRzJTIwQUklMjAlMjYlMjBBdXRvbWF0aW9uJTIwYXJjaGl0ZWN0dXJlfGVufDB8fHx8MTc2MTQ0MDU1MHww&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/consultants-dilemma-tax-many-hats-nino-chavez-fwrkc"
     },
     {
       "slug": "the-emperor-has-no-rag-why-your-genai-strategy-is-built-on-sand-unless-you-ask-these-questions",
@@ -282,8 +259,7 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/emperor-has-rag-why-your-genai-strategy-built-sand-unless-nino-chavez-zxlmc",
-      "featureImage": "https://images.unsplash.com/photo-1719996612528-2be21f9da54b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw1fHxUaGUlMjBFbXBlcm9yJTIwSGFzJTIwTm8lMjBSQUclM0ElMjBXaHklMjBZb3VyJTIwR2VuQUklMjBTdHJhdGVneSUyMElzJTIwQnVpbHQlMjBvbiUyMFNhbmQlMjAlMjhVbmxlc3MlMjBZb3UlMjBBc2slMjBUaGVzZSUyMFF1ZXN0aW9ucyUyOSUyMEFJJTIwJTI2JTIwQXV0b21hdGlvbiUyMGFyY2hpdGVjdHVyZXxlbnwwfHx8fDE3NjE0NDA1NTB8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/emperor-has-rag-why-your-genai-strategy-built-sand-unless-nino-chavez-zxlmc"
     },
     {
       "slug": "beyond-the-copilot-architecting-for-autonomy-with-claude-sonnet-45",
@@ -299,8 +275,7 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/beyond-copilot-architecting-autonomy-claude-sonnet-45-nino-chavez-k0djc",
-      "featureImage": "https://images.unsplash.com/photo-1705237100098-d3f32b47ec67?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwyfHxCZXlvbmQlMjB0aGUlMjBDb3BpbG90JTNBJTIwQXJjaGl0ZWN0aW5nJTIwZm9yJTIwQXV0b25vbXklMjB3aXRoJTIwQ2xhdWRlJTIwU29ubmV0JTIwNC41JTIwQUklMjAlMjYlMjBBdXRvbWF0aW9uJTIwYXJjaGl0ZWN0dXJlJTIwdGVzdGluZ3xlbnwwfHx8fDE3NjE0NDA1NTB8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/beyond-copilot-architecting-autonomy-claude-sonnet-45-nino-chavez-k0djc"
     },
     {
       "slug": "ai-wont-take-your-job-it-will-redefine-it-your-reskilling-starts-now",
@@ -315,8 +290,7 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/ai-wont-take-your-job-redefine-reskilling-starts-now-nino-chavez-lgkcc",
-      "featureImage": "https://images.unsplash.com/photo-1740059024857-9cdb2303a16e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw2fHxBSSUyMFdvbiUyN3QlMjBUYWtlJTIwWW91ciUyMEpvYi4lMjBJdCUyMFdpbGwlMjBSZWRlZmluZSUyMEl0LiUyMFlvdXIlMjBSZXNraWxsaW5nJTIwU3RhcnRzJTIwTm93LiUyMEFJJTIwJTI2JTIwQXV0b21hdGlvbiUyMGRldm9wc3xlbnwwfHx8fDE3NjE0NDA1NTF8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/ai-wont-take-your-job-redefine-reskilling-starts-now-nino-chavez-lgkcc"
     },
     {
       "slug": "i-let-a-bunch-of-ai-agents-rebuild-my-app-heres-what-actually-worked",
@@ -331,8 +305,7 @@
       "author": "Nino Chavez",
       "readTime": "5 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/i-let-bunch-ai-agents-rebuild-my-app-heres-what-actually-nino-chavez-uadgc",
-      "featureImage": "https://images.unsplash.com/photo-1666148670142-2f01b117e6e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwzfHxJJTIwTGV0JTIwYSUyMEJ1bmNoJTIwb2YlMjBBSSUyMEFnZW50cyUyMFJlYnVpbGQlMjBNeSUyMEFwcC4lMjBIZXJlJUUyJTgwJTk5cyUyMFdoYXQlMjBBY3R1YWxseSUyMFdvcmtlZC4lMjBBSSUyMCUyNiUyMEF1dG9tYXRpb24lMjBhcmNoaXRlY3R1cmV8ZW58MHx8fHwxNzYxNDQwNTUxfDA&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/i-let-bunch-ai-agents-rebuild-my-app-heres-what-actually-nino-chavez-uadgc"
     },
     {
       "slug": "moores-law-is-sputtering-so-whats-really-next-for-tech",
@@ -345,8 +318,7 @@
       "author": "Nino Chavez",
       "readTime": "1 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/moores-law-sputtering-so-whats-really-next-tech-nino-chavez-boykc",
-      "featureImage": "https://images.unsplash.com/photo-1546776310-eef45dd6d63c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwzfHxNb29yZSUyN3MlMjBMYXclMjBpcyUyMHNwdXR0ZXJpbmcuJTIwU28lMjB3aGF0JTI3cyUyMHJlYWxseSUyMG5leHQlMjBmb3IlMjB0ZWNoJTNGJTIwQUklMjAlMjYlMjBBdXRvbWF0aW9uJTIwfGVufDB8fHx8MTc2MTQ0MDU1Mnww&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/moores-law-sputtering-so-whats-really-next-tech-nino-chavez-boykc"
     },
     {
       "slug": "shipping-with-ai",
@@ -359,8 +331,7 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/shipping-ai-nino-chavez-gr6tc",
-      "featureImage": "https://images.unsplash.com/photo-1720036236694-d0a231c52563?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwyfHxTaGlwcGluZyUyMHdpdGglMjBBSSUyMEFJJTIwJTI2JTIwQXV0b21hdGlvbiUyMHxlbnwwfHx8fDE3NjE0NDA1NTJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/shipping-ai-nino-chavez-gr6tc"
     },
     {
       "slug": "observability-for-agent-commerce",
@@ -391,8 +362,7 @@
       "author": "Nino Chavez",
       "readTime": "6 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/710-year-evolution-web-nino-chavez-fjl2c",
-      "featureImage": "https://images.unsplash.com/photo-1544108343-c5356cd66e19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw1fHxUaGUlMjA3JUUyJTgwJTkzMTAlMjBZZWFyJTIwRXZvbHV0aW9uJTIwb2YlMjB0aGUlMjBXZWIlMjBBSSUyMCUyNiUyMEF1dG9tYXRpb24lMjBhcmNoaXRlY3R1cmV8ZW58MHx8fHwxNzYxNDQwNTUzfDA&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/710-year-evolution-web-nino-chavez-fjl2c"
     },
     {
       "slug": "llm-codegen-and-the-three-little-pigs",
@@ -405,8 +375,7 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/llm-codegen-three-little-pigs-nino-chavez-hrncc",
-      "featureImage": "https://images.unsplash.com/photo-1631111253593-7d615a1a935b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw4fHxMTE0lMjBDb2RlZ2VuJTIwYW5kJTIwdGhlJTIwVGhyZWUlMjBMaXR0bGUlMjBQaWdzJTIwQUklMjAlMjYlMjBBdXRvbWF0aW9uJTIwfGVufDB8fHx8MTc2MTQ0MDU1M3ww&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/llm-codegen-three-little-pigs-nino-chavez-hrncc"
     },
     {
       "slug": "the-coming-code-why-ai-native-software-needs-standards-and-how-to-prepare",
@@ -421,8 +390,7 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/coming-code-why-ai-native-software-needs-standards-how-nino-chavez-bsqyc",
-      "featureImage": "https://images.unsplash.com/photo-1542831371-d531d36971e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw4fHxUaGUlMjBDb21pbmclMjBDb2RlJTNBJTIwV2h5JTIwQUktTmF0aXZlJTIwU29mdHdhcmUlMjBOZWVkcyUyMFN0YW5kYXJkcyUyQyUyMGFuZCUyMEhvdyUyMHRvJTIwUHJlcGFyZSUyMEFJJTIwJTI2JTIwQXV0b21hdGlvbiUyMGRldm9wc3xlbnwwfHx8fDE3NjE0NDA1NTR8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/coming-code-why-ai-native-software-needs-standards-how-nino-chavez-bsqyc"
     },
     {
       "slug": "the-elitist-trap",
@@ -436,8 +404,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "1 min read",
-      "featureImage": "https://images.unsplash.com/photo-1657045463472-b482fcb157a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw5fHxUaGUlMjBFbGl0aXN0JTIwVHJhcCUyMFJlZmxlY3Rpb25zJTIwbGVhZGVyc2hpcCUyMHBlcnNvbmFsLWdyb3d0aHxlbnwwfHx8fDE3NjE0NDA1NTR8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "1 min read"
     },
     {
       "slug": "when-your-framework-outgrows-your-ability-to-explain-it",
@@ -465,8 +432,7 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/aegis-framework-constitutional-crisis-we-declared-martial-nino-chavez-t6bpc",
-      "featureImage": "https://images.unsplash.com/photo-1552109284-e81b2a0ab9bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw1fHwlRjAlOUYlOUElQTglMjBBZWdpcyUyMEZyYW1ld29yayUyMENvbnN0aXR1dGlvbmFsJTIwQ3Jpc2lzJTNBJTIwV2UlMjBEZWNsYXJlZCUyME1hcnRpYWwlMjBMYXclMjBvbiUyME91cnNlbHZlcyUyMEFJJTIwJTI2JTIwQXV0b21hdGlvbiUyMHxlbnwwfHx8fDE3NjE0NDA1NTV8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/aegis-framework-constitutional-crisis-we-declared-martial-nino-chavez-t6bpc"
     },
     {
       "slug": "i-didnt-write-a-test-i-asked-the-system-to-reflect",
@@ -482,8 +448,7 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/i-didnt-write-test-asked-system-reflect-nino-chavez-09psc",
-      "featureImage": "https://images.unsplash.com/photo-1585384107568-5bc588c7eefd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw5fHxJJTIwRGlkbiVFMiU4MCU5OXQlMjBXcml0ZSUyMGElMjBUZXN0LiUyMEklMjBBc2tlZCUyMHRoZSUyMFN5c3RlbSUyMHRvJTIwUmVmbGVjdC4lMjBBSSUyMCUyNiUyMEF1dG9tYXRpb24lMjBhcmNoaXRlY3R1cmUlMjBhaS1jb2Rpbmd8ZW58MHx8fHwxNzYxNDQwNTU1fDA&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/i-didnt-write-test-asked-system-reflect-nino-chavez-09psc"
     },
     {
       "slug": "the-storefront-isnt-dead-its-becoming-an-ai-optimized-validation-engine-in-a-shifting-commerce-lands",
@@ -498,8 +463,7 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/storefront-isnt-dead-its-becoming-ai-optimized-engine-nino-chavez-flfnc",
-      "featureImage": "https://images.unsplash.com/photo-1719256920835-8219e642f5a9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw0fHxUaGUlMjBTdG9yZWZyb250JTIwSXNuJUUyJTgwJTk5dCUyMERlYWQlMjAlRTIlODAlOTQlMjBJdCVFMiU4MCU5OXMlMjBCZWNvbWluZyUyMGFuJTIwQUktT3B0aW1pemVkJTIwVmFsaWRhdGlvbiUyMEVuZ2luZSUyMGluJTIwYSUyMFNoaWZ0aW5nJTIwQ29tbWVyY2UlMjBMYW5kc2NhcGUlMjBBSSUyMCUyNiUyMEF1dG9tYXRpb24lMjBhcmNoaXRlY3R1cmV8ZW58MHx8fHwxNzYxNDQwNTU2fDA&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/storefront-isnt-dead-its-becoming-ai-optimized-engine-nino-chavez-flfnc"
     },
     {
       "slug": "pay-no-attention-to-the-man-behind-the-curtain",
@@ -512,8 +476,7 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/pay-attention-man-behind-curtain-nino-chavez-doqmc",
-      "featureImage": "https://images.unsplash.com/photo-1615346929467-a9c1656c576f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw0fHxQYXklMjBubyUyMGF0dGVudGlvbiUyMHRvJTIwdGhlJTIwbWFuJTIwYmVoaW5kJTIwdGhlJTIwY3VydGFpbiVFMiU4MCVBNiUyME1ldGElMjB8ZW58MHx8fHwxNzYxNDQwNTU3fDA&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/pay-attention-man-behind-curtain-nino-chavez-doqmc"
     },
     {
       "slug": "genai-os",
@@ -557,8 +520,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "3 min read",
-      "featureImage": "https://images.unsplash.com/photo-1581093806997-124204d9fa9d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwxMHx8RGVzaWduaW5nJTIwV2hhdCUyMFlvdSUyMERvbiUyN3QlMjBCdWlsZCUyMCVFMiU4MCU5NCUyMEFuZCUyMEJ1aWxkaW5nJTIwV2hhdCUyMFlvdSUyMENhbiUyN3QlMjBSZWFkJTIwQUklMjAlMjYlMjBBdXRvbWF0aW9uJTIwYWktd29ya2Zsb3dzfGVufDB8fHx8MTc2MTQ0MDU1OHww&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "3 min read"
     },
     {
       "slug": "the-work-before-the-words",
@@ -620,8 +582,7 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/putting-my-money-where-mouth-nino-chavez-udeyc",
-      "featureImage": "https://images.unsplash.com/photo-1622905909796-5b1a1c78d53f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw3fHxQVVRUSU5HJTIwTVklMjBNT05FWSUyMFdIRVJFJTIwTVklMjBNT1VUSCUyMElTJTIwJUYwJTlGJTkyJUI4JUYwJTlGJUE0JTk2JTIwQUklMjAlMjYlMjBBdXRvbWF0aW9uJTIwZGV2b3BzfGVufDB8fHx8MTc2MTQ0MDU1OXww&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/putting-my-money-where-mouth-nino-chavez-udeyc"
     },
     {
       "slug": "the-paradox-of-velocity-in-ai-coding",
@@ -650,8 +611,7 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/next-compiler-semantic-nino-chavez-vulyc",
-      "featureImage": "https://images.unsplash.com/photo-1646583288948-24548aedffd8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw1fHxUaGUlMjBOZXh0JTIwQ29tcGlsZXIlMjBJcyUyMFNlbWFudGljJTIwQUklMjAlMjYlMjBBdXRvbWF0aW9uJTIwfGVufDB8fHx8MTc2MTQ0MDU2MHww&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/next-compiler-semantic-nino-chavez-vulyc"
     },
     {
       "slug": "what-my-jsx-free-react-app-really-taught-me-about-ai-coding",
@@ -667,8 +627,7 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/what-my-jsx-free-react-app-really-taught-me-ai-coding-nino-chavez-3faoc",
-      "featureImage": "https://images.unsplash.com/photo-1585384107568-5bc588c7eefd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw2fHxXaGF0JTIwbXklMjBKU1gtRnJlZSUyMFJlYWN0JTIwQXBwJTIwUmVhbGx5JTIwVGF1Z2h0JTIwTWUlMjBBYm91dCUyMEFJJTIwQ29kaW5nJTIwQUklMjAlMjYlMjBBdXRvbWF0aW9uJTIwYXJjaGl0ZWN0dXJlJTIwYWktY29kaW5nfGVufDB8fHx8MTc2MTQ0MDU2MHww&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/what-my-jsx-free-react-app-really-taught-me-ai-coding-nino-chavez-3faoc"
     },
     {
       "slug": "why-my-react-app-doesnt-use-jsx-and-what-that-taught-me-about-building-with-ai",
@@ -683,8 +642,7 @@
       "author": "Nino Chavez",
       "readTime": "4 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/why-my-react-app-doesnt-use-jsx-what-taught-me-building-nino-chavez-6e1ic",
-      "featureImage": "https://images.unsplash.com/photo-1732029062230-8a4f021b9f59?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw3fHxXaHklMjBNeSUyMFJlYWN0JTIwQXBwJTIwRG9lc24lRTIlODAlOTl0JTIwVXNlJTIwSlNYJTIwJTI4QW5kJTIwV2hhdCUyMFRoYXQlMjBUYXVnaHQlMjBNZSUyMEFib3V0JTIwQnVpbGRpbmclMjB3aXRoJTIwQUklMjklMjBBSSUyMCUyNiUyMEF1dG9tYXRpb24lMjBhcmNoaXRlY3R1cmV8ZW58MHx8fHwxNzYxNDQwNTYxfDA&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/why-my-react-app-doesnt-use-jsx-what-taught-me-building-nino-chavez-6e1ic"
     },
     {
       "slug": "i-still-dont-really-know-jsx-and-i-dont-think-it-matters",
@@ -698,8 +656,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "3 min read",
-      "featureImage": "https://images.unsplash.com/photo-1604364574829-73fcca90a87c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwxfHxJJTIwU3RpbGwlMjBEb24lRTIlODAlOTl0JTIwUmVhbGx5JTIwS25vdyUyMEpTWC4lMjBBbmQlMjBJJTIwRG9uJTI3dCUyMFRoaW5rJTIwSXQlMjBNYXR0ZXJzLiUyMEFJJTIwJTI2JTIwQXV0b21hdGlvbiUyMGFpLXdvcmtmbG93cyUyMHBlcnNvbmFsLWdyb3d0aHxlbnwwfHx8fDE3NjE0NDA1NjF8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "3 min read"
     },
     {
       "slug": "i-dont-believe-the-agentic-ai-hype-and-heres-why-thats-not-ignorance",
@@ -712,8 +669,7 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/i-dont-believe-agentic-ai-hype-heres-why-thats-ignorance-nino-chavez-ft3oc",
-      "featureImage": "https://images.unsplash.com/photo-1604364574829-73fcca90a87c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwzfHxJJTIwRG9uJUUyJTgwJTk5dCUyMEJlbGlldmUlMjB0aGUlMjBBZ2VudGljJTIwQUklMjBIeXBlJTIwJUUyJTgwJTk0JTIwYW5kJTIwSGVyZSVFMiU4MCU5OXMlMjBXaHklMjBUaGF0JUUyJTgwJTk5cyUyME5vdCUyMElnbm9yYW5jZSUyMEFJJTIwJTI2JTIwQXV0b21hdGlvbiUyMHxlbnwwfHx8fDE3NjE0NDA1NjF8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/i-dont-believe-agentic-ai-hype-heres-why-thats-ignorance-nino-chavez-ft3oc"
     },
     {
       "slug": "the-modern-js-stack-is-a-masterpiece-of-power-and-a-catastrophe-of-experience",
@@ -728,8 +684,7 @@
       "author": "Nino Chavez",
       "readTime": "5 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/modern-js-stack-masterpiece-power-catastrophe-nino-chavez-pdubc",
-      "featureImage": "https://images.unsplash.com/photo-1607018406814-04fc10a43288?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwyfHwlRjAlOUYlOTQlQTUlMjBUaGUlMjBNb2Rlcm4lMjBKUyUyMFN0YWNrJTIwSXMlMjBhJTIwTWFzdGVycGllY2UlMjBvZiUyMFBvd2VyJTIwJUUyJTgwJTk0JTIwYW5kJTIwYSUyMENhdGFzdHJvcGhlJTIwb2YlMjBFeHBlcmllbmNlJTIwQUklMjAlMjYlMjBBdXRvbWF0aW9uJTIwYXJjaGl0ZWN0dXJlfGVufDB8fHx8MTc2MTQ0MDU2Mnww&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/modern-js-stack-masterpiece-power-catastrophe-nino-chavez-pdubc"
     },
     {
       "slug": "even-the-ai-is-confused",
@@ -758,8 +713,7 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/light-bulb-moment-ive-been-doing-ai-coding-wrong-sort-nino-chavez-gthjc",
-      "featureImage": "https://images.unsplash.com/photo-1551033406-611cf9a28f67?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwzfHwlRjAlOUYlOTIlQTElMjBJJUUyJTgwJTk5dmUlMjBiZWVuJTIwZG9pbmclMjBBSSUyMGNvZGluZyUyMHdyb25nJTIwJTI4c29ydCUyMG9mJTI5JTIwQUklMjAlMjYlMjBBdXRvbWF0aW9uJTIwYWktY29kaW5nfGVufDB8fHx8MTc2MTQ0MDU2Mnww&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/light-bulb-moment-ive-been-doing-ai-coding-wrong-sort-nino-chavez-gthjc"
     },
     {
       "slug": "the-drift-beneath-the-velocity",
@@ -804,8 +758,7 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/ai-ops-docs-as-contracts-nino-chavez-atmuc",
-      "featureImage": "https://images.unsplash.com/photo-1655393001768-d946c97d6fd1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw3fHxBSSUyME9wcyUzQSUyMERvY3MtQXMtQ29udHJhY3RzJTIwQUklMjAlMjYlMjBBdXRvbWF0aW9uJTIwYXJjaGl0ZWN0dXJlfGVufDB8fHx8MTc2MTQ0MDU2NXww&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/ai-ops-docs-as-contracts-nino-chavez-atmuc"
     },
     {
       "slug": "skip-the-api-building-a-local-chatgpt-bridge-for-vs-code",
@@ -836,8 +789,7 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/from-qa-bottleneck-autonomous-confidence-how-i-built-fully-chavez-rudde",
-      "featureImage": "https://images.unsplash.com/photo-1568027762272-e4da8b386fe9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw4fHxGcm9tJTIwUUElMjBCb3R0bGVuZWNrJTIwdG8lMjBBdXRvbm9tb3VzJTIwQ29uZmlkZW5jZSUzQSUyMEhvdyUyMEklMjBCdWlsdCUyMGElMjBGdWxseSUyMEFJLURyaXZlbiUyMEUyRSUyMFRlc3RpbmclMjBGcmFtZXdvcmslMjBBSSUyMCUyNiUyMEF1dG9tYXRpb24lMjBhcmNoaXRlY3R1cmUlMjB0ZXN0aW5nfGVufDB8fHx8MTc2MTQ0MDU2Nnww&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/from-qa-bottleneck-autonomous-confidence-how-i-built-fully-chavez-rudde"
     },
     {
       "slug": "from-ai-copilot-to-ai-enforcer",
@@ -898,8 +850,7 @@
       "author": "Nino Chavez",
       "readTime": "5 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/from-prompt-product-building-demo-mode-week-2-nino-chavez-uzdic",
-      "featureImage": "https://images.unsplash.com/photo-1759663174086-941229ec510f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwxMHx8RnJvbSUyMFByb21wdCUyMHRvJTIwUHJvZHVjdCUzQSUyMEJ1aWxkaW5nJTIwRGVtbyUyME1vZGUlMjBpbiUyMFdlZWslMjAyJTIwQUklMjAlMjYlMjBBdXRvbWF0aW9uJTIwdGVzdGluZ3xlbnwwfHx8fDE3NjE0NDA1Njh8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/from-prompt-product-building-demo-mode-week-2-nino-chavez-uzdic"
     },
     {
       "slug": "when-control-matters-behind-the-decision-to-build-feature-toggles-into-the-bracket-app",
@@ -912,8 +863,7 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/when-control-matters-behind-decision-build-feature-toggles-chavez-gmttc",
-      "featureImage": "https://images.unsplash.com/photo-1464037788451-47f64cfda692?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw3fHxXaGVuJTIwQ29udHJvbCUyME1hdHRlcnMlM0ElMjBCZWhpbmQlMjB0aGUlMjBEZWNpc2lvbiUyMHRvJTIwQnVpbGQlMjBGZWF0dXJlJTIwVG9nZ2xlcyUyMEludG8lMjB0aGUlMjBCcmFja2V0JTIwQXBwJTIwQUklMjAlMjYlMjBBdXRvbWF0aW9uJTIwfGVufDB8fHx8MTc2MTQ0MDU2OHww&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/when-control-matters-behind-decision-build-feature-toggles-chavez-gmttc"
     },
     {
       "slug": "when-fast-isnt-fast-enough-the-shift-from-ai-coding-to-ai-concurrency",
@@ -930,8 +880,7 @@
       "author": "Nino Chavez",
       "readTime": "4 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/when-fast-isnt-enough-shift-from-ai-coding-nino-chavez-xipgc",
-      "featureImage": "https://images.unsplash.com/photo-1646583288948-24548aedffd8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw4fHxXSEVOJTIwRkFTVCUyMElTTiVFMiU4MCU5OVQlMjBGQVNUJTIwRU5PVUdIJTNBJTIwVGhlJTIwc2hpZnQlMjBmcm9tJTIwQUklMjBjb2RpbmclMjB0byUyMEFJJTIwY29uY3VycmVuY3klMjBBSSUyMCUyNiUyMEF1dG9tYXRpb24lMjBhcmNoaXRlY3R1cmUlMjB0ZXN0aW5nJTIwYWktY29kaW5nfGVufDB8fHx8MTc2MTQ0MDU2OHww&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/when-fast-isnt-enough-shift-from-ai-coding-nino-chavez-xipgc"
     },
     {
       "slug": "show-your-work-designing-ai-enforced-safeguards",
@@ -944,8 +893,7 @@
       "author": "Nino Chavez",
       "readTime": "2 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/show-your-work-designing-ai-enforced-safeguards-nino-chavez-os7mc",
-      "featureImage": "https://images.unsplash.com/photo-1641233593199-ac4426ce7b33?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwzfHxTaG93JTIwWW91ciUyMFdvcmslM0ElMjBEZXNpZ25pbmclMjBBSS1FbmZvcmNlZCUyMFNhZmVndWFyZHMlMjBBSSUyMCUyNiUyMEF1dG9tYXRpb24lMjB8ZW58MHx8fHwxNzYxNDQwNTY5fDA&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/show-your-work-designing-ai-enforced-safeguards-nino-chavez-os7mc"
     },
     {
       "slug": "fix-it-once-prevent-it-forever-how-i-made-a-dropdown-bug-impossible-to-reintroduce",
@@ -990,8 +938,7 @@
       "author": "Nino Chavez",
       "readTime": "3 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/designing-environments-just-themes-volleyball-app-ux-case-nino-chavez-jqkqc",
-      "featureImage": "https://images.unsplash.com/photo-1634433480471-147fe911ba6b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwzfHxEZXNpZ25pbmclMjBmb3IlMjBFbnZpcm9ubWVudHMlMkMlMjBOb3QlMjBKdXN0JTIwVGhlbWVzJTNBJTIwQSUyMFZvbGxleWJhbGwlMjBBcHAlMjBVWCUyMENhc2UlMjBTdHVkeSUyMEFJJTIwJTI2JTIwQXV0b21hdGlvbiUyMHRlc3Rpbmd8ZW58MHx8fHwxNzYyMzU5NTAzfDA&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/designing-environments-just-themes-volleyball-app-ux-case-nino-chavez-jqkqc"
     },
     {
       "slug": "one-week-one-developer-one-production-system-how-i-used-ai-to-build-and-harden-the-lpo-bracket-manag",
@@ -1008,8 +955,7 @@
       "author": "Nino Chavez",
       "readTime": "5 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/one-week-developer-production-system-how-i-used-ai-build-nino-chavez-mdkkc",
-      "featureImage": "https://images.unsplash.com/photo-1632910121591-29e2484c0259?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwxfHxPbmUlMjBXZWVrJTJDJTIwT25lJTIwRGV2ZWxvcGVyJTJDJTIwT25lJTIwUHJvZHVjdGlvbiUyMFN5c3RlbSUzQSUyMEhvdyUyMEklMjBVc2VkJTIwQUklMjB0byUyMEJ1aWxkJTIwYW5kJTIwSGFyZGVuJTIwdGhlJTIwTFBPJTIwQnJhY2tldCUyME1hbmFnZXIlMjBBSSUyMCUyNiUyMEF1dG9tYXRpb24lMjBhcmNoaXRlY3R1cmUlMjBkZXZvcHMlMjBhaS1jb2Rpbmd8ZW58MHx8fHwxNzYyMzU5NTA0fDA&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/one-week-developer-production-system-how-i-used-ai-build-nino-chavez-mdkkc"
     },
     {
       "slug": "tokens-are-dev-hours",
@@ -1024,8 +970,7 @@
       ],
       "featured": true,
       "author": "Nino Chavez",
-      "readTime": "4 min read",
-      "featureImage": "https://images.unsplash.com/photo-1539009139598-75df7c89734d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwxfHxUb2tlbnMlMjBBcmUlMjBEZXYlMjBIb3Vycy4lMjBXYXN0ZSUyMElzJTIwYSUyMEZlYXR1cmUlMkMlMjBOb3QlMjBhJTIwQnVnLiUyMEFJJTIwJTI2JTIwQXV0b21hdGlvbiUyMGFpLXdvcmtmbG93cyUyMHBlcnNvbmFsLWdyb3d0aCUyMHN5c3RlbXMtdGhpbmtpbmd8ZW58MHx8fHwxNzYyMzU5NTA1fDA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "4 min read"
     },
     {
       "slug": "the-ai-engineer-has-joined-the-team",
@@ -1058,8 +1003,7 @@
       "author": "Nino Chavez",
       "readTime": "4 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/docs-code-isnt-enough-how-ai-ready-knowledge-layers-compress-chavez-agawc",
-      "featureImage": "https://images.unsplash.com/photo-1687603858673-a08a2dc2302c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw1fHxEb2NzJTIwYXMlMjBDb2RlJTIwSXNuJUUyJTgwJTk5dCUyMEVub3VnaCUyMCVFMiU4MCU5NCUyMEhvdyUyMEFJLVJlYWR5JTIwS25vd2xlZGdlJTIwTGF5ZXJzJTIwQ29tcHJlc3MlMjBXZWVrcyUyMG9mJTIwV29yayUyMGludG8lMjBIb3VycyUyMEFJJTIwJTI2JTIwQXV0b21hdGlvbiUyMGFyY2hpdGVjdHVyZSUyMHRlc3RpbmclMjBhaS1jb2Rpbmd8ZW58MHx8fHwxNzYyMzU5NTA2fDA&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/docs-code-isnt-enough-how-ai-ready-knowledge-layers-compress-chavez-agawc"
     },
     {
       "slug": "from-fear-to-flow-my-accidental-journey-into-ai-powered-development",
@@ -1075,8 +1019,7 @@
       "author": "Nino Chavez",
       "readTime": "8 min read",
       "source": "linkedin",
-      "linkedinUrl": "https://www.linkedin.com/pulse/from-fear-flow-my-accidental-journey-ai-powered-nino-chavez-ohfdc",
-      "featureImage": "https://images.unsplash.com/photo-1750365919971-7dd273e7b317?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw0fHxGcm9tJTIwRmVhciUyMHRvJTIwRmxvdyUzQSUyME15JTIwQWNjaWRlbnRhbCUyMEpvdXJuZXklMjBpbnRvJTIwQUktUG93ZXJlZCUyMERldmVsb3BtZW50JTIwQUklMjAlMjYlMjBBdXRvbWF0aW9uJTIwYWktd29ya2Zsb3dzJTIwYWktY29kaW5nfGVufDB8fHx8MTc2MjM1OTUwN3ww&ixlib=rb-4.1.0&q=80&w=1080"
+      "linkedinUrl": "https://www.linkedin.com/pulse/from-fear-flow-my-accidental-journey-ai-powered-nino-chavez-ohfdc"
     },
     {
       "slug": "from-fear-to-flow",
@@ -1636,8 +1579,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read",
-      "featureImage": "https://images.unsplash.com/photo-1642052503083-9b9f61e75710?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwzfHxIb3clMjBDb250ZW50JTIwYW5kJTIwQ29tbWVyY2UlMjBBY3R1YWxseSUyMENvbm5lY3QlMjBOb3clMjBDb21tZXJjZSUyMGFpLXdvcmtmbG93cyUyMGNvbW1lcmNlLXN0cmF0ZWd5fGVufDB8fHx8MTc2MjM1OTUwN3ww&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "2 min read"
     },
     {
       "slug": "the-cleanup-economy",
@@ -1921,8 +1863,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "3 min read",
-      "featureImage": "https://images.unsplash.com/photo-1627435606130-ea6f5e6e4b55?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw2fHxUaGUlMjBSb2xlJTIwb2YlMjBTZWxmLUF3YXJlbmVzcyUyMGluJTIwRXZlcnklMjBUb29sJTIwSSUyMFVzZSUyMEFJJTIwJTI2JTIwQXV0b21hdGlvbiUyMGFpLXdvcmtmbG93cyUyMHBlcnNvbmFsLWdyb3d0aHxlbnwwfHx8fDE3NjIzNTk1MDh8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "3 min read"
     },
     {
       "slug": "writing-helped-me-notice-i-was-seeing-differently",
@@ -1966,8 +1907,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "3 min read",
-      "featureImage": "https://images.unsplash.com/photo-1639756533798-28c14d5e46db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw5fHxEbyUyMEklMjBTdGlsbCUyMFNvdW5kJTIwTGlrZSUyME1lJTNGJTIwTWV0YSUyMHBlcnNvbmFsLWdyb3d0aCUyMHN5c3RlbXMtdGhpbmtpbmd8ZW58MHx8fHwxNzYyMzU5NTA4fDA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "3 min read"
     },
     {
       "slug": "if-the-storefront-is-dead-where-do-you-compete-now",
@@ -1981,8 +1921,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read",
-      "featureImage": "https://images.unsplash.com/photo-1741998399451-1a37c00ba676?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw4fHxJZiUyMHRoZSUyMFN0b3JlZnJvbnQlMjBJcyUyMERlYWQlMkMlMjBXaGVyZSUyMERvJTIwWW91JTIwQ29tcGV0ZSUyME5vdyUzRiUyMENvbW1lcmNlJTIwY29tbWVyY2Utc3RyYXRlZ3klMjBzeXN0ZW1zLXRoaW5raW5nfGVufDB8fHx8MTc2MjM1OTUwOHww&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "2 min read"
     },
     {
       "slug": "why-this-made-you-ask",
@@ -2168,8 +2107,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "3 min read",
-      "featureImage": "https://images.unsplash.com/photo-1646583288948-24548aedffd8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw0fHxIb3clMjBJJTIwU3RydWN0dXJlJTIwTXklMjBBSSUyMFdvcmtmbG93cyUyMHRvJTIwU3VwcG9ydCUyMFJlYWwlMjBUaGlua2luZyUyMEFJJTIwJTI2JTIwQXV0b21hdGlvbiUyMGFpLXdvcmtmbG93c3xlbnwwfHx8fDE3NjIzNTk1MDl8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "3 min read"
     },
     {
       "slug": "the-rules-i-actually-follow",
@@ -2225,8 +2163,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read",
-      "featureImage": "https://images.unsplash.com/photo-1699501993044-bbcddede77d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw0fHxRdWlldCUyMFdhcyUyMEFybW9yJTIwUmVmbGVjdGlvbnMlMjBwZXJzb25hbC1ncm93dGh8ZW58MHx8fHwxNzYyMzU5NTA5fDA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "2 min read"
     },
     {
       "slug": "why-i-use-ai-every-day-and-why-i-started-writing-about-it",
@@ -2240,8 +2177,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read",
-      "featureImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw5fHxXaHklMjBJJTIwVXNlJTIwQUklMjBFdmVyeSUyMERheSUyMCUyOEFuZCUyMFdoeSUyMEklMjBTdGFydGVkJTIwV3JpdGluZyUyMEFib3V0JTIwSXQlMjklMjBBSSUyMCUyNiUyMEF1dG9tYXRpb24lMjBhaS13b3JrZmxvd3MlMjBwZXJzb25hbC1ncm93dGh8ZW58MHx8fHwxNzYyMzU5NTEwfDA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "2 min read"
     },
     {
       "slug": "grid-level-thinking-wasnt-the-plan",
@@ -2256,8 +2192,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read",
-      "featureImage": "https://images.unsplash.com/photo-1575297993717-ed88482229bd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwxMHx8R3JpZC1MZXZlbCUyMFRoaW5raW5nJTIwV2FzbiUyN3QlMjB0aGUlMjBQbGFuJTIwQUklMjAlMjYlMjBBdXRvbWF0aW9uJTIwYWktd29ya2Zsb3dzJTIwcGVyc29uYWwtZ3Jvd3RoJTIwc3lzdGVtcy10aGlua2luZ3xlbnwwfHx8fDE3NjIzNTk1MTB8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "2 min read"
     },
     {
       "slug": "power-without-purpose-is-just-a-bill",
@@ -2271,8 +2206,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read",
-      "featureImage": "https://images.unsplash.com/photo-1594107208706-51715f8f7836?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw1fHxQb3dlciUyMFdpdGhvdXQlMjBQdXJwb3NlJTIwSXMlMjBKdXN0JTIwYSUyMEJpbGwuJTIwQUklMjAlMjYlMjBBdXRvbWF0aW9uJTIwYWktd29ya2Zsb3dzJTIwc3lzdGVtcy10aGlua2luZ3xlbnwwfHx8fDE3NjIzNTk1MTB8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "2 min read"
     },
     {
       "slug": "plug-in-then-rethink-the-system",
@@ -2286,8 +2220,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read",
-      "featureImage": "https://images.unsplash.com/photo-1526688442562-41eb8259db9e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw3fHxQbHVnJTIwSW4uJTIwVGhlbiUyMFJldGhpbmslMjB0aGUlMjBTeXN0ZW0uJTIwQUklMjAlMjYlMjBBdXRvbWF0aW9uJTIwYWktd29ya2Zsb3dzJTIwc3lzdGVtcy10aGlua2luZ3xlbnwwfHx8fDE3NjIzNTk1MTF8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "2 min read"
     },
     {
       "slug": "wired-for-power-everyone-got-the-current-not-everyone-built-the-city",
@@ -2302,8 +2235,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "1 min read",
-      "featureImage": "https://images.unsplash.com/photo-1641925257336-6107a4a898cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw5fHxXaXJlZCUyMGZvciUyMFBvd2VyJTNBJTIwRXZlcnlvbmUlMjBHb3QlMjB0aGUlMjBDdXJyZW50LiUyME5vdCUyMEV2ZXJ5b25lJTIwQnVpbHQlMjB0aGUlMjBDaXR5LiUyMEFJJTIwJTI2JTIwQXV0b21hdGlvbiUyMGFpLXdvcmtmbG93cyUyMGxlYWRlcnNoaXAlMjBzeXN0ZW1zLXRoaW5raW5nfGVufDB8fHx8MTc2MjM1OTUxMXww&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "1 min read"
     },
     {
       "slug": "wired-for-power-ai-is-the-grid-youre-the-architect",
@@ -2317,8 +2249,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "1 min read",
-      "featureImage": "https://images.unsplash.com/photo-1717943273055-c599196f5969?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw3fHxXaXJlZCUyMGZvciUyMFBvd2VyJTNBJTIwQUklMjBJcyUyMHRoZSUyMEdyaWQuJTIwWW91JUUyJTgwJTk5cmUlMjB0aGUlMjBBcmNoaXRlY3QuJTIwQUklMjAlMjYlMjBBdXRvbWF0aW9uJTIwYWktd29ya2Zsb3dzJTIwc3lzdGVtcy10aGlua2luZ3xlbnwwfHx8fDE3NjIzNTk1MTJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "1 min read"
     },
     {
       "slug": "the-entry-level-developer-evolution-not-extinction",
@@ -2332,8 +2263,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read",
-      "featureImage": "https://images.unsplash.com/photo-1655393001768-d946c97d6fd1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw2fHxUaGUlMjBFbnRyeS1MZXZlbCUyMERldmVsb3BlciUzQSUyMEV2b2x1dGlvbiUyQyUyME5vdCUyMEV4dGluY3Rpb24lMjBBSSUyMCUyNiUyMEF1dG9tYXRpb24lMjBhaS13b3JrZmxvd3MlMjBzeXN0ZW1zLXRoaW5raW5nfGVufDB8fHx8MTc2MjM1OTUxMnww&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "2 min read"
     },
     {
       "slug": "you-cant-engineer-growth",
@@ -2346,8 +2276,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read",
-      "featureImage": "https://images.unsplash.com/photo-1576315770635-ef588ed7e8b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwyfHxZb3UlMjBDYW4lRTIlODAlOTl0JTIwRW5naW5lZXIlMjBHcm93dGglMjBSZWZsZWN0aW9ucyUyMHBlcnNvbmFsLWdyb3d0aHxlbnwwfHx8fDE3NjIzNTk1MTN8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "2 min read"
     },
     {
       "slug": "how-i-built-signal-reflex-in-a-week",
@@ -2361,8 +2290,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "3 min read",
-      "featureImage": "https://images.unsplash.com/photo-1616982731619-27dd28dc9142?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw1fHxIb3clMjBJJTIwQnVpbHQlMjBTaWduYWwlMjBSZWZsZXglMjBpbiUyMGElMjBXZWVrJTIwQUklMjAlMjYlMjBBdXRvbWF0aW9uJTIwYWktd29ya2Zsb3dzJTIwc3lzdGVtcy10aGlua2luZ3xlbnwwfHx8fDE3NjIzNTk1MTN8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "3 min read"
     },
     {
       "slug": "almost-flickday",
@@ -2403,8 +2331,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read",
-      "featureImage": "https://images.unsplash.com/photo-1753710877908-c6111ffcad4f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw1fHxTaWduYWwlMjBpbiUyMHRoZSUyME5vaXNlJTNBJTIwTXklMjBQZXJzb25hbCUyMFBoaWxvc29waHklMjBJbnNpZ2h0cyUyMHBlcnNvbmFsLWdyb3d0aHxlbnwwfHx8fDE3NjIzNTk1MTR8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "2 min read"
     },
     {
       "slug": "why-they-call-me-uncle-nino-an-evolving-leadership-style",
@@ -2418,8 +2345,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read",
-      "featureImage": "https://images.unsplash.com/photo-1656812206128-5d17e5a2a93f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwxfHxXaHklMjBUaGV5JTIwQ2FsbCUyME1lJTIwVW5jbGUlMjBOaW5vJTIwTGVhZGVyc2hpcCUyMGxlYWRlcnNoaXAlMjBwZXJzb25hbC1ncm93dGh8ZW58MHx8fHwxNzYyMzU5NTE0fDA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "2 min read"
     },
     {
       "slug": "start-smart-not-perfect",
@@ -2432,8 +2358,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read",
-      "featureImage": "https://images.unsplash.com/photo-1606327054581-0a1d4bf42831?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw2fHxTdGFydCUyMFNtYXJ0JTJDJTIwTm90JTIwUGVyZmVjdCUyMEZpZWxkJTIwTm90ZXMlMjBhaS13b3JrZmxvd3N8ZW58MHx8fHwxNzYyMzU5NTE0fDA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "2 min read"
     },
     {
       "slug": "why-i-shoot-senior-nights",
@@ -2446,8 +2371,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "3 min read",
-      "featureImage": "https://images.unsplash.com/photo-1680523130420-879cbaffef77?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw3fHxXaHklMjBJJTIwU2hvb3QlMjBTZW5pb3IlMjBOaWdodHMlMjBSZWZsZWN0aW9ucyUyMHBlcnNvbmFsLWdyb3d0aHxlbnwwfHx8fDE3NjIzNTk1MTV8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "3 min read"
     },
     {
       "slug": "how-i-use-ai-in-consulting-for-real",
@@ -2461,8 +2385,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read",
-      "featureImage": "https://images.unsplash.com/photo-1563273941-b7e21bfa1850?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwxMHx8SG93JTIwSSUyMFVzZSUyMEFJJTIwaW4lMjBDb25zdWx0aW5nJTIwJTI4Rm9yJTIwUmVhbCUyOSUyMEFJJTIwJTI2JTIwQXV0b21hdGlvbiUyMGFpLXdvcmtmbG93cyUyMHBlcnNvbmFsLWdyb3d0aHxlbnwwfHx8fDE3NjIzNTk1MTZ8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "2 min read"
     },
     {
       "slug": "why-i-started-signal-reflex",
@@ -2476,8 +2399,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "1 min read",
-      "featureImage": "https://images.unsplash.com/photo-1546776310-eef45dd6d63c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw3fHxXaHklMjBJJTIwU3RhcnRlZCUyMFNpZ25hbCUyMFJlZmxleCUyMEFJJTIwJTI2JTIwQXV0b21hdGlvbiUyMGFpLXdvcmtmbG93cyUyMHBlcnNvbmFsLWdyb3d0aHxlbnwwfHx8fDE3NjIzNTk1MTd8MA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "1 min read"
     },
     {
       "slug": "about-me",
@@ -2492,8 +2414,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "1 min read",
-      "featureImage": "https://images.unsplash.com/photo-1590102425728-aa39769512ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHw1fHxBYm91dCUyME5pbm8lMjBDaGF2ZXolMjB1bmRlZmluZWQlMjBhaS13b3JrZmxvd3MlMjBjcmFmdCUyMGxlYWRlcnNoaXAlMjBzeXN0ZW1zLXRoaW5raW5nfGVufDB8fHx8MTc2MjM1OTUxN3ww&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "1 min read"
     },
     {
       "slug": "the-storefront-is-dead",
@@ -2507,8 +2428,7 @@
       ],
       "featured": false,
       "author": "Nino Chavez",
-      "readTime": "2 min read",
-      "featureImage": "https://images.unsplash.com/photo-1741998400556-11f1aac9a78d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MjE1MDR8MHwxfHNlYXJjaHwzfHxUaGUlMjBTdG9yZWZyb250JTIwSXMlMjBEZWFkJTIwQ29tbWVyY2UlMjBjb21tZXJjZS1zdHJhdGVneSUyMHN5c3RlbXMtdGhpbmtpbmd8ZW58MHx8fHwxNzYyMzU5NTE4fDA&ixlib=rb-4.1.0&q=80&w=1080"
+      "readTime": "2 min read"
     },
     {
       "slug": "about",
@@ -2587,7 +2507,7 @@
     "web-development"
   ],
   "categoryCounts": {
-    "AI & Automation": 89,
+    "AI & Automation": 88,
     "Field Notes": 5,
     "Reflections": 17,
     "Leadership": 15,
@@ -2616,9 +2536,9 @@
     "devops": 4,
     "commerce-strategy": 11,
     "testing": 6,
-    "GenAI": 5,
-    "Strategy": 4,
-    "Field Notes": 5,
+    "GenAI": 4,
+    "Strategy": 3,
+    "Field Notes": 4,
     "systems design": 1,
     "svelte": 1,
     "web-development": 1,
@@ -2626,13 +2546,13 @@
     "Meta": 1,
     "meta": 1,
     "Productivity": 1,
-    "Engineering": 3,
-    "Consulting": 2,
+    "Engineering": 2,
     "ai-assisted-development": 1,
+    "Consulting": 1,
     "therapy": 1,
     "patterns": 1,
     "practice": 1
   },
-  "totalPosts": 167,
-  "lastGenerated": "2025-11-10T14:33:33.530Z"
+  "totalPosts": 166,
+  "lastGenerated": "2025-11-10T14:44:23.487Z"
 }
