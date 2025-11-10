@@ -5,7 +5,7 @@
     <link>https://blog.ninochavez.co</link>
     <description>Architecture, commerce, and the signals that matter in the age of AI.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Nov 2025 14:33:33 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 10 Nov 2025 14:44:24 GMT</lastBuildDate>
     <atom:link href="https://blog.ninochavez.co/rss.xml" rel="self" type="application/rss+xml" />
     <managingEditor>nino@signalreflex.studio (Nino Chavez)</managingEditor>
     <webMaster>nino@signalreflex.studio (Nino Chavez)</webMaster>
@@ -43,19 +43,6 @@
     <description>I&apos;ve spent months arguing AI isn&apos;t a bubble—it&apos;s infrastructure. Then smart money started betting against it. Both can be true. Here&apos;s what I&apos;m figuring out.</description>
     <category>GenAI</category>
     <category>Strategy</category>
-    <category>Field Notes</category>
-  </item>
-  <item>
-    <title>So Now What? From Theory to Practice in the AI Era</title>
-    <link>https://blog.ninochavez.co/so-now-what-from-theory-to-practice-in-the-ai-era</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/so-now-what-from-theory-to-practice-in-the-ai-era</guid>
-    <pubDate>Mon, 10 Nov 2025 13:00:00 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>AI is infrastructure. The multipliers are real. The old models are dying. But there&apos;s a bubble too. Both can be true. Here&apos;s what you actually do about it.</description>
-    <category>GenAI</category>
-    <category>Strategy</category>
-    <category>Consulting</category>
-    <category>Engineering</category>
     <category>Field Notes</category>
   </item>
   <item>
@@ -518,6 +505,15 @@
     <description>If your value lies in how you think, are you ever really off the clock? Lately, I’ve been chasing AI workflows at all hours—and thinking through systems even when I’m not at my keyboard. This post reflects on the cost of always being “on,” and how to protect the infrastructure: you.</description>
     <category>personal-growth</category>
     <category>systems-thinking</category>
+  </item>
+  <item>
+    <title>AI Ops: Docs-As-Contracts</title>
+    <link>https://blog.ninochavez.co/ai-ops-docs-as-contracts</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/ai-ops-docs-as-contracts</guid>
+    <pubDate>Thu, 31 Jul 2025 12:45:00 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>Somewhere along the line of a big refactor, we broke our custom theme system.</description>
+    <category>architecture</category>
   </item>
   </channel>
 </rss>
