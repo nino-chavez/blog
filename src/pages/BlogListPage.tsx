@@ -113,8 +113,17 @@ export default function BlogListPage() {
     return filtered;
   }, [posts, selectedCategory, searchQuery, otherCategories]);
 
-  const featuredPosts = filteredPosts.filter((post) => post.featured).slice(0, 2);
-  const allRegularPosts = filteredPosts.filter((post) => !post.featured);
+  // Get all featured posts
+  const allFeaturedPosts = filteredPosts.filter((post) => post.featured);
+  // Top 2 featured posts show in Featured section
+  const featuredPosts = allFeaturedPosts.slice(0, 2);
+  // Remaining featured posts "graduate" to Latest section
+  const olderFeaturedPosts = allFeaturedPosts.slice(2);
+  // Combine graduated featured posts with regular posts, sorted by date
+  const allRegularPosts = [
+    ...olderFeaturedPosts,
+    ...filteredPosts.filter((post) => !post.featured)
+  ].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
   const regularPosts = allRegularPosts.slice(0, visiblePostCount);
   const hasMorePosts = visiblePostCount < allRegularPosts.length;
 
