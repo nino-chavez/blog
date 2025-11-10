@@ -5,10 +5,72 @@
     <link>https://blog.ninochavez.co</link>
     <description>Architecture, commerce, and the signals that matter in the age of AI.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Nov 2025 16:53:18 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 10 Nov 2025 14:33:33 GMT</lastBuildDate>
     <atom:link href="https://blog.ninochavez.co/rss.xml" rel="self" type="application/rss+xml" />
     <managingEditor>nino@signalreflex.studio (Nino Chavez)</managingEditor>
     <webMaster>nino@signalreflex.studio (Nino Chavez)</webMaster>
+  <item>
+    <title>Field Notes: Real Patterns and Next Moves</title>
+    <link>https://blog.ninochavez.co/field-notes-real-patterns-and-next-moves</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/field-notes-real-patterns-and-next-moves</guid>
+    <pubDate>Wed, 12 Nov 2025 13:00:00 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>I&apos;m not observing from the sidelines. I&apos;m running these experiments in real time. Here&apos;s what&apos;s actually happening—and what I&apos;m doing about it.</description>
+    <category>GenAI</category>
+    <category>Strategy</category>
+    <category>Field Notes</category>
+    <category>Meta</category>
+  </item>
+  <item>
+    <title>The Playbook: Tactical Moves for the AI Era</title>
+    <link>https://blog.ninochavez.co/the-playbook-tactical-moves-for-the-ai-era</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/the-playbook-tactical-moves-for-the-ai-era</guid>
+    <pubDate>Tue, 11 Nov 2025 13:00:00 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>If both bubble and build-out are real, what do you actually do? Here&apos;s what I&apos;m seeing work—and what&apos;s failing—across different roles.</description>
+    <category>GenAI</category>
+    <category>Strategy</category>
+    <category>Consulting</category>
+    <category>Engineering</category>
+    <category>Field Notes</category>
+  </item>
+  <item>
+    <title>Bubble vs. Build-Out: Understanding the AI Moment</title>
+    <link>https://blog.ninochavez.co/bubble-vs-build-out-understanding-the-ai-moment</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/bubble-vs-build-out-understanding-the-ai-moment</guid>
+    <pubDate>Mon, 10 Nov 2025 13:00:00 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>I&apos;ve spent months arguing AI isn&apos;t a bubble—it&apos;s infrastructure. Then smart money started betting against it. Both can be true. Here&apos;s what I&apos;m figuring out.</description>
+    <category>GenAI</category>
+    <category>Strategy</category>
+    <category>Field Notes</category>
+  </item>
+  <item>
+    <title>So Now What? From Theory to Practice in the AI Era</title>
+    <link>https://blog.ninochavez.co/so-now-what-from-theory-to-practice-in-the-ai-era</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/so-now-what-from-theory-to-practice-in-the-ai-era</guid>
+    <pubDate>Mon, 10 Nov 2025 13:00:00 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>AI is infrastructure. The multipliers are real. The old models are dying. But there&apos;s a bubble too. Both can be true. Here&apos;s what you actually do about it.</description>
+    <category>GenAI</category>
+    <category>Strategy</category>
+    <category>Consulting</category>
+    <category>Engineering</category>
+    <category>Field Notes</category>
+  </item>
+  <item>
+    <title>AI Isn&apos;t a Bubble. It&apos;s Infrastructure.</title>
+    <link>https://blog.ninochavez.co/ai-isnt-a-bubble-its-infrastructure</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/ai-isnt-a-bubble-its-infrastructure</guid>
+    <pubDate>Sun, 09 Nov 2025 13:00:00 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>Hank Green says the AI industry is a bubble. I think we&apos;re looking at it wrong—what if AI isn&apos;t a product at all, but a foundational technology like electricity?</description>
+    <category>ai-workflows</category>
+    <category>systems-thinking</category>
+    <category>leadership</category>
+    <category>consulting-practice</category>
+    <category>grid-level-thinking</category>
+  </item>
   <item>
     <title>Intent-Driven Engineering: By The Numbers</title>
     <link>https://blog.ninochavez.co/intent-driven-engineering-by-the-numbers</link>
@@ -454,56 +516,6 @@
     <pubDate>Thu, 31 Jul 2025 20:42:57 GMT</pubDate>
     <author>nino@signalreflex.studio (Nino Chavez)</author>
     <description>If your value lies in how you think, are you ever really off the clock? Lately, I’ve been chasing AI workflows at all hours—and thinking through systems even when I’m not at my keyboard. This post reflects on the cost of always being “on,” and how to protect the infrastructure: you.</description>
-    <category>personal-growth</category>
-    <category>systems-thinking</category>
-  </item>
-  <item>
-    <title>AI Ops: Docs-As-Contracts</title>
-    <link>https://blog.ninochavez.co/ai-ops-docs-as-contracts</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/ai-ops-docs-as-contracts</guid>
-    <pubDate>Thu, 31 Jul 2025 12:45:00 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>Somewhere along the line of a big refactor, we broke our custom theme system.</description>
-    <category>architecture</category>
-  </item>
-  <item>
-    <title>Skip the API: Building a Local ChatGPT Bridge for VS Code</title>
-    <link>https://blog.ninochavez.co/skip-the-api-building-a-local-chatgpt-bridge-for-vs-code</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/skip-the-api-building-a-local-chatgpt-bridge-for-vs-code</guid>
-    <pubDate>Thu, 31 Jul 2025 11:47:37 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>Can you skip the API and wire ChatGPT directly into VS Code? Turns out, yes — with a little browser magic. This post breaks down how I thought about building a local-first bridge that replaces Kilo and avoids token costs, all powered by curiosity and a builder’s mindset.</description>
-    <category>ai-workflows</category>
-    <category>systems-thinking</category>
-  </item>
-  <item>
-    <title>From QA Bottleneck to Autonomous Confidence: How I Built a Fully AI-Driven E2E Testing Framework</title>
-    <link>https://blog.ninochavez.co/from-qa-bottleneck-to-autonomous-confidence-how-i-built-a-fully-ai-driven-e2e-testing-framework</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/from-qa-bottleneck-to-autonomous-confidence-how-i-built-a-fully-ai-driven-e2e-testing-framework</guid>
-    <pubDate>Wed, 30 Jul 2025 19:44:00 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>Shipping used to mean stress.</description>
-    <category>architecture</category>
-    <category>testing</category>
-  </item>
-  <item>
-    <title>From Copilot to Enforcer: The AI Maturity Spectrum for Developers</title>
-    <link>https://blog.ninochavez.co/from-ai-copilot-to-ai-enforcer</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/from-ai-copilot-to-ai-enforcer</guid>
-    <pubDate>Wed, 30 Jul 2025 17:46:05 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>Or: What happens when AI stops just helping you code — and starts holding your system accountable</description>
-    <category>ai-workflows</category>
-    <category>systems-thinking</category>
-  </item>
-  <item>
-    <title>Tool-and-Die Thinking for the AI Age</title>
-    <link>https://blog.ninochavez.co/tool-and-die-thinking-for-the-ai-age</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/tool-and-die-thinking-for-the-ai-age</guid>
-    <pubDate>Wed, 30 Jul 2025 17:21:51 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>How AI coding tools helped me beat the overhead wall — and build faster than I think.</description>
-    <category>ai-workflows</category>
     <category>personal-growth</category>
     <category>systems-thinking</category>
   </item>
