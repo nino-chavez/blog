@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Search, X, ExternalLink, Image, Radio } from 'lucide-react';
+import { Search, X, ExternalLink, Image, Radio, FileText } from 'lucide-react';
 
 interface HeaderNavProps {
   onSearch: (query: string) => void;
@@ -120,6 +120,18 @@ export default function HeaderNav({ onSearch, searchQuery }: HeaderNavProps) {
                 </div>
               )}
             </div>
+
+            {/* Whitepapers Link */}
+            <a
+              href="/whitepapers"
+              className="group relative p-1.5 text-zinc-400 hover:text-athletic-brand-violet transition-colors flex-shrink-0"
+              aria-label="Whitepapers"
+            >
+              <FileText className="w-4 h-4" />
+              <span className="absolute bottom-full right-0 mb-2 px-2 py-1 text-xs font-medium text-white bg-zinc-900 border border-zinc-800 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                Whitepapers
+              </span>
+            </a>
 
             {/* Portfolio Link */}
             <a

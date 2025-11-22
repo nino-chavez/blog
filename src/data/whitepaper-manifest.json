@@ -1,0 +1,15 @@
+{
+  "whitepapers": [
+    {
+      "slug": "the-algorithmic-consumer",
+      "title": "The Algorithmic Consumer: Agentic Commerce, Merchandising Dynamics, and the Future of Retail Discovery",
+      "publishedAt": "2025-11-22T12:00:00.000Z",
+      "excerpt": "The global retail ecosystem stands at the precipice of a structural transformation that rivals the introduction of the internet itself. We are transitioning from an era of 'search-based' commerce to 'agentic commerce.'",
+      "author": "Nino Chavez",
+      "readTime": "15 min read",
+      "featureImage": "https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&q=80&w=2000",
+      "downloadUrl": "#",
+      "tags": ["Agentic Commerce", "Retail Strategy", "AI", "Merchandising"]
+    }
+  ]
+}

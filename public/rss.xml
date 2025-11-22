@@ -5,10 +5,21 @@
     <link>https://blog.ninochavez.co</link>
     <description>Architecture, commerce, and the signals that matter in the age of AI.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Nov 2025 14:44:24 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 22 Nov 2025 16:54:01 GMT</lastBuildDate>
     <atom:link href="https://blog.ninochavez.co/rss.xml" rel="self" type="application/rss+xml" />
     <managingEditor>nino@signalreflex.studio (Nino Chavez)</managingEditor>
     <webMaster>nino@signalreflex.studio (Nino Chavez)</webMaster>
+  <item>
+    <title>The Infinite Concierge: Why Agentic Shopping Is Just Old School Merchandising on New School Rails</title>
+    <link>https://blog.ninochavez.co/the-infinite-concierge</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/the-infinite-concierge</guid>
+    <pubDate>Sat, 22 Nov 2025 12:00:00 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>Agentic shopping doesn&apos;t change why we buy. It radically changes the cost of discovery and the precision of the pitch. The game is the same. The speed of the players has changed everything.</description>
+    <category>ai-workflows</category>
+    <category>commerce-strategy</category>
+    <category>systems-thinking</category>
+  </item>
   <item>
     <title>Field Notes: Real Patterns and Next Moves</title>
     <link>https://blog.ninochavez.co/field-notes-real-patterns-and-next-moves</link>
@@ -505,15 +516,6 @@
     <description>If your value lies in how you think, are you ever really off the clock? Lately, I’ve been chasing AI workflows at all hours—and thinking through systems even when I’m not at my keyboard. This post reflects on the cost of always being “on,” and how to protect the infrastructure: you.</description>
     <category>personal-growth</category>
     <category>systems-thinking</category>
-  </item>
-  <item>
-    <title>AI Ops: Docs-As-Contracts</title>
-    <link>https://blog.ninochavez.co/ai-ops-docs-as-contracts</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/ai-ops-docs-as-contracts</guid>
-    <pubDate>Thu, 31 Jul 2025 12:45:00 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>Somewhere along the line of a big refactor, we broke our custom theme system.</description>
-    <category>architecture</category>
   </item>
   </channel>
 </rss>

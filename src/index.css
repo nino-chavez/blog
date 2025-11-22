@@ -1,5 +1,6 @@
 @import '@fontsource-variable/inter';
 @import "tailwindcss";
+@import "./print.css";
 
 /* Brand-unified utility classes for consistent violet/orange scheme */
 @source "inline(bg-athletic-brand-violet/10 bg-athletic-brand-violet/5)";

@@ -8,6 +8,7 @@ import ReadingProgress from '../components/ReadingProgress';
 import RelatedPosts from '../components/RelatedPosts';
 import SourceBadge from '../components/SourceBadge';
 import SocialShare from '../components/SocialShare';
+import CopyLinkButton from '../components/CopyLinkButton';
 import GammaEmbed from '../components/GammaEmbed';
 import { getPostBySlug } from '../utils/mdx-loader';
 import type { BlogPost } from '../utils/mdx-loader';
@@ -165,6 +166,8 @@ export default function BlogPostPage() {
                   </span>
                 </>
               )}
+              <span className="text-zinc-700">•</span>
+              <CopyLinkButton url={`/${post.slug}`} />
             </div>
 
             <h1 className="text-5xl md:text-6xl font-black text-white leading-tight tracking-tight">
