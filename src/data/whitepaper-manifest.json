@@ -1,6 +1,17 @@
 {
   "whitepapers": [
     {
+      "slug": "the-fourth-channel",
+      "title": "The Fourth Channel: A Strategic Analysis of Agentic Commerce as the New Digital Wholesale",
+      "publishedAt": "2025-11-23T12:00:00.000Z",
+      "excerpt": "Agentic Commerce represents a structural evolution comparable to the rise of e-commerce itself. This report analyzes the economics of AI agents that discover, evaluate, and execute purchases autonomously—and what it means for brands navigating the shift from marketplace saturation to algorithmic distribution.",
+      "author": "Nino Chavez",
+      "readTime": "18 min read",
+      "featureImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2000",
+      "downloadUrl": "#",
+      "tags": ["Agentic Commerce", "Channel Strategy", "AI", "E-commerce Economics", "Digital Wholesale"]
+    },
+    {
       "slug": "the-algorithmic-consumer",
       "title": "The Algorithmic Consumer: Agentic Commerce, Merchandising Dynamics, and the Future of Retail Discovery",
       "publishedAt": "2025-11-22T12:00:00.000Z",
