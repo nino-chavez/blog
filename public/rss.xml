@@ -5,10 +5,23 @@
     <link>https://blog.ninochavez.co</link>
     <description>Architecture, commerce, and the signals that matter in the age of AI.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 24 Nov 2025 02:04:25 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 24 Nov 2025 08:08:46 GMT</lastBuildDate>
     <atom:link href="https://blog.ninochavez.co/rss.xml" rel="self" type="application/rss+xml" />
     <managingEditor>nino@signalreflex.studio (Nino Chavez)</managingEditor>
     <webMaster>nino@signalreflex.studio (Nino Chavez)</webMaster>
+  <item>
+    <title>Toolmaker or Tool User: Finding Your True Nature in the AI Age</title>
+    <link>https://blog.ninochavez.co/toolmaker-or-tool-user-finding-your-true-nature-in-the-ai-age</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/toolmaker-or-tool-user-finding-your-true-nature-in-the-ai-age</guid>
+    <pubDate>Mon, 24 Nov 2025 19:30:00 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>I&apos;ve been wrestling with a question that won&apos;t let go: who&apos;s more valuable, me using the LLM or the people building it? After days of thinking, I realized I&apos;ve been asking the wrong question entirely.</description>
+    <category>AI</category>
+    <category>philosophy</category>
+    <category>self-awareness</category>
+    <category>meaning</category>
+    <category>tools</category>
+  </item>
   <item>
     <title>The Infinite Concierge: Why Agentic Shopping Is Just Old School Merchandising on New School Rails</title>
     <link>https://blog.ninochavez.co/the-infinite-concierge</link>
@@ -506,16 +519,6 @@
     <description>Week 2 of AI-assisted coding brought velocity — but also drift. This post explores the moment I realized I was managing AI agents like a team, and what that means for the future of software consulting.</description>
     <category>ai-workflows</category>
     <category>consulting-practice</category>
-  </item>
-  <item>
-    <title>Am I Ever Not Working?</title>
-    <link>https://blog.ninochavez.co/am-i-ever-not-working</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/am-i-ever-not-working</guid>
-    <pubDate>Thu, 31 Jul 2025 20:42:57 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>If your value lies in how you think, are you ever really off the clock? Lately, I’ve been chasing AI workflows at all hours—and thinking through systems even when I’m not at my keyboard. This post reflects on the cost of always being “on,” and how to protect the infrastructure: you.</description>
-    <category>personal-growth</category>
-    <category>systems-thinking</category>
   </item>
   </channel>
 </rss>
