@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Clock } from 'lucide-react';
+import { ArrowLeft, Clock } from '@phosphor-icons/react';
 import BlogLayout from '../components/BlogLayout';
+import { LoadingSpinner } from '../components/ui';
 import HeaderNav from '../components/HeaderNav';
 import SEOHead from '../components/SEOHead';
 import ReadingProgress from '../components/ReadingProgress';
@@ -14,6 +15,7 @@ import { getPostBySlug } from '../utils/mdx-loader';
 import type { BlogPost } from '../utils/mdx-loader';
 import { getCategoryColors } from '../utils/category-colors';
 import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
+import { getGeneratedCategoryImage } from '../utils/generated-images';
 
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -55,12 +57,11 @@ export default function BlogPostPage() {
             onClick={() => navigate('/')}
             className="group flex items-center gap-2 text-zinc-400 hover:text-athletic-court-orange transition-all duration-reaction font-medium"
           >
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-reaction" />
+            <ArrowLeft size={16} weight="bold" className="group-hover:-translate-x-1 transition-transform duration-reaction" />
             Back to all posts
           </button>
-          <div className="text-center py-20">
-            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-athletic-brand-violet border-r-transparent" />
-            <p className="text-zinc-400 mt-4">Loading post...</p>
+          <div className="flex justify-center py-20">
+            <LoadingSpinner size="lg" message="Loading post..." />
           </div>
           </div>
         </BlogLayout>
@@ -78,7 +79,7 @@ export default function BlogPostPage() {
             onClick={() => navigate('/')}
             className="group flex items-center gap-2 text-zinc-400 hover:text-athletic-court-orange transition-all duration-reaction font-medium"
           >
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-reaction" />
+            <ArrowLeft size={16} weight="bold" className="group-hover:-translate-x-1 transition-transform duration-reaction" />
             Back to all posts
           </button>
           <div className="text-center py-20">
@@ -115,7 +116,7 @@ export default function BlogPostPage() {
               onClick={() => navigate('/')}
               className="group flex items-center gap-2 text-zinc-400 hover:text-athletic-court-orange transition-all duration-reaction font-medium"
             >
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-reaction" />
+              <ArrowLeft size={16} weight="bold" className="group-hover:-translate-x-1 transition-transform duration-reaction" />
               Back to all posts
             </button>
 
@@ -123,11 +124,23 @@ export default function BlogPostPage() {
               {/* Featured Image Hero */}
               <div className="relative -mx-4 md:-mx-8 lg:mx-0 aspect-video overflow-hidden rounded-2xl border border-zinc-800">
                 <img
-                  src={post.featureImage || '/og_image.png'}
+                  src={
+                    post.featureImage
+                      ? post.featureImage
+                      : post.category
+                        ? getGeneratedCategoryImage(post.category, post.slug)
+                        : '/og_image.png'
+                  }
                   alt={post.title}
                   className="w-full h-full object-cover"
                   onError={(e) => {
-                    e.currentTarget.src = '/og_image.png';
+                    const target = e.currentTarget;
+                    // If primary image failed, try AI-generated as fallback
+                    if (post.category && !target.src.includes('/generated/')) {
+                      target.src = getGeneratedCategoryImage(post.category, post.slug);
+                    } else {
+                      target.src = '/og_image.png';
+                    }
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60" />
@@ -161,7 +174,7 @@ export default function BlogPostPage() {
                 <>
                   <span className="text-zinc-700">•</span>
                   <span className="flex items-center gap-1.5 text-zinc-500">
-                    <Clock className="w-3.5 h-3.5" />
+                    <Clock size={14} weight="regular" />
                     {post.readTime}
                   </span>
                 </>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BookOpen } from 'lucide-react';
+import { BookOpen } from '@phosphor-icons/react';
 
 interface Heading {
   id: string;
@@ -77,7 +77,7 @@ export default function TableOfContents() {
     <nav className="hidden lg:block sticky top-32 max-h-[calc(100vh-10rem)] overflow-y-auto">
       <div className="rounded-xl border border-zinc-800 bg-zinc-950/50 p-6 space-y-4">
         <div className="flex items-center gap-2 text-sm font-bold text-white uppercase tracking-wider">
-          <BookOpen className="w-4 h-4 text-athletic-brand-violet" />
+          <BookOpen size={16} weight="duotone" className="text-athletic-brand-violet" />
           Contents
         </div>
 

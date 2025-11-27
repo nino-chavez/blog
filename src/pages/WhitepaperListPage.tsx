@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FileText, Download } from 'lucide-react';
+import { FileText, ArrowRight } from '@phosphor-icons/react';
 import BlogLayout from '../components/BlogLayout';
 import HeaderNav from '../components/HeaderNav';
 import SEOHead from '../components/SEOHead';
@@ -89,7 +89,7 @@ export default function WhitepaperListPage() {
                       {/* Type Badge */}
                       <div className="absolute top-4 left-4">
                         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-950/90 backdrop-blur border border-zinc-800 text-xs font-medium text-zinc-300">
-                          <FileText className="w-3.5 h-3.5 text-athletic-brand-violet" />
+                          <FileText size={14} weight="duotone" className="text-athletic-brand-violet" />
                           Whitepaper
                         </span>
                       </div>
@@ -132,7 +132,7 @@ export default function WhitepaperListPage() {
                         
                         <span className="flex items-center gap-2 text-sm font-medium text-white group-hover:translate-x-1 transition-transform duration-300">
                           Read Paper
-                          <Download className="w-4 h-4" />
+                          <ArrowRight size={16} weight="bold" />
                         </span>
                       </div>
                     </div>

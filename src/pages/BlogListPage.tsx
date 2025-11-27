@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Presentation } from 'lucide-react';
+import { Presentation } from '@phosphor-icons/react';
 import BlogLayout from '../components/BlogLayout';
 import HeaderNav from '../components/HeaderNav';
 import StickyFilterBar from '../components/StickyFilterBar';
@@ -9,10 +9,12 @@ import FadeIn from '../components/FadeIn';
 import BackToTop from '../components/BackToTop';
 import ScatterToSignal from '../components/ScatterToSignal';
 import SourceBadge from '../components/SourceBadge';
+import { LoadingSpinner } from '../components/ui';
 import { getAllPosts } from '../utils/mdx-loader';
 import type { BlogPost } from '../utils/mdx-loader';
 import { getCategoryColors } from '../utils/category-colors';
 import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
+import { getGeneratedCategoryImage } from '../utils/generated-images';
 
 export default function BlogListPage() {
   const navigate = useNavigate();
@@ -135,6 +137,32 @@ export default function BlogListPage() {
     navigate(`/${slug}`);
   };
 
+  // Get the best image for a post: custom/Unsplash > generated category image > default
+  const getPostImage = (post: BlogPost): string => {
+    // If post has a feature image (including Unsplash), use it
+    if (post.featureImage) {
+      return post.featureImage;
+    }
+    // Fall back to AI-generated category image if no feature image
+    if (post.category) {
+      return getGeneratedCategoryImage(post.category, post.slug);
+    }
+    // Ultimate fallback
+    return '/og_image.png';
+  };
+
+  // Handle image error - fall back to generated image, then default
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>, post: BlogPost) => {
+    const target = e.currentTarget;
+    // If the Unsplash/custom image failed, try AI-generated
+    if (post.category && !target.src.includes('/generated/')) {
+      target.src = getGeneratedCategoryImage(post.category, post.slug);
+    } else {
+      // Ultimate fallback
+      target.src = '/og_image.png';
+    }
+  };
+
   return (
     <>
       {/* SEO Meta Tags */}
@@ -167,9 +195,8 @@ export default function BlogListPage() {
           <div className="space-y-8">
 
             {loading ? (
-              <div className="text-center py-20">
-                <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-athletic-brand-violet border-r-transparent" />
-                <p className="text-zinc-400 mt-4">Loading posts...</p>
+              <div className="flex justify-center py-20">
+                <LoadingSpinner size="lg" message="Loading posts..." />
               </div>
             ) : posts.length === 0 ? (
               <div className="text-center py-20">
@@ -242,13 +269,11 @@ export default function BlogListPage() {
                         {/* Feature Image */}
                         <div className="relative w-full h-48 sm:h-56 rounded-lg overflow-hidden bg-zinc-900">
                           <img
-                            src={post.featureImage || '/og_image.png'}
+                            src={getPostImage(post)}
                             alt={post.title}
                             className="w-full h-full object-cover opacity-0 transition-opacity duration-300"
                             onLoad={(e) => e.currentTarget.style.opacity = '1'}
-                            onError={(e) => {
-                              e.currentTarget.src = '/og_image.png';
-                            }}
+                            onError={(e) => handleImageError(e, post)}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
                         </div>
@@ -267,7 +292,7 @@ export default function BlogListPage() {
                                 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full border transition-colors bg-athletic-brand-violet/10 border-athletic-brand-violet/50 text-athletic-brand-violet flex items-center gap-1"
                                 title="Includes Gamma presentation"
                               >
-                                <Presentation className="w-3 h-3" />
+                                <Presentation size={12} weight="duotone" />
                                 <span className="hidden sm:inline">Presentation</span>
                               </span>
                             )}
@@ -369,13 +394,11 @@ export default function BlogListPage() {
                         {/* Feature Image */}
                         <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden bg-zinc-900">
                           <img
-                            src={post.featureImage || '/og_image.png'}
+                            src={getPostImage(post)}
                             alt={post.title}
                             className="w-full h-full object-cover opacity-0 transition-opacity duration-300"
                             onLoad={(e) => e.currentTarget.style.opacity = '1'}
-                            onError={(e) => {
-                              e.currentTarget.src = '/og_image.png';
-                            }}
+                            onError={(e) => handleImageError(e, post)}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
                         </div>
@@ -394,7 +417,7 @@ export default function BlogListPage() {
                                 className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full border transition-colors bg-athletic-brand-violet/10 border-athletic-brand-violet/50 text-athletic-brand-violet flex items-center gap-1"
                                 title="Includes Gamma presentation"
                               >
-                                <Presentation className="w-3 h-3" />
+                                <Presentation size={12} weight="duotone" />
                                 <span className="hidden sm:inline">Presentation</span>
                               </span>
                             )}

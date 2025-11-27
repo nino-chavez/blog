@@ -1,4 +1,4 @@
-import { Rss } from 'lucide-react';
+import { RssSimple } from '@phosphor-icons/react';
 
 export default function BlogFooter() {
   return (
@@ -32,7 +32,7 @@ export default function BlogFooter() {
                   href="/rss.xml"
                   className="text-zinc-400 hover:text-athletic-brand-violet transition-colors text-xs sm:text-sm inline-flex items-center gap-1.5 sm:gap-2"
                 >
-                  <Rss className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <RssSimple size={14} weight="bold" className="sm:w-4 sm:h-4" />
                   RSS Feed
                 </a>
               </li>
