@@ -14,7 +14,7 @@ import { getAllPosts } from '../utils/mdx-loader';
 import type { BlogPost } from '../utils/mdx-loader';
 import { getCategoryColors } from '../utils/category-colors';
 import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
-import { getGeneratedCategoryImage, getUnsplashFallback } from '../utils/generated-images';
+import { getGeneratedCategoryImage } from '../utils/generated-images';
 
 export default function BlogListPage() {
   const navigate = useNavigate();
@@ -137,26 +137,26 @@ export default function BlogListPage() {
     navigate(`/${slug}`);
   };
 
-  // Get the best image for a post: custom image > generated category image > fallback
+  // Get the best image for a post: custom/Unsplash > generated category image > default
   const getPostImage = (post: BlogPost): string => {
-    // If post has a custom feature image (not from Unsplash), use it
-    if (post.featureImage && !post.featureImage.includes('unsplash.com')) {
+    // If post has a feature image (including Unsplash), use it
+    if (post.featureImage) {
       return post.featureImage;
     }
-    // Use AI-generated category image based on post slug for consistency
+    // Fall back to AI-generated category image if no feature image
     if (post.category) {
       return getGeneratedCategoryImage(post.category, post.slug);
     }
-    // Fall back to default
+    // Ultimate fallback
     return '/og_image.png';
   };
 
-  // Handle image error - fall back to Unsplash or default
+  // Handle image error - fall back to generated image, then default
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>, post: BlogPost) => {
     const target = e.currentTarget;
-    // First try Unsplash fallback for the category
-    if (post.category && !target.src.includes('unsplash.com')) {
-      target.src = getUnsplashFallback(post.category);
+    // If the Unsplash/custom image failed, try AI-generated
+    if (post.category && !target.src.includes('/generated/')) {
+      target.src = getGeneratedCategoryImage(post.category, post.slug);
     } else {
       // Ultimate fallback
       target.src = '/og_image.png';
