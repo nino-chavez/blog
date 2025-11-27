@@ -1,7 +1,18 @@
 import { useEffect, useState } from 'react';
+import { motion, useSpring, useTransform } from 'framer-motion';
 
 export default function ReadingProgress() {
   const [progress, setProgress] = useState(0);
+  const [isComplete, setIsComplete] = useState(false);
+
+  // Spring animation for smooth progress
+  const springProgress = useSpring(0, { stiffness: 100, damping: 30 });
+  const width = useTransform(springProgress, [0, 100], ['0%', '100%']);
+
+  useEffect(() => {
+    springProgress.set(progress);
+    setIsComplete(progress >= 98);
+  }, [progress, springProgress]);
 
   useEffect(() => {
     const updateProgress = () => {
@@ -34,15 +45,33 @@ export default function ReadingProgress() {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-zinc-900/50">
-      <div
-        className="h-full bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange transition-all duration-quick-snap"
-        style={{ width: `${progress}%` }}
+      <motion.div
+        className={`h-full bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange ${
+          isComplete ? 'shadow-[0_0_12px_2px_rgba(249,115,22,0.6)]' : ''
+        }`}
+        style={{ width }}
         role="progressbar"
         aria-valuenow={Math.round(progress)}
         aria-valuemin={0}
         aria-valuemax={100}
         aria-label="Reading progress"
       />
+
+      {/* Completion glow pulse effect */}
+      {isComplete && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: [0, 0.8, 0],
+          }}
+          transition={{
+            duration: 1.5,
+            repeat: 2,
+            ease: 'easeInOut'
+          }}
+          className="absolute inset-0 bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange blur-sm"
+        />
+      )}
     </div>
   );
 }
