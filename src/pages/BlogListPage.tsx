@@ -9,6 +9,7 @@ import FadeIn from '../components/FadeIn';
 import BackToTop from '../components/BackToTop';
 import ScatterToSignal from '../components/ScatterToSignal';
 import SourceBadge from '../components/SourceBadge';
+import { LoadingSpinner } from '../components/ui';
 import { getAllPosts } from '../utils/mdx-loader';
 import type { BlogPost } from '../utils/mdx-loader';
 import { getCategoryColors } from '../utils/category-colors';
@@ -167,9 +168,8 @@ export default function BlogListPage() {
           <div className="space-y-8">
 
             {loading ? (
-              <div className="text-center py-20">
-                <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-athletic-brand-violet border-r-transparent" />
-                <p className="text-zinc-400 mt-4">Loading posts...</p>
+              <div className="flex justify-center py-20">
+                <LoadingSpinner size="lg" message="Loading posts..." />
               </div>
             ) : posts.length === 0 ? (
               <div className="text-center py-20">

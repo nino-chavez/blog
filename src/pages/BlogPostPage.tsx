@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Clock } from '@phosphor-icons/react';
 import BlogLayout from '../components/BlogLayout';
+import { LoadingSpinner } from '../components/ui';
 import HeaderNav from '../components/HeaderNav';
 import SEOHead from '../components/SEOHead';
 import ReadingProgress from '../components/ReadingProgress';
@@ -58,9 +59,8 @@ export default function BlogPostPage() {
             <ArrowLeft size={16} weight="bold" className="group-hover:-translate-x-1 transition-transform duration-reaction" />
             Back to all posts
           </button>
-          <div className="text-center py-20">
-            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-athletic-brand-violet border-r-transparent" />
-            <p className="text-zinc-400 mt-4">Loading post...</p>
+          <div className="flex justify-center py-20">
+            <LoadingSpinner size="lg" message="Loading post..." />
           </div>
           </div>
         </BlogLayout>
