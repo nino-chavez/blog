@@ -5,7 +5,20 @@
  * Right: Lines converge into single clean signal
  */
 
+import { useEffect, useState } from 'react';
+
 export default function ScatterToSignal() {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
   // Generate scatter points for left side (chaos) - extended further right
   const scatterPoints = Array.from({ length: 50 }, (_, i) => ({
     x: 10 + (i % 10) * 10 + Math.random() * 8,
@@ -60,7 +73,7 @@ export default function ScatterToSignal() {
               opacity="0.6"
               className="animate-scatter"
               style={{
-                animation: `scatter-pulse 3s ease-in-out infinite`,
+                animation: prefersReducedMotion ? 'none' : `scatter-pulse 3s ease-in-out infinite`,
                 animationDelay: `${point.delay}s`,
               }}
             />
@@ -88,7 +101,7 @@ export default function ScatterToSignal() {
                     fill="url(#scatter-gradient)"
                     opacity={0.4 + progress * 0.4}
                     style={{
-                      animation: `organize 4s ease-in-out infinite`,
+                      animation: prefersReducedMotion ? 'none' : `organize 4s ease-in-out infinite`,
                       animationDelay: `${i * 0.2 + dotIndex * 0.05}s`,
                     }}
                   />
@@ -104,7 +117,7 @@ export default function ScatterToSignal() {
                 opacity="0.3"
                 strokeDasharray="5 5"
                 style={{
-                  animation: `line-emerge 5s ease-in-out infinite`,
+                  animation: prefersReducedMotion ? 'none' : `line-emerge 5s ease-in-out infinite`,
                   animationDelay: `${i * 0.2}s`,
                 }}
               />
@@ -124,9 +137,9 @@ export default function ScatterToSignal() {
               fill="none"
               opacity={0.6}
               style={{
-                strokeDasharray: '360',
-                strokeDashoffset: '360',
-                animation: `converge 6s ease-out infinite`,
+                strokeDasharray: prefersReducedMotion ? 'none' : '360',
+                strokeDashoffset: prefersReducedMotion ? '0' : '360',
+                animation: prefersReducedMotion ? 'none' : `converge 6s ease-out infinite`,
                 animationDelay: `${i * 0.15}s`,
               }}
             />
@@ -143,29 +156,30 @@ export default function ScatterToSignal() {
             strokeLinecap="round"
             filter="url(#signal-glow)"
             style={{
-              animation: 'signal-pulse 2s ease-in-out infinite',
+              animation: prefersReducedMotion ? 'none' : 'signal-pulse 2s ease-in-out infinite',
             }}
           />
         </g>
 
         {/* Traveling particle showing the complete journey */}
-        <circle
-          r="2.5"
-          fill="#f97316"
-          opacity="0.9"
-        >
-          <animateMotion
-            dur="8s"
-            repeatCount="indefinite"
-            path="M 40 40 L 120 40 Q 220 38 320 40 Q 450 40 580 40 L 680 40"
-          />
-          <animate
-            attributeName="opacity"
-            dur="8s"
-            repeatCount="indefinite"
-            values="0; 0.3; 0.6; 0.9; 1; 1"
-          />
-        </circle>
+        {prefersReducedMotion ? (
+          /* Static endpoint for reduced motion */
+          <circle cx="680" cy="40" r="2.5" fill="#f97316" opacity="0.9" />
+        ) : (
+          <circle r="2.5" fill="#f97316" opacity="0.9">
+            <animateMotion
+              dur="8s"
+              repeatCount="indefinite"
+              path="M 40 40 L 120 40 Q 220 38 320 40 Q 450 40 580 40 L 680 40"
+            />
+            <animate
+              attributeName="opacity"
+              dur="8s"
+              repeatCount="indefinite"
+              values="0; 0.3; 0.6; 0.9; 1; 1"
+            />
+          </circle>
+        )}
 
         {/* CSS animations */}
         <style>{`

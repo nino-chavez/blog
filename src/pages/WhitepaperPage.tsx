@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Clock, Download, FileText } from 'lucide-react';
+import { ArrowLeft, Clock, DownloadSimple, FileText } from '@phosphor-icons/react';
 import BlogLayout from '../components/BlogLayout';
+import { LoadingSpinner } from '../components/ui';
 import HeaderNav from '../components/HeaderNav';
 import SEOHead from '../components/SEOHead';
 import ReadingProgress from '../components/ReadingProgress';
@@ -42,9 +43,8 @@ export default function WhitepaperPage() {
         <HeaderNav onSearch={setSearchQuery} searchQuery={searchQuery} />
         <BlogLayout>
           <div className="max-w-4xl mx-auto space-y-8 pt-12">
-            <div className="text-center py-20">
-              <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-athletic-brand-violet border-r-transparent" />
-              <p className="text-zinc-400 mt-4">Loading whitepaper...</p>
+            <div className="flex justify-center py-20">
+              <LoadingSpinner size="lg" message="Loading whitepaper..." />
             </div>
           </div>
         </BlogLayout>
@@ -96,7 +96,7 @@ export default function WhitepaperPage() {
               onClick={() => navigate('/whitepapers')}
               className="group flex items-center gap-2 text-zinc-400 hover:text-athletic-court-orange transition-all duration-reaction font-medium"
             >
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-reaction" />
+              <ArrowLeft size={16} weight="bold" className="group-hover:-translate-x-1 transition-transform duration-reaction" />
               Back to Research
             </button>
 
@@ -105,7 +105,7 @@ export default function WhitepaperPage() {
               <header className="space-y-6 pb-8 border-b border-zinc-800/50">
                 <div className="flex items-center gap-3 text-sm">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-athletic-brand-violet/10 border border-athletic-brand-violet/30 text-athletic-brand-violet font-medium">
-                    <FileText className="w-3.5 h-3.5" />
+                    <FileText size={14} weight="duotone" />
                     Whitepaper
                   </span>
                   <span className="text-zinc-700">•</span>
@@ -118,7 +118,7 @@ export default function WhitepaperPage() {
                   </time>
                   <span className="text-zinc-700">•</span>
                   <span className="flex items-center gap-1.5 text-zinc-500">
-                    <Clock className="w-3.5 h-3.5" />
+                    <Clock size={14} weight="regular" />
                     {paper.readTime}
                   </span>
                   <span className="text-zinc-700">•</span>
@@ -149,7 +149,7 @@ export default function WhitepaperPage() {
                     onClick={() => window.print()}
                     className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-zinc-950 font-bold hover:bg-zinc-200 transition-colors print:hidden"
                   >
-                    <Download className="w-4 h-4" />
+                    <DownloadSimple size={16} weight="bold" />
                     Download PDF
                   </button>
                 </div>
@@ -159,7 +159,7 @@ export default function WhitepaperPage() {
               <div className="p-4 rounded-lg border border-athletic-brand-violet/20 bg-athletic-brand-violet/5">
                 <div className="flex gap-3">
                   <div className="flex-shrink-0 mt-0.5">
-                    <FileText className="w-5 h-5 text-athletic-brand-violet" />
+                    <FileText size={20} weight="duotone" className="text-athletic-brand-violet" />
                   </div>
                   <div className="space-y-1">
                     <h4 className="text-sm font-semibold text-white">GenAI Research</h4>
