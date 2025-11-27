@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Clock } from 'lucide-react';
+import { ArrowLeft, Clock } from '@phosphor-icons/react';
 import BlogLayout from '../components/BlogLayout';
 import HeaderNav from '../components/HeaderNav';
 import SEOHead from '../components/SEOHead';
@@ -55,7 +55,7 @@ export default function BlogPostPage() {
             onClick={() => navigate('/')}
             className="group flex items-center gap-2 text-zinc-400 hover:text-athletic-court-orange transition-all duration-reaction font-medium"
           >
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-reaction" />
+            <ArrowLeft size={16} weight="bold" className="group-hover:-translate-x-1 transition-transform duration-reaction" />
             Back to all posts
           </button>
           <div className="text-center py-20">
@@ -78,7 +78,7 @@ export default function BlogPostPage() {
             onClick={() => navigate('/')}
             className="group flex items-center gap-2 text-zinc-400 hover:text-athletic-court-orange transition-all duration-reaction font-medium"
           >
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-reaction" />
+            <ArrowLeft size={16} weight="bold" className="group-hover:-translate-x-1 transition-transform duration-reaction" />
             Back to all posts
           </button>
           <div className="text-center py-20">
@@ -115,7 +115,7 @@ export default function BlogPostPage() {
               onClick={() => navigate('/')}
               className="group flex items-center gap-2 text-zinc-400 hover:text-athletic-court-orange transition-all duration-reaction font-medium"
             >
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-reaction" />
+              <ArrowLeft size={16} weight="bold" className="group-hover:-translate-x-1 transition-transform duration-reaction" />
               Back to all posts
             </button>
 
@@ -161,7 +161,7 @@ export default function BlogPostPage() {
                 <>
                   <span className="text-zinc-700">•</span>
                   <span className="flex items-center gap-1.5 text-zinc-500">
-                    <Clock className="w-3.5 h-3.5" />
+                    <Clock size={14} weight="regular" />
                     {post.readTime}
                   </span>
                 </>

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Search, X } from 'lucide-react';
+import { MagnifyingGlass, X } from '@phosphor-icons/react';
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
@@ -51,7 +51,7 @@ export default function SearchBar({ onSearch, placeholder = 'Search posts...' }:
             : 'border-zinc-800'
         } rounded-xl bg-zinc-900/50 backdrop-blur-sm`}
       >
-        <Search className="absolute left-4 w-5 h-5 text-zinc-500" />
+        <MagnifyingGlass size={20} weight="regular" className="absolute left-4 text-zinc-500" />
         <input
           ref={inputRef}
           type="text"
@@ -69,7 +69,7 @@ export default function SearchBar({ onSearch, placeholder = 'Search posts...' }:
             className="absolute right-4 p-1 rounded-full hover:bg-zinc-800 transition-colors group"
             aria-label="Clear search"
           >
-            <X className="w-4 h-4 text-zinc-500 group-hover:text-white transition-colors" />
+            <X size={16} weight="bold" className="text-zinc-500 group-hover:text-white transition-colors" />
           </button>
         )}
       </div>

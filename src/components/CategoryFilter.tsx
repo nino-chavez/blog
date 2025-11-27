@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { CaretDown } from '@phosphor-icons/react';
 import { getCategoryButtonClass } from '../utils/category-colors';
 
 interface CategoryFilterProps {
@@ -104,8 +104,10 @@ export default function CategoryFilter({
               className={`px-3 sm:px-4 py-2 sm:py-3 min-h-[40px] sm:min-h-[44px] rounded-full text-xs sm:text-sm font-medium whitespace-nowrap transition-all duration-reaction flex items-center gap-1.5 sm:gap-2 border ${getCategoryButtonClass(selectedCategory || '', isOverflowCategorySelected)} ${isOverflowCategorySelected ? 'shadow-lg scale-105' : 'hover:scale-105'}`}
             >
               {isOverflowCategorySelected ? selectedCategory : 'More'}
-              <ChevronDown
-                className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`}
+              <CaretDown
+                size={14}
+                weight="bold"
+                className={`sm:w-4 sm:h-4 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`}
               />
             </button>
 
