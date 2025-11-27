@@ -15,7 +15,7 @@ import { getPostBySlug } from '../utils/mdx-loader';
 import type { BlogPost } from '../utils/mdx-loader';
 import { getCategoryColors } from '../utils/category-colors';
 import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
-import { getGeneratedCategoryImage, getUnsplashFallback } from '../utils/generated-images';
+import { getGeneratedCategoryImage } from '../utils/generated-images';
 
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -125,7 +125,7 @@ export default function BlogPostPage() {
               <div className="relative -mx-4 md:-mx-8 lg:mx-0 aspect-video overflow-hidden rounded-2xl border border-zinc-800">
                 <img
                   src={
-                    post.featureImage && !post.featureImage.includes('unsplash.com')
+                    post.featureImage
                       ? post.featureImage
                       : post.category
                         ? getGeneratedCategoryImage(post.category, post.slug)
@@ -135,8 +135,9 @@ export default function BlogPostPage() {
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     const target = e.currentTarget;
-                    if (post.category && !target.src.includes('unsplash.com')) {
-                      target.src = getUnsplashFallback(post.category);
+                    // If primary image failed, try AI-generated as fallback
+                    if (post.category && !target.src.includes('/generated/')) {
+                      target.src = getGeneratedCategoryImage(post.category, post.slug);
                     } else {
                       target.src = '/og_image.png';
                     }
