@@ -1,4 +1,4 @@
-import { Link2, Check } from 'lucide-react';
+import { Link, Check } from '@phosphor-icons/react';
 import { useState } from 'react';
 
 interface SocialShareProps {
@@ -34,14 +34,14 @@ export default function SocialShare({ url }: SocialShareProps) {
         {copied ? (
           <>
             <div className="p-1 rounded-full bg-green-500/10">
-              <Check className="w-4 h-4 text-green-500" />
+              <Check size={16} weight="bold" className="text-green-500" />
             </div>
             <span className="text-green-500 font-medium">Link Copied</span>
           </>
         ) : (
           <>
             <div className="p-1 rounded-full bg-zinc-800 group-hover:bg-athletic-brand-violet/20 transition-colors">
-              <Link2 className="w-4 h-4 text-zinc-400 group-hover:text-athletic-brand-violet transition-colors" />
+              <Link size={16} weight="bold" className="text-zinc-400 group-hover:text-athletic-brand-violet transition-colors" />
             </div>
             <span className="text-zinc-300 group-hover:text-white font-medium transition-colors">Copy Link</span>
           </>

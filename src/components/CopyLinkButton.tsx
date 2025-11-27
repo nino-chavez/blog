@@ -1,4 +1,4 @@
-import { Link2, Check } from 'lucide-react';
+import { Link, Check } from '@phosphor-icons/react';
 import { useState } from 'react';
 
 interface CopyLinkButtonProps {
@@ -29,12 +29,12 @@ export default function CopyLinkButton({ url }: CopyLinkButtonProps) {
     >
       {copied ? (
         <>
-          <Check className="w-3.5 h-3.5 text-green-500" />
+          <Check size={14} weight="bold" className="text-green-500" />
           <span className="text-green-500 text-sm">Copied</span>
         </>
       ) : (
         <>
-          <Link2 className="w-3.5 h-3.5" />
+          <Link size={14} weight="bold" />
           <span className="text-sm group-hover:underline decoration-athletic-brand-violet/30 underline-offset-4">Copy Link</span>
         </>
       )}

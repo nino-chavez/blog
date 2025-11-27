@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Presentation } from 'lucide-react';
+import { Presentation } from '@phosphor-icons/react';
 import BlogLayout from '../components/BlogLayout';
 import HeaderNav from '../components/HeaderNav';
 import StickyFilterBar from '../components/StickyFilterBar';
@@ -267,7 +267,7 @@ export default function BlogListPage() {
                                 className="text-[10px] sm:text-xs font-bold uppercase tracking-wider px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full border transition-colors bg-athletic-brand-violet/10 border-athletic-brand-violet/50 text-athletic-brand-violet flex items-center gap-1"
                                 title="Includes Gamma presentation"
                               >
-                                <Presentation className="w-3 h-3" />
+                                <Presentation size={12} weight="duotone" />
                                 <span className="hidden sm:inline">Presentation</span>
                               </span>
                             )}
@@ -394,7 +394,7 @@ export default function BlogListPage() {
                                 className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full border transition-colors bg-athletic-brand-violet/10 border-athletic-brand-violet/50 text-athletic-brand-violet flex items-center gap-1"
                                 title="Includes Gamma presentation"
                               >
-                                <Presentation className="w-3 h-3" />
+                                <Presentation size={12} weight="duotone" />
                                 <span className="hidden sm:inline">Presentation</span>
                               </span>
                             )}

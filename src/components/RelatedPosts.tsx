@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight } from '@phosphor-icons/react';
 import { getAllPosts } from '../utils/mdx-loader';
 import type { BlogPost } from '../utils/mdx-loader';
 
@@ -89,7 +89,7 @@ export default function RelatedPosts({ currentSlug, category, tags = [], onSelec
 
                 <div className="flex items-center gap-2 text-sm text-athletic-brand-violet group-hover:text-athletic-court-orange transition-colors duration-reaction font-medium pt-2">
                   Read article
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-reaction" />
+                  <ArrowRight size={16} weight="bold" className="group-hover:translate-x-1 transition-transform duration-reaction" />
                 </div>
               </div>
             </article>

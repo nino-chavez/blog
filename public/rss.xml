@@ -5,10 +5,34 @@
     <link>https://blog.ninochavez.co</link>
     <description>Architecture, commerce, and the signals that matter in the age of AI.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 24 Nov 2025 08:08:46 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 27 Nov 2025 16:12:22 GMT</lastBuildDate>
     <atom:link href="https://blog.ninochavez.co/rss.xml" rel="self" type="application/rss+xml" />
     <managingEditor>nino@signalreflex.studio (Nino Chavez)</managingEditor>
     <webMaster>nino@signalreflex.studio (Nino Chavez)</webMaster>
+  <item>
+    <title>Thankful for My Robot Army</title>
+    <link>https://blog.ninochavez.co/thankful-for-my-robot-army</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/thankful-for-my-robot-army</guid>
+    <pubDate>Thu, 27 Nov 2025 12:00:00 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>It&apos;s Thanksgiving. And while I&apos;m grateful for the usual things—family, health, increasingly creative leftover sandwiches—I need to take a moment to thank the team that really made this year possible. They don&apos;t eat. They don&apos;t sleep. And they never ask for PTO.</description>
+    <category>ai-automation</category>
+    <category>personal-growth</category>
+    <category>meta</category>
+  </item>
+  <item>
+    <title>The Netflix Paradox: Why Shopping Isn&apos;t &quot;Streaming&quot; Yet</title>
+    <link>https://blog.ninochavez.co/the-netflix-paradox-why-shopping-isnt-streaming-yet</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/the-netflix-paradox-why-shopping-isnt-streaming-yet</guid>
+    <pubDate>Tue, 25 Nov 2025 08:00:00 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>Spotify knows what song you want to hear next. Netflix queues up your next binge. But your favorite retailer? Still making you filter by Men &gt; Shirts &gt; Size L. After 15 years of personalization promises, why doesn&apos;t shopping work like streaming?</description>
+    <category>ai</category>
+    <category>commerce</category>
+    <category>field-notes</category>
+    <category>consulting</category>
+    <category>personalization</category>
+  </item>
   <item>
     <title>Toolmaker or Tool User: Finding Your True Nature in the AI Age</title>
     <link>https://blog.ninochavez.co/toolmaker-or-tool-user-finding-your-true-nature-in-the-ai-age</link>
@@ -500,25 +524,6 @@
     <author>nino@signalreflex.studio (Nino Chavez)</author>
     <description>What My Stack Audit Revealed About Modern Dev</description>
     <category>ai-workflows</category>
-  </item>
-  <item>
-    <title>💡 I’ve been doing AI coding wrong (sort of)</title>
-    <link>https://blog.ninochavez.co/ive-been-doing-ai-coding-wrong-sort-of</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/ive-been-doing-ai-coding-wrong-sort-of</guid>
-    <pubDate>Fri, 01 Aug 2025 06:29:00 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>Been deep in the zone building with AI tools like GPT, Kilo, and Lovable. Pairing them with Vite + Supabase to generate real production software. I’ve got a solid workflow. Clear prompt stacks....</description>
-    <category>ai-coding</category>
-  </item>
-  <item>
-    <title>The Drift Beneath the Velocity</title>
-    <link>https://blog.ninochavez.co/the-drift-beneath-the-velocity</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/the-drift-beneath-the-velocity</guid>
-    <pubDate>Fri, 01 Aug 2025 00:43:56 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>Week 2 of AI-assisted coding brought velocity — but also drift. This post explores the moment I realized I was managing AI agents like a team, and what that means for the future of software consulting.</description>
-    <category>ai-workflows</category>
-    <category>consulting-practice</category>
   </item>
   </channel>
 </rss>
