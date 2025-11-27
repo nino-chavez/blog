@@ -14,6 +14,7 @@ import { getAllPosts } from '../utils/mdx-loader';
 import type { BlogPost } from '../utils/mdx-loader';
 import { getCategoryColors } from '../utils/category-colors';
 import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
+import { getGeneratedCategoryImage, getUnsplashFallback } from '../utils/generated-images';
 
 export default function BlogListPage() {
   const navigate = useNavigate();
@@ -136,6 +137,32 @@ export default function BlogListPage() {
     navigate(`/${slug}`);
   };
 
+  // Get the best image for a post: custom image > generated category image > fallback
+  const getPostImage = (post: BlogPost): string => {
+    // If post has a custom feature image (not from Unsplash), use it
+    if (post.featureImage && !post.featureImage.includes('unsplash.com')) {
+      return post.featureImage;
+    }
+    // Use AI-generated category image based on post slug for consistency
+    if (post.category) {
+      return getGeneratedCategoryImage(post.category, post.slug);
+    }
+    // Fall back to default
+    return '/og_image.png';
+  };
+
+  // Handle image error - fall back to Unsplash or default
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>, post: BlogPost) => {
+    const target = e.currentTarget;
+    // First try Unsplash fallback for the category
+    if (post.category && !target.src.includes('unsplash.com')) {
+      target.src = getUnsplashFallback(post.category);
+    } else {
+      // Ultimate fallback
+      target.src = '/og_image.png';
+    }
+  };
+
   return (
     <>
       {/* SEO Meta Tags */}
@@ -242,13 +269,11 @@ export default function BlogListPage() {
                         {/* Feature Image */}
                         <div className="relative w-full h-48 sm:h-56 rounded-lg overflow-hidden bg-zinc-900">
                           <img
-                            src={post.featureImage || '/og_image.png'}
+                            src={getPostImage(post)}
                             alt={post.title}
                             className="w-full h-full object-cover opacity-0 transition-opacity duration-300"
                             onLoad={(e) => e.currentTarget.style.opacity = '1'}
-                            onError={(e) => {
-                              e.currentTarget.src = '/og_image.png';
-                            }}
+                            onError={(e) => handleImageError(e, post)}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
                         </div>
@@ -369,13 +394,11 @@ export default function BlogListPage() {
                         {/* Feature Image */}
                         <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden bg-zinc-900">
                           <img
-                            src={post.featureImage || '/og_image.png'}
+                            src={getPostImage(post)}
                             alt={post.title}
                             className="w-full h-full object-cover opacity-0 transition-opacity duration-300"
                             onLoad={(e) => e.currentTarget.style.opacity = '1'}
-                            onError={(e) => {
-                              e.currentTarget.src = '/og_image.png';
-                            }}
+                            onError={(e) => handleImageError(e, post)}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
                         </div>
