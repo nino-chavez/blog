@@ -1,5 +1,6 @@
-import { Link, Check } from '@phosphor-icons/react';
+import { Link } from '@phosphor-icons/react';
 import { useState } from 'react';
+import { SuccessAnimation } from './ui/SuccessAnimation';
 
 interface CopyLinkButtonProps {
   url: string;
@@ -14,7 +15,6 @@ export default function CopyLinkButton({ url }: CopyLinkButtonProps) {
       const fullUrl = url.startsWith('http') ? url : `${window.location.origin}${url}`;
       await navigator.clipboard.writeText(fullUrl);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy:', err);
     }
@@ -29,8 +29,13 @@ export default function CopyLinkButton({ url }: CopyLinkButtonProps) {
     >
       {copied ? (
         <>
-          <Check size={14} weight="bold" className="text-green-500" />
-          <span className="text-green-500 text-sm">Copied</span>
+          <SuccessAnimation
+            show={copied}
+            size="sm"
+            autoHideAfter={2000}
+            onComplete={() => setCopied(false)}
+          />
+          <span className="text-green-500 text-sm">Copied!</span>
         </>
       ) : (
         <>

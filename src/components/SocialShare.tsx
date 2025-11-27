@@ -1,5 +1,6 @@
-import { Link, Check } from '@phosphor-icons/react';
+import { Link } from '@phosphor-icons/react';
 import { useState } from 'react';
+import { SuccessAnimation } from './ui/SuccessAnimation';
 
 interface SocialShareProps {
   url: string;
@@ -14,7 +15,6 @@ export default function SocialShare({ url }: SocialShareProps) {
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy:', err);
     }
@@ -25,7 +25,7 @@ export default function SocialShare({ url }: SocialShareProps) {
       <p className="text-zinc-500 text-sm font-medium">
         Share this article
       </p>
-      
+
       <button
         onClick={handleCopyLink}
         className="group flex items-center gap-3 px-6 py-3 rounded-full bg-zinc-900 border border-zinc-800 hover:border-athletic-brand-violet/50 hover:bg-zinc-900/80 transition-all duration-300"
@@ -34,9 +34,14 @@ export default function SocialShare({ url }: SocialShareProps) {
         {copied ? (
           <>
             <div className="p-1 rounded-full bg-green-500/10">
-              <Check size={16} weight="bold" className="text-green-500" />
+              <SuccessAnimation
+                show={copied}
+                size="sm"
+                autoHideAfter={2000}
+                onComplete={() => setCopied(false)}
+              />
             </div>
-            <span className="text-green-500 font-medium">Link Copied</span>
+            <span className="text-green-500 font-medium">Link Copied!</span>
           </>
         ) : (
           <>

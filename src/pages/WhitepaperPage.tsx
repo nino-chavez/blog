@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Clock, DownloadSimple, FileText } from '@phosphor-icons/react';
 import BlogLayout from '../components/BlogLayout';
+import { LoadingSpinner } from '../components/ui';
 import HeaderNav from '../components/HeaderNav';
 import SEOHead from '../components/SEOHead';
 import ReadingProgress from '../components/ReadingProgress';
@@ -42,9 +43,8 @@ export default function WhitepaperPage() {
         <HeaderNav onSearch={setSearchQuery} searchQuery={searchQuery} />
         <BlogLayout>
           <div className="max-w-4xl mx-auto space-y-8 pt-12">
-            <div className="text-center py-20">
-              <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-athletic-brand-violet border-r-transparent" />
-              <p className="text-zinc-400 mt-4">Loading whitepaper...</p>
+            <div className="flex justify-center py-20">
+              <LoadingSpinner size="lg" message="Loading whitepaper..." />
             </div>
           </div>
         </BlogLayout>
