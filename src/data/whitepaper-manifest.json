@@ -1,6 +1,17 @@
 {
   "whitepapers": [
     {
+      "slug": "the-agentic-shift",
+      "title": "The Agentic Shift: A Strategic Analysis of LLM Impact on the 2025 Holiday Shopping Season",
+      "publishedAt": "2025-11-27T08:00:00.000Z",
+      "excerpt": "The 2025 holiday shopping season marks the transition from algorithmic recommendation to Agentic Commerce. This report analyzes how LLMs and autonomous AI agents are reshaping Black Friday and Cyber Week—with 520% YoY AI traffic growth, $73B in agent-influenced sales, and a complete monitoring dashboard.",
+      "author": "Nino Chavez",
+      "readTime": "22 min read",
+      "featureImage": "https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?auto=format&fit=crop&q=80&w=2000",
+      "downloadUrl": "#",
+      "tags": ["Agentic Commerce", "LLM", "Holiday Shopping", "Black Friday", "AI Analytics"]
+    },
+    {
       "slug": "the-fourth-channel",
       "title": "The Fourth Channel: A Strategic Analysis of Agentic Commerce as the New Digital Wholesale",
       "publishedAt": "2025-11-23T12:00:00.000Z",
