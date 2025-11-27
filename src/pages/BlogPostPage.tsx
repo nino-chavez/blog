@@ -15,6 +15,7 @@ import { getPostBySlug } from '../utils/mdx-loader';
 import type { BlogPost } from '../utils/mdx-loader';
 import { getCategoryColors } from '../utils/category-colors';
 import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
+import { getGeneratedCategoryImage, getUnsplashFallback } from '../utils/generated-images';
 
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -123,11 +124,22 @@ export default function BlogPostPage() {
               {/* Featured Image Hero */}
               <div className="relative -mx-4 md:-mx-8 lg:mx-0 aspect-video overflow-hidden rounded-2xl border border-zinc-800">
                 <img
-                  src={post.featureImage || '/og_image.png'}
+                  src={
+                    post.featureImage && !post.featureImage.includes('unsplash.com')
+                      ? post.featureImage
+                      : post.category
+                        ? getGeneratedCategoryImage(post.category, post.slug)
+                        : '/og_image.png'
+                  }
                   alt={post.title}
                   className="w-full h-full object-cover"
                   onError={(e) => {
-                    e.currentTarget.src = '/og_image.png';
+                    const target = e.currentTarget;
+                    if (post.category && !target.src.includes('unsplash.com')) {
+                      target.src = getUnsplashFallback(post.category);
+                    } else {
+                      target.src = '/og_image.png';
+                    }
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60" />
