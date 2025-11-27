@@ -5,10 +5,34 @@
     <link>https://blog.ninochavez.co</link>
     <description>Architecture, commerce, and the signals that matter in the age of AI.</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Nov 2025 16:27:39 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 27 Nov 2025 17:19:24 GMT</lastBuildDate>
     <atom:link href="https://blog.ninochavez.co/rss.xml" rel="self" type="application/rss+xml" />
     <managingEditor>nino@signalreflex.studio (Nino Chavez)</managingEditor>
     <webMaster>nino@signalreflex.studio (Nino Chavez)</webMaster>
+  <item>
+    <title>It&apos;s the Artist, Not the Pen</title>
+    <link>https://blog.ninochavez.co/its-the-artist-not-the-pen</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/its-the-artist-not-the-pen</guid>
+    <pubDate>Thu, 27 Nov 2025 18:00:00 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>If I handed you my camera right now—same lens, same settings, same light—would you get the same shot? The tools are available to everyone. The output isn&apos;t.</description>
+    <category>ai-automation</category>
+    <category>personal-growth</category>
+    <category>meta</category>
+    <category>craft</category>
+  </item>
+  <item>
+    <title>One More Version</title>
+    <link>https://blog.ninochavez.co/one-more-version</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/one-more-version</guid>
+    <pubDate>Thu, 27 Nov 2025 18:00:00 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>I used to say &apos;just one more level&apos; until 3am. Now I say &apos;just one more version.&apos; The game changed. The compulsion didn&apos;t.</description>
+    <category>personal-growth</category>
+    <category>meta</category>
+    <category>ai-automation</category>
+    <category>self-awareness</category>
+  </item>
   <item>
     <title>Thankful for My Robot Army</title>
     <link>https://blog.ninochavez.co/thankful-for-my-robot-army</link>
@@ -506,24 +530,6 @@
     <author>nino@signalreflex.studio (Nino Chavez)</author>
     <description>Catching up with a peer recently and part of the conversation landed on — half-joking, half-incredulous — how I of all people, someone building software and systems with AI every day, don’t...</description>
 
-  </item>
-  <item>
-    <title>🔥 The Modern JS Stack Is a Masterpiece of Power — and a Catastrophe of Experience</title>
-    <link>https://blog.ninochavez.co/the-modern-js-stack-is-a-masterpiece-of-power-and-a-catastrophe-of-experience</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/the-modern-js-stack-is-a-masterpiece-of-power-and-a-catastrophe-of-experience</guid>
-    <pubDate>Fri, 01 Aug 2025 23:22:00 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>Come at me.</description>
-    <category>architecture</category>
-  </item>
-  <item>
-    <title>Even the AI Is Confused</title>
-    <link>https://blog.ninochavez.co/even-the-ai-is-confused</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/even-the-ai-is-confused</guid>
-    <pubDate>Fri, 01 Aug 2025 18:20:42 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>What My Stack Audit Revealed About Modern Dev</description>
-    <category>ai-workflows</category>
   </item>
   </channel>
 </rss>

@@ -127,6 +127,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://blog.ninochavez.co/its-the-artist-not-the-pen</loc>
+    <lastmod>2025-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://blog.ninochavez.co/one-more-version</loc>
+    <lastmod>2025-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://blog.ninochavez.co/the-infinite-concierge</loc>
     <lastmod>2025-11-22</lastmod>
     <changefreq>monthly</changefreq>
