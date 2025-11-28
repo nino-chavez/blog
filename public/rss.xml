@@ -5,7 +5,7 @@
     <link>https://blog.ninochavez.co</link>
     <description>Architecture, commerce, and the signals that matter in the age of AI.</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Nov 2025 18:34:22 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 28 Nov 2025 00:34:10 GMT</lastBuildDate>
     <atom:link href="https://blog.ninochavez.co/rss.xml" rel="self" type="application/rss+xml" />
     <managingEditor>nino@signalreflex.studio (Nino Chavez)</managingEditor>
     <webMaster>nino@signalreflex.studio (Nino Chavez)</webMaster>
@@ -32,6 +32,17 @@
     <category>meta</category>
     <category>ai-automation</category>
     <category>self-awareness</category>
+  </item>
+  <item>
+    <title>The Side of Agentic Commerce We&apos;re Not Talking About</title>
+    <link>https://blog.ninochavez.co/the-side-of-agentic-commerce-were-not-talking-about</link>
+    <guid isPermaLink="true">https://blog.ninochavez.co/the-side-of-agentic-commerce-were-not-talking-about</guid>
+    <pubDate>Thu, 27 Nov 2025 18:00:00 GMT</pubDate>
+    <author>nino@signalreflex.studio (Nino Chavez)</author>
+    <description>I just finished writing a whitepaper on agentic commerce. It&apos;s solid work. But something started bothering me. There&apos;s a version of this future that looks less like &apos;shopping gets easier&apos; and more like &apos;retail becomes a trading floor.&apos;</description>
+    <category>ai-workflows</category>
+    <category>commerce-strategy</category>
+    <category>systems-thinking</category>
   </item>
   <item>
     <title>Thankful for My Robot Army</title>
@@ -521,15 +532,6 @@
     <description>I built a production-grade React app—and still don’t fully understand JSX. In the AI-assisted era, syntax mastery matters less than system design. You’re not the coder anymore. You’re the architect. The real skill? Knowing what to ask, how to judge, and when the output doesn’t fit.</description>
     <category>ai-workflows</category>
     <category>personal-growth</category>
-  </item>
-  <item>
-    <title>I Don’t Believe the Agentic AI Hype — and Here’s Why That’s Not Ignorance</title>
-    <link>https://blog.ninochavez.co/i-dont-believe-the-agentic-ai-hype-and-heres-why-thats-not-ignorance</link>
-    <guid isPermaLink="true">https://blog.ninochavez.co/i-dont-believe-the-agentic-ai-hype-and-heres-why-thats-not-ignorance</guid>
-    <pubDate>Sat, 02 Aug 2025 08:12:00 GMT</pubDate>
-    <author>nino@signalreflex.studio (Nino Chavez)</author>
-    <description>Catching up with a peer recently and part of the conversation landed on — half-joking, half-incredulous — how I of all people, someone building software and systems with AI every day, don’t...</description>
-
   </item>
   </channel>
 </rss>
