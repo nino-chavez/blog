@@ -1,28 +1,25 @@
 {
-  "redirects": [
-    {
-      "source": "/:slug/",
-      "destination": "/:slug",
-      "permanent": true
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/:slug",
-      "has": [
-        {
-          "type": "header",
-          "key": "accept",
-          "value": "text/html.*"
-        }
-      ],
-      "destination": "/index.html"
-    }
-  ],
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "cd astro-build && npm install && npm run build",
+  "outputDirectory": "astro-build/dist",
+  "framework": "astro",
+  "installCommand": "cd astro-build && npm install",
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
         {
           "key": "Content-signal",
           "value": "search=yes, ai-input=yes, ai-train=yes"
@@ -34,15 +31,19 @@
       ]
     },
     {
-      "source": "/manifest.json",
+      "source": "/api/(.*)",
       "headers": [
         {
-          "key": "Content-Type",
-          "value": "application/json"
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, OPTIONS"
         },
         {
           "key": "Cache-Control",
-          "value": "public, max-age=3600, s-maxage=3600"
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
         }
       ]
     },
@@ -51,26 +52,57 @@
       "headers": [
         {
           "key": "Content-Type",
-          "value": "application/xml"
+          "value": "application/rss+xml"
         },
         {
           "key": "Cache-Control",
-          "value": "public, max-age=3600, s-maxage=3600"
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
         }
       ]
     },
     {
-      "source": "/robots.txt",
+      "source": "/full-content-rss.xml",
       "headers": [
         {
           "key": "Content-Type",
-          "value": "text/plain"
+          "value": "application/rss+xml"
         },
         {
           "key": "Cache-Control",
-          "value": "public, max-age=86400, s-maxage=86400"
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/llms.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
+      ]
+    },
+    {
+      "source": "/_astro/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
         }
       ]
     }
-  ]
+  ],
+  "redirects": [
+    {
+      "source": "/blog/:path*",
+      "destination": "/:path*",
+      "permanent": true
+    }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
 }
