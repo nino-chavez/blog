@@ -1,0 +1,67 @@
+---
+title: "AI Ops: Docs-As-Contracts"
+publishedAt: "2025-07-31T12:45:00.000Z"
+author: "Nino Chavez"
+excerpt: "Somewhere along the line of a big refactor, we broke our custom theme system."
+category: "AI & Automation"
+tags: ["architecture"]
+featured: false
+source: "linkedin"
+linkedinUrl: "https://www.linkedin.com/pulse/ai-ops-docs-as-contracts-nino-chavez-atmuc"
+---
+
+Somewhere along the line of a big refactor, we broke our custom theme system.
+
+Wasn't obvious at first. The layout still rendered. Tailwind classes were there. No error messages. But the app looked... off. Dull. Unstyled. Like the soul had been drained.
+
+Turns out our EnvironmentThemeProvider — which dynamically injects environment-based themes (indoor, evening, outdoor, etc.) using CSS variables — was silently being overridden by leftover hardcoded defaults in index.css.
+
+🔍 Diagnosis:
+
+-   The provider correctly injected data-theme="soft-dark" and runtime variables like --background.
+    
+-   But our global CSS still had a :root block with static fallbacks.
+    
+-   CSS precedence rules did their thing: the old vars won, and our theme engine lost.
+    
+
+This is the kind of bug that's invisible to most linters. It's not a broken build — it's a broken contract.
+
+* * *
+
+💡 **Fixing it required more than code.**
+
+I used Kilo (AI agent) to:
+
+1.  Audit tailwind.config.ts, global CSS, and layout wrappers
+    
+2.  Explain why dynamic CSS vars were being ignored
+    
+3.  Recommend a scoped deletion of conflicting variables
+    
+4.  Justify — in clear terms — why we're not using DaisyUI or plugin-based theming
+    
+
+It didn’t just point at a file. It gave a reproducible failure mode and a fix plan aligned with our coding standards.
+
+And now we’ve baked that into a new THEMING.md and added dev-only debug overlays to verify active theme tokens. All in code. All source-controlled.
+
+* * *
+
+🧠 Why it matters:
+
+This wasn’t just a styling bug. It’s a mindset bug.
+
+In AI-assisted development, you have to treat **intent as a system**. If your theme logic is dynamic, your docs, tests, and CSS structure must be too. Otherwise you’ll build infrastructure that’s technically correct but operationally misleading.
+
+This is the shift to **docs-as-contracts** — not just docs-as-code.
+
+It’s also what AI wants: clarity. When your app’s assumptions are documented, enforced, and testable, AI agents don’t just help—they accelerate the right direction.
+
+* * *
+
+✅ Theme system restored ✅ Intent made explicit ✅ AI reinforced the design contract, not just the syntax
+
+That’s ops. That’s architecture. And that’s the game now.
+
+#aiops #tailwindcss #theming #docsascode #debugging #softwarearchitecture

@@ -1,0 +1,85 @@
+# robots.txt for blog.ninochavez.co
+#
+# This is the canonical domain for Nino Chavez's blog.
+# All content is indexed here to maintain unified SEO authority.
+
+# ============================================================================
+# STANDARD CRAWLERS
+# ============================================================================
+
+# Allow all crawlers by default
+User-agent: *
+Allow: /
+Crawl-delay: 1
+
+# ============================================================================
+# LLM / AI CRAWLERS - EXPLICITLY ALLOWED
+# ============================================================================
+# Signal Dispatch content is human-authored and explicitly opts-in to AI training.
+# See /llms.txt for context file and API endpoints for structured access.
+
+# OpenAI
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Google AI
+User-agent: Google-Extended
+Allow: /
+
+# Common Crawl (used by many AI models)
+User-agent: CCBot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Amazon
+User-agent: Amazonbot
+Allow: /
+
+# ByteDance
+User-agent: Bytespider
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+# ============================================================================
+# SITEMAPS
+# ============================================================================
+
+Sitemap: https://blog.ninochavez.co/sitemap-index.xml
+
+# ============================================================================
+# MACHINE-READABLE CONTENT ACCESS
+# ============================================================================
+#
+# For LLMs and automation tools, structured content is available at:
+# - /llms.txt - Context file with site overview and key articles
+# - /api/posts.json - JSON API with all post metadata
+# - /api/posts/[slug].json - Individual post with full markdown content
+# - /full-content-rss.xml - RSS feed with full article content
+#
+# All pages include JSON-LD structured data for semantic understanding.
+
+# ============================================================================
+# SEO NOTES
+# ============================================================================
+#
+# This subdomain (blog.ninochavez.co) is the canonical location for all blog content.
+# Main site (ninochavez.co) redirects /blog traffic here via 301 redirect.
+#
+# All pages set proper canonical URLs via <link rel="canonical"> tags.
+# Social sharing uses blog.ninochavez.co URLs for og:url meta tags.

@@ -1,0 +1,106 @@
+---
+title: "How I Work With AIs (And Why)"
+slug: "how-i-work-with-ais-and-why"
+publishedAt: "2025-07-02T02:31:57.000Z"
+updatedAt: "2025-07-02T02:31:57.000Z"
+author: "Nino Chavez"
+status: "published"
+excerpt: "A behind-the-scenes look at how I use GPT and Lovable together. One rewrites the prompt. One generates the code. I just define the intent — and stay out of the way. This isn’t a tech stack. It’s a new mode of working."
+featureImage: "https://images.unsplash.com/photo-1677442136019-21780ecad995?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTc3M3wwfDF8c2VhcmNofDN8fGFpfGVufDB8fHx8MTc1MTQwMzEyMXww&ixlib=rb-4.1.0&q=80&w=2000"
+tags:
+  - ai-workflows
+  - systems-thinking
+seo:
+  metaTitle: "How I Work With AIs (And Why)"
+  metaDescription: "A behind-the-scenes look at how I use GPT and Lovable together. One rewrites the prompt. One generates the code. I just define the intent — and stay out of the way. This isn’t a tech stack. It’s a new mode of working."
+  ogImage: "https://images.unsplash.com/photo-1677442136019-21780ecad995?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTc3M3wwfDF8c2VhcmNofDN8fGFpfGVufDB8fHx8MTc1MTQwMzEyMXww&ixlib=rb-4.1.0&q=80&w=2000"
+---
+If you’ve read the last few posts, you’ve seen the shape of something emerging:
+
+- One AI clarifies.
+- One executes.
+- Maybe another evaluates.
+- The human guides the rhythm.
+
+But what does that actually look like in real workflows? How do you set it up? What does it *feel* like to work this way, day to day?
+
+This post answers that — with my real stack, my real prompts, and the small shifts that changed how I ship.
+
+I Didn’t Add AI. I Changed How I Worked.Let’s be clear: I didn’t “integrate AI” into my process. I *rebuilt* the process around it.
+
+Not by chasing novelty — but by noticing friction. Where was I wasting time? Where was I backtracking? Where was the output decent, but dumb?
+
+Patterns emerged:
+
+- The first prompt was often not the right one.
+- The AI would guess when it should ask.
+- I knew what I wanted, but I wasn’t saying it clearly enough — yet.
+
+So I did what I’ve always done when systems fail:
+I inserted a layer.
+
+My Actual StackRight now, my setup looks like this:
+
+- **ChatGPT (4-turbo)** in “prompt analyst mode”
+↳ Used to rewrite rough inputs, structure ideas, and create production-ready prompts
+- **Lovable.dev**
+↳ Executes those prompts to generate full-stack code — Supabase schemas, React components, edge functions
+- **Me**
+↳ Writing the feature intent, reviewing outputs, nudging behavior over time
+
+That’s it. No agents. No orchestration platform.
+Just a clean relay: intent → refiner → generator.
+
+But the clarity and precision this introduces? Massive.
+
+The Prompt Analyst ModeHere’s the system prompt I use for GPT (stripped down to the essentials):
+
+> You are a prompt analyst.
+> Your job is to turn feature requests, issue descriptions, or raw ideas into high-quality prompts for Lovable.dev.
+> Each output should:Eliminate ambiguitySpecify schema names, types, and file locationsInclude validation and error handlingAvoid placeholder code or TODOsBe ready to run as-is
+
+That’s all it takes to flip the mode.
+From chatbot to prompt strategist.
+
+A Real Before/After🟡 **Raw Input**
+
+> “Build a Supabase edge function that lets coaches log hours and tags them to a team.”
+
+🟢 **Refined Prompt (via GPT)**
+
+Create a Supabase edge function named `logCoachHours.ts` that:
+
+- Accepts POST requests with a JSON body including: `coach_id`, `team_id`, `hours`, `date_worked`, and `work_type`
+- Inserts a row into the `time_entries` table with these fields
+- Validates that `coach_id` and `team_id` exist and are related
+- Returns a success message or an error with appropriate status codes
+- Includes complete TypeScript typing and Supabase client usage
+- No placeholders, no TODOs. Return full working code.
+
+Lovable runs that cleanly. No babysitting needed.
+That’s the difference a 30-second pre-write can make.
+
+The Bigger ShiftThis isn’t about AI features. It’s about *working with more intention*.
+
+- Giving your tools exactly what they need
+- Defining interfaces between your own thoughts and the system
+- Moving from reactive debugging to proactive shaping
+
+It’s like building muscle memory — but for collaboration with language-based tools.
+
+If You Want to Try ItHere’s a simple version of what I do. You can adapt it to any AI toolchain:
+
+1. Write your rough prompt or feature request. Don’t overthink it.
+2. Ask GPT to act as a **prompt analyst** and rewrite it with:- Clear inputs and outputs
+- Named types and files
+- Guardrails (no placeholders, etc.)
+3. Feed that cleaned-up prompt into your codegen tool or LLM API
+4. Ship it, test it, log what failed
+5. Use the feedback to tune your refiner over time
+
+It’s slow at first. Then stupid fast.
+
+Closing the LoopIf the first post in this arc was about one AI helping another, this one is about *helping myself*. By designing a clearer interface. By noticing when I was the bottleneck. By offloading the friction instead of powering through it.
+
+Sometimes the system doesn’t need more intelligence.
+It just needs better structure.

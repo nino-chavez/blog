@@ -1,0 +1,82 @@
+---
+title: "The Sky Is Not Falling"
+slug: "the-sky-is-not-falling"
+publishedAt: "2025-06-12T13:28:32.000Z"
+updatedAt: "2025-06-12T13:28:32.000Z"
+author: "Nino Chavez"
+status: "published"
+excerpt: "I built the core Let’s Pepper site in under 2 hours—then spent over 8 trying to get one visual detail (the section dividers) to look right. AI can prototype, but it doesn’t ship. This post breaks down why the real work happens after the first draft, and why experience still matters more than ever."
+featureImage: "https://images.unsplash.com/photo-1584475784921-d9dbfd9d17ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTc3M3wwfDF8c2VhcmNofDV8fHBhbmljfGVufDB8fHx8MTc0OTY3NjY4M3ww&ixlib=rb-4.1.0&q=80&w=2000"
+tags:
+  - ai-workflows
+  - craft
+category: "AI & Automation"
+seo:
+  metaTitle: "The Sky Is Not Falling"
+  metaDescription: "I built the core Let’s Pepper site in under 2 hours—then spent over 8 trying to get one visual detail (the section dividers) to look right. AI can prototype, but it doesn’t ship. This post breaks down why the real work happens after the first draft, and why experience still matters more than ever."
+  ogImage: "https://images.unsplash.com/photo-1584475784921-d9dbfd9d17ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTc3M3wwfDF8c2VhcmNofDV8fHBhbmljfGVufDB8fHx8MTc0OTY3NjY4M3ww&ixlib=rb-4.1.0&q=80&w=2000"
+---
+The Let’s Pepper site took less than 2 hours to build.
+
+I’m talking about the core experience:
+
+- Video hero
+- Section layout
+- Mascot bands
+- Tap-in buttons
+- Mobile-responsiveness
+
+The site was up and visually solid before the end of a coffee shop work session.
+
+And yet—
+I spent nearly 8**+ hours** just trying to get the **section wave dividers** to look right.
+
+SVGs.
+ViewBox tweaks.
+Path editing.
+Image fallbacks.
+Pseudo-elements.
+Z-index layering.
+Mobile stacking bugs.
+
+All for a little visual “wave” between color blocks.
+
+This is why AI isn’t taking your job.You can get a layout scaffolded fast.
+You can prompt a design idea.
+You can even ask a model to debug your code.
+
+But the work that *feels* like magic still takes hours.
+Because the work is in the tension between what you want and what renders.
+
+🧱 Build vs. PolishHere’s the reality:
+
+TaskTime SpentCore site build (layout, flow)~1.5 hrsWave dividers (all versions)~6.0 hrsAsset generation + polish~3.0 hrs
+
+**The design element (waves) took 6x longer than the full site skeleton.**
+
+![](/content/images/2025/06/letspepper_timeline_updated.png" class="kg-image)*The time cost of polishing one visual detail (the waves) overshadowed every other step.*What AI Can Do vs What It Can’tAI helps you **prototype**.
+AI helps you **refactor**.
+AI helps you **explain**.
+
+But it doesn’t ship.
+
+It doesn’t know which bug will reappear on mobile Safari.
+It doesn’t know that a `background-image` won’t scale evenly inside a pseudo-element unless `background-position` is tweaked.
+It doesn’t know what feels *done*.
+
+That part is still human.
+
+The Final CurveThe irony:
+We ended up using a **pseudo-element with a background PNG**.
+
+Simple. Clean. Boring.
+Exactly what we would’ve done on day one—if we weren’t chasing elegance the hard way.
+
+That’s experience.
+It’s not in the code, it’s in the judgment.
+And judgment isn’t automated yet.
+
+So, *Do Not Panic!*
+
+We are trained professionals!> Want to see the final version? Too bad...I still haven't gotten it quite right. I may give up and just switch back to a drag-and-drop pre-built template:
+> [https://letspepper.netlify.app](https://letspepper.netlify.app)

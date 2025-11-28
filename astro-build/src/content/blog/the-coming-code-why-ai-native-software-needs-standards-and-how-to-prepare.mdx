@@ -1,0 +1,138 @@
+---
+title: "The Coming Code: Why AI-Native Software Needs Standards, and How to Prepare"
+publishedAt: "2025-08-12T23:08:00.000Z"
+author: "Nino Chavez"
+excerpt: "We’re in the middle of an AI development gold rush."
+category: "AI & Automation"
+tags: ["devops"]
+featured: false
+source: "linkedin"
+linkedinUrl: "https://www.linkedin.com/pulse/coming-code-why-ai-native-software-needs-standards-how-nino-chavez-bsqyc"
+---
+
+### 1\. The Gold Rush Moment
+
+We’re in the middle of an AI development gold rush.
+
+-   Agents can scaffold full apps in hours.
+    
+-   Frameworks can be swapped in and out mid-project.
+    
+-   Developers can work in stacks they’ve never touched before and still ship something functional.
+    
+
+It’s exhilarating—but also unstable. Without constraints, the AI is as likely to produce brittle, inconsistent, or insecure code as it is to generate something production-grade.
+
+The same thing has happened in every mature industry: a burst of unregulated innovation, followed by the arrival of **building codes**—standards that make outputs safe, reliable, and repeatable.
+
+* * *
+
+### 2\. The Historical Pattern
+
+We’ve seen this before:
+
+-   **Construction** → Building codes & inspections to prevent unsafe structures.
+    
+-   **APIs** → OpenAPI and contract-first development for predictable integrations.
+    
+-   **Software delivery** → DevOps pipelines and IaC for reproducible deployments.
+    
+
+Each time, the shift was from *possibility* to *repeatability*. From *artisanal craft* to *industrial reliability*.
+
+* * *
+
+### 3\. The Missing Layer in AI-Native Development
+
+Right now, frameworks and languages are still written for **human developers**, not agents. Their “standards” are buried in prose documentation, not expressed in machine-readable form.
+
+What’s missing is the **Agent Manifest**:
+
+-   A JSON/YAML specification of idioms, invariants, and anti-patterns for a framework.
+    
+-   Preferred scaffolds and templates for core tasks (auth, routing, state).
+    
+-   Performance, accessibility, and compliance guidelines baked in.
+    
+
+* * *
+
+### 4\. Why Agent Manifests Are Inevitable
+
+The moment AI is the primary builder, it needs **code-level guardrails** at the point of generation, not after the fact.
+
+-   Vendors want to protect their ecosystems from misuse.
+    
+-   Enterprises want predictable outcomes from multiple teams and agents.
+    
+-   Regulators will eventually demand traceable compliance in AI-generated systems.
+    
+
+When that happens, manifests will ship with the frameworks, just like lint configs and TS types do today.
+
+* * *
+
+### 5\. The Governance Layer Opportunity
+
+Even in a world with vendor manifests, something critical is still missing:
+
+-   **Cross-stack orchestration** — Most apps span frontend, backend, DB, infra.
+    
+-   **Org-specific policy** — PII handling, licensing restrictions, perf budgets.
+    
+-   **Conflict resolution** — When framework and library manifests disagree.
+    
+-   **Drift control** — Enforcing version-locked idioms until orgs approve changes.
+    
+-   **Attestation & audit** — Proving that generated code meets all constraints.
+    
+
+This is the **governance layer**—the “city inspector’s office” for AI development. Aegis is built to fill that role, consuming manifests where they exist and simulating them where they don’t.
+
+* * *
+
+### 6\. The Playbook for the Shift
+
+If you want to be ready when the industry turns from velocity to reliability:
+
+**Now:**
+
+-   Build your own “local manifests” for key frameworks you use.
+    
+-   Treat them as if they’re vendor-official—enforce at generation time, not just in review.
+    
+-   Track provenance for every AI-generated change.
+    
+
+**Soon:**
+
+-   Add manifest ingestion capabilities to your governance tooling.
+    
+-   Merge vendor manifests with your org’s security, compliance, and performance overlays.
+    
+-   Develop conflict resolution logic for multi-stack projects.
+    
+
+**Later:**
+
+-   Certify compliance automatically in CI/CD.
+    
+-   Maintain a library of golden test cases that prove manifest adherence.
+    
+-   Use telemetry to optimize cost, latency, and agent reliability under governance.
+    
+
+* * *
+
+### 7\. The Endgame
+
+When the dust settles, the industry will have:
+
+1.  **Vendor-supplied agent manifests** for individual frameworks.
+    
+2.  **Governance systems** that merge those with org-specific rules.
+    
+3.  **Auditable builds** that can be certified as safe, compliant, and repeatable.
+    
+
+The gold rush will end. The building codes will arrive. The winners will be those who are already building **to code**—even before it exists.

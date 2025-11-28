@@ -1,0 +1,92 @@
+---
+title: "How I Used One AI to Train Another: A Tactical Reset in Data Architecture and AI Tooling Strategy"
+slug: "the-ai-approach-reset"
+publishedAt: "2025-06-30T20:50:47.000Z"
+updatedAt: "2025-06-30T20:52:50.000Z"
+author: "Nino Chavez"
+status: "published"
+excerpt: "Like most devs experimenting with AI tools, I’ve found myself juggling multiple platforms, APIs, and half-understood schemas to build things faster. Sometimes it works. Other times, it works against you."
+featureImage: "https://images.unsplash.com/photo-1682531024803-376c7dfd7975?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTc3M3wwfDF8c2VhcmNofDl8fFRyYWluJTIwdGhlJTIwdHJhaW5lcnxlbnwwfHx8fDE3NTEzMTY3MDF8MA&ixlib=rb-4.1.0&q=80&w=2000"
+tags:
+  - ai-workflows
+  - consulting-practice
+  - leadership
+  - systems-thinking
+category: "AI & Automation"
+seo:
+  metaTitle: "How I Used One AI to Train Another: A Tactical Reset in Data Architecture and AI Tooling Strategy"
+  metaDescription: "Like most devs experimenting with AI tools, I’ve found myself juggling multiple platforms, APIs, and half-understood schemas to build things faster. Sometimes it works. Other times, it works against you."
+  ogImage: "https://images.unsplash.com/photo-1682531024803-376c7dfd7975?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTc3M3wwfDF8c2VhcmNofDl8fFRyYWluJTIwdGhlJTIwdHJhaW5lcnxlbnwwfHx8fDE3NTEzMTY3MDF8MA&ixlib=rb-4.1.0&q=80&w=2000"
+---
+This is a story about one of those "it worked against me" moments — and how I used ChatGPT to recover from a flawed implementation strategy with Lovable.dev, an AI tool for generating backend data models and transformers.
+
+The Problem I Was Trying to SolveI’m building a UI and backend to replace the tournament scheduling experience provided by AES/SportsEngine — a pain point for clubs, coaches, and media teams. I had access to real JSON responses from AES endpoints:
+
+- `nextassignments` — used for team and court seeding
+- `/schedule/current`, `/schedule/future`, `/schedule/work` — live match data
+- `/roster` — team personnel
+
+My goal was to feed these JSON examples into **Lovable**, which generates backend schemas and transformer functions from structured input. It seemed like a perfect fit — give it the data, and let it infer the schema.
+
+But I made one critical mistake.
+
+I assumed that the `nextassignments` API gave me complete match data.
+
+It doesn’t.
+
+It only gives you a **team’s view** of their upcoming match and work assignment — no opponent info, no play context, no scoring. And I didn’t realize how flawed that assumption was until I had already prompted Lovable and started reviewing the generated transformers.
+
+Recovering with ChatGPT — Not as a Code Writer, But as a Systems ThinkerInstead of re-prompting Lovable over and over (and burning credits in the process), I did something different:
+
+I used **ChatGPT to debug and clarify the API semantics**, one file and one structure at a time. I uploaded real JSON responses — no hallucinated examples — and had ChatGPT:
+
+- Analyze each file independently
+- Build a normalized database schema from the ground up
+- Identify what information was missing from each source
+- Map out the relationships between tournaments, divisions, teams, clubs, courts, plays, matches, and scores
+- Trim and refactor my example data into a Lovable-compatible prompt that would actually work
+
+The difference was immediate. The revised Lovable prompt was **long, structured, and clear**. It described:
+
+- What each API endpoint returned
+- How the entities related to each other (and how they didn’t)
+- Where IDs were missing and parsing heuristics were needed
+- How to layer the data sync across seeding, enrichment, and live updates
+
+That prompt unlocked a far more intelligent response from Lovable.
+
+But Lovable Still Got Some Things WrongEven with the improved prompt, Lovable still assumed that `court-schedule.json` was a raw API response. It wasn’t — it was a UI-derived artifact. It misinterpreted the completeness of `WorkMatchs`. It also assumed that `MatchId` only appears once, when in reality it appears multiple times (once per team).
+
+I had ChatGPT review Lovable’s implementation plan line by line.
+
+We rewrote the architecture:
+
+- Full reset of transformers, models, and sync logic
+- Phase 1: Entity seeding from `nextassignments`
+- Phase 2: Match enrichment from `/schedule/current` and `/past`
+- Phase 3: Work assignment resolution from `/schedule/work`
+- Phase 4: Roster enrichment
+- Unified sync monitoring, status flags (`placeholder`, `partial`, `complete`), and API visibility into enrichment state
+
+We turned what could’ve been days of trial-and-error rework into **a complete system reset**, architected cleanly, and scoped clearly.
+
+The Meta-Realization: This Is What Everyone Is Doing, and It Doesn’t ScaleWhat I realized after the fact is this:
+
+> **I could’ve saved hours and multiple missteps if I had used ChatGPT from the start — not as a shortcut to code, but as a thinking partner.**
+
+Most developers today are stumbling through multi-AI workflows with brittle prompts and incomplete data assumptions. We’re throwing raw JSON at AI tools like Lovable and hoping they infer the right thing. But these tools aren’t magic — they require accurate scaffolding.
+
+Using one AI (ChatGPT) to clarify and structure the input for another AI (Lovable) was the move. It turned AI from a "guess what I meant" engine into a system I could trust.
+
+This is the real opportunity in AI-assisted development: **orchestrating tools intelligently, not just using them individually**.
+
+Moving ForwardThe outcome of this reset is not just better code — it’s:
+
+- An auditable sync pipeline with test harnesses
+- A data model that reflects the true shape of the AES API
+- A UI that gracefully handles partial/incomplete match data
+- An AI prompt strategy that saves time, money, and rework
+
+It also gave me a reusable playbook: when working with specialized AI tools like Lovable, **always stage your prompts through a system-level lens first.**
+
+I’ll be applying this reflex again and again — and building tools to help others do the same.

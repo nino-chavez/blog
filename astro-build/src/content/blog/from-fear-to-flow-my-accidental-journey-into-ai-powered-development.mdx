@@ -1,0 +1,274 @@
+---
+title: "From Fear to Flow: My Accidental Journey into AI-Powered Development"
+publishedAt: "2025-07-25T17:45:00.000Z"
+author: "Nino Chavez"
+excerpt: "I didn’t start with a grand strategy. I didn’t even have a clear goal."
+category: "AI & Automation"
+tags: ["ai-workflows","ai-coding"]
+featured: false
+source: "linkedin"
+linkedinUrl: "https://www.linkedin.com/pulse/from-fear-flow-my-accidental-journey-ai-powered-nino-chavez-ohfdc"
+---
+
+## How building a tournament manager app taught me to scale with AI
+
+* * *
+
+### Introduction: It Started with Fear
+
+I didn’t start with a grand strategy. I didn’t even have a clear goal.
+
+I started with **fear.**
+
+When ChatGPT went mainstream, it felt like every other tech phenom that had exploded out of nowhere—Snapchat, TikTok, Instagram. But this time was different. A nagging thought burrowed into my mind and refused to leave:
+
+> *“This is it. This is the thing that finally leaves me behind. This is when I become the out-of-touch tech dinosaur I’ve spent my career working to replace.”*
+
+That fear was a powerful motivator. So I did the only thing I know how to do when I feel out of my depth: **I started building.** That project became the **LPO Bracket app**, and—without planning for it—it became my **personal AI bootcamp.**
+
+This blueprint is the story of that journey, guided by one of my favorite Maya Angelou quotes:
+
+> **“Do the best you can until you know better. Then when you know better, do better.”**
+
+At first, I was just doing my best—throwing messy prompts at ChatGPT and hoping for a spark of magic. But as I wrestled with a real-world application, I started to know better. I learned to **structure my interactions, focus AI’s attention with context, and treat it less like a magic box and more like a system.**
+
+And then, I started to do better.
+
+* * *
+
+### The Proving Ground: LPO Bracket App
+
+To make this journey tangible, let me introduce the project that forced me to evolve: **the LPO Bracket app.** It’s a tournament manager web application for **grass volleyball tournaments**, designed to handle pool play and bracket generation. It came with specific, non-negotiable constraints:
+
+-   **Complex Pool Logic:** For 22 teams, generate **4 four-team pools and 2 three-team pools.** For 21 teams, generate **3 four-team pools and 3 three-team pools.** The logic had to be exact.
+    
+-   **Data Integrity:** When a pool is deleted, the teams remain in the database but with their pool\_id set to NULL.
+    
+-   **Code Consistency:** Match scheduling logic had to stay **identical on both the client and the server** to avoid race conditions or mismatches.
+    
+
+Initially, I thought AI would just be a coding assistant. But its role quickly expanded. It became **an architect, a technical writer, and a pair programmer.** It drafted implementation plans before I wrote code, validated algorithms with simulated data, and helped me refactor with precision using git diff-based context.
+
+This project was the crucible—where I went from fumbling with prompts to building a **repeatable, scalable system for AI-driven development.**
+
+* * *
+
+### The Journey to AI Maturity: From Messy Sessions to a Cohesive System
+
+### Phase 1: The "Throwing Prompts at the Wall" Era
+
+Like most developers, my first attempts were chaotic. I’d open a chat window and type a giant, hopeful prompt:
+
+> *“Build a React component that lets a user assign 22 teams into pools according to these rules…”*
+
+The output was often over-engineered, missed key invariants, and was nearly impossible to debug. It became clear that this **ad-hoc prompting approach couldn’t scale** for a project like LPO Bracket. This was my *“do the best you can”* phase, and frankly, my best wasn’t very good.
+
+* * *
+
+### Phase 2: The Mindset Shift
+
+The breakthrough came when I stopped treating the AI like a one-off tool and started treating it like **a junior engineer.** It needed **clear instructions, context, and guardrails.**
+
+This shift was less about “prompt engineering” and more about building a **workflow** that put AI at the core:
+
+-   **Focused Context:** Give the AI only what it needs, when it needs it.
+    
+-   **Structured Loops:** Replace big, messy prompts with **Plan → Document → Patch → PR**.
+    
+-   **Self-Documenting System:** Make AI generate its own **decision logs, migration plans, and user guides.**
+    
+
+This shift was my *“know better, do better”* moment.
+
+* * *
+
+### The Three Pillars of My AI-Driven Workflow
+
+* * *
+
+### Pillar 1: Intelligent Context with RAG and Scan Minimization
+
+Early on, I wasted tokens letting the AI scan my entire repo for tiny fixes. It was slow, expensive, and noisy. The fix was **Retrieval-Augmented Generation (RAG).**
+
+Instead of letting AI wander, I **told it where to look**. I built a context map (docs/ai/kilo/context-map.md) cataloging the project’s **critical files**:
+
+-   Pool generation logic in pool\_generator.ts.
+    
+-   Match scheduling services.
+    
+-   Supabase schema and invariants.
+    
+
+When debugging, I didn’t ask vague questions like *“Find the bug.”* Instead, AI pulled just pool\_generator.ts and pool\_tests.ts and analyzed them with precision.
+
+**Supporting techniques:**
+
+-   **Allowed Globs:** kilo.config.yaml restricted AI to relevant directories.
+    
+-   **Diff-Based Context:** For refactors, I passed git diff outputs instead of full file scans.
+    
+
+**The result?** Token usage dropped from **200+ files per session to fewer than 15.** Focus improved, accuracy spiked, and costs plummeted.
+
+* * *
+
+### Pillar 2: Repeatable Workflows with PromptOps and Intelligent Chunking
+
+Context alone wasn’t enough. My next breakthrough was replacing **one-shot prompts** with a predictable, four-step workflow:
+
+1.  **Plan:** Generate a technical plan outlining goals, steps, and dependencies.
+    
+2.  **Document:** Save that plan to /docs/dev (e.g., implementation-plan.md).
+    
+3.  **Patch:** Generate *only the code needed* for that step (e.g., a React component).
+    
+4.  **PR:** Have AI summarize the plan and changes for review.
+    
+
+**Example:** For the **pool assignment dropdown**, I started with a design prompt:
+
+> *“Create a technical plan to build a React dropdown for pool assignments. Detail how UI state maps to the database.”*
+
+The AI generated an implementation-plan.md, I approved the steps, and then I asked it to build only the dropdown component—not the whole feature. Debugging was clean, and every step had a documented rationale.
+
+This approach mirrors emerging **PromptOps frameworks**, where **prompt templates, context maps, and decision logs** become first-class citizens.
+
+* * *
+
+### Pillar 3: A Self-Documenting System with Docs-as-Code
+
+This was the *biggest unlock.* I realized the AI could **document its own reasoning** as part of development.
+
+For LPO Bracket, AI-generated docs became a cornerstone:
+
+-   **Implementation Plans:** Every major feature started with a written plan (rollback strategies included).
+    
+-   **Migration Guides:** When I reorganized image assets, AI generated screenshot-migration-plan.md and executed it.
+    
+-   **User Guides:** AI wrote the first drafts of **how-to documentation** for tournament directors.
+    
+
+This is more than a time saver—it’s a **knowledge retention layer.** Anyone new to the project can open /docs/dev and instantly understand why a change was made.
+
+* * *
+
+### The Payoff: My “Limitless” Moment
+
+Building the LPO Bracket app with this system was my personal *Limitless* moment—when friction disappeared, and I felt like I was coding in fast-forward with a partner that anticipated my next move.
+
+**Example:** When a bug emerged where the **client and server pool logic diverged**, I didn’t spend hours manually debugging. I asked the AI:
+
+> *“Compare the pool generation logic in* client/utils/pool.js and server/services/pool\_generator.ts. Identify discrepancies based on the invariants in docs/invariants.md.”
+
+Using RAG, AI pulled only **those three files** and found the mismatched sorting algorithm. The fix took **minutes instead of hours.**
+
+By version 2.0, I wasn’t just coding with AI. I was **directing a system that planned, coded, documented, and optimized itself.**
+
+* * *
+
+### The AI Ops Layer: Kilo
+
+To make this repeatable, I built what I now call the **Kilo Ops Layer:**
+
+-   **Configuration:** kilo.config.yaml defines workflows like quick\_answer, code\_refactor, scripts\_reorg.
+    
+-   **Docs Spine:** docs/ai/kilo/ stores rules, templates, and context maps.
+    
+-   **Decision Logs:** Every AI session outputs a log of what it read and why.
+    
+
+With Kilo, I can say:
+
+> *“Regenerate pool logic tests.”*
+
+Kilo will:
+
+1.  Load only pool\_generator.ts and pool\_tests.ts.
+    
+2.  Write a plan in /docs/dev.
+    
+3.  Generate accurate tests—without scanning the whole repo.
+    
+
+* * *
+
+### Industry Context: Why This Matters
+
+This isn’t just about my volleyball app. These techniques align with what’s becoming **standard practice** in AI engineering:
+
+-   **Docs-as-code** is now a best practice (Pinterest’s PDocs, AWS Quick Start).
+    
+-   **RAG and intelligent chunking** are *table stakes* for efficient AI workflows.
+    
+-   **Decision logging** will soon be required for compliance (SOC 2, ISO 42001).
+    
+
+LPO Bracket was my lab for building **PromptOps workflows, caching strategies, and self-documenting systems** that are already shaping modern development practices.
+
+* * *
+
+### Your Playbook for Getting Started
+
+If you’re starting your AI journey, don’t wait for a perfect plan. Here’s what I wish I had on day one:
+
+1.  **Create a Context Map:** Start with docs/ai/context-map.md listing the 5–10 most critical files.
+    
+2.  **Use Plan-First Coding:** Before coding, make AI write a plan (store in /docs/dev).
+    
+3.  **Adopt RAG:** Never let AI scan your entire repo—fetch only what’s necessary.
+    
+4.  **Embrace Docs-as-Code:** Have AI write **implementation plans, migration guides, user tutorials** as part of development.
+    
+5.  **Chunk Your Work:** Break features into **Plan → Document → Patch → PR.**
+    
+6.  **Build Your Ops Layer:** Add kilo.config.yaml and docs/ai/ to formalize rules and workflows.
+    
+7.  **Iterate:** Don’t overthink it. Start messy, then refine.
+    
+
+* * *
+
+### The Real Breakthrough
+
+By version 2 of LPO Bracket, the **fear that initially drove me had transformed into confidence.** Not because I mastered every AI trick, but because I built a system that **planned, documented, and improved alongside me.**
+
+The LPO Bracket app still manages tournaments—but more importantly, it’s **proof that structured AI collaboration works.**
+
+* * *
+
+### What’s Next
+
+I’m continuing to refine:
+
+-   **Reusable templates** (implementation-plan.md).
+    
+-   **Context mapping patterns** for larger codebases.
+    
+-   **PromptOps techniques** for cost and accuracy optimization.
+    
+
+Your breakthrough project might look different, but the principles are the same: **Start small. Learn by doing. Iterate until you know better—and then do better.**
+
+* * *
+
+### Appendix: 10 Moves for AI Coding Mastery
+
+1.  Create a context map (docs/ai/context-map.md).
+    
+2.  Write rules for AI usage (rules.md).
+    
+3.  Use plan-first coding (plans in /docs/dev).
+    
+4.  Inject context via retrieval (RAG).
+    
+5.  Break work into intelligent chunks.
+    
+6.  Cache and reuse prompts.
+    
+7.  Compress prompts with summaries.
+    
+8.  Generate docs and guides automatically.
+    
+9.  Log AI actions (decision logs).
+    
+10.  Continuously refine your AI ops layer.

@@ -1,0 +1,120 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BlogList from '../components/BlogList';
+import { generateWebsiteSchema, generateBlogSchema, generatePersonSchema } from '../utils/schema';
+
+// Get all published posts sorted by date
+const posts = await getCollection('blog', ({ data }) => data.status !== 'draft');
+const sortedPosts = posts.sort(
+  (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime()
+);
+
+// Get unique categories
+const categories = [...new Set(sortedPosts.map((post) => post.data.category).filter(Boolean))];
+
+// Prepare posts data for BlogList component
+const postsData = sortedPosts.map((post) => ({
+  id: post.id,
+  title: post.data.title,
+  excerpt: post.data.excerpt || '',
+  publishedAt: typeof post.data.publishedAt === 'string'
+    ? post.data.publishedAt
+    : post.data.publishedAt.toISOString(),
+  category: post.data.category,
+  tags: post.data.tags,
+  featured: post.data.featured,
+}));
+
+// Generate JSON-LD schemas
+const websiteSchema = generateWebsiteSchema();
+const blogSchema = generateBlogSchema(sortedPosts);
+const personSchema = generatePersonSchema();
+
+// Category colors for hero badges
+const categoryColors: Record<string, { bg: string; border: string; text: string }> = {
+  'AI & Automation': { bg: 'bg-purple-500/10', border: 'border-purple-500/30', text: 'text-purple-400' },
+  'Commerce': { bg: 'bg-orange-500/10', border: 'border-orange-500/30', text: 'text-orange-400' },
+  'Leadership': { bg: 'bg-blue-500/10', border: 'border-blue-500/30', text: 'text-blue-400' },
+  'Meta': { bg: 'bg-zinc-500/10', border: 'border-zinc-500/30', text: 'text-zinc-400' },
+  'Field Notes': { bg: 'bg-green-500/10', border: 'border-green-500/30', text: 'text-green-400' },
+  'Consulting Practice': { bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', text: 'text-cyan-400' },
+  'default': { bg: 'bg-athletic-brand-violet/10', border: 'border-athletic-brand-violet/30', text: 'text-athletic-brand-violet' },
+};
+
+function getCategoryColors(category: string | undefined) {
+  return categoryColors[category || ''] || categoryColors.default;
+}
+---
+
+<BaseLayout
+  title="Signal Dispatch"
+  description="Architecture, commerce, and the signals that matter. Exploring AI workflows, systems thinking, and leadership through practical experience."
+  jsonLd={[websiteSchema, blogSchema, personSchema]}
+>
+  <main class="min-h-screen">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-lg border-b border-zinc-800/50">
+      <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3">
+          <span class="text-xl font-black text-white">Signal Dispatch</span>
+        </a>
+        <div class="flex items-center gap-4">
+          <a href="/whitepapers" class="text-zinc-400 hover:text-white text-sm transition-colors">Whitepapers</a>
+          <a href="/rss.xml" class="text-zinc-400 hover:text-white transition-colors" title="RSS Feed">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z" />
+            </svg>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="max-w-6xl mx-auto px-4 py-16">
+      <div class="max-w-3xl">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-6">
+          Architecture, commerce, and the signals that matter.
+        </h1>
+        <p class="text-xl text-zinc-400 leading-relaxed mb-8">
+          Exploring AI workflows, systems thinking, and leadership through practical experience. Written by <a href="https://ninochavez.co" class="text-athletic-brand-violet hover:text-athletic-court-orange transition-colors">Nino Chavez</a>.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          {categories.slice(0, 6).map((category) => {
+            const colors = getCategoryColors(category);
+            return (
+              <span class={`text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border ${colors.bg} ${colors.border} ${colors.text}`}>
+                {category}
+              </span>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog List with Client-Side Filtering -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+      <BlogList posts={postsData} client:load />
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-800/50 py-12 mt-12">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+          <div class="text-center md:text-left">
+            <p class="text-zinc-500 text-sm">
+              &copy; {new Date().getFullYear()} Nino Chavez. All rights reserved.
+            </p>
+          </div>
+          <div class="flex items-center gap-6">
+            <a href="/rss.xml" class="text-zinc-400 hover:text-white text-sm transition-colors">RSS Feed</a>
+            <a href="/full-content-rss.xml" class="text-zinc-400 hover:text-white text-sm transition-colors">Full RSS</a>
+            <a href="/api/posts.json" class="text-zinc-400 hover:text-white text-sm transition-colors">API</a>
+            <a href="/llms.txt" class="text-zinc-400 hover:text-white text-sm transition-colors">llms.txt</a>
+            <a href="https://ninochavez.co" class="text-zinc-400 hover:text-white text-sm transition-colors">ninochavez.co</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+</BaseLayout>

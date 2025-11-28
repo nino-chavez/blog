@@ -1,0 +1,141 @@
+---
+title: "Designing for Environments, Not Just Themes: A Volleyball App UX Case Study"
+publishedAt: "2025-07-29T00:43:00.000Z"
+author: "Nino Chavez"
+excerpt: "Most apps toggle between \"light\" and \"dark.\" Ours needed more."
+category: "AI & Automation"
+tags: ["testing"]
+featured: false
+source: "linkedin"
+linkedinUrl: "https://www.linkedin.com/pulse/designing-environments-just-themes-volleyball-app-ux-case-nino-chavez-jqkqc"
+---
+
+Most apps toggle between "light" and "dark." Ours needed more.
+
+When you're building tools for real-world events — like managing volleyball tournaments across gyms, beaches, and low-lit evening leagues — your UI has to flex with the physical environment. Our theme system couldn’t just be aesthetic. It had to *perform* under sun glare, gym lights, and accessible tech setups.
+
+So we ran a full audit of our theme system.
+
+Here’s what we found (and fixed).
+
+* * *
+
+### 🎨 THEME STRATEGY
+
+We support four environment-based themes:
+
+1.  **Indoor Mode** – default light theme for gym lighting
+    
+2.  **Evening Mode** – dark mode for low-light venues
+    
+3.  **Outdoor Mode** – max-contrast theme for sunlight and glare
+    
+4.  **Accessible Mode** – high-contrast option for visual impairments
+    
+
+Each theme is implemented via CSS custom properties (src/styles/colors.css), with semantic naming (--foreground, --muted, --accent, etc.) to support clarity and override consistency.
+
+* * *
+
+### ✅ WHAT’S WORKING
+
+-   Strong contrast ratios (13:1–21:1) across all environments
+    
+-   Brand colors hold up across light/dark variants
+    
+-   Semantic token structure makes overrides clean and maintainable
+    
+
+* * *
+
+### 🚨 WHAT NEEDED FIXING
+
+### 🔧 HIGH-CONTRAST MODE (P0)
+
+-   **Incomplete**: 8+ CSS variables were missing
+    
+-   **Fallback chaos**: Inherited colors broke expected contrast
+    
+-   **Fix**: Defined a complete high-contrast palette with max visibility:
+    
+
+### 🌞 OUTDOOR MODE (P0)
+
+-   **Too bright**: Dark teal and gold weren’t visible in real sunlight
+    
+-   **No anti-glare tweaks**: Pure white backgrounds created reflection
+    
+-   **Fix**: Darkened all key colors and replaced shadow reliance with bold borders:
+    
+
+### 🏐 INDOOR & EVENING (P1/P2)
+
+-   Muted text was too light in indoor mode (--muted-foreground: 215 16% 47%)
+    
+-   Evening mode slightly overshot brightness on secondary elements
+    
+-   Fixed with subtle tweaks to tone down and improve legibility
+    
+
+* * *
+
+### 🧪 WCAG COMPLIANCE SNAPSHOT
+
+Theme Ratio WCAG AAA Pass? Indoor 13.9:1 ✅ ✅ Evening 10.6:1 ✅ ✅ Outdoor 21:1 ✅ ✅ High Contrast 21:1 ✅\* ✅\*
+
+\*Basic text only — needed full variable coverage
+
+* * *
+
+### 🧰 TESTING PLAN
+
+**Automated**
+
+-   Contrast ratio validation
+    
+-   CSS variable completeness check
+    
+-   WCAG linting pass
+    
+
+**Manual**
+
+-   Sunlight test (real devices)
+    
+-   Evening test (low-light)
+    
+-   Screen reader + high zoom
+    
+-   Color-blind simulation
+    
+
+* * *
+
+### 🎯 SUCCESS METRICS
+
+-   All themes hit 4.5:1 or better for normal text
+    
+-   100% of required CSS tokens defined across themes
+    
+-   Positive field testing from tournament organizers
+    
+-   No regressions in focus state, accessibility, or readability
+    
+
+* * *
+
+### 💡 TAKEAWAY
+
+Don't design themes. Design for *environments*.
+
+Real users don’t care if your dark mode looks cool — they care if they can read pool assignments on a sun-drenched iPad at 10AM on a beach court. Our design system now reflects that.
+
+If you’re building real-world apps, ask yourself:
+
+**How does your UI perform in the environments your users live in?**
+
+* * *
+
+Happy to jam on accessibility, theme systems, or tournament logistics. Drop a comment or DM.
+
+#frontend #accessibility #uxdesign #css #tailwind #webapps #devblog #designsystems #volleyballtech

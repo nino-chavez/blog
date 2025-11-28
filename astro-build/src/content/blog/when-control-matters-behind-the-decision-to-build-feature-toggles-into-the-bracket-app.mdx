@@ -1,0 +1,100 @@
+---
+title: "When Control Matters: Behind the Decision to Build Feature Toggles Into the Bracket App"
+publishedAt: "2025-07-30T02:24:00.000Z"
+author: "Nino Chavez"
+excerpt: "Sometimes the feature isn’t for the user."
+category: "AI & Automation"
+tags: []
+featured: false
+source: "linkedin"
+linkedinUrl: "https://www.linkedin.com/pulse/when-control-matters-behind-decision-build-feature-toggles-chavez-gmttc"
+---
+
+Sometimes the feature isn’t for the user.
+
+It’s for us — the **system operators**, the maintainers, the ones who have to keep the app online when the fire starts. Or steer quietly into a beta when the paint’s not dry yet.
+
+This is one of those features.
+
+* * *
+
+### 💡 The Instinct
+
+We’ve been moving fast with the bracket app — too fast, maybe. New features like theme management, demo mode, admin controls — they all assume the world is working exactly as planned.
+
+But what happens when something breaks? Or when we want to test a feature in production, but only for a few users?
+
+That’s where **feature toggles** come in.
+
+Not just a kill switch. A **framework for conditional execution**, built into the bones of the system.
+
+I jotted down the first five immediately:
+
+-   Disable new registrations
+    
+-   Disable admin site access
+    
+-   Disable tournament creation
+    
+-   Disable demo mode
+    
+-   Disable custom theme creation
+    
+
+No whiteboard. No backlog grooming. The need was obvious.
+
+* * *
+
+### 🧠 Design Goals
+
+This wasn’t going to be a messy if (isProd) hack job. We needed:
+
+-   A **Supabase-backed toggle system** with environment and role filtering
+    
+-   A way to **cache and evaluate toggles** client-side
+    
+-   A hook like useFeatureToggle() to keep React declarative
+    
+-   No UI yet — CLI or Supabase-first is fine
+    
+-   RLS enforcement so only super\_admin can flip switches
+    
+
+With that, I dropped the prompt to Kilo.
+
+* * *
+
+### 🤖 The Prompt to Kilo
+
+Here’s what I gave our AI teammate:
+
+* * *
+
+### 🧱 Laying the Foundation
+
+This feature isn’t just about control. It’s about **agency** — for the system itself and for the operators behind it.
+
+To test safely. To react fast. To gatekeep with intention.
+
+We’re not just building apps. We’re building the **switches** that run them.
+
+* * *
+
+### 🛠 What’s Next
+
+Kilo’s plan is landing next. Once it’s in, we’ll:
+
+-   Review for alignment
+    
+-   Add toggle enforcement + caching
+    
+-   Wire them into routes, actions, and guards
+    
+-   Ship them quietly — off by default
+    
+
+And from there? We scale it. Maybe per-tournament experiments. Maybe staged rollouts by role. If the bracket app is turning into **infra**, this is our **control panel**.
+
+* * *
+
+Want to suggest a toggle or peek at the system once it’s live? Drop me a line. Operators welcome.

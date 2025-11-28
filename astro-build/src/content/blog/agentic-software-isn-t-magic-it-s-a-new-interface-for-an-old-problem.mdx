@@ -1,0 +1,54 @@
+---
+title: '"Agentic Software" Isn''t Magic. It''s a New Interface for an Old Problem.'
+publishedAt: "2025-10-21T02:45:06.077Z"
+author: "Nino Chavez"
+excerpt: "My feed is saturated with 'agentic software.' The promise is magic: autonomous agents executing complex, multi-step plans. But let's cut the hype. This isn't magic."
+category: "AI & Automation"
+tags: ["ai", "consulting", "field-notes"]
+featured: true
+source: "gemini"
+---
+
+My feed is saturated with "agentic software." The promise is magic: autonomous agents executing complex, multi-step plans. The demos are impressive.
+
+But let's cut the hype. This isn't magic. It's a new interface for an old problem.
+
+This "revolution" is Business Process Automation (BPA) with a new UI. We're mesmerized by the "digital switchboard"—an operator that understands natural language. We're forgetting the foundational truths.
+
+### 1. The Switchboard Is Useless Without Tools.
+
+An agent is an orchestrator. It's only as good as the tools it can call.
+
+The foundational work hasn't changed. You still have to build the reliable, scalable endpoints: the ShippingService, the PaymentGateway. The agent doesn't replace this work; it presupposes it.
+
+We're hyping the "AI intern" while ignoring that we still have to build all the services for it to call. The real work is building the function, not the switchboard that calls it.
+
+### 2. We Traded a Simple Risk for a Complex One.
+
+The old BPA model was deterministic. The risk was technical failure (API down). The solution was engineering (retry policies, dead-letter queues).
+
+The new agentic model is probabilistic. The risk is reasoning failure.
+
+The API can be 100% healthy, but the agent can still misinterpret intent, hallucinate a parameter, or execute a catastrophic—but technically valid—sequence of actions. We've introduced an unpredictable component inside our firewall that generates its own commands.
+
+### The Real Work: Stop Chasing Magic, Start Building Cages
+
+This isn't a prompt-engineering problem. It's an architectural one. The real work is to stop chasing magic and start building the governance layer around the agent.
+
+**The Deterministic Cage:** Build rigid, rules-based microservices for the agent to live inside. The agent doesn't call RefundService directly. It proposes a refund, and a simple, hard-coded validation service—the cage—is the gatekeeper.
+
+**The Intent Firewall:** Stop thinking about user authentication. Start validating the agent's intent. The agent's plan must be validated before execution, checking it for malicious or simply catastrophic logic.
+
+**Human-in-the-Loop (HITL):** This isn't a bug. It's the central, non-negotiable governance feature. For any high-stakes system, the agent's primary output is a plan for approval, not an action to execute.
+
+The hype train is a distraction, focused on the magic interface.
+
+The real work isn't dreaming up what an agent could do. It's building the robust, observable, and governed systems that allow it to do anything at all safely.
+
+This is the "Coder vs. Architect" split, in real-time. The "parrots" selling "slideware" about agentic magic are being automated to zero. The architects and builders providing the "signal"—the ones engineering the actual tools and the governance cages—have a tsunami of high-value work ahead.
+
+For everyone else, the reality is simple.
+
+**Adapt or die.**
+
+#AI #AgenticSoftware #TechHype #Engineering #Architecture #BPA #LLMs #SignalVsNoise

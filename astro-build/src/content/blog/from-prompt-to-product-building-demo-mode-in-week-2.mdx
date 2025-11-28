@@ -1,0 +1,178 @@
+---
+title: "From Prompt to Product: Building Demo Mode in Week 2"
+publishedAt: "2025-07-30T06:53:00.000Z"
+author: "Nino Chavez"
+excerpt: "🧱 Week 1: Build the foundation"
+category: "AI & Automation"
+tags: ["testing"]
+featured: false
+source: "linkedin"
+linkedinUrl: "https://www.linkedin.com/pulse/from-prompt-product-building-demo-mode-week-2-nino-chavez-uzdic"
+---
+
+* * *
+
+### TL;DR
+
+-   🧱 Week 1: Build the foundation
+    
+-   🚧 Week 2: Add a major feature (Demo Mode)
+    
+-   🛠 Prompt AI for feasibility → plan → implementation
+    
+-   ✅ Result: A fully interactive, zero-risk sandbox 💡 Bonus: Confidence that the system *can* evolve fast
+    
+
+* * *
+
+When you build software *with AI from day one*, you're not just writing code — you're designing a **system that can build systems**.
+
+Last week, I kicked off development on a custom tournament manager for my volleyball series - [The Let's Pepper Open](https://www.letspepper.com/) . Day 1 was all scaffolding: schema, auth, RLS, coding conventions, AI config, tests — the foundational work that makes iteration safe.
+
+By the end of **week 2**, I shipped a full **Demo Mode** — an isolated, offline simulation of the real app that users can explore without logging in or touching production data.
+
+This post is a behind-the-scenes breakdown of how that feature went from **idea → feasibility → prompt → plan → shipped**, all with AI tooling as a core collaborator.
+
+* * *
+
+### The Problem
+
+The app is useful — but only *after* you set up teams, pools, and matches. That means:
+
+-   You need to log in
+    
+-   You need real data
+    
+-   You need to understand how the app works
+    
+
+This is a huge barrier for new users.
+
+I wanted a way to let anyone **try the app for real** — generate a tournament, run pools, assign matches — without ever signing up or risking production data.
+
+But I didn’t want a static walkthrough. I wanted real functionality — **the full experience, in a sandbox.**
+
+* * *
+
+### Step 1: Ask a High-Quality Question
+
+Here’s the exact message I sent to GPT to kick things off:
+
+> would it be feasible to develop a feature of the lpo bracket app that acts like an isolated or standalone demo site? where users can run through both the admin and public features like on a real app but without needing to log in or worry about data bloat.
+
+My tech stack:
+
+-   React + Vite frontend
+    
+-   Supabase backend
+    
+-   Offline mode already implemented
+    
+-   AI tools like GPT, Kilo, and Lovable for planning, code, and refactoring
+    
+
+The response was thoughtful:
+
+> Yes — this is very feasible, especially given that you already support offline mode... You can approach this in two layers:
+
+That last bit was the kicker: 💡 I could shim or stub certain server logic to run client-side in demo mode.
+
+* * *
+
+### Step 2: Revise the Intent
+
+After reading the response, I clarified my priorities:
+
+> since i have an offline mode feature of my site, i think a client side storage approach would work best. i want users to be able to generate their own data like they would for a real tournament. we could have a "walk me through it" mode that uses mock data for people that just want to see how it works without the full experience, but the real selling point i think would be allowing users to "try it for real" but with the safeguards of never touching the database. we would need edge function logic to still work for things like generating pools and match assignment, unless we build duplicate logic in JS
+
+This became the core constraint set:
+
+-   ✅ Fully interactive
+    
+-   ✅ No backend writes
+    
+-   ✅ Reuse core logic where possible
+    
+-   ✅ Shim edge functions if needed
+    
+-   ✅ Persist data locally per session
+    
+
+* * *
+
+### Step 3: Prompt Kilo to Devise the Plan
+
+At this point, I shifted from GPT to Kilo — my AI pair dev tool of choice — and issued this planning prompt:
+
+* * *
+
+🧠 **KILO PLANNING PROMPT**
+
+> You are working inside the lpo-bracket app, which uses Supabase, React, and Vite. The user has built a documentation framework, coding conventions, and AI-assisted tooling into the codebase.
+
+* * *
+
+Kilo responded with:
+
+* * *
+
+🧩 **Execution Plan (Kilo)**
+
+1.  **Add Demo Mode Toggle**
+    
+2.  **Session-Based Mock DB**
+    
+3.  **Shim Edge Logic**
+    
+4.  **Guard All Mutations**
+    
+5.  **UI Handling**
+    
+6.  **Testing**
+    
+
+* * *
+
+### Step 4: Build, Test, Ship
+
+I followed the plan, implemented it in a modular way, and ran my regression suite to confirm isolation.
+
+The whole thing shipped cleanly. No database writes. Full functionality. Clear safeguards.
+
+In under a week, the app now supports:
+
+-   ✅ Public demo access
+    
+-   ✅ Simulated team/pool/match generation
+    
+-   ✅ Offline-safe state management
+    
+-   ✅ Production system completely untouched
+    
+
+* * *
+
+### Why It Matters
+
+Anyone can build a demo site. But building one that integrates safely *into your live app* — with no shortcuts, no risk — is different.
+
+This wasn’t a one-off. It was a test of the system I built:
+
+-   Were my docs useful to AI? ✅
+    
+-   Did architectural safeguards hold? ✅
+    
+-   Could I safely inject a major feature with AI support? ✅
+    
+-   Did I trust my own tools? ✅
+    
+
+The answer was yes — and now the system is even stronger.
+
+* * *
+
+Want to try the app in Demo Mode? (link coming soon)
+
+Or follow along as I build the next set of features — including bracket automation, match sync, and AI-assisted team management.
+
+#aidev #reactjs #supabase #buildinpublic #letspepperopen #signalstudio #bts #aiprompting #developerworkflow #docsascode
