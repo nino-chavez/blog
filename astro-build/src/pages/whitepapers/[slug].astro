@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { generateArticleSchema, generateBreadcrumbSchema } from '../../utils/schema';
+import ReadingProgress from '../../components/ReadingProgress';
 
 export async function getStaticPaths() {
   const whitepapers = await getCollection('whitepapers');
@@ -42,6 +43,9 @@ const readingTime = Math.ceil(wordCount / 200);
   author={whitepaper.data.author}
   jsonLd={[articleSchema]}
 >
+  <!-- Reading Progress Bar -->
+  <ReadingProgress client:load />
+
   <main class="min-h-screen">
     <!-- Header Navigation -->
     <header class="sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-lg border-b border-zinc-800/50 no-print">
