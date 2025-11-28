@@ -1,0 +1,53 @@
+---
+title: "I Don't Trust My AI Agents, So I Build Them Cages"
+publishedAt: "2025-10-26T13:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "Agentic software is powerful, but it needs guardrails. I'm finding the most important work isn't coding, but architecting the systems that constrain the code."
+category: "AI & Automation"
+tags: ["agentic software", "systems design", "ai ops", "governance"]
+featured: true
+---
+
+I have a team of AI agents that can take a project from idea to deployment. They write code, fix bugs, and manage their own workflows.
+
+And I don't trust them.
+
+Not completely. How could I? They are immensely powerful, trained on a corpus of knowledge I can’t even comprehend, and capable of generating solutions I would never have imagined. They are also capable of confidently making terrible decisions, misunderstanding core business logic, and drifting away from the project's soul.
+
+This is the tension of agentic software. We want the autonomy, but we fear the chaos. In a previous post, I called the solution "building deterministic cages." A nice, aggressive metaphor. But what does it actually look like in practice? What does it mean to build a cage for a large language model?
+
+It's not about writing better prompts. It's about architecture.
+
+### The Bars of the Cage are Business Rules
+
+I'm working on a project called AIQ. It's an internal platform for consultants to measure how brands appear in AI-generated answers. The key words there are *internal* and *consultants*. It is not, and must never be, a self-service SaaS product.
+
+Yet, an AI agent, tasked with creating a new dashboard, might reasonably conclude that adding a "Sign Up" button or a "Public Pricing Page" is a good idea. It's a common pattern for web apps. It's also a decision that would violate the core business model.
+
+The cage, here, is a compliance framework baked into the agent's operating system (`.agent-os`). It's a set of markdown files that don't just suggest, but *enforce*. One of the rules is an auto-rejection trigger: if any proposed code contains features like "client self-service signup flows" or "public subscription pricing pages," the commit is automatically blocked.
+
+That's a bar on the cage. A hard constraint. The agent can be as creative as it wants *within* that constraint, but it cannot break it. It’s an intent firewall.
+
+### A Cage Can Be a Narrative
+
+Another project, the Agentic Commerce Narrator, visualizes a massive knowledge graph. The temptation for any developer—human or AI—is to build a generic "graph explorer." Let the user fly around, click on nodes, and filter relationships. It's the default, logical solution.
+
+It's also the wrong one.
+
+The entire point of that project is to guide the user through a specific story: the transition from traditional commerce to an AI-native model. The goal is signal, not noise.
+
+So the cage is a narrative. The agent's instructions explicitly forbid it from building a generic explorer. It's forced to build what we call the "Narrative Cockpit." The navigation must follow a strict hierarchy: Concept → Domain → Capability. The UI must be 80% focused on the comparison between the "traditional" and "agentic" states.
+
+The agent isn't free to build the most feature-rich tool. It is constrained to build the most *purposeful* one. The cage isn't limiting its ability; it's focusing it on the correct problem.
+
+### Is "Cage" the Right Word?
+
+I keep using this aggressive term, and I wonder if it's right. It feels restrictive, adversarial. Maybe these are less like cages and more like scaffolds. Or a foundry, where raw intelligence is poured into a specific shape.
+
+I wrestle with this. Part of the promise of AI is emergent, unexpected behavior. Am I architecting that magic away? Am I just rebuilding traditional, process-heavy software engineering and sticking an "AI" label on it?
+
+I don't think so. Or at least, I hope not.
+
+This isn't about micro-managing the AI's code. It's about defining the problem space so tightly that the AI's creativity is channeled toward the actual goal. It's the difference between a firehose spraying wildly and a planned irrigation system delivering water exactly where it's needed. The volume of water is the same, but the impact is worlds apart.
+
+For now, this is the work that matters most. Not writing the code myself, but designing the systems that ensure the code written by my agents is the code that *should* be written. This is the new architecture. This is how I'm learning to sleep at night while the bots are committing to main.

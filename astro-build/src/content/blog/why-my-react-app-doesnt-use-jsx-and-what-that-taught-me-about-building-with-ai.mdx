@@ -1,0 +1,165 @@
+---
+title: "Why My React App Doesn’t Use JSX (And What That Taught Me About Building with AI)"
+publishedAt: "2025-08-02T16:39:00.000Z"
+author: "Nino Chavez"
+excerpt: "Most React apps are JSX-first."
+category: "AI & Automation"
+tags: ["architecture"]
+featured: false
+source: "linkedin"
+linkedinUrl: "https://www.linkedin.com/pulse/why-my-react-app-doesnt-use-jsx-what-taught-me-building-nino-chavez-6e1ic"
+---
+
+### 🧵 Behind-the-Scenes of an Unexpected UI Architecture
+
+Most React apps are JSX-first.
+
+Mine isn’t.
+
+That wasn’t a bold opinion or a clever trick — it’s just where I ended up after building a real system using AI as my primary coding partner.
+
+I’m not a frontend dev. I’m a Java-native backend engineer who builds systems — not interfaces.
+
+But I needed a UI. A real one. Something flexible, theme-aware, and programmatic — that could render brackets, matches, schedules, and metadata based on dynamic data and modes.
+
+So I relied on AI to generate the frontend. And I trusted it to scaffold something “React-idiomatic.”
+
+But what I got was React.createElement()… everywhere.
+
+* * *
+
+### 🧠 What I Was Actually Trying to Build
+
+I wasn’t setting out to write clean React code. I was trying to solve a **functional problem**:
+
+-   Display evolving bracket and match data
+    
+-   Theme the UI based on light/dark/system modes
+    
+-   Support variants like ghost, elevated, interactive
+    
+-   Compose layouts from data, not by hand
+    
+-   Move fast using AI to scaffold large chunks of the interface
+    
+
+I wasn’t trying to hand-craft components. I was trying to define the right **inputs** and let the UI be **rendered from logic**.
+
+So when the AI kept reaching for React.createElement(), I didn’t question it.
+
+It made sense to me: it looked like factory-style composition. Explicit. Declarative. Composable. A little verbose, maybe — but very familiar if you come from Java.
+
+* * *
+
+### ⚠️ Then TypeScript Got Involved
+
+Everything “worked” — until I turned on strict mode.
+
+Suddenly, the compiler lit up like a Christmas tree:
+
+-   **1,096 TypeScript errors**
+    
+-   Nearly all traced back to React.createElement calls
+    
+-   The component props were valid, but TypeScript couldn’t infer them properly
+    
+-   Variant-rich components like Button, Badge, and Card were totally broken in the type system
+    
+
+This wasn’t a logic bug. It was a type system mismatch.
+
+I could:
+
+-   Rewrite everything to JSX (huge lift)
+    
+-   Disable strict mode (nope)
+    
+-   Spam the codebase with as any (worse)
+    
+
+But I’m still an engineer. So I asked: *what’s actually happening here?*
+
+And then I fixed it.
+
+* * *
+
+### ✅ The Fix: Typed Abstractions Over Factories
+
+Instead of rewriting everything or giving up on strict mode, I built a small helper layer:
+
+Each function wraps React.createElement but preserves type inference (when possible) and gives me guardrails — without forcing JSX.
+
+Once this was in place, I refactored ~300 usages across the codebase.
+
+**TypeScript errors dropped from 1,096 to 8.**
+
+No JSX required. No safety lost. Just a little more intentionality.
+
+* * *
+
+### 🏪 And Then I Realized: I Accidentally Rebuilt Shopify
+
+Once the architecture stabilized, I stepped back.
+
+I noticed the pattern looked a lot like what Shopify Hydrogen, BigCommerce, and even WordPress block editors do under the hood.
+
+Feature Shopify / BigCommerce My App Schema-based layout composition ✅ ✅ (brackets → component trees) Theme + variant styling systems ✅ (Hydrogen, Polaris, CVA) ✅ (CVA + mode-aware logic) Programmatic component factories ✅ ✅ (typedElement wrappers) JSX everywhere Often abstracted away Intentionally avoided Type-safe UI rendering ❌ often loosely typed ✅ enforced with helpers
+
+The only difference is: **they abstracted it** I kept it visible and AI-compatible.
+
+It wasn’t meant to be clever — it was just me trying to keep things understandable while working with the tools I had.
+
+* * *
+
+### 🧠 What I Learned
+
+-   I don’t need to be a React expert to build solid UI infrastructure.
+    
+-   JSX is a great DX tool — but not always the best for AI-generated, runtime-driven layouts.
+    
+-   React.createElement isn’t wrong — it’s just raw. It needs help to be safe.
+    
+-   TypeScript’s type system isn’t broken — it just needs nudges when inference falls apart.
+    
+-   And as a backend engineer, I can bring real strengths into the frontend — as long as I take time to understand what the AI is giving me and hold it up to the intent of the system.
+    
+
+* * *
+
+### 🚀 What Happens Next
+
+-   I’m keeping the helper system (typedElement, typedIntrinsic, etc.)
+    
+-   I’ve added ESLint rules to block direct React.createElement() calls
+    
+-   I’ll write codemods to convert parts of the codebase to JSX later — if and when it improves DX
+    
+-   I’m documenting this pattern so future AI usage stays clean and safe
+    
+
+This isn’t a workaround. This is what happens when you blend:
+
+-   AI-assisted scaffolding
+    
+-   TypeScript strictness
+    
+-   Programmatic rendering
+    
+-   And an engineer’s intent to **understand and stabilize the result**
+    
+
+* * *
+
+### 🧬 TL;DR
+
+> I didn’t set out to avoid JSX. I just followed the structure AI gave me — then built the safety rails myself.
+
+And in doing that, I accidentally rebuilt the UI composition pattern used by modern commerce platforms — just with more transparency, and less team.
+
+* * *
+
+Want the helpers? I'll be publishing typedElement.ts soon.
+
+Trying to build with AI? Just remember: **You don’t need to know the frontend inside out — you just need to know your system.**
+
+That’s how you keep control.

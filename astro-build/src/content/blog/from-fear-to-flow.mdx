@@ -1,0 +1,116 @@
+---
+title: "From Fear to Flow: How Building a Tournament Manager App Taught Me to Scale with AI"
+slug: "from-fear-to-flow"
+publishedAt: "2025-07-25T13:55:52.000Z"
+updatedAt: "2025-07-28T15:50:57.000Z"
+author: "Nino Chavez"
+status: "published"
+excerpt: "I didn’t start with a strategy. I started with fear. Here’s how a grassroots volleyball app turned into my personal AI bootcamp—and the repeatable framework I built along the way."
+featureImage: "https://images.unsplash.com/photo-1633613286848-e6f43bbafb8d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTc3M3wwfDF8c2VhcmNofDF8fGRvdWJ0fGVufDB8fHx8MTc1MzQ1MTc0MHww&ixlib=rb-4.1.0&q=80&w=2000"
+tags:
+  - ai-workflows
+  - systems-thinking
+category: "AI & Automation"
+seo:
+  metaTitle: "From Fear to Flow: How Building a Tournament Manager App Taught Me to Scale with AI"
+  metaDescription: "I didn’t start with a strategy. I started with fear. Here’s how a grassroots volleyball app turned into my personal AI bootcamp—and the repeatable framework I built along the way."
+  ogImage: "https://images.unsplash.com/photo-1633613286848-e6f43bbafb8d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTc3M3wwfDF8c2VhcmNofDF8fGRvdWJ0fGVufDB8fHx8MTc1MzQ1MTc0MHww&ixlib=rb-4.1.0&q=80&w=2000"
+---
+**It Started with Fear**I didn’t dive into AI with a big strategy or clear goal. I started with **fear**.
+
+When ChatGPT went mainstream, it felt like the next unstoppable wave—like Snapchat, TikTok, or Instagram in their early days. But this time, it felt different. A voice in my head whispered:
+
+> *“This is it. This is the thing that finally leaves you behind. This is when you become the tech dinosaur you’ve spent your career replacing.”*
+
+That fear became fuel. So I did what I always do when I feel out of my depth: **I built something.**
+
+That “something” became the **LPO Bracket app**, a web tool for managing volleyball tournaments. And that project became my unexpected bootcamp in **AI-powered development.**
+
+**The Maya Angelou Principle**One of my core principles is a quote by Maya Angelou:
+
+> **“Do the best you can until you know better. Then when you know better, do better.”**
+
+At first, I was doing my best—throwing messy prompts at AI and hoping for useful code. But as I fought through real-world challenges in LPO Bracket, I started to know better. I learned how to structure prompts, how to feed AI the right context, and how to treat it less like a chatbot and more like a **junior engineer.**
+
+And then, I did better.
+
+**The Project That Changed Everything**The LPO Bracket app wasn’t a toy project. It had hard requirements:
+
+- **Pool Distribution Logic:** For 22 teams, generate **4 four-team pools and 2 three-team pools.** For 21 teams, **3 four-team pools and 3 three-team pools.**
+- **Data Integrity:** Deleting a pool must not delete the teams—`pool_id` just resets to `NULL`.
+- **Consistency:** Match scheduling logic had to be identical on both the client and server.
+
+AI became more than a coding assistant. It drafted **implementation plans** (`implementation-plan.md`), validated algorithms, and even auto-generated **documentation artifacts** like migration guides and user instructions. This wasn’t just about writing code; it was about building a **self-documenting system.**
+
+**The Shift to Structure**At first, my ChatGPT sessions were chaotic. I’d write long prompts and get back code that barely worked. With LPO Bracket’s complexity, I hit a wall fast.
+
+The breakthrough was treating AI like a **team member**:
+
+- **Preflight checks:** AI reads only critical docs (`README.md`, invariants).
+- **Plan-first execution:** Every feature starts with a plan in `/docs/dev`.
+- **Decision logs:** AI records what it scanned and why.
+
+This approach mirrors emerging **PromptOps** frameworks—where prompts, context, and decision logs are managed like any other code artifact.
+
+**Three Practices That Changed Everything****1. Intelligent Context (RAG + Scan Minimization)**I stopped letting AI scan my entire codebase. Instead, I created a **context map** (`docs/ai/kilo/context-map.md`) listing the most critical files.
+
+- AI retrieves only what it needs—`pool_generator.ts`, `pool_tests.ts`, etc.
+- For refactors, I provide **`git diff` outputs** instead of entire files.
+
+**Result:** AI scans dropped from 200+ files per session to fewer than 15, cutting costs and improving accuracy.
+
+**2. Structured Workflows (Plan → Document → Patch → PR)**Big, messy prompts are replaced by a four-step loop:
+
+1. **Plan:** AI drafts a technical plan.
+2. **Document:** The plan is saved to `/docs/dev` for review.
+3. **Patch:** AI generates just the code needed.
+4. **PR:** AI writes a summary for pull requests.
+
+This **chunking strategy** makes every change deliberate and reversible. For example, when building the pool assignment dropdown, I asked AI for only a React component—not the entire feature.
+
+**3. Docs-as-Code**AI now documents its own reasoning.
+
+- **Implementation plans:** Stored alongside the code.
+- **Migration guides:** e.g., `screenshot-migration-plan.md` for asset updates.
+- **User guides:** Drafted directly from features.
+
+These artifacts turn AI’s “thinking” into **institutional memory.** Anyone can join the project and see not just *what* was built, but *why.*
+
+**My Limitless Moment**This structured approach felt like flipping a switch. When I hit a bug where client and server pool logic diverged, I didn’t debug manually. I asked AI:
+
+> *“Compare `client/utils/pool.js` and `server/services/pool_generator.ts`. Highlight discrepancies based on invariants in `docs/invariants.md`.”*
+
+AI retrieved only those three files and pinpointed the mismatched sorting algorithm—**in seconds.**
+
+By version 2.0, I wasn’t coding with AI—I was **directing a system that planned, built, and documented itself.**
+
+**The Kilo Ops Layer**To make this repeatable, I built what I call the **Kilo Ops Layer**:
+
+- **`kilo.config.yaml`:** Defines workflows like `quick_answer` and `scripts_reorg`.
+- **`docs/ai/kilo/`:** Stores rules, templates, and context maps.
+- **Decision logs:** Every AI session explains what it read and why.
+
+This system is now the backbone of my workflow.
+
+**Your Starter Playbook**If you’re beginning your AI coding journey, here’s what I recommend:
+
+1. **Create a Context Map:** List the 5–10 files that matter most.
+2. **Plan Before You Code:** Use AI to write `implementation-plan.md` files.
+3. **Use RAG:** Don’t let AI scan everything—retrieve only what’s needed.
+4. **Document as You Go:** Treat docs like code.
+5. **Chunk Your Work:** Plan → Document → Patch → PR.
+6. **Iterate:** Start messy, then refine as you learn.
+
+**Why This Matters**These practices aren’t just hacks—they’re **emerging industry patterns**:
+
+- **Docs-as-code** is the future of documentation (Pinterest, AWS Quick Start).
+- **RAG and chunking** reduce cost and improve accuracy.
+- **Decision logging** aligns with compliance trends like SOC 2 and ISO 42001.
+
+The **LPO Bracket app** became my lab for experimenting with these workflows—and it proved that **AI-assisted development can be structured, scalable, and efficient.**
+
+**The Takeaway**You don’t need a perfect strategy to start. Begin with curiosity—or even fear. The key is to **treat AI like a partner, not a toy.**
+
+**Do the best you can. Then, when you know better, do better.**
+
+**Want the Framework?**I’ll be sharing **my Kilo Ops Layer templates**—including context maps and implementation plan examples—in an upcoming post. If you want to go from messy prompts to structured AI workflows, this playbook is where to start.

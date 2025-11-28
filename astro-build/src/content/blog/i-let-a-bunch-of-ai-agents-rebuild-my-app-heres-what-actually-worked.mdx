@@ -1,0 +1,240 @@
+---
+title: "I Let a Bunch of AI Agents Rebuild My App. Here’s What Actually Worked."
+publishedAt: "2025-09-17T03:02:00.000Z"
+author: "Nino Chavez"
+excerpt: "Date: September 16, 2025"
+category: "AI & Automation"
+tags: ["architecture"]
+featured: false
+source: "linkedin"
+linkedinUrl: "https://www.linkedin.com/pulse/i-let-bunch-ai-agents-rebuild-my-app-heres-what-actually-nino-chavez-uadgc"
+---
+
+**Date:** September 16, 2025
+
+**TL;DR:** [Agent-OS](https://buildermethods.com/agent-os) (spec-driven) + a shared [**AGENTS.md**](http://AGENTS.md) preamble across tools + the right agent per job = real output. I refactored a React Native app to Next.js, shipped features, and learned where each agent cracks. I first tried to invent a governance layer ([Aegis](https://github.com/signal-x-studio/aegis-framework))—great enterprise idea, but too heavy for solo sprinting. The win for solo dev: *clean specs, small tasks, uniform preamble, ruthless guardrails.*
+
+> “I’ve been using Agent-OS with pretty good results. Was able to completely refactor my React Native app to NextJS. Been flipping between Gemini CLI, Claude Code CLI, Codex CLI, Kilocode and Copilot chat agents. As long as Agent-OS is adapted to work with them, you get good results.”
+
+> “Currently, I’m giving Google Jules a shot at building the next feature by following Agent-OS. My last attempt with Jules failed miserably—but it was my own fault.”
+
+* * *
+
+### BEFORE AGENT-OS: I TRIED TO BUILD GOVERNANCE FIRST (AEGIS)
+
+I started with **Aegis** ([https://github.com/signal-x-studio/aegis-framework](https://github.com/signal-x-studio/aegis-framework)) — stage gates, audit trails, policy-driven agent execution. It still matters at **enterprise scale** (compliance, traceability, risk controls). But for **solo** work it slowed me down. I didn’t yet have a repeatable way to *feed* agents clean, scoped tasks.
+
+**Why Aegis still matters (enterprise lens)**
+
+-   Stage gates: plan → review → implement → verify (enforced, not suggested)
+    
+-   Traceability: specs, decisions, and diffs tied to policies for audit/compliance
+    
+-   Risk controls: who/what can change what; “show your receipts” baked in
+    
+
+**Why I paused it (solo dev lens)**
+
+-   I didn’t yet have a battle-tested way to **feed agents clean tasks**
+    
+-   Governance overhead slowed me when the real leverage was **tight specs + tiny tasks + PR-first workflows**
+    
+
+**Where this lands now**
+
+-   Aegis is a concept with real merit at enterprise scale
+    
+-   For a **solo dev**, pick *any* opinionated framework that **forces planning and review *before* coding**. You’ll beat “vibes-driven” coding every single time
+    
+
+> Bottom line for solo work: governance can wait; **specs and scope control cannot**.
+
+* * *
+
+### WHY THIS WORKED: A LINGUA FRANCA FOR AGENTS
+
+I stopped chasing “best model” and standardized *how* I work:
+
+-   **Specs first.** One-pager + task card with acceptance criteria
+    
+-   **Agent-OS rails.** Commands, DOD, and constraints live in-repo
+    
+-   **Bite-sized tasks.** If it reads like an epic, split it
+    
+-   **PR-first outputs.** Branch, test, open PR—never silent local edits
+    
+-   **New:** a repo-level [**AGENTS.md**](http://AGENTS.md) that all tools read as the **prompt preamble**
+    
+
+### AGENTS.MD = ONE PREAMBLE TO RULE THEM ALL
+
+I adopted the [**AGENTS.md**](http://AGENTS.md) convention and **mirrored the internal prompt instructions used by my CLIs** (Gemini/Claude/Codex/Kilocode/Copilot) into a single, versioned file. Every delegation says “**Follow** [**AGENTS.md**](http://AGENTS.md),” so all agents inherit the same rules, vocabulary, and house style—no more prompt drift per tool.
+
+**What lives in** [**AGENTS.md**](http://AGENTS.md)
+
+-   Role + principles (safety, determinism, truth over speed)
+    
+-   Coding standards (TS strictness, file layout, naming, commit style)
+    
+-   **Always-run commands** and test matrix
+    
+-   PR rules (branch naming, template, checklist from spec ACs)
+    
+-   Escalation policy (when to ask vs. proceed; how to report blockers)
+    
+-   “Do not do” list (no new deps without justification, no risky rewrites)
+    
+
+**Example scaffold**
+
+**Result:** swapping tools is trivial; quality doesn’t nosedive just because I changed CLIs.
+
+* * *
+
+### THE REFACTOR: REACT NATIVE → NEXT.JS
+
+**Scope:** port core flows, keep auth/session parity, use RSC where it’s a win. **Reality:** agents crushed repetitive migration + scaffolding; humans handled auth edges, data shape nuance, and visual intent.
+
+**Agents did well**
+
+-   Bulk file ops, routing scaffolds, codemods, glue-code rewrites
+    
+-   Tests—*when* I pinned runner + examples in the spec
+    
+-   PRs with decent commit hygiene (if I gave a template)
+    
+
+**I still did**
+
+-   Architecture calls (RSC vs client), auth boundaries, perf tradeoffs
+    
+-   Spec hygiene. Vague spec → mid PR
+    
+
+* * *
+
+### AGENT SCORECARD (MY REPO, MY TASKS, THIS WEEK)
+
+**Copilot Chat + Coding Agent**
+
+-   **Where it shines:** VS Code → PRs reliably; respects repo rules; solid with TS/Next.js
+    
+-   **Where it stumbles:** Needs explicit scripts/branch names
+    
+-   **Net take:** My default for PR-oriented work
+    
+
+**Claude Code CLI**
+
+-   **Where it shines:** Long-context refactors; big diffs; follows acceptance criteria
+    
+-   **Where it stumbles:** May “optimize” beyond spec if unfenced
+    
+-   **Net take:** Great for migration passes
+    
+
+**Gemini CLI**
+
+-   **Where it shines:** Fast utilities + test scaffolds
+    
+-   **Where it stumbles:** Misses local norms unless linked
+    
+-   **Net take:** Perfect for helpers/fixtures
+    
+
+**Codex CLI**
+
+-   **Where it shines:** Surgical transforms in tight loop
+    
+-   **Where it stumbles:** Less autonomous PR discipline unless told
+    
+-   **Net take:** Use for controlled edits
+    
+
+**Kilocode**
+
+-   **Where it shines:** Patterned codemods across trees
+    
+-   **Where it stumbles:** Needs dry-run/preview guardrails
+    
+-   **Net take:** Great for repetitive edits
+    
+
+**Google Jules**
+
+-   **Where it shines:** Doc-following inside Google stack
+    
+-   **Where it stumbles:** My failure: env/scripts not pinned
+    
+-   **Net take:** Worth another run with stricter preconditions
+    
+
+**Throughline:** outcomes map to **spec clarity and** [**AGENTS.md**](http://AGENTS.md) **discipline**, not model hype.
+
+* * *
+
+### THE PLAYBOOK I ACTUALLY USE
+
+### 1) SPEC SKELETON (SHORT AND SHARP)
+
+### 2) TASK CARD (ONE THING ONLY)
+
+### 3) DELEGATION PROMPT (PR-FIRST, UNIFIED PREAMBLE)
+
+### 4) GUARDRails THAT PREVENT NONSENSE
+
+-   [**AGENTS.md**](http://AGENTS.md) **+ .github/** own the rules; every agent reads the same preamble
+    
+-   **Determinism:** fixed seeds; snapshot tests where it matters
+    
+-   **Fail fast:** CI blocks missing tests/lint; agents learn the rails quickly
+    
+
+* * *
+
+### WHAT FAILED (SO I DON’T FORGET)
+
+-   **My Jules run bombed** because Node version, env vars, and test command weren’t pinned. The agent guessed; CI disagreed. That’s on me.
+    
+-   **“Do everything” tasks** → kitchen-sink PRs. Now: one visible change or one capability per task.
+    
+-   **Vague ACs** → surface-level solves. Fix: tiny fixtures + expected outputs in the spec.
+    
+
+* * *
+
+### SOLO VS ENTERPRISE: DIFFERENT DEFAULTS
+
+-   **Solo:** pick any opinionated framework that **forces planning + review before code** (Agent-OS, lean variant) **and ship an** [**AGENTS.md**](http://AGENTS.md). Fastest path to consistent wins.
+    
+-   **Enterprise:** revive **Aegis** ideas—stage gates, policy packs, audit trails—*on top of* the same [AGENTS.md](http://AGENTS.md) + spec/task backbone.
+    
+
+* * *
+
+### PRACTICES THAT COMPOUNDED RESULTS
+
+-   **Golden commands** in README/spec and [**AGENTS.md**](http://AGENTS.md)
+    
+-   **Self-contained fixtures** in /fixtures/
+    
+-   **PR checklists** auto-mirroring ACs
+    
+-   **Rollback safety:** agents never push to main
+    
+-   **Unified preamble:** every CLI reads [**AGENTS.md**](http://AGENTS.md) → no drift, easier benchmarking
+    
+
+* * *
+
+### WHAT’S NEXT
+
+-   [**AGENTS.md**](http://AGENTS.md) **linter** in CI (fail if required sections are missing)
+    
+-   **Autonomous PRs gated by smoke tests**
+    
+-   **Cost/time dashboards** per agent to track ROI
+    
+-   **Cross-agent handoffs** (Claude for refactor → Copilot for PR polish → Gemini for tests)
+    
+-   **Aegis, revisited** for enterprise governance atop this same contract

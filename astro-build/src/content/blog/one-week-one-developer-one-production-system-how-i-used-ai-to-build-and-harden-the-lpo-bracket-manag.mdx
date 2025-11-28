@@ -1,0 +1,261 @@
+---
+title: "One Week, One Developer, One Production System: How I Used AI to Build and Harden the LPO Bracket Manager"
+publishedAt: "2025-07-28T18:41:00.000Z"
+author: "Nino Chavez"
+excerpt: "In just seven days, I built a production-grade bracket and pool play management system — solo — using AI copilots, a structured prompt workflow, and modern web tooling. This isn’t a demo or proof..."
+category: "AI & Automation"
+tags: ["architecture","devops","ai-coding"]
+featured: false
+source: "linkedin"
+linkedinUrl: "https://www.linkedin.com/pulse/one-week-developer-production-system-how-i-used-ai-build-nino-chavez-mdkkc"
+---
+
+* * *
+
+### TL;DR
+
+In just **seven days**, I built a **production-grade bracket and pool play management system** — solo — using AI copilots, a structured prompt workflow, and modern web tooling. This isn’t a demo or proof of concept. It’s a hardened, documented, configurable application ready for real-world use.
+
+This post isn’t a flex — and it’s not about patting myself on the back. It’s a case study of real work, with real lessons learned the hard way. It took time, frustration, and personal investment — and it left behind something real.
+
+This post breaks down:
+
+-   What I built
+    
+-   How I governed AI to accelerate development without compromising quality
+    
+-   The invisible complexity most people miss
+    
+-   Why this matters as a case study in AI-driven engineering
+    
+
+* * *
+
+### Context: What Was Built
+
+The **LPO Bracket Manager** is a tournament operations platform built for real-time scheduling, pool play scoring, and bracket tracking — specifically optimized for 3- and 4-team volleyball pools and multi-bracket formats.
+
+**Features include:**
+
+-   Auto-generated pool play with **point-based scoring** and **head-to-head tiebreakers**
+    
+-   **Bracket generation** for single elimination, double elimination, and gold/silver formats
+    
+-   **Role-based access control** for admins, directors, and managers
+    
+-   **Theme configurability** for branded versions of the system (e.g., Bell Pepper Open, Pepper Belle)
+    
+-   A responsive, clean UI with live court assignment and team management
+    
+
+This is not a low-code toy. This is a robust, hand-built application with type safety, validation, version control, and deep extensibility.
+
+* * *
+
+### What Normally Takes a Team (And Weeks)
+
+To build and ship something like this typically requires:
+
+-   **3–4 developers** (frontend, backend, full-stack, devops)
+    
+-   **3–6 weeks** of effort to get to MVP, not counting polish
+    
+-   A project manager or technical lead to ensure delivery consistency
+    
+
+Instead, I built it **alone**, in **7 days**, with AI operating as a structured, rules-based assistant.
+
+The key: I didn’t just use AI to write code — I created a system to **govern AI’s behavior**, output, and role in the development process.
+
+* * *
+
+### The Core Principle: Harden the AI, Not Just the App
+
+Most AI-assisted dev workflows focus on speed — getting something working fast.
+
+My approach focused on **making sure what AI produced was inspectable, deterministic, and production-grade**.
+
+To do that, I implemented three disciplines:
+
+### 1\. Memory + Documentation-Driven Development
+
+I wrote all architectural plans, data model rules, and development process constraints into docs-as-code using **Docusaurus**. This created a persistent memory layer:
+
+-   implementation-plan.md: The playbook for how each feature was chunked
+    
+-   development-process-rules.md: Rules for how AI was allowed to operate
+    
+-   AUTHORITATIVE-SCHEMA-SYSTEM.md: Single source of truth for naming, typing, and relationships
+    
+-   sql-workflow.md: Repeatable Supabase prompt strategy
+    
+
+### 2\. Full-File Output Discipline
+
+AI was instructed to:
+
+-   Return complete files, not snippets
+    
+-   Include exact file paths
+    
+-   Use named exports and typed interfaces
+    
+
+This forced clarity and reduced the surface area for drift. The AI wasn’t a chatty partner — it was a silent code delivery agent working inside tight constraints.
+
+### 3\. Feedback Loops and Prompt Structuring
+
+Every AI mistake (naming inconsistencies, logic gaps, UI misalignment) was fed back into prompt engineering. I enforced:
+
+-   Reusable refactor patterns
+    
+-   Naming convention enforcement
+    
+-   File structure integrity
+    
+
+By the end of the build, AI was producing clean, contextual, lint-passing code at scale.
+
+* * *
+
+### Tools + Systems That Made It Possible
+
+Here’s the full tech + process stack:
+
+### 🛠️ Core Tools
+
+-   **React + Vite**: Fast builds, modern frontend DX
+    
+-   **Supabase**: Real-time Postgres with auth, storage, and RPC
+    
+-   **TailwindCSS**: Utility-first styling
+    
+-   **Kilo AI**: Primary AI coding assistant via VSCode plugin
+    
+
+### Documentation
+
+-   **Docusaurus**: Structured, versionable internal docs
+    
+-   Markdown guides for every part of the build: planning, schema, workflows, usage
+    
+
+### Theme System
+
+-   JSON-configurable theme files
+    
+-   Dynamic class binding in React components
+    
+-   Shared utility functions for color tokens and layout overrides
+    
+
+### Quality Assurance
+
+-   ESLint and Prettier across all AI-generated files
+    
+-   Naming rules, typing discipline, and zero-tolerance for floating logic
+    
+-   Git-based changelog tracking and audit logs
+    
+
+### AI Governance Layer
+
+-   Persistent memory via ChatGPT and Kilo history
+    
+-   Structured prompting modes ("no-fucking-around mode", refactor mode, file output mode)
+    
+-   Developer-in-the-loop validation for every code path
+    
+
+* * *
+
+### Invisible Work: What Made This Hard
+
+Anyone can generate code with AI. That’s not the achievement.
+
+Here’s what made this a serious engineering project:
+
+### Schema-Driven App Design
+
+-   Normalized schema with typed relationships
+    
+-   Configurable match formats via pool\_type
+    
+-   Real-time team state + UI match tracking
+    
+
+### Component Architecture
+
+-   Modular, themed React components
+    
+-   Layouts that auto-adapt based on event type
+    
+-   Role-based gating across routes and views
+    
+
+### Self-Healing AI Patterns
+
+-   Every mistake fed into stronger prompts
+    
+-   Every doc hardened AI’s future behavior
+    
+-   Every refactor made the system more teachable
+    
+
+The app got better — and so did the AI. That’s the future.
+
+* * *
+
+### Why This Matters
+
+This project isn’t just an example of fast development.
+
+It’s a **proof point for what’s possible when AI is used systemically** — not just tactically.
+
+> You don’t need a team of 4. You need a system that thinks like one.
+
+By treating AI as a tool **that must be governed**, not just invoked, I delivered:
+
+-   Real software
+    
+-   Real infrastructure
+    
+-   Real extensibility
+    
+-   Real documentation
+    
+
+In a week.
+
+* * *
+
+### Final Thought: This is the New Baseline
+
+I didn’t just ship a tournament app. I built a **production-ready, documented, themeable platform** governed by promptable constraints.
+
+This is what the new bar looks like for solo developers using AI intentionally:
+
+> **System design + AI governance = velocity with integrity.**
+
+This came at the cost of real effort: long days, tool friction, prompt fatigue, and constant debugging. But it worked. And it’s repeatable.
+
+* * *
+
+If you’re experimenting with AI development, the lesson is simple:
+
+-   Don’t just use AI to write code — design your system so AI can work *with* you, cleanly.
+    
+-   The more you constrain AI, the more valuable it becomes.
+    
+-   The more you teach it how you work, the less it surprises you.
+    
+
+* * *
+
+### Curious to See It?
+
+DM me - Happy to share more, open up the code, or walk you through the architecture.
+
+* * *
+
+**#AIengineering #buildinpublic #soloengineering #aidevelopment #letspepper #softwaredesign #devops #docusaurus #kiloAI #supabase #react**

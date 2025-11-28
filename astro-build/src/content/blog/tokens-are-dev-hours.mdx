@@ -1,0 +1,129 @@
+---
+title: "Tokens Are Dev Hours. Waste Is a Feature, Not a Bug."
+slug: "tokens-are-dev-hours"
+publishedAt: "2025-07-28T16:00:25.000Z"
+updatedAt: "2025-07-28T19:21:33.000Z"
+author: "Nino Chavez"
+status: "published"
+excerpt: "With AI development, waste isn’t hidden in team velocity or burndown charts — it’s itemized on your invoice. That’s not a flaw. It’s a feature."
+featured: true
+tags:
+  - ai-workflows
+  - personal-growth
+  - systems-thinking
+category: "AI & Automation"
+seo:
+  metaTitle: "Tokens Are Dev Hours. Waste Is a Feature, Not a Bug."
+  metaDescription: "With AI development, waste isn’t hidden in team velocity or burndown charts — it’s itemized on your invoice. That’s not a flaw. It’s a feature."
+---
+Last week I built a production-ready app from scratch using AI.
+One week. One developer. Real users. Real infrastructure.
+
+The catch? I didn’t do it alone — I had AI teammates.
+
+And they weren’t free.
+
+Not just in credits.
+In attention. In retries. In debugging mistakes *they* made.
+
+I’ve been thinking a lot about what that cost actually is. Here’s the pattern I’m seeing:
+
+> Tokens are dev hours.
+> Prompt tax is real.
+> And waste is no longer invisible.
+
+The Traditional Model: Burn Time, Not TokensIn a normal dev cycle, bad code and bad assumptions still cost time — but that time is baked into salaries. Hidden in Jira boards. Spread across "velocity." You don’t get a line-item receipt for every wrong guess.
+
+If your senior dev spends 4 hours debugging an integration that was supposed to take one, you probably won't even know. At best, it shows up in a retro.
+
+With humans, *waste is absorbed.*
+With AI, *waste is metered.*
+
+And once you see it — you can’t unsee it.
+
+The AI Engineer Has a Price TagEvery prompt has a cost. Every mistake has a token count. Every time the model forgets what you said three minutes ago, it burns another 1,200 tokens — and your patience.
+
+Here’s what I noticed while building the LPO Bracket Manager:
+
+- **Initial schema prompt →** ✅ Valid result (~$0.14)
+- **Rewrite with fix →** ✅ Clean tweak (~$0.11)
+- **Regeneration attempt →** ❌ Wrong syntax (~$0.21)
+- **Re-prompt with extra context →** ✅ Good output (~$0.13)
+
+That’s **$0.59 just to get one chunk of usable SQL.**
+Now multiply that by 500 interactions a week.
+
+Prompt Tax: The Cost of "Almost There"I call this the **prompt tax** — the cost of getting the AI to do something you thought it already knew how to do.
+
+You pay this tax when:
+
+- The AI hallucinates an import path
+- It forgets the file structure you just gave it
+- It reverts a function to a prior, incorrect state
+- You burn tokens teaching it *not* to repeat a bad pattern
+
+A strong junior dev might take 3 hours.
+AI might take 4 minutes — *but with 5 retries and $1.12 of token waste.*
+
+Speed and cost are now uncoupled.
+Attention is quantized.
+And you’re the one footing the bill.
+
+Waste Is Now Visible — and That’s GoodFor years, engineering waste has been invisible:
+
+- Slack threads re-explaining things
+- Code reviews correcting basic logic
+- Duplicate work across sprints
+- Context resets after PTO
+
+We never really *tracked* that waste — we just accepted it.
+
+But with AI, every retry is measurable.
+Every hallucination has a price.
+And every bad output forces you to ask:
+*Why did this happen? How do I prevent it next time?*
+
+That’s not frustrating — that’s an opportunity.
+
+Designing for AI WasteOver the last few weeks, I’ve shifted how I build systems for AI teammates:
+
+- I create **prompt scaffolds** with tone, formatting, and constraints
+- I write **coding guidelines** specifically for the model
+- I use **Kilo AI** to format prompts like tasks in VSCode
+- I maintain **Docusaurus** docs-as-code to reduce re-explaining logic
+- I added a **theme management layer** to isolate design tokens — normally a full-team feature, done in two rounds with AI
+
+This isn’t just development.
+It’s *training the system not to waste my time.*
+
+> You don’t just ship code anymore.
+> You shape the environment that makes code shippable.
+
+From Token Burn to Team DisciplineIf you’re leading a team, here’s the shift:
+
+- Stop measuring just output — **start measuring retries**
+- Budget for **prompt tax** — literally and emotionally
+- Create **AI-ready docs**, not just human-facing ones
+- Recognize that **context shaping** is now a team skill
+
+The dev team of the future won’t just be fast — it’ll be *self-healing*.
+Because it will treat AI not as magic, but as a junior teammate who can learn — if you build the systems for it to remember.
+
+Closing Thought> AI doesn’t eliminate waste.
+> It exposes it.
+> In tokens. In retries. In your Stripe receipt.
+
+That’s a feature, not a bug.
+
+It means we can finally see where our attention *actually* goes —
+and we can design systems to reduce waste at the source.
+Not just by writing better prompts…
+
+…but by teaching the system to forget less.
+
+✶
+
+I’m building real-time prompt analytics tools, documenting waste patterns, and architecting AI-led apps in the open.
+Follow along at [blog.nino.photos](/), or DM me to collaborate.
+
+Let’s build like waste matters.

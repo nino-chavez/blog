@@ -1,0 +1,43 @@
+---
+title: "LLM Codegen and the Three Little Pigs"
+publishedAt: "2025-08-17T19:45:00.000Z"
+author: "Nino Chavez"
+excerpt: "I burned my app to the ground — yes, again."
+category: "AI & Automation"
+tags: []
+featured: false
+source: "linkedin"
+linkedinUrl: "https://www.linkedin.com/pulse/llm-codegen-three-little-pigs-nino-chavez-hrncc"
+---
+
+I burned my app to the ground — yes, again.
+
+You can rush with straw or sticks, but the only way to survive the wolf of drift and fragility is to build with bricks: specs + stable stacks.
+
+This time I’m going even slower. Leaning further into the design and spec authoring discipline that “traditional” software dev has always had.
+
+Am I writing a line of spec? No. Do I intend to write a line of code? No.
+
+What I’m trying to figure out is: how do I get from intent (a feature, a capability) → to working code?
+
+And the answer is the same as it’s always been:
+
+-   You need specs.
+    
+-   You need tech stacks that afford drift protection.
+    
+-   You need agent rules that can use that.
+    
+
+Three things stand out for me right now:
+
+1.  **Codegen doesn’t erase design work** All it does is move the work *upstream*. My intent gets turned into specs, those specs drive codegen. The spec layer is where drift gets caught. Without it, you just generate spaghetti faster.
+    
+2.  **Codegen exposes brittle stacks** The state of “modern” full-stack is embarrassing. When an LLM tries to scaffold React+Vite+Supabase, half the cycles go into fixing broken defaults. Meanwhile, “boring” stacks — strong schemas, migrations, simple frameworks — hold up. Codegen shows you quickly what’s actually composable vs. fragile glue.
+    
+3.  **You need a design framework for LLMs** Epics, user stories, acceptance criteria, OpenAPI, schema-first. Machine-readable, human-explainable specs. That’s what keeps codegen on track. That’s how you reduce drift and enforce quality gates.
+    
+
+👆 That’s the loop I’m chasing: **intent → specs → code.**
+
+Not “AI replaces developers,” but “developers design systems LLMs can safely implement.”
