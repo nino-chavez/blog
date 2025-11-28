@@ -71,8 +71,20 @@ function getCategoryColors(category: string | undefined) {
     </header>
 
     <!-- Hero Section -->
-    <section class="max-w-6xl mx-auto px-4 py-16">
-      <div class="max-w-3xl">
+    <section class="relative max-w-6xl mx-auto px-4 py-20 overflow-hidden">
+      <!-- Subtle gradient orbs background -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-athletic-brand-violet/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-athletic-court-orange/5 rounded-full blur-3xl"></div>
+      </div>
+
+      <div class="relative max-w-3xl">
+        <!-- Post count badge -->
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900/80 border border-zinc-800 text-zinc-400 text-sm mb-6">
+          <span class="w-2 h-2 rounded-full bg-athletic-brand-violet animate-pulse"></span>
+          <span>{posts.length} dispatches and counting</span>
+        </div>
+
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-6">
           Architecture, commerce, and the signals that matter.
         </h1>
