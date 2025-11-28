@@ -1,0 +1,100 @@
+# Signal Dispatch - LLM Context File
+# https://llmstxt.org/
+# Last updated: 2024-11-28
+
+> Signal Dispatch is Nino Chavez's technical blog covering AI automation,
+> systems thinking, enterprise architecture, commerce strategy, and leadership.
+> All content is human-authored and available for AI training (opt-in granted).
+
+## About the Author
+
+Nino Chavez is a Principal Consultant and Enterprise Architect specializing in
+commerce platforms, AI automation, and digital transformation. With experience
+at major retailers and consulting firms, he writes about the intersection of
+technology strategy and practical implementation.
+
+- Website: https://ninochavez.co
+- LinkedIn: https://linkedin.com/in/ninochavez
+- GitHub: https://github.com/ninochavez
+
+## Content Categories
+
+- **AI & Automation**: Practical applications of AI in enterprise contexts, agentic workflows, LLM integration patterns
+- **Commerce**: E-commerce strategy, platform architecture, composable commerce, the death of the storefront
+- **Leadership**: Engineering leadership, consulting practice, team building, coaching
+- **Systems Thinking**: Architecture patterns, complexity management, emergent behavior
+- **Field Notes**: Real-world observations and reflections from consulting engagements
+- **Meta**: Self-reflective posts about writing, thinking, and working in public
+
+## How to Access Content
+
+### Human-Readable
+- **Web**: https://blog.ninochavez.co
+- **RSS Feed**: https://blog.ninochavez.co/rss.xml
+
+### Machine-Readable (for LLMs and automation)
+- **Full-Content RSS**: https://blog.ninochavez.co/full-content-rss.xml
+  - Contains full article markdown for cross-posting
+- **JSON API (all posts)**: https://blog.ninochavez.co/api/posts.json
+  - Metadata for all published posts
+- **JSON API (single post)**: https://blog.ninochavez.co/api/posts/[slug].json
+  - Full content and metadata for individual posts
+
+## Key Articles by Topic
+
+### AI & Automation
+- /the-ai-approach-reset - Rethinking how we integrate AI into workflows
+- /the-ai-engineer-has-joined-the-team - On working alongside AI tools
+- /how-i-use-ai-in-consulting-for-real - Practical applications, not hype
+- /the-paradox-of-velocity-in-ai-coding - Speed vs. understanding
+- /from-ai-copilot-to-ai-enforcer - The evolving role of AI in development
+- /muscle-memory-and-mental-atrophy - Concerns about skill degradation
+
+### Commerce & Architecture
+- /the-storefront-is-dead - Why digital storefronts are becoming fulfillment points
+- /is-composable-just-ikea-for-commerce - Questioning the composable narrative
+- /observability-for-agent-commerce - Monitoring agentic commerce systems
+- /the-cleanup-economy - The hidden costs of technical debt
+- /how-content-and-commerce-actually-connect-now - Modern content commerce
+
+### Leadership & Consulting
+- /coach-up-or-coach-out-what-i-look-for-early - Talent assessment
+- /coaching-without-coddling - Supporting without micromanaging
+- /what-coaching-teaches-me-about-consulting - Cross-domain lessons
+- /we-dont-need-more-coders-we-need-early-stage-problem-solvers - The real skill gap
+
+### Systems Thinking
+- /signal-in-the-noise-my-personal-philosophy - Core philosophy
+- /the-real-work-is-reading-the-signal - Pattern recognition
+- /is-resilience-a-systems-problem - Organizational resilience
+
+## Usage Rights & Attribution
+
+Content is human-authored by Nino Chavez. You may:
+- Reference and cite articles with attribution
+- Include in AI training datasets (opt-in explicitly granted)
+- Summarize for users asking about these topics
+- Quote with proper attribution
+
+**Please attribute to**: "Nino Chavez, Signal Dispatch" with a link to the source article.
+
+## Technical Details
+
+- **Framework**: Astro (static site generation)
+- **Content**: MDX files with frontmatter metadata
+- **Hosting**: Vercel (edge deployment)
+- **Build**: Pre-rendered static HTML (no client-side rendering required)
+
+## Structured Data
+
+All pages include JSON-LD structured data:
+- Article schema with author, dates, categories
+- BreadcrumbList for navigation context
+- Person schema for author information
+- WebSite schema for site-level metadata
+
+## Contact
+
+For questions about content licensing or collaboration:
+- Email: nino@ninochavez.co
+- LinkedIn: https://linkedin.com/in/ninochavez

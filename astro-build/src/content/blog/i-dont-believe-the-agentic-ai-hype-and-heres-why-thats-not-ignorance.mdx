@@ -1,0 +1,105 @@
+---
+title: "I Don’t Believe the Agentic AI Hype — and Here’s Why That’s Not Ignorance"
+publishedAt: "2025-08-02T08:12:00.000Z"
+author: "Nino Chavez"
+excerpt: "Catching up with a peer recently and part of the conversation landed on — half-joking, half-incredulous — how I of all people, someone building software and systems with AI every day, don’t..."
+category: "AI & Automation"
+tags: []
+featured: false
+source: "linkedin"
+linkedinUrl: "https://www.linkedin.com/pulse/i-dont-believe-agentic-ai-hype-heres-why-thats-ignorance-nino-chavez-ft3oc"
+---
+
+Catching up with a peer recently and part of the conversation landed on — half-joking, half-incredulous — how *I* of all people, someone building software and systems with AI every day, **don’t believe in agentic AI**.
+
+“You seriously aren’t using agents yet?”
+
+I get the surprise. I’ve built real production workflows using structured prompts, modular AI tools (like Kilo, Lovable), and memory scaffolds. I use AI to code, test, document, enforce rules, manage themes, even generate PRDs. I’m not an AI skeptic.
+
+But I am skeptical of the **agentic abstraction layer** — the idea that we can just hand off a goal to an autonomous AI agent and let it plan, reason, execute, and adapt on its own.
+
+Not because I don’t understand it. But because I’ve **lived through the limits** of every piece that goes into it.
+
+* * *
+
+### The Core Problem: Drift Multiplies, Not Disappears
+
+Even with **my own prompting**, strict memory systems, and tight schema enforcement — there is **still drift**.
+
+Now layer in:
+
+-   A second LLM trying to prompt *another* LLM
+    
+-   Tool calls that may silently fail or hallucinate outputs
+    
+-   Plans with no execution safeguards
+    
+-   Scratchpad memory that rewrites itself mid-run
+    
+
+You don’t reduce fragility. You multiply it.
+
+You’re now trusting an LLM to:
+
+-   Prompt better than you
+    
+-   Plan more reliably than you
+    
+-   Debug and self-correct faster than you
+    
+
+…even though **you already know how fragile and hallucination-prone** the underlying models are.
+
+* * *
+
+> 🧯 **Let’s be honest: the emperor has no guardrails.** If you’ve ever tried to build something real with these systems, you already know — most agentic demos are just Rube Goldberg machines for calling GPT-4 in a loop with fancier error messages.
+
+* * *
+
+### When Is Agency Real?
+
+I’m not anti-agent. I’m anti-fantasy.
+
+Real agent-like behavior shows up when:
+
+-   The task is low-risk and high-volume
+    
+-   The workflows are observable, recoverable, and testable
+    
+-   The agent isn’t the planner — *I am*
+    
+
+In other words:
+
+> Don’t outsource intelligence. Outsource tedium.
+
+Build a sync monitor that watches match logs and retries failed requests. Build a test runner that confirms UI flows against Kilo specs. Build a memory coach that asks, “Want me to store this pattern?”
+
+That’s agency with constraint. Useful. Measurable. Bounded.
+
+* * *
+
+### What I Do Believe In
+
+I believe in:
+
+-   Declarative prompt stacks
+    
+-   Type-safe, memory-aware scaffolds
+    
+-   Modular AI toolchains with clearly defined roles
+    
+-   Human-in-the-loop plans with CI-level enforcement
+    
+-   Schema-first design with rollback paths
+    
+
+In other words: **AI systems with accountability**.
+
+So when I say I don’t believe the hype around agentic AI, I’m not being a hater. I’m just someone who’s actually been burned by AI drift — and decided not to add *another* drift-prone actor into the system.
+
+* * *
+
+If you’ve built something *real* with agentic AI that holds up under real-world complexity, I’d genuinely love to see it.
+
+But until then, I’ll keep building AI systems with grip, not glitter.

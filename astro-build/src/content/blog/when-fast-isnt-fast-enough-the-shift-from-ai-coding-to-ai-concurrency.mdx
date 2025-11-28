@@ -1,0 +1,123 @@
+---
+title: "WHEN FAST ISN’T FAST ENOUGH: The shift from AI coding to AI concurrency"
+publishedAt: "2025-07-30T02:22:00.000Z"
+author: "Nino Chavez"
+excerpt: "There’s a strange kind of bottleneck that only shows up after you’ve gotten fast."
+category: "AI & Automation"
+tags: ["architecture","testing","ai-coding"]
+featured: false
+source: "linkedin"
+linkedinUrl: "https://www.linkedin.com/pulse/when-fast-isnt-enough-shift-from-ai-coding-nino-chavez-xipgc"
+---
+
+There’s a strange kind of bottleneck that only shows up *after* you’ve gotten fast.
+
+I’ve built a full system around AI-assisted development—structured specs, documentation, prompt stacks, demo environments, testing harnesses, architecture rules, safety scaffolding, and internal invariants.
+
+It works. It works so well that I can stand up full features in hours. But even *that* has started to feel too slow.
+
+Because once the infrastructure is in place, the only real blocker left... is waiting.
+
+Waiting for a model to finish one thing before starting the next. Waiting for your own sequential plan to complete before evaluating what's next. Waiting for single-threaded throughput to deliver multi-threaded results.
+
+And so the question hit me sideways last week: **Why am I still treating AI like a single teammate?**
+
+What if I wasn’t?
+
+* * *
+
+Now that I know what “good” looks like—what my specs should contain, how features should branch cleanly, how tests and docs are automatically scaffolded—why not run **multiple instances** of my AI agent in parallel?
+
+Not “one assistant helping me code.” But an orchestrated group of agents, each with their own branch, their own prompt, their own task. Like a real dev team. All operating under shared rules and outputs. All feeding back into the system. All running at once.
+
+* * *
+
+> ❐ **SIDEBAR: Anthropic, Amazon, and multi-agent orchestration** Claude researchers have already shown that parallel agents exploring different code paths outperform single-agent approaches on complex tasks. Amazon’s rumored "Kiro" system is reportedly building exactly this: AI agents working in parallel branches, coordinated through system prompts and pre-defined constraints. Simon Willison has a great breakdown on how parallel agents drastically improve exploratory tasks—if you can manage divergence.
+
+* * *
+
+This is where I see things going next:
+
+-   A system of *spec-first execution*
+    
+-   A library of *safe, modular prompts*
+    
+-   A set of *branch conventions and merge logic*
+    
+-   And a small fleet of AI “teammates,” each independently building, testing, and returning their version of the thing
+    
+
+You don’t have to wait on one prompt to finish before you start the next. You don’t need to chain everything in linear order. You don’t need to overthink the pipeline.
+
+You just **split the work**, define the rails, and let them build.
+
+* * *
+
+The bottleneck isn’t the model. It’s the *way you think about using it*.
+
+And when you shift from “copilot” to “orchestrator,” the game changes.
+
+You go from throughput to concurrency. From AI support to AI systems engineering.
+
+* * *
+
+> ❐ **SIDEBAR: Academic research has already validated this** AgentCoder, CrewAI, and others show 5–30% improvements in complex code task accuracy and speed when agents are coordinated instead of chained. The tradeoff is context fragmentation and token cost—but the creative yield makes it worth it when the right scaffolding is in place. [Read the AgentCoder study](https://arxiv.org/abs/2404.02183) for the nitty-gritty.
+
+* * *
+
+**EXAMPLE: BRANCH-BASED AGENT ORCHESTRATION**
+
+Let’s say I want to ship 3 new features this week:
+
+1.  Feature toggle framework
+    
+2.  Player-facing match history UI
+    
+3.  Admin-only schedule override system
+    
+
+Instead of queuing them in one prompt stream, I now:
+
+-   Create three feature specs (specs/feature-toggles.md, specs/player-history.md, etc.)
+    
+-   Kick off 3 Kilo prompts, each referencing the same app architecture, rules, and prompt scaffolds
+    
+-   Each agent spins up its own branch (feature/ai-ftoggles, feature/ai-history, etc.)
+    
+-   I monitor via PRs, review divergences, run generated tests, and decide what to keep or modify
+    
+
+Each agent runs independently. Each task executes in parallel. Each result feeds back into the same ecosystem.
+
+Not because I’m in a rush. But because now, *I can*.
+
+* * *
+
+### BTS: HOW I’M ACTUALLY DOING THIS
+
+This idea didn’t come out of nowhere. It emerged while I was debugging, late at night, and realized I wanted to build three features, debug a fourth, and refactor a fifth—all at once. And the blockers weren’t technical. They were architectural: I was still thinking “single terminal, single agent, single stream.”
+
+So I wrote this:
+
+> *“Can I run multiple instances of Kilo or VSCode? I want to work on a single project/repo as if I’m a multi-person team—each with their own IDE instance and Kilo process.”*
+
+The answer was yes.
+
+So now I’m spinning up:
+
+-   **Multiple VSCode windows**, each scoped to its own branch and task.
+    
+-   **Multiple Kilo agents**, each with their own isolated prompt history and feature spec.
+    
+-   A **local orchestration board** (think: a glorified Notion table) tracking spec, branch name, status, and merge decision.
+    
+-   A set of **shared AI invariants**, loaded into every prompt scaffold—so agents don’t drift too far.
+    
+
+This isn’t about simulating team structure. It’s about unleashing real velocity from *AI-native* structures.
+
+There’s no standup. No ticket grooming. No “blocks.” Just pure throughput—guided by prompts, specs, and automated review gates.
+
+It’s early. But it’s already working.
+
+And the second I felt it working, I realized: The only thing slowing me down now… is how fast I’m willing to go.

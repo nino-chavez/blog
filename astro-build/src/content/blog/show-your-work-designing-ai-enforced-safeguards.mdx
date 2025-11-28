@@ -1,0 +1,82 @@
+---
+title: "Show Your Work: Designing AI-Enforced Safeguards"
+publishedAt: "2025-07-29T20:12:00.000Z"
+author: "Nino Chavez"
+excerpt: "This isn’t magic. It’s thoughtful infrastructure."
+category: "AI & Automation"
+tags: []
+featured: false
+source: "linkedin"
+linkedinUrl: "https://www.linkedin.com/pulse/show-your-work-designing-ai-enforced-safeguards-nino-chavez-os7mc"
+---
+
+This isn’t magic. It’s thoughtful infrastructure.
+
+After a few bugs slipped past my AI assistant, I paused and asked:
+
+> “We’ve got docs, scripts, and checks… but which ones do *I* have to remember? Which ones does *AI* already know to run? And how many are just silently tucked into other commands?”
+
+That turned into a real system redesign.
+
+* * *
+
+⚠️ **CURRENT STATE**
+
+149+ scattered NPM scripts. 4 inconsistent entry points:
+
+-   Manual commands (npm run pre-deploy, etc.)
+    
+-   AI-invoked checks (“Run the CORS validator”)
+    
+-   Auto-enforced (lint-staged, pre-commit)
+    
+-   Hidden triggers (nested pre-\* scripts)
+    
+
+Unclear boundaries. Easy to forget. Drift waiting to happen.
+
+* * *
+
+✅ **UNIFIED SAFEGUARD SYSTEM (NOW LIVE)**
+
+> One entry point: npm run safeguard --ai-mode
+
+-   Detects what kind of task is running
+    
+-   Runs only relevant safeguards (risk-based logic)
+    
+-   Outputs structured results for AI or human review
+    
+-   Auto-fixes common issues
+    
+-   Stops the task if needed — or continues cleanly
+    
+
+We also added --verify for post-task enforcement.
+
+* * *
+
+🛠️ **MY REAL AI WORKFLOW (NO FLUFF)**
+
+Every feature starts like this:
+
+1.  npm run safeguard --ai-mode
+    
+2.  AI decides which checks apply
+    
+3.  If broken → auto-fix or explain
+    
+4.  If clean → proceed with implementation
+    
+5.  After completion → --verify to confirm
+    
+
+Not a hypothetical. Not a vibes-based system. This runs in production.
+
+This is part of a bigger shift I’m chasing: **from AI assistance to AI enforcement.** Real safety nets. Real repeatability. So I can move faster *without* racking up tech debt.
+
+#showyourwork #aiinfrastructure #promptops #aiengineering #buildinpublic
+
+![](https://media.licdn.com/dms/image/v2/D5612AQHLgFk4qhRP7g/article-inline_image-shrink_1500_2232/B56ZhWwfmqHkAY-/0/1753802210699?e=1762387200&v=beta&t=ZjC7Hpm0pJmHIjizIyPbAwa4N18xhLwCzfx2hAqmu_4)
+
+![](https://media.licdn.com/dms/image/v2/D5612AQGRcrL0ROzFHA/article-inline_image-shrink_1500_2232/B56ZhWvp5WG4AY-/0/1753801990572?e=1762387200&v=beta&t=zZ-6ZhGlmRl0cEUi1C-Ojhehe9cuibjIjGK3A4l6Bss)

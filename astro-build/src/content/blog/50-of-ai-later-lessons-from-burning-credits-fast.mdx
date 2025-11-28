@@ -1,0 +1,145 @@
+---
+title: "$50 of AI Later: Lessons from Burning Credits Fast"
+slug: "50-of-ai-later-lessons-from-burning-credits-fast"
+publishedAt: "2025-06-29T06:09:06.000Z"
+updatedAt: "2025-06-29T06:09:06.000Z"
+author: "Nino Chavez"
+status: "published"
+excerpt: "AI credits vanished quickly, highlighting hidden costs and forcing clarity into my development process. Here's how a $50 investment turned into a practical blueprint for smarter AI‑assisted builds."
+featureImage: "https://images.unsplash.com/photo-1603738335334-e91bdf122ca5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTc3M3wwfDF8c2VhcmNofDEyfHxidXJuJTIwbW9uZXl8ZW58MHx8fHwxNzUxMTc3MTEyfDA&ixlib=rb-4.1.0&q=80&w=2000"
+tags:
+  - ai-workflows
+  - craft
+category: "AI & Automation"
+seo:
+  metaTitle: "$50 of AI Later: Lessons from Burning Credits Fast"
+  metaDescription: "AI credits vanished quickly, highlighting hidden costs and forcing clarity into my development process. Here's how a $50 investment turned into a practical blueprint for smarter AI‑assisted builds."
+  ogImage: "https://images.unsplash.com/photo-1603738335334-e91bdf122ca5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTc3M3wwfDF8c2VhcmNofDEyfHxidXJuJTIwbW9uZXl8ZW58MHx8fHwxNzUxMTc3MTEyfDA&ixlib=rb-4.1.0&q=80&w=2000"
+---
+> *Building with AI is cheap—until it isn’t. Here’s what burned, what I learned, and how I’m budgeting the next sprint.*
+
+## 1. The Prototype Price Tag (or: How to Torch Cash Fast)
+
+I set out to build a clean **volleyball‑tournament schedule viewer**—transforming raw JSON scraped from the event site into a real‑time grid UI. I plopped down my first **$25** batch of lovable.dev credits thinking the assistant would rocket me from sketch to production. The credits vanished on rapid‑fire prototyping. The **next $25** went to "production hardening" refactors that only generated new tech‑debt tangles.
+
+**Takeaway:** Credits aren’t money—they’re mental Monopoly money. Burn fast enough, and every fuzzy assumption hiding in your spec gets lit up like neon.
+
+## 2. Why Credits Vanish So Quickly
+
+- **Illusion of Instant Speed.** The model prints code in seconds, so you assume the project timeline shrinks the same way. It doesn't.
+- **Prompt‑as‑Code Rot.** Each change cascades like version drift in a repo no one’s merging—every new prompt slightly diverges from previous intent, causing subtle but compounding inconsistencies. Each change cascades like version drift in a repo no one’s merging.
+- **Context Window Amnesia.** Context windows expire; you end up re‑explaining architecture instead of extending it.
+
+> *AI saves typing, but it doesn't save you from yourself.*
+
+## 3. The One‑Person Discipline Stack
+
+Because this was a solo side-project (aka me, my coffee, and some questionable life choices), there was no specialist bench—just me and a credit meter ticking upward. During the rewrite I had to swap hats faster than a pit crew:
+
+| Hat | Core Concern |
+| --- | --- |
+| Data Architect | Normalizing import feeds, naming conventions |
+| Software Architect | Module boundaries, service contracts |
+| Security Architect | AuthZ splits for public vs. admin |
+| Performance Engineer | Pre‑parsed data for faster UI paint |
+| UI/UX Designer | Navigation hierarchy, state cues |
+| Business Analyst | Gherkin‑style acceptance criteria |
+
+AI helped execute slices of each hat, but **only after** I articulated the discipline‑specific intent. That articulation is the hidden cost.
+
+## 4. From "Make It Work" to "Describe It So It Works"
+
+Writing prompts that survive multiple build cycles felt like learning a stricter programming language—one that's picky, moody, and incredibly vague about its errors (like my first boss).
+
+**Pattern that finally worked:**
+
+1. *Scenario* – single‑sentence business outcome.
+2. *Gherkin* – Given/When/Then for each user story.
+3. *Architectural note* – constraints, dependencies, NFRs.
+4. *Success snapshot* – expected JSON payload or UI state.
+
+Feed that quartet, and the AI stops hallucinating edge cases.
+
+*Concrete misfire:* A dropdown for court filters suddenly went blank. Thirty prompts earlier we’d **asked** the AI to hide options with no matching data; when I later flagged “nothing’s showing,” the model assumed it was a bug and silently ripped out the very feature we’d added. The prompt, not the code, was the defect.
+
+## 5. Budgeting the Build Cycle
+
+A quick canvas I'm using for the next round:
+
+| Sprint | Goal | Credits | Human Hours | Deliverable |
+| --- | --- | --- | --- | --- |
+| 0 | Architecture spike | 10 | 3 | ERD + service diagram |
+| 1 | CRUD MVP | 15 | 6 | Working data flow |
+| 2 | Auth & roles | 10 | 4 | Public/Admin split |
+| 3 | Perf hardening | 10 | 4 | Cached queries + tests |
+
+**Rule of thumb (back‑of‑napkin):** Over $50 in spend I averaged **20–30 usable lines of code per credit** once prompts were airtight. Your mileage—and model—will vary, so budget in ranges, not absolutes.
+
+## 6. Designing for AI Collaboration
+
+- **Normalize early.** Up‑front schema clarity kills downstream prompt bloat.
+- **Name states, not screens.** AI can wireframe if you describe *why* the state exists.
+- **Lock vocab.** A single glossary entry beats 50 context reminders.
+- **Version prompts.** Treat them like code—diff, review, branch, merge.
+
+### 6a. Fresh‑Start Blueprint: Turning Lessons into Architecture
+
+After stepping back from the prototype rubble, I drafted a **green‑field schema** and phased plan that bakes every lesson into the foundation.
+
+**Normalized Core Tables (7)**
+
+| Table | Purpose |
+| --- | --- |
+| tournaments | Top‑level container (replaces events) |
+| courts | Parsed court names linked to tournaments |
+| divisions | Division names/codes per tournament |
+| clubs | Club catalog per tournament |
+| teams | Child of clubs; cached full_name for search |
+| work_teams | Officiating teams (replaces officials) |
+| matches | Foreign‑key hub with sort_key for fast ordering |
+
+*Key benefits:* venue complexity dropped, work‑team search enabled, club filters become single JOINs.
+
+**Import Workflow Highlights**
+
+1. Parse "Club – Team" strings → create/link club & team.
+2. Extract courts/divisions/work teams.
+3. Store IDs in `matches`, pre‑compute `sort_key`.
+4. **Upsert on re‑import** – ensure repeated JSON loads *update* existing records instead of duplicating them, keeping the database idempotent.
+
+**Four‑Phase Implementation**
+
+1. **Schema migration** – drop, create, index, types regen.
+2. **Enhanced import** – rewrite JSON parser, normalize on ingest.
+3. **Clean React foundation** – scrap bloated components, query by FKs.
+4. **Core feature pass** – tournament CRUD, schedule grid, club/work‑team filters.
+
+> *The rewrite isn’t extra work—it’s paying off the tuition from the first $50.*
+
+## 7. Mindset Shift – Developer to System Choreographer
+
+The work isn't key‑pushing pixels; it's:
+
+- Negotiating constraints between roles that all live in your head.
+- Translating business nuance into deterministic instructions.
+- Spot-checking AI output like a slightly paranoid auditor—because trusting AI blindly is how you end up debugging at 3 AM (trust me on this one)., not a pair‑programmer.
+
+If that sounds like **Business Architect meets Dev Lead**, welcome to 2025. (See also my *AI‑as‑Infrastructure* and *Quiet Leadership* essays for the broader leadership context.)
+
+## 8. Recommendations
+
+1. **Price the learning curve.** Assume 25–50% of first‑month credits are tuition.
+2. **Sprint‑gate on architecture.** No feature sprints until schema + auth are locked.
+3. **Write prompts like contracts.** If a junior dev can’t implement it, the AI won’t either.
+4. **Build rollback paths.** Keep manual checkpoints so a bad prompt doesn’t brick the branch.
+5. **Budget by role, not feature.** Allocate credits/time to “Data integrity” the same way you would to “Landing page.”
+6. **Instrument early.** Stand up basic monitoring/logging so performance regressions and runaway credit burns surface before they hurt.
+7. **Track prompt versions in Git.** Commit each substantive prompt iteration alongside code so you can diff intent, revert misfires, and share reproducible context with collaborators.
+
+## 9. Where This Leaves Us
+
+AI tooling shifts cost from **labor** to **clarity**. You still pay; the invoice just arrives as credit burn and cognitive load.
+
+I’ll run the next build with half the credits and double the upfront rigor. If it works, great. If not, at least the failure will be cheaper—and better documented.
+
+*Field notes end. Where might your hidden tuition costs be? Feedback welcome.*

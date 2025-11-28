@@ -1,0 +1,126 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { generateCollectionSchema } from '../../utils/schema';
+
+// Get all whitepapers sorted by date
+const whitepapers = await getCollection('whitepapers');
+const sortedWhitepapers = whitepapers.sort(
+  (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime()
+);
+
+// Generate JSON-LD
+const collectionSchema = generateCollectionSchema(
+  'Signal Dispatch Whitepapers',
+  'In-depth strategic analyses and research reports on AI, commerce, and technology.',
+  'https://blog.ninochavez.co/whitepapers',
+  sortedWhitepapers
+);
+---
+
+<BaseLayout
+  title="Whitepapers"
+  description="In-depth strategic analyses and research reports on AI, commerce, and technology by Nino Chavez."
+  jsonLd={[collectionSchema]}
+>
+  <main class="min-h-screen">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-lg border-b border-zinc-800/50">
+      <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3">
+          <span class="text-xl font-black text-white">Signal Dispatch</span>
+        </a>
+        <div class="flex items-center gap-4">
+          <a href="/" class="text-zinc-400 hover:text-white text-sm transition-colors">Blog</a>
+          <a href="/rss.xml" class="text-zinc-400 hover:text-white transition-colors" title="RSS Feed">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z" />
+            </svg>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="max-w-6xl mx-auto px-4 py-16">
+      <div class="max-w-3xl">
+        <a href="/" class="inline-flex items-center gap-2 text-zinc-400 hover:text-athletic-court-orange transition-colors mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Blog
+        </a>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-6">
+          Whitepapers
+        </h1>
+        <p class="text-xl text-zinc-400 leading-relaxed">
+          In-depth strategic analyses and research reports on AI, commerce, and technology. These longer-form pieces provide comprehensive frameworks for understanding emerging trends.
+        </p>
+      </div>
+    </section>
+
+    <!-- Whitepapers List -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+      <div class="space-y-8">
+        {sortedWhitepapers.map((whitepaper) => (
+          <a href={`/whitepapers/${whitepaper.id}`} class="group block">
+            <article class="p-8 rounded-2xl border border-zinc-800 hover:border-athletic-brand-violet/50 transition-all duration-200 bg-zinc-900/30">
+              <div class="flex flex-col md:flex-row md:items-start gap-6">
+                {whitepaper.data.featureImage && (
+                  <div class="md:w-1/3 aspect-video md:aspect-[4/3] overflow-hidden rounded-xl flex-shrink-0">
+                    <img
+                      src={whitepaper.data.featureImage}
+                      alt={whitepaper.data.title}
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 text-sm mb-3">
+                    <span class="font-bold uppercase tracking-wider px-3 py-1 rounded-full text-xs bg-athletic-brand-violet/10 border border-athletic-brand-violet/30 text-athletic-brand-violet">
+                      Whitepaper
+                    </span>
+                    <time class="text-zinc-500">
+                      {new Date(whitepaper.data.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                    </time>
+                  </div>
+                  <h2 class="text-2xl md:text-3xl font-bold text-white group-hover:text-athletic-court-orange transition-colors mb-3">
+                    {whitepaper.data.title}
+                  </h2>
+                  {whitepaper.data.excerpt && (
+                    <p class="text-zinc-400 leading-relaxed line-clamp-3">{whitepaper.data.excerpt}</p>
+                  )}
+                  <div class="mt-4 inline-flex items-center gap-2 text-athletic-brand-violet group-hover:text-athletic-court-orange transition-colors">
+                    <span class="font-medium">Read whitepaper</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-800/50 py-12 mt-12">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+          <div class="text-center md:text-left">
+            <p class="text-zinc-500 text-sm">
+              &copy; {new Date().getFullYear()} Nino Chavez. All rights reserved.
+            </p>
+          </div>
+          <div class="flex items-center gap-6">
+            <a href="/rss.xml" class="text-zinc-400 hover:text-white text-sm transition-colors">RSS Feed</a>
+            <a href="/api/posts.json" class="text-zinc-400 hover:text-white text-sm transition-colors">API</a>
+            <a href="https://ninochavez.co" class="text-zinc-400 hover:text-white text-sm transition-colors">ninochavez.co</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+</BaseLayout>
