@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { generateArticleSchema, generateBreadcrumbSchema } from '../utils/schema';
+import ReadingProgress from '../components/ReadingProgress';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -44,6 +45,13 @@ const categoryColors: Record<string, { bg: string; border: string; text: string 
 };
 
 const colors = categoryColors[post.data.category || ''] || categoryColors.default;
+
+// Get related posts (same category, excluding current)
+const allPosts = await getCollection('blog', ({ data }) => data.status !== 'draft');
+const relatedPosts = allPosts
+  .filter((p) => p.id !== post.id && p.data.category === post.data.category)
+  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime())
+  .slice(0, 3);
 ---
 
 <BaseLayout
@@ -57,6 +65,9 @@ const colors = categoryColors[post.data.category || ''] || categoryColors.defaul
   tags={post.data.tags}
   jsonLd={[articleSchema, breadcrumbSchema]}
 >
+  <!-- Reading Progress Bar -->
+  <ReadingProgress client:load />
+
   <main class="min-h-screen">
     <!-- Header Navigation -->
     <header class="sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-lg border-b border-zinc-800/50 no-print">
@@ -143,6 +154,17 @@ const colors = categoryColors[post.data.category || ''] || categoryColors.defaul
               ))}
             </div>
           )}
+
+          <!-- Author Info -->
+          <div class="flex items-center gap-4 pt-6 mt-2 border-t border-zinc-800/30">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-athletic-brand-violet to-athletic-court-orange flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-athletic-brand-violet/20">
+              NC
+            </div>
+            <div>
+              <p class="text-white font-semibold">{post.data.author || 'Nino Chavez'}</p>
+              <p class="text-zinc-500 text-sm">Principal Consultant & Enterprise Architect</p>
+            </div>
+          </div>
         </header>
 
         <!-- Article Content -->
@@ -218,6 +240,34 @@ const colors = categoryColors[post.data.category || ''] || categoryColors.defaul
           </div>
         )}
       </article>
+
+      <!-- Related Posts -->
+      {relatedPosts.length > 0 && (
+        <section class="mt-16 pt-12 border-t border-zinc-800/50 no-print">
+          <h2 class="text-2xl font-bold text-white mb-8">More in {post.data.category}</h2>
+          <div class="grid gap-6 md:grid-cols-3">
+            {relatedPosts.map((related) => (
+              <a href={`/${related.id}`} class="group block">
+                <article class="h-full p-5 rounded-xl border border-zinc-800 hover:border-athletic-brand-violet/50 transition-all duration-200 bg-zinc-900/30 hover:bg-zinc-900/50 hover:shadow-lg hover:shadow-athletic-brand-violet/5 hover:-translate-y-1">
+                  <div class="space-y-3">
+                    <time class="text-xs text-zinc-500">
+                      {new Date(related.data.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                    </time>
+                    <h3 class="text-base font-bold text-white group-hover:text-athletic-court-orange transition-colors line-clamp-2">
+                      {related.data.title}
+                    </h3>
+                    {related.data.excerpt && (
+                      <p class="text-zinc-400 text-sm leading-relaxed line-clamp-2">
+                        {related.data.excerpt}
+                      </p>
+                    )}
+                  </div>
+                </article>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
 
     <!-- Footer -->
