@@ -12,6 +12,14 @@ interface Post {
   featured?: boolean;
 }
 
+// Check if post is new (within 7 days)
+const isNewPost = (publishedAt: string): boolean => {
+  const postDate = new Date(publishedAt);
+  const now = new Date();
+  const diffDays = Math.floor((now.getTime() - postDate.getTime()) / (1000 * 60 * 60 * 24));
+  return diffDays <= 7;
+};
+
 interface BlogListProps {
   posts: Post[];
 }
@@ -116,14 +124,22 @@ export default function BlogList({ posts }: BlogListProps) {
       {/* Featured Post */}
       {featuredPost && !searchQuery && !selectedCategory && (
         <a href={`/${featuredPost.id}`} className="group block mb-12">
-          <article className="relative p-8 rounded-2xl border border-athletic-brand-violet/30 bg-gradient-to-br from-athletic-brand-violet/10 via-transparent to-athletic-court-orange/5 hover:border-athletic-brand-violet/50 transition-all duration-200">
+          <article className="relative p-8 md:p-10 rounded-2xl border border-athletic-brand-violet/30 bg-gradient-to-br from-athletic-brand-violet/10 via-transparent to-athletic-court-orange/5 hover:border-athletic-brand-violet/50 transition-all duration-300 hover:shadow-2xl hover:shadow-athletic-brand-violet/10 overflow-hidden">
+            {/* Background accent */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-athletic-brand-violet/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+
             <div className="absolute top-4 right-4">
-              <span className="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange text-white">
+              <span className="text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange text-white shadow-lg shadow-athletic-brand-violet/25">
                 Featured
               </span>
             </div>
-            <div className="space-y-4">
+            <div className="relative space-y-4">
               <div className="flex items-center gap-3 text-sm">
+                {isNewPost(featuredPost.publishedAt) && (
+                  <span className="font-bold uppercase tracking-wider px-2 py-1 rounded-full bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange text-white text-[10px] animate-pulse">
+                    New
+                  </span>
+                )}
                 {featuredPost.category && (
                   <span className={`font-bold uppercase tracking-wider px-3 py-1 rounded-full border ${getCategoryBadgeClass(featuredPost.category)}`}>
                     {featuredPost.category}
@@ -131,20 +147,22 @@ export default function BlogList({ posts }: BlogListProps) {
                 )}
                 <span className="text-zinc-500">{formatDate(featuredPost.publishedAt)}</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-black text-white group-hover:text-athletic-court-orange transition-colors">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white group-hover:text-athletic-court-orange transition-colors leading-tight">
                 {featuredPost.title}
               </h2>
               {featuredPost.excerpt && (
-                <p className="text-zinc-400 text-lg leading-relaxed line-clamp-3">
+                <p className="text-zinc-400 text-lg leading-relaxed line-clamp-3 max-w-2xl">
                   {featuredPost.excerpt}
                 </p>
               )}
-              <span className="inline-flex items-center gap-2 text-athletic-brand-violet group-hover:text-athletic-court-orange transition-colors font-medium">
-                Read article
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </span>
+              <div className="pt-2">
+                <span className="inline-flex items-center gap-2 text-athletic-brand-violet group-hover:text-athletic-court-orange transition-colors font-semibold">
+                  Read article
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </span>
+              </div>
             </div>
           </article>
         </a>
@@ -168,9 +186,14 @@ export default function BlogList({ posts }: BlogListProps) {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {regularPosts.map((post) => (
             <a key={post.id} href={`/${post.id}`} className="group block">
-              <article className="h-full p-6 rounded-xl border border-zinc-800 hover:border-athletic-brand-violet/50 transition-all duration-200 bg-zinc-900/30 hover:bg-zinc-900/50">
+              <article className="h-full p-6 rounded-xl border border-zinc-800 hover:border-athletic-brand-violet/50 transition-all duration-200 bg-zinc-900/30 hover:bg-zinc-900/50 hover:shadow-lg hover:shadow-athletic-brand-violet/5 hover:-translate-y-1">
                 <div className="space-y-3">
                   <div className="flex items-center gap-2 text-xs">
+                    {isNewPost(post.publishedAt) && (
+                      <span className="font-bold uppercase tracking-wider px-2 py-1 rounded-full bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange text-white text-[10px] animate-pulse">
+                        New
+                      </span>
+                    )}
                     {post.category && (
                       <span className={`font-bold uppercase tracking-wider px-2 py-1 rounded-full border ${getCategoryBadgeClass(post.category)}`}>
                         {post.category}
