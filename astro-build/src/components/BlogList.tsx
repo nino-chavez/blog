@@ -207,55 +207,70 @@ export default function BlogList({ posts }: BlogListProps) {
 
       {/* Featured Section */}
       {featuredPosts.length > 0 && !searchQuery && !selectedCategory && (
-        <section>
-          <div className="flex items-center gap-3 mb-6">
+        <section className="relative -mx-4 px-4 py-8 rounded-3xl bg-gradient-to-b from-zinc-900/80 via-zinc-900/40 to-transparent">
+          {/* Subtle gradient orb background */}
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-athletic-brand-violet/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-athletic-court-orange/5 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="relative flex items-center gap-3 mb-6">
             <div className="h-1 w-10 bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange rounded-full" />
             <h2 className="text-xl font-bold text-white">Featured</h2>
+            <span className="text-xs text-zinc-500 bg-zinc-800/50 px-2 py-0.5 rounded-full">Editor's picks</span>
           </div>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="relative grid md:grid-cols-2 gap-6">
             {featuredPosts.map((post) => {
               const colors = getCategoryColors(post.category || '');
               return (
                 <a key={post.id} href={`/${post.id}`} className="group block">
-                  <article className="relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/50 hover:border-athletic-brand-violet/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-athletic-brand-violet/10">
-                    {/* Image */}
-                    <div className="relative aspect-[16/9] overflow-hidden">
-                      <img
-                        src={getPostImage(post)}
-                        alt={post.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        onError={handleImageError}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
-                    </div>
-
-                    {/* Content */}
-                    <div className="p-6 space-y-3">
-                      <div className="flex items-center gap-3 text-xs">
-                        {post.category && (
-                          <span className={`font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border ${colors.bg} ${colors.border} ${colors.text}`}>
-                            {post.category}
-                          </span>
-                        )}
-                        <span className="text-zinc-500">{formatDate(post.publishedAt)}</span>
+                  {/* Gradient border wrapper */}
+                  <div className="relative p-[1px] rounded-2xl bg-gradient-to-br from-athletic-brand-violet/50 via-transparent to-athletic-court-orange/50 group-hover:from-athletic-brand-violet group-hover:to-athletic-court-orange transition-all duration-500">
+                    <article className="relative overflow-hidden rounded-2xl bg-zinc-900 group-hover:bg-zinc-900/90 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-2xl group-hover:shadow-athletic-brand-violet/20">
+                      {/* Featured badge */}
+                      <div className="absolute top-4 right-4 z-10">
+                        <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange text-white shadow-lg">
+                          Featured
+                        </span>
                       </div>
-                      <h3 className="text-xl font-bold text-white group-hover:text-athletic-court-orange transition-colors line-clamp-2">
-                        {post.title}
-                      </h3>
-                      {post.excerpt && (
-                        <p className="text-zinc-400 text-sm line-clamp-2">{post.excerpt}</p>
-                      )}
-                      {post.tags && post.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5 pt-2">
-                          {post.tags.slice(0, 3).map((tag) => (
-                            <span key={tag} className="text-[10px] px-2 py-0.5 rounded bg-zinc-800/50 text-zinc-500">
-                              {tag}
+
+                      {/* Image */}
+                      <div className="relative aspect-[16/9] overflow-hidden">
+                        <img
+                          src={getPostImage(post)}
+                          alt={post.title}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          onError={handleImageError}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
+                      </div>
+
+                      {/* Content */}
+                      <div className="p-6 space-y-3">
+                        <div className="flex items-center gap-3 text-xs">
+                          {post.category && (
+                            <span className={`font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border ${colors.bg} ${colors.border} ${colors.text}`}>
+                              {post.category}
                             </span>
-                          ))}
+                          )}
+                          <span className="text-zinc-500">{formatDate(post.publishedAt)}</span>
                         </div>
-                      )}
-                    </div>
-                  </article>
+                        <h3 className="text-xl font-bold text-white group-hover:text-athletic-court-orange transition-colors line-clamp-2">
+                          {post.title}
+                        </h3>
+                        {post.excerpt && (
+                          <p className="text-zinc-400 text-sm line-clamp-2">{post.excerpt}</p>
+                        )}
+                        {post.tags && post.tags.length > 0 && (
+                          <div className="flex flex-wrap gap-1.5 pt-2">
+                            {post.tags.slice(0, 3).map((tag) => (
+                              <span key={tag} className="text-[10px] px-2 py-0.5 rounded bg-zinc-800/50 text-zinc-500">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </article>
+                  </div>
                 </a>
               );
             })}
