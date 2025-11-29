@@ -87,13 +87,6 @@
       ]
     }
   ],
-  "redirects": [
-    {
-      "source": "/blog/:path*",
-      "destination": "/:path*",
-      "permanent": true
-    }
-  ],
   "cleanUrls": true,
   "trailingSlash": false
 }
