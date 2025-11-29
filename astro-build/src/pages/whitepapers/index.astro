@@ -23,7 +23,7 @@ const getWhitepaperImage = (whitepaper: typeof sortedWhitepapers[0]) => {
   // Use AI-themed generated images
   const hash = whitepaper.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
   const variant = (hash % 5) + 1;
-  return `/generated/categories/ai-automation-${variant}.webp`;
+  return `/blog/generated/categories/ai-automation-${variant}.webp`;
 };
 ---
 
