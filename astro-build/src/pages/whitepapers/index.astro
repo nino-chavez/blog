@@ -16,6 +16,15 @@ const collectionSchema = generateCollectionSchema(
   'https://blog.ninochavez.co/whitepapers',
   sortedWhitepapers
 );
+
+// Default images for whitepapers without feature images
+const getWhitepaperImage = (whitepaper: typeof sortedWhitepapers[0]) => {
+  if (whitepaper.data.featureImage) return whitepaper.data.featureImage;
+  // Use AI-themed generated images
+  const hash = whitepaper.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const variant = (hash % 5) + 1;
+  return `/generated/categories/ai-automation-${variant}.webp`;
+};
 ---
 
 <BaseLayout
@@ -24,124 +33,129 @@ const collectionSchema = generateCollectionSchema(
   jsonLd={[collectionSchema]}
 >
   <main class="min-h-screen">
-    <!-- Header -->
-    <header class="sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-lg border-b border-zinc-800/50">
-      <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-3">
-          <span class="text-xl font-black text-white">Signal Dispatch</span>
-        </a>
-        <div class="flex items-center gap-4">
-          <a href="/" class="text-zinc-400 hover:text-white text-sm transition-colors">Blog</a>
-          <a href="/rss.xml" class="text-zinc-400 hover:text-white transition-colors" title="RSS Feed">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z" />
-            </svg>
+    <!-- Compact Header -->
+    <header class="sticky top-0 z-50 bg-zinc-950/95 backdrop-blur-xl border-b border-zinc-800/30">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-[73px]">
+          <a href="/" class="flex items-center gap-3">
+            <h1 class="text-lg font-bold bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange bg-clip-text text-transparent">
+              Signal Dispatch
+            </h1>
           </a>
+          <div class="flex items-center gap-4">
+            <a href="/" class="text-sm text-zinc-400 hover:text-white transition-colors">Blog</a>
+            <a href="/rss.xml" class="text-zinc-400 hover:text-white transition-colors" title="RSS Feed">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z" />
+              </svg>
+            </a>
+          </div>
         </div>
       </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative max-w-6xl mx-auto px-4 py-20 overflow-hidden">
-      <!-- Subtle gradient orbs background -->
-      <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute -top-40 -right-40 w-96 h-96 bg-athletic-brand-violet/10 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-athletic-court-orange/5 rounded-full blur-3xl"></div>
-      </div>
-
-      <div class="relative max-w-3xl">
-        <a href="/" class="group inline-flex items-center gap-2 text-zinc-400 hover:text-athletic-court-orange transition-colors mb-6">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          Back to Blog
-        </a>
-
-        <!-- Document icon badge -->
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900/80 border border-zinc-800 text-zinc-400 text-sm mb-6">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-athletic-brand-violet" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
-          <span>{sortedWhitepapers.length} strategic analyses</span>
+    <!-- Compact Page Header -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+        <div class="space-y-3">
+          <a href="/" class="group inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-athletic-court-orange transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Blog
+          </a>
+          <div class="flex items-center gap-4">
+            <h1 class="text-3xl md:text-4xl font-black text-white">Whitepapers</h1>
+            <span class="text-sm text-zinc-500 bg-zinc-900/50 px-3 py-1 rounded-full border border-zinc-800">
+              {sortedWhitepapers.length} analyses
+            </span>
+          </div>
+          <p class="text-zinc-400 max-w-2xl">
+            Strategic analyses on AI, commerce, and technology. Comprehensive frameworks for emerging trends.
+          </p>
         </div>
 
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-6">
-          Whitepapers
-        </h1>
-        <p class="text-xl text-zinc-400 leading-relaxed mb-6">
-          In-depth strategic analyses and research reports on AI, commerce, and technology. These longer-form pieces provide comprehensive frameworks for understanding emerging trends.
-        </p>
-
-        <!-- AI-assisted methodology note -->
-        <div class="flex items-start gap-3 p-4 rounded-xl bg-zinc-900/50 border border-zinc-800/50">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-athletic-brand-violet flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <!-- AI-assisted note - compact inline -->
+        <div class="flex items-center gap-2 text-xs text-zinc-500 bg-zinc-900/30 px-3 py-2 rounded-lg border border-zinc-800/50 lg:self-end">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-athletic-brand-violet flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
           </svg>
-          <p class="text-sm text-zinc-400">
-            <span class="text-zinc-300 font-medium">AI-assisted research.</span> These whitepapers are generated with AI tools, grounded in my professional experience and independent research. They represent synthesized insights, not original reporting.
-          </p>
+          <span>AI-assisted research, grounded in professional experience</span>
         </div>
       </div>
     </section>
 
-    <!-- Whitepapers List -->
-    <section class="max-w-6xl mx-auto px-4 py-12">
-      <div class="space-y-8">
+    <!-- Whitepapers Grid -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <div class="grid gap-6">
         {sortedWhitepapers.map((whitepaper, index) => {
           const wordCount = whitepaper.body?.split(/\s+/).length || 0;
           const readingTime = Math.ceil(wordCount / 200);
           const isNew = (new Date().getTime() - new Date(whitepaper.data.publishedAt).getTime()) / (1000 * 60 * 60 * 24) <= 14;
+          const imageUrl = getWhitepaperImage(whitepaper);
 
           return (
             <a href={`/whitepapers/${whitepaper.id}`} class="group block">
-              <article class={`relative p-8 rounded-2xl border transition-all duration-300 bg-zinc-900/30 hover:shadow-xl hover:shadow-athletic-brand-violet/5 overflow-hidden ${index === 0 ? 'border-athletic-brand-violet/30 hover:border-athletic-brand-violet/50' : 'border-zinc-800 hover:border-athletic-brand-violet/50'}`}>
-                {/* Featured accent for first whitepaper */}
-                {index === 0 && (
-                  <div class="absolute top-0 right-0 w-64 h-64 bg-athletic-brand-violet/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-                )}
-
-                <div class="relative flex flex-col md:flex-row md:items-start gap-6">
-                  {whitepaper.data.featureImage && (
-                    <div class="md:w-1/3 aspect-video md:aspect-[4/3] overflow-hidden rounded-xl flex-shrink-0 border border-zinc-800">
+              <article class={`relative overflow-hidden rounded-2xl border transition-all duration-300 hover:shadow-xl hover:shadow-athletic-brand-violet/10 ${index === 0 ? 'border-athletic-brand-violet/40 bg-gradient-to-br from-zinc-900/80 via-zinc-900/50 to-zinc-950' : 'border-zinc-800 bg-zinc-900/30 hover:border-athletic-brand-violet/50'}`}>
+                <div class="flex flex-col md:flex-row">
+                  {/* Image */}
+                  <div class="md:w-2/5 lg:w-1/3 relative">
+                    <div class="aspect-[16/9] md:aspect-auto md:absolute md:inset-0 overflow-hidden">
                       <img
-                        src={whitepaper.data.featureImage}
+                        src={imageUrl}
                         alt={whitepaper.data.title}
                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        loading="lazy"
+                        loading={index === 0 ? "eager" : "lazy"}
                       />
+                      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-zinc-900/90 hidden md:block" />
+                      <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent md:hidden" />
                     </div>
-                  )}
-                  <div class="flex-1">
-                    <div class="flex items-center gap-3 text-sm mb-3 flex-wrap">
+                    {/* Badges on image */}
+                    <div class="absolute top-4 left-4 flex items-center gap-2">
                       {isNew && (
-                        <span class="font-bold uppercase tracking-wider px-2 py-1 rounded-full bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange text-white text-[10px] animate-pulse">
+                        <span class="font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange text-white text-[10px] shadow-lg">
                           New
                         </span>
                       )}
-                      <span class="font-bold uppercase tracking-wider px-3 py-1 rounded-full text-xs bg-athletic-brand-violet/10 border border-athletic-brand-violet/30 text-athletic-brand-violet">
+                      {index === 0 && (
+                        <span class="font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-athletic-brand-violet/90 text-white text-[10px] shadow-lg backdrop-blur-sm">
+                          Latest
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div class="flex-1 p-6 md:p-8 flex flex-col justify-center">
+                    <div class="flex items-center gap-3 text-xs mb-3 flex-wrap">
+                      <span class="font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-athletic-brand-violet/10 border border-athletic-brand-violet/30 text-athletic-brand-violet">
                         Whitepaper
                       </span>
-                      <span class="text-zinc-700">•</span>
-                      <time class="text-zinc-500">
-                        {new Date(whitepaper.data.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-                      </time>
-                      <span class="text-zinc-700">•</span>
-                      <span class="flex items-center gap-1.5 text-zinc-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <span class="text-zinc-500">
+                        {new Date(whitepaper.data.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                      </span>
+                      <span class="text-zinc-600">•</span>
+                      <span class="flex items-center gap-1 text-zinc-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        {readingTime} min read
+                        {readingTime} min
                       </span>
                     </div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-white group-hover:text-athletic-court-orange transition-colors mb-3">
+
+                    <h2 class={`font-bold text-white group-hover:text-athletic-court-orange transition-colors mb-3 ${index === 0 ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'}`}>
                       {whitepaper.data.title}
                     </h2>
+
                     {whitepaper.data.excerpt && (
-                      <p class="text-zinc-400 leading-relaxed line-clamp-3">{whitepaper.data.excerpt}</p>
+                      <p class={`text-zinc-400 leading-relaxed mb-4 ${index === 0 ? 'line-clamp-3' : 'line-clamp-2'}`}>
+                        {whitepaper.data.excerpt}
+                      </p>
                     )}
-                    <div class="mt-4 inline-flex items-center gap-2 text-athletic-brand-violet group-hover:text-athletic-court-orange transition-colors font-semibold">
+
+                    <div class="inline-flex items-center gap-2 text-athletic-brand-violet group-hover:text-athletic-court-orange transition-colors font-semibold text-sm">
                       <span>Read whitepaper</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>
                     </div>
@@ -155,14 +169,12 @@ const collectionSchema = generateCollectionSchema(
     </section>
 
     <!-- Footer -->
-    <footer class="border-t border-zinc-800/50 py-12 mt-12">
-      <div class="max-w-6xl mx-auto px-4">
+    <footer class="border-t border-zinc-800/50 py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-          <div class="text-center md:text-left">
-            <p class="text-zinc-500 text-sm">
-              &copy; {new Date().getFullYear()} Nino Chavez. All rights reserved.
-            </p>
-          </div>
+          <p class="text-zinc-500 text-sm">
+            &copy; {new Date().getFullYear()} Nino Chavez. All rights reserved.
+          </p>
           <div class="flex items-center gap-6">
             <a href="/rss.xml" class="text-zinc-400 hover:text-white text-sm transition-colors">RSS Feed</a>
             <a href="/api/posts.json" class="text-zinc-400 hover:text-white text-sm transition-colors">API</a>
