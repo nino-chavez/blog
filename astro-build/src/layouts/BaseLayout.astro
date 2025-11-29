@@ -17,7 +17,7 @@ interface Props {
 const {
   title,
   description = 'Architecture, commerce, and the signals that matter. Exploring AI workflows, systems thinking, and leadership through practical experience.',
-  image = '/og_image.png',
+  image = '/blog/og_image.png',
   type = 'website',
   publishedTime,
   modifiedTime,
@@ -27,7 +27,7 @@ const {
   jsonLd,
 } = Astro.props;
 
-const siteUrl = 'https://blog.ninochavez.co';
+const siteUrl = 'https://ninochavez.co/blog';
 const fullImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
 const canonical = canonicalUrl || Astro.url.href.replace(/\/$/, '');
 const pageTitle = title === 'Signal Dispatch' ? title : `${title} - Signal Dispatch`;
@@ -41,7 +41,7 @@ const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="/favico.png" />
+    <link rel="icon" type="image/png" href="/blog/favico.png" />
 
     <!-- Primary Meta Tags -->
     <title>{pageTitle}</title>

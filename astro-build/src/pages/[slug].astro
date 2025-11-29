@@ -72,14 +72,14 @@ const relatedPosts = allPosts
     <!-- Header Navigation -->
     <header class="sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-lg border-b border-zinc-800/50 no-print">
       <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-2 text-white hover:text-athletic-court-orange transition-colors">
+        <a href="/blog" class="flex items-center gap-2 text-white hover:text-athletic-court-orange transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
           <span class="font-semibold">Signal Dispatch</span>
         </a>
         <div class="flex items-center gap-4">
-          <a href="/rss.xml" class="text-zinc-400 hover:text-white transition-colors" title="RSS Feed">
+          <a href="/blog/rss.xml" class="text-zinc-400 hover:text-white transition-colors" title="RSS Feed">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z" />
             </svg>
@@ -91,7 +91,7 @@ const relatedPosts = allPosts
     <div class="max-w-3xl mx-auto px-4 py-12">
       <!-- Back link -->
       <a
-        href="/"
+        href="/blog"
         class="group inline-flex items-center gap-2 text-zinc-400 hover:text-athletic-court-orange transition-all duration-150 font-medium mb-8 no-print"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -177,7 +177,7 @@ const relatedPosts = allPosts
           <div class="flex items-center gap-4">
             <span class="text-zinc-500 text-sm font-medium">Share:</span>
             <a
-              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.data.title)}&url=${encodeURIComponent(`https://blog.ninochavez.co/${post.id}`)}`}
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.data.title)}&url=${encodeURIComponent(`https://ninochavez.co/blog/${post.id}`)}`}
               target="_blank"
               rel="noopener noreferrer"
               class="text-zinc-400 hover:text-white transition-colors"
@@ -188,7 +188,7 @@ const relatedPosts = allPosts
               </svg>
             </a>
             <a
-              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://blog.ninochavez.co/${post.id}`)}`}
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://ninochavez.co/blog/${post.id}`)}`}
               target="_blank"
               rel="noopener noreferrer"
               class="text-zinc-400 hover:text-[#0A66C2] transition-colors"
@@ -199,7 +199,7 @@ const relatedPosts = allPosts
               </svg>
             </a>
             <button
-              onclick={`navigator.clipboard.writeText('https://blog.ninochavez.co/${post.id}'); this.textContent = 'Copied!'`}
+              onclick={`navigator.clipboard.writeText('https://ninochavez.co/blog/${post.id}'); this.textContent = 'Copied!'`}
               class="text-zinc-400 hover:text-athletic-brand-violet transition-colors text-sm"
               title="Copy link"
             >
@@ -247,7 +247,7 @@ const relatedPosts = allPosts
           <h2 class="text-2xl font-bold text-white mb-8">More in {post.data.category}</h2>
           <div class="grid gap-6 md:grid-cols-3">
             {relatedPosts.map((related) => (
-              <a href={`/${related.id}`} class="group block">
+              <a href={`/blog/${related.id}`} class="group block">
                 <article class="h-full p-5 rounded-xl border border-zinc-800 hover:border-athletic-brand-violet/50 transition-all duration-200 bg-zinc-900/30 hover:bg-zinc-900/50 hover:shadow-lg hover:shadow-athletic-brand-violet/5 hover:-translate-y-1">
                   <div class="space-y-3">
                     <time class="text-xs text-zinc-500">
@@ -277,9 +277,9 @@ const relatedPosts = allPosts
           &copy; {new Date().getFullYear()} Nino Chavez. All rights reserved.
         </p>
         <div class="flex justify-center gap-4 mt-4">
-          <a href="/rss.xml" class="text-zinc-400 hover:text-white text-sm transition-colors">RSS</a>
+          <a href="/blog/rss.xml" class="text-zinc-400 hover:text-white text-sm transition-colors">RSS</a>
           <span class="text-zinc-700">•</span>
-          <a href="/api/posts.json" class="text-zinc-400 hover:text-white text-sm transition-colors">API</a>
+          <a href="/blog/api/posts.json" class="text-zinc-400 hover:text-white text-sm transition-colors">API</a>
           <span class="text-zinc-700">•</span>
           <a href="https://ninochavez.co" class="text-zinc-400 hover:text-white text-sm transition-colors">ninochavez.co</a>
         </div>

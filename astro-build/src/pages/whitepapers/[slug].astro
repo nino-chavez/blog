@@ -50,14 +50,14 @@ const readingTime = Math.ceil(wordCount / 200);
     <!-- Header Navigation -->
     <header class="sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-lg border-b border-zinc-800/50 no-print">
       <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-2 text-white hover:text-athletic-court-orange transition-colors">
+        <a href="/blog" class="flex items-center gap-2 text-white hover:text-athletic-court-orange transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
           <span class="font-semibold">Signal Dispatch</span>
         </a>
         <div class="flex items-center gap-4">
-          <a href="/whitepapers" class="text-zinc-400 hover:text-white text-sm transition-colors">All Whitepapers</a>
+          <a href="/blog/whitepapers" class="text-zinc-400 hover:text-white text-sm transition-colors">All Whitepapers</a>
         </div>
       </nav>
     </header>
@@ -65,7 +65,7 @@ const readingTime = Math.ceil(wordCount / 200);
     <div class="max-w-4xl mx-auto px-4 py-12">
       <!-- Back link -->
       <a
-        href="/whitepapers"
+        href="/blog/whitepapers"
         class="group inline-flex items-center gap-2 text-zinc-400 hover:text-athletic-court-orange transition-all duration-150 font-medium mb-8 no-print"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -145,7 +145,7 @@ const readingTime = Math.ceil(wordCount / 200);
           <div class="flex items-center gap-4">
             <span class="text-zinc-500 text-sm font-medium">Share:</span>
             <a
-              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(whitepaper.data.title)}&url=${encodeURIComponent(`https://blog.ninochavez.co/whitepapers/${whitepaper.id}`)}`}
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(whitepaper.data.title)}&url=${encodeURIComponent(`https://ninochavez.co/blog/whitepapers/${whitepaper.id}`)}`}
               target="_blank"
               rel="noopener noreferrer"
               class="text-zinc-400 hover:text-white transition-colors"
@@ -156,7 +156,7 @@ const readingTime = Math.ceil(wordCount / 200);
               </svg>
             </a>
             <a
-              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://blog.ninochavez.co/whitepapers/${whitepaper.id}`)}`}
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://ninochavez.co/blog/whitepapers/${whitepaper.id}`)}`}
               target="_blank"
               rel="noopener noreferrer"
               class="text-zinc-400 hover:text-[#0A66C2] transition-colors"
@@ -167,7 +167,7 @@ const readingTime = Math.ceil(wordCount / 200);
               </svg>
             </a>
             <button
-              onclick={`navigator.clipboard.writeText('https://blog.ninochavez.co/whitepapers/${whitepaper.id}'); this.textContent = 'Copied!'`}
+              onclick={`navigator.clipboard.writeText('https://ninochavez.co/blog/whitepapers/${whitepaper.id}'); this.textContent = 'Copied!'`}
               class="text-zinc-400 hover:text-athletic-brand-violet transition-colors text-sm"
               title="Copy link"
             >
@@ -185,9 +185,9 @@ const readingTime = Math.ceil(wordCount / 200);
           &copy; {new Date().getFullYear()} Nino Chavez. All rights reserved.
         </p>
         <div class="flex justify-center gap-4 mt-4">
-          <a href="/" class="text-zinc-400 hover:text-white text-sm transition-colors">Blog</a>
+          <a href="/blog" class="text-zinc-400 hover:text-white text-sm transition-colors">Blog</a>
           <span class="text-zinc-700">•</span>
-          <a href="/whitepapers" class="text-zinc-400 hover:text-white text-sm transition-colors">Whitepapers</a>
+          <a href="/blog/whitepapers" class="text-zinc-400 hover:text-white text-sm transition-colors">Whitepapers</a>
           <span class="text-zinc-700">•</span>
           <a href="https://ninochavez.co" class="text-zinc-400 hover:text-white text-sm transition-colors">ninochavez.co</a>
         </div>
