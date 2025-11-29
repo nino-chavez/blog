@@ -8,11 +8,15 @@ import rehypePrettyCode from "rehype-pretty-code";
 import remarkEmoji from "remark-emoji";
 import remarkGfm from "remark-gfm";
 
+import vercel from "@astrojs/vercel/server";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://blog.ninochavez.co",
   base: "/blog",
   outDir: "./dist/blog",
+  output: "server",
+  adapter: vercel(),
 
   integrations: [
     mdx({
@@ -48,7 +52,6 @@ export default defineConfig({
     }),
   ],
 
-  output: "static",
   trailingSlash: "never",
 
   build: {
