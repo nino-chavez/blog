@@ -8,7 +8,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import remarkEmoji from "remark-emoji";
 import remarkGfm from "remark-gfm";
 
-import vercel from "@astrojs/vercel/server";
+import vercel from "@astrojs/vercel";
 
 // https://astro.build/config
 export default defineConfig({
