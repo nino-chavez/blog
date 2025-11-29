@@ -99,17 +99,6 @@
 
   "cleanUrls": true,
   "trailingSlash": false,
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "blog.ninochavez.co"
-        }
-      ],
-      "destination": "https://ninochavez.co/blog/$1",
-      "permanent": true
-    }
-  ]
+  "cleanUrls": true,
+  "trailingSlash": false
 }
