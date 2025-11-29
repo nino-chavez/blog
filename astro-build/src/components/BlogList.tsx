@@ -94,9 +94,9 @@ const getPostImage = (post: Post): string => {
       .split("")
       .reduce((acc, char) => acc + char.charCodeAt(0), 0);
     const variant = (hash % variants) + 1;
-    return `/generated/categories/${slug}-${variant}.webp`;
+    return `/blog/generated/categories/${slug}-${variant}.webp`;
   }
-  return "/generated/categories/ai-automation-1.webp";
+  return "/blog/generated/categories/ai-automation-1.webp";
 };
 
 // Fallback image handler
