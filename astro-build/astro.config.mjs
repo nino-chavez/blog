@@ -12,6 +12,7 @@ import remarkGfm from "remark-gfm";
 export default defineConfig({
   site: "https://blog.ninochavez.co",
   base: "/blog",
+  outDir: "./dist/blog",
 
   integrations: [
     mdx({
