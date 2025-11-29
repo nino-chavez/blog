@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "cd astro-build && npm install && npm run build",
-  "outputDirectory": "astro-build/dist",
+
   "framework": "astro",
   "installCommand": "cd astro-build && npm install",
   "headers": [
@@ -97,8 +97,6 @@
     }
   ],
 
-  "cleanUrls": true,
-  "trailingSlash": false,
   "cleanUrls": true,
   "trailingSlash": false
 }
