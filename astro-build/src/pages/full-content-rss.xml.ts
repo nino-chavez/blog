@@ -15,8 +15,8 @@ export async function GET(context: APIContext) {
     return `
     <item>
       <title><![CDATA[${post.data.title}]]></title>
-      <link>https://blog.ninochavez.co/${post.id}</link>
-      <guid isPermaLink="true">https://blog.ninochavez.co/${post.id}</guid>
+      <link>https://ninochavez.co/blog/${post.id}</link>
+      <guid isPermaLink="true">https://ninochavez.co/blog/${post.id}</guid>
       <pubDate>${new Date(post.data.publishedAt).toUTCString()}</pubDate>
       <description><![CDATA[${post.data.excerpt}]]></description>
       <content:encoded><![CDATA[${fullContent}]]></content:encoded>
@@ -34,8 +34,8 @@ export async function GET(context: APIContext) {
   <channel>
     <title>Signal Dispatch - Full Content</title>
     <description>Architecture, commerce, and the signals that matter. Full article content for cross-posting and syndication.</description>
-    <link>https://blog.ninochavez.co</link>
-    <atom:link href="https://blog.ninochavez.co/full-content-rss.xml" rel="self" type="application/rss+xml"/>
+    <link>https://ninochavez.co/blog</link>
+    <atom:link href="https://ninochavez.co/blog/full-content-rss.xml" rel="self" type="application/rss+xml"/>
     <language>en-us</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <managingEditor>nino@ninochavez.co (Nino Chavez)</managingEditor>
