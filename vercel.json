@@ -3,6 +3,13 @@
   "buildCommand": "cd astro-build && npm run build && cp -r .vercel/output ../.vercel/output",
   "installCommand": "cd astro-build && npm install",
   "framework": "astro",
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://ninochavez.co/blog",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
