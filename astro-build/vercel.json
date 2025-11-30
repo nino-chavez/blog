@@ -1,16 +1,39 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
   "framework": "astro",
-  "rewrites": [
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://ninochavez.co/blog",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "blog.ninochavez.co"
+        }
+      ]
+    },
     {
       "source": "/blog",
-      "destination": "/"
+      "destination": "https://ninochavez.co/blog",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "blog.ninochavez.co"
+        }
+      ]
     },
     {
       "source": "/blog/:path*",
-      "destination": "/:path*"
+      "destination": "https://ninochavez.co/blog/:path*",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "blog.ninochavez.co"
+        }
+      ]
     }
   ],
   "headers": [
@@ -28,6 +51,14 @@
         {
           "key": "X-XSS-Protection",
           "value": "1; mode=block"
+        },
+        {
+          "key": "Content-signal",
+          "value": "search=yes, ai-input=yes, ai-train=yes"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow"
         }
       ]
     },
