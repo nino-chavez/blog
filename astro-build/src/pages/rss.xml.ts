@@ -1,8 +1,6 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
-import type { APIContext } from 'astro';
-
-export async function GET(context: APIContext) {
+export async function GET() {
   const posts = await getCollection('blog', ({ data }) => data.status !== 'draft');
 
   const sortedPosts = posts.sort(
@@ -12,12 +10,12 @@ export async function GET(context: APIContext) {
   return rss({
     title: 'Signal Dispatch',
     description: 'Architecture, commerce, and the signals that matter. Exploring AI workflows, systems thinking, and leadership through practical experience.',
-    site: context.site!,
+    site: 'https://ninochavez.co',
     items: sortedPosts.map((post) => ({
       title: post.data.title,
       pubDate: new Date(post.data.publishedAt),
       description: post.data.excerpt,
-      link: `/${post.id}`,
+      link: `/blog/${post.id}`,
       categories: post.data.tags || [],
       author: post.data.author || 'Nino Chavez',
     })),
@@ -26,7 +24,7 @@ export async function GET(context: APIContext) {
       <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
       <managingEditor>nino@ninochavez.co (Nino Chavez)</managingEditor>
       <webMaster>nino@ninochavez.co (Nino Chavez)</webMaster>
-      <atom:link href="https://blog.ninochavez.co/rss.xml" rel="self" type="application/rss+xml"/>
+      <atom:link href="https://ninochavez.co/blog/rss.xml" rel="self" type="application/rss+xml"/>
     `,
     xmlns: {
       atom: 'http://www.w3.org/2005/Atom',
