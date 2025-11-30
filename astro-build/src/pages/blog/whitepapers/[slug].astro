@@ -4,15 +4,15 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { generateArticleSchema, generateBreadcrumbSchema } from '../../../utils/schema';
 import ReadingProgress from '../../../components/ReadingProgress';
 
-export async function getStaticPaths() {
-  const whitepapers = await getCollection('whitepapers');
-  return whitepapers.map((whitepaper) => ({
-    params: { slug: whitepaper.id },
-    props: { whitepaper },
-  }));
+// In SSR mode, get the whitepaper from the slug parameter
+const { slug } = Astro.params;
+const whitepapers = await getCollection('whitepapers');
+const whitepaper = whitepapers.find((w) => w.id === slug);
+
+if (!whitepaper) {
+  return Astro.redirect('/blog/whitepapers');
 }
 
-const { whitepaper } = Astro.props;
 const { Content } = await render(whitepaper);
 
 // Generate JSON-LD schemas (reuse article schema)

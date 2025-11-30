@@ -4,17 +4,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { generateArticleSchema, generateBreadcrumbSchema } from '../../utils/schema';
 import ReadingProgress from '../../components/ReadingProgress';
 
-export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts
-    .filter((post) => post.data.status !== 'draft')
-    .map((post) => ({
-      params: { slug: post.id },
-      props: { post },
-    }));
+// In SSR mode, get the post from the slug parameter
+const { slug } = Astro.params;
+const posts = await getCollection('blog');
+const post = posts.find((p) => p.id === slug && p.data.status !== 'draft');
+
+if (!post) {
+  return Astro.redirect('/blog');
 }
 
-const { post } = Astro.props;
 const { Content } = await render(post);
 
 // Generate JSON-LD schemas
