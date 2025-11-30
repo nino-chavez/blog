@@ -3,6 +3,16 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "astro",
+  "rewrites": [
+    {
+      "source": "/blog",
+      "destination": "/"
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "/:path*"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
