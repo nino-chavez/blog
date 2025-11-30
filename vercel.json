@@ -5,6 +5,16 @@
 
   "framework": "astro",
   "installCommand": "cd astro-build && npm install",
+  "rewrites": [
+    {
+      "source": "/blog",
+      "destination": "/"
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "/:path*"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
