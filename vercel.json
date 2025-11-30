@@ -1,9 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "cd astro-build && npm install && npm run build && node scripts/inject-blog-routes.mjs",
-  "framework": null,
+  "buildCommand": "cd astro-build && npm install && npm run build",
+  "framework": "astro",
   "installCommand": "cd astro-build && npm install",
-  "outputDirectory": "astro-build/.vercel/output",
   "rewrites": [
     {
       "source": "/blog",
