@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "cd astro-build && npm install && npm run build && node -e \"const fs=require('fs'); const c=JSON.parse(fs.readFileSync('.vercel/output/config.json')); c.routes.unshift({src:'^/blog$',dest:'/'},{src:'^/blog/(.*)$',dest:'/$1'}); fs.writeFileSync('.vercel/output/config.json',JSON.stringify(c,null,2));\"",
+  "buildCommand": "cd astro-build && npm install && npm run build && node scripts/inject-blog-routes.mjs",
   "framework": null,
   "installCommand": "cd astro-build && npm install",
   "outputDirectory": "astro-build/.vercel/output",
