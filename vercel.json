@@ -14,28 +14,6 @@
           "value": "blog.ninochavez.co"
         }
       ]
-    },
-    {
-      "source": "/blog",
-      "destination": "https://ninochavez.co/blog",
-      "permanent": true,
-      "has": [
-        {
-          "type": "host",
-          "value": "blog.ninochavez.co"
-        }
-      ]
-    },
-    {
-      "source": "/blog/:path*",
-      "destination": "https://ninochavez.co/blog/:path*",
-      "permanent": true,
-      "has": [
-        {
-          "type": "host",
-          "value": "blog.ninochavez.co"
-        }
-      ]
     }
   ],
   "headers": [
