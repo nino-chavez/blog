@@ -1,8 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { generateArticleSchema, generateBreadcrumbSchema } from '../utils/schema';
-import ReadingProgress from '../components/ReadingProgress';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { generateArticleSchema, generateBreadcrumbSchema } from '../../utils/schema';
+import ReadingProgress from '../../components/ReadingProgress';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -79,7 +79,7 @@ const relatedPosts = allPosts
           <span class="font-semibold">Signal Dispatch</span>
         </a>
         <div class="flex items-center gap-4">
-          <a href="/blog/rss.xml" class="text-zinc-400 hover:text-white transition-colors" title="RSS Feed">
+          <a href="/rss.xml" class="text-zinc-400 hover:text-white transition-colors" title="RSS Feed">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z" />
             </svg>
@@ -277,9 +277,9 @@ const relatedPosts = allPosts
           &copy; {new Date().getFullYear()} Nino Chavez. All rights reserved.
         </p>
         <div class="flex justify-center gap-4 mt-4">
-          <a href="/blog/rss.xml" class="text-zinc-400 hover:text-white text-sm transition-colors">RSS</a>
+          <a href="/rss.xml" class="text-zinc-400 hover:text-white text-sm transition-colors">RSS</a>
           <span class="text-zinc-700">•</span>
-          <a href="/blog/api/posts.json" class="text-zinc-400 hover:text-white text-sm transition-colors">API</a>
+          <a href="/api/posts.json" class="text-zinc-400 hover:text-white text-sm transition-colors">API</a>
           <span class="text-zinc-700">•</span>
           <a href="https://ninochavez.co" class="text-zinc-400 hover:text-white text-sm transition-colors">ninochavez.co</a>
         </div>

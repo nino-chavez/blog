@@ -3,14 +3,39 @@
   "buildCommand": "cd astro-build && npm install && npm run build",
   "framework": "astro",
   "installCommand": "cd astro-build && npm install",
-  "rewrites": [
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://ninochavez.co/blog",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "blog.ninochavez.co"
+        }
+      ]
+    },
     {
       "source": "/blog",
-      "destination": "/"
+      "destination": "https://ninochavez.co/blog",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "blog.ninochavez.co"
+        }
+      ]
     },
     {
       "source": "/blog/:path*",
-      "destination": "/:path*"
+      "destination": "https://ninochavez.co/blog/:path*",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "blog.ninochavez.co"
+        }
+      ]
     }
   ],
   "headers": [
