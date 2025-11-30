@@ -13,8 +13,6 @@ import vercel from "@astrojs/vercel";
 // https://astro.build/config
 export default defineConfig({
   site: "https://blog.ninochavez.co",
-  base: "/blog",
-  outDir: "./dist/blog",
   output: "server",
   adapter: vercel(),
 

@@ -1,8 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { generateArticleSchema, generateBreadcrumbSchema } from '../../utils/schema';
-import ReadingProgress from '../../components/ReadingProgress';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { generateArticleSchema, generateBreadcrumbSchema } from '../../../utils/schema';
+import ReadingProgress from '../../../components/ReadingProgress';
 
 export async function getStaticPaths() {
   const whitepapers = await getCollection('whitepapers');

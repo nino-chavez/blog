@@ -1,8 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import BlogList from '../components/BlogList';
-import { generateWebsiteSchema, generateBlogSchema, generatePersonSchema } from '../utils/schema';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogList from '../../components/BlogList';
+import { generateWebsiteSchema, generateBlogSchema, generatePersonSchema } from '../../utils/schema';
 
 // Get all published posts sorted by date
 const posts = await getCollection('blog', ({ data }) => data.status !== 'draft');
@@ -55,7 +55,7 @@ const personSchema = generatePersonSchema();
             <a href="/blog/whitepapers" class="text-sm text-zinc-400 hover:text-white transition-colors">
               Whitepapers
             </a>
-            <a href="/blog/rss.xml" class="text-zinc-400 hover:text-white transition-colors" title="RSS Feed">
+            <a href="/rss.xml" class="text-zinc-400 hover:text-white transition-colors" title="RSS Feed">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z" />
               </svg>
@@ -85,10 +85,10 @@ const personSchema = generatePersonSchema();
             </p>
           </div>
           <div class="flex items-center gap-6">
-            <a href="/blog/rss.xml" class="text-zinc-400 hover:text-white text-sm transition-colors">RSS Feed</a>
-            <a href="/blog/full-content-rss.xml" class="text-zinc-400 hover:text-white text-sm transition-colors">Full RSS</a>
-            <a href="/blog/api/posts.json" class="text-zinc-400 hover:text-white text-sm transition-colors">API</a>
-            <a href="/blog/llms.txt" class="text-zinc-400 hover:text-white text-sm transition-colors">llms.txt</a>
+            <a href="/rss.xml" class="text-zinc-400 hover:text-white text-sm transition-colors">RSS Feed</a>
+            <a href="/full-content-rss.xml" class="text-zinc-400 hover:text-white text-sm transition-colors">Full RSS</a>
+            <a href="/api/posts.json" class="text-zinc-400 hover:text-white text-sm transition-colors">API</a>
+            <a href="/llms.txt" class="text-zinc-400 hover:text-white text-sm transition-colors">llms.txt</a>
             <a href="https://ninochavez.co" class="text-zinc-400 hover:text-white text-sm transition-colors">ninochavez.co</a>
           </div>
         </div>
