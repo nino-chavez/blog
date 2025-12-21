@@ -1,100 +1,65 @@
 ---
-title: "When Control Matters: Behind the Decision to Build Feature Toggles Into the Bracket App"
+title: "Why I Built Feature Toggles Into the Bracket App"
 publishedAt: "2025-07-30T02:24:00.000Z"
 author: "Nino Chavez"
-excerpt: "Sometimes the feature isn’t for the user."
+excerpt: "Sometimes the feature isn't for the user. It's for the system operators—the ones who have to keep the app online when the fire starts."
 category: "AI & Automation"
-tags: []
+tags: ["architecture", "ai-coding"]
 featured: false
 source: "linkedin"
 linkedinUrl: "https://www.linkedin.com/pulse/when-control-matters-behind-decision-build-feature-toggles-chavez-gmttc"
 ---
 
-Sometimes the feature isn’t for the user.
+Sometimes the feature isn't for the user.
 
-It’s for us — the **system operators**, the maintainers, the ones who have to keep the app online when the fire starts. Or steer quietly into a beta when the paint’s not dry yet.
+It's for us—the system operators, the maintainers, the ones who have to keep the app online when the fire starts. Or steer quietly into a beta when the paint's not dry yet.
 
 This is one of those features.
 
-* * *
+**The Instinct**
 
-### 💡 The Instinct
+I've been moving fast with the bracket app—too fast, maybe. New features like theme management, demo mode, admin controls—they all assume the world is working exactly as planned.
 
-We’ve been moving fast with the bracket app — too fast, maybe. New features like theme management, demo mode, admin controls — they all assume the world is working exactly as planned.
+But what happens when something breaks? Or when I want to test a feature in production, but only for a few users?
 
-But what happens when something breaks? Or when we want to test a feature in production, but only for a few users?
+That's where feature toggles come in.
 
-That’s where **feature toggles** come in.
-
-Not just a kill switch. A **framework for conditional execution**, built into the bones of the system.
+Not just a kill switch. A framework for conditional execution, built into the bones of the system.
 
 I jotted down the first five immediately:
 
--   Disable new registrations
-    
--   Disable admin site access
-    
--   Disable tournament creation
-    
--   Disable demo mode
-    
--   Disable custom theme creation
-    
+- Disable new registrations
+- Disable admin site access
+- Disable tournament creation
+- Disable demo mode
+- Disable custom theme creation
 
 No whiteboard. No backlog grooming. The need was obvious.
 
-* * *
+**Design Goals**
 
-### 🧠 Design Goals
+This wasn't going to be a messy if (isProd) hack job. I needed:
 
-This wasn’t going to be a messy if (isProd) hack job. We needed:
-
--   A **Supabase-backed toggle system** with environment and role filtering
-    
--   A way to **cache and evaluate toggles** client-side
-    
--   A hook like useFeatureToggle() to keep React declarative
-    
--   No UI yet — CLI or Supabase-first is fine
-    
--   RLS enforcement so only super\_admin can flip switches
-    
+- A Supabase-backed toggle system with environment and role filtering
+- A way to cache and evaluate toggles client-side
+- A hook like useFeatureToggle() to keep React declarative
+- No UI yet—CLI or Supabase-first is fine
+- RLS enforcement so only super_admin can flip switches
 
 With that, I dropped the prompt to Kilo.
 
-* * *
+**Laying the Foundation**
 
-### 🤖 The Prompt to Kilo
-
-Here’s what I gave our AI teammate:
-
-* * *
-
-### 🧱 Laying the Foundation
-
-This feature isn’t just about control. It’s about **agency** — for the system itself and for the operators behind it.
+This feature isn't just about control. It's about agency—for the system itself and for the operators behind it.
 
 To test safely. To react fast. To gatekeep with intention.
 
-We’re not just building apps. We’re building the **switches** that run them.
+I'm not just building apps. I'm building the switches that run them.
 
-* * *
+**What's Next**
 
-### 🛠 What’s Next
+Once Kilo's plan lands, I'll review for alignment, add toggle enforcement + caching, wire them into routes, actions, and guards, and ship them quietly—off by default.
 
-Kilo’s plan is landing next. Once it’s in, we’ll:
+And from there? Maybe per-tournament experiments. Maybe staged rollouts by role. If the bracket app is turning into infra, this is the control panel.
 
--   Review for alignment
-    
--   Add toggle enforcement + caching
-    
--   Wire them into routes, actions, and guards
-    
--   Ship them quietly — off by default
-    
-
-And from there? We scale it. Maybe per-tournament experiments. Maybe staged rollouts by role. If the bracket app is turning into **infra**, this is our **control panel**.
-
-* * *
-
-Want to suggest a toggle or peek at the system once it’s live? Drop me a line. Operators welcome.
+I'm still figuring out the right granularity—how many toggles are too many, and at what point the system becomes harder to reason about than the features it's protecting. But the core idea feels right: operational control shouldn't be an afterthought.

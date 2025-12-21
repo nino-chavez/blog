@@ -1,80 +1,63 @@
 ---
-title: "The Next Compiler Is Semantic"
+title: "When Intent Becomes the Source Code"
 publishedAt: "2025-08-02T20:16:00.000Z"
 author: "Nino Chavez"
-excerpt: "🚨 I FOUND THE COMPILER."
+excerpt: "The past two weeks of AI engineering forced a shift I didn't expect—away from writing code and toward describing systems semantically."
 category: "AI & Automation"
-tags: []
+tags: ["architecture", "ai-coding"]
 featured: false
 source: "linkedin"
 linkedinUrl: "https://www.linkedin.com/pulse/next-compiler-semantic-nino-chavez-vulyc"
 ---
 
-🚨 I FOUND THE COMPILER.
+I found the compiler. Not the one that turns .ts into .js. The one that turns intent into software.
 
-Not the one that turns .ts into .js. The one that turns **intent into software**.
+The past two weeks of hands-on AI engineering forced a shift I didn't expect—away from writing code and toward describing systems semantically. And the deeper I went, the clearer it became:
 
-The past two weeks of hands-on AI engineering forced a shift I didn’t expect — away from writing code and toward **describing systems semantically**. And the deeper I went, the clearer it became:
+We're not building apps anymore. We're building compilers for our ideas.
 
-> We’re not building *apps* anymore. We’re building *compilers* for our ideas.
+**The Starting Point**
 
-Let me explain.
+Like many teams, I started with Copilot-style assistance. Helpful, sure—but fundamentally just faster typing.
 
-—
-
-🧱 Like many teams, we started with Copilot-style assistance. Helpful, sure — but fundamentally just faster typing.
-
-Then we layered in Kilo and Lovable. Now we could describe a bracket system, define a schema, and scaffold UIs + edge functions from that shared model. Progress.
+Then I layered in Kilo and Lovable. Now I could describe a bracket system, define a schema, and scaffold UIs + edge functions from that shared model. Progress.
 
 But something was still missing.
 
-—
+**The Click**
 
-🔍 Then it clicked.
+Then it clicked. The real unlock wasn't "better codegen." It was treating the spec as the source of truth—not the code.
 
-The real unlock wasn’t “better codegen.” It was **treating the spec as the source of truth** — not the code.
+I stopped tweaking components and started writing rules:
 
-We stopped tweaking components and started writing *rules*:
+- 3-team pools must always play 3 sets
+- Points determine ranking
+- Head-to-head is first tiebreak
+- Match syncs should never overwrite confirmed states
+- Themes are DB-driven and WCAG validated by default
 
--   3-team pools must always play 3 sets
-    
--   Points determine ranking
-    
--   Head-to-head is first tiebreak
-    
--   Match syncs should never overwrite confirmed states
-    
--   Themes are DB-driven and WCAG validated by default
-    
+These weren't just config files. They were semantic constraints. And once those existed, everything else could be compiled: Supabase schema, edge function orchestration, RLS policies, UI variants, test cases, and real-time sync validation.
 
-These weren’t just config files. They were **semantic constraints**. And once those existed, everything else could be *compiled*:
+**The Twist**
 
-✅ Supabase schema ✅ Edge function orchestration ✅ RLS policies ✅ UI variants ✅ Test cases ✅ Real-time sync validation
+But here's the twist: when something broke, the bug wasn't in the code. It was in the intent. Either I didn't express it clearly enough—or the AI misread my spec.
 
-—
+So I stopped debugging the app. I started debugging the model of the system.
 
-⚠️ But here’s the twist: when something broke, the bug wasn’t in the code. It was in the **intent**. Either we didn’t express it clearly enough — or the AI misread our spec.
+That's where I've landed.
 
-So we stopped debugging the app. We started debugging the **model of the system**.
+**What I'm Building Now**
 
-That’s where I’ve landed.
+What I'm building now is closer to an Intent Compiler than a frontend. It turns semantic specs into full-stack systems—deterministically.
 
-—
+It's reliable. Composable. Auditable. It aligns with the real work: defining what matters and letting the system figure out the rest.
 
-🛠 What we’re building now is closer to an **Intent Compiler** than a frontend. It turns semantic specs into full-stack systems — deterministically.
+This is the next abstraction layer. It's how AI-native software actually gets written.
 
-It’s reliable. Composable. Auditable. It aligns with the real work: defining what matters and letting the system figure out the rest.
+And once you see it, you can't go back.
 
-This is the next abstraction layer. It’s how AI-native software actually gets written.
+**Open Questions**
 
-And once you see it, you can’t go back.
+I'm still figuring out the boundaries. How do you handle escape hatches for manual code? How do you debug AI reasoning when the spec is correct but the output isn't? How do you build trust in AI-generated systems?
 
-—
-
-If you’re deep in AI engineering or building apps with AI-first toolchains (Kilo, Lovable, etc), I’d love to hear how you’re approaching:
-
-📦 Semantic specifications 🔄 Intent-based diffs 🧩 Escape hatches for manual code 🔍 Tools for debugging AI reasoning 🛡 Trust + safety in AI-generated systems
-
-Let’s compare notes. The compiler is already here — we’re just learning how to write for it.
-
-***Up Next:*** I'll be drafting a more formal keynote style call to action for the consulting industry - keep an eye on [blog.nino.photos](http://blog.nino.photos) for that...
+The compiler is already here—I'm just learning how to write for it.

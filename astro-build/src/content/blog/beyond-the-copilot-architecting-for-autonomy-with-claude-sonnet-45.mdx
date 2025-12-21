@@ -1,41 +1,45 @@
 ---
-title: "Beyond the Copilot: Architecting for Autonomy with Claude Sonnet 4.5"
+title: "From Asking AI Questions to Giving It Directives"
 publishedAt: "2025-09-30T12:51:00.000Z"
 author: "Nino Chavez"
-excerpt: "The age of the simple AI prompt is over. As models like Claude Sonnet 4.5 become more powerful, our role isn't just to ask questions—it's to architect a system for the AI to follow. Our prompts..."
+excerpt: "The shift from prompting to architecting—and why more powerful models demand a different kind of input."
 category: "AI & Automation"
-tags: ["architecture","testing"]
+tags: ["architecture", "ai-coding"]
 featured: false
 source: "linkedin"
 linkedinUrl: "https://www.linkedin.com/pulse/beyond-copilot-architecting-autonomy-claude-sonnet-45-nino-chavez-k0djc"
 ---
 
-The age of the simple AI prompt is over. As models like Claude Sonnet 4.5 become more powerful, our role isn't just to ask questions—it's to architect a system for the AI to follow. Our prompts must become directives.
+Something shifted when I started working with Claude Sonnet 4.5.
 
-* * *
+The way I'd been prompting—asking questions, waiting for opinions, iterating through clarifications—started to feel wrong. Not broken, exactly. Just... undersized for what the model could do.
 
-### The Old Approach: The Question
+**The Old Approach**
 
-This is a good-faith prompt that asks the AI for an opinion. It's reactive, not proactive.
+Here's how I used to prompt:
 
-***Original Prompt:***
+> "Analyze the config, docs, and source code. Given the new version of Claude Code and Sonnet 4.5, do we need to revise any workflows? Do we need to update the agent-os instructions? Is there anything I'm not thinking of?"
 
-analyze the config, docs, and source code. also use our conversation history. given the new version of claude code we are now on, and the new sonnet4.5 model, do we need to revise any workflows in our development approach? do we need to update or improve upon the agent-os instructions? do we need to define additional or better subagents specific to our ways of working and/or our application? is there any thing else along these lines i'm not thinking of to improve the clarity and efficiency of our development experience?
+It's a good-faith question. Reactive. Exploratory. Asking for an opinion.
 
-* * *
+**What Changed**
 
-### The New Approach: The Directive
+The new models can handle long, autonomous sessions. They can manage complex, multi-phase tasks. They can hold context across entire codebases. So why was I still treating them like a junior dev waiting for direction?
 
-This prompt doesn't ask for an opinion; it commands a comprehensive, multi-phase project. It leverages the new model's ability to handle long, autonomous sessions and manage complex tasks by giving it a clear mission and guardrails. It's a blueprint for action.
+I tried something different. Instead of asking a question, I gave a directive:
 
-***Enhanced Prompt:***
+> "You are the lead architect for an autonomous development agent. Your primary objective is to redesign our workflow to leverage Sonnet 4.5's long-context, agentic features. Your mission: perform a comprehensive systems analysis and provide a strategic plan."
 
-You are the lead architect for an autonomous development agent. Your primary objective is to redesign our workflow to leverage the new capabilities of Claude Code, specifically the Sonnet 4.5 model and its long-context, agentic features. Your mission is to perform a comprehensive systems analysis and provide a strategic plan.
+Then I defined phases. Phase 1: Read the entire codebase, revise the workflow, update instructions, architect specialized subagents. Phase 2: Evaluate risks, define oversight processes for autonomous sessions.
 
-Phase 1: Foundational Analysis & System Design
+Not a question. A blueprint for action.
 
-1\. **Analyze System:** Read our entire codebase, configuration, and Agent-OS instructions. 2. **Revise Workflow:** Propose a new, high-level workflow that shifts our focus from line-by-line coding to high-level intent engineering and system orchestration. 3. **Update Instructions:** Enhance our Agent-OS instructions to utilize Sonnet 4.5's new features, including rules for memory and context management. 4. **Architect Subagents:** Propose a new architecture for specialized subagents to handle specific tasks within our application's domain.
+**The Difference**
 
-Phase 2: Evaluation & Refinement
+When I ask questions, I get opinions. When I give directives, I get execution plans. The AI doesn't wait for me to clarify—it moves.
 
-1\. **Evaluate Risks:** Define how we will ensure increased AI velocity doesn't create new integration or testing bottlenecks. 2. **Define Oversight:** Articulate the key risks of this new approach and the process for human review of autonomous sessions.
+I'm still figuring out where the boundaries are. How much autonomy is too much? When does "directive" become "abdicating judgment"? But the shift from prompting to architecting feels like the right direction.
+
+The prompts aren't getting simpler as the models get smarter. They're getting more structural. Less "what do you think?" More "here's the mission, here are the constraints, go."
+
+That's the transition I'm in the middle of, anyway. Ask me again in six months.

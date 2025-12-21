@@ -1,141 +1,53 @@
 ---
-title: "Fix It Once, Prevent It Forever: How I Made a Dropdown Bug Impossible to Reintroduce"
+title: "How I Made a Cache Bug Impossible to Reintroduce"
 publishedAt: "2025-07-29T05:16:00.000Z"
 author: "Nino Chavez"
-excerpt: "This one started like a lot of bugs do: Dropdowns weren’t updating after a bulk import. The data was there, the page reloaded, but the dropdowns stayed stale. Console warnings, frustrated..."
+excerpt: "A dropdown bug became a lesson in building automated guardrails that prevent architectural drift—especially when AI is generating your components."
 category: "AI & Automation"
-tags: ["architecture"]
+tags: ["architecture", "ai-coding"]
 featured: false
 source: "linkedin"
 linkedinUrl: "https://www.linkedin.com/pulse/fix-once-prevent-forever-how-i-made-dropdown-bug-nino-chavez-04yyc"
 ---
 
-This one started like a lot of bugs do: Dropdowns weren’t updating after a bulk import. The data was there, the page reloaded, but the dropdowns stayed stale. Console warnings, frustrated debugging, and that subtle, familiar itch—"Something here isn’t wired right."
+This one started like a lot of bugs do: dropdowns weren't updating after a bulk import. The data was there, the page reloaded, but the dropdowns stayed stale. Console warnings, frustrated debugging, and that subtle, familiar itch—"Something here isn't wired right."
 
-Eventually, I traced it to a **cache invalidation mismatch**.
+Eventually, I traced it to a cache invalidation mismatch.
 
--   One component (BulkTeamUploader) was correctly invalidating the React Query cache.
-    
--   Another (AssignTeams) was bypassing it entirely, calling Supabase directly.
-    
+One component (BulkTeamUploader) was correctly invalidating the React Query cache. Another (AssignTeams) was bypassing it entirely, calling Supabase directly. They weren't speaking the same language—and the result was inconsistent state and broken UX.
 
-They weren’t speaking the same language—and the result was inconsistent state and broken UX.
+**The Fix**
 
-* * *
+I could've patched it by syncing the fetch call. But I didn't want to see this kind of bug again—especially as I scale this project and rely more heavily on AI-generated components.
 
-### The Fix: Not Just Patch, But Protect
+So I built a multi-layer safeguard system.
 
-I could’ve patched it by syncing the fetch call. But I didn’t want to see this kind of bug again—especially as I scale this project and rely more heavily on AI-generated components.
+**Custom ESLint Rules**
 
-So I built a **multi-layer safeguard system**.
+I wrote an internal plugin with rules like `no-direct-supabase-in-components`, `require-approved-queries`, and `cache-invalidation-consistency`. These throw build-breaking errors if violated.
 
-* * *
+**Automated Validation Script**
 
-### 🔍 Root Cause: Mixed Data Fetching Patterns
+A custom TypeScript script that scans for mismatched fetch/cache patterns, reports violations with fix suggestions, and runs in pre-commit.
 
-**Fixed** by switching to approved edge function queries and wrapping everything in the shared caching strategy.
+**Documentation as Constraint**
 
-### 🧯 Console Errors: React Hooks and Missing States
+Everything is now codified in `docs/development/data-fetching-patterns.md`—approved query patterns, troubleshooting, and reusable templates for future component generation.
 
-**Fixed** by adding loading states, dependency arrays, and proper error handling.
+**Why This Matters with AI**
 
-* * *
+I'm relying more on AI to scaffold components, write boilerplate, generate workflows. But with that speed comes risk—especially if the AI doesn't "remember" the architectural rules.
 
-### 🔐 New Prevention Layers
+By creating automated guardrails, I've made it harder for myself (or a co-pilot) to unknowingly break core patterns. And I tested it—you literally can't reintroduce this bug without triggering a lint error, failing a pre-commit, or breaking the build.
 
-These weren’t just fixes—they’re now **enforcements**, baked into the system:
+**The Bigger Picture**
 
-### 1\. Custom ESLint Rules
+This wasn't just about fixing a dropdown. It was a reminder that AI won't catch architectural drift unless you teach it how.
 
-I wrote an internal plugin that includes:
+We've all used style guides, linters, static analyzers, CI pipelines with type checks. But now the code is moving faster—because we're not always the ones writing it. AI can scaffold things in seconds, but it doesn't carry your system context, your constraints, or your edge cases—unless you embed that context back into the workflow.
 
--   no-direct-supabase-in-components
-    
--   require-approved-queries
-    
--   cache-invalidation-consistency
-    
+So that's what I'm doing. Codifying patterns. Enforcing them. Turning architectural decisions into lint rules, scripts, and guardrails that even an AI co-pilot has to obey.
 
-These throw **build-breaking errors** if violated.
+We haven't figured out how to trust AI code yet. Not because it won't compile—but because it skips the part where we sweat the details. So for now, I build my own safety rails.
 
-### 2\. Automated Validation Script
-
-A custom TypeScript script that:
-
--   Scans for mismatched fetch/cache patterns
-    
--   Reports violations with fix suggestions
-    
--   Runs in pre-commit, and can be triggered manually
-    
-
-### 3\. Updated Dev Scripts
-
-In package.json:
-
--   npm run validate-data-fetching
-    
--   npm run pre-component-work Tied into lint-staged to catch issues before they land.
-    
-
-### 4\. Documentation for Myself (and AI)
-
-Everything is now codified in a working doc: docs/development/data-fetching-patterns.md Includes approved query patterns, troubleshooting, and reusable templates for future component generation.
-
-* * *
-
-### 🧱 Why It Matters (Especially with AI in the Mix)
-
-I’m relying more and more on AI to scaffold components, write boilerplate, and even generate workflows. But with that speed comes risk—especially if the AI doesn’t “remember” the architectural rules.
-
-By creating **automated guardrails**, I’ve made it harder for myself (or a co-pilot) to unknowingly break core patterns.
-
-And yeah—I tested it. You literally *can’t* reintroduce this bug without triggering a lint error, failing a pre-commit, or breaking the build.
-
-* * *
-
-### ✅ Result
-
--   Dropdowns now populate immediately after a bulk import
-    
--   Console logs are clean
-    
--   Future bugs in this category are blocked at the gates
-    
--   My AI dev loop is safer and more predictable
-    
--   I trust the system more
-    
-
-* * *
-
-### Final Thought
-
-This wasn’t just about fixing a dropdown. It was a reminder that **AI won’t catch architectural drift—unless you teach it how**.
-
-What I’m building here isn’t new in spirit. We’ve all used style guides, linters, static analyzers, CI pipelines with type checks and test coverage thresholds. But now the code is moving faster—because we’re not always the ones writing it.
-
-AI can scaffold things in seconds, but it doesn’t carry your system context, your constraints, or your edge cases—unless you **embed that context back into the workflow**.
-
-So that’s what I’m doing. Codifying patterns. Enforcing them. Turning architectural decisions into **lint rules**, **scripts**, and **guardrails** that even an AI co-pilot has to obey.
-
-Where does this go? Probably toward the same place all software quality tools have gone:
-
--   Plugins and validators for AI agents
-    
--   Contracts between code generators and build systems
-    
--   Observability for logic and architecture, not just logs and metrics
-    
--   New layers of static + dynamic analysis, purpose-built for AI-written code
-    
-
-The thing is, we **haven’t figured out how to trust AI code yet**. Not because it won’t compile—but because it skips the part where we sweat the details.
-
-So for now, we build our own safety rails. And maybe someone out there is already working on making that trust layer a product.
-
-I hope so. Because I’d use it tomorrow.
-
-> Real-world screenshot of my VSCode IDE.
-
-![](https://media.licdn.com/dms/image/v2/D5612AQGmQGUwtlYogA/article-inline_image-shrink_1500_2232/B56ZhTg8eeG4AU-/0/1753747803365?e=1762387200&v=beta&t=1mBCUMUKAKQ-5FxVHE8gOuvDABljL6FX05Rqwcf3Htc)
+![Screenshot of VSCode showing the validation system in action](https://media.licdn.com/dms/image/v2/D5612AQGmQGUwtlYogA/article-inline_image-shrink_1500_2232/B56ZhTg8eeG4AU-/0/1753747803365?e=1762387200&v=beta&t=1mBCUMUKAKQ-5FxVHE8gOuvDABljL6FX05Rqwcf3Htc)
