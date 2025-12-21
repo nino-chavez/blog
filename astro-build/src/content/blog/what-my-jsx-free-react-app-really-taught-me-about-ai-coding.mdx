@@ -1,8 +1,8 @@
 ---
-title: "What my JSX-Free React App Really Taught Me About AI Coding"
+title: "What My JSX-Free React App Taught Me About AI-Assisted Engineering"
 publishedAt: "2025-08-02T16:50:00.000Z"
 author: "Nino Chavez"
-excerpt: "Let's be clear - I still don't really know what JSX is, but if i'm asking AI the right questions, does it matter? Is this really no different then architecting systems based on principles and..."
+excerpt: "I still don't really know what JSX is. But if I'm asking AI the right questions, does it matter? Is this really different from architecting systems based on principles and relying on an engineering staff to understand the nuances?"
 category: "AI & Automation"
 tags: ["architecture","ai-coding"]
 featured: false
@@ -10,121 +10,64 @@ source: "linkedin"
 linkedinUrl: "https://www.linkedin.com/pulse/what-my-jsx-free-react-app-really-taught-me-ai-coding-nino-chavez-3faoc"
 ---
 
-Let's be clear - I still don't really know what JSX is, but if i'm asking AI the right questions, does it matter? Is this really no different then architecting systems based on principles and relying on an engineering staff to understand the nuances of the tech stack?
+I still don't really know what JSX is. But if I'm asking AI the right questions, does it matter? Is this really different from architecting systems based on principles and relying on an engineering staff to understand the nuances of the tech stack?
 
-In my last post, I shared how my AI-assisted React app didn’t use JSX — and how I cleaned up over 1,000 TypeScript errors using typed wrappers around React.createElement.
+In my last post, I shared how my AI-assisted React app didn't use JSX—and how I cleaned up over 1,000 TypeScript errors using typed wrappers around React.createElement.
 
-That article was about the “what.” This one is about the **“so what.”**
+That article was about the "what." This one is about the "so what."
 
-Because somewhere between wrapping createElement() and rebuilding Shopify’s layout engine… I realized something much bigger:
+Because somewhere between wrapping createElement() and rebuilding Shopify's layout engine, I realized something much bigger:
 
-> This isn’t just AI-assisted coding. It’s a **new form of software engineering.**
+This isn't just AI-assisted coding. It's a new form of software engineering.
 
-And it only works if you're willing to **own the system** — not just accept what the AI gives you.
+And it only works if you're willing to own the system—not just accept what the AI gives you.
 
-* * *
+**AI Didn't Make My Architecture. It Exposed It.**
 
-### 🤖 AI Didn’t Make My Architecture. It Exposed It.
+The AI gave me React.createElement() everywhere. It didn't ask me if I wanted JSX. It didn't "choose" the right architecture.
 
-The AI gave me React.createElement() everywhere. It didn’t ask me if I wanted JSX. It didn’t “choose” the right architecture.
+It just followed patterns—patterns that are common in codebases where layout is built from data.
 
-It just followed patterns — patterns that are common in codebases where layout is built from data.
+At first, I thought: "This is probably wrong."
 
-At first, I thought:
+But the more I looked, the more I saw that programmatic rendering made sense for my data-driven UI. CVA-based components fit the bracket use case. JSX actually would've limited flexibility.
 
-> “This is probably wrong.”
+What I realized was: The AI wasn't wrong. But it wasn't right either. It scaffolded something workable—not intentional.
 
-But the more I looked, the more I saw:
+It was up to me to decide whether it made sense. And then to fix what didn't.
 
--   Programmatic rendering made sense for my data-driven UI
-    
--   CVA-based components fit the bracket use case
-    
--   JSX actually *would’ve* limited flexibility
-    
+**What I Actually Learned**
 
-What I realized was:
+This wasn't just a frontend refactor. It was a mindset shift.
 
-> **The AI wasn’t wrong. But it wasn’t right either.** It scaffolded something *workable* — not *intentional*.
+**1. AI isn't a coding assistant—it's a pattern amplifier.**
 
-It was up to me to decide whether it made sense. And then to fix what didn’t.
+It doesn't give you best practices. It gives you defaults, fragments, scaffolds. It's your job to ask: "Is this the right shape for what I'm trying to build?"
 
-* * *
+**2. Engineering doesn't disappear—it becomes the differentiator.**
 
-### 🧠 What I Actually Learned
+I didn't write most of the React syntax. But I audited the patterns, reframed the architecture, preserved type safety, and enforced structure. That's engineering.
 
-This wasn’t just a frontend refactor. It was a mindset shift:
+**3. One developer and an AI is not a team—it's a feedback loop.**
 
-### 1\. AI isn’t a coding assistant — it’s a pattern amplifier
-
-It doesn’t give you best practices. It gives you defaults, fragments, scaffolds.
-
-It’s your job to ask:
-
-> “Is this the right shape for what I’m trying to build?”
-
-* * *
-
-### 2\. Engineering doesn’t disappear — it becomes the differentiator
-
-I didn’t write most of the React syntax. But I:
-
--   Audited the patterns
-    
--   Reframed the architecture
-    
--   Preserved type safety
-    
--   Enforced structure
-    
-
-That’s engineering.
-
-* * *
-
-### 3\. One developer and an AI is not a team — it’s a feedback loop
-
-There’s no design review. No product manager. No senior dev watching your commits.
-
-There’s just:
-
--   What the AI generates
-    
--   What you accept or reject
-    
--   And how tightly you control the feedback
-    
+There's no design review. No product manager. No senior dev watching your commits. There's just what the AI generates, what you accept or reject, and how tightly you control the feedback.
 
 This only works if you're asking the right questions.
 
-* * *
+**4. This isn't just faster coding. It's solo systems design.**
 
-### 4\. This isn’t just faster coding. It’s solo systems design.
+The moment I decided not to rip out the createElement scaffolding—and instead make it safe and intentional—was the moment I realized:
 
-The moment I decided not to rip out the createElement scaffolding — and instead make it safe and intentional — was the moment I realized:
+I wasn't debugging AI code. I was architecting a system with AI as a builder.
 
-> I wasn’t *debugging AI code*. I was **architecting a system with AI as a builder.**
+That's not a hack. That's a new mode of development.
 
-That’s not a hack. That’s a new mode of development.
+**The Takeaway**
 
-* * *
+If you're using AI to help you code, and you're wondering why it feels kind of wrong but still works—it might be because the AI surfaced an architectural pattern that makes sense, but only if you step in to refine it.
 
-### 🪡 The Takeaway
+I didn't set out to avoid JSX. I just followed the shape that emerged—and then took responsibility for making it stable.
 
-If you’re using AI to help you code, and you’re wondering:
+That's the real work.
 
-> “Why does this feel kind of... wrong, but still works?”
-
-It might be because the AI surfaced an architectural pattern that makes sense — but only if **you step in to refine it**.
-
-I didn’t set out to avoid JSX. I just followed the shape that emerged — and then took responsibility for making it stable.
-
-That’s the real work.
-
-* * *
-
-🧠 The first article: [Why My React App Doesn’t Use JSX](https://nino.photos/blog)
-
-📌 This follow-up is for anyone navigating the next level of AI-assisted dev — not just faster code, but **real system shaping.**
-
-Let me know if you’ve hit the same inflection point.
+I'm still figuring out where the boundaries are between what AI should scaffold and what requires sustained human attention. But the direction feels right: less fighting the output, more shaping it into something intentional.

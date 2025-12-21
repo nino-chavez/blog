@@ -1,10 +1,10 @@
 ---
-title: "Designing for Environments, Not Just Themes: A Volleyball App UX Case Study"
+title: "Why Light and Dark Mode Weren't Enough for Our Volleyball App"
 publishedAt: "2025-07-29T00:43:00.000Z"
 author: "Nino Chavez"
-excerpt: "Most apps toggle between \"light\" and \"dark.\" Ours needed more."
+excerpt: "When your users are on sun-drenched beach courts and dimly lit evening gyms, you need more than a theme toggle. You need environment-aware design."
 category: "AI & Automation"
-tags: ["testing"]
+tags: ["ux-design", "accessibility"]
 featured: false
 source: "linkedin"
 linkedinUrl: "https://www.linkedin.com/pulse/designing-environments-just-themes-volleyball-app-ux-case-nino-chavez-jqkqc"
@@ -12,130 +12,39 @@ linkedinUrl: "https://www.linkedin.com/pulse/designing-environments-just-themes-
 
 Most apps toggle between "light" and "dark." Ours needed more.
 
-When you're building tools for real-world events — like managing volleyball tournaments across gyms, beaches, and low-lit evening leagues — your UI has to flex with the physical environment. Our theme system couldn’t just be aesthetic. It had to *perform* under sun glare, gym lights, and accessible tech setups.
+When you're building tools for real-world events—managing volleyball tournaments across gyms, beaches, and low-lit evening leagues—your UI has to flex with the physical environment. The theme system couldn't just be aesthetic. It had to *perform* under sun glare, gym lights, and accessible tech setups.
 
-So we ran a full audit of our theme system.
+So I ran a full audit. Here's what I found.
 
-Here’s what we found (and fixed).
-
-* * *
-
-### 🎨 THEME STRATEGY
+**Four Environments, Not Two Modes**
 
 We support four environment-based themes:
 
-1.  **Indoor Mode** – default light theme for gym lighting
-    
-2.  **Evening Mode** – dark mode for low-light venues
-    
-3.  **Outdoor Mode** – max-contrast theme for sunlight and glare
-    
-4.  **Accessible Mode** – high-contrast option for visual impairments
-    
+- **Indoor Mode** – default light theme for gym lighting
+- **Evening Mode** – dark mode for low-light venues
+- **Outdoor Mode** – max-contrast theme for sunlight and glare
+- **Accessible Mode** – high-contrast option for visual impairments
 
-Each theme is implemented via CSS custom properties (src/styles/colors.css), with semantic naming (--foreground, --muted, --accent, etc.) to support clarity and override consistency.
+Each theme is implemented via CSS custom properties with semantic naming (`--foreground`, `--muted`, `--accent`, etc.) to support clarity and override consistency.
 
-* * *
+**What Worked**
 
-### ✅ WHAT’S WORKING
+Strong contrast ratios (13:1–21:1) across all environments. Brand colors held up across light/dark variants. The semantic token structure made overrides clean and maintainable.
 
--   Strong contrast ratios (13:1–21:1) across all environments
-    
--   Brand colors hold up across light/dark variants
-    
--   Semantic token structure makes overrides clean and maintainable
-    
+**What Didn't**
 
-* * *
+High-contrast mode was incomplete—8+ CSS variables were missing. Inherited colors broke expected contrast. Outdoor mode was too bright; dark teal and gold weren't visible in real sunlight, and pure white backgrounds created reflection. Indoor mode had muted text that was too light. Evening mode slightly overshot brightness on secondary elements.
 
-### 🚨 WHAT NEEDED FIXING
+The fixes were straightforward once I saw them: defined a complete high-contrast palette, darkened key colors for outdoor use, replaced shadow reliance with bold borders, and tuned the muted values.
 
-### 🔧 HIGH-CONTRAST MODE (P0)
+**Testing Reality**
 
--   **Incomplete**: 8+ CSS variables were missing
-    
--   **Fallback chaos**: Inherited colors broke expected contrast
-    
--   **Fix**: Defined a complete high-contrast palette with max visibility:
-    
+Automated tests covered contrast ratio validation, CSS variable completeness, and WCAG linting. But the real validation came from manual testing: sunlight tests on real devices, evening tests in low-light, screen reader plus high zoom, color-blind simulation.
 
-### 🌞 OUTDOOR MODE (P0)
+The uncomfortable truth? All themes hit 4.5:1 or better for normal text, but I didn't catch the missing high-contrast variables until I actually tested on a beach court with a sun-drenched iPad.
 
--   **Too bright**: Dark teal and gold weren’t visible in real sunlight
-    
--   **No anti-glare tweaks**: Pure white backgrounds created reflection
-    
--   **Fix**: Darkened all key colors and replaced shadow reliance with bold borders:
-    
+**The Shift**
 
-### 🏐 INDOOR & EVENING (P1/P2)
+I used to think about themes as aesthetic choices. Now I think about them as environmental constraints. Real users don't care if dark mode looks cool—they care if they can read pool assignments at 10AM on a beach court.
 
--   Muted text was too light in indoor mode (--muted-foreground: 215 16% 47%)
-    
--   Evening mode slightly overshot brightness on secondary elements
-    
--   Fixed with subtle tweaks to tone down and improve legibility
-    
-
-* * *
-
-### 🧪 WCAG COMPLIANCE SNAPSHOT
-
-Theme Ratio WCAG AAA Pass? Indoor 13.9:1 ✅ ✅ Evening 10.6:1 ✅ ✅ Outdoor 21:1 ✅ ✅ High Contrast 21:1 ✅\* ✅\*
-
-\*Basic text only — needed full variable coverage
-
-* * *
-
-### 🧰 TESTING PLAN
-
-**Automated**
-
--   Contrast ratio validation
-    
--   CSS variable completeness check
-    
--   WCAG linting pass
-    
-
-**Manual**
-
--   Sunlight test (real devices)
-    
--   Evening test (low-light)
-    
--   Screen reader + high zoom
-    
--   Color-blind simulation
-    
-
-* * *
-
-### 🎯 SUCCESS METRICS
-
--   All themes hit 4.5:1 or better for normal text
-    
--   100% of required CSS tokens defined across themes
-    
--   Positive field testing from tournament organizers
-    
--   No regressions in focus state, accessibility, or readability
-    
-
-* * *
-
-### 💡 TAKEAWAY
-
-Don't design themes. Design for *environments*.
-
-Real users don’t care if your dark mode looks cool — they care if they can read pool assignments on a sun-drenched iPad at 10AM on a beach court. Our design system now reflects that.
-
-If you’re building real-world apps, ask yourself:
-
-**How does your UI perform in the environments your users live in?**
-
-* * *
-
-Happy to jam on accessibility, theme systems, or tournament logistics. Drop a comment or DM.
-
-#frontend #accessibility #uxdesign #css #tailwind #webapps #devblog #designsystems #volleyballtech
+Don't design themes. Design for environments. How does your UI perform in the places your users actually live?

@@ -1,10 +1,10 @@
 ---
-title: "From QA Bottleneck to Autonomous Confidence: How I Built a Fully AI-Driven E2E Testing Framework"
+title: "Building an AI-Driven E2E Testing Framework from Scratch"
 publishedAt: "2025-07-30T19:44:00.000Z"
 author: "Nino Chavez"
-excerpt: "Shipping used to mean stress."
+excerpt: "Testing was my bottleneck. So I built a framework where AI writes, runs, and validates the tests."
 category: "AI & Automation"
-tags: ["architecture","testing"]
+tags: ["testing", "ai-coding"]
 featured: false
 source: "linkedin"
 linkedinUrl: "https://www.linkedin.com/pulse/from-qa-bottleneck-autonomous-confidence-how-i-built-fully-chavez-rudde"
@@ -12,127 +12,35 @@ linkedinUrl: "https://www.linkedin.com/pulse/from-qa-bottleneck-autonomous-confi
 
 Shipping used to mean stress.
 
-Especially when you’re the only person standing between the deploy button and a swarm of live users.
+Especially when you're the only person standing between the deploy button and a swarm of live users. But what if you could guarantee full regression coverage—with zero human oversight?
 
-But what if you could guarantee **full regression coverage**—with zero human oversight?
+I just shipped a production-grade, autonomous end-to-end testing framework that touches every admin feature in my app, from the browser's perspective, using nothing but AI tools and system-level architecture.
 
-I just shipped a **production-grade, autonomous end-to-end testing framework** that touches every admin feature in my app, from the browser’s perspective, using nothing but AI tools and system-level architecture.
+**What I Built**
 
-And it changed how I think about QA forever.
+I didn't just write tests—I built a self-sustaining test architecture powered by Kilo AI that:
 
-* * *
+- Writes its own Playwright tests
+- Heals itself when the UI or schema changes
+- Executes multiple test tiers automatically (smoke → full regression)
+- Validates every button, input, route, and display from a real user's point of view
 
-### 🧠 What I Built (and Why It Matters)
+This isn't about code coverage percentages. It's about real confidence in every release.
 
-I didn’t just write tests—I built a **self-sustaining test architecture** powered by Kilo AI that:
+**How It Works**
 
--   Writes its own Playwright tests
-    
--   Heals itself when the UI or schema changes
-    
--   Executes multiple test tiers automatically (smoke → full regression)
-    
--   Validates every button, input, route, and display from a real user’s point of view
-    
+AI templates for test generation—Kilo analyzes components and writes E2E tests using reusable prompt blueprints. Self-healing maintenance—tests detect schema or UI changes and auto-regenerate with updated selectors and assertions. Zero-touch execution—with one command, the system spins up the environment, runs all test suites, and outputs full reports.
 
-This isn't about code coverage percentages.
+Under the hood: modular utilities (`test-ids.ts` with 318 IDs for stable selectors, `TestModeContext` for visual test states, `admin-page-validators.ts` with 378 lines of reusable logic). All admin routes modeled and abstracted for DRY test writing. Coverage spans functional, visual, accessibility, performance, cross-browser, and mobile.
 
-It’s about **real confidence** in every release.
+**The Shift**
 
-* * *
+I used to treat QA as a cost center—something I had to do before shipping. Now I think about it differently. QA can be a strategic asset—powered by AI, maintained by code, enforced by design.
 
-### 🔁 From Human QA to AI Guardian
+The framework is fully autonomous, AI-maintained, fast, reliable, and designed for scale. And most importantly, it's running right now—in production—guarding every admin feature.
 
-Here’s what autonomy looks like:
+**What I'm Still Figuring Out**
 
-✅ **AI Templates for Test Generation** Kilo analyzes components and writes E2E tests using reusable prompt blueprints.
+The self-healing works for incremental changes, but big refactors still break things in ways the AI doesn't anticipate. I'm experimenting with having the AI analyze git diffs before regenerating tests, so it understands the scope of what changed.
 
-✅ **Self-Healing Maintenance** Tests detect schema or UI changes and auto-regenerate with updated selectors and assertions.
-
-✅ **Zero-Touch Execution** With one command, the system spins up the environment, runs all test suites, and outputs full reports.
-
-✅ **Complete Admin Coverage** Every route, every interaction, every validation—covered. Fully. On every build.
-
-* * *
-
-### ⚙️ Under the Hood
-
-🧩 Modular Utilities
-
--   test-ids.ts (318 IDs) for stable selectors
-    
--   TestModeContext for visual test states
-    
--   admin-page-validators.ts (378 lines of logic) for reusability and clarity
-    
-
-📄 Page Object Model
-
--   All admin routes are modeled and abstracted for DRY test writing
-    
--   Easy to expand, easy to maintain
-    
-
-📊 Multi-Tier Test Runs
-
-🧪 Types of Coverage
-
--   Functional ✅
-    
--   Visual 🖼️
-    
--   A11y ♿
-    
--   Performance 🏎️
-    
--   Cross-Browser 🌐
-    
--   Mobile 📱
-    
-
-* * *
-
-### 🎯 Why This Matters for Builders + Consultants
-
-If you’re building software:
-
--   This is your CI/CD shield. It gives you confidence to move fast without breaking trust.
-    
--   You don’t need a QA team to have QA discipline—**you need systems.**
-    
-
-If you’re advising clients:
-
--   This is where AI is going: **automated infrastructure for quality**.
-    
--   Instead of buying bloated QA platforms or hiring armies of testers, you define invariants + let AI own the test layer.
-    
-
-* * *
-
-### 📣 Bottom Line
-
-This framework is:
-
--   Fully autonomous
-    
--   AI-maintained
-    
--   Fast, reliable, and resilient
-    
--   Designed for scale
-    
-
-And most importantly, it’s not a fantasy. It’s running right now—in production—guarding every admin feature 24/7.
-
-If you're still treating QA as a cost center, it's time to flip the model.
-
-QA can be **a strategic asset**—powered by AI, maintained by code, enforced by design.
-
-* * *
-
-👀 Curious how it works under the hood? 🧪 Want to see how Kilo automates test writing? 🎯 Or need help bringing this to your app or client?
-
-Let’s talk.
-
-#AICoding #E2Etesting #SoftwareQuality #CI #Consulting #Playwright #Kilo #AIEngineering
+And there's a trust question I haven't fully answered: how do I know the AI-generated tests are actually testing what matters? I've added assertions to verify the tests themselves, which feels recursive in an uncomfortable way. But it's working for now.
