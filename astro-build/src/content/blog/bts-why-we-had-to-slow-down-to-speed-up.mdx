@@ -28,7 +28,7 @@ This was a **small architecture bug that scaled quickly**, compounded by a **mis
 
 Let’s walk through it.
 
-🧃 The Setup: “Grass Volleyball” FormatWe were uploading team rosters using a format common to grass volleyball tournaments:
+**The Setup: "Grass Volleyball" Format**We were uploading team rosters using a format common to grass volleyball tournaments:
 
 ```
 Charlie Podgorny, Nate Meyer, Peter Zurawski	1  
@@ -58,7 +58,7 @@ There was even a code comment explaining the plan:
 
 The problem? That logic was never implemented.
 
-🚨 The BreakdownWhen the upload hit the backend, our validation function looked like this:
+**The Breakdown**When the upload hit the backend, our validation function looked like this:
 
 ```typescript
 if (!team_name || team_name.trim().length === 0) {
@@ -72,7 +72,7 @@ And so: **every team was skipped** with "Team name is required" errors.
 We didn’t have a bug.
 We had a breakdown in **assumptions**.
 
-🤖 How the AI Almost Made It WorseHere’s the original prompt I gave the AI:
+**How the AI Almost Made It Worse**Here’s the original prompt I gave the AI:
 
 > “We should produce as much of what the backend expects on the frontend.
 > But don’t you agree that general engineering principles say **deriving specific data from general input should happen on the backend**?
@@ -90,7 +90,7 @@ But it **cemented the broken contract** between systems.
 
 I pushed back.
 
-🧠 The RealizationI proposed a redesign:
+**The Realization**I proposed a redesign:
 
 > “Should we separate the bulk upload into two steps — Parse and Submit?
 > Visually, this lets users preview and verify parsed data before it goes into the DB.
@@ -99,13 +99,13 @@ I pushed back.
 
 This time, the AI aligned.
 
-> ✅ “You raise excellent architectural points.
+> "You raise excellent architectural points.
 > Separation of concerns. Single source of truth. Avoiding duplication.
 > Let’s implement a Parse → Submit flow:**Frontend**: parses raw CSV to `ParsedTeamInput[]`, shows editable preview**Backend**: derives team names, applies fallbacks, validates, inserts**UX**: gives the human a chance to correct edge cases before they go live”
 
 That was the unlock.
 
-🧱 The New Architecture (What We Did Instead)Step 1: Parse- Frontend reads raw data, builds a minimal object with:`players`
+**The New Architecture (What We Did Instead)**Step 1: Parse- Frontend reads raw data, builds a minimal object with:`players`
 - `seed`
 - optional hints (division, captain, etc.)
 
@@ -114,7 +114,7 @@ That was the unlock.
 - Validates full domain logic
 - Handles DB insertion and returns result breakdown
 
-✍️ Why This MattersThis wasn't just a logic bug. It was a **design trap**:
+**Why This Matters**This wasn't just a logic bug. It was a **design trap**:
 
 - The frontend assumed the backend would fix things
 - The backend assumed the frontend would never send invalid data
@@ -122,7 +122,7 @@ That was the unlock.
 
 No one paused to ask: *Should the frontend even be generating this?*
 
-🔄 When Speed Hurts, Slow DownThis is what it means to **slow down to speed up**:
+**When Speed Hurts, Slow Down**This is what it means to **slow down to speed up**:
 
 - To *not* patch the frontend for a backend failure
 - To *not* accept broken contracts between layers
@@ -134,7 +134,7 @@ Would an agentic AI have caught this?
 Maybe — if it had the training of a senior engineer.
 But the real fix came from a human noticing the friction and **zooming out**.
 
-💥 The Real CostThis wasn’t just a missed detail — it was almost a wasted sprint.
+**The Real Cost**This wasn’t just a missed detail — it was almost a wasted sprint.
 
 If I hadn’t stepped back to notice the architectural drift,
 I would’ve wasted **two more weeks**,
