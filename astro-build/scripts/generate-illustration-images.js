@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Generate custom blog feature images for ALL posts using Gemini 2.0 Flash
+ * Generate custom blog feature images using OpenRouter (Flux/DALL-E)
  * NEW STYLE: Hand-drawn illustration aesthetic with distinctive visual identity
  *
  * Style Philosophy:
@@ -12,14 +12,14 @@
  * Output: Optimized WebP images at 1200x675 (16:9), targeting 30-80KB
  */
 
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import OpenAI from 'openai';
 import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
 
-const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
-if (!GOOGLE_API_KEY) {
-  console.error('Error: GOOGLE_API_KEY environment variable required');
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+if (!OPENROUTER_API_KEY) {
+  console.error('Error: OPENROUTER_API_KEY environment variable required');
   process.exit(1);
 }
 
@@ -32,7 +32,15 @@ const TARGET_WIDTH = 1200;
 const TARGET_HEIGHT = 675;
 const WEBP_QUALITY = 85;
 
-const genAI = new GoogleGenerativeAI(GOOGLE_API_KEY);
+// Initialize OpenRouter client (OpenAI-compatible)
+const openrouter = new OpenAI({
+  baseURL: 'https://openrouter.ai/api/v1',
+  apiKey: OPENROUTER_API_KEY,
+  defaultHeaders: {
+    'HTTP-Referer': 'https://blog.ninochavez.co',
+    'X-Title': 'Signal Dispatch Blog'
+  }
+});
 
 // NEW VISUAL STYLE SYSTEM: Illustration-based with category variations
 const ILLUSTRATION_STYLES = {
@@ -289,38 +297,88 @@ async function optimizeImage(inputBuffer, outputPath) {
   }
 }
 
-// Generate image using Gemini and convert to optimized WebP
+// Generate image using OpenRouter (Gemini 2.5 Flash Image) via chat completions
 async function generateImage(prompt, filename) {
   try {
-    const model = genAI.getGenerativeModel({
-      model: 'gemini-2.0-flash-exp',
-      generationConfig: {
-        responseModalities: ['image', 'text'],
-      }
+    // Use chat completions with image modality
+    const response = await openrouter.chat.completions.create({
+      model: 'google/gemini-2.5-flash-preview-image',
+      modalities: ['text', 'image'],
+      messages: [
+        {
+          role: 'user',
+          content: prompt
+        }
+      ]
     });
 
-    const result = await model.generateContent(prompt);
-    const response = result.response;
+    // Extract image from response
+    const message = response.choices?.[0]?.message;
 
-    for (const part of response.candidates[0].content.parts) {
-      if (part.inlineData) {
-        const imageData = part.inlineData.data;
-        const imageBuffer = Buffer.from(imageData, 'base64');
+    // Check for images array (OpenRouter format: images[].image_url.url)
+    if (message?.images && Array.isArray(message.images) && message.images.length > 0) {
+      const imageData = message.images[0];
+      let base64Data;
 
-        const outputPath = path.join(OUTPUT_DIR, `${filename}.webp`);
-        const optimizeResult = await optimizeImage(imageBuffer, outputPath);
+      // OpenRouter returns: { type: 'image_url', image_url: { url: 'data:image/png;base64,...' } }
+      if (imageData?.image_url?.url) {
+        base64Data = imageData.image_url.url.replace(/^data:image\/\w+;base64,/, '');
+      } else if (typeof imageData === 'string') {
+        base64Data = imageData.replace(/^data:image\/\w+;base64,/, '');
+      } else if (imageData?.url) {
+        base64Data = imageData.url.replace(/^data:image\/\w+;base64,/, '');
+      } else if (imageData?.b64_json) {
+        base64Data = imageData.b64_json;
+      } else {
+        throw new Error(`Unknown image format: ${JSON.stringify(imageData).substring(0, 100)}`);
+      }
 
-        const fileSizeKB = Math.round(optimizeResult.size / 1024);
+      const imageBuffer = Buffer.from(base64Data, 'base64');
+      const outputPath = path.join(OUTPUT_DIR, `${filename}.webp`);
+      const optimizeResult = await optimizeImage(imageBuffer, outputPath);
+      const fileSizeKB = Math.round(optimizeResult.size / 1024);
 
-        return {
-          path: `/images/generated/${filename}.webp`,
-          fullPath: outputPath,
-          size: fileSizeKB
-        };
+      return {
+        path: `/images/generated/${filename}.webp`,
+        fullPath: outputPath,
+        size: fileSizeKB
+      };
+    }
+
+    // Check for content array with image parts
+    if (message?.content && Array.isArray(message.content)) {
+      for (const part of message.content) {
+        if (part.type === 'image_url' && part.image_url?.url) {
+          const base64Data = part.image_url.url.replace(/^data:image\/\w+;base64,/, '');
+          const imageBuffer = Buffer.from(base64Data, 'base64');
+          const outputPath = path.join(OUTPUT_DIR, `${filename}.webp`);
+          const optimizeResult = await optimizeImage(imageBuffer, outputPath);
+          const fileSizeKB = Math.round(optimizeResult.size / 1024);
+
+          return {
+            path: `/images/generated/${filename}.webp`,
+            fullPath: outputPath,
+            size: fileSizeKB
+          };
+        }
+        // Also check for inline_data format (Gemini style)
+        if (part.inline_data?.data) {
+          const imageBuffer = Buffer.from(part.inline_data.data, 'base64');
+          const outputPath = path.join(OUTPUT_DIR, `${filename}.webp`);
+          const optimizeResult = await optimizeImage(imageBuffer, outputPath);
+          const fileSizeKB = Math.round(optimizeResult.size / 1024);
+
+          return {
+            path: `/images/generated/${filename}.webp`,
+            fullPath: outputPath,
+            size: fileSizeKB
+          };
+        }
       }
     }
 
-    return null;
+    // Debug: log the actual response structure
+    throw new Error(`No image found in response. Keys: ${Object.keys(message || {}).join(', ')}. Images type: ${typeof message?.images}`);
   } catch (e) {
     throw e;
   }
@@ -330,25 +388,44 @@ async function generateImage(prompt, filename) {
 function updateMdxFile(filepath, newImagePath) {
   let content = fs.readFileSync(filepath, 'utf-8');
 
-  // Check if featureImage already exists
-  if (content.match(/featureImage:\s/)) {
+  // Check if featureImage already exists - just update it
+  if (content.match(/^featureImage:\s/m)) {
     content = content.replace(
-      /featureImage:\s*["'][^"']*["']/,
+      /^featureImage:\s*"[^"]*"/m,
       `featureImage: "${newImagePath}"`
     );
   } else {
-    // Add featureImage after excerpt or after category
-    if (content.match(/excerpt:\s*["'][^"']*["']/)) {
-      content = content.replace(
-        /(excerpt:\s*["'][^"']*["'])/,
-        `$1\nfeatureImage: "${newImagePath}"`
-      );
-    } else if (content.match(/category:\s/)) {
-      content = content.replace(
-        /(category:\s*["'][^"']*["'])/,
-        `$1\nfeatureImage: "${newImagePath}"`
-      );
+    // Add featureImage on its own line after category line
+    // Using line-based approach to avoid breaking excerpts with apostrophes
+    const lines = content.split('\n');
+    let inserted = false;
+
+    for (let i = 0; i < lines.length; i++) {
+      if (lines[i].match(/^category:\s*["']/)) {
+        // Insert featureImage after this line
+        lines.splice(i + 1, 0, `featureImage: "${newImagePath}"`);
+        inserted = true;
+        break;
+      }
     }
+
+    if (!inserted) {
+      // Fallback: insert after excerpt line
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].match(/^excerpt:\s*["']/)) {
+          // Find the end of excerpt (might be multi-line)
+          let j = i;
+          while (j < lines.length && !lines[j].match(/"$/)) {
+            j++;
+          }
+          lines.splice(j + 1, 0, `featureImage: "${newImagePath}"`);
+          inserted = true;
+          break;
+        }
+      }
+    }
+
+    content = lines.join('\n');
   }
 
   fs.writeFileSync(filepath, content);
@@ -392,9 +469,9 @@ async function main() {
   );
 
   console.log('');
-  console.log('🎨 Signal Dispatch Illustration Generator v3.0');
-  console.log('   NEW: Hand-drawn illustration style');
-  console.log('   Gemini 2.0 Flash + Sharp WebP Optimization\n');
+  console.log('🎨 Signal Dispatch Illustration Generator v4.0');
+  console.log('   OpenRouter + Gemini 2.5 Flash Image');
+  console.log('   Hand-drawn illustration style + Sharp WebP Optimization\n');
   console.log(`📐 Output: ${TARGET_WIDTH}x${TARGET_HEIGHT} WebP @ quality ${WEBP_QUALITY}`);
   console.log(`📊 Status:`);
   console.log(`   Total posts: ${files.length}`);
@@ -462,8 +539,8 @@ async function main() {
 
     saveProgress(progress);
 
-    // Rate limit - 5 seconds between requests to avoid API limits
-    await new Promise(r => setTimeout(r, 5000));
+    // Rate limit - 2 seconds between requests (OpenRouter is more generous)
+    await new Promise(r => setTimeout(r, 2000));
   }
 
   console.log('\n' + '='.repeat(60));
