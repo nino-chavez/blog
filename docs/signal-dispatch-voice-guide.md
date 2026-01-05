@@ -483,6 +483,287 @@ If it sounds like someone thinking out loud while figuring out something hard—
 
 ---
 
+## Visual Formatting Standards
+
+**Added**: 2026-01-05
+**Inspiration**: jeremyronking.com, maggieappleton.com, swyx.io
+
+Beyond voice and tone, Signal Dispatch posts follow specific formatting patterns that create visual rhythm and scanability. These standards ensure posts are readable, engaging, and visually consistent.
+
+### Core Principles
+
+1. **Scanability over density** — Readers should be able to skim and find key insights
+2. **Visual breaks create rhythm** — Whitespace is content
+3. **Components highlight, not decorate** — Use callouts sparingly for genuine emphasis
+4. **Lists break up prose** — When you have 3+ items, use bullets
+
+### Paragraph Structure
+
+**Short paragraphs are the default.** Target 1-3 sentences per paragraph.
+
+❌ **Avoid**: Dense 4-5 sentence paragraphs that wall-of-text the reader
+```markdown
+Here's the thing Foster calls out that I've been circling for months: CEOs fall into a "delegation trap." They send memos about AI. They sponsor initiatives. They approve budgets for tools. But they don't use the tools themselves. This creates a specific kind of organizational paralysis.
+```
+
+✅ **Instead**: Break at natural thought boundaries
+```markdown
+Here's the thing Foster calls out that I've been circling for months: CEOs fall into a "delegation trap."
+
+They send memos about AI. They sponsor initiatives. They approve budgets for tools.
+
+But they don't *use* the tools themselves.
+
+This creates a specific kind of organizational paralysis.
+```
+
+**Single-sentence paragraphs are powerful.** Use them for:
+- Punchlines
+- Transitions
+- Emphasis
+
+Example:
+```markdown
+Now? It's just... what you do.
+```
+
+### Section Breaks
+
+**Use horizontal rules (`---`) between major sections.** This creates breathing room and signals topic shifts.
+
+```markdown
+## The Delegation Trap
+
+Content here...
+
+---
+
+## The Economically Unviable Becomes Viable
+
+Content here...
+```
+
+**When to use horizontal rules:**
+- Between H2 sections (almost always)
+- Before a major tonal shift
+- Before the conclusion/closing section
+
+**When NOT to use:**
+- Between every paragraph (too choppy)
+- Within a single flowing argument
+
+### MDX Components
+
+Signal Dispatch has four MDX components for visual emphasis. Use them strategically—not decoratively.
+
+#### PullQuote
+
+**Purpose**: Elevate the single most important quote or statement in a post.
+
+**Usage**: One per post maximum. Reserve for signature phrases or key insights.
+
+```mdx
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+<PullQuote>
+If you want to get in this boat, you need to learn to row. There's no room for tourists.
+</PullQuote>
+```
+
+**When to use:**
+- The thesis statement readers should remember
+- A quote you'd want shared on social media
+- The "bumper sticker" version of your argument
+
+**When NOT to use:**
+- Every blockquote (use standard `>` for regular quotes)
+- Multiple times in one post
+
+#### Callout
+
+**Purpose**: Highlight key insights, warnings, or contextual information that deserves visual separation.
+
+**Types available:**
+- `signal` — Key insight or main point (orange accent)
+- `noise` — Background context or aside (violet accent)
+- `insight` — "Aha" moment or crystallized learning (gradient accent)
+- `warning` — Caution or important caveat (yellow accent)
+
+```mdx
+import { Callout } from '@/components/mdx/Callout';
+
+<Callout type="signal" title="Foster's Alternative">
+Hackathons and show-and-tells. Not as one-off events—as ongoing practice.
+</Callout>
+
+<Callout type="insight">
+If you can't define what fluency looks like, you can't teach it.
+</Callout>
+
+<Callout type="warning">
+You can't read about Aegis and "get it." You have to live through the drift.
+</Callout>
+```
+
+**Usage guidelines:**
+- 2-4 callouts per post maximum
+- Space them throughout—don't cluster
+- Use different types for variety
+- Title is optional; omit for shorter callouts
+
+**When to use:**
+- A insight that deserves to stand apart from the prose
+- A warning or caveat the reader shouldn't miss
+- An actionable takeaway
+- A quote or point from someone else you're responding to
+
+**When NOT to use:**
+- Every key point (loses impact)
+- For decoration or visual variety alone
+- For content that flows naturally in prose
+
+#### Figure
+
+**Purpose**: Images with proper captions and attribution.
+
+```mdx
+import { Figure } from '@/components/mdx/Figure';
+
+<Figure
+  src="/images/example.webp"
+  alt="Description of image"
+  caption="Optional caption explaining the image"
+/>
+```
+
+#### Mermaid
+
+**Purpose**: Diagrams for technical concepts, flows, or architectures.
+
+```mdx
+import { Mermaid } from '@/components/mdx/Mermaid';
+
+<Mermaid chart={`
+graph LR
+    A[Intent] --> B[Refiner]
+    B --> C[Generator]
+    C --> D[Output]
+`} />
+```
+
+### Lists
+
+**Convert inline lists to bullet points when you have 3+ items.**
+
+❌ **Avoid**: Comma-separated lists buried in prose
+```markdown
+I see this in my own work constantly: documenting every decision, running structured reviews on every output, building linter-bots to police my coding agents.
+```
+
+✅ **Instead**: Break out as bullets
+```markdown
+I see this in my own work constantly:
+
+- Documenting every decision
+- Running structured reviews on every output
+- Building linter-bots to police my coding agents
+```
+
+**List formatting guidelines:**
+- No periods at end of items (unless full sentences)
+- Parallel structure (all start with verbs, or all are nouns)
+- 3-7 items typical; more than 7 may need subheaders
+
+### Headers
+
+**H2 (`##`) for major sections.** These are the primary navigational markers.
+
+**H3 (`###`) for subsections within an H2.** Use when breaking down a topic into parts.
+
+```markdown
+## What Rowing Actually Looks Like
+
+Introduction paragraph...
+
+### Aegis Framework
+
+Details about Aegis...
+
+### CLAUDE.md Files
+
+Details about CLAUDE.md...
+
+### Intent-Driven Engineering
+
+Details about IDE...
+```
+
+**Header style:**
+- Questions ("Is This Just Me?")
+- Statements ("The Real Work Is Reading the Signal")
+- Provocations ("You're Not the Driver")
+- Avoid: Generic headers ("Introduction", "Conclusion", "Summary")
+
+### Bold and Emphasis
+
+**Bold (`**text**`)** for:
+- Key terms being introduced
+- The lead-in phrase of a key point
+- Section-like emphasis within flowing prose
+
+```markdown
+**The CEO has to be a practitioner.** Not the best practitioner. Not the most sophisticated user. But someone who uses the tools, makes the mistakes, and shows the work.
+
+**Fluency needs rubrics.** I'm done saying "embrace AI" without defining what that actually means.
+```
+
+**Italics (`*text*`)** for:
+- Vocal emphasis (how you'd stress a word when speaking)
+- Introducing terms
+- Book/article titles
+
+```markdown
+But they don't *use* the tools themselves.
+```
+
+### Formatting Checklist
+
+Before publishing, verify visual formatting:
+
+- [ ] Paragraphs are short (1-3 sentences typical)
+- [ ] Horizontal rules between major H2 sections
+- [ ] Key quote elevated with `<PullQuote>` (max 1)
+- [ ] Strategic callouts for insights/warnings (max 2-4)
+- [ ] Inline lists converted to bullets (3+ items)
+- [ ] Headers are punchy, not generic
+- [ ] Bold used for key terms and lead-in phrases
+- [ ] Single-sentence paragraphs for punchlines
+- [ ] Visual rhythm varies (not all same-length paragraphs)
+
+### Example: Before/After
+
+**Before** (wall of text):
+```markdown
+Here's the thing Foster calls out that I've been circling for months: CEOs fall into a "delegation trap." They send memos about AI. They sponsor initiatives. They approve budgets for tools. But they don't use the tools themselves. This creates a specific kind of organizational paralysis. The people at the top are signaling that AI is important, but they're not demonstrating what "good" looks like. They're not making mistakes in public. They're not showing the messy middle. Foster's alternative? Hackathons and show-and-tells. Not as one-off events—as ongoing practice. Creating a safe space where people can experiment, fail, and learn without the pressure of immediate production value.
+```
+
+**After** (formatted):
+```markdown
+Here's the thing Foster calls out that I've been circling for months: CEOs fall into a "delegation trap."
+
+They send memos about AI. They sponsor initiatives. They approve budgets for tools.
+
+But they don't *use* the tools themselves.
+
+This creates a specific kind of organizational paralysis. The people at the top are signaling that AI is important, but they're not demonstrating what "good" looks like. They're not making mistakes in public. They're not showing the messy middle.
+
+<Callout type="signal" title="Foster's Alternative">
+Hackathons and show-and-tells. Not as one-off events—as ongoing practice. Creating a safe space where people can experiment, fail, and learn without the pressure of immediate production value.
+</Callout>
+```
+
+---
+
 ## Appendix: Corpus Analysis Summary
 
 **Total Posts Analyzed**: 156
