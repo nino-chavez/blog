@@ -19,51 +19,88 @@ seo:
   ogImage: ""
 ---
 
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
 I've been saying something to my teams lately that probably sounds harsh.
 
-> "If you want to get in this boat, you need to learn to row. There's no room for tourists."
+<PullQuote>
+If you want to get in this boat, you need to learn to row. There's no room for tourists.
+</PullQuote>
 
-It's not meant to be gatekeeping. It's an observation about what's actually happening. The gap between people *using* AI and people *building systems around it* is widening so fast that the middle ground is disappearing.
+It's not meant to be gatekeeping. It's an observation about what's actually happening.
+
+The gap between people *using* AI and people *building systems around it* is widening so fast that the middle ground is disappearing.
 
 Then I watched [Wade Foster's interview](https://www.youtube.com/watch?v=ZKnASs_d7aE) about how Zapier's CEO actually uses AI—not the marketing version, the real version—and I felt like someone finally said the quiet part out loud.
 
+---
+
 ## The Delegation Trap
 
-Here's the thing Foster calls out that I've been circling for months: CEOs fall into a "delegation trap." They send memos about AI. They sponsor initiatives. They approve budgets for tools.
+Here's the thing Foster calls out that I've been circling for months: CEOs fall into a "delegation trap."
+
+They send memos about AI. They sponsor initiatives. They approve budgets for tools.
 
 But they don't *use* the tools themselves.
 
 This creates a specific kind of organizational paralysis. The people at the top are signaling that AI is important, but they're not demonstrating what "good" looks like. They're not making mistakes in public. They're not showing the messy middle.
 
-Foster's alternative? Hackathons and show-and-tells. Not as one-off events—as ongoing practice. Creating a safe space where people can experiment, fail, and learn without the pressure of immediate production value.
+<Callout type="signal" title="Foster's Alternative">
+Hackathons and show-and-tells. Not as one-off events—as ongoing practice. Creating a safe space where people can experiment, fail, and learn without the pressure of immediate production value.
+</Callout>
 
-I've seen the difference this makes. When leadership actually builds something with AI—even something small, even something imperfect—it changes the entire conversation. Suddenly it's not abstract strategy. It's craft.
+I've seen the difference this makes. When leadership actually builds something with AI—even something small, even something imperfect—it changes the entire conversation.
+
+Suddenly it's not abstract strategy. It's craft.
+
+---
 
 ## The Economically Unviable Becomes Viable
 
 One of Foster's points hit particularly hard: AI agents make tasks that were previously "economically unviable" suddenly possible.
 
-Think about it. There's a category of work that's too tedious or too expensive for humans to do consistently. Not because it's not valuable—because the cost-to-value ratio was upside down.
+Think about it.
 
-I see this in my own work constantly. Things I would never have spent time on—because the ROI didn't justify it—are now table stakes. Documenting every decision. Running structured reviews on every output. Building linter-bots to police my coding agents. None of this would have been worth the effort before.
+There's a category of work that's too tedious or too expensive for humans to do consistently. Not because it's not valuable—because the cost-to-value ratio was upside down.
+
+I see this in my own work constantly. Things I would never have spent time on—because the ROI didn't justify it—are now table stakes:
+
+- Documenting every decision
+- Running structured reviews on every output
+- Building linter-bots to police my coding agents
+
+None of this would have been worth the effort before.
 
 Now? It's just... what you do.
 
+---
+
 ## AI Fluency Rubrics
 
-The part of Foster's approach that made me stop and take notes: Zapier has created specific rubrics to measure "AI fluency" for different roles. Not vague "embrace AI" mandates. Specific, measurable expectations for what AI skills look like at different levels.
+The part of Foster's approach that made me stop and take notes: Zapier has created specific rubrics to measure "AI fluency" for different roles.
+
+Not vague "embrace AI" mandates. Specific, measurable expectations for what AI skills look like at different levels.
 
 This is the "learn to row" principle made operational.
 
+<Callout type="insight">
 If you can't define what fluency looks like, you can't teach it. You can't hire for it. You can't reward it. You're just hoping people figure it out.
+</Callout>
 
 I've been guilty of this. Telling people to "use AI more" without giving them a clear picture of what "more" means. Without showing them the difference between prompting and governing. Between vibe coding and intent engineering.
 
-The rubric forces the conversation. What does "good" look like for a product manager? For an engineer? For a designer? The answers are different—and the specificity is the point.
+The rubric forces the conversation. What does "good" look like for a product manager? For an engineer? For a designer?
+
+The answers are different—and the specificity is the point.
+
+---
 
 ## Mining the Unspoken Culture
 
-This one might be the most interesting. Foster uses a meeting recorder (Granola) to transcribe meetings, then feeds the transcripts to AI to extract "unspoken culture." He compares what the data shows against Zapier's stated values.
+This one might be the most interesting.
+
+Foster uses a meeting recorder (Granola) to transcribe meetings, then feeds the transcripts to AI to extract "unspoken culture." He compares what the data shows against Zapier's stated values.
 
 What behaviors are actually rewarded? Not what's written in the handbook. What happens in the room.
 
@@ -73,35 +110,82 @@ I've been thinking about this in the context of AI governance. We write instruct
 
 Foster's doing the same thing, but for humans. Surfacing the gap between what we say we value and what we actually do.
 
+---
+
 ## The Hiring Evaluator Agent
 
-Foster built a custom agent that acts as an "expert hiring evaluator." It reviews interview transcripts against the job description and company values, provides a yes/no recommendation with reasoning, and serves as a bias check for hiring managers.
+Foster built a custom agent that acts as an "expert hiring evaluator."
 
-This isn't replacing the hiring decision. It's adding a structured second opinion that doesn't get tired, doesn't have unconscious biases toward candidates who remind them of themselves, and doesn't forget to check for specific criteria.
+It reviews interview transcripts against the job description and company values, provides a yes/no recommendation with reasoning, and serves as a bias check for hiring managers.
+
+This isn't replacing the hiring decision. It's adding a structured second opinion that:
+
+- Doesn't get tired
+- Doesn't have unconscious biases toward candidates who remind them of themselves
+- Doesn't forget to check for specific criteria
 
 It's the same pattern I've been writing about: AI as governance layer. Not making the decision—providing oversight on the decision-making process.
+
+---
 
 ## Systems, Not Prompts
 
 The reason Foster's approach resonates is that it's not aspirational. It's operational.
 
-He's not talking about what AI will do someday. He's showing what he does with it today. The meeting recorder that extracts culture. The hiring evaluator agent. The Grok searches for niche talent. The fluency rubrics.
+He's not talking about what AI will do someday. He's showing what he does with it today:
+
+- The meeting recorder that extracts culture
+- The hiring evaluator agent
+- The Grok searches for niche talent
+- The fluency rubrics
 
 Each of these is a system, not a prompt. Each of these required someone to build it, test it, iterate on it. Each of these required learning to row.
 
-It's the same thing I've been finding in my own work. The linter-bot I built to police my coding agents. The constitutional framework I use to govern AI behavior. The replay prompts I save so I can regenerate features cleanly. None of it is glamorous. All of it compounds.
+---
 
-Let me be specific. Here's what "learning to row" actually looks like in my projects:
+## What Rowing Actually Looks Like
 
-**Aegis Framework** — I built an entire governance system for AI agent development. Not because I wanted to. Because after burning two prototypes to the ground from "vibe coding," I realized that without constitutional constraints, AI agents drift. The framework has execution modes (lean, strict, generative), agent behavior profiles, drift detection tools, and snapshot testing for pattern fidelity. It's unglamorous infrastructure work. It's also the only reason my AI-assisted projects don't collapse under their own weight.
+It's the same thing I've been finding in my own work. The linter-bot I built to police my coding agents. The constitutional framework I use to govern AI behavior. The replay prompts I save so I can regenerate features cleanly.
 
-**CLAUDE.md files** — Every project I work on now has a detailed instruction file that defines the project's soul. Tech stack constraints. Diff budget policies. Auto-rejection triggers. Test contract requirements. The photography gallery project lists every Svelte 5 rune pattern the agent must follow and defines which files require "thorough mode" vs "direct mode." The ACP tools project locks the entire dependency stack—"DO NOT substitute these dependencies"—and defines a strict implementation order that agents cannot violate.
+None of it is glamorous. All of it compounds.
 
-**Intent-Driven Engineering** — I codified a methodology for AI-human collaborative development that prevents tool concurrency explosions. Sequential feature execution. Phase-based task decomposition. Human approval gates between major features. It sounds obvious. It took three weeks of failure to articulate.
+Let me be specific. Here's what "learning to row" looks like in my projects:
 
+### Aegis Framework
+
+I built an entire governance system for AI agent development. Not because I wanted to. Because after burning two prototypes to the ground from "vibe coding," I realized that without constitutional constraints, AI agents drift.
+
+The framework has:
+- Execution modes (lean, strict, generative)
+- Agent behavior profiles
+- Drift detection tools
+- Snapshot testing for pattern fidelity
+
+It's unglamorous infrastructure work. It's also the only reason my AI-assisted projects don't collapse under their own weight.
+
+### CLAUDE.md Files
+
+Every project I work on now has a detailed instruction file that defines the project's soul.
+
+Tech stack constraints. Diff budget policies. Auto-rejection triggers. Test contract requirements.
+
+The photography gallery project lists every Svelte 5 rune pattern the agent must follow and defines which files require "thorough mode" vs "direct mode." The ACP tools project locks the entire dependency stack—"DO NOT substitute these dependencies"—and defines a strict implementation order that agents cannot violate.
+
+### Intent-Driven Engineering
+
+I codified a methodology for AI-human collaborative development that prevents tool concurrency explosions.
+
+Sequential feature execution. Phase-based task decomposition. Human approval gates between major features.
+
+It sounds obvious. It took three weeks of failure to articulate.
+
+<Callout type="warning">
 None of this is intellectual tourism. You can't read about Aegis and "get it." You can't skim a CLAUDE.md template and understand why the diff budget policy matters. You have to live through the drift. You have to debug the agent that ignored your instructions. You have to rebuild from scratch after the entropy compounds.
+</Callout>
 
 That's what rowing feels like.
+
+---
 
 ## The Dissolution of Syntax
 
@@ -109,11 +193,15 @@ Here's the connection I keep making to the broader shift.
 
 I wrote recently about [the dissolution of syntax](/blog/the-dissolution-of-syntax)—the idea that we're transitioning from an era where code is the artifact to one where intent is the artifact. The syntax becomes something AI handles. What matters is whether you can articulate what you want and govern how it gets built.
 
-Foster's approach is this principle made operational. He's not delegating "use AI" to his organization. He's building the governance layer—the fluency rubrics, the culture audits, the structured agent workflows—that makes AI use actually productive.
+Foster's approach is this principle made operational.
+
+He's not delegating "use AI" to his organization. He's building the governance layer—the fluency rubrics, the culture audits, the structured agent workflows—that makes AI use actually productive.
 
 Most organizations are still sending memos. They're tourists in the AI landscape. They visit, take photos, and go home unchanged.
 
 The practitioners are building infrastructure.
+
+---
 
 ## The Tourist Problem
 
@@ -127,17 +215,21 @@ The gap between tourists and practitioners is widening precisely because the pra
 
 You can't delegate that. You can't memo your way to it. You have to row.
 
+---
+
 ## What This Crystallized
 
 Foster's interview put words to something I've been circling.
 
-The CEO has to be a practitioner. Not the best practitioner. Not the most sophisticated user. But someone who uses the tools, makes the mistakes, and shows the work. I've seen what happens when leadership stays abstract—the whole organization stays abstract.
+**The CEO has to be a practitioner.** Not the best practitioner. Not the most sophisticated user. But someone who uses the tools, makes the mistakes, and shows the work. I've seen what happens when leadership stays abstract—the whole organization stays abstract.
 
-Fluency needs rubrics. I'm done saying "embrace AI" to my teams without defining what that actually means. What does good look like for a PM? For an engineer? For a designer? If I can't answer that specifically, I'm just hoping people figure it out.
+**Fluency needs rubrics.** I'm done saying "embrace AI" to my teams without defining what that actually means. What does good look like for a PM? For an engineer? For a designer? If I can't answer that specifically, I'm just hoping people figure it out.
 
-Culture audits work on AI too. The gap between what you tell your agents to do and what they actually do is the same gap between stated values and actual behavior. Both require signal processing. Both require someone paying attention.
+**Culture audits work on AI too.** The gap between what you tell your agents to do and what they actually do is the same gap between stated values and actual behavior. Both require signal processing. Both require someone paying attention.
 
-The economically unviable is now viable. The governance work, the documentation, the meta-layer stuff I would have skipped before—that's where the compound interest lives now.
+**The economically unviable is now viable.** The governance work, the documentation, the meta-layer stuff I would have skipped before—that's where the compound interest lives now.
+
+---
 
 I don't know if "no room for tourists" is the right way to say it. Maybe it's too harsh. Maybe it sounds like gatekeeping when it's meant as an invitation.
 
