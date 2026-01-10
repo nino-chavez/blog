@@ -23,9 +23,22 @@ if (!OPENROUTER_API_KEY) {
   process.exit(1);
 }
 
-const BLOG_DIR = '/Users/nino/Workspace/dev/sites/signal-dispatch-blog/astro-build/src/content/blog';
-const OUTPUT_DIR = '/Users/nino/Workspace/dev/sites/signal-dispatch-blog/astro-build/public/images/generated';
-const PROGRESS_FILE = './illustration-generation-progress.json';
+// Parse --dir flag (blog or whitepapers, defaults to blog)
+const args = process.argv.slice(2);
+const dirFlagIndex = args.findIndex(a => a === '--dir');
+const CONTENT_TYPE = dirFlagIndex !== -1 && args[dirFlagIndex + 1]
+  ? args[dirFlagIndex + 1]
+  : 'blog';
+
+if (!['blog', 'whitepapers'].includes(CONTENT_TYPE)) {
+  console.error('Error: --dir must be "blog" or "whitepapers"');
+  process.exit(1);
+}
+
+const BASE_DIR = '/Users/nino/Workspace/dev/sites/signal-dispatch-blog/astro-build';
+const CONTENT_DIR = `${BASE_DIR}/src/content/${CONTENT_TYPE}`;
+const OUTPUT_DIR = `${BASE_DIR}/public/images/generated`;
+const PROGRESS_FILE = `./illustration-generation-progress-${CONTENT_TYPE}.json`;
 
 // Target dimensions for blog feature images (16:9 aspect ratio)
 const TARGET_WIDTH = 1200;
@@ -455,7 +468,7 @@ async function main() {
   }
 
   const progress = forceRegenerate ? { completed: [], failed: [], skipped: [] } : loadProgress();
-  let files = fs.readdirSync(BLOG_DIR).filter(f => f.endsWith('.mdx'));
+  let files = fs.readdirSync(CONTENT_DIR).filter(f => f.endsWith('.mdx'));
 
   // If specific file requested
   if (specificFile) {
@@ -472,9 +485,10 @@ async function main() {
   console.log('🎨 Signal Dispatch Illustration Generator v4.0');
   console.log('   OpenRouter + Gemini 2.5 Flash Image');
   console.log('   Hand-drawn illustration style + Sharp WebP Optimization\n');
+  console.log(`📂 Content type: ${CONTENT_TYPE}`);
   console.log(`📐 Output: ${TARGET_WIDTH}x${TARGET_HEIGHT} WebP @ quality ${WEBP_QUALITY}`);
   console.log(`📊 Status:`);
-  console.log(`   Total posts: ${files.length}`);
+  console.log(`   Total ${CONTENT_TYPE}: ${files.length}`);
   console.log(`   Completed: ${progress.completed.length}`);
   console.log(`   Failed: ${progress.failed.length}`);
   console.log(`   Remaining: ${remaining.length}`);
@@ -488,7 +502,7 @@ async function main() {
 
   for (const filename of remaining) {
     count++;
-    const filepath = path.join(BLOG_DIR, filename);
+    const filepath = path.join(CONTENT_DIR, filename);
     const content = fs.readFileSync(filepath, 'utf-8');
     const frontmatter = extractFrontmatter(content);
 
