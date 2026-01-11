@@ -1,0 +1,917 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { generateArticleSchema } from '../../utils/schema';
+import { PresentationNavigation } from '../../components/presentations';
+
+// In SSR mode, get the presentation from the slug parameter
+const { slug } = Astro.params;
+const presentations = await getCollection('presentations');
+const presentation = presentations.find((p) => p.id === slug);
+
+if (!presentation) {
+  return Astro.redirect('/presentations');
+}
+
+const { Content } = await render(presentation);
+
+// Count slides by looking for <Slide> components in the raw content
+// This is a rough estimate - actual count comes from rendered content
+const slideMatches = presentation.body?.match(/<Slide/g);
+const slideCount = slideMatches?.length || 1;
+
+// Generate JSON-LD schema
+const articleSchema = generateArticleSchema({
+  id: `presentations/${presentation.id}`,
+  data: presentation.data,
+});
+
+// Format dates
+const publishedDate = new Date(presentation.data.publishedAt);
+const formattedDate = publishedDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+// Mode labels
+const modeLabels = {
+  'executive-advisory': 'Executive Advisory',
+  'technical-deep-dive': 'Technical Deep Dive',
+  'workshop': 'Workshop',
+};
+const mode = presentation.data.mode as keyof typeof modeLabels | undefined;
+---
+
+<BaseLayout
+  title={presentation.data.title}
+  description={presentation.data.excerpt || `A presentation by Nino Chavez`}
+  image={presentation.data.featureImage}
+  type="article"
+  publishedTime={publishedDate.toISOString()}
+  author={presentation.data.author}
+  jsonLd={[articleSchema]}
+>
+  <!-- Navigation -->
+  <PresentationNavigation
+    client:load
+    totalSlides={slideCount}
+    title={presentation.data.title}
+  />
+
+  <main class="pt-14 min-h-screen bg-brand-slate overflow-hidden">
+    <!-- Presentation Content -->
+    <div class="presentation-container">
+      <Content />
+    </div>
+  </main>
+</BaseLayout>
+
+<style is:global>
+  /* ============================================
+     SIGNAL DISPATCH PRESENTATION DESIGN SYSTEM
+     Based on Signal Forge reference implementation
+     ============================================ */
+
+  /* Font imports */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  /* ============================================
+     CSS CUSTOM PROPERTIES (Design Tokens)
+     ============================================ */
+  :root {
+    /* Brand Colors */
+    --brand-violet: #6366f1;
+    --brand-navy: #1e1b4b;
+    --brand-slate: #0f172a;
+
+    /* Accent Colors */
+    --accent-cyan: #06b6d4;
+    --accent-emerald: #10b981;
+    --accent-amber: #f59e0b;
+
+    /* Platform Colors */
+    --windows-blue: #0078D4;
+    --ubuntu-orange: #E95420;
+  }
+
+  /* Background utility class */
+  .bg-brand-slate {
+    background-color: var(--brand-slate);
+  }
+
+  /* ============================================
+     PRESENTATION CONTAINER
+     ============================================ */
+  .presentation-container {
+    position: relative;
+    min-height: calc(100vh - 56px);
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* ============================================
+     BASE SLIDE STYLING
+     ============================================ */
+  .presentation-container .slide {
+    display: none;
+    min-height: calc(100vh - 56px);
+    flex-direction: column;
+    background: linear-gradient(to bottom right, var(--brand-slate), var(--brand-navy), var(--brand-slate));
+    overflow: hidden;
+    padding: 5rem 2rem 3rem 2rem;
+    box-sizing: border-box;
+  }
+
+  /* Active slide is visible */
+  .presentation-container .slide.active {
+    display: flex;
+  }
+
+  /* Animation for active slides */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .presentation-container .slide.active {
+    animation: fadeIn 0.4s ease-out;
+  }
+
+  /* Slow pulse animation for badges */
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+  .animate-pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
+
+  /* ============================================
+     TYPOGRAPHY
+     ============================================ */
+  .presentation-container .slide h1 {
+    font-size: 3.75rem;
+    font-weight: 800;
+    color: #fafafa;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin-bottom: 1.5rem;
+  }
+
+  .presentation-container .slide h2 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #fafafa;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    margin-bottom: 3rem;
+  }
+
+  .presentation-container .slide h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fafafa;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+
+  .presentation-container .slide p {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .presentation-container .slide strong {
+    color: #fafafa;
+    font-weight: 600;
+  }
+
+  .presentation-container .slide em {
+    color: var(--accent-cyan);
+    font-style: italic;
+  }
+
+  /* ============================================
+     SECTION LABELS (The key visual element!)
+     ============================================ */
+  .presentation-container .section-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .presentation-container .section-label.amber { color: var(--accent-amber); }
+  .presentation-container .section-label.cyan { color: var(--accent-cyan); }
+  .presentation-container .section-label.emerald { color: var(--accent-emerald); }
+  .presentation-container .section-label.violet { color: var(--brand-violet); }
+  .presentation-container .section-label.red { color: #f87171; }
+  .presentation-container .section-label.neutral { color: rgba(255, 255, 255, 0.4); }
+
+  /* ============================================
+     CONTENT CARDS
+     ============================================ */
+  .presentation-container .card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .presentation-container .card.highlighted {
+    background: linear-gradient(to bottom right, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.1));
+    border-color: rgba(99, 102, 241, 0.3);
+    box-shadow: 0 0 40px rgba(99, 102, 241, 0.3);
+  }
+
+  .presentation-container .card.terminal {
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .presentation-container .card.warning {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.2);
+  }
+
+  .presentation-container .card.success {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.2);
+  }
+
+  /* Card header/label */
+  .presentation-container .card-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1.5rem;
+  }
+
+  /* ============================================
+     CALLOUT BLOCKS
+     ============================================ */
+  .presentation-container .callout {
+    background: linear-gradient(to right, rgba(99, 102, 241, 0.1), transparent);
+    border-left: 4px solid var(--brand-violet);
+    padding: 1.5rem;
+    border-radius: 0 0.75rem 0.75rem 0;
+    margin-top: 2rem;
+  }
+
+  .presentation-container .callout.amber {
+    background: linear-gradient(to right, rgba(245, 158, 11, 0.1), transparent);
+    border-left-color: var(--accent-amber);
+  }
+
+  .presentation-container .callout.cyan {
+    background: linear-gradient(to right, rgba(6, 182, 212, 0.1), transparent);
+    border-left-color: var(--accent-cyan);
+  }
+
+  .presentation-container .callout.emerald {
+    background: linear-gradient(to right, rgba(16, 185, 129, 0.1), transparent);
+    border-left-color: var(--accent-emerald);
+  }
+
+  .presentation-container .callout.red {
+    background: linear-gradient(to right, rgba(239, 68, 68, 0.1), transparent);
+    border-left-color: #f87171;
+  }
+
+  .presentation-container .callout p {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0;
+  }
+
+  .presentation-container .callout-label {
+    font-weight: 700;
+  }
+
+  .presentation-container .callout-label.amber { color: var(--accent-amber); }
+  .presentation-container .callout-label.cyan { color: var(--accent-cyan); }
+  .presentation-container .callout-label.emerald { color: var(--accent-emerald); }
+  .presentation-container .callout-label.violet { color: var(--brand-violet); }
+  .presentation-container .callout-label.red { color: #f87171; }
+
+  /* ============================================
+     NUMBERED STEPS
+     ============================================ */
+  .presentation-container .step-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .presentation-container .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .presentation-container .step-number {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: rgba(99, 102, 241, 0.2);
+    color: var(--brand-violet);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.875rem;
+  }
+
+  .presentation-container .step-number.amber {
+    background: rgba(245, 158, 11, 0.2);
+    color: var(--accent-amber);
+  }
+
+  .presentation-container .step-content {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.8);
+    padding-top: 0.125rem;
+  }
+
+  /* ============================================
+     LISTS
+     ============================================ */
+  .presentation-container .slide ul,
+  .presentation-container .slide ol {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.8;
+    text-align: left;
+    margin: 1.5rem 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .presentation-container .slide li {
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .presentation-container .slide ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--brand-violet);
+    font-weight: 600;
+  }
+
+  .presentation-container .slide ol {
+    counter-reset: item;
+  }
+
+  .presentation-container .slide ol li {
+    counter-increment: item;
+  }
+
+  .presentation-container .slide ol li::before {
+    content: counter(item);
+    position: absolute;
+    left: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: rgba(99, 102, 241, 0.2);
+    color: var(--brand-violet);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    top: 0.2rem;
+  }
+
+  /* ============================================
+     CODE BLOCKS
+     ============================================ */
+  .presentation-container .slide code {
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(0, 0, 0, 0.4);
+    color: var(--accent-cyan);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.9em;
+  }
+
+  .presentation-container .slide pre {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.75rem;
+    padding: 1rem 1.5rem;
+    overflow-x: auto;
+    text-align: left;
+    margin: 1.5rem 0;
+  }
+
+  .presentation-container .slide pre code {
+    background: transparent;
+    padding: 0;
+    font-size: 0.875rem;
+  }
+
+  /* ============================================
+     TABLES (Card-style)
+     ============================================ */
+  .presentation-container .slide table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 1rem;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .presentation-container .slide th {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    padding: 1rem 1.25rem;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .presentation-container .slide td {
+    padding: 1rem 1.25rem;
+    color: rgba(255, 255, 255, 0.7);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .presentation-container .slide tr:last-child td {
+    border-bottom: none;
+  }
+
+  .presentation-container .slide tr:hover td {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  /* Table cell colors */
+  .presentation-container .slide td.positive,
+  .presentation-container .slide td .positive {
+    color: var(--accent-emerald);
+  }
+
+  .presentation-container .slide td.negative,
+  .presentation-container .slide td .negative {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .presentation-container .slide td strong {
+    font-weight: 600;
+  }
+
+  /* ============================================
+     BLOCKQUOTES
+     ============================================ */
+  .presentation-container .slide blockquote {
+    border-left: 4px solid var(--brand-violet);
+    padding-left: 1.5rem;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 2rem 0;
+  }
+
+  .presentation-container .slide blockquote p {
+    font-size: inherit;
+    margin-bottom: 0;
+  }
+
+  /* ============================================
+     GRIDS
+     ============================================ */
+  .presentation-container .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .presentation-container .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* ============================================
+     LAYOUT: TITLE SLIDE
+     ============================================ */
+  .presentation-container .slide[data-layout="title"] {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .presentation-container .slide[data-layout="title"] > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .presentation-container .slide[data-layout="title"] h1 {
+    font-size: 3.75rem;
+    background: linear-gradient(to right, #fafafa, rgba(250, 250, 250, 0.6));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .presentation-container .slide[data-layout="title"] p {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.5);
+    max-width: 600px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .presentation-container .slide[data-layout="title"] p strong {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    display: block;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .presentation-container .slide[data-layout="title"] em {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.3);
+    display: block;
+    margin-top: 3rem;
+    text-align: center;
+  }
+
+  /* Title badge */
+  .presentation-container .title-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(99, 102, 241, 0.2);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 9999px;
+    color: var(--brand-violet);
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+
+  .presentation-container .title-badge .pulse-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--brand-violet);
+    animation: pulse-slow 3s ease-in-out infinite;
+  }
+
+  /* ============================================
+     LAYOUT: DEFAULT (Left-aligned content)
+     ============================================ */
+  .presentation-container .slide[data-layout="default"] {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .presentation-container .slide[data-layout="default"] > div {
+    max-width: 64rem;
+    width: 100%;
+  }
+
+  /* ============================================
+     LAYOUT: TABLE SLIDE
+     ============================================ */
+  .presentation-container .slide[data-layout="table"] {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .presentation-container .slide[data-layout="table"] > div {
+    max-width: 64rem;
+    width: 100%;
+  }
+
+  .presentation-container .slide[data-layout="table"] h2 {
+    margin-bottom: 0.5rem;
+  }
+
+  .presentation-container .slide[data-layout="table"] h3 {
+    color: var(--brand-violet);
+    margin-bottom: 2rem;
+  }
+
+  /* ============================================
+     LAYOUT: QUOTE SLIDE
+     ============================================ */
+  .presentation-container .slide[data-layout="quote"] {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .presentation-container .slide[data-layout="quote"] blockquote {
+    font-size: 2rem;
+    border-left: none;
+    padding: 0;
+    text-align: center;
+    max-width: 800px;
+  }
+
+  .presentation-container .slide[data-layout="quote"] blockquote::before {
+    content: '"';
+    font-size: 5rem;
+    color: var(--brand-violet);
+    line-height: 1;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ============================================
+     LAYOUT: GRID SLIDE
+     ============================================ */
+  .presentation-container .slide[data-layout="grid"] {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .presentation-container .slide[data-layout="grid"] > div {
+    max-width: 64rem;
+    width: 100%;
+  }
+
+  /* ============================================
+     PLATFORM HEADERS
+     ============================================ */
+  .presentation-container .platform-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .presentation-container .platform-icon {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .presentation-container .platform-icon.windows {
+    background: var(--windows-blue);
+  }
+
+  .presentation-container .platform-icon.macos {
+    background: linear-gradient(to bottom right, #374151, #111827);
+  }
+
+  .presentation-container .platform-icon.linux {
+    background: var(--ubuntu-orange);
+  }
+
+  .presentation-container .platform-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .presentation-container .platform-name.windows { color: var(--windows-blue); }
+  .presentation-container .platform-name.macos { color: rgba(255, 255, 255, 0.6); }
+  .presentation-container .platform-name.linux { color: var(--ubuntu-orange); }
+
+  /* ============================================
+     DATA CARDS (Metrics)
+     ============================================ */
+  .presentation-container .data-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+  }
+
+  .presentation-container .data-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .presentation-container .data-card-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .presentation-container .data-card-title {
+    font-weight: 700;
+    color: white;
+  }
+
+  .presentation-container .data-card-subtitle {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .presentation-container .data-card-metric {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .presentation-container .data-card-metric.cyan { color: var(--accent-cyan); }
+  .presentation-container .data-card-metric.emerald { color: var(--accent-emerald); }
+  .presentation-container .data-card-metric.amber { color: var(--accent-amber); }
+  .presentation-container .data-card-metric.violet { color: var(--brand-violet); }
+
+  .presentation-container .data-card-description {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* ============================================
+     FEATURE LISTS
+     ============================================ */
+  .presentation-container .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .presentation-container .feature-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding-left: 0;
+    margin-bottom: 0.75rem;
+  }
+
+  .presentation-container .feature-list li::before {
+    display: none;
+  }
+
+  /* Suppress arrow markers for lists with list-none class (custom inline markers) */
+  .presentation-container .slide ul.list-none li::before {
+    display: none;
+  }
+
+  .presentation-container .feature-list .icon {
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+  }
+
+  .presentation-container .feature-list .icon.arrow { color: var(--brand-violet); }
+  .presentation-container .feature-list .icon.check { color: var(--accent-emerald); }
+  .presentation-container .feature-list .icon.x { color: rgba(255, 255, 255, 0.3); }
+  .presentation-container .feature-list .icon.warning { color: #f87171; }
+  .presentation-container .feature-list .icon.dot { color: var(--accent-emerald); }
+
+  /* ============================================
+     COMPARISON CARDS
+     ============================================ */
+  .presentation-container .comparison-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .presentation-container .comparison-card:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .presentation-container .comparison-card.highlighted {
+    background: linear-gradient(to bottom right, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.1));
+    border-color: rgba(99, 102, 241, 0.3);
+    box-shadow: 0 0 40px rgba(99, 102, 241, 0.3);
+  }
+
+  .presentation-container .comparison-card-era {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 0.5rem;
+  }
+
+  .presentation-container .comparison-card.highlighted .comparison-card-era {
+    color: var(--brand-violet);
+    font-weight: 600;
+  }
+
+  .presentation-container .comparison-card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.75rem;
+  }
+
+  .presentation-container .comparison-card-description {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .presentation-container .comparison-card.highlighted .comparison-card-description {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .presentation-container .comparison-card-footer {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* ============================================
+     TIMELINE
+     ============================================ */
+  .presentation-container .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .presentation-container .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), var(--brand-violet), var(--accent-cyan));
+  }
+
+  .presentation-container .timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+    margin-left: 1rem;
+  }
+
+  .presentation-container .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.5rem;
+    top: 0.5rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background: var(--brand-violet);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+  }
+
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
+  @media (max-width: 768px) {
+    .presentation-container .slide {
+      padding: 4rem 1rem 2rem 1rem;
+    }
+
+    .presentation-container .slide h1 {
+      font-size: 2.25rem;
+    }
+
+    .presentation-container .slide h2 {
+      font-size: 1.75rem;
+    }
+
+    .presentation-container .slide h3 {
+      font-size: 1.125rem;
+    }
+
+    .presentation-container .slide p {
+      font-size: 1rem;
+    }
+
+    .presentation-container .slide[data-layout="title"] h1 {
+      font-size: 2.25rem;
+    }
+
+    .presentation-container .slide ul,
+    .presentation-container .slide ol {
+      font-size: 0.9375rem;
+    }
+
+    .presentation-container .slide table {
+      font-size: 0.875rem;
+    }
+
+    .presentation-container .grid-2,
+    .presentation-container .grid-3 {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
