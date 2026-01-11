@@ -176,8 +176,90 @@ export default function BlogList({ posts }: BlogListProps) {
   return (
     <div className="space-y-8">
       {/* Sticky Filter Bar */}
-      <div className="sticky top-[73px] z-40 -mx-4 px-4 py-4 bg-zinc-950/95 backdrop-blur-lg border-b border-zinc-800/50">
-        <div className="flex flex-wrap items-center gap-3">
+      <div className="sticky top-[56px] sm:top-[73px] z-40 -mx-3 sm:-mx-4 px-3 sm:px-4 py-3 sm:py-4 bg-zinc-950/95 backdrop-blur-lg border-b border-zinc-800/50">
+        {/* Mobile: Stack search above filters */}
+        <div className="flex flex-col gap-3 sm:hidden">
+          {/* Search - Full width on mobile */}
+          <div className="relative">
+            <svg
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+            <input
+              type="text"
+              placeholder="Search posts..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-2.5 text-sm bg-zinc-900/50 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-athletic-brand-violet/50"
+            />
+          </div>
+
+          {/* Horizontally scrollable category filters */}
+          <div className="-mx-3 px-3 overflow-x-auto scrollbar-hide">
+            <div className="flex items-center gap-2 pb-1" style={{ minWidth: 'max-content' }}>
+              {/* All Posts */}
+              <button
+                onClick={() => setSelectedCategory(null)}
+                className={`text-xs font-semibold px-4 py-2 rounded-full border transition-all whitespace-nowrap ${
+                  !selectedCategory
+                    ? "bg-athletic-brand-violet text-white border-athletic-brand-violet"
+                    : "bg-zinc-900/50 text-zinc-400 border-zinc-800 active:bg-zinc-800"
+                }`}
+              >
+                All ({posts.length})
+              </button>
+
+              {/* Top Categories */}
+              {topCategories.map((cat) => {
+                const colors = getCategoryColors(cat);
+                const isSelected = selectedCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setSelectedCategory(isSelected ? null : cat)}
+                    className={`text-xs font-semibold px-4 py-2 rounded-full border transition-all whitespace-nowrap ${
+                      isSelected
+                        ? `${colors.bg} ${colors.border} ${colors.text}`
+                        : "bg-zinc-900/50 text-zinc-400 border-zinc-800 active:bg-zinc-800"
+                    }`}
+                  >
+                    {cat} ({postCounts[cat]})
+                  </button>
+                );
+              })}
+
+              {/* Other dropdown */}
+              {otherCategories.length > 0 && (
+                <button
+                  onClick={() =>
+                    setSelectedCategory(
+                      selectedCategory === "Other" ? null : "Other"
+                    )
+                  }
+                  className={`text-xs font-semibold px-4 py-2 rounded-full border transition-all whitespace-nowrap ${
+                    selectedCategory === "Other"
+                      ? "bg-zinc-700 text-white border-zinc-600"
+                      : "bg-zinc-900/50 text-zinc-400 border-zinc-800 active:bg-zinc-800"
+                  }`}
+                >
+                  Other ({postCounts["Other"]})
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop: Inline layout */}
+        <div className="hidden sm:flex sm:flex-wrap sm:items-center sm:gap-3">
           {/* All Posts */}
           <button
             onClick={() => setSelectedCategory(null)}
