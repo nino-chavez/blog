@@ -1,0 +1,294 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { generateCollectionSchema } from '../../utils/schema';
+
+// Get all content collections
+const presentations = await getCollection('presentations');
+const whitepapers = await getCollection('whitepapers');
+const blogPosts = await getCollection('blog');
+
+const sortedPresentations = presentations.sort(
+  (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime()
+);
+
+// Generate JSON-LD
+const collectionSchema = generateCollectionSchema(
+  'Signal Dispatch Presentations',
+  'Strategic presentations and executive briefings on AI, technology, and systems design.',
+  'https://blog.ninochavez.co/presentations',
+  sortedPresentations
+);
+
+// Get presentation image - check companion content first, then own featureImage, then fallback
+const getPresentationImage = (presentation: typeof sortedPresentations[0]) => {
+  // 1. Check if presentation has its own feature image
+  if (presentation.data.featureImage) return presentation.data.featureImage;
+
+  // 2. Check companion content for image
+  const companion = presentation.data.companionOf;
+  if (companion) {
+    if (companion.type === 'whitepaper') {
+      const wp = whitepapers.find(w => w.id === companion.slug);
+      if (wp?.data.featureImage) return wp.data.featureImage;
+    } else if (companion.type === 'blog') {
+      const post = blogPosts.find(p => p.id === companion.slug);
+      if (post?.data.featureImage) return post.data.featureImage;
+    }
+  }
+
+  // 3. Fallback to generated category image
+  const hash = presentation.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const variant = (hash % 5) + 1;
+  return `/images/generated/categories/ai-automation-${variant}.webp`;
+};
+
+// Get companion content details
+const getCompanionContent = (presentation: typeof sortedPresentations[0]) => {
+  const companion = presentation.data.companionOf;
+  if (!companion) return null;
+
+  if (companion.type === 'whitepaper') {
+    const wp = whitepapers.find(w => w.id === companion.slug);
+    if (wp) return { type: 'whitepaper', title: wp.data.title, url: `/blog/whitepapers/${wp.id}` };
+  } else if (companion.type === 'blog') {
+    const post = blogPosts.find(p => p.id === companion.slug);
+    if (post) return { type: 'blog', title: post.data.title, url: `/blog/${post.id}` };
+  }
+  return null;
+};
+
+// Mode labels and icons
+const modeLabels = {
+  'executive-advisory': 'Executive Advisory',
+  'technical-deep-dive': 'Technical Deep Dive',
+  'workshop': 'Workshop',
+};
+
+const modeColors = {
+  'executive-advisory': 'from-athletic-brand-violet to-purple-600',
+  'technical-deep-dive': 'from-cyan-500 to-blue-600',
+  'workshop': 'from-athletic-court-orange to-amber-500',
+};
+---
+
+<BaseLayout
+  title="Presentations"
+  description="Strategic presentations and executive briefings on AI, technology, and systems design by Nino Chavez."
+  jsonLd={[collectionSchema]}
+>
+  <main class="min-h-screen">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-zinc-950/95 backdrop-blur-xl border-b border-zinc-800/30">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-[73px]">
+          <a href="/blog" class="flex items-center gap-3">
+            <h1 class="text-lg font-bold bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange bg-clip-text text-transparent">
+              Signal Dispatch
+            </h1>
+          </a>
+          <div class="flex items-center gap-4">
+            <a href="/blog" class="text-sm text-zinc-400 hover:text-white transition-colors">Blog</a>
+            <a href="/blog/whitepapers" class="text-sm text-zinc-400 hover:text-white transition-colors">Whitepapers</a>
+            <a href="/rss.xml" class="text-zinc-400 hover:text-white transition-colors" title="RSS Feed">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden border-b border-zinc-800/30">
+      <div class="absolute inset-0 bg-gradient-to-br from-athletic-brand-violet/5 via-transparent to-athletic-court-orange/5" />
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div class="space-y-4">
+            <a href="/blog" class="group inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-athletic-court-orange transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Back to Blog
+            </a>
+            <div class="flex items-center gap-4">
+              <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight">Presentations</h1>
+              <span class="text-sm text-zinc-400 bg-zinc-800/50 px-3 py-1.5 rounded-full border border-zinc-700/50">
+                {sortedPresentations.length} {sortedPresentations.length === 1 ? 'deck' : 'decks'}
+              </span>
+            </div>
+            <p class="text-lg text-zinc-400 max-w-xl">
+              Strategic briefings and executive presentations. Slide-based delivery of key insights.
+            </p>
+          </div>
+
+          <!-- Controls hint -->
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center gap-3 text-sm text-zinc-500 bg-zinc-900/50 px-4 py-3 rounded-xl border border-zinc-800/50">
+              <div class="flex items-center gap-1.5">
+                <kbd class="px-2 py-1 bg-zinc-800 rounded text-xs font-mono text-zinc-300">←</kbd>
+                <kbd class="px-2 py-1 bg-zinc-800 rounded text-xs font-mono text-zinc-300">→</kbd>
+              </div>
+              <span>Navigate slides</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Presentations Grid -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {sortedPresentations.length === 0 ? (
+        <div class="text-center py-20">
+          <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-zinc-900/50 flex items-center justify-center border border-zinc-800">
+            <svg class="w-10 h-10 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">No presentations yet</h3>
+          <p class="text-zinc-500">Check back soon for strategic briefings and executive presentations.</p>
+        </div>
+      ) : (
+        <div class="space-y-8">
+          {sortedPresentations.map((presentation, index) => {
+            const isNew = (new Date().getTime() - new Date(presentation.data.publishedAt).getTime()) / (1000 * 60 * 60 * 24) <= 14;
+            const imageUrl = getPresentationImage(presentation);
+            const mode = presentation.data.mode as keyof typeof modeLabels | undefined;
+            const companion = getCompanionContent(presentation);
+            const isFirst = index === 0;
+
+            return (
+              <article class={`group relative overflow-hidden rounded-2xl border transition-all duration-500 hover:border-athletic-brand-violet/50 ${isFirst ? 'border-athletic-brand-violet/30 bg-gradient-to-br from-zinc-900/90 via-zinc-900/70 to-zinc-950' : 'border-zinc-800/50 bg-zinc-900/30 hover:bg-zinc-900/50'}`}>
+                <a href={`/presentations/${presentation.id}`} class="block">
+                  <div class="flex flex-col lg:flex-row">
+                    {/* Image Section */}
+                    <div class={`relative ${isFirst ? 'lg:w-3/5' : 'lg:w-2/5'}`}>
+                      <div class={`${isFirst ? 'aspect-[16/9] lg:aspect-[16/10]' : 'aspect-[16/9] lg:aspect-[4/3]'} overflow-hidden`}>
+                        <img
+                          src={imageUrl}
+                          alt={presentation.data.title}
+                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                          loading={isFirst ? "eager" : "lazy"}
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/20 to-transparent" />
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-zinc-900/80 hidden lg:block" />
+                      </div>
+
+                      {/* Badges */}
+                      <div class="absolute top-4 left-4 flex items-center gap-2">
+                        {isNew && (
+                          <span class="font-bold uppercase tracking-wider px-3 py-1.5 rounded-full bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange text-white text-[10px] shadow-lg shadow-athletic-brand-violet/20">
+                            New
+                          </span>
+                        )}
+                        {isFirst && sortedPresentations.length > 1 && (
+                          <span class="font-bold uppercase tracking-wider px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-white text-[10px] border border-white/20">
+                            Latest
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Play button overlay */}
+                      <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-athletic-brand-violet/80 backdrop-blur-sm flex items-center justify-center shadow-2xl shadow-athletic-brand-violet/30 group-hover:scale-110 group-hover:bg-athletic-brand-violet transition-all duration-300">
+                          <svg class="w-7 h-7 lg:w-8 lg:h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Content Section */}
+                    <div class={`flex-1 p-6 lg:p-8 flex flex-col justify-center ${isFirst ? 'lg:py-10' : ''}`}>
+                      {/* Meta row */}
+                      <div class="flex items-center gap-3 text-xs mb-4 flex-wrap">
+                        {mode && (
+                          <span class={`font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full bg-gradient-to-r ${modeColors[mode]} text-white`}>
+                            {modeLabels[mode]}
+                          </span>
+                        )}
+                        <span class="text-zinc-500">
+                          {new Date(presentation.data.publishedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                        </span>
+                        {presentation.data.duration && (
+                          <>
+                            <span class="text-zinc-700">•</span>
+                            <span class="flex items-center gap-1.5 text-zinc-500">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                              {presentation.data.duration}
+                            </span>
+                          </>
+                        )}
+                      </div>
+
+                      {/* Title */}
+                      <h2 class={`font-bold text-white group-hover:text-athletic-court-orange transition-colors mb-3 ${isFirst ? 'text-2xl lg:text-4xl' : 'text-xl lg:text-2xl'}`}>
+                        {presentation.data.title}
+                      </h2>
+
+                      {/* Excerpt */}
+                      {presentation.data.excerpt && (
+                        <p class={`text-zinc-400 leading-relaxed mb-4 ${isFirst ? 'text-base lg:text-lg line-clamp-3' : 'text-sm line-clamp-2'}`}>
+                          {presentation.data.excerpt}
+                        </p>
+                      )}
+
+                      {/* Audience */}
+                      {presentation.data.audience && (
+                        <p class="text-xs text-zinc-500 mb-4">
+                          <span class="text-zinc-600 font-medium">Audience:</span> {presentation.data.audience}
+                        </p>
+                      )}
+
+                      {/* Companion content link */}
+                      {companion && (
+                        <div class="mb-4">
+                          <span
+                            class="inline-flex items-center gap-2 text-xs text-zinc-500 bg-zinc-800/50 px-3 py-1.5 rounded-full border border-zinc-700/50 hover:border-athletic-brand-violet/50 hover:text-athletic-brand-violet transition-colors"
+                            onclick={`event.preventDefault(); event.stopPropagation(); window.location.href='${companion.url}'`}
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                            </svg>
+                            Companion {companion.type === 'whitepaper' ? 'Whitepaper' : 'Post'}
+                          </span>
+                        </div>
+                      )}
+
+                      {/* CTA */}
+                      <div class="inline-flex items-center gap-2 text-athletic-brand-violet group-hover:text-athletic-court-orange transition-colors font-semibold text-sm">
+                        <span>View presentation</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </article>
+            );
+          })}
+        </div>
+      )}
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-800/50 py-12 mt-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+          <p class="text-zinc-500 text-sm">
+            &copy; {new Date().getFullYear()} Nino Chavez. All rights reserved.
+          </p>
+          <div class="flex items-center gap-6">
+            <a href="/rss.xml" class="text-zinc-400 hover:text-white text-sm transition-colors">RSS Feed</a>
+            <a href="/api/posts.json" class="text-zinc-400 hover:text-white text-sm transition-colors">API</a>
+            <a href="https://ninochavez.co" class="text-zinc-400 hover:text-white text-sm transition-colors">ninochavez.co</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+</BaseLayout>

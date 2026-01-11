@@ -41,7 +41,32 @@ const whitepaperCollection = defineCollection({
   }),
 });
 
+const presentationCollection = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/presentations' }),
+  schema: z.object({
+    title: z.string(),
+    slug: z.string().optional(),
+    publishedAt: z.string().or(z.date()),
+    updatedAt: z.string().or(z.date()).optional(),
+    author: z.string().default('Nino Chavez'),
+    excerpt: z.string().optional().default(''),
+    category: z.string().optional(),
+    featureImage: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    // Presentation-specific fields
+    duration: z.string().optional(),
+    audience: z.string().optional(),
+    mode: z.enum(['executive-advisory', 'technical-deep-dive', 'workshop']).optional(),
+    // Companion content - links to related blog post or whitepaper
+    companionOf: z.object({
+      type: z.enum(['blog', 'whitepaper']),
+      slug: z.string(),
+    }).optional(),
+  }),
+});
+
 export const collections = {
   blog: blogCollection,
   whitepapers: whitepaperCollection,
+  presentations: presentationCollection,
 };

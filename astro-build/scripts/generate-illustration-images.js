@@ -30,8 +30,8 @@ const CONTENT_TYPE = dirFlagIndex !== -1 && args[dirFlagIndex + 1]
   ? args[dirFlagIndex + 1]
   : 'blog';
 
-if (!['blog', 'whitepapers'].includes(CONTENT_TYPE)) {
-  console.error('Error: --dir must be "blog" or "whitepapers"');
+if (!['blog', 'whitepapers', 'presentations'].includes(CONTENT_TYPE)) {
+  console.error('Error: --dir must be "blog", "whitepapers", or "presentations"');
   process.exit(1);
 }
 
