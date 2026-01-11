@@ -41,8 +41,8 @@ const personSchema = generatePersonSchema();
       <nav class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-[56px] sm:h-[73px]">
           <!-- Logo -->
-          <a href="/blog" class="flex items-center gap-2 sm:gap-3 min-w-0">
-            <h1 class="text-base sm:text-lg font-bold bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange bg-clip-text text-transparent whitespace-nowrap">
+          <a href="/blog" class="flex items-center gap-2 sm:gap-3 flex-shrink min-w-0">
+            <h1 class="text-sm xs:text-base sm:text-lg font-bold bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange bg-clip-text text-transparent truncate">
               Signal Dispatch
             </h1>
             <span class="hidden lg:inline text-sm text-zinc-500 truncate">
@@ -51,7 +51,7 @@ const personSchema = generatePersonSchema();
           </a>
 
           <!-- Right: Links -->
-          <div class="flex items-center gap-1 sm:gap-4">
+          <div class="flex items-center gap-0.5 xs:gap-1 sm:gap-4 flex-shrink-0">
             <!-- Text links - hidden on mobile, visible on sm+ -->
             <a href="/blog/whitepapers" class="hidden sm:block text-sm text-zinc-400 hover:text-white transition-colors">
               Whitepapers
