@@ -171,7 +171,7 @@ export function PresentationNavigation({ totalSlides, title }: PresentationNavig
           {/* Left: Back link and icon */}
           <div className="flex items-center gap-3 flex-shrink-0">
             <a
-              href="/presentations"
+              href="/blog/presentations"
               className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors"
             >
               <svg

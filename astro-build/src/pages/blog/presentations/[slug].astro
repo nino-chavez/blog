@@ -1,8 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { generateArticleSchema } from '../../utils/schema';
-import { PresentationNavigation } from '../../components/presentations';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { generateArticleSchema } from '../../../utils/schema';
+import { PresentationNavigation } from '../../../components/presentations';
 
 // In SSR mode, get the presentation from the slug parameter
 const { slug } = Astro.params;
@@ -10,7 +10,7 @@ const presentations = await getCollection('presentations');
 const presentation = presentations.find((p) => p.id === slug);
 
 if (!presentation) {
-  return Astro.redirect('/presentations');
+  return Astro.redirect('/blog/presentations');
 }
 
 const { Content } = await render(presentation);
