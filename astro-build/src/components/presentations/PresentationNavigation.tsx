@@ -167,12 +167,13 @@ export function PresentationNavigation({ totalSlides, title }: PresentationNavig
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/95 backdrop-blur-md border-b border-zinc-800/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-2 sm:py-3 flex items-center justify-between">
           {/* Left: Back link and icon */}
-          <div className="flex items-center gap-3 flex-shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             <a
               href="/blog/presentations"
-              className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors"
+              className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors p-1 -m-1"
+              aria-label="Back to presentations"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -185,8 +186,8 @@ export function PresentationNavigation({ totalSlides, title }: PresentationNavig
                 <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
             </a>
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-athletic-brand-violet to-athletic-court-orange flex items-center justify-center">
-              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="hidden xs:flex w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-athletic-brand-violet to-athletic-court-orange items-center justify-center">
+              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
               </svg>
             </div>
@@ -194,21 +195,23 @@ export function PresentationNavigation({ totalSlides, title }: PresentationNavig
 
           {/* Center: Title - hidden on mobile, visible on larger screens */}
           <div className="hidden md:block flex-1 min-w-0 mx-4">
-            <span className="font-semibold text-white/90 truncate block text-center">
+            <span className="font-semibold text-white/90 truncate block text-center text-sm lg:text-base">
               {title}
             </span>
           </div>
 
           {/* Right: Navigation controls */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
             <button
               onClick={prevSlide}
               disabled={currentSlide === 1}
-              className="px-2 sm:px-3 py-1.5 text-sm font-medium text-zinc-400 hover:text-white border border-zinc-700 rounded-lg hover:border-zinc-500 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+              className="w-9 h-9 sm:w-auto sm:h-auto sm:px-3 sm:py-1.5 text-sm font-medium text-zinc-400 hover:text-white border border-zinc-700 rounded-lg hover:border-zinc-500 transition-all disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center touch-manipulation"
               aria-label="Previous slide"
             >
-              <span className="hidden sm:inline">← Previous</span>
-              <span className="sm:hidden">←</span>
+              <span className="hidden sm:inline">← Prev</span>
+              <svg className="w-4 h-4 sm:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
             </button>
 
             {/* Progress dots - visible on larger screens */}
@@ -227,25 +230,37 @@ export function PresentationNavigation({ totalSlides, title }: PresentationNavig
               ))}
             </div>
 
-            {/* Slide counter */}
-            <span className="text-sm text-zinc-500 min-w-[50px] text-center font-mono">
-              {currentSlide} / {actualSlideCount}
-            </span>
+            {/* Slide counter - compact on mobile */}
+            <button
+              onClick={() => {
+                const slideNum = prompt(`Go to slide (1-${actualSlideCount}):`);
+                if (slideNum) {
+                  const num = parseInt(slideNum, 10);
+                  if (!isNaN(num)) goToSlide(num);
+                }
+              }}
+              className="text-xs sm:text-sm text-zinc-500 hover:text-zinc-300 min-w-[40px] sm:min-w-[50px] text-center font-mono py-1 px-1.5 sm:px-2 rounded hover:bg-zinc-800/50 transition-colors touch-manipulation"
+              aria-label={`Slide ${currentSlide} of ${actualSlideCount}. Click to jump to slide.`}
+            >
+              {currentSlide}/{actualSlideCount}
+            </button>
 
             <button
               onClick={nextSlide}
               disabled={currentSlide === actualSlideCount}
-              className="px-2 sm:px-3 py-1.5 text-sm font-medium bg-athletic-brand-violet hover:bg-athletic-brand-violet/80 text-white rounded-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+              className="w-9 h-9 sm:w-auto sm:h-auto sm:px-3 sm:py-1.5 text-sm font-medium bg-athletic-brand-violet hover:bg-athletic-brand-violet/80 text-white rounded-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center touch-manipulation"
               aria-label="Next slide"
             >
               <span className="hidden sm:inline">Next →</span>
-              <span className="sm:hidden">→</span>
+              <svg className="w-4 h-4 sm:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
             </button>
 
-            {/* Fullscreen toggle */}
+            {/* Fullscreen toggle - hidden on small mobile */}
             <button
               onClick={toggleFullscreen}
-              className="hidden sm:block p-1.5 text-zinc-400 hover:text-white border border-zinc-700 rounded-lg hover:border-zinc-500 transition-all"
+              className="hidden sm:flex w-9 h-9 items-center justify-center text-zinc-400 hover:text-white border border-zinc-700 rounded-lg hover:border-zinc-500 transition-all touch-manipulation"
               aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
             >
               {isFullscreen ? (
@@ -270,10 +285,30 @@ export function PresentationNavigation({ totalSlides, title }: PresentationNavig
         </div>
       </nav>
 
-      {/* Keyboard hint - fixed at bottom right */}
-      <div className="fixed bottom-6 right-6 z-50 bg-zinc-900/90 backdrop-blur-sm px-4 py-2 rounded-lg text-sm text-zinc-500 hidden sm:block">
-        Use <kbd className="px-1.5 py-0.5 bg-zinc-800 rounded text-zinc-400 mx-1">←</kbd> <kbd className="px-1.5 py-0.5 bg-zinc-800 rounded text-zinc-400 mx-1">→</kbd> or <kbd className="px-2 py-0.5 bg-zinc-800 rounded text-zinc-400 mx-1">space</kbd> to navigate
+      {/* Swipe hint for mobile - shows briefly on first load */}
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-zinc-900/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs text-zinc-400 sm:hidden pointer-events-none opacity-0 animate-fade-hint">
+        Swipe to navigate
       </div>
+
+      {/* Keyboard hint - fixed at bottom right, desktop only */}
+      <div className="fixed bottom-6 right-6 z-50 bg-zinc-900/90 backdrop-blur-sm px-4 py-2 rounded-lg text-sm text-zinc-500 hidden md:block">
+        <kbd className="px-1.5 py-0.5 bg-zinc-800 rounded text-zinc-400 mx-0.5">←</kbd>
+        <kbd className="px-1.5 py-0.5 bg-zinc-800 rounded text-zinc-400 mx-0.5">→</kbd> or
+        <kbd className="px-2 py-0.5 bg-zinc-800 rounded text-zinc-400 mx-0.5">space</kbd>
+      </div>
+
+      {/* Mobile swipe hint animation */}
+      <style>{`
+        @keyframes fadeHint {
+          0% { opacity: 0; }
+          10% { opacity: 1; }
+          80% { opacity: 1; }
+          100% { opacity: 0; }
+        }
+        .animate-fade-hint {
+          animation: fadeHint 3s ease-in-out forwards;
+        }
+      `}</style>
     </>
   );
 }
