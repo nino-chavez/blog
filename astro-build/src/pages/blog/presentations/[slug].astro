@@ -873,19 +873,21 @@ const mode = presentation.data.mode as keyof typeof modeLabels | undefined;
   }
 
   /* ============================================
-     RESPONSIVE
+     RESPONSIVE - TABLET (768px and below)
      ============================================ */
   @media (max-width: 768px) {
     .presentation-container .slide {
-      padding: 4rem 1rem 2rem 1rem;
+      padding: 4rem 1.25rem 2rem 1.25rem;
     }
 
     .presentation-container .slide h1 {
       font-size: 2.25rem;
+      margin-bottom: 1rem;
     }
 
     .presentation-container .slide h2 {
       font-size: 1.75rem;
+      margin-bottom: 2rem;
     }
 
     .presentation-container .slide h3 {
@@ -894,24 +896,440 @@ const mode = presentation.data.mode as keyof typeof modeLabels | undefined;
 
     .presentation-container .slide p {
       font-size: 1rem;
+      line-height: 1.6;
     }
 
     .presentation-container .slide[data-layout="title"] h1 {
       font-size: 2.25rem;
     }
 
+    .presentation-container .slide[data-layout="title"] p strong {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .presentation-container .slide[data-layout="title"] em {
+      margin-top: 2rem;
+    }
+
     .presentation-container .slide ul,
     .presentation-container .slide ol {
       font-size: 0.9375rem;
+      line-height: 1.7;
+      margin: 1rem 0;
     }
 
+    .presentation-container .slide li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Cards - tighter padding */
+    .presentation-container .card {
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Callouts - tighter padding */
+    .presentation-container .callout {
+      padding: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .presentation-container .callout p {
+      font-size: 1rem;
+    }
+
+    /* Tables - horizontal scroll wrapper */
     .presentation-container .slide table {
       font-size: 0.875rem;
+      display: block;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
+    .presentation-container .slide th,
+    .presentation-container .slide td {
+      padding: 0.75rem 1rem;
+      white-space: nowrap;
+    }
+
+    /* Code blocks */
+    .presentation-container .slide pre {
+      padding: 0.875rem 1rem;
+      margin: 1rem 0;
+    }
+
+    .presentation-container .slide pre code {
+      font-size: 0.8125rem;
+    }
+
+    .presentation-container .slide code {
+      font-size: 0.85em;
+      padding: 0.2rem 0.4rem;
+    }
+
+    /* Blockquotes */
+    .presentation-container .slide blockquote {
+      font-size: 1.25rem;
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .presentation-container .slide[data-layout="quote"] blockquote {
+      font-size: 1.5rem;
+    }
+
+    .presentation-container .slide[data-layout="quote"] blockquote::before {
+      font-size: 3.5rem;
+    }
+
+    /* Grids collapse to single column */
     .presentation-container .grid-2,
     .presentation-container .grid-3 {
       grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    /* Data cards */
+    .presentation-container .data-card {
+      padding: 1.25rem;
+    }
+
+    .presentation-container .data-card-metric {
+      font-size: 1.5rem;
+    }
+
+    /* Step lists */
+    .presentation-container .step-list {
+      gap: 0.75rem;
+    }
+
+    .presentation-container .step-content {
+      font-size: 1rem;
+    }
+
+    /* Comparison cards */
+    .presentation-container .comparison-card {
+      padding: 1.25rem;
+    }
+
+    .presentation-container .comparison-card-title {
+      font-size: 1.125rem;
+    }
+
+    /* Timeline */
+    .presentation-container .timeline {
+      padding-left: 1.5rem;
+    }
+
+    .presentation-container .timeline-item {
+      margin-bottom: 1.5rem;
+      margin-left: 0.75rem;
+    }
+
+    .presentation-container .timeline-item::before {
+      left: -1.875rem;
+    }
+
+    /* Title badge */
+    .presentation-container .title-badge {
+      padding: 0.375rem 0.875rem;
+      font-size: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  /* ============================================
+     RESPONSIVE - MOBILE (480px and below)
+     ============================================ */
+  @media (max-width: 480px) {
+    .presentation-container .slide {
+      padding: 3.5rem 1rem 1.5rem 1rem;
+      min-height: calc(100vh - 48px);
+    }
+
+    .presentation-container .slide h1 {
+      font-size: 1.75rem;
+      line-height: 1.15;
+      margin-bottom: 0.875rem;
+    }
+
+    .presentation-container .slide h2 {
+      font-size: 1.375rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .presentation-container .slide h3 {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .presentation-container .slide p {
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+
+    .presentation-container .slide[data-layout="title"] {
+      padding: 3rem 1rem 2rem 1rem;
+    }
+
+    .presentation-container .slide[data-layout="title"] h1 {
+      font-size: 1.75rem;
+    }
+
+    .presentation-container .slide[data-layout="title"] p {
+      font-size: 1rem;
+    }
+
+    .presentation-container .slide[data-layout="title"] p strong {
+      font-size: 1.125rem;
+      margin-bottom: 1rem;
+    }
+
+    .presentation-container .slide[data-layout="title"] em {
+      font-size: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .presentation-container .slide ul,
+    .presentation-container .slide ol {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin: 0.75rem 0;
+    }
+
+    .presentation-container .slide li {
+      margin-bottom: 0.5rem;
+      padding-left: 1.25rem;
+    }
+
+    .presentation-container .slide ol li::before {
+      width: 1.25rem;
+      height: 1.25rem;
+      font-size: 0.625rem;
+    }
+
+    /* Section labels */
+    .presentation-container .section-label {
+      font-size: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Cards */
+    .presentation-container .card {
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 0.75rem;
+    }
+
+    .presentation-container .card-label {
+      font-size: 0.625rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Callouts */
+    .presentation-container .callout {
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+
+    .presentation-container .callout p {
+      font-size: 0.9375rem;
+    }
+
+    /* Tables */
+    .presentation-container .slide table {
+      font-size: 0.8125rem;
+      margin: 1rem 0;
+    }
+
+    .presentation-container .slide th,
+    .presentation-container .slide td {
+      padding: 0.625rem 0.75rem;
+    }
+
+    .presentation-container .slide th {
+      font-size: 0.625rem;
+    }
+
+    /* Code */
+    .presentation-container .slide pre {
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      margin: 0.75rem 0;
+    }
+
+    .presentation-container .slide pre code {
+      font-size: 0.75rem;
+    }
+
+    .presentation-container .slide code {
+      font-size: 0.8em;
+      padding: 0.125rem 0.25rem;
+    }
+
+    /* Blockquotes */
+    .presentation-container .slide blockquote {
+      font-size: 1.125rem;
+      padding-left: 0.875rem;
+      margin: 1rem 0;
+      border-left-width: 3px;
+    }
+
+    .presentation-container .slide[data-layout="quote"] blockquote {
+      font-size: 1.25rem;
+    }
+
+    .presentation-container .slide[data-layout="quote"] blockquote::before {
+      font-size: 2.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Grids */
+    .presentation-container .grid-2,
+    .presentation-container .grid-3 {
+      gap: 0.75rem;
+    }
+
+    /* Data cards */
+    .presentation-container .data-card {
+      padding: 1rem;
+      border-radius: 0.5rem;
+    }
+
+    .presentation-container .data-card-icon {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.375rem;
+    }
+
+    .presentation-container .data-card-metric {
+      font-size: 1.375rem;
+      margin-bottom: 0.375rem;
+    }
+
+    .presentation-container .data-card-description {
+      font-size: 0.8125rem;
+    }
+
+    .presentation-container .data-card-header {
+      margin-bottom: 0.75rem;
+    }
+
+    .presentation-container .data-card-title {
+      font-size: 0.9375rem;
+    }
+
+    .presentation-container .data-card-subtitle {
+      font-size: 0.75rem;
+    }
+
+    /* Step lists */
+    .presentation-container .step-list {
+      gap: 0.625rem;
+    }
+
+    .presentation-container .step {
+      gap: 0.75rem;
+    }
+
+    .presentation-container .step-number {
+      width: 1.75rem;
+      height: 1.75rem;
+      font-size: 0.75rem;
+    }
+
+    .presentation-container .step-content {
+      font-size: 0.9375rem;
+      padding-top: 0;
+    }
+
+    /* Feature lists */
+    .presentation-container .feature-list li {
+      gap: 0.375rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .presentation-container .feature-list .icon {
+      margin-top: 0.125rem;
+    }
+
+    /* Comparison cards */
+    .presentation-container .comparison-card {
+      padding: 1rem;
+      border-radius: 0.75rem;
+    }
+
+    .presentation-container .comparison-card-era {
+      font-size: 0.75rem;
+    }
+
+    .presentation-container .comparison-card-title {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .presentation-container .comparison-card-description {
+      font-size: 0.875rem;
+    }
+
+    .presentation-container .comparison-card-footer {
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+    }
+
+    /* Timeline */
+    .presentation-container .timeline {
+      padding-left: 1.25rem;
+    }
+
+    .presentation-container .timeline-item {
+      margin-bottom: 1.25rem;
+      margin-left: 0.5rem;
+    }
+
+    .presentation-container .timeline-item::before {
+      left: -1.5rem;
+      width: 0.625rem;
+      height: 0.625rem;
+    }
+
+    /* Title badge */
+    .presentation-container .title-badge {
+      padding: 0.25rem 0.625rem;
+      font-size: 0.6875rem;
+      margin-bottom: 1rem;
+      gap: 0.375rem;
+    }
+
+    .presentation-container .title-badge .pulse-dot {
+      width: 0.375rem;
+      height: 0.375rem;
+    }
+
+    /* Platform headers */
+    .presentation-container .platform-header {
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .presentation-container .platform-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 0.25rem;
+    }
+
+    .presentation-container .platform-name {
+      font-size: 0.75rem;
+    }
+
+    /* Max width for content on default slides */
+    .presentation-container .slide[data-layout="default"] > div,
+    .presentation-container .slide[data-layout="grid"] > div,
+    .presentation-container .slide[data-layout="table"] > div {
+      max-width: 100%;
     }
   }
 </style>
