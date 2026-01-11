@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { generateCollectionSchema } from '../../utils/schema';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { generateCollectionSchema } from '../../../utils/schema';
 
 // Get all content collections
 const presentations = await getCollection('presentations');
@@ -16,7 +16,7 @@ const sortedPresentations = presentations.sort(
 const collectionSchema = generateCollectionSchema(
   'Signal Dispatch Presentations',
   'Strategic presentations and executive briefings on AI, technology, and systems design.',
-  'https://blog.ninochavez.co/presentations',
+  'https://blog.ninochavez.co/blog/presentations',
   sortedPresentations
 );
 
@@ -160,7 +160,7 @@ const modeColors = {
 
             return (
               <article class={`group relative overflow-hidden rounded-2xl border transition-all duration-500 hover:border-athletic-brand-violet/50 ${isFirst ? 'border-athletic-brand-violet/30 bg-gradient-to-br from-zinc-900/90 via-zinc-900/70 to-zinc-950' : 'border-zinc-800/50 bg-zinc-900/30 hover:bg-zinc-900/50'}`}>
-                <a href={`/presentations/${presentation.id}`} class="block">
+                <a href={`/blog/presentations/${presentation.id}`} class="block">
                   <div class="flex flex-col lg:flex-row">
                     {/* Image Section */}
                     <div class={`relative ${isFirst ? 'lg:w-3/5' : 'lg:w-2/5'}`}>
