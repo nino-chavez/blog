@@ -7,17 +7,19 @@ All content lives in the `astro-build/` subdirectory:
 ```
 signal-dispatch-blog/
 ├── astro-build/
-│   ├── src/content/blog/*.mdx      # Blog posts
-│   ├── src/content/whitepapers/*.mdx # Whitepapers
-│   ├── public/images/generated/    # Generated feature images
-│   └── scripts/                    # Utility scripts
-├── docs/                           # Documentation (voice guide, etc.)
-└── .claude/                        # Claude instructions
+│   ├── src/content/blog/*.mdx           # Blog posts
+│   ├── src/content/whitepapers/*.mdx    # Whitepapers
+│   ├── src/content/presentations/*.mdx  # Presentations
+│   ├── public/images/generated/         # Generated feature images
+│   ├── public/presentations/export/     # Exported standalone HTML decks
+│   └── scripts/                         # Utility scripts
+├── docs/                                # Documentation (voice guide, etc.)
+└── .claude/                             # Claude instructions
 ```
 
 ### Key Conventions
 - All commands run from `astro-build/` directory
-- MDX content in `astro-build/src/content/blog/` or `astro-build/src/content/whitepapers/`
+- MDX content in `astro-build/src/content/{blog,whitepapers,presentations}/`
 - Voice guide enforcement via `/docs/signal-dispatch-voice-guide.md`
 - Generated images in `astro-build/public/images/generated/`
 
@@ -45,6 +47,13 @@ signal-dispatch-blog/
 - **Format**: Plain markdown (NO MDX components), heavy use of tables
 - **Structure**: Executive Summary → Parts (I, II, III) → Appendix
 - **Headers**: H1 for Parts, H2 for numbered sections (1.1, 1.2)
+
+### Presentations
+- **Location**: `astro-build/src/content/presentations/*.mdx`
+- **Voice**: Executive briefing style, clear and direct
+- **Format**: MDX with `<Slide>` components, markdown content within slides
+- **Structure**: Title slide → Content slides → Summary/CTA slide
+- **Output**: Web viewer + standalone HTML export
 
 ---
 
@@ -208,6 +217,120 @@ git push
 
 ---
 
+## Presentation Workflow
+
+When asked to create a **new presentation**, follow this workflow exactly:
+
+### 1. Draft Content
+Create file at `astro-build/src/content/presentations/{slug}.mdx`
+
+**Frontmatter template:**
+```yaml
+---
+title: "Presentation Title"
+publishedAt: "YYYY-MM-DDTHH:MM:SS.000Z"
+author: "Nino Chavez"
+excerpt: "Brief description of the presentation"
+category: "Category Name"
+tags: ["tag1", "tag2"]
+duration: "15 min"
+audience: "Target audience description"
+mode: "executive-advisory"  # or "technical-deep-dive" or "workshop"
+---
+```
+
+**Structure template:**
+```mdx
+import { Slide } from '@/components/presentations';
+
+<Slide layout="title">
+# Presentation Title
+
+Subtitle or tagline
+
+*Author Name • Date*
+</Slide>
+
+<Slide>
+## Section Header
+
+- Key point one
+- Key point two
+- Key point three
+</Slide>
+
+<Slide layout="quote">
+> "Memorable quote that captures the core insight."
+
+— Attribution
+</Slide>
+
+<Slide layout="split">
+<div>
+### Left Column
+Content for left side
+</div>
+<div>
+### Right Column
+Content for right side
+</div>
+</Slide>
+
+<Slide>
+## Summary
+
+**Key Takeaways:**
+1. First takeaway
+2. Second takeaway
+3. Third takeaway
+</Slide>
+```
+
+**Slide layouts available:**
+- `default` - Centered content (default)
+- `title` - Large title with gradient text
+- `split` - Two-column layout
+- `table` - Optimized for data tables
+- `image` - Full-bleed image with overlay
+- `quote` - Large quote with decorative styling
+
+**Presentation conventions:**
+- Use `<Slide>` component for each slide
+- One concept per slide
+- Bullet points for scannability
+- Tables for data comparison
+- Keep text concise (presentation, not document)
+
+### 2. Generate Feature Image
+```bash
+cd astro-build
+export OPENROUTER_API_KEY=$(grep OPENROUTER_API_KEY .env | cut -d'=' -f2)
+node scripts/generate-illustration-images.js --dir presentations {filename}.mdx
+```
+
+### 3. Export Standalone HTML
+```bash
+cd astro-build
+node scripts/export-presentation-html.js {slug}
+```
+Output: `public/presentations/export/{slug}.html`
+
+### 4. Verify Build
+```bash
+cd astro-build
+npm run build
+```
+
+### 5. Publish (if requested)
+- Commit and push:
+```bash
+git add -A
+git commit -m "publish: {Presentation Title}"
+git push
+```
+
+---
+
 ## Image Generation Script
 
 The script `astro-build/scripts/generate-illustration-images.js` handles feature image generation.
@@ -220,6 +343,9 @@ node scripts/generate-illustration-images.js --dir blog {filename}.mdx
 # Whitepapers
 node scripts/generate-illustration-images.js --dir whitepapers {filename}.mdx
 
+# Presentations
+node scripts/generate-illustration-images.js --dir presentations {filename}.mdx
+
 # Force regenerate existing
 node scripts/generate-illustration-images.js --dir blog --force {filename}.mdx
 ```
@@ -231,6 +357,25 @@ node scripts/generate-illustration-images.js --dir blog --force {filename}.mdx
 **Output:**
 - Generates WebP image at `public/images/generated/{slug}.webp`
 - Automatically updates frontmatter with `featureImage` path
+
+---
+
+## Presentation Export Script
+
+The script `astro-build/scripts/export-presentation-html.js` generates standalone HTML decks.
+
+**Usage:**
+```bash
+cd astro-build
+node scripts/export-presentation-html.js {slug}
+```
+
+**Output:**
+- Self-contained HTML file at `public/presentations/export/{slug}.html`
+- Includes Tailwind CDN, all styles inlined
+- Works offline, shareable as single file
+- Keyboard navigation (arrow keys)
+- Progress indicator
 
 ---
 
@@ -289,4 +434,7 @@ npm run preview  # Preview production build
 - **Show the work**: Meta-awareness is a feature, not a bug
 - **Evidence over theory**: Ground posts in actual experience
 - **Public practice**: It's okay to be figuring things out in the post itself
-- **Blog vs Whitepaper**: Blog posts are conversational with MDX; whitepapers are formal with tables
+- **Content type selection**:
+  - **Blog posts**: Conversational exploration with MDX components
+  - **Whitepapers**: Formal analysis with data tables
+  - **Presentations**: Executive briefings with slide-based delivery
