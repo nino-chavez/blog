@@ -1,7 +1,9 @@
 {
   "completed": [
     "neuro-symbolic-convergence.mdx",
-    "the-agentic-student.mdx"
+    "the-agentic-student.mdx",
+    "the-business-engineer.mdx",
+    "the-ai-analyst.mdx"
   ],
   "failed": [],
   "skipped": []
