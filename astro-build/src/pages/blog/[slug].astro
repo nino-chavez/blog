@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { generateArticleSchema, generateBreadcrumbSchema } from '../../utils/schema';
 import ReadingProgress from '../../components/ReadingProgress';
+import SeriesNav from '../../components/SeriesNav.astro';
 
 // In SSR mode, get the post from the slug parameter
 const { slug } = Astro.params;
@@ -164,6 +165,14 @@ const relatedPosts = allPosts
             </div>
           </div>
         </header>
+
+        <!-- Series Navigation (if post is part of a series) -->
+        {post.data.series && (
+          <SeriesNav
+            seriesSlug={post.data.series.slug}
+            currentPosition={post.data.series.position}
+          />
+        )}
 
         <!-- Article Content -->
         <div class="prose max-w-none text-lg">

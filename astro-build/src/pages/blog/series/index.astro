@@ -3,33 +3,40 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { generateCollectionSchema } from '../../../utils/schema';
 
-// Get all whitepapers sorted by date
-const whitepapers = await getCollection('whitepapers');
-const sortedWhitepapers = whitepapers.sort(
+// Get all series sorted by date
+const allSeries = await getCollection('series');
+const sortedSeries = allSeries.sort(
   (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime()
 );
 
+// Get all blog posts to count posts per series
+const blogPosts = await getCollection('blog', ({ data }) => data.status !== 'draft');
+
+// Count posts per series
+const getPostCount = (seriesSlug: string) => {
+  return blogPosts.filter(post => post.data.series?.slug === seriesSlug).length;
+};
+
 // Generate JSON-LD
 const collectionSchema = generateCollectionSchema(
-  'Signal Dispatch Whitepapers',
-  'In-depth strategic analyses and research reports on AI, commerce, and technology.',
-  'https://blog.ninochavez.co/whitepapers',
-  sortedWhitepapers
+  'Signal Dispatch Series',
+  'Curated multi-part explorations on AI, commerce, and systems thinking.',
+  'https://blog.ninochavez.co/series',
+  sortedSeries.map(s => ({
+    id: s.id,
+    data: {
+      title: s.data.title,
+      excerpt: s.data.description,
+      publishedAt: s.data.publishedAt,
+      author: 'Nino Chavez',
+    }
+  }))
 );
-
-// Default images for whitepapers without feature images
-const getWhitepaperImage = (whitepaper: typeof sortedWhitepapers[0]) => {
-  if (whitepaper.data.featureImage) return whitepaper.data.featureImage;
-  // Use AI-themed generated images
-  const hash = whitepaper.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  const variant = (hash % 5) + 1;
-  return `/generated/categories/ai-automation-${variant}.webp`;
-};
 ---
 
 <BaseLayout
-  title="Whitepapers"
-  description="In-depth strategic analyses and research reports on AI, commerce, and technology by Nino Chavez."
+  title="Series"
+  description="Curated multi-part explorations on AI, commerce, leadership, and systems thinking by Nino Chavez."
   jsonLd={[collectionSchema]}
 >
   <main class="min-h-screen">
@@ -44,7 +51,7 @@ const getWhitepaperImage = (whitepaper: typeof sortedWhitepapers[0]) => {
           </a>
           <div class="flex items-center gap-1 sm:gap-4 flex-shrink-0">
             <a href="/blog" class="hidden sm:block text-sm text-zinc-400 hover:text-white transition-colors">Blog</a>
-            <a href="/blog/series" class="hidden sm:block text-sm text-zinc-400 hover:text-white transition-colors">Series</a>
+            <a href="/blog/whitepapers" class="hidden sm:block text-sm text-zinc-400 hover:text-white transition-colors">Whitepapers</a>
             <a href="/blog/presentations" class="hidden sm:block text-sm text-zinc-400 hover:text-white transition-colors">Presentations</a>
             <!-- Mobile icons -->
             <a href="/blog" class="sm:hidden flex items-center justify-center w-9 h-9 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800/50 transition-colors" title="Blog">
@@ -52,9 +59,9 @@ const getWhitepaperImage = (whitepaper: typeof sortedWhitepapers[0]) => {
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
               </svg>
             </a>
-            <a href="/blog/series" class="sm:hidden flex items-center justify-center w-9 h-9 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800/50 transition-colors" title="Series">
+            <a href="/blog/whitepapers" class="sm:hidden flex items-center justify-center w-9 h-9 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800/50 transition-colors" title="Whitepapers">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
             </a>
             <a href="/blog/presentations" class="sm:hidden flex items-center justify-center w-9 h-9 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800/50 transition-colors" title="Presentations">
@@ -83,100 +90,73 @@ const getWhitepaperImage = (whitepaper: typeof sortedWhitepapers[0]) => {
             Back to Blog
           </a>
           <div class="flex items-center gap-4">
-            <h1 class="text-3xl md:text-4xl font-black text-white">Whitepapers</h1>
+            <h1 class="text-3xl md:text-4xl font-black text-white">Series</h1>
             <span class="text-sm text-zinc-500 bg-zinc-900/50 px-3 py-1 rounded-full border border-zinc-800">
-              {sortedWhitepapers.length} analyses
+              {sortedSeries.length} collections
             </span>
           </div>
           <p class="text-zinc-400 max-w-2xl">
-            Strategic analyses on AI, commerce, and technology. Comprehensive frameworks for emerging trends.
+            Multi-part explorations. Each series builds a complete arc—from opening tension to synthesis.
           </p>
-        </div>
-
-        <!-- AI-assisted note - compact inline -->
-        <div class="flex items-center gap-2 text-xs text-zinc-500 bg-zinc-900/30 px-3 py-2 rounded-lg border border-zinc-800/50 lg:self-end">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-athletic-brand-violet flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-          </svg>
-          <span>AI-assisted research, grounded in professional experience</span>
         </div>
       </div>
     </section>
 
-    <!-- Whitepapers Grid -->
+    <!-- Series Grid -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
       <div class="grid gap-6">
-        {sortedWhitepapers.map((whitepaper, index) => {
-          const wordCount = whitepaper.body?.split(/\s+/).length || 0;
-          const readingTime = Math.ceil(wordCount / 200);
-          const isNew = (new Date().getTime() - new Date(whitepaper.data.publishedAt).getTime()) / (1000 * 60 * 60 * 24) <= 14;
-          const imageUrl = getWhitepaperImage(whitepaper);
+        {sortedSeries.map((series, index) => {
+          const postCount = getPostCount(series.id);
+          const isCompleted = series.data.status === 'completed';
 
           return (
-            <a href={`/blog/whitepapers/${whitepaper.id}`} class="group block">
+            <a href={`/blog/series/${series.id}`} class="group block">
               <article class={`relative overflow-hidden rounded-2xl border transition-all duration-300 hover:shadow-xl hover:shadow-athletic-brand-violet/10 ${index === 0 ? 'border-athletic-brand-violet/40 bg-gradient-to-br from-zinc-900/80 via-zinc-900/50 to-zinc-950' : 'border-zinc-800 bg-zinc-900/30 hover:border-athletic-brand-violet/50'}`}>
-                <div class="flex flex-col md:flex-row">
-                  {/* Image */}
-                  <div class="md:w-2/5 lg:w-1/3 relative">
-                    <div class="aspect-[16/9] md:aspect-auto md:absolute md:inset-0 overflow-hidden">
-                      <img
-                        src={imageUrl}
-                        alt={whitepaper.data.title}
-                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        loading={index === 0 ? "eager" : "lazy"}
-                      />
-                      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-zinc-900/90 hidden md:block" />
-                      <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent md:hidden" />
-                    </div>
-                    {/* Badges on image */}
-                    <div class="absolute top-4 left-4 flex items-center gap-2">
-                      {isNew && (
-                        <span class="font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange text-white text-[10px] shadow-lg">
-                          New
-                        </span>
-                      )}
-                      {index === 0 && (
-                        <span class="font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-athletic-brand-violet/90 text-white text-[10px] shadow-lg backdrop-blur-sm">
-                          Latest
-                        </span>
-                      )}
-                    </div>
+                <div class="p-6 md:p-8">
+                  <div class="flex items-center gap-3 text-xs mb-4 flex-wrap">
+                    <span class="font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-athletic-court-orange/10 border border-athletic-court-orange/30 text-athletic-court-orange">
+                      Series
+                    </span>
+                    <span class="text-zinc-500">
+                      {postCount} {postCount === 1 ? 'post' : 'posts'}
+                    </span>
+                    {isCompleted && (
+                      <span class="font-medium px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] uppercase tracking-wider">
+                        Complete
+                      </span>
+                    )}
+                    {index === 0 && (
+                      <span class="font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-athletic-brand-violet/90 text-white text-[10px] shadow-lg backdrop-blur-sm">
+                        Latest
+                      </span>
+                    )}
                   </div>
 
-                  {/* Content */}
-                  <div class="flex-1 p-6 md:p-8 flex flex-col justify-center">
-                    <div class="flex items-center gap-3 text-xs mb-3 flex-wrap">
-                      <span class="font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-athletic-brand-violet/10 border border-athletic-brand-violet/30 text-athletic-brand-violet">
-                        Whitepaper
-                      </span>
-                      <span class="text-zinc-500">
-                        {new Date(whitepaper.data.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                      </span>
-                      <span class="text-zinc-600">•</span>
-                      <span class="flex items-center gap-1 text-zinc-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        {readingTime} min
-                      </span>
-                    </div>
+                  <h2 class={`font-bold text-white group-hover:text-athletic-court-orange transition-colors mb-3 ${index === 0 ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'}`}>
+                    {series.data.title}
+                  </h2>
 
-                    <h2 class={`font-bold text-white group-hover:text-athletic-court-orange transition-colors mb-3 ${index === 0 ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'}`}>
-                      {whitepaper.data.title}
-                    </h2>
+                  <p class={`text-zinc-400 leading-relaxed mb-4 ${index === 0 ? 'line-clamp-3' : 'line-clamp-2'}`}>
+                    {series.data.description}
+                  </p>
 
-                    {whitepaper.data.excerpt && (
-                      <p class={`text-zinc-400 leading-relaxed mb-4 ${index === 0 ? 'line-clamp-3' : 'line-clamp-2'}`}>
-                        {whitepaper.data.excerpt}
-                      </p>
-                    )}
-
+                  <div class="flex items-center justify-between">
                     <div class="inline-flex items-center gap-2 text-athletic-brand-violet group-hover:text-athletic-court-orange transition-colors font-semibold text-sm">
-                      <span>Read whitepaper</span>
+                      <span>Explore series</span>
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>
                     </div>
+
+                    {series.data.tags && series.data.tags.length > 0 && (
+                      <div class="hidden sm:flex items-center gap-2">
+                        {series.data.tags.slice(0, 2).map(tag => (
+                          <span class="text-xs text-zinc-500 bg-zinc-800/50 px-2 py-1 rounded">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               </article>

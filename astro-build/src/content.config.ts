@@ -23,6 +23,11 @@ const blogCollection = defineCollection({
       metaTitle: z.string().optional(),
       metaDescription: z.string().optional(),
     }).optional(),
+    // Series membership - links post to a series collection
+    series: z.object({
+      slug: z.string(),
+      position: z.number().int().positive(), // 1-based position in series
+    }).optional(),
   }),
 });
 
@@ -65,8 +70,22 @@ const presentationCollection = defineCollection({
   }),
 });
 
+const seriesCollection = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/series' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    publishedAt: z.string().or(z.date()),
+    updatedAt: z.string().or(z.date()).optional(),
+    featureImage: z.string().optional(),
+    status: z.enum(['active', 'completed']).default('active'),
+    tags: z.array(z.string()).optional(),
+  }),
+});
+
 export const collections = {
   blog: blogCollection,
   whitepapers: whitepaperCollection,
   presentations: presentationCollection,
+  series: seriesCollection,
 };
