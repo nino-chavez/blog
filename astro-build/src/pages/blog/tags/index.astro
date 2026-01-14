@@ -16,9 +16,14 @@ allPosts.forEach((post) => {
 
 // Sort tags by count (descending), then alphabetically
 const sortedTags = Array.from(tagCounts.entries()).sort((a, b) => {
-  if (b[1] !== a[1]) return b[1] - a[1]; // By count desc
-  return a[0].localeCompare(b[0]); // Then alphabetically
+  if (b[1] !== a[1]) return b[1] - a[1];
+  return a[0].localeCompare(b[0]);
 });
+
+// Split into tiers
+const popularTags = sortedTags.filter(([_, count]) => count >= 5);
+const growingTags = sortedTags.filter(([_, count]) => count >= 2 && count < 5);
+const exploreTags = sortedTags.filter(([_, count]) => count === 1);
 
 const totalTags = sortedTags.length;
 
@@ -73,7 +78,7 @@ const collectionSchema = generateCollectionSchema(
     </header>
 
     <!-- Page Header -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div class="space-y-3">
         <a href="/blog" class="group inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-athletic-court-orange transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -82,50 +87,125 @@ const collectionSchema = generateCollectionSchema(
           Back to Blog
         </a>
         <div class="flex items-center gap-4">
-          <h1 class="text-3xl md:text-4xl font-black text-white">Tags</h1>
+          <h1 class="text-3xl md:text-4xl font-black text-white">Topics</h1>
           <span class="text-sm text-zinc-500 bg-zinc-900/50 px-3 py-1 rounded-full border border-zinc-800">
-            {totalTags} topics
+            {totalTags} tags
           </span>
         </div>
         <p class="text-zinc-400 max-w-2xl">
-          Browse posts by topic. Tags are ordered by frequency—the most-used tags appear first.
+          Browse posts by topic. Popular topics have the most coverage, while Explore contains emerging ideas.
         </p>
       </div>
     </section>
 
-    <!-- Tags Cloud -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-      <div class="flex flex-wrap gap-3">
-        {sortedTags.map(([tag, count]) => {
-          // Size based on count
-          const isLarge = count >= 10;
-          const isMedium = count >= 5 && count < 10;
+    <!-- Tags Sections -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 space-y-12">
 
-          return (
-            <a
-              href={`/blog/tags/${encodeURIComponent(tag)}`}
-              class={`group relative inline-flex items-center gap-2 rounded-xl border transition-all duration-200 hover:border-athletic-brand-violet/50 hover:bg-zinc-900/80 ${
-                isLarge
-                  ? 'px-5 py-3 bg-zinc-900/60 border-athletic-brand-violet/30'
-                  : isMedium
-                  ? 'px-4 py-2.5 bg-zinc-900/40 border-zinc-700/50'
-                  : 'px-3 py-2 bg-zinc-900/30 border-zinc-800/50'
-              }`}
-            >
-              <span class={`font-medium group-hover:text-athletic-brand-violet transition-colors ${
-                isLarge ? 'text-white text-base' : isMedium ? 'text-zinc-200 text-sm' : 'text-zinc-300 text-sm'
-              }`}>
-                {tag}
+      <!-- Popular Topics (5+ posts) -->
+      {popularTags.length > 0 && (
+        <div>
+          <div class="flex items-center gap-3 mb-5">
+            <h2 class="text-lg font-bold text-white">Popular Topics</h2>
+            <span class="text-xs text-zinc-500 bg-zinc-900/50 px-2 py-0.5 rounded-full border border-zinc-800">
+              5+ posts
+            </span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {popularTags.map(([tag, count]) => (
+              <a
+                href={`/blog/tags/${encodeURIComponent(tag)}`}
+                class="group flex items-center justify-between p-4 rounded-xl border border-athletic-brand-violet/20 bg-gradient-to-br from-zinc-900/80 to-zinc-900/40 hover:border-athletic-brand-violet/50 hover:from-zinc-900 hover:to-zinc-800/50 transition-all duration-200"
+              >
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-lg bg-athletic-brand-violet/10 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-athletic-brand-violet" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                    </svg>
+                  </div>
+                  <span class="font-semibold text-white group-hover:text-athletic-brand-violet transition-colors">
+                    {tag}
+                  </span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-sm text-zinc-400 group-hover:text-athletic-brand-violet transition-colors">
+                    {count} posts
+                  </span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-zinc-600 group-hover:text-athletic-brand-violet group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Growing Topics (2-4 posts) -->
+      {growingTags.length > 0 && (
+        <div>
+          <div class="flex items-center gap-3 mb-5">
+            <h2 class="text-lg font-bold text-white">Growing Topics</h2>
+            <span class="text-xs text-zinc-500 bg-zinc-900/50 px-2 py-0.5 rounded-full border border-zinc-800">
+              2-4 posts
+            </span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            {growingTags.map(([tag, count]) => (
+              <a
+                href={`/blog/tags/${encodeURIComponent(tag)}`}
+                class="group inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-zinc-700/50 bg-zinc-900/50 hover:border-athletic-brand-violet/50 hover:bg-zinc-900/80 transition-all duration-200"
+              >
+                <span class="text-sm font-medium text-zinc-200 group-hover:text-athletic-brand-violet transition-colors">
+                  {tag}
+                </span>
+                <span class="text-xs px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400 group-hover:bg-athletic-brand-violet/20 group-hover:text-athletic-brand-violet transition-colors">
+                  {count}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Explore (1 post) - Collapsible -->
+      {exploreTags.length > 0 && (
+        <div>
+          <details class="group">
+            <summary class="flex items-center gap-3 mb-5 cursor-pointer list-none">
+              <h2 class="text-lg font-bold text-white">Explore</h2>
+              <span class="text-xs text-zinc-500 bg-zinc-900/50 px-2 py-0.5 rounded-full border border-zinc-800">
+                {exploreTags.length} topics
               </span>
-              <span class={`rounded-full bg-zinc-800/80 group-hover:bg-athletic-brand-violet/20 transition-colors ${
-                isLarge ? 'px-2.5 py-0.5 text-sm' : 'px-2 py-0.5 text-xs'
-              } text-zinc-400 group-hover:text-athletic-brand-violet`}>
-                {count}
-              </span>
-            </a>
-          );
-        })}
-      </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4 text-zinc-500 transition-transform duration-200 group-open:rotate-180"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <p class="text-sm text-zinc-500 mb-4">
+              Emerging ideas and single-post topics worth exploring.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              {exploreTags.map(([tag]) => (
+                <a
+                  href={`/blog/tags/${encodeURIComponent(tag)}`}
+                  class="group inline-flex items-center px-3 py-1.5 rounded-lg border border-zinc-800/50 bg-zinc-900/30 hover:border-athletic-brand-violet/40 hover:bg-zinc-900/60 transition-all duration-200"
+                >
+                  <span class="text-xs font-medium text-zinc-400 group-hover:text-athletic-brand-violet transition-colors">
+                    {tag}
+                  </span>
+                </a>
+              ))}
+            </div>
+          </details>
+        </div>
+      )}
+
     </section>
 
     <!-- Footer -->
@@ -145,3 +225,10 @@ const collectionSchema = generateCollectionSchema(
     </footer>
   </main>
 </BaseLayout>
+
+<style>
+  /* Remove default summary arrow in WebKit browsers */
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

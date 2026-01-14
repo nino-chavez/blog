@@ -107,11 +107,12 @@ const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
 
 export default function BlogList({ posts }: BlogListProps) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [visibleCount, setVisibleCount] = useState(8);
 
   // Category stats
-  const { categories, postCounts, topCategories, otherCategories } =
+  const { postCounts, topCategories, otherCategories } =
     useMemo(() => {
       const counts: Record<string, number> = {};
       posts.forEach((post) => {
@@ -128,7 +129,6 @@ export default function BlogList({ posts }: BlogListProps) {
       if (other.length > 0) counts["Other"] = otherCount;
 
       return {
-        categories: sorted.map(([cat]) => cat),
         postCounts: counts,
         topCategories: top,
         otherCategories: other,
@@ -146,6 +146,9 @@ export default function BlogList({ posts }: BlogListProps) {
           return false;
         }
       }
+      if (selectedTag) {
+        if (!post.tags?.includes(selectedTag)) return false;
+      }
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
         const matches =
@@ -157,7 +160,7 @@ export default function BlogList({ posts }: BlogListProps) {
       }
       return true;
     });
-  }, [posts, selectedCategory, searchQuery, otherCategories]);
+  }, [posts, selectedCategory, selectedTag, searchQuery, otherCategories]);
 
   // Split featured and regular
   const featuredPosts = filteredPosts.filter((p) => p.featured).slice(0, 2);
@@ -309,6 +312,17 @@ export default function BlogList({ posts }: BlogListProps) {
             </button>
           )}
 
+          {/* Browse Topics Link */}
+          <a
+            href="/blog/tags"
+            className="text-xs font-medium px-3 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 hover:border-athletic-brand-violet/50 hover:text-athletic-brand-violet transition-all flex items-center gap-1.5"
+          >
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+            </svg>
+            Topics
+          </a>
+
           {/* Search */}
           <div className="flex-1 min-w-[200px] max-w-xs ml-auto">
             <div className="relative">
@@ -338,27 +352,46 @@ export default function BlogList({ posts }: BlogListProps) {
       </div>
 
       {/* Results info */}
-      {(searchQuery || selectedCategory) && (
-        <p className="text-sm text-zinc-500">
-          Showing {filteredPosts.length} posts
-          {selectedCategory && (
-            <span>
-              {" "}
-              in <span className="text-white">{selectedCategory}</span>
-            </span>
+      {(searchQuery || selectedCategory || selectedTag) && (
+        <div className="flex items-center justify-between">
+          <p className="text-sm text-zinc-500">
+            Showing {filteredPosts.length} posts
+            {selectedCategory && (
+              <span>
+                {" "}
+                in <span className="text-white">{selectedCategory}</span>
+              </span>
+            )}
+            {selectedTag && (
+              <span>
+                {" "}
+                tagged <span className="text-athletic-brand-violet">{selectedTag}</span>
+              </span>
+            )}
+            {searchQuery && (
+              <span>
+                {" "}
+                matching "
+                <span className="text-athletic-brand-violet">{searchQuery}</span>"
+              </span>
+            )}
+          </p>
+          {selectedTag && (
+            <button
+              onClick={() => setSelectedTag(null)}
+              className="text-xs text-zinc-400 hover:text-white transition-colors flex items-center gap-1"
+            >
+              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              Clear tag
+            </button>
           )}
-          {searchQuery && (
-            <span>
-              {" "}
-              matching "
-              <span className="text-athletic-brand-violet">{searchQuery}</span>"
-            </span>
-          )}
-        </p>
+        </div>
       )}
 
       {/* Featured Section */}
-      {featuredPosts.length > 0 && !searchQuery && !selectedCategory && (
+      {featuredPosts.length > 0 && !searchQuery && !selectedCategory && !selectedTag && (
         <section className="relative -mx-4 px-4 py-8 rounded-3xl bg-gradient-to-b from-zinc-900/80 via-zinc-900/40 to-transparent">
           {/* Subtle gradient orb background */}
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-athletic-brand-violet/5 rounded-full blur-3xl pointer-events-none" />
@@ -426,12 +459,16 @@ export default function BlogList({ posts }: BlogListProps) {
                         {post.tags && post.tags.length > 0 && (
                           <div className="flex flex-wrap gap-1.5 pt-2">
                             {post.tags.slice(0, 3).map((tag) => (
-                              <span
+                              <button
                                 key={tag}
-                                className="text-[10px] px-2 py-0.5 rounded bg-zinc-800/50 text-zinc-500"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setSelectedTag(tag);
+                                }}
+                                className="text-[10px] px-2 py-0.5 rounded bg-zinc-800/50 text-zinc-500 hover:bg-athletic-brand-violet/20 hover:text-athletic-brand-violet transition-colors"
                               >
                                 {tag}
-                              </span>
+                              </button>
                             ))}
                           </div>
                         )}
@@ -504,12 +541,16 @@ export default function BlogList({ posts }: BlogListProps) {
                       {post.tags && post.tags.length > 0 && (
                         <div className="flex flex-wrap gap-1.5 pt-1">
                           {post.tags.slice(0, 4).map((tag) => (
-                            <span
+                            <button
                               key={tag}
-                              className="text-[10px] px-2 py-0.5 rounded bg-zinc-800/50 text-zinc-500"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setSelectedTag(tag);
+                              }}
+                              className="text-[10px] px-2 py-0.5 rounded bg-zinc-800/50 text-zinc-500 hover:bg-athletic-brand-violet/20 hover:text-athletic-brand-violet transition-colors"
                             >
                               {tag}
-                            </span>
+                            </button>
                           ))}
                         </div>
                       )}
@@ -544,6 +585,7 @@ export default function BlogList({ posts }: BlogListProps) {
           <button
             onClick={() => {
               setSelectedCategory(null);
+              setSelectedTag(null);
               setSearchQuery("");
             }}
             className="px-4 py-2 rounded-lg bg-zinc-900 text-athletic-brand-violet hover:bg-zinc-800 transition-colors"
