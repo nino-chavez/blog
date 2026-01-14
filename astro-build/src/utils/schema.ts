@@ -18,16 +18,15 @@ const AUTHOR = {
     'https://linkedin.com/in/ninochavez',
     'https://github.com/ninochavez',
   ],
-  jobTitle: 'Principal Consultant & Enterprise Architect',
-  description: 'Strategy, architecture, and AI automation. Turning enterprise complexity into competitive advantage.',
+  jobTitle: 'Product Architect',
+  description: 'Product architecture, commerce platforms, and AI automation. Building systems that scale.',
   knowsAbout: [
-    'Enterprise Architecture',
-    'AI Automation',
+    'Product Architecture',
     'Commerce Platforms',
+    'AI Automation',
     'Systems Thinking',
     'Digital Transformation',
     'Leadership',
-    'Consulting',
   ],
 };
 
@@ -207,8 +206,8 @@ export function generatePersonSchema() {
     '@id': 'https://ninochavez.co#person',
     name: 'Nino Chavez',
     url: 'https://ninochavez.co',
-    jobTitle: 'Principal Consultant & Enterprise Architect',
-    description: 'Strategy, architecture, and AI automation. Turning enterprise complexity into competitive advantage.',
+    jobTitle: 'Product Architect',
+    description: 'Product architecture, commerce platforms, and AI automation. Building systems that scale.',
     image: 'https://ninochavez.co/nino-chavez.jpg',
     sameAs: [
       'https://linkedin.com/in/ninochavez',
@@ -216,17 +215,16 @@ export function generatePersonSchema() {
       'https://blog.ninochavez.co',
     ],
     knowsAbout: [
-      'Enterprise Architecture',
-      'AI Automation',
+      'Product Architecture',
       'Commerce Platforms',
+      'AI Automation',
       'Systems Thinking',
       'Digital Transformation',
       'Leadership',
-      'Consulting',
     ],
     worksFor: {
       '@type': 'Organization',
-      name: 'SignalX Labs',
+      name: 'commerce.com',
     },
   };
 }

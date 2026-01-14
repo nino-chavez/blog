@@ -8,10 +8,10 @@
 
 ## About the Author
 
-Nino Chavez is a Principal Consultant and Enterprise Architect specializing in
-commerce platforms, AI automation, and digital transformation. With experience
-at major retailers and consulting firms, he writes about the intersection of
-technology strategy and practical implementation.
+Nino Chavez is a Product Architect at commerce.com, specializing in commerce
+platforms, AI automation, and digital transformation. With experience at major
+retailers and technology companies, he writes about the intersection of product
+architecture and practical implementation.
 
 - Website: https://ninochavez.co
 - LinkedIn: https://linkedin.com/in/ninochavez
