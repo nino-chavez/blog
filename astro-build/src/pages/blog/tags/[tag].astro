@@ -1,0 +1,199 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { generateCollectionSchema } from '../../../utils/schema';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog', ({ data }) => data.status !== 'draft');
+  const allTags = Array.from(
+    new Set(allPosts.flatMap((post) => post.data.tags || []))
+  );
+
+  return allTags.map((tag) => ({
+    params: { tag },
+  }));
+}
+
+const { tag } = Astro.params;
+
+// Get all published posts with this tag
+const allPosts = await getCollection('blog', ({ data }) => data.status !== 'draft');
+const postsWithTag = allPosts.filter((post) =>
+  post.data.tags?.includes(tag)
+);
+const sortedPosts = postsWithTag.sort(
+  (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime()
+);
+
+const postCount = sortedPosts.length;
+
+// Get unique categories for these posts
+const categories = Array.from(
+  new Set(sortedPosts.map((p) => p.data.category).filter(Boolean))
+);
+
+// Calculate reading time
+function getReadingTime(excerpt: string): number {
+  const wordsPerMinute = 200;
+  const words = excerpt?.split(/\s+/).length || 0;
+  return Math.max(1, Math.ceil(words / wordsPerMinute));
+}
+
+// Generate JSON-LD
+const collectionSchema = generateCollectionSchema(
+  `Posts tagged "${tag}"`,
+  `All Signal Dispatch posts tagged with "${tag}".`,
+  `https://blog.ninochavez.co/blog/tags/${encodeURIComponent(tag)}`,
+  sortedPosts.map((post) => ({
+    id: post.id,
+    data: {
+      title: post.data.title,
+      excerpt: post.data.excerpt,
+      publishedAt: post.data.publishedAt,
+      author: post.data.author || 'Nino Chavez',
+    },
+  }))
+);
+---
+
+<BaseLayout
+  title={`Posts tagged "${tag}"`}
+  description={`Browse all ${postCount} Signal Dispatch posts tagged with "${tag}".`}
+  jsonLd={[collectionSchema]}
+>
+  <main class="min-h-screen">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-zinc-950/95 backdrop-blur-xl border-b border-zinc-800/30">
+      <nav class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-[56px] sm:h-[73px]">
+          <a href="/blog" class="flex items-center gap-2 sm:gap-3 flex-shrink min-w-0">
+            <h1 class="text-sm xs:text-base sm:text-lg font-bold bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange bg-clip-text text-transparent truncate">
+              Signal Dispatch
+            </h1>
+          </a>
+          <div class="flex items-center gap-1 sm:gap-4 flex-shrink-0">
+            <a href="/blog" class="hidden sm:block text-sm text-zinc-400 hover:text-white transition-colors">Blog</a>
+            <a href="/blog/series" class="hidden sm:block text-sm text-zinc-400 hover:text-white transition-colors">Series</a>
+            <a href="/blog/tags" class="hidden sm:block text-sm text-zinc-400 hover:text-white transition-colors">Tags</a>
+            <a href="/blog/whitepapers" class="hidden sm:block text-sm text-zinc-400 hover:text-white transition-colors">Whitepapers</a>
+            <a href="/rss.xml" class="flex items-center justify-center w-9 h-9 sm:w-auto sm:h-auto rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800/50 sm:hover:bg-transparent transition-colors" title="RSS Feed">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="space-y-3">
+        <a href="/blog/tags" class="group inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-athletic-court-orange transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          All Tags
+        </a>
+        <div class="flex items-center gap-4 flex-wrap">
+          <div class="flex items-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-athletic-brand-violet" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+            </svg>
+            <h1 class="text-3xl md:text-4xl font-black text-white">{tag}</h1>
+          </div>
+          <span class="text-sm text-zinc-500 bg-zinc-900/50 px-3 py-1 rounded-full border border-zinc-800">
+            {postCount} {postCount === 1 ? 'post' : 'posts'}
+          </span>
+        </div>
+        {categories.length > 0 && (
+          <p class="text-zinc-400">
+            Found in: {categories.join(', ')}
+          </p>
+        )}
+      </div>
+    </section>
+
+    <!-- Posts Grid -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <div class="grid gap-6">
+        {sortedPosts.map((post, index) => {
+          const readingTime = getReadingTime(post.data.excerpt || '');
+          const publishDate = new Date(post.data.publishedAt).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          });
+
+          return (
+            <a href={`/blog/${post.id}`} class="group block">
+              <article class={`relative overflow-hidden rounded-2xl border transition-all duration-300 hover:shadow-xl hover:shadow-athletic-brand-violet/10 ${
+                index === 0
+                  ? 'border-athletic-brand-violet/40 bg-gradient-to-br from-zinc-900/80 via-zinc-900/50 to-zinc-950'
+                  : 'border-zinc-800 bg-zinc-900/30 hover:border-athletic-brand-violet/50'
+              }`}>
+                <div class="flex flex-col md:flex-row">
+                  {post.data.featureImage && (
+                    <div class="md:w-64 lg:w-80 flex-shrink-0">
+                      <img
+                        src={post.data.featureImage}
+                        alt={post.data.title}
+                        class="w-full h-48 md:h-full object-cover"
+                        loading={index < 3 ? 'eager' : 'lazy'}
+                      />
+                    </div>
+                  )}
+                  <div class="p-6 flex-1">
+                    <div class="flex items-center gap-3 text-xs mb-3 flex-wrap">
+                      {post.data.category && (
+                        <span class="font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-athletic-court-orange/10 border border-athletic-court-orange/30 text-athletic-court-orange">
+                          {post.data.category}
+                        </span>
+                      )}
+                      <span class="text-zinc-500">{publishDate}</span>
+                      <span class="text-zinc-500">·</span>
+                      <span class="text-zinc-500">{readingTime} min read</span>
+                    </div>
+
+                    <h2 class={`font-bold text-white group-hover:text-athletic-court-orange transition-colors mb-2 ${
+                      index === 0 ? 'text-xl md:text-2xl' : 'text-lg md:text-xl'
+                    }`}>
+                      {post.data.title}
+                    </h2>
+
+                    <p class={`text-zinc-400 leading-relaxed ${index === 0 ? 'line-clamp-3' : 'line-clamp-2'}`}>
+                      {post.data.excerpt}
+                    </p>
+
+                    <div class="mt-4 flex items-center gap-2 text-athletic-brand-violet group-hover:text-athletic-court-orange transition-colors font-medium text-sm">
+                      <span>Read post</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-800/50 py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+          <p class="text-zinc-500 text-sm">
+            &copy; {new Date().getFullYear()} Nino Chavez. All rights reserved.
+          </p>
+          <div class="flex items-center gap-6">
+            <a href="/rss.xml" class="text-zinc-400 hover:text-white text-sm transition-colors">RSS Feed</a>
+            <a href="/api/posts.json" class="text-zinc-400 hover:text-white text-sm transition-colors">API</a>
+            <a href="https://ninochavez.co" class="text-zinc-400 hover:text-white text-sm transition-colors">ninochavez.co</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+</BaseLayout>
