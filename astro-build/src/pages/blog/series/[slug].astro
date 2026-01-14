@@ -1,0 +1,214 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { generateArticleSchema } from '../../../utils/schema';
+
+// Get the series from the slug parameter
+const { slug } = Astro.params;
+const allSeries = await getCollection('series');
+const series = allSeries.find((s) => s.id === slug);
+
+if (!series) {
+  return Astro.redirect('/blog/series');
+}
+
+const { Content } = await render(series);
+
+// Get all blog posts in this series, sorted by position
+const blogPosts = await getCollection('blog', ({ data }) =>
+  data.status !== 'draft' && data.series?.slug === slug
+);
+const sortedPosts = blogPosts.sort((a, b) =>
+  (a.data.series?.position || 0) - (b.data.series?.position || 0)
+);
+
+// Generate JSON-LD schema
+const articleSchema = generateArticleSchema({
+  id: `series/${series.id}`,
+  data: {
+    title: series.data.title,
+    excerpt: series.data.description,
+    publishedAt: series.data.publishedAt,
+    author: 'Nino Chavez',
+  },
+});
+
+// Format date
+const publishedDate = new Date(series.data.publishedAt);
+const formattedDate = publishedDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+// Calculate total reading time for series
+const totalReadingTime = sortedPosts.reduce((acc, post) => {
+  const wordCount = post.body?.split(/\s+/).length || 0;
+  return acc + Math.ceil(wordCount / 200);
+}, 0);
+---
+
+<BaseLayout
+  title={`${series.data.title} | Series`}
+  description={series.data.description}
+  image={series.data.featureImage}
+  type="article"
+  publishedTime={publishedDate.toISOString()}
+  author="Nino Chavez"
+  jsonLd={[articleSchema]}
+>
+  <main class="min-h-screen">
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-lg border-b border-zinc-800/50">
+      <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <a href="/blog" class="flex items-center gap-2 text-white hover:text-athletic-court-orange transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          <span class="font-semibold">Signal Dispatch</span>
+        </a>
+        <div class="flex items-center gap-4">
+          <a href="/blog/series" class="text-zinc-400 hover:text-white text-sm transition-colors">All Series</a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="max-w-4xl mx-auto px-4 py-12">
+      <!-- Back link -->
+      <a
+        href="/blog/series"
+        class="group inline-flex items-center gap-2 text-zinc-400 hover:text-athletic-court-orange transition-all duration-150 font-medium mb-8"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to Series
+      </a>
+
+      <!-- Series Header -->
+      <header class="space-y-4 pb-8 border-b border-zinc-800/50 mb-8">
+        <div class="flex items-center gap-3 text-sm flex-wrap">
+          <span class="font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border transition-colors bg-athletic-court-orange/10 border-athletic-court-orange/30 text-athletic-court-orange">
+            Series
+          </span>
+          <span class="text-zinc-500">
+            {sortedPosts.length} {sortedPosts.length === 1 ? 'post' : 'posts'}
+          </span>
+          <span class="text-zinc-700">•</span>
+          <span class="flex items-center gap-1.5 text-zinc-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            ~{totalReadingTime} min total
+          </span>
+          {series.data.status === 'completed' && (
+            <span class="font-medium px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs uppercase tracking-wider">
+              Complete
+            </span>
+          )}
+        </div>
+
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight">
+          {series.data.title}
+        </h1>
+
+        <p class="text-xl text-zinc-400 leading-relaxed">
+          {series.data.description}
+        </p>
+      </header>
+
+      <!-- Series Introduction (from MDX content) -->
+      <div class="prose prose-lg max-w-none mb-12">
+        <Content />
+      </div>
+
+      <!-- Posts List -->
+      <section class="space-y-4">
+        <h2 class="text-lg font-bold text-zinc-300 mb-6">Reading Order</h2>
+
+        <div class="space-y-4">
+          {sortedPosts.map((post, index) => {
+            const wordCount = post.body?.split(/\s+/).length || 0;
+            const readingTime = Math.ceil(wordCount / 200);
+            const position = post.data.series?.position || index + 1;
+
+            return (
+              <a href={`/blog/${post.id}`} class="group block">
+                <article class="relative flex items-start gap-4 p-4 md:p-6 rounded-xl border border-zinc-800 bg-zinc-900/30 hover:border-athletic-brand-violet/50 hover:bg-zinc-900/50 transition-all duration-300">
+                  <!-- Position Badge -->
+                  <div class="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-athletic-brand-violet to-athletic-court-orange flex items-center justify-center text-white font-bold text-lg md:text-xl">
+                    {position}
+                  </div>
+
+                  <!-- Content -->
+                  <div class="flex-1 min-w-0">
+                    <h3 class="font-bold text-white group-hover:text-athletic-court-orange transition-colors text-lg md:text-xl mb-2 line-clamp-2">
+                      {post.data.title}
+                    </h3>
+
+                    {post.data.excerpt && (
+                      <p class="text-zinc-400 text-sm md:text-base line-clamp-2 mb-3">
+                        {post.data.excerpt}
+                      </p>
+                    )}
+
+                    <div class="flex items-center gap-3 text-xs text-zinc-500">
+                      <span class="flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        {readingTime} min
+                      </span>
+                      <span>•</span>
+                      <time datetime={new Date(post.data.publishedAt).toISOString()}>
+                        {new Date(post.data.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                      </time>
+                    </div>
+                  </div>
+
+                  <!-- Arrow -->
+                  <div class="flex-shrink-0 self-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-zinc-600 group-hover:text-athletic-brand-violet group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </article>
+              </a>
+            );
+          })}
+        </div>
+      </section>
+
+      <!-- Start Reading CTA -->
+      {sortedPosts.length > 0 && (
+        <div class="mt-12 text-center">
+          <a
+            href={`/blog/${sortedPosts[0].id}`}
+            class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange text-white font-bold rounded-xl hover:shadow-lg hover:shadow-athletic-brand-violet/25 transition-all duration-300"
+          >
+            <span>Start Reading</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+        </div>
+      )}
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-800/50 py-12 mt-12">
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <p class="text-zinc-500 text-sm">
+          &copy; {new Date().getFullYear()} Nino Chavez. All rights reserved.
+        </p>
+        <div class="flex justify-center gap-4 mt-4">
+          <a href="/blog" class="text-zinc-400 hover:text-white text-sm transition-colors">Blog</a>
+          <span class="text-zinc-700">•</span>
+          <a href="/blog/series" class="text-zinc-400 hover:text-white text-sm transition-colors">Series</a>
+          <span class="text-zinc-700">•</span>
+          <a href="https://ninochavez.co" class="text-zinc-400 hover:text-white text-sm transition-colors">ninochavez.co</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+</BaseLayout>
