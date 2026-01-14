@@ -1,5 +1,12 @@
-@import '@fontsource-variable/inter';
+@import '@fontsource-variable/inter/wght.css';
 @import "tailwindcss";
+
+/* Ensure font-display: swap for Inter Variable */
+@font-face {
+  font-family: 'Inter Variable';
+  font-display: swap;
+  src: local('Inter Variable');
+}
 
 /* Brand-unified utility classes for consistent violet/orange scheme */
 @source "inline(bg-athletic-brand-violet/10 bg-athletic-brand-violet/5)";
@@ -56,12 +63,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-html,
+html {
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Inter Variable', system-ui, -apple-system, sans-serif;
   color: rgba(255, 255, 255, 0.87);
   overflow-x: hidden;
-  max-width: 100vw;
+  width: 100%;
   margin: 0;
   padding: 0;
 }

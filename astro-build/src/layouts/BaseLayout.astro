@@ -45,6 +45,11 @@ const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <link rel="icon" type="image/png" sizes="32x32" href="/blog/favicon-32x32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/blog/apple-touch-icon.png" />
 
+    <!-- Preload LCP image for blog posts -->
+    {image && type === 'article' && (
+      <link rel="preload" as="image" href={image} fetchpriority="high" />
+    )}
+
     <!-- Primary Meta Tags -->
     <title>{pageTitle}</title>
     <meta name="title" content={pageTitle} />
