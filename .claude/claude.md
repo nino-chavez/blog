@@ -379,6 +379,54 @@ node scripts/export-presentation-html.js {slug}
 
 ---
 
+## Canonical Tag System
+
+**CRITICAL**: All blog posts MUST use only approved canonical tags from `astro-build/src/config/tags.ts`.
+
+### Approved Tags (18 total)
+
+**Core Domains:**
+- `ai-development` - Building with AI tools, LLMs, AI-assisted coding
+- `ai-governance` - Guardrails, policies, oversight, responsible AI
+- `agentic-systems` - Autonomous AI agents, multi-agent orchestration
+- `architecture` - System design, patterns, technical architecture
+- `commerce` - Digital commerce, storefronts, e-commerce platforms
+- `consulting` - Consulting practice, client work, advisory
+- `leadership` - Managing people, teams, organizational dynamics
+
+**Content Type:**
+- `field-notes` - Real-time observations, work-in-progress, raw learnings
+- `deep-dive` - Technical explorations, thorough analysis
+- `reflection` - Introspective posts, personal growth, philosophy
+- `tutorial` - How-to content, step-by-step guides
+
+**Frameworks & Projects:**
+- `aegis-framework` - Posts about the Aegis constitutional AI governance framework
+- `signal-dispatch` - Meta posts about the blog itself
+
+**Skills & Practices:**
+- `engineering` - Code, tools, craft, testing, web development
+- `product-strategy` - Product thinking, roadmaps, prioritization
+- `career` - Career development, professional growth, education
+- `communication` - Writing, presenting, feedback
+- `photography` - Photography practice, visual storytelling
+
+### Tag Rules
+1. **Use kebab-case** - All tags are lowercase with hyphens
+2. **No new tags** - Do not create tags outside this list without updating `tags.ts`
+3. **1-3 tags per post** - Be selective; choose the most relevant
+4. **Check migration map** - Old tags map to canonical equivalents (see `TAG_MIGRATION_MAP` in tags.ts)
+
+### Migration Script
+If tags need normalization, run:
+```bash
+cd astro-build
+node scripts/migrate-tags.js --dry-run   # Preview changes
+node scripts/migrate-tags.js             # Apply changes
+```
+
+---
+
 ## Common Categories
 
 - AI & Automation
