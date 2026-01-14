@@ -18,7 +18,7 @@ export const CANONICAL_TAGS = {
   'ai-development': {
     label: 'AI Development',
     description: 'Building with AI tools, LLMs, AI-assisted coding, prompt engineering',
-    replaces: ['AI Coding', 'AI', 'GenAI', 'llm', 'AI Workflows']
+    replaces: ['AI Coding', 'AI', 'GenAI', 'llm', 'AI Workflows', 'ai-workflows', 'AI Coding']
   },
 
   'ai-governance': {
@@ -30,25 +30,25 @@ export const CANONICAL_TAGS = {
   'agentic-systems': {
     label: 'Agentic Systems',
     description: 'Autonomous AI agents, multi-agent orchestration, agentic commerce',
-    replaces: ['Agentic Software', 'Agentic Commerce', 'Automation']
+    replaces: ['Agentic Software', 'Agentic Commerce', 'Automation', 'agentic-ai', 'ai-automation']
   },
 
   'architecture': {
     label: 'Architecture',
     description: 'System design, patterns, technical architecture, infrastructure',
-    replaces: ['architecture', 'Systems Design']
+    replaces: ['architecture', 'Systems Design', 'systems-thinking']
   },
 
   'commerce': {
     label: 'Commerce',
     description: 'Digital commerce, storefronts, e-commerce platforms, retail tech',
-    replaces: ['Commerce', 'E-Commerce']
+    replaces: ['Commerce', 'E-Commerce', 'commerce-strategy']
   },
 
   'consulting': {
     label: 'Consulting',
     description: 'Consulting practice, client work, advisory, professional services',
-    replaces: ['Consulting', 'Strategy']
+    replaces: ['Consulting', 'Strategy', 'consulting-practice', 'Consulting Practice']
   },
 
   'leadership': {
@@ -76,7 +76,7 @@ export const CANONICAL_TAGS = {
   'reflection': {
     label: 'Reflection',
     description: 'Introspective posts, personal growth, philosophy, meaning-making',
-    replaces: ['Personal Growth', 'Self-Awareness', 'philosophy', 'meaning', 'therapy', 'honesty']
+    replaces: ['Personal Growth', 'Self-Awareness', 'philosophy', 'meaning', 'therapy', 'honesty', 'personal-growth', 'Reflections', 'Philosophy']
   },
 
   'tutorial': {
@@ -98,7 +98,7 @@ export const CANONICAL_TAGS = {
   'signal-dispatch': {
     label: 'Signal Dispatch',
     description: 'Meta posts about the blog itself, voice, process',
-    replaces: ['Meta']
+    replaces: ['Meta', 'meta']
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -108,7 +108,7 @@ export const CANONICAL_TAGS = {
   'engineering': {
     label: 'Engineering',
     description: 'Code, tools, craft, testing, web development, developer experience',
-    replaces: ['Engineering', 'Web Development', 'Developer Tools', 'testing', 'UX Design', 'accessibility', 'svelte', 'cli']
+    replaces: ['Engineering', 'Web Development', 'Developer Tools', 'testing', 'UX Design', 'accessibility', 'svelte', 'cli', 'craft']
   },
 
   'product-strategy': {

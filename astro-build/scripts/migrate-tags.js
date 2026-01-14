@@ -23,6 +23,10 @@ const TAG_MIGRATION_MAP = {
   'genai': 'ai-development',
   'llm': 'ai-development',
   'ai workflows': 'ai-development',
+  'ai-workflows': 'ai-development',
+  'intent-engineering': 'ai-development',
+  'software-economics': 'ai-development',
+  'ai-assisted-development': 'ai-development',
 
   // ai-governance
   'ai governance': 'ai-governance',
@@ -35,32 +39,43 @@ const TAG_MIGRATION_MAP = {
   'agentic software': 'agentic-systems',
   'agentic commerce': 'agentic-systems',
   'automation': 'agentic-systems',
+  'agentic-ai': 'agentic-systems',
+  'ai-automation': 'agentic-systems',
 
   // architecture
   'architecture': 'architecture',
   'systems design': 'architecture',
+  'systems-thinking': 'architecture',
+  'grid-level-thinking': 'architecture',
 
   // commerce
   'commerce': 'commerce',
   'e-commerce': 'commerce',
+  'commerce-strategy': 'commerce',
+  'personalization': 'commerce',
 
   // consulting
   'consulting': 'consulting',
   'strategy': 'consulting',
+  'consulting-practice': 'consulting',
+  'consulting practice': 'consulting',
 
   // leadership
   'leadership': 'leadership',
 
   // field-notes
   'field notes': 'field-notes',
+  'field-notes': 'field-notes',
 
   // reflection
   'personal growth': 'reflection',
+  'personal-growth': 'reflection',
   'self-awareness': 'reflection',
   'philosophy': 'reflection',
   'meaning': 'reflection',
   'therapy': 'reflection',
   'honesty': 'reflection',
+  'reflections': 'reflection',
 
   // signal-dispatch (meta posts)
   'meta': 'signal-dispatch',
@@ -74,6 +89,7 @@ const TAG_MIGRATION_MAP = {
   'accessibility': 'engineering',
   'svelte': 'engineering',
   'cli': 'engineering',
+  'craft': 'engineering',
 
   // product-strategy
   'product strategy': 'product-strategy',
@@ -84,6 +100,7 @@ const TAG_MIGRATION_MAP = {
   'education': 'career',
   'productivity': 'career',
   'industry': 'career',
+  'workforce': 'career',
 
   // communication
   'communication': 'communication',
@@ -152,26 +169,60 @@ function migrateTag(tag) {
 }
 
 function extractTags(content) {
-  const match = content.match(/^tags:\s*\[(.*?)\]/m);
-  if (!match) return null;
+  // Try inline array format first: tags: ["tag1", "tag2"]
+  const inlineMatch = content.match(/^tags:\s*\[(.*?)\]/m);
+  if (inlineMatch) {
+    const tagsStr = inlineMatch[1];
+    const tags = tagsStr.split(',').map(t => {
+      let tag = t.trim();
+      // Remove quotes
+      if ((tag.startsWith('"') && tag.endsWith('"')) ||
+          (tag.startsWith("'") && tag.endsWith("'"))) {
+        tag = tag.slice(1, -1);
+      }
+      return tag;
+    }).filter(t => t.length > 0);
+    return { tags, format: 'inline' };
+  }
 
-  // Parse the tags array
-  const tagsStr = match[1];
-  const tags = tagsStr.split(',').map(t => {
-    let tag = t.trim();
-    // Remove quotes
-    if ((tag.startsWith('"') && tag.endsWith('"')) ||
-        (tag.startsWith("'") && tag.endsWith("'"))) {
-      tag = tag.slice(1, -1);
-    }
-    return tag;
-  }).filter(t => t.length > 0);
+  // Try YAML list format: tags:\n  - tag1\n  - tag2
+  const yamlMatch = content.match(/^tags:\s*\n((?:\s+-\s+.+\n?)+)/m);
+  if (yamlMatch) {
+    const yamlBlock = yamlMatch[1];
+    const tags = yamlBlock
+      .split('\n')
+      .map(line => {
+        const match = line.match(/^\s+-\s+(.+)$/);
+        if (match) {
+          let tag = match[1].trim();
+          // Remove quotes if present
+          if ((tag.startsWith('"') && tag.endsWith('"')) ||
+              (tag.startsWith("'") && tag.endsWith("'"))) {
+            tag = tag.slice(1, -1);
+          }
+          return tag;
+        }
+        return null;
+      })
+      .filter(t => t !== null && t.length > 0);
+    return { tags, format: 'yaml' };
+  }
 
-  return tags;
+  return null;
 }
 
-function updateTags(content, newTags) {
+function updateTags(content, newTags, format) {
   const tagsStr = newTags.map(t => `"${t}"`).join(', ');
+
+  if (format === 'yaml') {
+    // Replace YAML list format with inline format
+    return content.replace(
+      /^tags:\s*\n(?:\s+-\s+.+\n?)+/m,
+      `tags: [${tagsStr}]\n`
+    );
+  }
+
+  // Replace inline format
   return content.replace(
     /^tags:\s*\[.*?\]/m,
     `tags: [${tagsStr}]`
@@ -206,13 +257,14 @@ async function main() {
   for (const filename of files) {
     const filepath = path.join(BLOG_DIR, filename);
     const content = fs.readFileSync(filepath, 'utf-8');
-    const oldTags = extractTags(content);
+    const extracted = extractTags(content);
 
-    if (!oldTags || oldTags.length === 0) continue;
+    if (!extracted || extracted.tags.length === 0) continue;
     stats.filesProcessed++;
 
+    const { tags: oldTags, format } = extracted;
     const newTags = [];
-    const fileChanges = { file: filename, from: [], to: [], dropped: [], unknown: [] };
+    const fileChanges = { file: filename, from: [], to: [], dropped: [], unknown: [], format };
 
     for (const oldTag of oldTags) {
       const result = migrateTag(oldTag);
@@ -241,17 +293,18 @@ async function main() {
       }
     }
 
-    // Check if anything changed
+    // Check if anything changed (also convert yaml to inline format)
     const changed = fileChanges.from.length > 0 ||
                     fileChanges.dropped.length > 0 ||
-                    newTags.length !== oldTags.length;
+                    newTags.length !== oldTags.length ||
+                    format === 'yaml';
 
     if (changed) {
       stats.filesModified++;
       changes.push({ ...fileChanges, newTags });
 
       if (!dryRun) {
-        const newContent = updateTags(content, newTags);
+        const newContent = updateTags(content, newTags, format);
         fs.writeFileSync(filepath, newContent);
       }
     }
