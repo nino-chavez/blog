@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { generatePersonSchema } from '../utils/schema';
+
+const personSchema = generatePersonSchema();
+
+const expertise = [
+  'Enterprise Architecture',
+  'AI Automation',
+  'Commerce Platforms',
+  'Systems Thinking',
+  'Digital Transformation',
+  'Leadership',
+];
+
+const links = [
+  { label: 'LinkedIn', url: 'https://linkedin.com/in/ninochavez', icon: 'linkedin' },
+  { label: 'GitHub', url: 'https://github.com/ninochavez', icon: 'github' },
+  { label: 'Portfolio', url: 'https://ninochavez.co', icon: 'globe' },
+  { label: 'Photography', url: 'https://gallery.nino.photos', icon: 'camera' },
+];
+---
+
+<BaseLayout
+  title="About"
+  description="Nino Chavez - Principal Consultant & Enterprise Architect. Strategy, architecture, and AI automation. Turning enterprise complexity into competitive advantage."
+  jsonLd={[personSchema]}
+>
+  <main class="min-h-screen">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-zinc-950/95 backdrop-blur-xl border-b border-zinc-800/30">
+      <nav class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-[56px] sm:h-[73px]">
+          <a href="/blog" class="flex items-center gap-2 sm:gap-3 flex-shrink min-w-0">
+            <h1 class="text-sm xs:text-base sm:text-lg font-bold bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange bg-clip-text text-transparent truncate">
+              Signal Dispatch
+            </h1>
+          </a>
+          <div class="flex items-center gap-1 sm:gap-4 flex-shrink-0">
+            <a href="/blog" class="hidden sm:block text-sm text-zinc-400 hover:text-white transition-colors">Blog</a>
+            <a href="/blog/series" class="hidden sm:block text-sm text-zinc-400 hover:text-white transition-colors">Series</a>
+            <a href="/blog/whitepapers" class="hidden sm:block text-sm text-zinc-400 hover:text-white transition-colors">Whitepapers</a>
+            <a href="/rss.xml" class="flex items-center justify-center w-9 h-9 sm:w-auto sm:h-auto rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800/50 sm:hover:bg-transparent transition-colors" title="RSS Feed">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <!-- Back link -->
+      <a href="/blog" class="group inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-athletic-court-orange transition-colors mb-8">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to Blog
+      </a>
+
+      <!-- Author Header -->
+      <div class="flex flex-col sm:flex-row items-start gap-6 mb-12">
+        <!-- Avatar -->
+        <div class="flex-shrink-0">
+          <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-2xl bg-gradient-to-br from-athletic-brand-violet to-athletic-court-orange p-[3px]">
+            <div class="w-full h-full rounded-2xl bg-zinc-900 flex items-center justify-center">
+              <span class="text-3xl sm:text-4xl font-bold bg-gradient-to-br from-athletic-brand-violet to-athletic-court-orange bg-clip-text text-transparent">
+                NC
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Name & Title -->
+        <div class="space-y-2">
+          <h1 class="text-3xl sm:text-4xl font-black text-white">Nino Chavez</h1>
+          <p class="text-lg text-athletic-court-orange font-medium">Principal Consultant & Enterprise Architect</p>
+          <p class="text-zinc-400">SignalX Labs</p>
+        </div>
+      </div>
+
+      <!-- Bio -->
+      <div class="prose prose-invert prose-lg max-w-none mb-12">
+        <p class="text-xl text-zinc-300 leading-relaxed">
+          Strategy, architecture, and AI automation. Turning enterprise complexity into competitive advantage.
+        </p>
+
+        <p class="text-zinc-400">
+          I help organizations navigate the intersection of technology and strategy. My work focuses on making complex systems legible—whether that's enterprise architecture, AI integration, or the messy reality of digital transformation.
+        </p>
+
+        <p class="text-zinc-400">
+          This blog is where I think out loud. About AI workflows that actually work. About systems thinking as a practice. About what it means to lead in a world where the tools keep changing but the human problems stay the same.
+        </p>
+
+        <p class="text-zinc-400">
+          I write because it helps me see more clearly. And occasionally, it helps others see too.
+        </p>
+      </div>
+
+      <!-- Expertise -->
+      <div class="mb-12">
+        <h2 class="text-sm font-semibold text-zinc-500 uppercase tracking-wider mb-4">Areas of Focus</h2>
+        <div class="flex flex-wrap gap-2">
+          {expertise.map((area) => (
+            <span class="px-4 py-2 rounded-lg bg-zinc-900/80 border border-zinc-800 text-zinc-300 text-sm">
+              {area}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <!-- Links -->
+      <div class="mb-12">
+        <h2 class="text-sm font-semibold text-zinc-500 uppercase tracking-wider mb-4">Connect</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {links.map((link) => (
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center gap-3 p-4 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:border-athletic-brand-violet/50 hover:bg-zinc-900/80 transition-all"
+            >
+              {link.icon === 'linkedin' && (
+                <svg class="w-5 h-5 text-zinc-400 group-hover:text-athletic-brand-violet transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              )}
+              {link.icon === 'github' && (
+                <svg class="w-5 h-5 text-zinc-400 group-hover:text-athletic-brand-violet transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              )}
+              {link.icon === 'globe' && (
+                <svg class="w-5 h-5 text-zinc-400 group-hover:text-athletic-brand-violet transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                </svg>
+              )}
+              {link.icon === 'camera' && (
+                <svg class="w-5 h-5 text-zinc-400 group-hover:text-athletic-brand-violet transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              )}
+              <span class="text-sm text-zinc-300 group-hover:text-white transition-colors">{link.label}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="rounded-2xl bg-gradient-to-r from-athletic-brand-violet/10 to-athletic-court-orange/10 border border-athletic-brand-violet/20 p-6 sm:p-8">
+        <h2 class="text-xl font-bold text-white mb-2">Read the Blog</h2>
+        <p class="text-zinc-400 mb-4">
+          Explore posts on AI workflows, systems thinking, leadership, and more.
+        </p>
+        <a
+          href="/blog"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-athletic-brand-violet hover:bg-athletic-brand-violet/90 text-white font-medium transition-colors"
+        >
+          Browse Posts
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-800/50 py-12 mt-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+          <p class="text-zinc-500 text-sm">
+            &copy; {new Date().getFullYear()} Nino Chavez. All rights reserved.
+          </p>
+          <div class="flex items-center gap-6">
+            <a href="/rss.xml" class="text-zinc-400 hover:text-white text-sm transition-colors">RSS Feed</a>
+            <a href="/api/posts.json" class="text-zinc-400 hover:text-white text-sm transition-colors">API</a>
+            <a href="https://ninochavez.co" class="text-zinc-400 hover:text-white text-sm transition-colors">ninochavez.co</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+</BaseLayout>

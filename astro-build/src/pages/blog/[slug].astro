@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { generateArticleSchema, generateBreadcrumbSchema } from '../../utils/schema';
 import ReadingProgress from '../../components/ReadingProgress';
 import SeriesNav from '../../components/SeriesNav.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
 
 // In SSR mode, get the post from the slug parameter
 const { slug } = Astro.params;
@@ -14,7 +15,7 @@ if (!post) {
   return Astro.redirect('/blog');
 }
 
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 
 // Generate JSON-LD schemas
 const articleSchema = generateArticleSchema(post);
@@ -147,9 +148,12 @@ const relatedPosts = allPosts
           {post.data.tags && post.data.tags.length > 0 && (
             <div class="flex flex-wrap gap-2 pt-4">
               {post.data.tags.map((tag) => (
-                <span class="text-xs px-3 py-1.5 rounded-full bg-zinc-900/50 text-zinc-400 border border-zinc-800 hover:border-athletic-brand-violet/50 hover:text-athletic-brand-violet transition-all duration-150 cursor-default">
+                <a
+                  href={`/blog/tags/${encodeURIComponent(tag)}`}
+                  class="text-xs px-3 py-1.5 rounded-full bg-zinc-900/50 text-zinc-400 border border-zinc-800 hover:border-athletic-brand-violet/50 hover:text-athletic-brand-violet transition-all duration-150"
+                >
                   {tag}
-                </span>
+                </a>
               ))}
             </div>
           )}
@@ -173,6 +177,9 @@ const relatedPosts = allPosts
             currentPosition={post.data.series.position}
           />
         )}
+
+        <!-- Table of Contents -->
+        <TableOfContents headings={headings} />
 
         <!-- Article Content -->
         <div class="prose max-w-none text-lg">
