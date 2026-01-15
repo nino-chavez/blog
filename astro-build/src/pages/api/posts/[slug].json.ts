@@ -35,7 +35,7 @@ export const GET: APIRoute = async ({ params }) => {
     category: post.data.category,
     tags: post.data.tags,
     author: post.data.author || 'Nino Chavez',
-    url: `https://blog.ninochavez.co/${post.id}`,
+    url: `https://ninochavez.co/blog/${post.id}`,
     featureImage: post.data.featureImage,
     source: post.data.source,
     linkedinUrl: post.data.linkedinUrl,
