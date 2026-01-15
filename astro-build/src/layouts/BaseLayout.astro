@@ -27,9 +27,10 @@ const {
   jsonLd,
 } = Astro.props;
 
-const siteUrl = 'https://ninochavez.co/blog';
+const siteUrl = 'https://ninochavez.co';
+const blogPath = '/blog';
 const fullImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
-const canonical = canonicalUrl || Astro.url.href.replace(/\/$/, '');
+const canonical = canonicalUrl || `${siteUrl}${blogPath}${Astro.url.pathname}`.replace(/\/$/, '');
 const pageTitle = title === 'Signal Dispatch' ? title : `${title} - Signal Dispatch`;
 
 // Convert jsonLd to array if single object
@@ -96,11 +97,11 @@ const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <meta name="generator" content="Astro" />
 
     <!-- RSS Feed -->
-    <link rel="alternate" type="application/rss+xml" title="Signal Dispatch RSS" href={`${siteUrl}/rss.xml`} />
-    <link rel="alternate" type="application/rss+xml" title="Signal Dispatch Full Content RSS" href={`${siteUrl}/full-content-rss.xml`} />
+    <link rel="alternate" type="application/rss+xml" title="Signal Dispatch RSS" href={`${siteUrl}${blogPath}/rss.xml`} />
+    <link rel="alternate" type="application/rss+xml" title="Signal Dispatch Full Content RSS" href={`${siteUrl}${blogPath}/full-content-rss.xml`} />
 
     <!-- JSON API Discovery -->
-    <link rel="alternate" type="application/json" title="Signal Dispatch API" href={`${siteUrl}/api/posts.json`} />
+    <link rel="alternate" type="application/json" title="Signal Dispatch API" href={`${siteUrl}${blogPath}/api/posts.json`} />
 
     <!-- JSON-LD Structured Data -->
     {jsonLdArray.map((schema) => (

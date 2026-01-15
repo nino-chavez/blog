@@ -7,7 +7,7 @@
  * - Content relationships and navigation
  */
 
-const SITE_URL = 'https://blog.ninochavez.co';
+const SITE_URL = 'https://ninochavez.co/blog';
 
 const AUTHOR = {
   '@type': 'Person',
@@ -212,7 +212,7 @@ export function generatePersonSchema() {
     sameAs: [
       'https://linkedin.com/in/ninochavez',
       'https://github.com/ninochavez',
-      'https://blog.ninochavez.co',
+      'https://ninochavez.co/blog',
     ],
     knowsAbout: [
       'Product Architecture',

@@ -45,7 +45,7 @@ function getReadingTime(excerpt: string): number {
 const collectionSchema = generateCollectionSchema(
   `Posts tagged "${tag}"`,
   `All Signal Dispatch posts tagged with "${tag}".`,
-  `https://blog.ninochavez.co/blog/tags/${encodeURIComponent(tag)}`,
+  `https://ninochavez.co/blog/tags/${encodeURIComponent(tag)}`,
   sortedPosts.map((post) => ({
     id: post.id,
     data: {
