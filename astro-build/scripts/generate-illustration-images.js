@@ -310,12 +310,12 @@ async function optimizeImage(inputBuffer, outputPath) {
   }
 }
 
-// Generate image using OpenRouter (Gemini 2.5 Flash Image) via chat completions
+// Generate image using OpenRouter (GPT-5 Image) via chat completions
 async function generateImage(prompt, filename) {
   try {
     // Use chat completions with image modality
     const response = await openrouter.chat.completions.create({
-      model: 'google/gemini-2.5-flash-preview-image',
+      model: 'openai/gpt-5-image',
       modalities: ['text', 'image'],
       messages: [
         {
@@ -483,7 +483,7 @@ async function main() {
 
   console.log('');
   console.log('🎨 Signal Dispatch Illustration Generator v4.0');
-  console.log('   OpenRouter + Gemini 2.5 Flash Image');
+  console.log('   OpenRouter + GPT-5 Image');
   console.log('   Hand-drawn illustration style + Sharp WebP Optimization\n');
   console.log(`📂 Content type: ${CONTENT_TYPE}`);
   console.log(`📐 Output: ${TARGET_WIDTH}x${TARGET_HEIGHT} WebP @ quality ${WEBP_QUALITY}`);
