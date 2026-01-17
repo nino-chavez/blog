@@ -9,7 +9,7 @@ import ReadingProgress from '../../components/ReadingProgress';
 // In SSR mode, get the research note from the slug parameter
 const { slug } = Astro.params;
 const researchNotes = await getCollection('research-notes');
-const note = researchNotes.find((n) => n.id === slug);
+const note = researchNotes.find((n) => n.data.slug === slug);
 
 if (!note) {
   return Astro.redirect('/research');
