@@ -1,6 +1,18 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+// Shared schema for supportedBy references (used by blog, whitepapers, presentations)
+const supportedBySchema = z.array(z.object({
+  slug: z.string(),
+  // How this research note is referenced in the content
+  relationship: z.enum([
+    'based-on',      // Primary source - the content is derived from this research
+    'informed-by',   // Secondary source - research influenced but didn't drive the content
+    'responds-to',   // The content is a response or critique of this research
+    'extends',       // The content builds upon this research
+  ]).default('informed-by'),
+})).optional();
+
 const blogCollection = defineCollection({
   loader: glob({ pattern: '**/*.mdx', base: './src/content/blog' }),
   schema: z.object({
@@ -26,8 +38,10 @@ const blogCollection = defineCollection({
     // Series membership - links post to a series collection
     series: z.object({
       slug: z.string(),
-      position: z.number().int().positive(), // 1-based position in series
+      position: z.number().int().positive(),
     }).optional(),
+    // Research notes that support this content
+    supportedBy: supportedBySchema,
   }),
 });
 
@@ -43,6 +57,13 @@ const whitepaperCollection = defineCollection({
     category: z.string().optional(),
     featureImage: z.string().optional(),
     tags: z.array(z.string()).optional(),
+    // Companion content - links to related blog post
+    companionOf: z.object({
+      type: z.enum(['post']),
+      slug: z.string(),
+    }).optional(),
+    // Research notes that support this content
+    supportedBy: supportedBySchema,
   }),
 });
 
@@ -67,6 +88,8 @@ const presentationCollection = defineCollection({
       type: z.enum(['blog', 'whitepaper']),
       slug: z.string(),
     }).optional(),
+    // Research notes that support this content
+    supportedBy: supportedBySchema,
   }),
 });
 
@@ -83,9 +106,67 @@ const seriesCollection = defineCollection({
   }),
 });
 
+// Research Notes are working documents that capture deep research, analysis,
+// and methodology. They can be internal (for reference while writing) or
+// published (as methodology transparency / supporting material).
+//
+// URL structure: /research/[slug]
+const researchNotesCollection = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/research-notes' }),
+  schema: z.object({
+    title: z.string(),
+    slug: z.string().optional(),
+    publishedAt: z.string().or(z.date()),
+    updatedAt: z.string().or(z.date()).optional(),
+    author: z.string().default('Nino Chavez'),
+    excerpt: z.string().optional().default(''),
+
+    // What type of research note is this?
+    noteType: z.enum([
+      'red-team-analysis',   // Adversarial critique of a thesis
+      'research-synthesis',  // Compiled research supporting content
+      'literature-review',   // Survey of existing work on a topic
+      'methodology',         // How an analysis was conducted
+      'data-analysis',       // Raw data exploration and findings
+      'interview-notes',     // Synthesized insights from interviews
+      'market-research',     // Industry/market analysis
+    ]),
+
+    // Where did this research originate?
+    origin: z.enum([
+      'internal',   // Created by Signal Dispatch (you)
+      'external',   // Received from outside source (like the deep research you shared)
+      'collaborative', // Co-created with external parties
+    ]).default('internal'),
+
+    // For external research, who provided it?
+    externalSource: z.object({
+      name: z.string(),           // e.g., "Deep Research AI Analysis"
+      organization: z.string().optional(),
+      url: z.string().optional(),
+      receivedAt: z.string().or(z.date()).optional(),
+    }).optional(),
+
+    // Visibility status
+    visibility: z.enum([
+      'internal',    // Only for your reference while writing
+      'published',   // Public at /research/[slug]
+    ]).default('internal'),
+
+    // What content does this research support? (reverse link)
+    supportsContent: z.array(z.object({
+      type: z.enum(['blog', 'whitepaper', 'presentation']),
+      slug: z.string(),
+    })).optional(),
+
+    tags: z.array(z.string()).optional(),
+  }),
+});
+
 export const collections = {
   blog: blogCollection,
   whitepapers: whitepaperCollection,
   presentations: presentationCollection,
   series: seriesCollection,
+  'research-notes': researchNotesCollection,
 };
