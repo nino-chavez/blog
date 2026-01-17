@@ -1,0 +1,177 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import { generateCollectionSchema } from '../../utils/schema';
+
+// Get all published research notes sorted by date
+const researchNotes = await getCollection('research-notes');
+const publishedNotes = researchNotes
+  .filter((note) => note.data.visibility === 'published')
+  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
+
+// Generate JSON-LD
+const collectionSchema = generateCollectionSchema(
+  'Signal Dispatch Research',
+  'Research notes, analyses, and methodology documentation supporting Signal Dispatch content.',
+  'https://ninochavez.co/research',
+  publishedNotes
+);
+
+// Note type labels and colors
+const noteTypeConfig: Record<string, { label: string; color: string }> = {
+  'red-team-analysis': { label: 'Red Team Analysis', color: 'rose' },
+  'research-synthesis': { label: 'Research Synthesis', color: 'violet' },
+  'literature-review': { label: 'Literature Review', color: 'cyan' },
+  'methodology': { label: 'Methodology', color: 'emerald' },
+  'data-analysis': { label: 'Data Analysis', color: 'amber' },
+  'interview-notes': { label: 'Interview Notes', color: 'blue' },
+  'market-research': { label: 'Market Research', color: 'orange' },
+};
+
+const getTypeConfig = (noteType: string) => noteTypeConfig[noteType] || { label: 'Research Note', color: 'zinc' };
+---
+
+<BaseLayout
+  title="Research"
+  description="Research notes, analyses, and methodology documentation supporting Signal Dispatch content."
+  jsonLd={[collectionSchema]}
+>
+  <main class="min-h-screen">
+    <SiteHeader currentPage="research" />
+
+    <!-- Compact Page Header -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+        <div class="space-y-3">
+          <a href="/blog" class="group inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-athletic-court-orange transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Blog
+          </a>
+          <div class="flex items-center gap-4">
+            <h1 class="text-3xl md:text-4xl font-black text-white">Research Notes</h1>
+            <span class="text-sm text-zinc-500 bg-zinc-900/50 px-3 py-1 rounded-full border border-zinc-800">
+              {publishedNotes.length} {publishedNotes.length === 1 ? 'note' : 'notes'}
+            </span>
+          </div>
+          <p class="text-zinc-400 max-w-2xl">
+            Deep research, adversarial analyses, and methodology documentation. The foundation behind Signal Dispatch content.
+          </p>
+        </div>
+
+        <!-- Note about research -->
+        <div class="flex items-center gap-2 text-xs text-zinc-500 bg-zinc-900/30 px-3 py-2 rounded-lg border border-zinc-800/50 lg:self-end">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-amber-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <span>Methodology transparency for published content</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research Notes Grid -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      {publishedNotes.length === 0 ? (
+        <div class="text-center py-16">
+          <p class="text-zinc-500">No published research notes yet.</p>
+        </div>
+      ) : (
+        <div class="grid gap-6">
+          {publishedNotes.map((note, index) => {
+            const wordCount = note.body?.split(/\s+/).length || 0;
+            const readingTime = Math.ceil(wordCount / 200);
+            const isNew = (new Date().getTime() - new Date(note.data.publishedAt).getTime()) / (1000 * 60 * 60 * 24) <= 14;
+            const typeConfig = getTypeConfig(note.data.noteType);
+
+            return (
+              <a href={`/research/${note.id}`} class="group block">
+                <article class={`relative overflow-hidden rounded-2xl border transition-all duration-300 hover:shadow-xl hover:shadow-amber-500/10 ${index === 0 ? 'border-amber-500/40 bg-gradient-to-br from-zinc-900/80 via-zinc-900/50 to-zinc-950' : 'border-zinc-800 bg-zinc-900/30 hover:border-amber-500/50'}`}>
+                  <div class="p-6 md:p-8">
+                    {/* Badges */}
+                    <div class="flex items-center gap-2 mb-4">
+                      {isNew && (
+                        <span class="font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-gradient-to-r from-amber-500 to-athletic-court-orange text-white text-[10px] shadow-lg">
+                          New
+                        </span>
+                      )}
+                      {index === 0 && (
+                        <span class="font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-500/90 text-white text-[10px] shadow-lg">
+                          Latest
+                        </span>
+                      )}
+                    </div>
+
+                    <div class="flex items-center gap-3 text-xs mb-3 flex-wrap">
+                      <span class={`font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-500`}>
+                        {typeConfig.label}
+                      </span>
+                      <span class="text-zinc-500">
+                        {new Date(note.data.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                      </span>
+                      <span class="text-zinc-600">•</span>
+                      <span class="flex items-center gap-1 text-zinc-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        {readingTime} min
+                      </span>
+                      {note.data.origin === 'external' && note.data.externalSource && (
+                        <>
+                          <span class="text-zinc-600">•</span>
+                          <span class="text-zinc-500">
+                            Source: {note.data.externalSource.name}
+                          </span>
+                        </>
+                      )}
+                    </div>
+
+                    <h2 class={`font-bold text-white group-hover:text-amber-400 transition-colors mb-3 ${index === 0 ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'}`}>
+                      {note.data.title}
+                    </h2>
+
+                    {note.data.excerpt && (
+                      <p class={`text-zinc-400 leading-relaxed mb-4 ${index === 0 ? 'line-clamp-3' : 'line-clamp-2'}`}>
+                        {note.data.excerpt}
+                      </p>
+                    )}
+
+                    {/* Supports Content */}
+                    {note.data.supportsContent && note.data.supportsContent.length > 0 && (
+                      <div class="flex items-center gap-2 text-xs text-zinc-500 mb-4">
+                        <span>Supports:</span>
+                        <div class="flex flex-wrap gap-1.5">
+                          {note.data.supportsContent.slice(0, 3).map((content) => (
+                            <span class="px-2 py-0.5 rounded bg-zinc-800 text-zinc-400">
+                              {content.type}
+                            </span>
+                          ))}
+                          {note.data.supportsContent.length > 3 && (
+                            <span class="px-2 py-0.5 rounded bg-zinc-800 text-zinc-400">
+                              +{note.data.supportsContent.length - 3} more
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    <div class="inline-flex items-center gap-2 text-amber-500 group-hover:text-amber-400 transition-colors font-semibold text-sm">
+                      <span>Read research note</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </div>
+                  </div>
+                </article>
+              </a>
+            );
+          })}
+        </div>
+      )}
+    </section>
+
+    <SiteFooter />
+  </main>
+</BaseLayout>
