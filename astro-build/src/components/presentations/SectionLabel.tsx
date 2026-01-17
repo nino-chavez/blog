@@ -11,6 +11,7 @@ export type SectionLabelColor =
   | 'emerald'  // Solutions, hardware, strategies
   | 'violet'   // Key concepts, distinctions
   | 'red'      // Security, warnings, crises
+  | 'rose'     // Critique, challenges
   | 'neutral'; // Discussion, general
 
 interface SectionLabelProps {
@@ -24,6 +25,7 @@ const colorClasses: Record<SectionLabelColor, string> = {
   emerald: 'text-emerald-400',
   violet: 'text-indigo-400',
   red: 'text-red-400',
+  rose: 'text-rose-400',
   neutral: 'text-white/40',
 };
 

@@ -11,7 +11,8 @@ export type CalloutColor =
   | 'cyan'    // Technical notes
   | 'emerald' // Solutions
   | 'blue'    // Platform-specific (Windows)
-  | 'red';    // Security warnings
+  | 'red'     // Security warnings
+  | 'rose';   // Critique, challenges
 
 interface CalloutProps {
   children: ReactNode;
@@ -49,6 +50,11 @@ const colorConfig: Record<CalloutColor, { bg: string; border: string; text: stri
     bg: 'bg-gradient-to-r from-red-500/10 to-transparent',
     border: 'border-l-4 border-red-400',
     text: 'text-red-400',
+  },
+  rose: {
+    bg: 'bg-gradient-to-r from-rose-500/10 to-transparent',
+    border: 'border-l-4 border-rose-400',
+    text: 'text-rose-400',
   },
 };
 
