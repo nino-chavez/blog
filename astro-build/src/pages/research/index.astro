@@ -87,7 +87,7 @@ const getTypeConfig = (noteType: string) => noteTypeConfig[noteType] || { label:
             const typeConfig = getTypeConfig(note.data.noteType);
 
             return (
-              <a href={`/research/${note.id}`} class="group block">
+              <a href={`/research/${note.data.slug}`} class="group block">
                 <article class={`relative overflow-hidden rounded-2xl border transition-all duration-300 hover:shadow-xl hover:shadow-amber-500/10 ${index === 0 ? 'border-amber-500/40 bg-gradient-to-br from-zinc-900/80 via-zinc-900/50 to-zinc-950' : 'border-zinc-800 bg-zinc-900/30 hover:border-amber-500/50'}`}>
                   <div class="p-6 md:p-8">
                     {/* Badges */}
