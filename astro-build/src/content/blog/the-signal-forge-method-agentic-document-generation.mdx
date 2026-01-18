@@ -1,0 +1,251 @@
+---
+title: "The Signal Forge Method: Agentic Document Generation"
+publishedAt: "2026-01-18T00:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "I kept getting the same document wrong. Blog voice in architecture docs. Technical precision in executive briefs. Then I realized the problem wasn't AI—it was me. I was treating all documents as the same task."
+featureImage: "/images/generated/the-signal-forge-method-agentic-document-generation.webp"
+category: "AI & Automation"
+tags:
+  - ai-workflows
+  - consulting
+featured: false
+status: "published"
+series:
+  slug: "agentic-workflows-in-practice"
+  position: 3
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+The strategy deck was wrong. Not the content—the voice.
+
+I'd spent an hour with Claude generating a platform migration strategy for a client. The analysis was solid. The recommendations made sense. But reading it back, something felt off.
+
+"Here's where I've landed—for now."
+
+"I've been wrestling with a question that keeps surfacing..."
+
+"This is provisional thinking, subject to revision."
+
+That's blog voice. Exploratory. Provisional. Perfect for Signal Dispatch. Completely wrong for an executive brief where the client is paying for confident recommendations.
+
+I'd trained myself to write one way—and the AI was faithfully reproducing it in contexts where it didn't belong.
+
+---
+
+## The Problem Isn't AI. It's Classification.
+
+The video compression workflow from the first post in this series worked because the task was singular. Compress these files. Clear constraint, clear outcome, one mode of operation.
+
+Document generation is different. A strategy deck, a blog post, and an architecture doc aren't the same task with different topics. They're fundamentally different types of work that require different voices, structures, and generation approaches.
+
+I was treating them all as "write a document about X."
+
+The AI obliged—using whatever voice patterns it had learned from our previous interactions. Which meant my executive briefs sounded like blog posts. My architecture specs sounded like thought leadership pieces. My recommendations hedged when they should have been direct.
+
+---
+
+## Three Modes, Three Voices
+
+The fix was classification. Before generating anything, decide what you're making.
+
+| Mode | Purpose | Voice | Audience |
+|------|---------|-------|----------|
+| Thought Leadership | Share insights, establish expertise | Narrative, provisional, question-led | Broad professional |
+| Executive Advisory | Recommend strategy, align stakeholders | Confident consultant, pattern-based | Executives, decision-makers |
+| Solution Architecture | Document technical decisions | Precise, definitive, reference-grade | Technical teams |
+
+This isn't a taxonomy I invented. It's a taxonomy I discovered by getting things wrong repeatedly.
+
+Blog post about AI governance? Thought Leadership. Open with a question. Show the thinking. End provisionally.
+
+Migration strategy for a client? Executive Advisory. Lead with the recommendation. Demonstrate pattern recognition. Be confident with acknowledged caveats.
+
+System design for the implementation team? Solution Architecture. State decisions first. No hedging. Reference-grade precision that someone can implement from.
+
+---
+
+## Voice Calibration
+
+Each mode has voice principles that the AI needs to follow. Here's what I learned about Executive Advisory—the mode I kept getting wrong.
+
+**What works:**
+- "I recommend..." not "You might consider..."
+- Pattern recognition: "I've seen this across retail, manufacturing, healthcare..."
+- Business outcomes first, technical details second
+- Grounded in the client's specific context and concerns
+
+**What breaks it:**
+- Provisional language ("here's where I've landed," "for now")
+- Technical deep-dives without business framing
+- Generic frameworks without application to this client
+- Too much hedging on recommendations
+
+The voice principles become part of the prompt. Not as vague guidance—as explicit constraints.
+
+<Callout type="signal" title="The Principle">
+Different documents require different voices. Calibrate before you generate. The AI will faithfully reproduce whatever voice patterns you've established—which is only useful if those patterns fit the context.
+</Callout>
+
+---
+
+## The Workflow
+
+Here's what the agentic document generation workflow actually looks like:
+
+**Step 1: Classify**
+
+Before prompting, ask: Is this Thought Leadership, Executive Advisory, or Solution Architecture?
+
+The answer determines everything downstream—voice, structure, quality criteria.
+
+**Step 2: Select Structure**
+
+Each mode has templates. For Executive Advisory, I use:
+
+- **SCR (Situation-Complication-Resolution)**: For presenting problems with solutions
+- **Recommendation Stack**: For specific, actionable recommendations
+- **Strategy Document**: For full transformation initiatives with phases
+- **Hypothesis Document**: For early-stage planning where unknowns exceed knowns
+
+The template isn't a cage. It's scaffolding that ensures the output has the right bones.
+
+**Step 3: Generate with Voice Constraints**
+
+The prompt includes:
+- The selected template structure
+- Voice principles for the mode
+- Anti-patterns to avoid
+- Raw input material (meeting notes, research, data)
+
+The AI generates against explicit constraints, not vague instructions.
+
+**Step 4: Validate Against Checklist**
+
+Each mode has a quality checklist. For Executive Advisory:
+
+- Clear recommendation in first section?
+- Business outcomes lead, technical details follow?
+- Pattern recognition demonstrated?
+- Grounded in client context?
+- Risks acknowledged with mitigations?
+- Next steps with owners?
+
+If the output fails the checklist, iterate. The checklist catches voice drift before the client sees it.
+
+---
+
+## The Pivot That Made It Work
+
+I used to prompt like this:
+
+> "Write a strategy document about platform migration."
+
+Now I prompt like this:
+
+> "Generate an executive advisory document using the Strategy Document template.
+>
+> Voice requirements:
+> - Consultant perspective: Use 'I recommend...' not 'You might consider...'
+> - Lead with business outcomes, not technical details
+> - Demonstrate pattern recognition from similar engagements
+> - Confident with acknowledged caveats
+>
+> Structure: [Template sections]
+>
+> Input: [Raw notes and data]
+>
+> Anti-patterns to avoid:
+> - Provisional hedging
+> - Generic frameworks without application
+> - Technical deep-dives without business context"
+
+The difference isn't length. It's precision. The AI knows exactly what voice to use because I told it explicitly.
+
+---
+
+## Why This Is Agentic
+
+This might look like sophisticated prompting. It is. But it's also delegation.
+
+I'm not writing documents. I'm not even editing first drafts. I'm classifying, constraining, and validating. The AI does the generation work against explicit criteria.
+
+The workflow from the video compression post—describe constraints, let the agent discover context, propose options, execute—applies here too. The constraint is voice and structure. The context is the raw input material. The execution is generation against templates.
+
+<PullQuote>The AI doesn't get to decide what voice to use. I decide. Then I delegate the execution.</PullQuote>
+
+---
+
+## What I Got Wrong First
+
+Before classification, I'd generate a document, read it, think "this sounds wrong," and try to fix it in editing. That's backwards. You can't edit blog voice into executive voice. The structural assumptions are different.
+
+I also over-relied on "continue in this style" prompting. Great for consistency within a mode. Terrible when the mode itself is wrong.
+
+The fix was front-loading the work. Classification happens before generation, not after.
+
+---
+
+## The Templates
+
+For those who want specifics, here are the structural templates I use most:
+
+**Recommendation Stack** (Executive Advisory):
+1. The Recommendation (clear, unambiguous)
+2. Why Now (urgency drivers)
+3. What It Takes (investment, resources)
+4. What You Get (outcomes, metrics)
+5. What Could Go Wrong (risks with mitigations)
+6. Next Steps (actions with owners)
+
+**Strategy Document** (Executive Advisory):
+1. Executive Summary (3 key metrics)
+2. Core Insight (one-sentence thesis)
+3. Strategic Framework (visual model)
+4. Phase Overview (timeline with costs)
+5. Phase Details (objective, activities, success criteria per phase)
+6. Investment Summary (old vs. new approach)
+7. Governance Model (global vs. local decisions)
+8. Success Metrics
+9. Recommended Next Steps
+
+**Hypothesis Document** (Executive Advisory, but for early-stage work):
+1. What We Believe to Be True
+2. What We Don't Know (with validation methods)
+3. Strategic Hypothesis (core thesis)
+4. Why This Should Work / Why It Might Not
+5. Confidence Assessment (High/Medium/Low per claim)
+6. Risk Register
+7. Validation Plan
+8. What This Document Is NOT vs. What It IS
+
+The Hypothesis Document deserves special mention. It's for situations where unknowns exceed knowns—where a confident strategy document would be dishonest. The structure explicitly distinguishes assumptions from validated knowledge.
+
+---
+
+## The Compound Effect
+
+One well-structured strategy document isn't transformative. But generating documents at this quality consistently, across different modes, without the usual iteration cycles—that compounds.
+
+The time savings matter less than the quality consistency. When every executive brief sounds like a confident consultant, not a hesitant blogger, clients notice. Not consciously. They just trust the recommendations more.
+
+---
+
+## What's Next
+
+The three posts in this series—video compression, the Cowork announcement, and this document generation method—share a pattern: explicit constraints, delegated execution, validation gates.
+
+Video compression: Constraint was output quality and file size. Execution was ffmpeg commands. Validation was visual inspection.
+
+This method: Constraint is voice and structure. Execution is AI generation against templates. Validation is quality checklists.
+
+The pattern scales. The specific domain doesn't matter. What matters is the discipline of classification, constraint, and validation.
+
+I'm still refining Signal Forge. The templates evolve. The voice calibration gets sharper. But the method—classify before you generate, constrain explicitly, validate against criteria—that's stable.
+
+At least, that's where I've landed. For now.
+
+---
+
+*This is the third entry in the Agentic Workflows in Practice series. Not demos. Not theory. Real work, documented as it happens.*
