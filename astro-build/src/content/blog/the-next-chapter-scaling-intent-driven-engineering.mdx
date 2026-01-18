@@ -1,0 +1,332 @@
+---
+title: "The Next Chapter: What Happens When You Try to Scale Intent-Driven Engineering"
+publishedAt: "2026-01-17T12:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "I've spent six months proving that one person with AI agents can build what used to require a team. Now I'm joining Commerce.com to find out if that methodology survives contact with an organization."
+category: "AI & Automation"
+featureImage: "/images/generated/the-next-chapter-scaling-intent-driven-engineering.webp"
+tags: ["ai-development", "career", "consulting"]
+featured: true
+status: "published"
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+I've been running an experiment for six months. Not a productivity hack. Something weirder.
+
+I stopped treating AI as a tool and started treating it as a team.
+
+Not metaphorically. Literally. I assign it roles—database-engineer, api-engineer, ui-designer, security-verifier. I give it deliverables with acceptance criteria. I hold it accountable to validation gates. And when it screws up—which it does, constantly—I build guardrails so it doesn't screw up the same way twice.
+
+The experiment worked. For me. Alone.
+
+Now I'm about to find out if it breaks.
+
+---
+
+## How I Got Here
+
+In my first weeks of agentic coding, I built elaborate frameworks. Aegis—a "constitutional governance system" for AI agents. Agent-OS—a workflow orchestration layer. Worktree Orchestrator—parallel execution with file ownership enforcement.
+
+These were useful as learning experiments. I don't really apply them as standalone systems anymore.
+
+What I kept was the instinct. Observability matters. Traceability matters. Governance matters. You can't trust AI output without verification gates. You can't scale AI work without explicit ownership boundaries.
+
+Those principles now live in my project instructions—CLAUDE.md files embedded in every codebase. Not frameworks to install. Just discipline, codified.
+
+---
+
+## What the Methodology Actually Looks Like
+
+Let me show you what's in a real project's instructions. This is from AIX, a multi-tenant platform I built over the past few months.
+
+**Three execution modes, each with explicit constraints:**
+
+| Mode | Token Budget | Max Lines | Use For |
+|------|-------------|-----------|---------|
+| Direct | 1,000 | 50 | UI styling, bug fixes (90% of work) |
+| Selective | 3,000 | 120 | Features with backend + frontend |
+| Thorough | 5,000+ | 300 | Security, auth, performance |
+
+Exceeding mode limits without approval triggers auto-rejection. This isn't a bug—it's scope discipline enforced at the prompt level.
+
+**Validation gates that run on every change:**
+
+```bash
+# Pre-flight (before changes)
+git status            # Clean working directory
+npm run type-check    # Baseline TypeScript state
+npm test              # Baseline test state
+
+# Post-flight (after implementation)
+npm run type-check    # MUST PASS (0 errors)
+npm test              # MUST PASS (0 failures)
+npm run build         # MUST SUCCEED
+npm run lint          # MUST NOT GET WORSE
+```
+
+The AI doesn't get to claim it implemented something. It has to prove it: file paths with line numbers, test counts, commit hashes.
+
+Not "I implemented citation tracking." But "`lib/services/citation-tracker.ts:1-234`, tests passing (24/24), committed: abc1234."
+
+Evidence-based status. Not claims.
+
+---
+
+## The 3-Gate Workflow
+
+Every significant feature runs through three gates:
+
+**Gate 1: Strategic Approval (15-30 minutes, human)**
+
+I review the implementation plan. Validate approach against constraints. Approve scope. This is the only time I'm deeply involved before execution.
+
+**Gate 2: Autonomous Execution (30 minutes to 6+ hours, unattended)**
+
+The AI works independently with tier-based context loading:
+
+- Tier 1: Core architecture (~40k tokens, load once per session)
+- Tier 2: Domain context (~30k tokens, load per feature area)
+- Tier 3: Task-specific files (~20k tokens, load per operation)
+
+Total budget: 90,000 tokens—45% of the context window, leaving room for actual work.
+
+**Gate 3: Validation Review (15-45 minutes, human)**
+
+I review the completion report. Verify all checks passed. The AI provides evidence, not intentions. If something failed, it's visible. If something's incomplete, there's a trace.
+
+Three gates replaced what used to be continuous supervision.
+
+---
+
+## File Ownership Zones
+
+One of the hardest problems in AI-assisted development is parallel execution without merge chaos.
+
+My solution: define explicit zones in the project instructions.
+
+```
+Zone A: Core Services (src/lib/*.ts)
+  → Single agent at a time, coordinate carefully
+
+Zone B: Feature Modules (parallelizable)
+  → One agent per file, independent
+
+Zone C: UI Components (parallelizable)
+  → Each component is independent
+
+Zone D: API Routes (separate domain)
+  → Can work independently from UI
+
+Zone E: Tests (always safe)
+  → Can always add tests without coordination
+```
+
+Conflict zones—files touched by multiple features—resolve only during explicit merge phases. Not optimistically. Explicitly, with review.
+
+This pattern came from watching AI agents step on each other's work for weeks before I figured out the discipline.
+
+---
+
+## Anti-Patterns as Code
+
+The Rally HQ project documents what *not* to do, with enforcement:
+
+```markdown
+### ❌ Component-Level Dark Mode Overrides
+
+NEVER add @media (prefers-color-scheme: dark) inside component files.
+
+Why: Dark mode logic scattered across 50+ files.
+     Inconsistent colors. No source of truth.
+
+Instead: Use semantic tokens. app.css handles dark mode.
+
+The ONLY file with dark mode media queries is app.css.
+```
+
+This isn't just documentation. It's a rejection trigger. If AI-generated code violates documented anti-patterns, it gets flagged before review.
+
+<Callout type="signal" title="The Pattern">
+Every project accumulates hard-won lessons about what breaks. Encoding them as explicit anti-patterns—not just best practices—prevents regression.
+</Callout>
+
+---
+
+## Strategic Compliance
+
+The AIX project has business model violations coded as auto-reject triggers:
+
+```yaml
+auto_reject:
+  triggers:
+    strategic_violations:
+      - "Client self-service signup flows"
+      - "Public subscription pricing pages"
+      - "Self-service client dashboards"
+
+    business_model_violations:
+      - "Features designed for client direct use"
+      - "Selling tool access instead of service delivery"
+```
+
+AIX is an internal consulting platform, not client-facing SaaS. Features that would reposition it get rejected at the prompt level—no manual enforcement needed.
+
+This sounds heavy-handed. It is. But it prevents the slow drift where a tool's original purpose gets eroded by "just this one feature" requests.
+
+---
+
+## The Numbers
+
+After six months across seven production projects, here's what the methodology produces:
+
+**Efficiency:**
+- Token cost per task: under 1,000 (down from 5,000+ with naive prompting)
+- Feedback time: under 10 minutes per checkpoint
+
+**Quality:**
+- TypeScript: 0 errors (strict mode enforced)
+- Test coverage: 90%+
+- Build success: 100% (failures trigger rollback)
+
+**Autonomy:**
+- Autonomous completion: 80%+ (runs to completion without intervention)
+- Emergency stops: under 5%
+- Rollbacks needed: under 2%
+
+<Callout type="warning" title="The Uncomfortable Truth">
+These numbers come from solo operation with zero communication overhead. The intent stays pure from brain to prompt to implementation. Add a team, and I have no idea what survives.
+</Callout>
+
+---
+
+## The Structural Problem I Wrote About
+
+A few weeks ago I published a post called "[I Don't Want to Be a 10-Person Team of One](/blog/i-dont-want-to-be-a-10-person-team-of-one)." The thesis was simple: I'd been building AI-native systems at a velocity that didn't fit the economic model I was operating in.
+
+Product companies reward collapsed timelines. Consultancies sell hours.
+
+I was optimizing velocity in a system that monetizes duration.
+
+The post ended with this:
+
+> I'm done being a one-person bridge. Time to find a team that already speaks the same language.
+
+I meant it. And then Commerce.com called.
+
+---
+
+## Why Commerce.com
+
+Commerce.com—the parent company of BigCommerce, Feedonomics, and Makeswift—is betting publicly that the future of commerce is intelligent, composable, and agentic.
+
+That thesis aligns with what I've been writing about for months: the shift to agentic commerce, where AI agents browse, compare, and purchase on behalf of humans. Product discovery that begins with a prompt, not a homepage.
+
+<PullQuote>
+The methodology was developed in low-stakes solo projects. Now it has to prove itself in high-stakes team environments. That's the only validation that matters.
+</PullQuote>
+
+Commerce.com is a public company with real scale, real revenue, and enterprise clients who can't afford experiments that break production.
+
+This isn't "move fast and break things" territory. It's "move fast and don't break anything" territory.
+
+That's exactly the constraint I want.
+
+The role is Product Architect. Which means I get to bring the methodology I've been developing and find out what survives.
+
+---
+
+## What I'm Testing
+
+Here's my hypothesis: Intent-Driven Engineering works because it forces clarity before execution. The AI doesn't let you be vague. You can't hand-wave past decisions the way you can with a human team.
+
+If that's true, then the methodology should scale—not because AI agents replace people, but because the discipline of intent specification improves how people work together.
+
+But I genuinely don't know if that's true.
+
+**Does the 3-gate workflow hold when approval authority distributes?**
+
+Right now, I own Gate 1 (strategy) and Gate 3 (validation). What happens when different people own different gates? When the person approving scope isn't the person validating output?
+
+**Do file ownership zones scale past one person's mental model?**
+
+I define the zones. I know why Zone A requires coordination and Zone E is always safe. Can that knowledge transfer? Or does it require the same person who designed the architecture to enforce it?
+
+**Does evidence-based status survive organizational pressure?**
+
+"Citation tracking implemented at `lib/services/citation-tracker.ts:1-234`" is unambiguous. But what happens when someone wants to mark something complete that isn't? When there's pressure to report progress that doesn't exist?
+
+**Do token budgets survive deadline pressure?**
+
+Direct mode (50 lines, 1,000 tokens) works because I enforce it. What happens when a team is behind and someone decides "just this once" they'll skip the constraints?
+
+**Can anti-patterns transfer?**
+
+Rally HQ's dark mode rule exists because I made that mistake, learned from it, and encoded the lesson. Can you transfer the rule without the scar tissue? Or does everyone have to make the mistake first?
+
+I don't have answers. I'm about to find out.
+
+---
+
+## What I'm Bringing
+
+Here's what I know works, at least for me:
+
+**Embedded project instructions.** CLAUDE.md files that define modes, constraints, anti-patterns, and validation gates. Not external frameworks—discipline codified where the work happens.
+
+**The 3-gate workflow.** Strategic approval, autonomous execution, validation review. Three touchpoints instead of continuous supervision.
+
+**Evidence-based status.** File paths, line numbers, commit hashes. No claims. No intentions. What exists, documented.
+
+**Zone-based ownership.** Explicit boundaries for parallel work. Conflict resolution during merge phases, not on the fly.
+
+**Anti-patterns as rejection triggers.** Hard-won lessons encoded so they don't have to be re-learned.
+
+And I'm bringing the open questions. The gaps in the methodology that only show up when you try to scale it.
+
+---
+
+## What I'm Not Claiming
+
+Let me be clear about what this isn't:
+
+**This isn't "I solved AI-assisted development."** I built a system that works for one person on greenfield projects. That's a narrow achievement. Scaling it is a different problem entirely.
+
+**This isn't "Commerce.com hired me to implement my framework."** They hired me to be a Product Architect. The methodology is mine to test, validate, or abandon based on what actually works.
+
+**This isn't "solo developers can replace teams."** The experiment proved that one person can build at a pace that used to require a team. It didn't prove that teams are unnecessary. It proved that the nature of what teams do is changing.
+
+---
+
+## The Direction
+
+Six months ago, I wrote about fear. Fear of being left behind by AI. Fear that everything I'd learned about software was becoming obsolete.
+
+That fear turned into experiments. The experiments turned into instincts. The instincts got codified into project instructions that I now apply without thinking.
+
+But instincts developed alone don't automatically transfer.
+
+The next chapter is finding out what survives. What breaks. What I was wrong about.
+
+Commerce.com is the test case. A real company, with real scale, building for a future where AI agents are part of the commerce infrastructure—not just a feature, but the foundation.
+
+I don't know if Intent-Driven Engineering works at scale. I don't know if the discipline I've codified is transferable. I don't know if the velocity I achieved is reproducible when you add coordination costs.
+
+I'm about to find out.
+
+---
+
+## For Those Following Along
+
+This isn't the end of Signal Dispatch. If anything, it's the beginning of a more interesting phase.
+
+I've been writing about AI-assisted development from the solo practitioner perspective. Now I get to write about it from inside an organization that's betting its future on the same thesis.
+
+What works. What breaks. What I was wrong about.
+
+That's the direction, anyway.
+
+---
+
+*I'm joining Commerce.com as Product Architect in January 2026. If you've been following the Intent-Driven Engineering experiments, the next posts will cover what happens when the methodology meets organizational reality. Buckle up.*
