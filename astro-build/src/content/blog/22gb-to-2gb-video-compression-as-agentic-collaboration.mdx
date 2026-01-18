@@ -1,0 +1,140 @@
+---
+title: "22GB to 2GB: Video Compression as Agentic Collaboration"
+publishedAt: "2026-01-17T00:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "I needed to send 90 video files to a remote editor over mobile hotspot. The files were too large. What followed wasn't a tutorial lookup—it was a collaboration with an AI agent that analyzed, proposed, tested, pivoted, and executed. This is what agentic workflows actually look like."
+featureImage: "/images/generated/22gb-to-2gb-video-compression-as-agentic-collaboration.webp"
+category: "AI & Automation"
+tags:
+  - ai-workflows
+  - craft
+featured: false
+status: "published"
+series:
+  slug: "agentic-workflows-in-practice"
+  position: 1
+---
+
+I had 90 video files. 22GB of 4K footage from a shoot in Phoenix. They needed to reach a remote editor who was going to cut social media clips.
+
+The constraint: mobile hotspot. The files were too large to upload practically.
+
+I know ffmpeg exists. I've used it before. But I don't remember the optimal settings for codec selection, bitrate targeting, or quality tradeoffs. Normally this means Stack Overflow, trial and error, and a lot of wasted time.
+
+Instead, I described the problem to Claude Code and let it work.
+
+---
+
+## What Happened
+
+I didn't ask "how do I compress videos with ffmpeg." I described the situation: videos too large for mobile hotspot, need to send to editor for social media posts.
+
+The agent immediately ran diagnostics:
+
+```
+90 video files, 22GB total
+4K (3840x2160) at 60fps
+H.264 codec at ~150 Mbps bitrate
+```
+
+I didn't specify which properties to examine. The agent understood that codec, resolution, framerate, and bitrate were the relevant variables for a compression decision.
+
+Then it presented options:
+
+| Option | Resolution | Quality | Reduction | Tradeoff |
+|--------|-----------|---------|-----------|----------|
+| High quality | 1080p | CRF 20 | ~95% | General editing |
+| Aggressive | 1080p | CRF 24 | ~98% | Maximum compression |
+| Headroom | 1440p | CRF 20 | ~92% | Post-processing flexibility |
+
+Each option included the actual command and explained the parameters. Not a tutorial—decision support with executable artifacts.
+
+---
+
+## The Pivot
+
+We tested on a single file first. 448MB → 23MB. The quality looked good.
+
+But before running the batch, I asked: *"Will there be any effect on post-processing for stabilization or speed ramping?"*
+
+The agent explained the tradeoffs I hadn't considered:
+
+- **Stabilization**: 1080p means less pixel buffer for crop-based stabilization
+- **Speed ramping**: 60fps preserved, so slow-mo still works
+- **Color grading**: Some data loss from compression
+
+This surfaced a constraint I hadn't articulated: the editor might need stabilization headroom on shaky handheld shots.
+
+We pivoted. 1440p instead of 1080p. Slightly larger files (2GB vs 1.5GB total), but the editor could stabilize and still output clean 1080p.
+
+I also asked about running stabilization as part of the pipeline. The agent knew ffmpeg's vidstab filter, started the two-pass process—but it was taking too long. We abandoned that approach together. The agent didn't stubbornly continue a failing strategy.
+
+---
+
+## The Execution
+
+Batch compression ran in the background while the agent monitored progress:
+
+```
+5 of 90 files (106 MB)
+21 of 90 files (382 MB)
+45 of 90 files (877 MB)
+63 of 90 files (1.3 GB)
+90 of 90 files (2.0 GB) — complete
+```
+
+Twenty-five minutes of collaborative work. 22GB → 2GB. Editor received files sized for mobile hotspot transfer, with resolution headroom for stabilization, framerate preserved for slow-mo.
+
+---
+
+## What Made This Work
+
+**Problem framing over solution specification.** I described constraints (mobile hotspot, remote editor, social media output) rather than prescribing technical requirements. The agent mapped the problem space correctly because I gave it room to.
+
+**Domain knowledge injection at decision points.** The agent couldn't know my editor needs stabilization headroom. When I added that context, the recommendation changed.
+
+**Test-before-batch.** Neither of us wanted to discover a problem after processing 90 files.
+
+**Graceful strategy abandonment.** When vidstab proved too slow, we pivoted without friction. No ego, no defense of the initial suggestion.
+
+---
+
+## The Division of Labor
+
+What I did:
+- Constraint articulation (mobile hotspot, editor's downstream needs)
+- Quality judgment (reviewing the test file)
+- Domain knowledge injection ("what about stabilization?")
+- Go/no-go decisions
+
+What the agent did:
+- Technical discovery (analyzing source files)
+- Options synthesis (multiple approaches with tradeoffs)
+- Execution (ffmpeg commands, batch processing)
+- Progress monitoring (background execution with status updates)
+
+This isn't automation. It's collaboration with a capable partner who happens to know ffmpeg syntax better than I do.
+
+---
+
+## The Mundane Point
+
+Video compression isn't impressive. That's exactly the point.
+
+The demos that get shared are always the flashy ones—"I built an app in 20 minutes" or "AI wrote my entire codebase." Those demos are real, but they're also exceptional. They don't represent how most AI-assisted work actually happens.
+
+Most AI-assisted work is mundane. Compressing video. Reformatting data. Writing boilerplate. Debugging obscure errors.
+
+The value isn't in the spectacle. It's in the friction reduction. Twenty-five minutes of collaboration instead of an hour of documentation browsing and trial-and-error.
+
+Multiply that across every technical task in a week, and the compound effect is significant—even if no single task makes for a good tweet.
+
+---
+
+## What's Next
+
+This is the first entry in a running series documenting actual agentic workflows. Not demos. Not theory. Real work, captured as it happens.
+
+The goal isn't to prove AI works. I already know it does. The goal is to document *how* it works—the patterns, the friction points, the decisions—so the knowledge compounds.
+
+Next up: what it means that Anthropic just productized this exact pattern for non-developers.
