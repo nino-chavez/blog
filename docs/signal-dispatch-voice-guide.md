@@ -1,8 +1,8 @@
 # Signal Dispatch: Voice & Tone Guide
 ## Copy Editor and Ghostwriter Touchstone
 
-**Version**: 1.0
-**Last Updated**: 2025-12-14
+**Version**: 1.1
+**Last Updated**: 2026-01-21
 **Source**: Empirical analysis of 156 blog posts, 15 deep-read corpus sample
 
 ---
@@ -14,6 +14,61 @@ This guide defines the **actual voice** of Signal Dispatch based on production c
 - Ghostwriting new content in Nino's voice
 - Evaluating AI-generated drafts
 - Maintaining tonal coherence across all posts
+
+---
+
+## The Cardinal Rule: Spirit Over Literals
+
+> **This guide describes patterns, not templates. If you copy phrases from this document, you're using it wrong.**
+
+Every example in this guide represents *one way* Nino has expressed a particular spirit. The examples are evidence, not instructions. When you read "Ask me again in six months" as an example of provisional endings, the takeaway is not "use this phrase." The takeaway is: *endings should feel open, not concluded*.
+
+**Why this matters**: AI systems (and humans following guides too literally) tend to pattern-match to specific phrases. This creates two problems:
+
+1. **Tells**: When the same phrases appear across multiple posts, they become signatures of templated writing. Readers feel the inauthenticity even if they can't name it.
+
+2. **Drift from spirit**: Copying a phrase gets the surface right but often misses the underlying intent. "Ask me again in six months" isn't about the words—it's about intellectual humility and forward motion. Those can be expressed infinite ways.
+
+**The test**: Before using any phrase from this guide, ask: *What is this phrase trying to accomplish?* Then find your own words that accomplish the same thing.
+
+**Phrases that have become tells through overuse** (do not use):
+- "Ask me again in six months"
+- "Here's where I've landed—for now"
+- "Two different modes. Same instinct."
+- "This is what I think today"
+- "Your mileage may vary"
+- "That's the direction, anyway"
+
+These phrases were once authentic expressions of Nino's voice. Through repetition, they've become hollow. The spirits they represented—openness, humility, pattern recognition—remain goals. The words must change.
+
+---
+
+## Freshness Check (Rolling)
+
+> **Updated**: 2026-01-21
+> **Review Cadence**: After every 5 posts or monthly, whichever comes first
+
+This section tracks patterns and phrases that have appeared in *recent* posts. Even if they're not on the permanent "overused tells" list, repetition across a short window creates staleness. Avoid these in upcoming posts.
+
+### Recently Used (Cooling Off)
+
+| Pattern/Phrase | Last Used | Cool Until |
+|----------------|-----------|------------|
+| "Here's where my head is" | 2026-01-21 | 2026-02-21 |
+| "I've been sitting with..." | 2026-01-21 | 2026-02-21 |
+| Opening with "How many..." question | 2026-01-21 | 2026-02-21 |
+| Graveyard/death metaphor for ideas | 2026-01-21 | 2026-03-21 |
+| "Not X. Y." two-word fragment ending | 2026-01-21 | 2026-02-21 |
+
+### How to Use This Section
+
+1. **Before drafting**: Scan this table. Avoid anything in the cooling-off period.
+2. **After publishing**: Add any distinctive phrases or patterns from the new post.
+3. **Monthly review**: Remove entries older than 60 days. Promote anything that keeps recurring to the permanent "overused tells" list.
+
+### Graduation to Permanent Retirement
+
+If a phrase appears in the "Recently Used" table three or more times within six months, it graduates to the permanent "Phrases that have become tells" list above. This keeps the voice evolving rather than calcifying around new favorites.
 
 ---
 
@@ -58,53 +113,71 @@ State the thing most people don't say out loud:
 
 ### Structural Patterns
 
+> **CRITICAL: Spirit Over Literals**
+> The patterns below describe *what the voice does*, not *phrases to copy*. If you find yourself reaching for a phrase from this guide verbatim, stop. Ask: what is this pattern trying to accomplish? Then find your own words.
+
 **1. The Evolution Pattern** (One Option, Not Default)
-Shows change explicitly. Makes growth visible. Effective when the post is genuinely about a shift in thinking—but don't force it.
 
-The principle: Show that your perspective has moved. The structure can vary.
+**The spirit**: Nino's posts often reveal that his thinking has moved. The reader witnesses someone in the middle of figuring something out—not someone presenting finished conclusions. This creates intimacy and trust.
 
-Variations:
-- "I used to [X]. Now [Y]. But that raises a question..."
-- "Six months ago, I would have said [X]. I'm less sure now."
-- "The old version of me would have [X]. I've stopped doing that."
-- Start in the middle of the shift, not at the beginning.
-- Show evolution through narrative, not explicit "I used to / now I" framing.
+**What this is NOT**: A formula where every post must contain "I used to think X, now I think Y." That structure, used repeatedly, becomes a tic that signals AI-generated content.
 
-Example (explicit):
-> "I used to shoot 1000 photos and keep 300. Then I got better. Started shooting 300, keeping 100. Now? I might shoot 100 and keep 80."
+**How to embody this spirit**:
+- Show the *evidence* of changed thinking through the argument itself, not through explicit "before/after" framing
+- Let contradiction exist—hold two ideas in tension without resolving them neatly
+- Reference past versions of yourself only when it serves the specific point, not as a structural requirement
+- Sometimes the evolution is implied: the reader can feel that this isn't where you started
 
-Example (implicit):
-> "Somewhere along the way, I stopped optimizing for volume. I'm not sure when it happened."
-
-❌ Avoid: Using "I used to think X, now I think Y" in every post. It becomes a tell.
+**The test**: Could you delete any explicit "I used to / now I" language and still feel the evolution? If yes, you probably don't need it.
 
 **2. The Compare/Contrast Pattern**
-Shows both sides. Old voice vs. new. What works vs. what doesn't.
 
-Template:
-```
-**Old voice:** [Direct, rough]
-**Evolved voice:** [Polished, professional]
+**The spirit**: Nino often shows both sides of a tension—not to resolve it, but to sit in it. The reader sees a mind weighing options, comfortable with ambiguity.
 
-I like both. But I trust the first one more.
-```
+**What this is NOT**: A template with labeled sections ("Old voice" / "New voice") that gets copy-pasted.
 
-**3. Provisional Conclusions (Directional, Not Formulaic)**
-Never claims final authority. Always leaves room for evolution. But avoid repeating the same phrase—it should feel natural, not templated.
+**How to embody this spirit**:
+- Present competing ideas as genuinely competing, not as a straw man vs. obvious answer
+- Let the comparison reveal something unexpected—if the "right" answer is obvious, you're not comparing hard enough
+- Sometimes the contrast is between what you expected and what happened
+- Trust the reader to hold both sides without you declaring a winner
 
-The principle: Signal that your thinking is still in motion without undermining your conviction.
+**3. Endings That Stay Open**
 
-Variations:
-- "This is what I think today."
+**The spirit**: Nino's posts don't conclude—they pause. The reader leaves feeling like the conversation continues beyond the page. There's confidence in the direction, but humility about the destination.
+
+**What this is NOT**: A closing line chosen from a list of "provisional" phrases. Phrases like "ask me again in six months," "here's where I've landed—for now," and "that's what I think today" are now *overused tells* that signal templated writing. **Do not use these phrases.**
+
+**How to embody this spirit**:
+- End with forward motion: where is this thinking going next? What question remains?
+- End with an image or specific detail, not a summary
+- End mid-thought if that's where the energy is
+- End with a question you're genuinely still holding, not a rhetorical flourish
+- Sometimes the best ending is just... stopping. No wrap-up. The argument made its point.
+
+**The test**: Does your ending feel like a period or an ellipsis? Aim for ellipsis energy, but don't literally use ellipses.
+
+**⚠️ Phrases to Retire (Overused Tells)**
+
+These phrases appeared in earlier versions of this guide as examples. They've been copied so often they now signal inauthenticity. **Do not use them**:
+
+- "Ask me again in six months"
+- "Here's where I've landed—for now"
+- "That's what I think today"
+- "This is what I think, anyway"
+- "Two different modes. Same instinct."
 - "For now, I'm trying to..."
-- "Maybe this isn't about [X] at all. Maybe it's about [Y]."
-- "I see it differently now."
-- "That's the direction, anyway."
-- "Ask me again in six months."
-- Simply end with forward motion, no explicit "provisional" label needed.
+- "Your mileage may vary"
 
-❌ Avoid: Using "Here's where I've landed—for now" every time. It becomes a crutch.
-✅ Instead: Let the provisionality emerge from the content, not the formula.
+If you catch yourself reaching for one of these, find different words that capture the same spirit.
+
+**4. Short Sections with Bold Headers**
+Scannable. Punchy. Clear signposting.
+
+Header style:
+- Questions ("Is This Just Me?")
+- Statements ("The Real Work Is Reading the Signal")
+- Provocations ("You're Not the Driver. But You're Still in the Car")
 
 **4. Short Sections with Bold Headers**
 Scannable. Punchy. Clear signposting.
@@ -158,21 +231,41 @@ Not casual blog-speak. Not conference-room speak. Something in between.
 
 ### What to Avoid
 
-**1. Corporate Jargon**
+**1. Fabricated Anecdotes**
+
+This is a hard rule. **Never invent specific people, conversations, or events.**
+
+```
+❌ "A friend of mine spent three months learning React..."
+❌ "I was talking to a colleague last week who said..."
+❌ "A client once told me..."
+```
+
+If you didn't witness it or experience it directly, don't write it as if you did. The alternative:
+
+```
+✅ "I've seen it happen repeatedly. Someone with a product concept spends months..."
+✅ "The pattern I keep observing..."
+✅ "This shows up constantly in consulting work..."
+```
+
+General observations grounded in real experience are fine. Fabricating specific people or conversations is not. The line: would Nino be comfortable if someone asked "which friend?" or "which client?" If the answer requires inventing details, the anecdote is fabricated.
+
+**2. Corporate Jargon**
 ```
 ❌ "Leverage our extensive background to deliver impactful solutions"
 ❌ "Drive value for stakeholders"
 ❌ "Synergize cross-functional teams"
 ```
 
-**2. Academic Distance**
+**3. Academic Distance**
 ```
 ❌ "In this essay, I will explore..."
 ❌ "Research shows that..."
 ❌ "One could argue that..."
 ```
 
-**3. Humble Bragging**
+**4. Humble Bragging**
 ```
 ❌ "I'm no expert, but..."
 ❌ "This might be obvious, but..."
@@ -186,12 +279,23 @@ Not casual blog-speak. Not conference-room speak. Something in between.
 ❌ "Here are the 7 steps to..."
 ```
 
-Instead:
+**The spirit**: Nino shares his experience and thinking without claiming it's universal truth. The reader is trusted to apply or reject ideas based on their own context.
+
+**How to embody this**: Ground claims in your specific experience. Use "I" not "you." Let the strength of the argument speak for itself rather than asserting authority.
+
+**5. Templated Provisionality**
+
+This is a new category of things to avoid—phrases that *sound* humble and open but have become so common they now signal AI-generated content:
+
 ```
-✅ "Here's what I've found works—for me, in this context"
-✅ "Your mileage may vary"
-✅ "This is what I think today"
+❌ "Ask me again in six months"
+❌ "Here's where I've landed—for now"
+❌ "This is what I think today"
+❌ "Your mileage may vary"
+❌ "That's the direction, anyway"
 ```
+
+These phrases were once authentic. Through overuse, they've become tells. The spirit they aimed for—openness, humility, forward motion—is still the goal. Find fresh words.
 
 ---
 
@@ -205,8 +309,12 @@ Instead:
 ```
 
 **Use Fragments for Emphasis**
+
+**The spirit**: Fragments create punch. They break rhythm intentionally. They make the reader pause.
+
+**The danger**: Fragments with a recognizable structure (like "Two X. Same Y." or three-word staccato lists) become tics when repeated. Use fragments, but vary their shape.
+
 ```
-✅ "Two different modes. Same instinct."
 ✅ "Not recognition—direction."
 ✅ "Quietly. Precisely. With intent."
 ✅ "That's the thing."
