@@ -428,7 +428,11 @@ export default function BlogList({ posts }: BlogListProps) {
                         <img
                           src={getPostImage(post)}
                           alt={post.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          width={800}
+                          height={450}
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading="eager"
+                          decoding="async"
                           onError={handleImageError}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
@@ -510,7 +514,11 @@ export default function BlogList({ posts }: BlogListProps) {
                       <img
                         src={getPostImage(post)}
                         alt={post.title}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        width={800}
+                        height={450}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        loading="lazy"
+                        decoding="async"
                         onError={handleImageError}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent" />

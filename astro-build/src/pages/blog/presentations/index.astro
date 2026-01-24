@@ -150,8 +150,12 @@ const modeColors = {
                         <img
                           src={imageUrl}
                           alt={presentation.data.title}
-                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                          width="800"
+                          height="500"
+                          class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                           loading={isFirst ? "eager" : "lazy"}
+                          fetchpriority={isFirst ? "high" : "auto"}
+                          decoding="async"
                         />
                         <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/20 to-transparent" />
                         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-zinc-900/80 hidden lg:block" />

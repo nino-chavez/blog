@@ -87,8 +87,12 @@ const getWhitepaperImage = (whitepaper: typeof sortedWhitepapers[0]) => {
                       <img
                         src={imageUrl}
                         alt={whitepaper.data.title}
-                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        width="800"
+                        height="450"
+                        class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         loading={index === 0 ? "eager" : "lazy"}
+                        fetchpriority={index === 0 ? "high" : "auto"}
+                        decoding="async"
                       />
                       <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-zinc-900/90 hidden md:block" />
                       <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent md:hidden" />
