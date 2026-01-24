@@ -70,8 +70,12 @@ const readingTime = Math.ceil(wordCount / 200);
             <img
               src={whitepaper.data.featureImage}
               alt={whitepaper.data.title}
-              class="w-full h-full object-cover"
+              width="1200"
+              height="514"
+              class="absolute inset-0 w-full h-full object-cover"
               loading="eager"
+              fetchpriority="high"
+              decoding="async"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
           </div>
