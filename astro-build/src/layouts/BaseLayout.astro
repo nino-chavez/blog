@@ -109,9 +109,6 @@ const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     ))}
 
-    <!-- Vercel Web Analytics -->
-    <Analytics />
-
     <!-- Additional head content from pages -->
     <slot name="head" />
   </head>
@@ -120,5 +117,8 @@ const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 
     <!-- Cloudflare Web Analytics -->
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "24ecd813bb2d45798f0512e6beebc164"}'></script>
+
+    <!-- Vercel Web Analytics -->
+    <Analytics />
   </body>
 </html>
