@@ -20,5 +20,8 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# image generation progress tracking
+illustration-generation-progress-*.json
+
 # jetbrains setting folder
 .idea/
