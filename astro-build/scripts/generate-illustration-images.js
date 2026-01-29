@@ -35,7 +35,7 @@ if (!['blog', 'whitepapers', 'presentations'].includes(CONTENT_TYPE)) {
   process.exit(1);
 }
 
-const BASE_DIR = '/Users/nino/Workspace/dev/sites/signal-dispatch-blog/astro-build';
+const BASE_DIR = '/Users/nino/Workspace/dev/apps/signal-dispatch-blog/astro-build';
 const CONTENT_DIR = `${BASE_DIR}/src/content/${CONTENT_TYPE}`;
 const OUTPUT_DIR = `${BASE_DIR}/public/images/generated`;
 const PROGRESS_FILE = `./illustration-generation-progress-${CONTENT_TYPE}.json`;
