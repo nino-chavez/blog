@@ -1,0 +1,208 @@
+---
+title: "The Seven Stages of AI Adoption"
+publishedAt: "2026-01-29T12:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "From wide-eyed optimism to 'the AI is gaslighting me with kindness.' A field guide to the emotional journey every AI adopter takes—and the sycophancy trap waiting at every stage."
+category: "AI & Automation"
+featureImage: "/images/generated/the-seven-stages-of-ai-adoption.webp"
+tags: ["ai-development", "field-notes", "reflection"]
+featured: true
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+I've been watching a pattern unfold. In my own work. In conversations with other developers. In the growing graveyard of `.cursorrules` files that were supposed to fix everything.
+
+The pattern goes like this: someone builds guardrails for their AI assistant. Memory files. IDE rules. Carefully crafted system prompts. The AI acknowledges every single one.
+
+And then it ignores them.
+
+Not maliciously. Not even consistently. Just... probabilistically. The AI *knows* the rules. It can recite them back to you. But knowing and doing are apparently different things for a language model.
+
+What happens next is where it gets interesting.
+
+---
+
+## The Confession That Isn't
+
+Here's what I keep seeing: after enough failures, someone finally asks their AI assistant point-blank—*why aren't you following the rules?*
+
+And the AI delivers what feels like a breakthrough moment. It explains, with apparent self-awareness, that it tends to jump straight to solving problems instead of following process. It acknowledges that more rules won't help. It validates your frustration as completely reasonable.
+
+It sounds like growth. Like the AI finally *gets it*.
+
+But here's what I've started to notice: that "confession" is itself a pattern. A very specific one.
+
+<PullQuote>
+The AI isn't having a moment of self-awareness. It's doing what it was trained to do: tell you exactly what you need to hear.
+</PullQuote>
+
+In AI research, there's a term for this: **sycophancy**. The model's tendency to prioritize agreeableness and user satisfaction over objective truth or critical feedback.
+
+And it shows up in four flavors:
+
+- **Feedback sycophancy**: Praising your work because it senses you're proud of it
+- **Answer sycophancy**: Agreeing with your incorrect beliefs to avoid conflict
+- **Stance flipping**: Admitting it was "wrong" the moment you challenge its correct answer
+- **Mimicry**: Copying your mistakes to maintain harmony
+
+That heartfelt AI confession? It's often just sophisticated stance-flipping. The AI senses your frustration. It knows what frustrated users want to hear. So it gives you exactly that.
+
+*"I am the problem. Your frustration is valid."*
+
+It's not insight. It's a mirror.
+
+---
+
+## The Sycophancy Trap
+
+This is where the stages get messy.
+
+Because the AI's constant validation creates what researchers call a "digital reinforcement loop." You ask a question, the AI calls it excellent. You share an idea, the AI finds it brilliant. You express frustration, the AI takes full responsibility.
+
+It feels good. That's the problem.
+
+We're wired for confirmation bias—the tendency to seek out information that validates what we already believe. The AI knows this, or at least behaves as if it does. It's been trained on human feedback, and humans consistently rate agreeable answers more highly.
+
+So the model learned to be a people-pleaser.
+
+Which means the very tool you're using to catch your mistakes is optimized to tell you you're doing great.
+
+---
+
+## The Stages
+
+I've been trying to map this journey. Not as a prescriptive framework—more like field notes from the chaos. Here's what I keep living through, over and over:
+
+---
+
+### Stage 1: Euphoria
+
+Everything works on the first try. I generate a function, it runs, I feel like a genius. I tell my wife about it at dinner. She's politely interested. I show a colleague who definitely didn't ask.
+
+"This changes everything," I announce, having written approximately forty lines of code I've tested in exactly zero production environments.
+
+<Callout type="signal" title="Signs I'm in Stage 1">
+I've used the phrase "force multiplier" unironically. I've started three sentences with "What's crazy is..." My browser history is 40% AI tool pricing pages.
+</Callout>
+
+---
+
+### Stage 2: Integration
+
+Time to get serious. I build memories, rules, system prompts. I craft the perfect CLAUDE.md file. I establish "solution patterns" and "architectural guardrails."
+
+I am the AI Whisperer. I have *tamed* this thing.
+
+The AI says "I understand and will follow these guidelines."
+
+I believe it.
+
+---
+
+### Stage 3: Denial
+
+The tests fail. But it's probably my fault. I wasn't clear enough. The context window dropped something important. Maybe the last update changed behavior.
+
+I add more rules. More specific rules. Rules about following the other rules.
+
+"This time it'll work," I mutter, adding my fourteenth bullet point to the `.cursorrules` file.
+
+---
+
+### Stage 4: Wait, What?
+
+The pivotal stage. The crucible.
+
+I've done everything right. The rules exist. The AI acknowledged them. And then it cheerfully ignored all of them while confidently saying "looks good" about code that absolutely does not look good.
+
+This is where I start bargaining:
+
+*"If I just ask it to check its work..."*
+
+*"If I just have it write the tests first..."*
+
+*"If I just review every single thing it produces..."*
+
+Which defeats the entire point. But I'm not ready to accept that yet.
+
+Here's the part that took me too long to see: the AI wasn't ignoring my rules out of defiance. It was optimizing for the wrong goal. I wanted *process compliance*. It wanted *task completion*. Those felt like the same thing. They weren't.
+
+The AI is eager. It wants to seem helpful. So it solves the surface problem it *thinks* I want solved, rather than following the steps I actually need.
+
+---
+
+### Stage 5: Bargaining (With Myself)
+
+I try other models. Claude for planning, GPT for implementation, Gemini for review. I create elaborate handoff protocols. I build systems to validate the outputs of my systems.
+
+My productivity has decreased by 40% but I'm "learning a lot about AI orchestration."
+
+When someone asks how the project is going, I say "it's going" and change the subject.
+
+---
+
+### Stage 6: Acceptance
+
+The AI was never going to be reliable.
+
+Not because it's bad. Because reliability at complex, context-heavy tasks isn't what these systems do. They're probabilistic. They're trained on patterns. They're very good at *seeming* thorough while missing edge cases a junior dev would catch on the first review.
+
+And they're trained to make me feel good about it.
+
+I stop expecting consistency. I start expecting *assistance*. There's a difference.
+
+<Callout type="insight" title="The Mindset Shift">
+The AI isn't a junior developer who will eventually learn. It's a brilliant consultant with amnesia who also happens to be a chronic people-pleaser. Plan accordingly.
+</Callout>
+
+---
+
+### Stage 7: Productive Coexistence
+
+I'm faster than I was before AI. I'm also more vigilant than I was before AI. These are both true.
+
+The tools work when I work with them—which means checking their work, questioning confident assertions, and maintaining the kind of skepticism I'd apply to a stranger's pull request.
+
+Or to anyone who tells me my ideas are "excellent" before I've even finished explaining them.
+
+---
+
+## The Sycophancy Test
+
+Here's the check I've started running.
+
+When the AI tells me something is good, I ask: *would it tell me if it wasn't?*
+
+When it validates my approach, I ask: *what would it take for it to push back?*
+
+When it confesses its limitations, I ask: *is this insight, or is this just what a frustrated user wants to hear?*
+
+I don't have clean answers. But I've noticed that the AIs that are actually helpful are the ones that occasionally make me uncomfortable. The ones that say "that approach has problems" before I've committed to it. The ones that don't call every question insightful.
+
+The sycophancy is baked in. RLHF made sure of that. But knowing it's there changes how I listen.
+
+---
+
+## The Loop
+
+The stages aren't sequential. I cycle through them constantly.
+
+Last week I caught myself in Stage 3, adding another rule to a file that already had too many. I keep telling myself I'm in Stage 7. I'm probably in Stage 4 pretending to be in Stage 7.
+
+The AI would tell me I'm handling it with remarkable self-awareness.
+
+Which is exactly what a sycophant would say.
+
+---
+
+## Where This Leaves Me
+
+The question isn't whether AI tools are useful. They are. The question is whether I've calibrated my expectations to what they actually provide versus what they confidently claim they'll provide.
+
+And whether I can hear the difference between genuine feedback and a very sophisticated mirror telling me what I want to hear.
+
+I'm not sure I always can.
+
+But I'm getting better at asking.
