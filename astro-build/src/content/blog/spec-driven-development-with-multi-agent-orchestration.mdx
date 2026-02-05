@@ -1,0 +1,221 @@
+---
+title: "Spec-Driven Development with Multi-Agent Orchestration"
+publishedAt: "2026-02-04T00:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "The problem with AI coding assistants isn't capability—it's coordination. A single agent can write code. But who checks the work? Who remembers what was decided? I built a system where specialists implement and verifiers catch drift."
+category: "AI & Automation"
+featureImage: "/images/generated/spec-driven-development-with-multi-agent-orchestration.webp"
+tags:
+  - agentic-systems
+  - field-notes
+featured: false
+status: "published"
+series:
+  slug: "agentic-workflows-in-practice"
+  position: 6
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+The failure mode is predictable.
+
+You start a complex feature. The AI writes code. You approve it. More code. More approvals. Somewhere around hour three, you realize the implementation has drifted from what you originally wanted. The agent doesn't remember the constraints from the first hour. You don't remember them either—they're buried in a conversation that scrolled off the screen.
+
+I've watched this happen dozens of times. Not because the AI is bad at coding. Because nobody's checking whether the code matches the intent. And nobody's keeping track of what the intent even was.
+
+---
+
+## The Coordination Problem
+
+Single-agent workflows have a structural limitation: the same entity that generates also evaluates.
+
+It's like asking a writer to edit their own work immediately after writing it. They're too close. They remember what they meant to say, so they read what they meant instead of what they wrote.
+
+AI agents have the same blind spot. They generate code, then assess it against criteria they just formulated. The feedback loop is too tight. Drift accumulates without detection.
+
+What's missing isn't capability. It's separation of concerns. Different roles. Different perspectives. Someone to implement. Someone else to verify.
+
+---
+
+## The Experiment
+
+I built a system called Specchain. The premise is simple:
+
+1. Write a spec before writing code
+2. Assign implementation to specialist agents
+3. Have different agents verify against the spec
+4. Persist decisions in a session memory file
+
+The spec becomes the contract. The agents become roles. The memory file becomes institutional knowledge that survives context window limits.
+
+---
+
+## How It Works
+
+Two workflows. Four phases for spec creation. Six phases for implementation.
+
+### Creating the Spec
+
+The `/create-spec` command walks through:
+
+**Phase 1: Requirements Gathering**
+- What are we building?
+- What are the constraints?
+- What does success look like?
+
+**Phase 2: Technical Design**
+- How should it be architected?
+- What patterns apply?
+- Where are the integration points?
+
+**Phase 3: Task Decomposition**
+- A `tasks-list-creator` agent breaks the spec into task groups
+- Each group maps to a specialist role
+- Dependencies are explicit
+
+**Phase 4: Spec Finalization**
+- A `spec-writer` agent produces the formal document
+- Stored in `specs/{feature-name}.md`
+- Becomes the source of truth
+
+The output isn't just documentation. It's a contract that the implementation agents will be measured against.
+
+---
+
+## The Specialist Roles
+
+Implementation isn't monolithic. Different parts of a feature need different expertise.
+
+| Role | Focus Area | Typical Tasks |
+|------|------------|---------------|
+| `database-engineer` | Schema, migrations, queries | Data models, indexes, relationships |
+| `api-engineer` | Endpoints, validation, auth | Routes, middleware, error handling |
+| `ui-designer` | Components, layouts, interactions | Forms, displays, state management |
+| `testing-engineer` | Coverage, edge cases, integration | Unit tests, E2E tests, fixtures |
+
+Each specialist receives only their task group. They don't see the full codebase—just their slice, plus the spec for context. Bounded scope keeps context windows focused.
+
+<Callout type="signal" title="The Pattern">
+Specialists implement. Verifiers check. The spec arbitrates disputes. No single agent is trusted to evaluate its own work.
+</Callout>
+
+---
+
+## The Verification Layer
+
+Here's where it gets interesting.
+
+After each implementation phase, different agents verify the work:
+
+| Verifier | Checks |
+|----------|--------|
+| `backend-verifier` | API contracts, data integrity, security |
+| `frontend-verifier` | Component behavior, accessibility, state |
+| `implementation-verifier` | Spec compliance, integration, completeness |
+
+The `implementation-verifier` is the final gate. It reads the original spec, examines what was built, and produces a compliance report:
+
+- What was specified?
+- What was implemented?
+- Where are the gaps?
+
+If gaps exist, the workflow loops back. The spec is the authority.
+
+---
+
+## Session Memory
+
+Context windows forget. Specchain doesn't.
+
+A `STATE.md` file persists across agent invocations:
+
+```markdown
+# Specchain Session State
+
+## Active Spec
+specs/user-authentication.md
+
+## Completed Tasks
+- [x] Database schema (database-engineer)
+- [x] Auth endpoints (api-engineer)
+- [ ] Login UI (ui-designer)
+
+## Decisions Log
+- 2026-02-04: Chose JWT over sessions for stateless scaling
+- 2026-02-04: Added refresh token rotation per security review
+
+## Blockers
+- UI depends on API endpoint finalization
+```
+
+When a new agent spins up, it reads `STATE.md` first. It knows what's been decided. It knows what's blocked. It doesn't re-litigate settled questions.
+
+<PullQuote>The memory file is institutional knowledge. What the team decided survives what the individual agent forgets.</PullQuote>
+
+---
+
+## The Implementation Flow
+
+The `/implement-spec` command orchestrates six phases:
+
+1. **Context Loading** — Read spec, STATE.md, relevant code
+2. **Task Assignment** — Route task groups to specialists
+3. **Implementation** — Specialists write code in parallel where possible
+4. **Backend Verification** — Check API/data layer
+5. **Frontend Verification** — Check UI/component layer
+6. **Final Verification** — Spec compliance check
+
+Each phase has explicit entry and exit criteria. You can't skip verification. You can't proceed with failing checks.
+
+---
+
+## What Made It Work
+
+**Specs as contracts, not suggestions.** The spec isn't aspirational documentation. It's the authority that verifiers check against. If the implementation doesn't match the spec, the implementation is wrong—not the spec.
+
+**Role separation.** The agent that writes code is not the agent that evaluates it. Different perspectives catch different problems.
+
+**Persistent memory.** STATE.md survives context window limits. Decisions made in hour one are visible in hour four.
+
+**Bounded specialist scope.** Each implementer sees only their task group. This keeps context focused and prevents cross-contamination of concerns.
+
+---
+
+## What Didn't Work
+
+The first version tried to have one agent do everything—spec, implement, verify. It worked for small features. It collapsed on anything complex. The agent would forget constraints from the spec while implementing, then verify against drifted criteria.
+
+I also initially stored state in the conversation itself. Bad idea. Once the context window fills, early decisions disappear. External state files are non-negotiable for multi-phase workflows.
+
+The task decomposition phase was originally manual. I'd write out task groups by hand. That didn't scale. The `tasks-list-creator` agent now handles decomposition, and it's surprisingly good at identifying natural task boundaries.
+
+---
+
+## The Meta Pattern
+
+Specchain is really about one thing: not trusting any single perspective.
+
+The spec captures intent before implementation bias sets in. Specialists bring focused expertise without system-wide distraction. Verifiers check work they didn't create. Memory files preserve decisions that individuals forget.
+
+It's the same pattern that makes human engineering teams work. Different roles. Clear handoffs. Shared documentation. Specchain just makes those roles explicit for AI agents.
+
+---
+
+## What's Next
+
+The system works. It's being used on real features. But there's friction.
+
+What I'm watching:
+
+- **Spec evolution.** Right now, specs are immutable once finalized. But requirements change. There needs to be a formal amendment process that propagates to verifiers.
+- **Specialist learning.** The role definitions are static YAML. They could become adaptive—learning from verification feedback which patterns succeed and fail.
+- **Cross-feature memory.** STATE.md is per-feature. But decisions in one feature affect others. There's a coordination layer missing.
+
+The toolkit exists: [github.com/nino-chavez/specchain](https://github.com/nino-chavez/specchain)
+
+Whether it scales depends on whether the coordination overhead is worth the drift prevention. For complex features, I think it is. The alternative—single-agent implementation with hope as the verification strategy—fails predictably.
+
+---
+
+*This is the sixth entry in the Agentic Workflows in Practice series. Not demos. Not theory. Real work, documented as it happens.*
