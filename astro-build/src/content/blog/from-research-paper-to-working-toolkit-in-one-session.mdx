@@ -1,0 +1,238 @@
+---
+title: "From Research Paper to Working Toolkit in One Session"
+publishedAt: "2026-02-04T00:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "I had a 46-citation research paper about autonomous documentation. Academic frameworks rarely survive contact with a real codebase. So I asked an agent to turn theory into working code—and watched what happened."
+category: "AI & Automation"
+featureImage: "/images/generated/from-research-paper-to-working-toolkit-in-one-session.webp"
+tags:
+  - agentic-systems
+  - field-notes
+featured: false
+status: "published"
+series:
+  slug: "agentic-workflows-in-practice"
+  position: 5
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+There's a graveyard somewhere. Every engineering team has one.
+
+It's full of documentation initiatives. Strategic frameworks. Best practices that lived in slide decks but never made it into the codebase. Research papers bookmarked with good intentions.
+
+I had just added to the pile. A 46-citation research paper titled "Autonomous Knowledge Synthesis: A Strategic Framework for Comprehensive Codebase Documentation Using Claude Code."
+
+The paper was thorough. Seven documentation layers. The Diátaxis framework for user docs. Context engineering strategies. Prompt architectures for everything from architecture analysis to technical debt audits.
+
+It was also, functionally, shelf-ware. An artifact that described how documentation *should* work without being something anyone could actually use.
+
+---
+
+## The Gap
+
+The research laid out a clean theory:
+
+- Claude Code can autonomously analyze codebases using an OODA loop
+- Context windows need careful management via incremental ingestion
+- CLAUDE.md files anchor agent behavior across sessions
+- Different documentation layers require different personas and prompts
+- Custom skills turn ad-hoc prompting into reproducible workflows
+
+All true. All validated by sources. All useless without implementation.
+
+The gap between "here's the framework" and "here's how to use it on your project Monday morning" is where most documentation initiatives die. The research describes the destination. It doesn't provide transportation.
+
+---
+
+## The Experiment
+
+Instead of letting the paper join the graveyard, I tried something different. I gave the research to Claude and asked a simple question:
+
+*How do we turn this into a reusable approach for any existing project?*
+
+Not "summarize this paper." Not "explain the key concepts." A direct request to operationalize theory into working code.
+
+What followed was a two-hour session that produced a complete toolkit: 9 custom skills, a scaffold generator, templates, and a public repository. The paper became software.
+
+---
+
+## What the Agent Did
+
+The agent's first move wasn't to start writing code. It was to synthesize.
+
+It read the 46-citation paper and extracted the operational patterns—the parts that could become executable. The OODA loop description became a detection protocol. The seven documentation layers became seven corresponding skills. The Diátaxis quadrants became a parameterized user documentation generator.
+
+Then it proposed two implementation paths:
+
+| Approach | Description | Tradeoff |
+|----------|-------------|----------|
+| Scaffold Generator | Single `/init-docs` command bootstraps everything | All-or-nothing adoption |
+| Modular Toolkit | Separate skills adopted incrementally | More flexible, slower to full value |
+
+I chose the scaffold generator. The agent started building.
+
+---
+
+## The Scaffold Generator
+
+The core skill—`/init-docs`—does four things:
+
+1. **Detects** project type and tech stack from config files
+2. **Generates** a project-specific CLAUDE.md configuration
+3. **Creates** a complete `docs/` directory structure
+4. **Installs** all documentation skills for ongoing use
+
+The detection phase reads `package.json`, `go.mod`, `pyproject.toml`, Dockerfiles, CI configs—whatever exists—and infers the stack. This goes into CLAUDE.md so subsequent skills don't need re-prompting.
+
+The structure phase creates the skeleton:
+
+```
+docs/
+├── architecture/    # System design, ADRs, diagrams
+├── developer/       # Onboarding, setup, contributing
+├── ops/            # Infrastructure, CI/CD, deployment
+├── testing/        # Strategy, coverage, patterns
+├── functional/     # Business logic extraction
+├── strategic/      # Tech debt, roadmap
+└── user/           # Tutorials, guides, reference
+    └── (Diátaxis quadrants)
+```
+
+Each subdirectory gets placeholder READMEs that point to the skill that populates them.
+
+---
+
+## The Layer Skills
+
+Each of the seven documentation layers became a dedicated skill:
+
+| Skill | Persona | Output |
+|-------|---------|--------|
+| `/doc-architecture` | Principal Architect | Patterns, decisions, Mermaid diagrams |
+| `/doc-developer` | DevEx Engineer | Setup, onboarding, contribution guides |
+| `/doc-ops` | SRE | Infrastructure topology, CI/CD, runbooks |
+| `/doc-testing` | QA Lead | Test strategy, coverage gaps, patterns |
+| `/doc-functional` | Business Analyst | Business rules in stakeholder language |
+| `/doc-strategic` | CTO | Tech debt audit, remediation roadmap |
+| `/doc-user` | Technical Writer | Diátaxis-compliant user documentation |
+
+The persona assignment isn't decorative. It shapes output. When `/doc-ops` runs as a "Cloud Security Auditor," it surfaces risk and access patterns. When `/doc-functional` runs as a "Business Analyst," it translates code into policy language without mentioning arrays or iteration.
+
+<Callout type="signal" title="The Pattern">
+Different documentation requires different personas. The same codebase looks different to an architect, an SRE, and a business analyst. The skills encode those perspectives.
+</Callout>
+
+---
+
+## The Audit Skill
+
+The eighth skill—`/doc-audit`—closes the loop.
+
+It compares existing documentation against the codebase to identify:
+
+- **Missing documentation**: Components with no corresponding docs
+- **Outdated documentation**: Docs older than their source files
+- **Incomplete documentation**: Placeholder content never populated
+
+The output is a coverage matrix with prioritized recommendations. "Run `/doc-architecture` first—no system overview exists." "The payment module was modified last week but `docs/functional/payments.md` is six months old."
+
+This turns documentation from a one-time project into an ongoing audit cycle.
+
+---
+
+## What Made It Work
+
+**Research as specification, not inspiration.** The paper wasn't vague guidance. It included specific prompt architectures, structural patterns, and quality criteria. The agent had enough detail to implement, not just enough to understand.
+
+**Persona-driven generation.** Each skill embeds a professional persona that shapes the output. The agent doesn't just "document the tests"—it analyzes them as a QA Lead would, identifying coverage gaps and strategic risks.
+
+**Bounded scope per skill.** Instead of one massive "document everything" command, each skill handles one layer. This keeps context focused and outputs coherent. You can run `/doc-architecture` without generating developer docs.
+
+**The CLAUDE.md anchor.** Project-specific configuration persists across sessions. The agent doesn't need re-prompting about tech stack, exclusion directories, or documentation standards. It reads the config and adapts.
+
+---
+
+## The Division of Labor
+
+What I did:
+
+- Provided the research as input material
+- Chose scaffold generator over modular toolkit
+- Named the repository
+- Requested documentation of the research itself
+
+What the agent did:
+
+- Synthesized operational patterns from academic framework
+- Designed the skill architecture
+- Wrote all 9 skill files (~3,000 lines of prompt engineering)
+- Created directory structures and templates
+- Initialized git, created GitHub repo, pushed code
+- Formatted the research paper as repository documentation
+
+Total time: About two hours. Most of that was generation and my review of outputs.
+
+<PullQuote>The research paper described what should happen. The agent made it happen.</PullQuote>
+
+---
+
+## The Output
+
+The toolkit is public: [github.com/nino-chavez/claude-docs-toolkit](https://github.com/nino-chavez/claude-docs-toolkit)
+
+To use it on any project:
+
+```bash
+# Install the skills
+cp -r claude-docs-toolkit/.claude /path/to/your/project/
+
+# Bootstrap documentation infrastructure
+claude /init-docs
+
+# Generate what you need
+claude /doc-architecture
+claude /doc-developer
+claude /doc-audit
+```
+
+The `/init-docs` command auto-detects your stack. The individual skills generate their respective layers. The audit skill tells you what's missing.
+
+---
+
+## What Didn't Work
+
+The first pass at `/doc-user` was too generic. Diátaxis has four quadrants—tutorials, guides, reference, explanation—and the initial skill tried to handle all four in one invocation. The output was muddy.
+
+The fix was parameterization: `/doc-user type=tutorial feature=onboarding` generates one specific document in one specific quadrant. Bounded scope again.
+
+I also initially forgot to include the research paper in the repository. Documentation about documentation tooling should probably include its theoretical basis. The agent added a `docs/research/` directory with the full paper after I mentioned the gap.
+
+---
+
+## The Meta Layer
+
+There's something recursive about using an AI agent to implement a framework for AI-assisted documentation.
+
+The paper describes how Claude Code can analyze codebases and generate documentation through an OODA loop. The session that produced the toolkit was itself an OODA loop: the agent observed the research, oriented around operational patterns, decided on the scaffold approach, and acted by writing code.
+
+The framework validated itself in its own implementation.
+
+---
+
+## What's Next
+
+The toolkit exists. It works on any project with detectable config files. But it's a starting point.
+
+What I'm watching:
+
+- **Drift detection in CI.** The audit skill could run on every PR, flagging when code changes outpace documentation.
+- **Cross-project patterns.** Running this on multiple codebases might surface common architectural patterns worth extracting.
+- **Voice calibration per project.** Right now, documentation voice is generic. Projects have personality. The skills could learn it.
+
+The research paper described a destination: continuous documentation synchronized with the source of truth. The toolkit is transportation. Whether it gets there depends on what happens after the initial scaffold.
+
+---
+
+*This is the fifth entry in the Agentic Workflows in Practice series. Not demos. Not theory. Real work, documented as it happens.*
