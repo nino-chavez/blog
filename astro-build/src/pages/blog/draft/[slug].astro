@@ -1,0 +1,189 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooter from '../../../components/SiteFooter.astro';
+import ReadingProgress from '../../../components/ReadingProgress';
+import SeriesNav from '../../../components/SeriesNav.astro';
+import TableOfContents from '../../../components/TableOfContents.astro';
+import DraftBanner from '../../../components/DraftBanner.astro';
+
+// Token-gated draft preview
+const token = Astro.url.searchParams.get('token');
+const expectedToken = import.meta.env.DRAFT_PREVIEW_TOKEN;
+
+if (!token || token !== expectedToken) {
+  return Astro.redirect('/blog');
+}
+
+// In SSR mode, get the draft post from the slug parameter
+const { slug } = Astro.params;
+const posts = await getCollection('blog');
+const post = posts.find((p) => p.id === slug && p.data.status === 'draft');
+
+if (!post) {
+  return Astro.redirect('/blog');
+}
+
+const { Content, headings } = await render(post);
+
+// Format dates
+const publishedDate = new Date(post.data.publishedAt);
+const formattedDate = publishedDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+// Calculate reading time
+const wordCount = post.body?.split(/\s+/).length || 0;
+const readingTime = Math.ceil(wordCount / 200);
+
+// Category colors
+const categoryColors: Record<string, { bg: string; border: string; text: string }> = {
+  'AI & Automation': { bg: 'bg-purple-500/10', border: 'border-purple-500/30', text: 'text-purple-400' },
+  'Commerce': { bg: 'bg-orange-500/10', border: 'border-orange-500/30', text: 'text-orange-400' },
+  'Leadership': { bg: 'bg-blue-500/10', border: 'border-blue-500/30', text: 'text-blue-400' },
+  'Meta': { bg: 'bg-zinc-500/10', border: 'border-zinc-500/30', text: 'text-zinc-400' },
+  'Field Notes': { bg: 'bg-green-500/10', border: 'border-green-500/30', text: 'text-green-400' },
+  'Consulting Practice': { bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', text: 'text-cyan-400' },
+  'Reflection': { bg: 'bg-amber-500/10', border: 'border-amber-500/30', text: 'text-amber-400' },
+  'default': { bg: 'bg-athletic-brand-violet/10', border: 'border-athletic-brand-violet/30', text: 'text-athletic-brand-violet' },
+};
+
+const colors = categoryColors[post.data.category || ''] || categoryColors.default;
+---
+
+<BaseLayout
+  title={`[DRAFT] ${post.data.title}`}
+  description={post.data.excerpt}
+  image={post.data.featureImage}
+  type="article"
+>
+  <!-- Draft Banner -->
+  <DraftBanner
+    slug={post.id}
+    title={post.data.title}
+    hasFeatureImage={!!post.data.featureImage}
+  />
+
+  <!-- Reading Progress Bar -->
+  <ReadingProgress client:load />
+
+  <main class="min-h-screen">
+    <SiteHeader currentPage="blog" />
+
+    <div class="max-w-3xl mx-auto px-4 py-12">
+      <!-- Back link -->
+      <a
+        href="/blog"
+        class="group inline-flex items-center gap-2 text-zinc-400 hover:text-athletic-court-orange transition-all duration-150 font-medium mb-8 no-print"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to all posts
+      </a>
+
+      <article class="space-y-6">
+        <!-- Featured Image -->
+        {post.data.featureImage ? (
+          <div class="relative -mx-4 md:-mx-8 lg:mx-0 aspect-video overflow-hidden rounded-2xl border border-zinc-800">
+            <img
+              src={post.data.featureImage}
+              alt={post.data.title}
+              class="w-full h-full object-cover"
+              width="1200"
+              height="675"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
+          </div>
+        ) : (
+          <div class="relative -mx-4 md:-mx-8 lg:mx-0 aspect-video overflow-hidden rounded-2xl border border-dashed border-zinc-700 bg-zinc-900/50 flex items-center justify-center">
+            <div class="text-center text-zinc-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <p class="text-sm">No feature image yet</p>
+              <p class="text-xs mt-1">Use the "Generate Image" button above</p>
+            </div>
+          </div>
+        )}
+
+        <!-- Article Header -->
+        <header class="space-y-3 pb-6 border-b border-zinc-800/50">
+          <div class="flex items-center gap-3 text-sm flex-wrap">
+            {post.data.category && (
+              <span class={`font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border transition-colors ${colors.bg} ${colors.border} ${colors.text}`}>
+                {post.data.category}
+              </span>
+            )}
+            {post.data.category && <span class="text-zinc-700">•</span>}
+            <time datetime={publishedDate.toISOString()} class="text-zinc-500">
+              {formattedDate}
+            </time>
+            <span class="text-zinc-700">•</span>
+            <span class="flex items-center gap-1.5 text-zinc-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              {readingTime} min read
+            </span>
+          </div>
+
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight">
+            {post.data.title}
+          </h1>
+
+          {post.data.excerpt && (
+            <p class="excerpt text-xl text-zinc-400 leading-relaxed">
+              {post.data.excerpt}
+            </p>
+          )}
+
+          {post.data.tags && post.data.tags.length > 0 && (
+            <div class="flex flex-wrap gap-2 pt-4">
+              {post.data.tags.map((tag) => (
+                <span class="text-xs px-3 py-1.5 rounded-full bg-zinc-900/50 text-zinc-400 border border-zinc-800">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+
+          <!-- Author Info -->
+          <div class="flex items-center gap-4 pt-6 mt-2 border-t border-zinc-800/30">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-athletic-brand-violet to-athletic-court-orange flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-athletic-brand-violet/20">
+              NC
+            </div>
+            <div>
+              <p class="text-white font-semibold">{post.data.author || 'Nino Chavez'}</p>
+              <p class="text-zinc-500 text-sm">Product Architect at commerce.com</p>
+            </div>
+          </div>
+        </header>
+
+        <!-- Series Navigation -->
+        {post.data.series && (
+          <SeriesNav
+            seriesSlug={post.data.series.slug}
+            currentPosition={post.data.series.position}
+          />
+        )}
+
+        <!-- Table of Contents -->
+        <TableOfContents headings={headings} />
+
+        <!-- Article Content -->
+        <div class="prose max-w-none text-lg">
+          <Content />
+        </div>
+      </article>
+    </div>
+
+    <SiteFooter />
+  </main>
+</BaseLayout>

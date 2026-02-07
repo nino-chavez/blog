@@ -1,0 +1,61 @@
+name: Publish Draft Post
+
+on:
+  repository_dispatch:
+    types: [publish-draft]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate input
+        id: validate
+        run: |
+          SLUG="${{ github.event.client_payload.slug }}"
+          if [ -z "$SLUG" ]; then
+            echo "Error: No slug provided"
+            exit 1
+          fi
+          echo "slug=$SLUG" >> "$GITHUB_OUTPUT"
+
+          # Find the MDX file (check both content locations)
+          if [ -f "src/content/blog/${SLUG}.mdx" ]; then
+            echo "file=src/content/blog/${SLUG}.mdx" >> "$GITHUB_OUTPUT"
+          elif [ -f "astro-build/src/content/blog/${SLUG}.mdx" ]; then
+            echo "file=astro-build/src/content/blog/${SLUG}.mdx" >> "$GITHUB_OUTPUT"
+          else
+            echo "Error: No MDX file found for slug '${SLUG}'"
+            exit 1
+          fi
+
+      - name: Update post status to published
+        run: |
+          FILE="${{ steps.validate.outputs.file }}"
+          echo "Publishing: $FILE"
+
+          # Replace status: "draft" with status: "published"
+          sed -i 's/status: ["'\'']*draft["'\'']*/status: "published"/' "$FILE"
+
+          # Update publishedAt to current timestamp
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")
+          sed -i "s/publishedAt: .*/publishedAt: \"$TIMESTAMP\"/" "$FILE"
+
+          echo "Updated status to published and publishedAt to $TIMESTAMP"
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add "${{ steps.validate.outputs.file }}"
+          git commit -m "publish: ${{ steps.validate.outputs.slug }}
+
+          Published via draft preview CTA
+          Triggered by repository dispatch"
+          git push
