@@ -8,12 +8,12 @@ import SeriesNav from '../../../components/SeriesNav.astro';
 import TableOfContents from '../../../components/TableOfContents.astro';
 import DraftBanner from '../../../components/DraftBanner.astro';
 
-// Token-gated draft preview
-const token = Astro.url.searchParams.get('token');
+// Token-gated draft preview via cookie
 const expectedToken = import.meta.env.DRAFT_PREVIEW_TOKEN;
+const cookieToken = Astro.cookies.get('draft_token')?.value;
 
-if (!token || token !== expectedToken) {
-  return Astro.redirect('/blog');
+if (!cookieToken || cookieToken !== expectedToken) {
+  return Astro.redirect('/blog/drafts');
 }
 
 // In SSR mode, get the draft post from the slug parameter
@@ -76,13 +76,13 @@ const colors = categoryColors[post.data.category || ''] || categoryColors.defaul
     <div class="max-w-3xl mx-auto px-4 py-12">
       <!-- Back link -->
       <a
-        href="/blog"
+        href="/blog/drafts"
         class="group inline-flex items-center gap-2 text-zinc-400 hover:text-athletic-court-orange transition-all duration-150 font-medium mb-8 no-print"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
-        Back to all posts
+        Back to drafts
       </a>
 
       <article class="space-y-6">

@@ -1,0 +1,5 @@
+---
+// Clear the draft token cookie and redirect to drafts page
+Astro.cookies.delete('draft_token', { path: '/' });
+return Astro.redirect('/blog/drafts');
+---
