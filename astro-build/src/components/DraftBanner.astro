@@ -69,7 +69,7 @@ const { slug, title, hasFeatureImage } = Astro.props;
   async function triggerAction(action: string, slug: string) {
     // Token is validated via HTTP-only cookie on the server
     try {
-      const res = await fetch(`/api/${action}`, {
+      const res = await fetch(`/blog/api/${action}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ slug }),
