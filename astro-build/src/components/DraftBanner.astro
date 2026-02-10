@@ -56,11 +56,6 @@ const { slug, title, hasFeatureImage } = Astro.props;
 <div class="h-14 print:hidden"></div>
 
 <script>
-  function getToken() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('token') || '';
-  }
-
   function showStatus(message: string, isError = false) {
     const statusArea = document.getElementById('draft-banner-status');
     const statusInner = document.getElementById('draft-banner-status-inner');
@@ -72,12 +67,13 @@ const { slug, title, hasFeatureImage } = Astro.props;
   }
 
   async function triggerAction(action: string, slug: string) {
-    const token = getToken();
+    // Token is validated via HTTP-only cookie on the server
     try {
       const res = await fetch(`/api/${action}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ slug, token }),
+        body: JSON.stringify({ slug }),
+        credentials: 'same-origin', // Ensure cookies are sent
       });
       const data = await res.json();
       if (!res.ok) {

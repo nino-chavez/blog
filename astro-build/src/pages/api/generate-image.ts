@@ -1,17 +1,18 @@
 import type { APIRoute } from 'astro';
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, cookies }) => {
   const corsHeaders = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
   };
 
   try {
-    const { slug, token } = await request.json();
+    const { slug } = await request.json();
 
-    // Validate token
+    // Validate token from cookie (set by drafts-auth)
     const expectedToken = import.meta.env.DRAFT_PREVIEW_TOKEN;
-    if (!token || token !== expectedToken) {
+    const cookieToken = cookies.get('draft_token')?.value;
+    if (!cookieToken || cookieToken !== expectedToken) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), {
         status: 401,
         headers: corsHeaders,
