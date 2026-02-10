@@ -399,6 +399,8 @@ async function generateImage(prompt, filename) {
 
 // Update MDX file with new image
 function updateMdxFile(filepath, newImagePath) {
+  console.log(`              📝 Updating MDX: ${filepath}`);
+  console.log(`              📝 Image path: ${newImagePath}`);
   let content = fs.readFileSync(filepath, 'utf-8');
 
   // Check if featureImage already exists - just update it
@@ -442,6 +444,7 @@ function updateMdxFile(filepath, newImagePath) {
   }
 
   fs.writeFileSync(filepath, content);
+  console.log(`              📝 MDX updated successfully`);
 }
 
 // Load/save progress
