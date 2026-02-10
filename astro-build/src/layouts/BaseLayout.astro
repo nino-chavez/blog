@@ -31,7 +31,7 @@ const {
 const siteUrl = 'https://ninochavez.co';
 const blogPath = '/blog';
 const fullImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
-const canonical = canonicalUrl || `${siteUrl}${blogPath}${Astro.url.pathname}`.replace(/\/$/, '');
+const canonical = canonicalUrl || `${siteUrl}${Astro.url.pathname}`.replace(/\/$/, '');
 const pageTitle = title === 'Signal Dispatch' ? title : `${title} - Signal Dispatch`;
 
 // Convert jsonLd to array if single object
