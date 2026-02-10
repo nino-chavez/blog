@@ -399,52 +399,91 @@ async function generateImage(prompt, filename) {
 
 // Update MDX file with new image
 function updateMdxFile(filepath, newImagePath) {
-  console.log(`              📝 Updating MDX: ${filepath}`);
+  console.log(`              📝 Updating MDX file...`);
+  console.log(`              📝 Filepath: ${filepath}`);
   console.log(`              📝 Image path: ${newImagePath}`);
-  let content = fs.readFileSync(filepath, 'utf-8');
 
-  // Check if featureImage already exists - just update it
-  if (content.match(/^featureImage:\s/m)) {
-    content = content.replace(
-      /^featureImage:\s*"[^"]*"/m,
-      `featureImage: "${newImagePath}"`
-    );
-  } else {
-    // Add featureImage on its own line after category line
-    // Using line-based approach to avoid breaking excerpts with apostrophes
-    const lines = content.split('\n');
-    let inserted = false;
-
-    for (let i = 0; i < lines.length; i++) {
-      if (lines[i].match(/^category:\s*["']/)) {
-        // Insert featureImage after this line
-        lines.splice(i + 1, 0, `featureImage: "${newImagePath}"`);
-        inserted = true;
-        break;
-      }
+  try {
+    // Verify file exists
+    if (!fs.existsSync(filepath)) {
+      console.error(`              ❌ MDX file not found: ${filepath}`);
+      return false;
     }
 
-    if (!inserted) {
-      // Fallback: insert after excerpt line
+    let content = fs.readFileSync(filepath, 'utf-8');
+    const originalContent = content;
+
+    // Check if featureImage already exists - just update it
+    if (content.match(/^featureImage:\s/m)) {
+      console.log(`              📝 Updating existing featureImage`);
+      content = content.replace(
+        /^featureImage:\s*"[^"]*"/m,
+        `featureImage: "${newImagePath}"`
+      );
+    } else {
+      console.log(`              📝 Adding new featureImage field`);
+      // Add featureImage on its own line after category line
+      const lines = content.split('\n');
+      let inserted = false;
+
       for (let i = 0; i < lines.length; i++) {
-        if (lines[i].match(/^excerpt:\s*["']/)) {
-          // Find the end of excerpt (might be multi-line)
-          let j = i;
-          while (j < lines.length && !lines[j].match(/"$/)) {
-            j++;
-          }
-          lines.splice(j + 1, 0, `featureImage: "${newImagePath}"`);
+        if (lines[i].match(/^category:\s*["']/)) {
+          console.log(`              📝 Found category at line ${i}: "${lines[i].substring(0, 40)}..."`);
+          // Insert featureImage after this line
+          lines.splice(i + 1, 0, `featureImage: "${newImagePath}"`);
           inserted = true;
           break;
         }
       }
+
+      if (!inserted) {
+        console.log(`              📝 Category not found, trying excerpt fallback`);
+        // Fallback: insert after excerpt line
+        for (let i = 0; i < lines.length; i++) {
+          if (lines[i].match(/^excerpt:\s*["']/)) {
+            // Find the end of excerpt (might be multi-line)
+            let j = i;
+            while (j < lines.length && !lines[j].match(/"$/)) {
+              j++;
+            }
+            lines.splice(j + 1, 0, `featureImage: "${newImagePath}"`);
+            inserted = true;
+            console.log(`              📝 Inserted after excerpt at line ${j}`);
+            break;
+          }
+        }
+      }
+
+      if (!inserted) {
+        console.error(`              ❌ Could not find category or excerpt to insert featureImage`);
+        return false;
+      }
+
+      content = lines.join('\n');
     }
 
-    content = lines.join('\n');
-  }
+    // Verify content was actually modified
+    if (content === originalContent) {
+      console.error(`              ❌ Content was not modified!`);
+      return false;
+    }
 
-  fs.writeFileSync(filepath, content);
-  console.log(`              📝 MDX updated successfully`);
+    // Write the file
+    fs.writeFileSync(filepath, content);
+
+    // Verify the write by reading back
+    const verifyContent = fs.readFileSync(filepath, 'utf-8');
+    if (verifyContent.includes(`featureImage: "${newImagePath}"`)) {
+      console.log(`              ✅ MDX updated and verified`);
+      return true;
+    } else {
+      console.error(`              ❌ Write verification failed - featureImage not found in file`);
+      return false;
+    }
+  } catch (err) {
+    console.error(`              ❌ Error updating MDX: ${err.message}`);
+    return false;
+  }
 }
 
 // Load/save progress
@@ -534,12 +573,20 @@ async function main() {
       const result = await generateImage(prompt, slug);
 
       if (result) {
-        updateMdxFile(filepath, result.path);
+        const mdxUpdated = updateMdxFile(filepath, result.path);
         totalSize += result.size;
         generatedCount++;
-        console.log(`              ✅ Generated: ${result.size}KB`);
-        progress.completed.push(filename);
-        progress.failed = progress.failed.filter(f => f !== filename);
+        if (mdxUpdated) {
+          console.log(`              ✅ Generated: ${result.size}KB (image + MDX updated)`);
+          progress.completed.push(filename);
+          progress.failed = progress.failed.filter(f => f !== filename);
+        } else {
+          console.log(`              ⚠️  Generated: ${result.size}KB (image only - MDX update failed)`);
+          // Still mark as needing attention
+          if (!progress.failed.includes(filename)) {
+            progress.failed.push(filename);
+          }
+        }
       } else {
         console.log(`              ❌ No image returned`);
         if (!progress.failed.includes(filename)) {
