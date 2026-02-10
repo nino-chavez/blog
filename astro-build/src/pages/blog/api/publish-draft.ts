@@ -68,8 +68,9 @@ export const POST: APIRoute = async ({ request, cookies }) => {
       { status: 200, headers: corsHeaders }
     );
   } catch (err) {
+    const message = err instanceof Error ? err.message : 'Unknown error';
     return new Response(
-      JSON.stringify({ error: 'Internal server error' }),
+      JSON.stringify({ error: 'Internal server error', details: message }),
       { status: 500, headers: corsHeaders }
     );
   }
