@@ -1,0 +1,135 @@
+---
+title: "Two Doors for Agents"
+publishedAt: "2026-02-18T14:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "GitHub wants agents to explore. Google wants websites to hand them a menu. Two competing philosophies for the same problem—and the one you start with will shape your migration cost when they inevitably converge."
+category: "AI & Automation"
+featureImage: "/images/generated/two-doors-for-agents.webp"
+tags: ["agentic-systems", "architecture"]
+featured: true
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+Two announcements dropped within days of each other. Google previewed WebMCP in Chrome 146 on February 10th. GitHub shipped agentic workflows in technical preview on the 13th.
+
+On the surface, they're both about the same thing: letting AI agents *do stuff*.
+
+But the way they answer the fundamental question—how should an agent understand what it can do?—couldn't be more different. And even though most real systems will walk through both doors eventually, where you *start* shapes what you build, what you neglect, and what you'll have to retrofit later.
+
+---
+
+## The Explorer vs. The Menu
+
+GitHub's approach is the explorer model. Write a workflow in plain Markdown. Describe what you want. The agent gets broad access to your repo—issues, pull requests, CI pipelines, file trees—and figures out how to accomplish the goal. It reads. It navigates. It reasons about structure. It proposes.
+
+The philosophy: hand the agent context, and let it discover the path.
+
+Google's WebMCP is the opposite impulse. Websites expose a structured manifest of callable tools through a browser API—`navigator.modelContext`. Instead of an agent squinting at your DOM, parsing buttons, reverse-engineering what a form does, you publish a contract: here are the functions, here are the parameters, here's what each one returns.
+
+The philosophy: don't make the agent guess. Give it a typed interface and get out of the way.
+
+---
+
+## Why This Split Matters
+
+I've been building with agents long enough to recognize this pattern. It's the same tension that shows up everywhere in software architecture: flexibility versus reliability. Discovery versus determinism.
+
+And the instinct is to pick a side. Loose is creative. Tight is boring but safe.
+
+But here's what I keep coming back to.
+
+The explorer model works *beautifully* when the domain is rich, unstructured, and the agent has enough context to reason well. Code is like that. A repository is a densely linked knowledge graph—files reference other files, tests describe behavior, commit history tells a story. An agent with broad repo access can actually build a useful mental model because the information density supports it.
+
+The contract model works when the domain is transactional and the cost of getting it wrong is high. Booking a flight. Processing a checkout. Filing a support ticket. You don't want the agent "exploring" your payment gateway. You want it calling `buyTicket(destination, date)` with exactly the right parameters.
+
+<Callout type="signal" title="The Real Distinction">
+It's not loose vs. tight. It's whether the domain rewards exploration or punishes it.
+</Callout>
+
+---
+
+## The Part That Makes Me Uncomfortable
+
+Here's what I haven't fully reconciled.
+
+GitHub's agentic workflows still use MCP under the hood. The agent accesses repos, issues, and actions *through* GitHub's native MCP server. And Google's WebMCP, despite being a structured contract layer, still requires a reasoning model to decide *which* tools to invoke and *when*.
+
+So the clean binary—explorer vs. menu—breaks down almost immediately. What we're actually seeing is two different answers to the *same* layer of the stack:
+
+- **The discovery layer**: How does the agent learn what's available?
+- **The execution layer**: How does the agent act on what it knows?
+
+GitHub is innovating on discovery. Let agents figure out what's possible by reading Markdown and navigating structure. Google is innovating on execution. Make the action surface explicit, typed, deterministic.
+
+Neither one is a complete solution alone.
+
+---
+
+## What I Think Is Actually Happening
+
+The industry is building a hierarchy, and most people are only looking at one floor.
+
+At the top: a reasoning agent with broad context and the freedom to plan. This is the GitHub model—the strategist. It reads the terrain, understands intent, proposes an approach.
+
+At the bottom: tightly scoped tool contracts that execute specific actions reliably. This is the WebMCP model—the specialist. No ambiguity. No drift. Call the function, get the result.
+
+The architecture that wins will have both. A loose agent orchestrating tight tools.
+
+<PullQuote>
+We want agents to think loosely and act tightly. The question is where you draw the line.
+</PullQuote>
+
+This isn't a new pattern. It's microservices, reframed. A coordinator service with broad business logic calling narrow, reliable APIs. We've been building this architecture for fifteen years. The difference now is that the coordinator has a language model instead of a state machine.
+
+---
+
+## The Fragmentation Risk That Still Doesn't Have an Answer
+
+This is the part the industry keeps circling without resolving. We now have:
+
+- Anthropic's MCP (backend, server-to-server)
+- Google's WebMCP (client-side, browser-native)
+- GitHub's agentic workflows (platform-specific, Markdown-driven)
+- Amazon's Nova Act (their own agentic browser framework)
+
+Four major companies, four different protocols for roughly the same problem space. If you're building an agent that needs to interact with the web, which contract layer do you target?
+
+The realistic answer is: all of them. And that's expensive, fragile, and exactly the kind of integration tax that makes builders cynical about "standards." Software history says these protocols eventually converge or get abstracted by middle-layer frameworks. But right now, today, the abstraction doesn't exist yet—and someone has to build on the raw wire while it gets sorted out.
+
+<Callout type="warning" title="Sound Familiar?">
+We've been here before. REST vs. SOAP vs. GraphQL. React vs. Angular vs. Vue. The protocol wars always start with "this is the standard" and end with "we support everything."
+</Callout>
+
+I'm not saying interoperability is impossible. WebMCP is going through W3C. MCP is open-source with growing adoption. The conversation *is* happening—in W3C working groups, in developer forums, in the spec repos. But the conversation existing and the conversation being resolved are different things. Right now, the ecosystem looks less like convergence and more like competitive forking with good intentions.
+
+---
+
+## What This Means If You're Building
+
+If I'm architecting an agent system today, here's where my head is:
+
+**Design for both modes.** Your agent will need to explore *and* execute contracts. Build the orchestration layer to handle ambiguity. Build the tool layer to eliminate it.
+
+**Don't bet on one protocol.** Abstract your tool interfaces. Make the contract layer swappable. The agent doesn't need to know whether it's calling through MCP, WebMCP, or a REST endpoint—it needs to know what the tool *does*.
+
+**Invest in the discovery problem.** The execution side is getting solved fast. Typed contracts are well-understood infrastructure. The harder problem is: how does an agent decide what to do next? That's where the real differentiation lives.
+
+**Watch the governance gap.** GitHub puts agents in sandboxes with read-only defaults. WebMCP defines what's callable. But neither fully answers: who's accountable when the agent makes a bad decision with correct tools? The cage still matters more than the interface.
+
+---
+
+## Where This Leaves Me
+
+Two announcements. Same week. Completely different bets on how agents should interact with the world.
+
+One says: let agents roam and reason. The other says: give them a structured menu and let them order.
+
+The interesting thing isn't which one is right. It's that we're asking the question at all—that we've moved past "can agents do things?" to "how should we let them?"
+
+That's the real signal. The doing is getting solved. The governing is where the actual hard problems live. And this split may not last—protocols converge, abstractions emerge, middle layers get built. But the choices you make now shape your migration cost later.
+
+And I keep thinking about my own agent work—the cages I build, the constraints I enforce. I've been designing for the "tight" side of this equation almost reflexively. Reading about GitHub's approach makes me wonder if I've been under-investing in the exploratory layer. Giving my agents too narrow a view when a broader one might produce better outcomes.
+
+Not sure yet. Still weighing it.

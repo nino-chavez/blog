@@ -155,6 +155,23 @@ function extractFrontmatter(content) {
   return frontmatter;
 }
 
+// Extract clean post body text from MDX content
+function extractPostBody(content) {
+  // Strip frontmatter
+  let body = content.replace(/^---\n[\s\S]*?\n---/, '');
+
+  // Strip MDX import statements
+  body = body.replace(/^import\s+.*$/gm, '');
+
+  // Strip MDX component tags (self-closing and paired)
+  body = body.replace(/<\/?[A-Z][A-Za-z]*[^>]*>/g, '');
+
+  // Collapse multiple blank lines
+  body = body.replace(/\n{3,}/g, '\n\n');
+
+  return body.trim().substring(0, 3000);
+}
+
 // Get category style or default
 function getCategoryStyle(category) {
   if (!category) return ILLUSTRATION_STYLES.default;
@@ -240,17 +257,59 @@ function extractVisualConcept(title) {
   return 'abstract symbols representing the core idea';
 }
 
+// Use LLM to generate a content-aware visual concept from the full post
+async function generateVisualConcept(title, excerpt, category, postBody) {
+  try {
+    const response = await openrouter.chat.completions.create({
+      model: 'google/gemini-2.5-flash',
+      messages: [
+        {
+          role: 'user',
+          content: `You are a visual concept designer for a professional blog called Signal Dispatch. Read the following blog post and propose a single, specific visual scene that captures the post's core argument or tension.
+
+TITLE: ${title}
+CATEGORY: ${category || 'general'}
+EXCERPT: ${excerpt || ''}
+
+POST BODY:
+${postBody}
+
+INSTRUCTIONS:
+- Identify the post's central argument, tension, or insight
+- Propose ONE specific visual scene (not a generic metaphor) that illustrates it
+- The scene should be concrete enough for an illustrator to draw
+- 2-3 sentences maximum
+- Avoid cliches: no robots, lightbulbs, handshakes, puzzle pieces, or generic tech imagery
+- Think about what makes THIS post different from others on similar topics
+
+Respond with ONLY the visual scene description, nothing else.`
+        }
+      ],
+      max_tokens: 200,
+      temperature: 0.7
+    });
+
+    const concept = response.choices?.[0]?.message?.content?.trim();
+    if (concept && concept.length > 20) {
+      return concept;
+    }
+    throw new Error('Response too short or empty');
+  } catch (e) {
+    console.log(`              ⚠️  Visual concept LLM failed (${e.message}), using keyword fallback`);
+    return extractVisualConcept(title);
+  }
+}
+
 // Generate image prompt using new illustration style
-function createImagePrompt(title, excerpt, category) {
+function createImagePrompt(title, excerpt, category, visualConcept) {
   const style = getCategoryStyle(category);
-  const visualConcept = extractVisualConcept(title);
 
   return `Create a sophisticated hand-drawn illustration for a professional blog header.
 
 BLOG POST CONTEXT:
 Title: "${title}"
 ${excerpt ? `Summary: "${excerpt.substring(0, 200)}"` : ''}
-Visual Concept to Explore: ${visualConcept}
+SCENE TO ILLUSTRATE: ${visualConcept}
 
 ILLUSTRATION STYLE (MUST FOLLOW PRECISELY):
 Background: ${style.background}
@@ -563,10 +622,20 @@ async function main() {
     console.log(`              Category: ${frontmatter.category || 'default'}`);
 
     try {
+      const postBody = extractPostBody(content);
+      const visualConcept = await generateVisualConcept(
+        frontmatter.title,
+        frontmatter.excerpt || frontmatter.metaDescription || '',
+        frontmatter.category,
+        postBody
+      );
+      console.log(`              🧠 Visual concept: ${visualConcept.substring(0, 80)}...`);
+
       const prompt = createImagePrompt(
         frontmatter.title,
         frontmatter.excerpt || frontmatter.metaDescription || '',
-        frontmatter.category
+        frontmatter.category,
+        visualConcept
       );
 
       const slug = filename.replace('.mdx', '');

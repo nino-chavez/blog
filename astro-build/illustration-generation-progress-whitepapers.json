@@ -1,11 +1,15 @@
 {
-  "completed": [
-    "the-neuro-symbolic-convergence.mdx",
+  "completed": [],
+  "failed": [
+    "the-agentic-shift.mdx",
     "the-agentic-student.mdx",
-    "the-business-engineer-curriculum.mdx",
     "the-ai-analyst-curriculum.mdx",
-    "the-cognitive-foundry.mdx"
+    "the-algorithmic-consumer.mdx",
+    "the-cognitive-foundry-part-2.mdx",
+    "the-cognitive-foundry.mdx",
+    "the-dissolution-of-syntax.mdx",
+    "the-fourth-channel.mdx",
+    "the-neuro-symbolic-convergence.mdx"
   ],
-  "failed": [],
   "skipped": []
 }

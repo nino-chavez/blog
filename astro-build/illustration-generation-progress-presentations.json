@@ -1,12 +1,12 @@
 {
-  "completed": [
+  "completed": [],
+  "failed": [
+    "investing-101-zoey.mdx",
     "neuro-symbolic-convergence.mdx",
     "the-agentic-student.mdx",
-    "the-business-engineer.mdx",
     "the-ai-analyst.mdx",
-    "the-cognitive-foundry.mdx",
-    "investing-101-zoey.mdx"
+    "the-cognitive-foundry-part-2.mdx",
+    "the-cognitive-foundry.mdx"
   ],
-  "failed": [],
   "skipped": []
 }
