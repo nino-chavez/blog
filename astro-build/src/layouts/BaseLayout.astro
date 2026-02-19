@@ -47,9 +47,16 @@ const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <link rel="icon" type="image/png" sizes="32x32" href="/blog/favicon-32x32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/blog/apple-touch-icon.png" />
 
-    <!-- Preload LCP image for blog posts -->
+    <!-- Preload LCP image for blog posts with responsive hints -->
     {image && type === 'article' && (
-      <link rel="preload" as="image" href={image} fetchpriority="high" />
+      <link
+        rel="preload"
+        as="image"
+        href={image}
+        imagesrcset={`${image.replace('.webp', '-600w.webp')} 600w, ${image} 1200w`}
+        imagesizes="(max-width: 768px) 100vw, 1200px"
+        fetchpriority="high"
+      />
     )}
 
     <!-- Primary Meta Tags -->

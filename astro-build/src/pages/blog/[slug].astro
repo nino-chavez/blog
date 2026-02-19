@@ -87,21 +87,27 @@ const relatedPosts = allPosts
 
       <article class="space-y-6">
         <!-- Featured Image -->
-        {post.data.featureImage && (
-          <div class="relative -mx-4 md:-mx-8 lg:mx-0 aspect-video overflow-hidden rounded-2xl border border-zinc-800">
-            <img
-              src={post.data.featureImage}
-              alt={post.data.title}
-              class="w-full h-full object-cover"
-              width="1200"
-              height="675"
-              loading="eager"
-              fetchpriority="high"
-              decoding="async"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
-          </div>
-        )}
+        {post.data.featureImage && (() => {
+          const src = post.data.featureImage;
+          const mobile = src.replace('.webp', '-600w.webp');
+          return (
+            <div class="relative -mx-4 md:-mx-8 lg:mx-0 aspect-video overflow-hidden rounded-2xl border border-zinc-800">
+              <img
+                src={src}
+                srcset={`${mobile} 600w, ${src} 1200w`}
+                sizes="(max-width: 768px) 100vw, 1200px"
+                alt={post.data.title}
+                class="w-full h-full object-cover"
+                width="1200"
+                height="675"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
+            </div>
+          );
+        })()}
 
         <!-- Article Header -->
         <header class="space-y-3 pb-6 border-b border-zinc-800/50">
