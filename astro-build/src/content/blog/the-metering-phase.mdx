@@ -1,0 +1,156 @@
+---
+title: "The Metering Phase"
+publishedAt: "2026-02-20T12:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "Every major infrastructure technology goes through a phase where we carefully ration usage. AI is there now. The question is which of today's anxieties are transitional—and which become permanent disciplines."
+category: "Systems Thinking"
+featureImage: "/images/generated/the-metering-phase.webp"
+tags: ["ai-development", "field-notes"]
+featured: false
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+I caught myself doing it again last week. Hovering over the "send" button on an AI prompt, running mental math. *Is this task worth the tokens? Could I just do this manually in ten minutes instead of burning credits?*
+
+That hesitation felt familiar. Not from AI. From somewhere older.
+
+---
+
+## You Had to Really Want That File
+
+In 1998, downloading a song took planning. You'd start the transfer, watch the progress bar crawl, and pray nobody picked up the phone. Every megabyte was a decision. You had to *want* that file.
+
+Web browsing was the same. You didn't casually surf—you navigated with intention. Because bandwidth cost money, took time, and competed with the household phone line.
+
+Text messages had the same economics. Remember when SMS plans came in tiers? 200 messages a month. You'd check your count mid-cycle, ration the last fifty, decide whether a thought was *worth a text* or could wait until you saw someone in person.
+
+Now I send thirty texts before breakfast without thinking about it.
+
+The bandwidth problem didn't get managed better. It got *solved*. Infrastructure caught up, pricing models flattened, and the constraint just vanished. We stopped counting because counting stopped mattering.
+
+---
+
+## Every Infrastructure Gets the Problems It Deserves
+
+Here's what I keep noticing across technology transitions: solving the primary problem always generates secondary problems that nobody planned for. And those secondary problems become entire disciplines.
+
+Cloud computing solved the infrastructure provisioning problem. No more racking servers, no more capacity planning months in advance. But it created:
+
+- **FinOps** — because elastic scaling means elastic spending, and "we can scale" quickly becomes "we can't afford how we scaled"
+- **Cloud security posture management** — because distributed infrastructure has a distributed attack surface
+- **Cost allocation** — because shared infrastructure makes it genuinely hard to answer "who's paying for this?"
+
+Microservices solved the monolith deployment problem. Ship independently, scale independently, fail independently. But they created:
+
+- **Observability** — because you can't `tail -f` a log file when your system is 200 services deep
+- **Service mesh complexity** — because inter-service communication needs its own infrastructure layer
+- **Distributed tracing** — because debugging now means following a request across seventeen boundaries
+
+These weren't bugs in the adoption. They were the *next layer* of problems. Predictable in hindsight, invisible during the hype cycle.
+
+AI is following the same arc.
+
+---
+
+## The Problems AI Is Creating
+
+We solved the "can a machine do this?" question faster than anyone expected. Summarization, generation, code completion, analysis—the capability gap closed in months, not decades.
+
+But the secondary problems have arrived. And they're substantial.
+
+**Quality verification.** How do I know this output is actually good? Not plausible—*good*. I've written about burning through [$50 in credits](/blog/50-of-ai-later-lessons-from-burning-credits-fast) and [$800 in credits](/blog/putting-my-money-where-my-mouth-is) and one thing is clear in both: the hardest cost isn't the money. It's the time spent evaluating whether the output was worth anything.
+
+**Value attribution.** When AI assists a workflow, where does the value come from? The prompt? The model? The human judgment applied after? I tracked a [48-64x productivity multiplier](/blog/intent-driven-engineering-by-the-numbers) in one project, but even that number required careful accounting to separate what AI contributed from architectural decisions I'd already made.
+
+**Cost management as practice.** Not just "how much did I spend?" but "how do I spend *intentionally*?" This isn't budgeting. It's closer to the FinOps discipline that emerged from cloud—a systematic approach to aligning spending with value creation.
+
+<Callout type="signal" title="The Pattern">
+Cloud gave us FinOps. Microservices gave us observability. AI is generating its own discipline—something like "output operations"—and we don't have a clean name for it yet because we're still inside the problem.
+</Callout>
+
+---
+
+## The Metering Mindset
+
+What I find most interesting isn't the cost itself. It's the *psychology* of metering.
+
+When I hesitate before sending a prompt, I'm running the same calculation I ran in 2001 before loading a webpage on dial-up. Is this worth the resource? Can I get what I need another way? What's the cost of being wrong?
+
+That calculation has a recognizable shape. I've watched it play out before:
+
+1. **Scarcity** — The resource is limited and expensive. Usage is deliberate.
+2. **Metering** — The resource becomes more available but still costs enough to track. You develop systems for monitoring and rationing.
+3. **Abundance** — Infrastructure catches up. The unit cost drops below the threshold of attention.
+4. **Invisibility** — You stop thinking about it entirely. The constraint dissolves.
+
+Bandwidth followed this arc. SMS followed it. Cloud compute is deep into stage 3—most companies have stopped debating whether to *use* cloud and started optimizing *how*. Storage is basically at stage 4 for most applications.
+
+AI is firmly in stage 2. We're metering. We're tracking tokens, managing API costs, building dashboards for spend. "Is this worth an AI call?" is still a live question in most workflows.
+
+---
+
+## Where the Analogy Breaks
+
+But here's where I keep pushing back on my own framing: does quality verification follow the same arc?
+
+Cost almost certainly will. Token prices have already dropped by orders of magnitude. They'll keep dropping. At some point, the cost of an AI call will be so low that tracking it becomes more expensive than the call itself. We'll stop counting tokens the way we stopped counting text messages.
+
+Quality is a different animal.
+
+Bandwidth was a pure infrastructure problem. Make the pipes bigger, make them cheaper, done. Quality is a *judgment* problem. It requires someone—human or system—to evaluate whether output meets a standard. And that evaluation itself requires expertise.
+
+<PullQuote>
+Cost is an infrastructure problem that infrastructure will solve. Quality is a judgment problem that might require permanent discipline.
+</PullQuote>
+
+I'm not convinced the quality layer ever becomes invisible. Cloud got cheap, but we still need security reviews. Bandwidth got unlimited, but we still need content moderation. The *access* problem dissolves; the *trust* problem persists.
+
+Maybe what's happening is that we're conflating two different anxieties—the metering problem (which is transitional) and the verification problem (which might be structural). Because both feel uncomfortable right now, we treat them as one thing. They're not.
+
+---
+
+## The Disciplines That Stick
+
+When I look at what survived past infrastructure transitions, a pattern emerges.
+
+From cloud: FinOps became a real discipline with certifications, dedicated teams, and mature tooling. It didn't disappear when cloud got cheaper—it deepened. Because "how do we spend intentionally?" turns out to be a permanent question, even when spending itself becomes routine.
+
+From microservices: observability became foundational. It didn't vanish when the tools improved—it became table stakes. Because "how do we understand what's happening in our system?" never stops being relevant.
+
+From AI, I think what endures is something about **output governance**. Not "is this too expensive?"—that fades. But:
+
+- "Is this output trustworthy enough to act on?"
+- "Can I trace how this conclusion was reached?"
+- "Who's accountable when the AI-assisted decision turns out to be wrong?"
+
+Those aren't metering questions. They're institutional questions. And institutions don't release their grip on those easily.
+
+<Callout type="insight">
+The transitional problem: "Can I afford to use AI for this?" The permanent problem: "Can I trust what AI produced?" The first one resolves with infrastructure. The second one builds a discipline.
+</Callout>
+
+---
+
+## What I'm Watching For
+
+The signal that we've moved past the metering phase won't be cheaper tokens. It'll be a shift in the questions people ask.
+
+Right now, the default question is: *Should I use AI for this?* That's a metering question. It implies the resource is scarce enough to ration.
+
+The next phase sounds like: *How do I use AI well for this?* That's an optimization question. It assumes the resource is available and focuses on quality of application.
+
+The mature phase sounds like: *How do I verify what AI produced?* That's a governance question. Usage is invisible; accountability is not.
+
+Some teams are already in phase two. Very few are genuinely in phase three. Most are still in phase one, still running the mental math before every prompt, still wondering whether the task is *worth it*.
+
+That's fine. That's where bandwidth was in 1999. We built the infrastructure. We flattened the pricing. We stopped counting.
+
+But we never stopped caring about what traveled over those pipes.
+
+---
+
+The bandwidth will get solved. It always does. The part I keep circling is what remains after it does—what new discipline crystallizes once the cost anxiety burns off and we're left staring at the trust question underneath.
+
+I don't think we'll be counting tokens in five years. But I think we'll still be asking whether the output was worth trusting. And I suspect that question will have an entire profession wrapped around it by then.
