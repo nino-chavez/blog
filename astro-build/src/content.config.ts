@@ -93,6 +93,33 @@ const presentationCollection = defineCollection({
   }),
 });
 
+const counterpointCollection = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/counterpoints' }),
+  schema: z.object({
+    title: z.string(),
+    slug: z.string().optional(),
+    publishedAt: z.string().or(z.date()),
+    updatedAt: z.string().or(z.date()).optional(),
+    author: z.string().default('Nino Chavez'),
+    excerpt: z.string().optional().default(''),
+    category: z.string().optional(),
+    featureImage: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    // Which blog post does this counterpoint challenge?
+    challengesPost: z.object({
+      slug: z.string(),
+    }),
+    // Who generated this challenge?
+    challengeSource: z.object({
+      name: z.string(),
+      type: z.enum(['ai-analysis', 'external-contributor', 'self-critique']).default('ai-analysis'),
+      url: z.string().optional(),
+    }),
+    // Research notes that support this content
+    supportedBy: supportedBySchema,
+  }),
+});
+
 const seriesCollection = defineCollection({
   loader: glob({ pattern: '**/*.mdx', base: './src/content/series' }),
   schema: z.object({
@@ -167,6 +194,7 @@ export const collections = {
   blog: blogCollection,
   whitepapers: whitepaperCollection,
   presentations: presentationCollection,
+  counterpoints: counterpointCollection,
   series: seriesCollection,
   'research-notes': researchNotesCollection,
 };

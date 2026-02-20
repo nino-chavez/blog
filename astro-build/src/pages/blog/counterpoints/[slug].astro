@@ -1,0 +1,263 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooter from '../../../components/SiteFooter.astro';
+import { generateArticleSchema } from '../../../utils/schema';
+import ReadingProgress from '../../../components/ReadingProgress';
+
+// In SSR mode, get the counterpoint from the slug parameter
+const { slug } = Astro.params;
+const counterpoints = await getCollection('counterpoints');
+const counterpoint = counterpoints.find((c) => c.id === slug);
+
+if (!counterpoint) {
+  return Astro.redirect('/blog/counterpoints');
+}
+
+const { Content } = await render(counterpoint);
+
+// Find the original blog post being challenged
+const posts = await getCollection('blog');
+const originalPost = posts.find((p) => p.id === counterpoint.data.challengesPost.slug);
+
+// Find author response: a blog post with supportedBy referencing this counterpoint + responds-to
+const responsePost = posts.find((p) =>
+  p.data.supportedBy?.some(
+    (ref) => ref.slug === counterpoint.id && ref.relationship === 'responds-to'
+  )
+);
+
+// Generate JSON-LD schemas
+const articleSchema = generateArticleSchema({
+  id: `counterpoints/${counterpoint.id}`,
+  data: counterpoint.data,
+});
+
+// Format dates
+const publishedDate = new Date(counterpoint.data.publishedAt);
+const formattedDate = publishedDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+// Calculate reading time
+const wordCount = counterpoint.body?.split(/\s+/).length || 0;
+const readingTime = Math.ceil(wordCount / 200);
+
+// Challenge source type labels
+const sourceTypeLabels: Record<string, string> = {
+  'ai-analysis': 'AI Analysis',
+  'external-contributor': 'External Contributor',
+  'self-critique': 'Self-Critique',
+};
+---
+
+<BaseLayout
+  title={counterpoint.data.title}
+  description={counterpoint.data.excerpt || `A counterpoint analysis`}
+  image={counterpoint.data.featureImage}
+  type="article"
+  publishedTime={publishedDate.toISOString()}
+  author={counterpoint.data.author}
+  jsonLd={[articleSchema]}
+>
+  <!-- Reading Progress Bar -->
+  <ReadingProgress client:load />
+
+  <main class="min-h-screen">
+    <SiteHeader currentPage="counterpoints" />
+
+    <div class="max-w-4xl mx-auto px-4 py-12">
+      <!-- Back link -->
+      <a
+        href="/blog/counterpoints"
+        class="group inline-flex items-center gap-2 text-zinc-400 hover:text-athletic-court-orange transition-all duration-150 font-medium mb-8 no-print"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to Counterpoints
+      </a>
+
+      <article class="space-y-8">
+        <!-- Featured Image -->
+        {counterpoint.data.featureImage && (
+          <div class="relative -mx-4 md:-mx-8 lg:mx-0 aspect-[21/9] overflow-hidden rounded-2xl border border-zinc-800">
+            <img
+              src={counterpoint.data.featureImage}
+              alt={counterpoint.data.title}
+              width="1200"
+              height="514"
+              class="absolute inset-0 w-full h-full object-cover"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
+          </div>
+        )}
+
+        <!-- Article Header -->
+        <header class="space-y-4 pb-8 border-b border-zinc-800/50">
+          <div class="flex items-center gap-3 text-sm flex-wrap">
+            <span class="font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border transition-colors bg-teal-600/10 border-teal-600/30 text-teal-400">
+              Counterpoint
+            </span>
+            <span class="text-zinc-700">&bull;</span>
+            <time datetime={publishedDate.toISOString()} class="text-zinc-500">
+              {formattedDate}
+            </time>
+            <span class="text-zinc-700">&bull;</span>
+            <span class="flex items-center gap-1.5 text-zinc-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              {readingTime} min read
+            </span>
+          </div>
+
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight">
+            {counterpoint.data.title}
+          </h1>
+
+          {counterpoint.data.excerpt && (
+            <p class="text-xl text-zinc-400 leading-relaxed">
+              {counterpoint.data.excerpt}
+            </p>
+          )}
+
+          <div class="flex items-center gap-3 pt-4">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-teal-600 to-cyan-500 flex items-center justify-center text-white font-bold">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-white font-medium">{counterpoint.data.challengeSource.name}</p>
+              <p class="text-zinc-500 text-sm">{sourceTypeLabels[counterpoint.data.challengeSource.type] || counterpoint.data.challengeSource.type}</p>
+            </div>
+          </div>
+        </header>
+
+        <!-- Original Post Link -->
+        {originalPost && (
+          <a href={`/blog/${originalPost.id}`} class="group block p-4 rounded-xl border border-teal-600/30 bg-teal-600/5 hover:bg-teal-600/10 transition-colors no-print">
+            <div class="flex items-center gap-3">
+              <div class="flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-xs font-semibold uppercase tracking-wider text-teal-400 mb-1">Challenges</p>
+                <p class="text-white font-medium group-hover:text-teal-400 transition-colors truncate">{originalPost.data.title}</p>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-zinc-500 group-hover:text-teal-400 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </div>
+          </a>
+        )}
+
+        <!-- Reading tip -->
+        <div class="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800 no-print">
+          <p class="text-sm text-zinc-400">
+            <strong class="text-zinc-300">Reading tip:</strong> This is an adversarial analysis designed to stress-test ideas. It does not represent the author's position. The goal is intellectual rigor through structured critique.
+          </p>
+        </div>
+
+        <!-- Article Content -->
+        <div class="prose prose-lg max-w-none">
+          <Content />
+        </div>
+
+        <!-- Author Response Link -->
+        {responsePost && (
+          <a href={`/blog/${responsePost.id}`} class="group block p-5 rounded-xl border border-athletic-brand-violet/30 bg-athletic-brand-violet/5 hover:bg-athletic-brand-violet/10 transition-colors no-print">
+            <div class="flex items-center gap-3">
+              <div class="flex-shrink-0">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-athletic-brand-violet to-athletic-court-orange flex items-center justify-center text-white font-bold">
+                  NC
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-xs font-semibold uppercase tracking-wider text-athletic-brand-violet mb-1">Author Response</p>
+                <p class="text-white font-medium group-hover:text-athletic-court-orange transition-colors truncate">{responsePost.data.title}</p>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-zinc-500 group-hover:text-athletic-court-orange group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </div>
+          </a>
+        )}
+
+        <!-- Social Sharing -->
+        <div class="pt-8 pb-8 border-t border-zinc-800/50 no-print">
+          <div class="flex items-center gap-4">
+            <span class="text-zinc-500 text-sm font-medium">Share:</span>
+            <a
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(counterpoint.data.title)}&url=${encodeURIComponent(`https://ninochavez.co/blog/counterpoints/${counterpoint.id}`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-zinc-400 hover:text-white transition-colors"
+              title="Share on Twitter"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://ninochavez.co/blog/counterpoints/${counterpoint.id}`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-zinc-400 hover:text-[#0A66C2] transition-colors"
+              title="Share on LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+            <button
+              onclick={`navigator.clipboard.writeText('https://ninochavez.co/blog/counterpoints/${counterpoint.id}'); this.textContent = 'Copied!'`}
+              class="text-zinc-400 hover:text-teal-400 transition-colors text-sm"
+              title="Copy link"
+            >
+              Copy link
+            </button>
+          </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="pt-4 pb-8 border-t border-zinc-800/50 no-print">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            {originalPost && (
+              <a href={`/blog/${originalPost.id}`} class="group p-3 rounded-lg border border-zinc-800 hover:border-teal-600/50 transition-colors text-center">
+                <p class="text-xs text-zinc-500 mb-1">Original Post</p>
+                <p class="text-zinc-300 group-hover:text-teal-400 transition-colors line-clamp-1">{originalPost.data.title}</p>
+              </a>
+            )}
+            <div class="p-3 rounded-lg border border-teal-600/30 bg-teal-600/5 text-center">
+              <p class="text-xs text-teal-400 mb-1">Counterpoint</p>
+              <p class="text-white line-clamp-1">{counterpoint.data.title}</p>
+            </div>
+            {responsePost ? (
+              <a href={`/blog/${responsePost.id}`} class="group p-3 rounded-lg border border-zinc-800 hover:border-athletic-brand-violet/50 transition-colors text-center">
+                <p class="text-xs text-zinc-500 mb-1">Author Response</p>
+                <p class="text-zinc-300 group-hover:text-athletic-brand-violet transition-colors line-clamp-1">{responsePost.data.title}</p>
+              </a>
+            ) : (
+              <div class="p-3 rounded-lg border border-zinc-800/50 text-center opacity-50">
+                <p class="text-xs text-zinc-600 mb-1">Author Response</p>
+                <p class="text-zinc-600 italic">Pending</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <SiteFooter />
+  </main>
+</BaseLayout>

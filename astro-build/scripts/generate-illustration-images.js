@@ -30,8 +30,8 @@ const CONTENT_TYPE = dirFlagIndex !== -1 && args[dirFlagIndex + 1]
   ? args[dirFlagIndex + 1]
   : 'blog';
 
-if (!['blog', 'whitepapers', 'presentations'].includes(CONTENT_TYPE)) {
-  console.error('Error: --dir must be "blog", "whitepapers", or "presentations"');
+if (!['blog', 'whitepapers', 'presentations', 'counterpoints'].includes(CONTENT_TYPE)) {
+  console.error('Error: --dir must be "blog", "whitepapers", "presentations", or "counterpoints"');
   process.exit(1);
 }
 
@@ -119,6 +119,13 @@ const ILLUSTRATION_STYLES = {
     style: 'Camera viewfinder aesthetic - frames within frames',
     elements: 'lens apertures, film strips, light rays, composition grids, shutter clicks',
     personality: 'Visual storyteller, seeing the extraordinary in ordinary moments'
+  },
+  'Counterpoints': {
+    background: 'Deep charcoal with cool teal undertones (#0d1a1a to #1a2f2f)',
+    lineColor: 'Sharp teal lines (#0d9488) with cool white accents (#e2e8f0)',
+    style: 'Analytical diagrams with tension - opposing forces, balanced structures under scrutiny',
+    elements: 'scales tipping, magnifying glasses over text, chess counter-moves, two paths diverging, fractured mirrors',
+    personality: 'Intellectually rigorous, adversarial but fair, the loyal opposition'
   },
   'default': {
     background: 'Rich charcoal gradient (#1f1f1f to #2d2d2d)',
