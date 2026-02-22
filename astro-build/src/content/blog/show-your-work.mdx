@@ -1,0 +1,139 @@
+---
+title: "Show Your Work"
+publishedAt: "2026-02-22T16:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "If you take away the LLM, could I still do this? The answer is complicated — and the complication is the point."
+category: "Meta"
+featureImage: "/images/generated/show-your-work.webp"
+tags: ["ai-development", "reflection"]
+featured: false
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+There's a question I keep circling back to, and I haven't found a clean answer for it yet.
+
+If you took away the LLM — stripped out Claude, Gemini, all of it — could I still write this blog? Could I still articulate these ideas? Would the references be as sharp, the analysis as layered?
+
+Honestly? Probably not. Not like this.
+
+And I don't know what to do with that.
+
+---
+
+## The Rule Was Always the Same
+
+I was good at math growing up. Not prodigy good — but the kind of good where I could sit with a problem, feel my way through it, and arrive somewhere that made sense. Advanced math. The kind where you stop doing arithmetic and start doing *reasoning*.
+
+And in that world, one rule never changed: **show your work.**
+
+It didn't matter if you got the right answer. If you couldn't demonstrate *how* you got there — which formula you chose, how you applied it, where the variables shifted — you didn't get credit. The answer was secondary. The derivation was the proof.
+
+The answer told the teacher what you found. The work told them whether you understood it.
+
+---
+
+## Then They Gave Us Calculators
+
+I remember the shift. Scientific calculators first, then graphing calculators. Suddenly you could skip the tedious parts — the long division, the manual trig, the brute-force computation.
+
+The interesting thing is what happened to the *test*. The problems didn't get easier. They got harder. Because the calculator handled the arithmetic, the teachers raised the bar on reasoning. The expectation shifted from "can you compute this?" to "can you *set up* this problem correctly?"
+
+The skill wasn't pressing buttons. The skill was knowing which buttons to press and why.
+
+I think about that transition constantly now.
+
+---
+
+## The 42 Problem
+
+There's a moment in *The Hitchhiker's Guide to the Galaxy* that keeps nagging at me.
+
+Deep Thought — this impossibly powerful supercomputer — is asked to compute the Answer to the Ultimate Question of Life, the Universe, and Everything. It runs for 7.5 million years. And it returns: **42.**
+
+That's it. A number. No derivation, no explanation, no methodology. Just output.
+
+And the characters are left standing there, furious. Not because the answer is wrong — they have no way to evaluate whether it's wrong. They're furious because they can't *do* anything with it. The answer without the question is noise.
+
+Deep Thought's response is basically: "I gave you what you asked for. The problem is you never really understood what you were asking."
+
+<Callout type="signal" title="The Derivation Gap">
+A claim without a visible process behind it isn't knowledge. It's a number someone handed you. The value was never in the output — it was in the ability to evaluate whether the output makes sense.
+</Callout>
+
+That's the thing I keep bumping into with LLMs. They're extraordinarily good at producing 42s. Polished, confident, well-structured 42s. And if all you're evaluating is the output, they look brilliant.
+
+But output without journey is just a claim.
+
+---
+
+## So Am I Cheating?
+
+Let me be specific about what I actually do.
+
+When I wrote [The Metering Phase](/blog/the-metering-phase), I didn't type "write me a blog post about AI infrastructure costs." I spent weeks noticing a pattern — the way I hesitate before sending expensive prompts, the way that hesitation reminded me of dial-up internet, the way every infrastructure technology seems to follow the same arc from scarcity to invisibility.
+
+The *observation* was mine. The *framework* was mine. The LLM helped me pressure-test the historical parallels, find the data I half-remembered, and articulate connections I could feel but hadn't fully formed.
+
+Then I did something I didn't plan: I [fed the whole thing to Gemini and asked it to tear it apart](/blog/red-teaming-the-metering-phase). Published the demolition alongside the thesis.
+
+Was that me, or was that the tool?
+
+Here's where I get stuck. The thinking was mine. The architecture of the argument was mine. But the *execution* — the velocity, the polish, the breadth of reference — that was collaborative. If I'd written The Metering Phase by hand, the core ideas would survive. The supporting evidence would be thinner. The prose would be rougher. It would have taken three times as long.
+
+Is that a confession or just a description of using a tool?
+
+---
+
+## The Professor and the Student
+
+There's a distinction that matters here, and I'm still working out where I fall.
+
+A student shows their work to prove they learned something. The teacher needs to see the derivation because the whole point is demonstrating comprehension. The answer is almost irrelevant — what matters is whether you *understand* the path.
+
+A professor shows their work for a different reason. They're not proving they learned. They're building trust. When a structural engineer shows their stress calculations, no one is *testing* them. The documentation exists so that other people can verify the bridge won't fall down.
+
+The question I keep asking myself: which one am I?
+
+When I red-teamed my own Metering Phase thesis and published both the argument and the counter-argument, was I proving I understand the material? Or was I providing stress calculations?
+
+I want to say the second thing. But some days I'm not sure.
+
+<PullQuote>The calculator didn't make you a mathematician. But a mathematician without a calculator is just slower.</PullQuote>
+
+---
+
+## What's Actually Mine
+
+This is the framework I'm testing right now — not a conclusion, more of a working scaffold.
+
+**The problem statement is mine.** The LLM didn't decide that AI infrastructure follows historical metering patterns. I noticed that. The LLM didn't connect the two-door agent problem to governance accountability. I drew that line. The observations come from years of building things, shipping things, watching things fail.
+
+**The architecture is mine.** How the argument is structured, what goes where, which thread connects to which — that's editorial judgment. An LLM can generate paragraphs. It can't decide that a post needs to exist, or why, or what it should make the reader *feel*.
+
+**The interrogation is mine.** The impulse to red-team my own work, to publish the demolition, to sit in the discomfort of being partially wrong — that's not a feature of the tool. That's a choice.
+
+**The execution is collaborative.** And I think that's fine. I think. Maybe.
+
+---
+
+## The Part I Haven't Resolved
+
+The 42 problem has a sequel that people forget.
+
+Deep Thought doesn't just deliver the answer and walk away. It tells them they need to build an *entirely new computer* — one designed specifically to figure out what the Question was. That computer turns out to be Earth. The whole planet. Running for billions of years.
+
+The point Adams was making, under all the absurdism: the hard problem was never the answer. It was figuring out what you were actually asking.
+
+I keep coming back to that when I think about my own process. The LLM is Deep Thought — fast, capable, confident. But I'm the one building Earth. I'm the one deciding what questions are worth asking, what frameworks are worth constructing, what tensions are worth sitting in.
+
+That might be the skill. Not the writing. Not the research. The *questioning*.
+
+<Callout type="insight">
+If the tool disappears and the thinking survives, the thinking was yours. If the tool disappears and there's nothing left — you were never doing math. You were watching someone else's calculator.
+</Callout>
+
+Or maybe I'm telling myself a story because the alternative is harder to sit with. Maybe the line between "architect" and "operator" isn't as clean as I need it to be. Maybe in five years, the questioning itself gets automated, and whatever I'm calling "mine" today turns out to have been a transitional skill too.
+
+I don't have that answer yet. I'm still building the computer that generates the question.
