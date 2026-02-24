@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beyond Chat: Building Agentic Workflows with Claude Code</title>
+  <meta name="author" content="Nino Chavez">
+  <meta name="description" content="AI assistants forget everything between sessions. Here's how I turned Claude Code into an operational partner — with persistent memory, codified editorial judgment, multi-stage pipelines, and four different publishing pathways. A walkthrough of the real system behind Signal Dispatch.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-violet': '#6366f1',
+            'brand-navy': '#1e1b4b',
+            'brand-slate': '#0f172a',
+          },
+          fontFamily: {
+            display: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+
+    /* ============================================
+       SIGNAL DISPATCH PRESENTATION DESIGN SYSTEM
+       Based on Signal Forge reference implementation
+       ============================================ */
+
+    /* CSS Custom Properties (Design Tokens) */
+    :root {
+      --brand-violet: #6366f1;
+      --brand-navy: #1e1b4b;
+      --brand-slate: #0f172a;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--brand-slate);
+      color: #fafafa;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    /* ============================================
+       PRESENTATION CONTAINER
+       ============================================ */
+    .presentation-container {
+      position: fixed;
+      top: 59px;
+      left: 0;
+      right: 0;
+      bottom: 28px;
+      font-family: 'Inter', system-ui, sans-serif;
+      overflow: hidden;
+    }
+
+    /* ============================================
+       BASE SLIDE STYLING
+       ============================================ */
+    .presentation-container .slide {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      flex-direction: column;
+      background: linear-gradient(to bottom right, var(--brand-slate), var(--brand-navy), var(--brand-slate));
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 3rem 2rem 4rem 2rem;
+      box-sizing: border-box;
+    }
+
+    .presentation-container .slide.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .presentation-container .slide.active {
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+    .animate-pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
+
+    /* ============================================
+       TYPOGRAPHY
+       ============================================ */
+    .presentation-container .slide h1 {
+      font-size: 3.75rem;
+      font-weight: 800;
+      color: #fafafa;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.5rem;
+    }
+
+    .presentation-container .slide h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #fafafa;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 3rem;
+    }
+
+    .presentation-container .slide h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fafafa;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+
+    .presentation-container .slide p {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .presentation-container .slide strong {
+      color: #fafafa;
+      font-weight: 600;
+    }
+
+    .presentation-container .slide em {
+      color: var(--accent-cyan);
+      font-style: italic;
+    }
+
+    /* ============================================
+       SECTION LABELS
+       ============================================ */
+    .presentation-container .section-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .presentation-container .section-label.amber { color: var(--accent-amber); }
+    .presentation-container .section-label.cyan { color: var(--accent-cyan); }
+    .presentation-container .section-label.emerald { color: var(--accent-emerald); }
+    .presentation-container .section-label.violet { color: var(--brand-violet); }
+    .presentation-container .section-label.red { color: #f87171; }
+    .presentation-container .section-label.rose { color: #fb7185; }
+    .presentation-container .section-label.neutral { color: rgba(255, 255, 255, 0.4); }
+
+    /* ============================================
+       CONTENT CARDS
+       ============================================ */
+    .presentation-container .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .presentation-container .card.highlighted {
+      background: linear-gradient(to bottom right, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.1));
+      border-color: rgba(99, 102, 241, 0.3);
+      box-shadow: 0 0 40px rgba(99, 102, 241, 0.3);
+    }
+
+    .presentation-container .card.terminal {
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .presentation-container .card.warning {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: rgba(239, 68, 68, 0.2);
+    }
+
+    .presentation-container .card.success {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.2);
+    }
+
+    /* ============================================
+       CALLOUT BLOCKS
+       ============================================ */
+    .presentation-container .callout {
+      background: linear-gradient(to right, rgba(99, 102, 241, 0.1), transparent);
+      border-left: 4px solid var(--brand-violet);
+      padding: 1.5rem;
+      border-radius: 0 0.75rem 0.75rem 0;
+      margin-top: 2rem;
+    }
+
+    .presentation-container .callout.amber {
+      background: linear-gradient(to right, rgba(245, 158, 11, 0.1), transparent);
+      border-left-color: var(--accent-amber);
+    }
+
+    .presentation-container .callout.cyan {
+      background: linear-gradient(to right, rgba(6, 182, 212, 0.1), transparent);
+      border-left-color: var(--accent-cyan);
+    }
+
+    .presentation-container .callout.emerald {
+      background: linear-gradient(to right, rgba(16, 185, 129, 0.1), transparent);
+      border-left-color: var(--accent-emerald);
+    }
+
+    .presentation-container .callout.violet {
+      background: linear-gradient(to right, rgba(99, 102, 241, 0.1), transparent);
+      border-left-color: var(--brand-violet);
+    }
+
+    .presentation-container .callout.rose {
+      background: linear-gradient(to right, rgba(251, 113, 133, 0.1), transparent);
+      border-left-color: #fb7185;
+    }
+
+    .presentation-container .callout.red {
+      background: linear-gradient(to right, rgba(239, 68, 68, 0.1), transparent);
+      border-left-color: #f87171;
+    }
+
+    .presentation-container .callout p {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 0;
+    }
+
+    /* ============================================
+       TITLE BADGE
+       ============================================ */
+    .presentation-container .title-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(99, 102, 241, 0.2);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 9999px;
+      color: var(--brand-violet);
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
+
+    .presentation-container .title-badge .pulse-dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background: var(--brand-violet);
+      animation: pulse-slow 3s ease-in-out infinite;
+    }
+
+    /* ============================================
+       LISTS
+       ============================================ */
+    .presentation-container .slide ul,
+    .presentation-container .slide ol {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.8;
+      text-align: left;
+      margin: 1.5rem 0;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .presentation-container .slide li {
+      margin-bottom: 0.75rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .presentation-container .slide ul li::before {
+      content: '\2192';
+      position: absolute;
+      left: 0;
+      color: var(--brand-violet);
+      font-weight: 600;
+    }
+
+    /* Suppress arrows for list-none (inline markers) */
+    .presentation-container .slide ul.list-none li::before {
+      display: none;
+    }
+    .presentation-container .slide ul.list-none li {
+      padding-left: 0;
+    }
+
+    .presentation-container .slide ol { counter-reset: item; }
+    .presentation-container .slide ol li { counter-increment: item; }
+    .presentation-container .slide ol li::before {
+      content: counter(item);
+      position: absolute;
+      left: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: rgba(99, 102, 241, 0.2);
+      color: var(--brand-violet);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      top: 0.2rem;
+    }
+
+    /* ============================================
+       CODE BLOCKS
+       ============================================ */
+    .presentation-container .slide code {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(0, 0, 0, 0.4);
+      color: var(--accent-cyan);
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.9em;
+    }
+
+    .presentation-container .slide pre,
+    .presentation-container .code-block {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.75rem;
+      padding: 1rem 1.5rem;
+      overflow-x: auto;
+      text-align: left;
+      margin: 1.5rem 0;
+    }
+
+    .presentation-container .slide pre code,
+    .presentation-container .code-block code {
+      background: transparent;
+      padding: 0;
+      font-size: 0.875rem;
+      white-space: pre;
+    }
+
+    /* ============================================
+       TABLES
+       ============================================ */
+    .presentation-container .slide table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      overflow: hidden;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .presentation-container .slide th {
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 600;
+      padding: 1rem 1.25rem;
+      text-align: left;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .presentation-container .slide td {
+      padding: 1rem 1.25rem;
+      color: rgba(255, 255, 255, 0.7);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .presentation-container .slide tr:last-child td { border-bottom: none; }
+    .presentation-container .slide tr:hover td { background: rgba(255, 255, 255, 0.03); }
+
+    /* ============================================
+       BLOCKQUOTES
+       ============================================ */
+    .presentation-container .slide blockquote {
+      border-left: 4px solid var(--brand-violet);
+      padding-left: 1.5rem;
+      font-size: 1.5rem;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 2rem 0;
+    }
+
+    .presentation-container .slide blockquote p {
+      font-size: inherit;
+      margin-bottom: 0;
+    }
+
+    /* ============================================
+       LAYOUT: TITLE SLIDE
+       ============================================ */
+    .presentation-container .slide[data-layout="title"] {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .presentation-container .slide[data-layout="title"] > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .presentation-container .slide[data-layout="title"] h1 {
+      font-size: 3.75rem;
+      background: linear-gradient(to right, #fafafa, rgba(250, 250, 250, 0.6));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .presentation-container .slide[data-layout="title"] p {
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 0.5);
+      max-width: 600px;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .presentation-container .slide[data-layout="title"] p strong {
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.8);
+      display: block;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .presentation-container .slide[data-layout="title"] em {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.3);
+      display: block;
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    /* ============================================
+       LAYOUT: DEFAULT
+       ============================================ */
+    .presentation-container .slide[data-layout="default"] {
+      justify-content: center;
+      align-items: center;
+    }
+
+    .presentation-container .slide[data-layout="default"] > div {
+      max-width: 64rem;
+      width: 100%;
+    }
+
+    /* ============================================
+       LAYOUT: TABLE
+       ============================================ */
+    .presentation-container .slide[data-layout="table"] {
+      justify-content: center;
+      align-items: center;
+    }
+
+    .presentation-container .slide[data-layout="table"] > div {
+      max-width: 64rem;
+      width: 100%;
+    }
+
+    /* ============================================
+       LAYOUT: GRID
+       ============================================ */
+    .presentation-container .slide[data-layout="grid"] {
+      justify-content: center;
+      align-items: center;
+    }
+
+    .presentation-container .slide[data-layout="grid"] > div {
+      max-width: 64rem;
+      width: 100%;
+    }
+
+    /* ============================================
+       LAYOUT: QUOTE
+       ============================================ */
+    .presentation-container .slide[data-layout="quote"] {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .presentation-container .slide[data-layout="quote"] blockquote {
+      font-size: 2rem;
+      border-left: none;
+      padding: 0;
+      text-align: center;
+      max-width: 800px;
+    }
+
+    .presentation-container .slide[data-layout="quote"] blockquote::before {
+      content: '\201C';
+      font-size: 5rem;
+      color: var(--brand-violet);
+      line-height: 1;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ============================================
+       NAVIGATION
+       ============================================ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-icon {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.5rem;
+      background: linear-gradient(to bottom right, var(--brand-violet), #ea580c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-btn {
+      padding: 0.375rem 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 0.5rem;
+      transition: all 0.15s;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: transparent;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #fafafa;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .nav-btn-primary {
+      background: var(--brand-violet);
+      border-color: var(--brand-violet);
+      color: #fafafa;
+    }
+
+    .nav-btn-primary:hover:not(:disabled) {
+      background: rgba(99, 102, 241, 0.8);
+    }
+
+    .slide-counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.4);
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .progress-bar {
+      position: fixed;
+      top: 57px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(to right, var(--brand-violet), #ea580c);
+      transition: width 0.3s;
+    }
+
+    /* ============================================
+       RESPONSIVE - TABLET
+       ============================================ */
+    @media (max-width: 768px) {
+      .presentation-container .slide {
+        padding: 4rem 1.25rem 2rem 1.25rem;
+      }
+
+      .presentation-container .slide h1 { font-size: 2.25rem; margin-bottom: 1rem; }
+      .presentation-container .slide h2 { font-size: 1.75rem; margin-bottom: 2rem; }
+      .presentation-container .slide h3 { font-size: 1.125rem; }
+      .presentation-container .slide p { font-size: 1rem; line-height: 1.6; }
+
+      .presentation-container .slide[data-layout="title"] h1 { font-size: 2.25rem; }
+      .presentation-container .slide[data-layout="title"] p strong { font-size: 1.25rem; margin-bottom: 1.5rem; }
+
+      .presentation-container .card { padding: 1.25rem; margin-bottom: 1.5rem; }
+      .presentation-container .callout { padding: 1.25rem; margin-top: 1.5rem; }
+      .presentation-container .callout p { font-size: 1rem; }
+    }
+
+    /* ============================================
+       RESPONSIVE - MOBILE
+       ============================================ */
+    @media (max-width: 480px) {
+      .presentation-container .slide {
+        padding: 3.5rem 1rem 1.5rem 1rem;
+        min-height: calc(100vh - 48px);
+      }
+
+      .presentation-container .slide h1 { font-size: 1.75rem; }
+      .presentation-container .slide h2 { font-size: 1.375rem; margin-bottom: 1.5rem; }
+      .presentation-container .slide h3 { font-size: 1rem; }
+      .presentation-container .slide p { font-size: 0.9375rem; }
+
+      .presentation-container .slide[data-layout="title"] h1 { font-size: 1.75rem; }
+
+      .presentation-container .card { padding: 1rem; margin-bottom: 1rem; border-radius: 0.75rem; }
+      .presentation-container .callout { padding: 1rem; margin-top: 1rem; }
+      .presentation-container .callout p { font-size: 0.9375rem; }
+      .presentation-container .section-label { font-size: 0.75rem; }
+      .presentation-container .title-badge { padding: 0.25rem 0.625rem; font-size: 0.6875rem; margin-bottom: 1rem; }
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-title">
+      <div class="nav-icon">
+        <svg class="w-4 h-4" fill="none" stroke="white" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+        </svg>
+      </div>
+      <span style="color: rgba(255,255,255,0.9); font-weight: 600;" class="hidden sm:inline">Beyond Chat: Building Agentic Workflows with Claude Code</span>
+    </div>
+    <div class="nav-controls">
+      <button id="prevBtn" class="nav-btn" disabled>&larr; <span class="hidden sm:inline">Previous</span></button>
+      <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">17</span></span>
+      <button id="nextBtn" class="nav-btn nav-btn-primary"><span class="hidden sm:inline">Next</span> &rarr;</button>
+    </div>
+  </nav>
+
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress" style="width: 5.88235294117647%"></div>
+  </div>
+
+  <!-- Slides -->
+  <main class="presentation-container">
+    
+    <section class="slide active" data-slide="1" data-layout="title">
+      <div class="slide-content">
+        <div class="title-badge"><span class="pulse-dot"></span>AI Lunch & Learn - February 2026</div>
+
+<h1>Beyond Chat</h1>
+
+<strong>Building Agentic Workflows with Claude Code</strong>
+
+<p>Most AI usage stops at "ask a question, get an answer."</p>
+<p>What happens when you treat the AI as a <span class="text-cyan-400 font-semibold">team member with persistent context, codified judgment, and operational autonomy?</span></p>
+
+<div class="mt-16 text-sm text-white/30">
+<p>A walkthrough of a real production system — not a demo</p>
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="2" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label amber">The Problem</div>
+
+<h2>Every Session Starts at Zero</h2>
+
+<div class="card">
+<div class="text-white/60 text-sm uppercase tracking-wider mb-6">The default AI experience:</div>
+
+<div class="space-y-4">
+  <div class="flex items-start gap-4">
+    <span class="flex-shrink-0 w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">1</span>
+    <p class="text-lg text-white/80">You open a new session. The AI knows nothing about your project.</p>
+  </div>
+  <div class="flex items-start gap-4">
+    <span class="flex-shrink-0 w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">2</span>
+    <p class="text-lg text-white/80">You spend 10 minutes re-explaining conventions, file locations, and preferences.</p>
+  </div>
+  <div class="flex items-start gap-4">
+    <span class="flex-shrink-0 w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">3</span>
+    <p class="text-lg text-white/80">It generates something generic. You fix it manually. Repeat tomorrow.</p>
+  </div>
+</div>
+</div>
+
+<div class="callout amber"><p>
+<strong>The real cost isn't the AI subscription.</strong> It's the re-onboarding tax you pay every single session — and the drift that happens when context is lost.
+</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="3" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label cyan">The Shift</div>
+
+<h2>Chat vs. Agentic: What's the Difference?</h2>
+
+<div class="overflow-hidden rounded-2xl border border-white/10 mb-8">
+  <table class="w-full">
+    <thead>
+      <tr class="bg-white/5">
+        <th class="text-left p-4 font-semibold text-white/60 text-sm uppercase tracking-wider">Dimension</th>
+        <th class="text-left p-4 font-semibold text-amber-400 text-sm uppercase tracking-wider">Chat Pattern</th>
+        <th class="text-left p-4 font-semibold text-cyan-400 text-sm uppercase tracking-wider">Agentic Pattern</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-white/5">
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Context</td>
+        <td class="p-4 text-white/60">Starts from zero each session</td>
+        <td class="p-4 text-cyan-400">Loads project config automatically</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Knowledge</td>
+        <td class="p-4 text-white/60">Generic best practices</td>
+        <td class="p-4 text-cyan-400">Your conventions, your patterns</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Workflow</td>
+        <td class="p-4 text-white/60">Single Q&A exchange</td>
+        <td class="p-4 text-cyan-400">Multi-step with tools and side effects</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Quality Control</td>
+        <td class="p-4 text-white/60">You review everything manually</td>
+        <td class="p-4 text-cyan-400">Codified standards enforce themselves</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Trust</td>
+        <td class="p-4 text-white/60">Verify every output</td>
+        <td class="p-4 text-cyan-400">Permission envelope grows over time</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+<strong>The key insight:</strong> An agentic workflow isn't smarter AI. It's the same AI with better infrastructure around it — memory, judgment, tools, and trust boundaries.
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="4" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label violet">The Architecture</div>
+
+<h2>Five Layers of an Agentic System</h2>
+
+<p class="text-xl text-white/60 mb-10">Each layer solves a specific problem. Together, they compound.</p>
+
+<div class="grid grid-cols-5 gap-3 mb-8">
+  <div class="bg-gradient-to-b from-amber-500/20 to-transparent border border-amber-500/30 rounded-2xl p-4 text-center">
+    <div class="text-amber-400 text-3xl font-bold mb-2">1</div>
+    <div class="text-amber-400 text-sm font-semibold mb-2">Session Bootstrap</div>
+    <p class="text-white/60 text-xs">Project memory that loads automatically</p>
+  </div>
+  <div class="bg-gradient-to-b from-cyan-500/20 to-transparent border border-cyan-500/30 rounded-2xl p-4 text-center">
+    <div class="text-cyan-400 text-3xl font-bold mb-2">2</div>
+    <div class="text-cyan-400 text-sm font-semibold mb-2">Codified Judgment</div>
+    <p class="text-white/60 text-xs">Quality standards the AI enforces</p>
+  </div>
+  <div class="bg-gradient-to-b from-emerald-500/20 to-transparent border border-emerald-500/30 rounded-2xl p-4 text-center">
+    <div class="text-emerald-400 text-3xl font-bold mb-2">3</div>
+    <div class="text-emerald-400 text-sm font-semibold mb-2">Multi-Stage Pipelines</div>
+    <p class="text-white/60 text-xs">Chain models by their strengths</p>
+  </div>
+  <div class="bg-gradient-to-b from-violet-500/20 to-transparent border border-violet-500/30 rounded-2xl p-4 text-center">
+    <div class="text-violet-400 text-3xl font-bold mb-2">4</div>
+    <div class="text-violet-400 text-sm font-semibold mb-2">Trust Boundaries</div>
+    <p class="text-white/60 text-xs">Permissions that grow incrementally</p>
+  </div>
+  <div class="bg-gradient-to-b from-rose-500/20 to-transparent border border-rose-500/30 rounded-2xl p-4 text-center">
+    <div class="text-rose-400 text-3xl font-bold mb-2">5</div>
+    <div class="text-rose-400 text-sm font-semibold mb-2">Multiple Pathways</div>
+    <p class="text-white/60 text-xs">Same system, different entry points</p>
+  </div>
+</div>
+
+<div class="callout violet"><p>
+<strong>None of this requires a custom framework.</strong> It's configuration files, markdown documents, shell scripts, and CI/CD. The tools already exist — the insight is in how you compose them.
+</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="5" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label amber">Layer 1</div>
+
+<h2>Session Bootstrap: CLAUDE.md</h2>
+
+<p class="text-lg text-white/60 mb-6">A single markdown file that loads at the start of every session. The AI arrives pre-configured.</p>
+
+<div class="grid grid-cols-2 gap-5 mb-6">
+  <div class="card">
+    <h3 class="font-bold text-base mb-3 text-amber-400">What goes in it</h3>
+    <ul class="list-none space-y-2 text-white/70 text-sm">
+      <li class="flex items-start gap-2">
+        <span class="text-amber-400 mt-0.5">→</span>
+<p>Directory map with purpose annotations</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-amber-400 mt-0.5">→</span>
+<p>Complete workflow templates (step-by-step)</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-amber-400 mt-0.5">→</span>
+<p>Frontmatter schemas and conventions</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-amber-400 mt-0.5">→</span>
+<p>Off-limits files requiring explicit approval</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-amber-400 mt-0.5">→</span>
+<p>Common commands and build steps</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card terminal">
+    <div class="text-white/40 text-xs uppercase tracking-wider mb-3">Example: Directory Map</div>
+    <pre class="code-block"><code>project/
+<p>├── astro-build/</p>
+<p>│   ├── src/content/blog/</p>
+<p>│   ├── public/images/</p>
+<p>│   └── scripts/</p>
+<p>├── docs/          # Voice guide</p>
+<p>└── .claude/       # This config</code></pre></p>
+  </div>
+</div>
+
+<div class="callout amber"><p>
+<strong>Think of it as onboarding docs for a team member</strong> who has perfect recall but joins fresh every morning. Invest 30 minutes once — it pays off in every session.
+</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="6" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label amber">Layer 1 (cont.)</div>
+
+<h2>Slash Commands: Mode-Switching</h2>
+
+<p class="text-xl text-white/60 mb-8">Custom commands that activate specific operational modes. Same AI, different posture.</p>
+
+<div class="grid grid-cols-2 gap-4 mb-8">
+  <div class="card">
+    <div class="text-cyan-400 text-sm font-semibold mb-2">/write-post</div>
+    <h3 class="font-bold text-lg mb-3">New Content Mode</h3>
+    <p class="text-white/60 text-sm">Reads the voice guide first, then walks through: identify the hook, choose a structure template, draft following patterns, create frontmatter, self-review against checklist.</p>
+  </div>
+
+  <div class="card">
+    <div class="text-emerald-400 text-sm font-semibold mb-2">/edit-post</div>
+    <h3 class="font-bold text-lg mb-3">Refinement Mode</h3>
+    <p class="text-white/60 text-sm">Reviews against voice authenticity, structural integrity, and tonal balance. Critically: includes explicit <strong>"What NOT to Fix"</strong> instructions — preserve rough edges, don't add polish.</p>
+  </div>
+
+  <div class="card">
+    <div class="text-violet-400 text-sm font-semibold mb-2">/review-voice</div>
+    <h3 class="font-bold text-lg mb-3">Audit Mode</h3>
+    <p class="text-white/60 text-sm">Scores on three dimensions (1-10 each): Voice Authenticity, Structural Patterns, Tonal Consistency. Flags specific red-flag phrases.</p>
+  </div>
+
+  <div class="card">
+    <div class="text-rose-400 text-sm font-semibold mb-2">/voice-check</div>
+    <h3 class="font-bold text-lg mb-3">Quick Screen</h3>
+    <p class="text-white/60 text-sm">Five yes/no questions. Returns a binary: <strong>SOUNDS LIKE NINO: Yes/No/Mostly</strong>. Takes 30 seconds. Used for fast iteration.</p>
+  </div>
+</div>
+
+<div class="callout cyan"><p>
+<strong>Each command is a short markdown file</strong> — 15-30 lines. The power isn't in complexity. It's in giving the AI a clear role to inhabit.
+</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="7" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label cyan">Layer 2</div>
+
+<h2>Codified Judgment: The Voice Guide</h2>
+
+<p class="text-xl text-white/60 mb-8">A 156-post empirical analysis turned into a living editorial standard. Not aspirational — descriptive.</p>
+
+<div class="grid grid-cols-2 gap-6 mb-8">
+  <div class="card">
+    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="text-cyan-400">What it captures</span>
+    </h3>
+    <ul class="list-none space-y-3 text-white/70">
+      <li class="flex items-start gap-2">
+        <span class="text-cyan-400 mt-1">→</span>
+        <span><strong>Voice dimensions:</strong> Public practice, meta-awareness, vulnerable competence, pattern recognition</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-cyan-400 mt-1">→</span>
+        <span><strong>Structure templates:</strong> Reflection, Technical Deep-Dive, Leadership Insight, Origin Story</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-cyan-400 mt-1">→</span>
+        <span><strong>Anti-patterns:</strong> Retired phrases that became "tells" through overuse</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-cyan-400 mt-1">→</span>
+        <span><strong>Formatting rules:</strong> Paragraph length, divider usage, component limits</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card highlighted">
+    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="text-violet-400">The Cardinal Rule</span>
+    </h3>
+    <p class="text-white/80 text-lg italic mb-4">"This guide describes patterns, not templates. If you copy phrases from this document, you're using it wrong."</p>
+    <p class="text-white/60 text-sm">Every example is evidence, not instruction. The AI should understand the <em>spirit</em>, then find its own words.</p>
+  </div>
+</div>
+
+<div class="bg-rose-500/10 border border-rose-500/20 rounded-xl p-6">
+<strong>The "What NOT to Fix" list</strong> is the most valuable part. Any AI can add polish. The hard part is teaching it to leave the rough edges that make writing feel human.
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="8" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label cyan">Layer 2 (cont.)</div>
+
+<h2>Freshness Tracking: Preventing Staleness</h2>
+
+<p class="text-xl text-white/60 mb-8">Even authentic phrases become hollow through repetition. The guide tracks recency and enforces cooldowns.</p>
+
+<div class="overflow-hidden rounded-2xl border border-white/10 mb-8">
+  <table class="w-full">
+    <thead>
+      <tr class="bg-white/5">
+        <th class="text-left p-4 font-semibold text-white/60 text-sm uppercase tracking-wider">Pattern / Phrase</th>
+        <th class="text-left p-4 font-semibold text-amber-400 text-sm uppercase tracking-wider">Last Used</th>
+        <th class="text-left p-4 font-semibold text-rose-400 text-sm uppercase tracking-wider">Cool Until</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-white/5">
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">"Here's where my head is"</td>
+        <td class="p-4 text-white/60">Jan 21</td>
+        <td class="p-4 text-rose-400">Feb 21</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Opening with "How many..." question</td>
+        <td class="p-4 text-white/60">Jan 21</td>
+        <td class="p-4 text-rose-400">Feb 21</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Graveyard/death metaphor</td>
+        <td class="p-4 text-white/60">Jan 21</td>
+        <td class="p-4 text-rose-400">Mar 21</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid grid-cols-2 gap-6">
+  <div class="card">
+    <div class="text-amber-400 text-sm font-semibold mb-2">Graduation Rule</div>
+    <p class="text-white/70">Any phrase appearing 3+ times in six months gets permanently retired. No exceptions.</p>
+  </div>
+  <div class="card">
+    <div class="text-emerald-400 text-sm font-semibold mb-2">Permanently Retired</div>
+    <p class="text-white/70">"Ask me again in six months" — "Here's where I've landed, for now" — "This is what I think today"</p>
+  </div>
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="9" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label emerald">Layer 3</div>
+
+<h2>Multi-Stage Pipelines: Image Generation</h2>
+
+<p class="text-xl text-white/60 mb-8">One model thinks. Another model draws. Anti-cliche guardrails sit between them.</p>
+
+<div class="grid grid-cols-3 gap-4 mb-8">
+  <div class="card">
+    <div class="text-cyan-400 text-sm font-semibold mb-2">Stage 1: Concept</div>
+    <h3 class="font-bold text-lg mb-3">Gemini Flash</h3>
+    <p class="text-white/60 text-sm mb-4">Reads the full post. Generates a specific, non-generic visual concept.</p>
+    <div class="bg-black/40 rounded-lg p-3 text-white/50 text-xs">
+<p>Prompt explicitly rejects: "no robots, lightbulbs, handshakes, puzzle pieces, or generic tech imagery"</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="text-emerald-400 text-sm font-semibold mb-2">Stage 2: Render</div>
+    <h3 class="font-bold text-lg mb-3">GPT-5 Image</h3>
+    <p class="text-white/60 text-sm mb-4">Takes the concept, applies category-specific style profile. Generates 1200x675 illustration.</p>
+    <div class="bg-black/40 rounded-lg p-3 text-white/50 text-xs">
+<p>10 visual styles mapped to content categories</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="text-violet-400 text-sm font-semibold mb-2">Stage 3: Process</div>
+    <h3 class="font-bold text-lg mb-3">Sharp + Frontmatter</h3>
+    <p class="text-white/60 text-sm mb-4">Compresses to WebP at 85% quality. Auto-updates the post's frontmatter with the image path.</p>
+    <div class="bg-black/40 rounded-lg p-3 text-white/50 text-xs">
+<p>No manual steps. Post references the image automatically.</p>
+    </div>
+  </div>
+</div>
+
+<div class="callout emerald"><p>
+<strong>The principle:</strong> Chain models by their strengths, not by vendor. One model for reasoning, another for generation, with your quality standards as the glue between them.
+</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="10" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label emerald">Layer 3 (cont.)</div>
+
+<h2>Category-Specific Visual Identity</h2>
+
+<p class="text-xl text-white/60 mb-8">Each content category has a distinct illustration style. The AI doesn't choose — the system assigns.</p>
+
+<div class="grid grid-cols-2 gap-4 mb-8">
+  <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+    <div class="text-cyan-400 text-sm font-semibold mb-1">AI & Automation</div>
+    <p class="text-white/60 text-sm">Electric cyan circuit patterns, flowing data streams</p>
+  </div>
+  <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+    <div class="text-amber-400 text-sm font-semibold mb-1">Reflections</div>
+    <p class="text-white/60 text-sm">Golden amber, journal marginalia aesthetic</p>
+  </div>
+  <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+    <div class="text-violet-400 text-sm font-semibold mb-1">Leadership</div>
+    <p class="text-white/60 text-sm">Architectural linework — lighthouses, bridges</p>
+  </div>
+  <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+    <div class="text-emerald-400 text-sm font-semibold mb-1">Systems Thinking</div>
+    <p class="text-white/60 text-sm">Organic network diagrams, mycelium patterns</p>
+  </div>
+  <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+    <div class="text-rose-400 text-sm font-semibold mb-1">Meta</div>
+    <p class="text-white/60 text-sm">Escher-like impossible geometries</p>
+  </div>
+  <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+    <div class="text-white/40 text-sm font-semibold mb-1">Consulting Practice</div>
+    <p class="text-white/60 text-sm">Whiteboard energy, sketch-in-progress</p>
+  </div>
+</div>
+
+<div class="card">
+<strong>Visual consistency at scale.</strong> Every post gets a unique illustration, but they all feel like they belong to the same publication. The AI handles uniqueness; the system handles coherence.
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="11" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label violet">Layer 4</div>
+
+<h2>Trust Boundaries: The Permission Envelope</h2>
+
+<p class="text-xl text-white/60 mb-8">Autonomy isn't granted wholesale. It's earned incrementally through accumulated permissions.</p>
+
+<div class="grid grid-cols-2 gap-6 mb-8">
+  <div class="card">
+    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="text-emerald-400">Approved (170+ permissions)</span>
+    </h3>
+    <ul class="list-none space-y-2 text-white/70 text-sm">
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-400 mt-1">&#10003;</span>
+<p>Git operations (add, commit, push, branch)</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-400 mt-1">&#10003;</span>
+<p>npm build pipeline (dev, build, preview)</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-400 mt-1">&#10003;</span>
+<p>Node automation scripts</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-400 mt-1">&#10003;</span>
+<p>Browser automation (Playwright, DevTools)</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-400 mt-1">&#10003;</span>
+<p>WebFetch for curated domains only</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card warning">
+    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="text-rose-400">Off-Limits (Explicit Approval)</span>
+    </h3>
+    <ul class="list-none space-y-2 text-white/70 text-sm">
+      <li class="flex items-start gap-2">
+        <span class="text-rose-400 mt-1">&#10007;</span>
+<p>.env files (secrets, API keys)</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-rose-400 mt-1">&#10007;</span>
+<p>Build configuration (astro.config.mjs)</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-rose-400 mt-1">&#10007;</span>
+<p>Unapproved external domains</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-rose-400 mt-1">&#10007;</span>
+<p>Destructive git operations</p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="callout violet"><p>
+<strong>The permission list is a living document</strong> that grows through use. Each approval says: "I trust you to do this without asking." Over time, the agent operates faster because the trust is pre-established.
+</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="12" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label rose">Layer 5</div>
+
+<h2>Multiple Pathways: Same System, Four Entry Points</h2>
+
+<p class="text-xl text-white/60 mb-10">The same content system, the same quality standards — accessible from anywhere.</p>
+
+<div class="grid grid-cols-2 gap-6 mb-8">
+  <div class="card">
+    <div class="text-cyan-400 text-sm font-semibold mb-2">Pathway 1: Local (Primary)</div>
+    <h3 class="font-bold text-lg mb-3">Claude Code Session</h3>
+    <p class="text-white/60 text-sm">CLAUDE.md loads → slash commands activate modes → voice guide enforces quality → scripts generate images → git push deploys to Vercel</p>
+  </div>
+
+  <div class="card">
+    <div class="text-emerald-400 text-sm font-semibold mb-2">Pathway 2: Mobile</div>
+    <h3 class="font-bold text-lg mb-3">GitHub Issue Form</h3>
+    <p class="text-white/60 text-sm">Structured issue template → GitHub Actions triggers → Claude API formats MDX → auto-commits → Mailgun cross-posts to Substack</p>
+  </div>
+
+  <div class="card">
+    <div class="text-violet-400 text-sm font-semibold mb-2">Pathway 3: Web</div>
+    <h3 class="font-bold text-lg mb-3">Draft Preview UI</h3>
+    <p class="text-white/60 text-sm">View draft on site → click "Generate Image" → API fires repository dispatch → CI generates image → Vercel redeploys</p>
+  </div>
+
+  <div class="card">
+    <div class="text-amber-400 text-sm font-semibold mb-2">Pathway 4: Browser</div>
+    <h3 class="font-bold text-lg mb-3">Visual Audit</h3>
+    <p class="text-white/60 text-sm">Playwright/Chrome DevTools MCP → inspect live site at breakpoints → verify rendered output → audit visual design</p>
+  </div>
+</div>
+
+<div class="card">
+<strong>The voice guide is the connective tissue.</strong> It doesn't matter which pathway triggers content creation — the same quality standards apply regardless of entry point.
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="13" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label cyan">The GitHub Issues Pipeline</div>
+
+<h2>Publish From Your Phone</h2>
+
+<p class="text-xl text-white/60 mb-8">A structured issue form feeds directly into a CI/CD pipeline. No local dev environment needed.</p>
+
+<div class="grid grid-cols-2 gap-6 mb-8">
+  <div class="card terminal">
+    <div class="text-white/40 text-xs uppercase tracking-wider mb-4">Issue Form Fields</div>
+    <div class="space-y-2 text-sm">
+      <div class="flex gap-3"><span class="text-cyan-400 font-mono">title:</span> <span class="text-white/70">Post title</span></div>
+      <div class="flex gap-3"><span class="text-cyan-400 font-mono">category:</span> <span class="text-white/70">Dropdown selection</span></div>
+      <div class="flex gap-3"><span class="text-cyan-400 font-mono">tags:</span> <span class="text-white/70">From canonical list</span></div>
+      <div class="flex gap-3"><span class="text-cyan-400 font-mono">featured:</span> <span class="text-white/70">Boolean toggle</span></div>
+      <div class="flex gap-3"><span class="text-cyan-400 font-mono">source:</span> <span class="text-white/70">Where content came from</span></div>
+      <div class="flex gap-3"><span class="text-cyan-400 font-mono">content:</span> <span class="text-white/70">Raw text or markdown</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="text-white/40 text-xs uppercase tracking-wider mb-4">What Happens Next</div>
+    <div class="space-y-3 text-sm">
+      <div class="flex items-start gap-3">
+        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold">1</span>
+        <span class="text-white/70">GitHub Actions triggers on issue label</span>
+      </div>
+      <div class="flex items-start gap-3">
+        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold">2</span>
+        <span class="text-white/70">Claude Sonnet API formats content as MDX</span>
+      </div>
+      <div class="flex items-start gap-3">
+        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold">3</span>
+        <span class="text-white/70">MDX file committed to repo with frontmatter</span>
+      </div>
+      <div class="flex items-start gap-3">
+        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold">4</span>
+        <span class="text-white/70">Mailgun emails content to Substack</span>
+      </div>
+      <div class="flex items-start gap-3">
+        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold">5</span>
+        <span class="text-white/70">Issue auto-closes with confirmation</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="callout cyan"><p>
+<strong>The insight:</strong> Content from any source — a voice note transcribed by Gemini, a draft from your phone's notes app, an idea at 2am — can enter the same quality pipeline.
+</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="14" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label emerald">The Content Graph</div>
+
+<h2>Six Content Types, One Provenance System</h2>
+
+<p class="text-xl text-white/60 mb-8">Every piece of content can trace its lineage. Research notes link to posts. Posts link to whitepapers. Counterpoints challenge posts.</p>
+
+<div class="grid grid-cols-3 gap-4 mb-8">
+  <div class="card">
+    <div class="text-cyan-400 text-sm font-semibold mb-2">Blog Posts</div>
+    <p class="text-white/60 text-sm">Conversational exploration. MDX components. Voice-guide enforced.</p>
+  </div>
+  <div class="card">
+    <div class="text-emerald-400 text-sm font-semibold mb-2">Whitepapers</div>
+    <p class="text-white/60 text-sm">Formal analysis. Data tables. Plain markdown only.</p>
+  </div>
+  <div class="card">
+    <div class="text-violet-400 text-sm font-semibold mb-2">Presentations</div>
+    <p class="text-white/60 text-sm">Slide-based delivery. Exportable as standalone HTML.</p>
+  </div>
+  <div class="card">
+    <div class="text-rose-400 text-sm font-semibold mb-2">Counterpoints</div>
+    <p class="text-white/60 text-sm">Adversarial critiques of existing posts. AI-generated or self-authored.</p>
+  </div>
+  <div class="card">
+    <div class="text-amber-400 text-sm font-semibold mb-2">Research Notes</div>
+    <p class="text-white/60 text-sm">Working documents. Red-team analyses, lit reviews, methodology.</p>
+  </div>
+  <div class="card">
+    <div class="text-white/40 text-sm font-semibold mb-2">Series</div>
+    <p class="text-white/60 text-sm">Groups related posts into multi-part arcs.</p>
+  </div>
+</div>
+
+<div class="card highlighted">
+<strong>Bidirectional linking:</strong> Posts declare <code>supportedBy</code> (which research backs this?). Research notes declare <code>supportsContent</code> (which posts use this?). The graph is navigable in both directions.
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="15" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label violet">Lessons Learned</div>
+
+<h2>What Actually Worked</h2>
+
+<div class="grid grid-cols-2 gap-6 mb-8">
+  <div class="card success">
+    <h3 class="font-bold text-lg mb-4 text-emerald-400">High ROI</h3>
+    <ul class="list-none space-y-3 text-white/70 text-sm">
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-400 mt-1">→</span>
+        <span><strong>CLAUDE.md</strong> — 30 minutes to write, saves 10 min per session forever</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-400 mt-1">→</span>
+        <span><strong>"What NOT to Fix"</strong> — The single most impactful editorial instruction</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-400 mt-1">→</span>
+        <span><strong>Slash commands</strong> — 15 lines of markdown creates a mode the AI inhabits</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-400 mt-1">→</span>
+        <span><strong>Freshness tracking</strong> — Prevents the staleness that makes AI writing feel templated</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card warning">
+    <h3 class="font-bold text-lg mb-4 text-rose-400">Honest Surprises</h3>
+    <ul class="list-none space-y-3 text-white/70 text-sm">
+      <li class="flex items-start gap-2">
+        <span class="text-rose-400 mt-1">→</span>
+        <span><strong>Permissions accumulate fast</strong> — 170+ entries. Needs periodic review.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-rose-400 mt-1">→</span>
+        <span><strong>Voice guide maintenance</strong> — It's a living document, not write-once. Requires updating after every ~5 posts.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-rose-400 mt-1">→</span>
+        <span><strong>Multi-model pipelines are fragile</strong> — When one API changes, the whole chain breaks.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-rose-400 mt-1">→</span>
+        <span><strong>The counterpoints system</strong> — AI critiquing its own output is genuinely useful, not gimmick.</span>
+      </li>
+    </ul>
+  </div>
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="16" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label amber">Takeaways</div>
+
+<h2>What You Can Do Monday Morning</h2>
+
+<p class="text-xl text-white/60 mb-8">You don't need the full system. Start with Layer 1 and build up.</p>
+
+<div class="space-y-4 mb-8">
+  <div class="flex items-start gap-4">
+    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">1</span>
+    <div>
+      <p class="text-lg text-white/80 font-semibold">Write a CLAUDE.md (or equivalent) for your project</p>
+      <p class="text-white/50 text-sm">Directory map, conventions, workflow steps. Takes 30 minutes. Pays off immediately.</p>
+    </div>
+  </div>
+  <div class="flex items-start gap-4">
+    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold">2</span>
+    <div>
+      <p class="text-lg text-white/80 font-semibold">Create one slash command for your most repetitive task</p>
+      <p class="text-white/50 text-sm">Code review, PR description, ticket grooming — whatever you do weekly. 15 lines of markdown.</p>
+    </div>
+  </div>
+  <div class="flex items-start gap-4">
+    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">3</span>
+    <div>
+      <p class="text-lg text-white/80 font-semibold">Document what the AI should NOT do</p>
+      <p class="text-white/50 text-sm">The most valuable instruction isn't "do this." It's "don't touch that." Preserve what's already working.</p>
+    </div>
+  </div>
+  <div class="flex items-start gap-4">
+    <span class="flex-shrink-0 w-10 h-10 rounded-full bg-violet-500/20 text-violet-400 flex items-center justify-center font-bold">4</span>
+    <div>
+      <p class="text-lg text-white/80 font-semibold">Let the permission list grow organically</p>
+      <p class="text-white/50 text-sm">Don't pre-approve everything. Let the AI ask, approve what makes sense, and the trust boundary forms naturally.</p>
+    </div>
+  </div>
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="17" data-layout="title">
+      <div class="slide-content">
+        <h2>The Bigger Picture</h2>
+
+<p class="text-xl text-white/60 mt-8 mb-12 max-w-3xl mx-auto">The gap between "using AI" and "working with AI" is infrastructure, not intelligence. The models are already capable. The question is whether your systems let them remember, enforce standards, use tools, and operate within trust boundaries.</p>
+
+<div class="grid grid-cols-3 gap-6 max-w-3xl mx-auto mb-12">
+  <div class="text-center">
+    <div class="text-4xl font-bold text-amber-400 mb-2">5</div>
+    <p class="text-white/50 text-sm">Config files that form the system</p>
+  </div>
+  <div class="text-center">
+    <div class="text-4xl font-bold text-cyan-400 mb-2">0</div>
+    <p class="text-white/50 text-sm">Custom frameworks required</p>
+  </div>
+  <div class="text-center">
+    <div class="text-4xl font-bold text-emerald-400 mb-2">156</div>
+    <p class="text-white/50 text-sm">Posts through this system</p>
+  </div>
+</div>
+
+<div class="text-white/30 text-sm">
+<p>Signal Dispatch | February 2026</p>
+</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let currentSlide = 1;
+
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const currentSlideEl = document.getElementById('currentSlide');
+    const progressEl = document.getElementById('progress');
+
+    function goToSlide(n) {
+      const target = Math.max(1, Math.min(n, totalSlides));
+      if (target === currentSlide) return;
+
+      slides.forEach((slide, i) => {
+        const isTarget = i + 1 === target;
+        slide.classList.toggle('active', isTarget);
+        if (isTarget) slide.scrollTop = 0;
+      });
+
+      currentSlide = target;
+      currentSlideEl.textContent = currentSlide;
+      progressEl.style.width = (currentSlide / totalSlides * 100) + '%';
+
+      prevBtn.disabled = currentSlide === 1;
+      nextBtn.disabled = currentSlide === totalSlides;
+    }
+
+    prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+    nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+    function getActiveSlide() {
+      return document.querySelector('.slide.active');
+    }
+
+    function isSlideScrollable(slide) {
+      return slide && slide.scrollHeight > slide.clientHeight + 2;
+    }
+
+    function isAtScrollBottom(slide) {
+      return slide.scrollTop + slide.clientHeight >= slide.scrollHeight - 2;
+    }
+
+    function isAtScrollTop(slide) {
+      return slide.scrollTop <= 2;
+    }
+
+    document.addEventListener('keydown', (e) => {
+      const active = getActiveSlide();
+      const scrollable = isSlideScrollable(active);
+
+      switch (e.key) {
+        case 'ArrowRight': case 'PageDown':
+          e.preventDefault();
+          if (scrollable && !isAtScrollBottom(active)) {
+            active.scrollBy({ top: active.clientHeight * 0.8, behavior: 'smooth' });
+          } else {
+            goToSlide(currentSlide + 1);
+          }
+          break;
+        case ' ':
+          e.preventDefault();
+          if (scrollable && !isAtScrollBottom(active)) {
+            active.scrollBy({ top: active.clientHeight * 0.8, behavior: 'smooth' });
+          } else {
+            goToSlide(currentSlide + 1);
+          }
+          break;
+        case 'ArrowDown':
+          if (scrollable && !isAtScrollBottom(active)) {
+            // let native scroll happen
+          } else {
+            e.preventDefault();
+            goToSlide(currentSlide + 1);
+          }
+          break;
+        case 'ArrowLeft': case 'PageUp':
+          e.preventDefault();
+          if (scrollable && !isAtScrollTop(active)) {
+            active.scrollBy({ top: -active.clientHeight * 0.8, behavior: 'smooth' });
+          } else {
+            goToSlide(currentSlide - 1);
+          }
+          break;
+        case 'ArrowUp':
+          if (scrollable && !isAtScrollTop(active)) {
+            // let native scroll happen
+          } else {
+            e.preventDefault();
+            goToSlide(currentSlide - 1);
+          }
+          break;
+        case 'Home': e.preventDefault(); goToSlide(1); break;
+        case 'End': e.preventDefault(); goToSlide(totalSlides); break;
+        case 'f': case 'F':
+          e.preventDefault();
+          if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+          else document.exitFullscreen();
+          break;
+      }
+    });
+
+    goToSlide(1);
+  </script>
+
+  <footer style="position: fixed; bottom: 0; left: 0; right: 0; padding: 0.5rem; text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.3); background: rgba(15, 23, 42, 0.95); z-index: 40; border-top: 1px solid rgba(255,255,255,0.05);">
+    Nino Chavez &middot; Signal Dispatch &middot; 2026
+  </footer>
+</body>
+</html>

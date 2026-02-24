@@ -1,0 +1,722 @@
+---
+title: "Beyond Chat: Building Agentic Workflows with Claude Code"
+publishedAt: "2026-02-24T12:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "AI assistants forget everything between sessions. Here's how I turned Claude Code into an operational partner — with persistent memory, codified editorial judgment, multi-stage pipelines, and four different publishing pathways. A walkthrough of the real system behind Signal Dispatch."
+category: "AI & Automation"
+featureImage: "/images/generated/beyond-chat-agentic-workflows.webp"
+tags: ["agentic-systems", "ai-development", "engineering"]
+duration: "30 min"
+audience: "Engineers, technical leads, and anyone curious about agentic AI workflows beyond basic chat"
+mode: "technical-deep-dive"
+---
+
+import { Slide, SectionLabel, Card, Callout, TitleBadge, CodeBlock } from '@/components/presentations';
+
+<Slide layout="title">
+<TitleBadge>AI Lunch & Learn - February 2026</TitleBadge>
+
+# Beyond Chat
+
+**Building Agentic Workflows with Claude Code**
+
+Most AI usage stops at "ask a question, get an answer."
+What happens when you treat the AI as a <span className="text-cyan-400 font-semibold">team member with persistent context, codified judgment, and operational autonomy?</span>
+
+<div className="mt-16 text-sm text-white/30">
+A walkthrough of a real production system — not a demo
+</div>
+</Slide>
+
+<Slide>
+<SectionLabel color="amber">The Problem</SectionLabel>
+
+## Every Session Starts at Zero
+
+<Card>
+<div className="text-white/60 text-sm uppercase tracking-wider mb-6">The default AI experience:</div>
+
+<div className="space-y-4">
+  <div className="flex items-start gap-4">
+    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">1</span>
+    <p className="text-lg text-white/80">You open a new session. The AI knows nothing about your project.</p>
+  </div>
+  <div className="flex items-start gap-4">
+    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">2</span>
+    <p className="text-lg text-white/80">You spend 10 minutes re-explaining conventions, file locations, and preferences.</p>
+  </div>
+  <div className="flex items-start gap-4">
+    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">3</span>
+    <p className="text-lg text-white/80">It generates something generic. You fix it manually. Repeat tomorrow.</p>
+  </div>
+</div>
+</Card>
+
+<Callout color="amber">
+**The real cost isn't the AI subscription.** It's the re-onboarding tax you pay every single session — and the drift that happens when context is lost.
+</Callout>
+</Slide>
+
+<Slide>
+<SectionLabel color="cyan">The Shift</SectionLabel>
+
+## Chat vs. Agentic: What's the Difference?
+
+<div className="overflow-hidden rounded-2xl border border-white/10 mb-8">
+  <table className="w-full">
+    <thead>
+      <tr className="bg-white/5">
+        <th className="text-left p-4 font-semibold text-white/60 text-sm uppercase tracking-wider">Dimension</th>
+        <th className="text-left p-4 font-semibold text-amber-400 text-sm uppercase tracking-wider">Chat Pattern</th>
+        <th className="text-left p-4 font-semibold text-cyan-400 text-sm uppercase tracking-wider">Agentic Pattern</th>
+      </tr>
+    </thead>
+    <tbody className="divide-y divide-white/5">
+      <tr className="hover:bg-white/5 transition-colors">
+        <td className="p-4 font-medium">Context</td>
+        <td className="p-4 text-white/60">Starts from zero each session</td>
+        <td className="p-4 text-cyan-400">Loads project config automatically</td>
+      </tr>
+      <tr className="hover:bg-white/5 transition-colors">
+        <td className="p-4 font-medium">Knowledge</td>
+        <td className="p-4 text-white/60">Generic best practices</td>
+        <td className="p-4 text-cyan-400">Your conventions, your patterns</td>
+      </tr>
+      <tr className="hover:bg-white/5 transition-colors">
+        <td className="p-4 font-medium">Workflow</td>
+        <td className="p-4 text-white/60">Single Q&A exchange</td>
+        <td className="p-4 text-cyan-400">Multi-step with tools and side effects</td>
+      </tr>
+      <tr className="hover:bg-white/5 transition-colors">
+        <td className="p-4 font-medium">Quality Control</td>
+        <td className="p-4 text-white/60">You review everything manually</td>
+        <td className="p-4 text-cyan-400">Codified standards enforce themselves</td>
+      </tr>
+      <tr className="hover:bg-white/5 transition-colors">
+        <td className="p-4 font-medium">Trust</td>
+        <td className="p-4 text-white/60">Verify every output</td>
+        <td className="p-4 text-cyan-400">Permission envelope grows over time</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<Card>
+**The key insight:** An agentic workflow isn't smarter AI. It's the same AI with better infrastructure around it — memory, judgment, tools, and trust boundaries.
+</Card>
+</Slide>
+
+<Slide>
+<SectionLabel color="violet">The Architecture</SectionLabel>
+
+## Five Layers of an Agentic System
+
+<p className="text-xl text-white/60 mb-10">Each layer solves a specific problem. Together, they compound.</p>
+
+<div className="grid grid-cols-5 gap-3 mb-8">
+  <div className="bg-gradient-to-b from-amber-500/20 to-transparent border border-amber-500/30 rounded-2xl p-4 text-center">
+    <div className="text-amber-400 text-3xl font-bold mb-2">1</div>
+    <div className="text-amber-400 text-sm font-semibold mb-2">Session Bootstrap</div>
+    <p className="text-white/60 text-xs">Project memory that loads automatically</p>
+  </div>
+  <div className="bg-gradient-to-b from-cyan-500/20 to-transparent border border-cyan-500/30 rounded-2xl p-4 text-center">
+    <div className="text-cyan-400 text-3xl font-bold mb-2">2</div>
+    <div className="text-cyan-400 text-sm font-semibold mb-2">Codified Judgment</div>
+    <p className="text-white/60 text-xs">Quality standards the AI enforces</p>
+  </div>
+  <div className="bg-gradient-to-b from-emerald-500/20 to-transparent border border-emerald-500/30 rounded-2xl p-4 text-center">
+    <div className="text-emerald-400 text-3xl font-bold mb-2">3</div>
+    <div className="text-emerald-400 text-sm font-semibold mb-2">Multi-Stage Pipelines</div>
+    <p className="text-white/60 text-xs">Chain models by their strengths</p>
+  </div>
+  <div className="bg-gradient-to-b from-violet-500/20 to-transparent border border-violet-500/30 rounded-2xl p-4 text-center">
+    <div className="text-violet-400 text-3xl font-bold mb-2">4</div>
+    <div className="text-violet-400 text-sm font-semibold mb-2">Trust Boundaries</div>
+    <p className="text-white/60 text-xs">Permissions that grow incrementally</p>
+  </div>
+  <div className="bg-gradient-to-b from-rose-500/20 to-transparent border border-rose-500/30 rounded-2xl p-4 text-center">
+    <div className="text-rose-400 text-3xl font-bold mb-2">5</div>
+    <div className="text-rose-400 text-sm font-semibold mb-2">Multiple Pathways</div>
+    <p className="text-white/60 text-xs">Same system, different entry points</p>
+  </div>
+</div>
+
+<Callout color="violet">
+**None of this requires a custom framework.** It's configuration files, markdown documents, shell scripts, and CI/CD. The tools already exist — the insight is in how you compose them.
+</Callout>
+</Slide>
+
+<Slide>
+<SectionLabel color="amber">Layer 1</SectionLabel>
+
+## Session Bootstrap: CLAUDE.md
+
+<p className="text-lg text-white/60 mb-6">A single markdown file that loads at the start of every session. The AI arrives pre-configured.</p>
+
+<div className="grid grid-cols-2 gap-5 mb-6">
+  <Card>
+    <h3 className="font-bold text-base mb-3 text-amber-400">What goes in it</h3>
+    <ul className="list-none space-y-2 text-white/70 text-sm">
+      <li className="flex items-start gap-2">
+        <span className="text-amber-400 mt-0.5">→</span>
+        Directory map with purpose annotations
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="text-amber-400 mt-0.5">→</span>
+        Complete workflow templates (step-by-step)
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="text-amber-400 mt-0.5">→</span>
+        Frontmatter schemas and conventions
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="text-amber-400 mt-0.5">→</span>
+        Off-limits files requiring explicit approval
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="text-amber-400 mt-0.5">→</span>
+        Common commands and build steps
+      </li>
+    </ul>
+  </Card>
+
+  <Card variant="terminal">
+    <div className="text-white/40 text-xs uppercase tracking-wider mb-3">Example: Directory Map</div>
+    <CodeBlock>{`project/
+├── astro-build/
+│   ├── src/content/blog/
+│   ├── public/images/
+│   └── scripts/
+├── docs/          # Voice guide
+└── .claude/       # This config`}</CodeBlock>
+  </Card>
+</div>
+
+<Callout color="amber">
+**Think of it as onboarding docs for a team member** who has perfect recall but joins fresh every morning. Invest 30 minutes once — it pays off in every session.
+</Callout>
+</Slide>
+
+<Slide>
+<SectionLabel color="amber">Layer 1 (cont.)</SectionLabel>
+
+## Slash Commands: Mode-Switching
+
+<p className="text-xl text-white/60 mb-8">Custom commands that activate specific operational modes. Same AI, different posture.</p>
+
+<div className="grid grid-cols-2 gap-4 mb-8">
+  <Card>
+    <div className="text-cyan-400 text-sm font-semibold mb-2">/write-post</div>
+    <h3 className="font-bold text-lg mb-3">New Content Mode</h3>
+    <p className="text-white/60 text-sm">Reads the voice guide first, then walks through: identify the hook, choose a structure template, draft following patterns, create frontmatter, self-review against checklist.</p>
+  </Card>
+
+  <Card>
+    <div className="text-emerald-400 text-sm font-semibold mb-2">/edit-post</div>
+    <h3 className="font-bold text-lg mb-3">Refinement Mode</h3>
+    <p className="text-white/60 text-sm">Reviews against voice authenticity, structural integrity, and tonal balance. Critically: includes explicit <strong>"What NOT to Fix"</strong> instructions — preserve rough edges, don't add polish.</p>
+  </Card>
+
+  <Card>
+    <div className="text-violet-400 text-sm font-semibold mb-2">/review-voice</div>
+    <h3 className="font-bold text-lg mb-3">Audit Mode</h3>
+    <p className="text-white/60 text-sm">Scores on three dimensions (1-10 each): Voice Authenticity, Structural Patterns, Tonal Consistency. Flags specific red-flag phrases.</p>
+  </Card>
+
+  <Card>
+    <div className="text-rose-400 text-sm font-semibold mb-2">/voice-check</div>
+    <h3 className="font-bold text-lg mb-3">Quick Screen</h3>
+    <p className="text-white/60 text-sm">Five yes/no questions. Returns a binary: <strong>SOUNDS LIKE NINO: Yes/No/Mostly</strong>. Takes 30 seconds. Used for fast iteration.</p>
+  </Card>
+</div>
+
+<Callout color="cyan">
+**Each command is a short markdown file** — 15-30 lines. The power isn't in complexity. It's in giving the AI a clear role to inhabit.
+</Callout>
+</Slide>
+
+<Slide>
+<SectionLabel color="cyan">Layer 2</SectionLabel>
+
+## Codified Judgment: The Voice Guide
+
+<p className="text-xl text-white/60 mb-8">A 156-post empirical analysis turned into a living editorial standard. Not aspirational — descriptive.</p>
+
+<div className="grid grid-cols-2 gap-6 mb-8">
+  <Card>
+    <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
+      <span className="text-cyan-400">What it captures</span>
+    </h3>
+    <ul className="list-none space-y-3 text-white/70">
+      <li className="flex items-start gap-2">
+        <span className="text-cyan-400 mt-1">→</span>
+        <span><strong>Voice dimensions:</strong> Public practice, meta-awareness, vulnerable competence, pattern recognition</span>
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="text-cyan-400 mt-1">→</span>
+        <span><strong>Structure templates:</strong> Reflection, Technical Deep-Dive, Leadership Insight, Origin Story</span>
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="text-cyan-400 mt-1">→</span>
+        <span><strong>Anti-patterns:</strong> Retired phrases that became "tells" through overuse</span>
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="text-cyan-400 mt-1">→</span>
+        <span><strong>Formatting rules:</strong> Paragraph length, divider usage, component limits</span>
+      </li>
+    </ul>
+  </Card>
+
+  <Card variant="highlighted">
+    <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
+      <span className="text-violet-400">The Cardinal Rule</span>
+    </h3>
+    <p className="text-white/80 text-lg italic mb-4">"This guide describes patterns, not templates. If you copy phrases from this document, you're using it wrong."</p>
+    <p className="text-white/60 text-sm">Every example is evidence, not instruction. The AI should understand the <em>spirit</em>, then find its own words.</p>
+  </Card>
+</div>
+
+<div className="bg-rose-500/10 border border-rose-500/20 rounded-xl p-6">
+**The "What NOT to Fix" list** is the most valuable part. Any AI can add polish. The hard part is teaching it to leave the rough edges that make writing feel human.
+</div>
+</Slide>
+
+<Slide>
+<SectionLabel color="cyan">Layer 2 (cont.)</SectionLabel>
+
+## Freshness Tracking: Preventing Staleness
+
+<p className="text-xl text-white/60 mb-8">Even authentic phrases become hollow through repetition. The guide tracks recency and enforces cooldowns.</p>
+
+<div className="overflow-hidden rounded-2xl border border-white/10 mb-8">
+  <table className="w-full">
+    <thead>
+      <tr className="bg-white/5">
+        <th className="text-left p-4 font-semibold text-white/60 text-sm uppercase tracking-wider">Pattern / Phrase</th>
+        <th className="text-left p-4 font-semibold text-amber-400 text-sm uppercase tracking-wider">Last Used</th>
+        <th className="text-left p-4 font-semibold text-rose-400 text-sm uppercase tracking-wider">Cool Until</th>
+      </tr>
+    </thead>
+    <tbody className="divide-y divide-white/5">
+      <tr className="hover:bg-white/5 transition-colors">
+        <td className="p-4 font-medium">"Here's where my head is"</td>
+        <td className="p-4 text-white/60">Jan 21</td>
+        <td className="p-4 text-rose-400">Feb 21</td>
+      </tr>
+      <tr className="hover:bg-white/5 transition-colors">
+        <td className="p-4 font-medium">Opening with "How many..." question</td>
+        <td className="p-4 text-white/60">Jan 21</td>
+        <td className="p-4 text-rose-400">Feb 21</td>
+      </tr>
+      <tr className="hover:bg-white/5 transition-colors">
+        <td className="p-4 font-medium">Graveyard/death metaphor</td>
+        <td className="p-4 text-white/60">Jan 21</td>
+        <td className="p-4 text-rose-400">Mar 21</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div className="grid grid-cols-2 gap-6">
+  <Card>
+    <div className="text-amber-400 text-sm font-semibold mb-2">Graduation Rule</div>
+    <p className="text-white/70">Any phrase appearing 3+ times in six months gets permanently retired. No exceptions.</p>
+  </Card>
+  <Card>
+    <div className="text-emerald-400 text-sm font-semibold mb-2">Permanently Retired</div>
+    <p className="text-white/70">"Ask me again in six months" — "Here's where I've landed, for now" — "This is what I think today"</p>
+  </Card>
+</div>
+</Slide>
+
+<Slide>
+<SectionLabel color="emerald">Layer 3</SectionLabel>
+
+## Multi-Stage Pipelines: Image Generation
+
+<p className="text-xl text-white/60 mb-8">One model thinks. Another model draws. Anti-cliche guardrails sit between them.</p>
+
+<div className="grid grid-cols-3 gap-4 mb-8">
+  <Card>
+    <div className="text-cyan-400 text-sm font-semibold mb-2">Stage 1: Concept</div>
+    <h3 className="font-bold text-lg mb-3">Gemini Flash</h3>
+    <p className="text-white/60 text-sm mb-4">Reads the full post. Generates a specific, non-generic visual concept.</p>
+    <div className="bg-black/40 rounded-lg p-3 text-white/50 text-xs">
+      Prompt explicitly rejects: "no robots, lightbulbs, handshakes, puzzle pieces, or generic tech imagery"
+    </div>
+  </Card>
+
+  <Card>
+    <div className="text-emerald-400 text-sm font-semibold mb-2">Stage 2: Render</div>
+    <h3 className="font-bold text-lg mb-3">GPT-5 Image</h3>
+    <p className="text-white/60 text-sm mb-4">Takes the concept, applies category-specific style profile. Generates 1200x675 illustration.</p>
+    <div className="bg-black/40 rounded-lg p-3 text-white/50 text-xs">
+      10 visual styles mapped to content categories
+    </div>
+  </Card>
+
+  <Card>
+    <div className="text-violet-400 text-sm font-semibold mb-2">Stage 3: Process</div>
+    <h3 className="font-bold text-lg mb-3">Sharp + Frontmatter</h3>
+    <p className="text-white/60 text-sm mb-4">Compresses to WebP at 85% quality. Auto-updates the post's frontmatter with the image path.</p>
+    <div className="bg-black/40 rounded-lg p-3 text-white/50 text-xs">
+      No manual steps. Post references the image automatically.
+    </div>
+  </Card>
+</div>
+
+<Callout color="emerald">
+**The principle:** Chain models by their strengths, not by vendor. One model for reasoning, another for generation, with your quality standards as the glue between them.
+</Callout>
+</Slide>
+
+<Slide>
+<SectionLabel color="emerald">Layer 3 (cont.)</SectionLabel>
+
+## Category-Specific Visual Identity
+
+<p className="text-xl text-white/60 mb-8">Each content category has a distinct illustration style. The AI doesn't choose — the system assigns.</p>
+
+<div className="grid grid-cols-2 gap-4 mb-8">
+  <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+    <div className="text-cyan-400 text-sm font-semibold mb-1">AI & Automation</div>
+    <p className="text-white/60 text-sm">Electric cyan circuit patterns, flowing data streams</p>
+  </div>
+  <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+    <div className="text-amber-400 text-sm font-semibold mb-1">Reflections</div>
+    <p className="text-white/60 text-sm">Golden amber, journal marginalia aesthetic</p>
+  </div>
+  <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+    <div className="text-violet-400 text-sm font-semibold mb-1">Leadership</div>
+    <p className="text-white/60 text-sm">Architectural linework — lighthouses, bridges</p>
+  </div>
+  <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+    <div className="text-emerald-400 text-sm font-semibold mb-1">Systems Thinking</div>
+    <p className="text-white/60 text-sm">Organic network diagrams, mycelium patterns</p>
+  </div>
+  <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+    <div className="text-rose-400 text-sm font-semibold mb-1">Meta</div>
+    <p className="text-white/60 text-sm">Escher-like impossible geometries</p>
+  </div>
+  <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+    <div className="text-white/40 text-sm font-semibold mb-1">Consulting Practice</div>
+    <p className="text-white/60 text-sm">Whiteboard energy, sketch-in-progress</p>
+  </div>
+</div>
+
+<Card>
+**Visual consistency at scale.** Every post gets a unique illustration, but they all feel like they belong to the same publication. The AI handles uniqueness; the system handles coherence.
+</Card>
+</Slide>
+
+<Slide>
+<SectionLabel color="violet">Layer 4</SectionLabel>
+
+## Trust Boundaries: The Permission Envelope
+
+<p className="text-xl text-white/60 mb-8">Autonomy isn't granted wholesale. It's earned incrementally through accumulated permissions.</p>
+
+<div className="grid grid-cols-2 gap-6 mb-8">
+  <Card>
+    <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
+      <span className="text-emerald-400">Approved (170+ permissions)</span>
+    </h3>
+    <ul className="list-none space-y-2 text-white/70 text-sm">
+      <li className="flex items-start gap-2">
+        <span className="text-emerald-400 mt-1">&#10003;</span>
+        Git operations (add, commit, push, branch)
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="text-emerald-400 mt-1">&#10003;</span>
+        npm build pipeline (dev, build, preview)
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="text-emerald-400 mt-1">&#10003;</span>
+        Node automation scripts
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="text-emerald-400 mt-1">&#10003;</span>
+        Browser automation (Playwright, DevTools)
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="text-emerald-400 mt-1">&#10003;</span>
+        WebFetch for curated domains only
+      </li>
+    </ul>
+  </Card>
+
+  <Card variant="warning">
+    <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
+      <span className="text-rose-400">Off-Limits (Explicit Approval)</span>
+    </h3>
+    <ul className="list-none space-y-2 text-white/70 text-sm">
+      <li className="flex items-start gap-2">
+        <span className="text-rose-400 mt-1">&#10007;</span>
+        .env files (secrets, API keys)
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="text-rose-400 mt-1">&#10007;</span>
+        Build configuration (astro.config.mjs)
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="text-rose-400 mt-1">&#10007;</span>
+        Unapproved external domains
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="text-rose-400 mt-1">&#10007;</span>
+        Destructive git operations
+      </li>
+    </ul>
+  </Card>
+</div>
+
+<Callout color="violet">
+**The permission list is a living document** that grows through use. Each approval says: "I trust you to do this without asking." Over time, the agent operates faster because the trust is pre-established.
+</Callout>
+</Slide>
+
+<Slide>
+<SectionLabel color="rose">Layer 5</SectionLabel>
+
+## Multiple Pathways: Same System, Four Entry Points
+
+<p className="text-xl text-white/60 mb-10">The same content system, the same quality standards — accessible from anywhere.</p>
+
+<div className="grid grid-cols-2 gap-6 mb-8">
+  <Card>
+    <div className="text-cyan-400 text-sm font-semibold mb-2">Pathway 1: Local (Primary)</div>
+    <h3 className="font-bold text-lg mb-3">Claude Code Session</h3>
+    <p className="text-white/60 text-sm">CLAUDE.md loads → slash commands activate modes → voice guide enforces quality → scripts generate images → git push deploys to Vercel</p>
+  </Card>
+
+  <Card>
+    <div className="text-emerald-400 text-sm font-semibold mb-2">Pathway 2: Mobile</div>
+    <h3 className="font-bold text-lg mb-3">GitHub Issue Form</h3>
+    <p className="text-white/60 text-sm">Structured issue template → GitHub Actions triggers → Claude API formats MDX → auto-commits → Mailgun cross-posts to Substack</p>
+  </Card>
+
+  <Card>
+    <div className="text-violet-400 text-sm font-semibold mb-2">Pathway 3: Web</div>
+    <h3 className="font-bold text-lg mb-3">Draft Preview UI</h3>
+    <p className="text-white/60 text-sm">View draft on site → click "Generate Image" → API fires repository dispatch → CI generates image → Vercel redeploys</p>
+  </Card>
+
+  <Card>
+    <div className="text-amber-400 text-sm font-semibold mb-2">Pathway 4: Browser</div>
+    <h3 className="font-bold text-lg mb-3">Visual Audit</h3>
+    <p className="text-white/60 text-sm">Playwright/Chrome DevTools MCP → inspect live site at breakpoints → verify rendered output → audit visual design</p>
+  </Card>
+</div>
+
+<Card>
+**The voice guide is the connective tissue.** It doesn't matter which pathway triggers content creation — the same quality standards apply regardless of entry point.
+</Card>
+</Slide>
+
+<Slide>
+<SectionLabel color="cyan">The GitHub Issues Pipeline</SectionLabel>
+
+## Publish From Your Phone
+
+<p className="text-xl text-white/60 mb-8">A structured issue form feeds directly into a CI/CD pipeline. No local dev environment needed.</p>
+
+<div className="grid grid-cols-2 gap-6 mb-8">
+  <Card variant="terminal">
+    <div className="text-white/40 text-xs uppercase tracking-wider mb-4">Issue Form Fields</div>
+    <div className="space-y-2 text-sm">
+      <div className="flex gap-3"><span className="text-cyan-400 font-mono">title:</span> <span className="text-white/70">Post title</span></div>
+      <div className="flex gap-3"><span className="text-cyan-400 font-mono">category:</span> <span className="text-white/70">Dropdown selection</span></div>
+      <div className="flex gap-3"><span className="text-cyan-400 font-mono">tags:</span> <span className="text-white/70">From canonical list</span></div>
+      <div className="flex gap-3"><span className="text-cyan-400 font-mono">featured:</span> <span className="text-white/70">Boolean toggle</span></div>
+      <div className="flex gap-3"><span className="text-cyan-400 font-mono">source:</span> <span className="text-white/70">Where content came from</span></div>
+      <div className="flex gap-3"><span className="text-cyan-400 font-mono">content:</span> <span className="text-white/70">Raw text or markdown</span></div>
+    </div>
+  </Card>
+
+  <Card>
+    <div className="text-white/40 text-xs uppercase tracking-wider mb-4">What Happens Next</div>
+    <div className="space-y-3 text-sm">
+      <div className="flex items-start gap-3">
+        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold">1</span>
+        <span className="text-white/70">GitHub Actions triggers on issue label</span>
+      </div>
+      <div className="flex items-start gap-3">
+        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold">2</span>
+        <span className="text-white/70">Claude Sonnet API formats content as MDX</span>
+      </div>
+      <div className="flex items-start gap-3">
+        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold">3</span>
+        <span className="text-white/70">MDX file committed to repo with frontmatter</span>
+      </div>
+      <div className="flex items-start gap-3">
+        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold">4</span>
+        <span className="text-white/70">Mailgun emails content to Substack</span>
+      </div>
+      <div className="flex items-start gap-3">
+        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold">5</span>
+        <span className="text-white/70">Issue auto-closes with confirmation</span>
+      </div>
+    </div>
+  </Card>
+</div>
+
+<Callout color="cyan">
+**The insight:** Content from any source — a voice note transcribed by Gemini, a draft from your phone's notes app, an idea at 2am — can enter the same quality pipeline.
+</Callout>
+</Slide>
+
+<Slide>
+<SectionLabel color="emerald">The Content Graph</SectionLabel>
+
+## Six Content Types, One Provenance System
+
+<p className="text-xl text-white/60 mb-8">Every piece of content can trace its lineage. Research notes link to posts. Posts link to whitepapers. Counterpoints challenge posts.</p>
+
+<div className="grid grid-cols-3 gap-4 mb-8">
+  <Card>
+    <div className="text-cyan-400 text-sm font-semibold mb-2">Blog Posts</div>
+    <p className="text-white/60 text-sm">Conversational exploration. MDX components. Voice-guide enforced.</p>
+  </Card>
+  <Card>
+    <div className="text-emerald-400 text-sm font-semibold mb-2">Whitepapers</div>
+    <p className="text-white/60 text-sm">Formal analysis. Data tables. Plain markdown only.</p>
+  </Card>
+  <Card>
+    <div className="text-violet-400 text-sm font-semibold mb-2">Presentations</div>
+    <p className="text-white/60 text-sm">Slide-based delivery. Exportable as standalone HTML.</p>
+  </Card>
+  <Card>
+    <div className="text-rose-400 text-sm font-semibold mb-2">Counterpoints</div>
+    <p className="text-white/60 text-sm">Adversarial critiques of existing posts. AI-generated or self-authored.</p>
+  </Card>
+  <Card>
+    <div className="text-amber-400 text-sm font-semibold mb-2">Research Notes</div>
+    <p className="text-white/60 text-sm">Working documents. Red-team analyses, lit reviews, methodology.</p>
+  </Card>
+  <Card>
+    <div className="text-white/40 text-sm font-semibold mb-2">Series</div>
+    <p className="text-white/60 text-sm">Groups related posts into multi-part arcs.</p>
+  </Card>
+</div>
+
+<Card variant="highlighted">
+**Bidirectional linking:** Posts declare `supportedBy` (which research backs this?). Research notes declare `supportsContent` (which posts use this?). The graph is navigable in both directions.
+</Card>
+</Slide>
+
+<Slide>
+<SectionLabel color="violet">Lessons Learned</SectionLabel>
+
+## What Actually Worked
+
+<div className="grid grid-cols-2 gap-6 mb-8">
+  <Card variant="success">
+    <h3 className="font-bold text-lg mb-4 text-emerald-400">High ROI</h3>
+    <ul className="list-none space-y-3 text-white/70 text-sm">
+      <li className="flex items-start gap-2">
+        <span className="text-emerald-400 mt-1">→</span>
+        <span><strong>CLAUDE.md</strong> — 30 minutes to write, saves 10 min per session forever</span>
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="text-emerald-400 mt-1">→</span>
+        <span><strong>"What NOT to Fix"</strong> — The single most impactful editorial instruction</span>
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="text-emerald-400 mt-1">→</span>
+        <span><strong>Slash commands</strong> — 15 lines of markdown creates a mode the AI inhabits</span>
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="text-emerald-400 mt-1">→</span>
+        <span><strong>Freshness tracking</strong> — Prevents the staleness that makes AI writing feel templated</span>
+      </li>
+    </ul>
+  </Card>
+
+  <Card variant="warning">
+    <h3 className="font-bold text-lg mb-4 text-rose-400">Honest Surprises</h3>
+    <ul className="list-none space-y-3 text-white/70 text-sm">
+      <li className="flex items-start gap-2">
+        <span className="text-rose-400 mt-1">→</span>
+        <span><strong>Permissions accumulate fast</strong> — 170+ entries. Needs periodic review.</span>
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="text-rose-400 mt-1">→</span>
+        <span><strong>Voice guide maintenance</strong> — It's a living document, not write-once. Requires updating after every ~5 posts.</span>
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="text-rose-400 mt-1">→</span>
+        <span><strong>Multi-model pipelines are fragile</strong> — When one API changes, the whole chain breaks.</span>
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="text-rose-400 mt-1">→</span>
+        <span><strong>The counterpoints system</strong> — AI critiquing its own output is genuinely useful, not gimmick.</span>
+      </li>
+    </ul>
+  </Card>
+</div>
+</Slide>
+
+<Slide>
+<SectionLabel color="amber">Takeaways</SectionLabel>
+
+## What You Can Do Monday Morning
+
+<p className="text-xl text-white/60 mb-8">You don't need the full system. Start with Layer 1 and build up.</p>
+
+<div className="space-y-4 mb-8">
+  <div className="flex items-start gap-4">
+    <span className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">1</span>
+    <div>
+      <p className="text-lg text-white/80 font-semibold">Write a CLAUDE.md (or equivalent) for your project</p>
+      <p className="text-white/50 text-sm">Directory map, conventions, workflow steps. Takes 30 minutes. Pays off immediately.</p>
+    </div>
+  </div>
+  <div className="flex items-start gap-4">
+    <span className="flex-shrink-0 w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold">2</span>
+    <div>
+      <p className="text-lg text-white/80 font-semibold">Create one slash command for your most repetitive task</p>
+      <p className="text-white/50 text-sm">Code review, PR description, ticket grooming — whatever you do weekly. 15 lines of markdown.</p>
+    </div>
+  </div>
+  <div className="flex items-start gap-4">
+    <span className="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">3</span>
+    <div>
+      <p className="text-lg text-white/80 font-semibold">Document what the AI should NOT do</p>
+      <p className="text-white/50 text-sm">The most valuable instruction isn't "do this." It's "don't touch that." Preserve what's already working.</p>
+    </div>
+  </div>
+  <div className="flex items-start gap-4">
+    <span className="flex-shrink-0 w-10 h-10 rounded-full bg-violet-500/20 text-violet-400 flex items-center justify-center font-bold">4</span>
+    <div>
+      <p className="text-lg text-white/80 font-semibold">Let the permission list grow organically</p>
+      <p className="text-white/50 text-sm">Don't pre-approve everything. Let the AI ask, approve what makes sense, and the trust boundary forms naturally.</p>
+    </div>
+  </div>
+</div>
+</Slide>
+
+<Slide layout="title">
+
+## The Bigger Picture
+
+<p className="text-xl text-white/60 mt-8 mb-12 max-w-3xl mx-auto">The gap between "using AI" and "working with AI" is infrastructure, not intelligence. The models are already capable. The question is whether your systems let them remember, enforce standards, use tools, and operate within trust boundaries.</p>
+
+<div className="grid grid-cols-3 gap-6 max-w-3xl mx-auto mb-12">
+  <div className="text-center">
+    <div className="text-4xl font-bold text-amber-400 mb-2">5</div>
+    <p className="text-white/50 text-sm">Config files that form the system</p>
+  </div>
+  <div className="text-center">
+    <div className="text-4xl font-bold text-cyan-400 mb-2">0</div>
+    <p className="text-white/50 text-sm">Custom frameworks required</p>
+  </div>
+  <div className="text-center">
+    <div className="text-4xl font-bold text-emerald-400 mb-2">156</div>
+    <p className="text-white/50 text-sm">Posts through this system</p>
+  </div>
+</div>
+
+<div className="text-white/30 text-sm">
+Signal Dispatch | February 2026
+</div>
+</Slide>

@@ -1,5 +1,7 @@
 {
-  "completed": [],
+  "completed": [
+    "beyond-chat-agentic-workflows.mdx"
+  ],
   "failed": [
     "investing-101-zoey.mdx",
     "neuro-symbolic-convergence.mdx",
