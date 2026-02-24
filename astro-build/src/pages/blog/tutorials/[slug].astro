@@ -1,0 +1,301 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooter from '../../../components/SiteFooter.astro';
+import { generateArticleSchema } from '../../../utils/schema';
+import ReadingProgress from '../../../components/ReadingProgress';
+
+const { slug } = Astro.params;
+const tutorials = await getCollection('tutorials');
+const tutorial = tutorials.find((t) => t.id === slug);
+
+if (!tutorial) {
+  return Astro.redirect('/blog/tutorials');
+}
+
+const { Content } = await render(tutorial);
+
+const articleSchema = generateArticleSchema({
+  id: `tutorials/${tutorial.id}`,
+  data: tutorial.data,
+});
+
+const publishedDate = new Date(tutorial.data.publishedAt);
+const formattedDate = publishedDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const wordCount = tutorial.body?.split(/\s+/).length || 0;
+const readingTime = Math.ceil(wordCount / 200);
+
+const difficultyColors: Record<string, string> = {
+  'beginner': 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400',
+  'intermediate': 'bg-amber-500/10 border-amber-500/30 text-amber-400',
+  'advanced': 'bg-rose-500/10 border-rose-500/30 text-rose-400',
+};
+
+const difficultyLabels: Record<string, string> = {
+  'beginner': 'Beginner',
+  'intermediate': 'Intermediate',
+  'advanced': 'Advanced',
+};
+
+const difficulty = tutorial.data.difficulty as string | undefined;
+
+// Get companion content
+const presentations = await getCollection('presentations');
+const blogPosts = await getCollection('blog');
+const whitepapers = await getCollection('whitepapers');
+
+const getCompanionContent = () => {
+  const companion = tutorial.data.companionOf;
+  if (!companion) return null;
+  if (companion.type === 'presentation') {
+    const pres = presentations.find(p => p.id === companion.slug);
+    if (pres) return { type: 'Presentation', title: pres.data.title, url: `/blog/presentations/${pres.id}` };
+  } else if (companion.type === 'blog') {
+    const post = blogPosts.find(p => p.id === companion.slug);
+    if (post) return { type: 'Post', title: post.data.title, url: `/blog/${post.id}` };
+  } else if (companion.type === 'whitepaper') {
+    const wp = whitepapers.find(w => w.id === companion.slug);
+    if (wp) return { type: 'Whitepaper', title: wp.data.title, url: `/blog/whitepapers/${wp.id}` };
+  }
+  return null;
+};
+
+const companion = getCompanionContent();
+---
+
+<BaseLayout
+  title={tutorial.data.title}
+  description={tutorial.data.excerpt || `A tutorial by Nino Chavez`}
+  image={tutorial.data.featureImage}
+  type="article"
+  publishedTime={publishedDate.toISOString()}
+  author={tutorial.data.author}
+  jsonLd={[articleSchema]}
+>
+  <ReadingProgress client:load />
+
+  <main class="min-h-screen">
+    <SiteHeader currentPage="tutorials" />
+
+    <div class="max-w-4xl mx-auto px-4 py-12">
+      <!-- Back link -->
+      <a
+        href="/blog/tutorials"
+        class="group inline-flex items-center gap-2 text-zinc-400 hover:text-athletic-court-orange transition-all duration-150 font-medium mb-8 no-print"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to Tutorials
+      </a>
+
+      <article class="space-y-8">
+        <!-- Featured Image -->
+        {tutorial.data.featureImage && (
+          <div class="relative -mx-4 md:-mx-8 lg:mx-0 aspect-[21/9] overflow-hidden rounded-2xl border border-zinc-800">
+            <img
+              src={tutorial.data.featureImage}
+              alt={tutorial.data.title}
+              width="1200"
+              height="514"
+              class="absolute inset-0 w-full h-full object-cover"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
+          </div>
+        )}
+
+        <!-- Article Header -->
+        <header class="space-y-4 pb-8 border-b border-zinc-800/50">
+          <div class="flex items-center gap-3 text-sm flex-wrap">
+            <span class="font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border transition-colors bg-amber-500/10 border-amber-500/30 text-amber-400">
+              Tutorial
+            </span>
+            {difficulty && (
+              <span class={`font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border ${difficultyColors[difficulty]}`}>
+                {difficultyLabels[difficulty]}
+              </span>
+            )}
+            <span class="text-zinc-700">&bull;</span>
+            <time datetime={publishedDate.toISOString()} class="text-zinc-500">
+              {formattedDate}
+            </time>
+            {tutorial.data.duration && (
+              <>
+                <span class="text-zinc-700">&bull;</span>
+                <span class="flex items-center gap-1.5 text-zinc-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {tutorial.data.duration}
+                </span>
+              </>
+            )}
+            <span class="text-zinc-700">&bull;</span>
+            <span class="text-zinc-500">{readingTime} min read</span>
+          </div>
+
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight">
+            {tutorial.data.title}
+          </h1>
+
+          {tutorial.data.excerpt && (
+            <p class="text-xl text-zinc-400 leading-relaxed">
+              {tutorial.data.excerpt}
+            </p>
+          )}
+
+          <div class="flex items-center gap-3 pt-4">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white font-bold">
+              NC
+            </div>
+            <div>
+              <p class="text-white font-medium">{tutorial.data.author || 'Nino Chavez'}</p>
+              <p class="text-zinc-500 text-sm">Product Architect</p>
+            </div>
+          </div>
+        </header>
+
+        <!-- Workshop Info Panel -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 no-print">
+          {/* Prerequisites */}
+          {tutorial.data.prerequisites && tutorial.data.prerequisites.length > 0 && (
+            <div class="p-5 rounded-xl bg-zinc-900/50 border border-zinc-800">
+              <h3 class="text-sm font-semibold uppercase tracking-wider text-zinc-500 mb-3 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                Prerequisites
+              </h3>
+              <ul class="space-y-2">
+                {tutorial.data.prerequisites.map((prereq) => (
+                  <li class="flex items-start gap-2 text-sm text-zinc-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {prereq}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Learning Objectives */}
+          {tutorial.data.objectives && tutorial.data.objectives.length > 0 && (
+            <div class="p-5 rounded-xl bg-zinc-900/50 border border-zinc-800">
+              <h3 class="text-sm font-semibold uppercase tracking-wider text-zinc-500 mb-3 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+                What you'll build
+              </h3>
+              <ul class="space-y-2">
+                {tutorial.data.objectives.map((obj) => (
+                  <li class="flex items-start gap-2 text-sm text-zinc-300">
+                    <span class="text-amber-400 flex-shrink-0 mt-0.5 font-bold">&rarr;</span>
+                    {obj}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+
+        <!-- Companion Content -->
+        {companion && (
+          <div class="p-4 rounded-xl bg-athletic-brand-violet/5 border border-athletic-brand-violet/20 no-print">
+            <div class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-athletic-brand-violet flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+              </svg>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm text-zinc-400">
+                  <span class="text-zinc-500">Companion {companion.type}:</span>{' '}
+                  <a href={companion.url} class="text-athletic-brand-violet hover:text-athletic-court-orange transition-colors font-medium">
+                    {companion.title}
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <!-- Tutorial Content -->
+        <div class="prose prose-lg max-w-none">
+          <Content />
+        </div>
+
+        <!-- Social Sharing -->
+        <div class="pt-8 pb-8 border-t border-zinc-800/50 no-print">
+          <div class="flex items-center gap-4">
+            <span class="text-zinc-500 text-sm font-medium">Share:</span>
+            <a
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(tutorial.data.title)}&url=${encodeURIComponent(`https://ninochavez.co/blog/tutorials/${tutorial.id}`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-zinc-400 hover:text-white transition-colors"
+              title="Share on Twitter"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://ninochavez.co/blog/tutorials/${tutorial.id}`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-zinc-400 hover:text-[#0A66C2] transition-colors"
+              title="Share on LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+            <button
+              onclick={`navigator.clipboard.writeText('https://ninochavez.co/blog/tutorials/${tutorial.id}'); this.textContent = 'Copied!'`}
+              class="text-zinc-400 hover:text-athletic-brand-violet transition-colors text-sm"
+              title="Copy link"
+            >
+              Copy link
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <SiteFooter />
+  </main>
+</BaseLayout>
+
+<script>
+  // Template copy button functionality
+  document.querySelectorAll('[data-copy-btn]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const template = btn.closest('[data-tutorial-template]');
+      const content = template?.querySelector('[data-copy-content]');
+      if (content) {
+        try {
+          await navigator.clipboard.writeText(content.textContent || '');
+          const original = btn.textContent;
+          btn.textContent = 'Copied!';
+          setTimeout(() => { btn.textContent = original; }, 2000);
+        } catch {
+          // Fallback for older browsers
+          const range = document.createRange();
+          range.selectNodeContents(content);
+          const selection = window.getSelection();
+          selection?.removeAllRanges();
+          selection?.addRange(range);
+        }
+      }
+    });
+  });
+</script>

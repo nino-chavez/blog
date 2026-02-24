@@ -1,0 +1,586 @@
+---
+title: "Beyond Chat: Build Your First Agentic Workflow"
+publishedAt: "2026-02-24T14:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "A hands-on workshop for turning AI assistants into operational partners. Write a CLAUDE.md, create a slash command, codify your quality standards, and design a multi-stage pipeline — in 60 minutes."
+category: "AI & Automation"
+featureImage: "/images/generated/beyond-chat-workshop.webp"
+tags: ["agentic-systems", "ai-development", "tutorial"]
+duration: "60 min"
+difficulty: "beginner"
+prerequisites:
+  - "An AI coding assistant (Claude Code, Cursor, GitHub Copilot, etc.)"
+  - "A project you're actively working on"
+  - "Terminal access"
+objectives:
+  - "Write a CLAUDE.md that gives your AI persistent project context"
+  - "Create a slash command that activates a specific operational mode"
+  - "Define quality guardrails including 'What NOT to Do' rules"
+  - "Design a two-stage AI pipeline on paper"
+companionOf:
+  type: presentation
+  slug: beyond-chat-agentic-workflows
+---
+
+import { Exercise } from '@/components/tutorials/Exercise';
+import { Template } from '@/components/tutorials/Template';
+import { Checkpoint } from '@/components/tutorials/Checkpoint';
+
+# The Gap
+
+Most people use AI assistants the same way they use a search engine — ask a question, get an answer, close the tab. There's nothing wrong with that. But if you've spent any real time with AI coding assistants, you've probably hit the ceiling: every session starts from zero. The AI doesn't remember your conventions, doesn't know your project structure, doesn't understand your quality standards. It generates something generic. You fix it manually. Tomorrow, you do it all over again.
+
+This workshop is about breaking through that ceiling.
+
+Over the next 60 minutes, you're going to build the infrastructure that turns a chat assistant into something closer to a team member — one that arrives pre-configured, operates within defined quality standards, and remembers what matters between sessions.
+
+Everything here comes from a real production system. I run a blog called Signal Dispatch, and over the past year I've built an agentic publishing pipeline on top of Claude Code that handles editorial voice enforcement, multi-model image generation, four different content publishing pathways, and adversarial quality review. The system has produced 150+ posts. None of it required a custom framework — it's configuration files, markdown documents, and shell scripts.
+
+You don't need the full system. You need the first three layers. That's what we're building today.
+
+---
+
+## The Mental Model: Five Layers
+
+Before we build, here's the architecture. Each layer solves a specific problem. You can adopt them incrementally — Layer 1 alone pays for itself immediately.
+
+| Layer | What It Solves | How |
+|-------|---------------|-----|
+| **1. Session Bootstrap** | AI forgets everything between sessions | A config file that loads automatically at session start |
+| **2. Codified Judgment** | AI applies generic standards, not yours | A living document that describes your quality criteria |
+| **3. Multi-Stage Pipelines** | One model can't do everything well | Chain models by their strengths with your standards as glue |
+| **4. Trust Boundaries** | You have to approve everything manually | A permission envelope that grows incrementally |
+| **5. Multiple Pathways** | Only works from one entry point | Same standards, different triggers (CLI, mobile, CI/CD) |
+
+**Today we're building Layers 1-3.** Layers 4 and 5 grow organically from the foundation you set up in this workshop.
+
+---
+
+<Exercise number={1} title="Session Bootstrap: Write a CLAUDE.md" duration="15 min">
+
+## Why this matters
+
+Think of your AI assistant as a new team member who has perfect recall but joins fresh every morning. Without onboarding docs, you spend the first 10 minutes of every session re-explaining your project's conventions, file locations, and preferences. A `CLAUDE.md` (or equivalent project config) eliminates that re-onboarding tax permanently.
+
+The file loads automatically at the start of every Claude Code session. Other tools have equivalents — Cursor uses `.cursorrules`, GitHub Copilot uses `.github/copilot-instructions.md`. The principle is the same: give the AI persistent project context.
+
+## What goes in it
+
+Your CLAUDE.md needs four sections, minimum:
+
+1. **Directory map** — Where things live, annotated with purpose
+2. **Key conventions** — The rules that aren't obvious from the code
+3. **Primary workflow** — Step-by-step for your most common task
+4. **Off-limits** — What the AI should never touch without asking
+
+## Your turn
+
+Open your project. Create a `.claude/CLAUDE.md` file (or your tool's equivalent). Use the template below as scaffolding — fill in the blanks for your actual project.
+
+</Exercise>
+
+<Template title="CLAUDE.md Starter Template" description="Fill in the brackets for your project">
+
+````markdown
+# [Project Name] - Project Instructions
+
+## Directory Structure
+All source code lives in [main directory]:
+
+  [project-name]/
+  ├── [dir-1]/          # [purpose]
+  │   ├── [subdir]/     # [purpose]
+  │   └── [subdir]/     # [purpose]
+  ├── [dir-2]/          # [purpose]
+  └── [dir-3]/          # [purpose]
+
+## Key Conventions
+- [Convention 1 — e.g., "All API routes live in src/routes/api/"]
+- [Convention 2 — e.g., "Use kebab-case for file names"]
+- [Convention 3 — e.g., "Tests mirror the src/ directory structure"]
+
+## Workflow: [Your Most Common Task]
+### Steps:
+1. [First step]
+2. [Second step]
+3. [Third step]
+4. [Verification step]
+
+## Off-Limits (Explicit Approval Required)
+- [File or action — e.g., ".env files"]
+- [File or action — e.g., "Database migrations"]
+- [File or action — e.g., "Package version bumps"]
+
+## Common Commands
+  [dev command]       # Start dev server
+  [build command]     # Build for production
+  [test command]      # Run test suite
+````
+
+</Template>
+
+**A real example.** Here's a condensed version of the CLAUDE.md for Signal Dispatch — the blog system that powers this tutorial:
+
+````markdown
+# Signal Dispatch - Project Instructions
+
+## Directory Structure
+  signal-dispatch-blog/
+  ├── astro-build/
+  │   ├── src/content/blog/*.mdx     # Blog posts
+  │   ├── src/content/whitepapers/   # Whitepapers
+  │   └── scripts/                   # Utility scripts
+  ├── docs/                          # Voice guide
+  └── .claude/                       # This config
+
+## Key Conventions
+- All commands run from astro-build/ directory
+- MDX content uses Callout and PullQuote components
+- Voice guide enforcement via /docs/signal-dispatch-voice-guide.md
+- Canonical tags only (18 approved, defined in tags.ts)
+
+## Off-Limits (Explicit Approval Required)
+- .env files (API keys)
+- astro.config.mjs (build configuration)
+````
+
+Notice what's **not** in there: no paragraphs of explanation, no aspirational goals, no philosophy. It's reference material — the kind of thing a competent team member looks up when they need specifics.
+
+**Going further.** Signal Forge — a content generation CLI I use for client work — takes this further with four distinct content modes (Thought Leadership, Solution Architecture, Executive Advisory, Documentation), each with its own voice guide and workflow. But that's Layer 2 territory. Start with the basics.
+
+<Checkpoint>
+
+**Test it.** Open a new AI session in your project. Ask it: *"What directory should I create new API routes in?"* or *"What's the build command?"*
+
+If it answers correctly from the CLAUDE.md without you explaining anything — you're done. If it doesn't, your directory map or conventions section needs more detail.
+
+</Checkpoint>
+
+---
+
+<Exercise number={2} title="Mode-Switching: Create a Slash Command" duration="10 min">
+
+## Why this matters
+
+Your AI assistant is one tool that can inhabit many roles. A slash command is a mode-switch — 15 lines of markdown that change the AI's operational posture. Same underlying model, completely different behavior.
+
+In Signal Dispatch, I have four commands:
+- **`/write-post`** — Reads the voice guide first, walks through hook identification, structure selection, drafting, frontmatter creation, self-review
+- **`/edit-post`** — Reviews voice authenticity, structural integrity, tonal balance. Critically: includes "What NOT to Fix" instructions
+- **`/review-voice`** — Scores on three dimensions (1-10 each): Voice Authenticity, Structural Patterns, Tonal Consistency
+- **`/voice-check`** — Five yes/no questions. Returns a binary: SOUNDS LIKE NINO: Yes/No/Mostly. Takes 30 seconds.
+
+In Signal Forge, the same pattern produces `/strategic-deck`, `/executive-pov`, `/solution-architecture`, and `/technical-specification` — each activating a completely different content mode with its own voice and workflow.
+
+## What goes in it
+
+A slash command needs three things:
+
+1. **Role definition** — Who the AI is when this command activates
+2. **Procedure** — What to do, step by step
+3. **Guardrails** — What NOT to do (often the most important part)
+
+## Your turn
+
+Think about your most repetitive weekly task. Code reviews? PR descriptions? Meeting summaries? Ticket grooming? Pick one and write a slash command for it.
+
+</Exercise>
+
+<Template title="Slash Command Template" description="Save as .claude/commands/[name].md">
+
+```markdown
+You are a [role] for [project/team context].
+
+## When activated:
+1. First, [gather context — read a file, check state, etc.]
+2. Then, [perform the core action]
+3. Next, [apply quality check]
+4. Finally, [produce output in specific format]
+
+## Quality standards:
+- [Standard 1 — e.g., "Every review must cite specific line numbers"]
+- [Standard 2 — e.g., "Flag security concerns separately from style issues"]
+- [Standard 3 — e.g., "Limit to 5 actionable items maximum"]
+
+## What NOT to do:
+- [Anti-pattern — e.g., "Don't suggest refactors unrelated to the PR's purpose"]
+- [Anti-pattern — e.g., "Don't rewrite code in a different style preference"]
+- [Anti-pattern — e.g., "Don't add comments to code you didn't change"]
+```
+
+</Template>
+
+**Example: A code review command.** Here's a practical one most teams could use immediately:
+
+```markdown
+You are a senior code reviewer for this project.
+
+When activated:
+1. Read the diff (staged or specified files)
+2. Check for: correctness, security, performance, readability
+3. Categorize findings as: MUST FIX, SHOULD FIX, CONSIDER
+4. Output as a structured review with line references
+
+Quality standards:
+- Every finding must reference a specific file and line
+- MUST FIX items need an explanation of the risk
+- Maximum 7 findings — prioritize ruthlessly
+- Acknowledge what's done well (1-2 positives)
+
+What NOT to do:
+- Don't suggest style changes that aren't in the project's linter config
+- Don't recommend refactors outside the scope of the change
+- Don't flag theoretical edge cases that can't happen given the codebase
+- Don't add documentation suggestions unless there's a public API change
+```
+
+<Checkpoint>
+
+**Test it.** Run your new slash command against a recent piece of work. Does the AI behave differently than a generic "please review this" prompt?
+
+The quality bar: if someone watched you use the command, they should be able to tell *which* command is active from the AI's behavior alone. If it feels the same as a regular prompt, your role definition and guardrails need more specificity.
+
+</Checkpoint>
+
+---
+
+<Exercise number={3} title="Quality Guardrails: Write Your 'What NOT to Do' List" duration="10 min">
+
+## Why this is the hardest part
+
+Any AI can add polish. The hard part is teaching it to leave the rough edges that make work feel human — or to respect the constraints that exist for good reasons.
+
+In Signal Dispatch, the "What NOT to Fix" list is the single most impactful editorial instruction. It tells the AI: *these things look like mistakes but they're intentional. Do not smooth them out.* Intentional fragments for rhythm. Sentences that start with "And" or "But." Paragraphs that are just one line. Provisional conclusions that don't wrap up neatly.
+
+In Signal Forge, it's a different flavor: *don't use blog voice for architecture docs* (too exploratory, not implementable), *don't use architecture voice for executive briefs* (too technical, loses the audience), *don't add provisional language to specifications* ("I think we should..." has no place in a spec).
+
+Both are the same principle: **the most valuable instruction isn't "do this." It's "don't touch that."**
+
+## Categories of "don't"
+
+Your guardrails need to cover four areas:
+
+1. **Phrases to avoid** — Language that sounds generic, corporate, or AI-generated in your context
+2. **Patterns to preserve** — "Rough edges" that are actually intentional and should not be polished
+3. **Off-limits operations** — Actions that have consequences the AI can't fully evaluate
+4. **Domain-specific rules** — Constraints unique to your industry, team, or project
+
+## Your turn
+
+Write a "What NOT to Do" document for your most common AI-assisted workflow. Think about the last time an AI assistant "helped" by changing something you had to change back.
+
+</Exercise>
+
+<Template title="What NOT to Do Template" description="Add to your CLAUDE.md or keep as a separate doc">
+
+```markdown
+## Quality Guardrails: What NOT to Do
+
+### Phrases to Avoid
+- "[phrase]" — [why it's problematic in your context]
+- "[phrase]" — [why it's problematic]
+- "[phrase]" — [why it's problematic]
+
+### Patterns to Preserve (Don't "Fix" These)
+- [pattern] — [why it's intentional]
+- [pattern] — [why it's intentional]
+- [pattern] — [why it's intentional]
+
+### Off-Limits Operations
+- [operation] — [consequence if done carelessly]
+- [operation] — [consequence if done carelessly]
+
+### Domain-Specific Rules
+- [rule] — [context for why this matters]
+- [rule] — [context for why this matters]
+```
+
+</Template>
+
+**Real examples from three projects:**
+
+| Project | Don't | Why |
+|---------|-------|-----|
+| Signal Dispatch | Don't remove intentional sentence fragments | They create rhythm; "fixing" them makes the writing feel robotic |
+| Signal Dispatch | Don't add transition phrases between sections | The `---` dividers ARE the transitions |
+| Signal Forge | Don't use "I think" in architecture docs | Architecture specs need definitive language, not exploration |
+| Signal Forge | Don't add executive summary to technical specs | Different audience, different document — keep them separate |
+| AI Academy | Don't skip the WHY section in learning modules | Students need motivation before instruction |
+| AI Academy | Don't merge concept definitions into prose | Definitions need to be scannable, not buried in paragraphs |
+
+<Checkpoint>
+
+**Gut check.** Read your "What NOT to Do" list and ask: *Has the AI actually done any of these things to me before?*
+
+If every item on your list comes from real experience (not hypothetical risk), you're writing a useful document. If you're guessing at what might go wrong, you're writing a policy doc — save it for later and start with the things that have actually burned you.
+
+</Checkpoint>
+
+---
+
+<Exercise number={4} title="Pipeline Design: Chain Models by Strength" duration="10 min">
+
+## Why this matters
+
+A single model can't do everything well. But you can chain multiple models (or the same model in different modes) so each one does what it's best at. The key insight: **your quality standards from Exercise 3 become the glue between stages.**
+
+Here's how Signal Dispatch generates feature images for every blog post — no manual steps:
+
+| Stage | Model | Input | Output |
+|-------|-------|-------|--------|
+| 1. Concept | Gemini Flash | Full blog post text | Visual concept description (explicitly rejects generic imagery) |
+| 2. Render | GPT Image | Concept + category style profile | 1200x675 illustration |
+| 3. Process | Sharp (code) | Raw image | Compressed WebP + frontmatter update |
+
+And here's Signal Forge's content pipeline:
+
+| Stage | Role | Input | Output |
+|-------|------|-------|--------|
+| 1. Draft | Ghost Writer | Raw notes + content mode | First draft following voice guide |
+| 2. Polish | Copywriter | Draft + quality standards | Refined version with consistent voice |
+| 3. QA | Editor | Polished draft + anti-pattern list | Final version with issues flagged |
+
+Both follow the same pattern: **one stage's output feeds the next, with quality criteria enforced at each handoff.**
+
+## Your turn
+
+This is a paper exercise. Design a two-stage pipeline for something you actually do. Don't build it — just map it.
+
+</Exercise>
+
+<Template title="Pipeline Design Canvas" description="Sketch on paper or fill in digitally">
+
+```
+Pipeline: [What this produces]
+
+  ┌─────────────────────┐         ┌─────────────────────┐
+  │      STAGE 1        │         │      STAGE 2        │
+  │                     │         │                     │
+  │ Model: ___________  │────────>│ Model: ___________  │
+  │                     │         │                     │
+  │ Input: ___________  │ Quality │ Input: ___________  │
+  │                     │ Gate:   │                     │
+  │ Output: __________  │ _______ │ Output: __________  │
+  │                     │ _______ │                     │
+  │ Why this model:     │         │ Why this model:     │
+  │ _________________   │         │ _________________   │
+  └─────────────────────┘         └─────────────────────┘
+
+Quality gate between stages:
+  - [ ] ________________________________
+  - [ ] ________________________________
+```
+
+</Template>
+
+**Starter ideas if you're stuck:**
+
+- **PR description pipeline:** Diff → Claude (extract intent and changes) → Template (format as PR description with test plan)
+- **Meeting notes pipeline:** Transcript → Claude (extract decisions, action items, open questions) → Formatter (structured markdown with @mentions)
+- **Bug triage pipeline:** Error log → Claude (classify severity and likely root cause) → Router (assign to team based on classification)
+- **Documentation pipeline:** Code diff → Claude (identify what changed publicly) → Claude with docs context (update relevant docs sections)
+
+<Checkpoint title="Share">
+
+**If you're in a group:** Take 2 minutes to explain your pipeline to a neighbor. Can they understand the handoff between stages? Can they identify what quality gate sits between them?
+
+**If you're solo:** Write one sentence that explains why Stage 1 and Stage 2 use different models (or different prompts). If you can't articulate why they're separate, they might not need to be — and a single well-prompted stage might be simpler.
+
+</Checkpoint>
+
+---
+
+## Putting It Together
+
+Here's what you've built in the last 45 minutes:
+
+| Layer | What You Created | What It Does |
+|-------|-----------------|--------------|
+| **1. Session Bootstrap** | CLAUDE.md | AI arrives knowing your project — directory map, conventions, workflows, boundaries |
+| **2. Codified Judgment** | Slash command + "What NOT to Do" | AI operates in defined modes with explicit quality guardrails |
+| **3. Pipeline Design** | Two-stage pipeline sketch | A blueprint for chaining AI stages with quality gates between them |
+
+These three layers compound. The CLAUDE.md means your slash commands can reference project-specific files and conventions. The "What NOT to Do" list means your pipeline quality gates have teeth. The pipeline design means you can automate multi-step workflows where each stage is good at one thing.
+
+**What you don't have yet — and that's fine:**
+
+- **Layer 4 (Trust Boundaries)** grows organically. Every time you approve an AI action, that's a data point. After a few weeks, you'll notice patterns in what you always approve — that's your permission envelope forming. In my system, this grew to 170+ pre-approved operations over six months.
+
+- **Layer 5 (Multiple Pathways)** comes when you need it. Maybe you want to trigger content creation from a GitHub Issue on your phone. Maybe you want a CI pipeline that runs your slash command on every PR. The foundation you built today supports all of these — you just need the trigger mechanism.
+
+---
+
+## What's Next
+
+### Monday morning
+Start with Exercise 1. Just the CLAUDE.md. Give it two sessions and see if the re-onboarding tax disappears.
+
+### This week
+Add Exercise 2 — one slash command for your most repetitive task. Use it five times. Iterate on the guardrails based on where it goes wrong.
+
+### This month
+Write the "What NOT to Do" list for real (Exercise 3). This one improves the most with actual usage data — every time the AI does something you have to undo, add it to the list.
+
+### Deeper learning
+- **Companion presentation:** [Beyond Chat: Building Agentic Workflows with Claude Code](/blog/presentations/beyond-chat-agentic-workflows) — the full 30-minute talk that this workshop expands on
+- **AI Academy Phase 2 (Workflow Engineering)** and **Phase 3 (Agentic Orchestration)** — self-paced curriculum covering these concepts in depth with hands-on labs
+- **Claude Code documentation** — `CLAUDE.md` reference, slash commands, hooks, and permissions
+
+### The bigger picture
+
+The gap between "using AI" and "working with AI" isn't about model capability. The models are already capable. The gap is infrastructure: does your AI have memory? Does it have judgment? Does it have defined trust boundaries? The answers to those questions are configuration files and markdown documents — the stuff you started building today.
+
+---
+
+## Appendix: Complete Templates
+
+The templates from each exercise, collected here for easy reference.
+
+### A. Complete CLAUDE.md
+
+<Template title="Full CLAUDE.md Template">
+
+````markdown
+# [Project Name] - Project Instructions
+
+## Directory Structure
+
+  [project]/
+  ├── [src/]              # [Application source]
+  │   ├── [components/]   # [UI components]
+  │   ├── [routes/]       # [Page routes / API endpoints]
+  │   ├── [lib/]          # [Shared utilities]
+  │   └── [styles/]       # [Global styles]
+  ├── [tests/]            # [Test files mirror src/]
+  ├── [docs/]             # [Documentation]
+  ├── [scripts/]          # [Build/deploy scripts]
+  └── [config files]      # [List key configs]
+
+## Key Conventions
+- [File naming convention]
+- [Import ordering convention]
+- [State management approach]
+- [Error handling pattern]
+- [Testing convention]
+
+## Content Types (if applicable)
+### [Type 1 — e.g., Blog Posts]
+- Location: [path]
+- Format: [MDX / Markdown / etc.]
+- Voice: [brief description]
+
+### [Type 2 — e.g., API Docs]
+- Location: [path]
+- Format: [format]
+- Voice: [brief description]
+
+## Workflows
+
+### [Primary Workflow — e.g., New Feature]
+1. [Step 1]
+2. [Step 2]
+3. [Step 3]
+4. [Verify: command]
+
+### [Secondary Workflow — e.g., Bug Fix]
+1. [Step 1]
+2. [Step 2]
+3. [Verify: command]
+
+## Off-Limits (Explicit Approval Required)
+- [.env files — contains secrets]
+- [Config files — affects build/deploy]
+- [Database migrations — irreversible in production]
+- [Package updates — can break dependencies]
+
+## Common Commands
+  [dev command]       # Start dev server
+  [build command]     # Build for production
+  [test command]      # Run test suite
+  [lint command]      # Run linter
+````
+
+</Template>
+
+### B. Slash Command
+
+<Template title="Slash Command Template">
+
+```markdown
+You are a [role] for [project context].
+
+## When activated:
+1. [Gather context]
+2. [Core action]
+3. [Quality check]
+4. [Output format]
+
+## Quality standards:
+- [Standard with specific criteria]
+- [Standard with specific criteria]
+- [Standard with specific criteria]
+
+## What NOT to do:
+- [Anti-pattern with explanation]
+- [Anti-pattern with explanation]
+- [Anti-pattern with explanation]
+```
+
+</Template>
+
+### C. What NOT to Do
+
+<Template title="Quality Guardrails Template">
+
+```markdown
+## Quality Guardrails: What NOT to Do
+
+### Phrases to Avoid
+- "[phrase]" — [why]
+- "[phrase]" — [why]
+
+### Patterns to Preserve
+- [intentional pattern] — [why it should stay]
+- [intentional pattern] — [why it should stay]
+
+### Off-Limits Operations
+- [action] — [risk]
+- [action] — [risk]
+
+### Domain-Specific Rules
+- [rule] — [context]
+- [rule] — [context]
+```
+
+</Template>
+
+### D. Pipeline Canvas
+
+<Template title="Pipeline Design Canvas">
+
+```
+Pipeline: [What this produces]
+Trigger: [What kicks it off]
+
+STAGE 1: [Name]
+  Model:   [Which AI / tool]
+  Input:   [What it receives]
+  Output:  [What it produces]
+  Why:     [Why this model for this stage]
+
+  Quality gate -> [What must be true before Stage 2]
+
+STAGE 2: [Name]
+  Model:   [Which AI / tool]
+  Input:   [Stage 1 output + any additions]
+  Output:  [Final deliverable]
+  Why:     [Why this model for this stage]
+
+  Verification -> [How you know it worked]
+```
+
+</Template>
+
+---
+
+*Signal Dispatch Tutorials | February 2026*

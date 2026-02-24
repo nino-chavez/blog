@@ -93,6 +93,33 @@ const presentationCollection = defineCollection({
   }),
 });
 
+const tutorialCollection = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/tutorials' }),
+  schema: z.object({
+    title: z.string(),
+    slug: z.string().optional(),
+    publishedAt: z.string().or(z.date()),
+    updatedAt: z.string().or(z.date()).optional(),
+    author: z.string().default('Nino Chavez'),
+    excerpt: z.string().optional().default(''),
+    category: z.string().optional(),
+    featureImage: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    // Tutorial-specific fields
+    duration: z.string().optional(),
+    difficulty: z.enum(['beginner', 'intermediate', 'advanced']).optional(),
+    prerequisites: z.array(z.string()).optional(),
+    objectives: z.array(z.string()).optional(),
+    // Companion content - links to related presentation, post, or whitepaper
+    companionOf: z.object({
+      type: z.enum(['blog', 'whitepaper', 'presentation']),
+      slug: z.string(),
+    }).optional(),
+    // Research notes that support this content
+    supportedBy: supportedBySchema,
+  }),
+});
+
 const counterpointCollection = defineCollection({
   loader: glob({ pattern: '**/*.mdx', base: './src/content/counterpoints' }),
   schema: z.object({
@@ -182,7 +209,7 @@ const researchNotesCollection = defineCollection({
 
     // What content does this research support? (reverse link)
     supportsContent: z.array(z.object({
-      type: z.enum(['blog', 'whitepaper', 'presentation']),
+      type: z.enum(['blog', 'whitepaper', 'presentation', 'tutorial']),
       slug: z.string(),
     })).optional(),
 
@@ -194,6 +221,7 @@ export const collections = {
   blog: blogCollection,
   whitepapers: whitepaperCollection,
   presentations: presentationCollection,
+  tutorials: tutorialCollection,
   counterpoints: counterpointCollection,
   series: seriesCollection,
   'research-notes': researchNotesCollection,

@@ -1,0 +1,275 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooter from '../../../components/SiteFooter.astro';
+import { generateCollectionSchema } from '../../../utils/schema';
+
+const tutorials = await getCollection('tutorials');
+const presentations = await getCollection('presentations');
+const blogPosts = await getCollection('blog');
+const whitepapers = await getCollection('whitepapers');
+
+const sortedTutorials = tutorials.sort(
+  (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime()
+);
+
+const collectionSchema = generateCollectionSchema(
+  'Signal Dispatch Tutorials',
+  'Hands-on workshops and guided exercises for building with AI.',
+  'https://ninochavez.co/blog/tutorials',
+  sortedTutorials
+);
+
+const difficultyColors: Record<string, string> = {
+  'beginner': 'from-emerald-500 to-green-600',
+  'intermediate': 'from-amber-500 to-orange-600',
+  'advanced': 'from-rose-500 to-red-600',
+};
+
+const difficultyLabels: Record<string, string> = {
+  'beginner': 'Beginner',
+  'intermediate': 'Intermediate',
+  'advanced': 'Advanced',
+};
+
+const getTutorialImage = (tutorial: typeof sortedTutorials[0]) => {
+  if (tutorial.data.featureImage) return tutorial.data.featureImage;
+  const companion = tutorial.data.companionOf;
+  if (companion) {
+    if (companion.type === 'presentation') {
+      const pres = presentations.find(p => p.id === companion.slug);
+      if (pres?.data.featureImage) return pres.data.featureImage;
+    } else if (companion.type === 'blog') {
+      const post = blogPosts.find(p => p.id === companion.slug);
+      if (post?.data.featureImage) return post.data.featureImage;
+    } else if (companion.type === 'whitepaper') {
+      const wp = whitepapers.find(w => w.id === companion.slug);
+      if (wp?.data.featureImage) return wp.data.featureImage;
+    }
+  }
+  const hash = tutorial.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const variant = (hash % 5) + 1;
+  return `/images/generated/categories/ai-automation-${variant}.webp`;
+};
+
+const getCompanionContent = (tutorial: typeof sortedTutorials[0]) => {
+  const companion = tutorial.data.companionOf;
+  if (!companion) return null;
+  if (companion.type === 'presentation') {
+    const pres = presentations.find(p => p.id === companion.slug);
+    if (pres) return { type: 'presentation', title: pres.data.title, url: `/blog/presentations/${pres.id}` };
+  } else if (companion.type === 'blog') {
+    const post = blogPosts.find(p => p.id === companion.slug);
+    if (post) return { type: 'blog', title: post.data.title, url: `/blog/${post.id}` };
+  } else if (companion.type === 'whitepaper') {
+    const wp = whitepapers.find(w => w.id === companion.slug);
+    if (wp) return { type: 'whitepaper', title: wp.data.title, url: `/blog/whitepapers/${wp.id}` };
+  }
+  return null;
+};
+---
+
+<BaseLayout
+  title="Tutorials"
+  description="Hands-on workshops and guided exercises for building with AI. Step-by-step walkthroughs with real examples."
+  jsonLd={[collectionSchema]}
+>
+  <main class="min-h-screen">
+    <SiteHeader currentPage="tutorials" />
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden border-b border-zinc-800/30">
+      <div class="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-cyan-500/5" />
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div class="space-y-4">
+            <a href="/blog" class="group inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-athletic-court-orange transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Back to Blog
+            </a>
+            <div class="flex items-center gap-4">
+              <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight">Tutorials</h1>
+              <span class="text-sm text-zinc-400 bg-zinc-800/50 px-3 py-1.5 rounded-full border border-zinc-700/50">
+                {sortedTutorials.length} {sortedTutorials.length === 1 ? 'workshop' : 'workshops'}
+              </span>
+            </div>
+            <p class="text-lg text-zinc-400 max-w-xl">
+              Hands-on workshops with exercises, templates, and real examples. Build something in every session.
+            </p>
+          </div>
+
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center gap-3 text-sm text-zinc-500 bg-zinc-900/50 px-4 py-3 rounded-xl border border-zinc-800/50">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+              <span>Exercises included — bring a project to work on</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tutorials Grid -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {sortedTutorials.length === 0 ? (
+        <div class="text-center py-20">
+          <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-zinc-900/50 flex items-center justify-center border border-zinc-800">
+            <svg class="w-10 h-10 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">No tutorials yet</h3>
+          <p class="text-zinc-500">Check back soon for hands-on workshops and guided exercises.</p>
+        </div>
+      ) : (
+        <div class="space-y-8">
+          {sortedTutorials.map((tutorial, index) => {
+            const isNew = (new Date().getTime() - new Date(tutorial.data.publishedAt).getTime()) / (1000 * 60 * 60 * 24) <= 14;
+            const imageUrl = getTutorialImage(tutorial);
+            const difficulty = tutorial.data.difficulty as keyof typeof difficultyLabels | undefined;
+            const companion = getCompanionContent(tutorial);
+            const isFirst = index === 0;
+            const wordCount = tutorial.body?.split(/\s+/).length || 0;
+            const readingTime = Math.ceil(wordCount / 200);
+
+            return (
+              <article class={`group relative overflow-hidden rounded-2xl border transition-all duration-500 hover:border-amber-500/50 ${isFirst ? 'border-amber-500/30 bg-gradient-to-br from-zinc-900/90 via-zinc-900/70 to-zinc-950' : 'border-zinc-800/50 bg-zinc-900/30 hover:bg-zinc-900/50'}`}>
+                <a href={`/blog/tutorials/${tutorial.id}`} class="block">
+                  <div class="flex flex-col lg:flex-row">
+                    {/* Image Section */}
+                    <div class={`relative ${isFirst ? 'lg:w-3/5' : 'lg:w-2/5'}`}>
+                      <div class={`${isFirst ? 'aspect-[16/9] lg:aspect-[16/10]' : 'aspect-[16/9] lg:aspect-[4/3]'} overflow-hidden`}>
+                        <img
+                          src={imageUrl}
+                          alt={tutorial.data.title}
+                          width="800"
+                          height="500"
+                          class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                          loading={isFirst ? "eager" : "lazy"}
+                          fetchpriority={isFirst ? "high" : "auto"}
+                          decoding="async"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/20 to-transparent" />
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-zinc-900/80 hidden lg:block" />
+                      </div>
+
+                      {/* Badges */}
+                      <div class="absolute top-4 left-4 flex items-center gap-2">
+                        {isNew && (
+                          <span class="font-bold uppercase tracking-wider px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[10px] shadow-lg shadow-amber-500/20">
+                            New
+                          </span>
+                        )}
+                        {isFirst && sortedTutorials.length > 1 && (
+                          <span class="font-bold uppercase tracking-wider px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-white text-[10px] border border-white/20">
+                            Latest
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Workshop icon overlay */}
+                      <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-amber-500/80 backdrop-blur-sm flex items-center justify-center shadow-2xl shadow-amber-500/30 group-hover:scale-110 group-hover:bg-amber-500 transition-all duration-300">
+                          <svg class="w-7 h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Content Section */}
+                    <div class={`flex-1 p-6 lg:p-8 flex flex-col justify-center ${isFirst ? 'lg:py-10' : ''}`}>
+                      {/* Meta row */}
+                      <div class="flex items-center gap-3 text-xs mb-4 flex-wrap">
+                        {difficulty && (
+                          <span class={`font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full bg-gradient-to-r ${difficultyColors[difficulty]} text-white`}>
+                            {difficultyLabels[difficulty]}
+                          </span>
+                        )}
+                        <span class="text-zinc-500">
+                          {new Date(tutorial.data.publishedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                        </span>
+                        {tutorial.data.duration && (
+                          <>
+                            <span class="text-zinc-700">&bull;</span>
+                            <span class="flex items-center gap-1.5 text-zinc-500">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                              {tutorial.data.duration}
+                            </span>
+                          </>
+                        )}
+                        {readingTime > 0 && (
+                          <>
+                            <span class="text-zinc-700">&bull;</span>
+                            <span class="text-zinc-500">{readingTime} min read</span>
+                          </>
+                        )}
+                      </div>
+
+                      {/* Title */}
+                      <h2 class={`font-bold text-white group-hover:text-athletic-court-orange transition-colors mb-3 ${isFirst ? 'text-2xl lg:text-4xl' : 'text-xl lg:text-2xl'}`}>
+                        {tutorial.data.title}
+                      </h2>
+
+                      {/* Excerpt */}
+                      {tutorial.data.excerpt && (
+                        <p class={`text-zinc-400 leading-relaxed mb-4 ${isFirst ? 'text-base lg:text-lg line-clamp-3' : 'text-sm line-clamp-2'}`}>
+                          {tutorial.data.excerpt}
+                        </p>
+                      )}
+
+                      {/* Learning objectives preview */}
+                      {tutorial.data.objectives && tutorial.data.objectives.length > 0 && isFirst && (
+                        <div class="mb-4">
+                          <p class="text-xs text-zinc-600 font-medium uppercase tracking-wider mb-2">You'll learn to:</p>
+                          <div class="flex flex-wrap gap-2">
+                            {tutorial.data.objectives.slice(0, 3).map((obj) => (
+                              <span class="text-xs text-amber-400/80 bg-amber-400/10 px-2.5 py-1 rounded-full border border-amber-400/20">
+                                {obj}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Companion content link */}
+                      {companion && (
+                        <div class="mb-4">
+                          <span
+                            class="inline-flex items-center gap-2 text-xs text-zinc-500 bg-zinc-800/50 px-3 py-1.5 rounded-full border border-zinc-700/50 hover:border-athletic-brand-violet/50 hover:text-athletic-brand-violet transition-colors"
+                            onclick={`event.preventDefault(); event.stopPropagation(); window.location.href='${companion.url}'`}
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                            </svg>
+                            Companion {companion.type === 'presentation' ? 'Presentation' : companion.type === 'whitepaper' ? 'Whitepaper' : 'Post'}
+                          </span>
+                        </div>
+                      )}
+
+                      {/* CTA */}
+                      <div class="inline-flex items-center gap-2 text-amber-400 group-hover:text-athletic-court-orange transition-colors font-semibold text-sm">
+                        <span>Start tutorial</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </article>
+            );
+          })}
+        </div>
+      )}
+    </section>
+
+    <SiteFooter />
+  </main>
+</BaseLayout>

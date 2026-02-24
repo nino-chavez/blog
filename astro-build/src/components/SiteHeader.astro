@@ -1,6 +1,6 @@
 ---
 interface Props {
-  currentPage?: 'blog' | 'series' | 'tags' | 'whitepapers' | 'presentations' | 'counterpoints' | 'research' | 'about';
+  currentPage?: 'blog' | 'series' | 'tags' | 'whitepapers' | 'presentations' | 'tutorials' | 'counterpoints' | 'research' | 'about';
 }
 
 const { currentPage } = Astro.props;
@@ -8,6 +8,7 @@ const { currentPage } = Astro.props;
 const contentLinks = [
   { href: '/blog/whitepapers', label: 'Whitepapers', id: 'whitepapers' },
   { href: '/blog/presentations', label: 'Presentations', id: 'presentations' },
+  { href: '/blog/tutorials', label: 'Tutorials', id: 'tutorials' },
   { href: '/blog/counterpoints', label: 'Counterpoints', id: 'counterpoints' },
 ];
 
