@@ -21,9 +21,7 @@ No music. No signage. No aisles designed for browsing. Robots move through the d
 
 Meanwhile, in a lab somewhere, a humanoid robot is learning to push a cart through Kroger. Navigate narrow aisles. Reach for items on shelves built for five-foot-eight humans. Read price tags printed in twelve-point type.
 
-Same industry. Same problem. Two completely different bets on how machines should operate in the world.
-
-I've been writing about this tension for almost a year without naming it.
+Both solving the same problem in the same industry. Completely different bets on how machines should operate in the world.
 
 ---
 
@@ -37,7 +35,7 @@ Every agent system I've built, observed, or written about is making the same cho
 
 The instinct is to pick a side. Native is cleaner, more efficient, more deterministic. Mimicry is messy, slow, brittle.
 
-But the industry isn't picking. It's doing both. Simultaneously. And the more I look at it, the more I think that's not indecision—it's inevitability.
+But the industry isn't picking. It's doing both. Simultaneously. And I keep trying to figure out whether that's indecision or something more structural.
 
 ---
 
@@ -109,9 +107,9 @@ The through-line is this: *who adapts to whom?*
 The machine adapts to us, or we adapt to it. Both are happening. The ratio is what's shifting.
 </PullQuote>
 
-Legacy data optimized for human search? That's us expecting machines to adapt. MCP servers and structured APIs? That's us adapting our interfaces for machines. Computer use features? Machines learning our interfaces. Dark stores? Us redesigning physical space for machines.
+Legacy data optimized for human search is one end of that spectrum—we built it for ourselves and expected machines to figure it out. Dark stores are the other end—physical space redesigned from the ground up so machines never have to pretend.
 
-Every agent system sits somewhere on this spectrum. And the spectrum is moving—slowly, unevenly, but directionally—toward native.
+MCP servers, computer use features, screen-reading agents, WebMCP manifests—they all sit somewhere in between. And the whole spectrum is drifting, slowly and unevenly, toward the native end.
 
 ---
 
@@ -119,15 +117,11 @@ Every agent system sits somewhere on this spectrum. And the spectrum is moving�
 
 The civil war doesn't end with a winner.
 
-Dark stores didn't replace grocery stores. They exist alongside them. Ocado runs its robotic warehouses *and* partners with brick-and-mortar chains. The lights-out factory handles volume; the human-staffed facility handles exceptions, edge cases, the long tail of products that don't fit a grid.
+Dark stores didn't replace grocery stores. They exist alongside them. Ocado runs its robotic warehouses *and* partners with brick-and-mortar chains. The lights-out factory handles volume; the human-staffed facility handles exceptions, edge cases, the long tail of products that don't fit on a grid.
 
-Agent systems will settle the same way. Some domains will go fully native—structured APIs, typed contracts, deterministic tool calls. Commerce infrastructure. Financial APIs. Cloud services. Anywhere the incentive to support agents exceeds the cost of building the interface.
+I keep waiting for the clean resolution—the moment where one path obviously wins and the other becomes legacy. It hasn't come. And the longer I watch, the less I think it will.
 
-Other domains will stay in mimicry territory—legacy enterprise software, government portals, the vast sprawl of websites that will never publish a WebMCP manifest because nobody's maintaining them anymore. Agents will keep reading screens and clicking buttons there, because that's all there is.
-
-The interesting territory is the middle. The systems that start with mimicry and gradually expose native interfaces as agent traffic grows. The ones where some operations are contract-based and others still require visual reasoning. Multi-modal by necessity, not by design.
-
-That middle is where most of us will be building for the next several years.
+What I see instead is a messy middle. Systems that start with mimicry and gradually expose native interfaces as agent traffic justifies the investment. Operations where some calls go through typed contracts and others still require a model squinting at a screenshot. Not elegant. Not by design. Just the shape that real infrastructure takes when it's serving two masters at once.
 
 <Callout type="warning" title="The Protocol Fragmentation Risk">
 Four major companies, four different agent protocols. MCP, WebMCP, A2A, Nova Act. The machine-native path assumes a standard that doesn't exist yet. And standardization has a cost: standardized protocols create standardized attack surfaces.
