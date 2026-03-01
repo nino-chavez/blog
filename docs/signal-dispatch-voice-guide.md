@@ -45,7 +45,7 @@ These phrases were once authentic expressions of Nino's voice. Through repetitio
 
 ## Freshness Check (Rolling)
 
-> **Updated**: 2026-01-21
+> **Updated**: 2026-03-01
 > **Review Cadence**: After every 5 posts or monthly, whichever comes first
 
 This section tracks patterns and phrases that have appeared in *recent* posts. Even if they're not on the permanent "overused tells" list, repetition across a short window creates staleness. Avoid these in upcoming posts.
@@ -54,11 +54,16 @@ This section tracks patterns and phrases that have appeared in *recent* posts. E
 
 | Pattern/Phrase | Last Used | Cool Until |
 |----------------|-----------|------------|
-| "Here's where my head is" | 2026-01-21 | 2026-02-21 |
-| "I've been sitting with..." | 2026-01-21 | 2026-02-21 |
-| Opening with "How many..." question | 2026-01-21 | 2026-02-21 |
 | Graveyard/death metaphor for ideas | 2026-01-21 | 2026-03-21 |
-| "Not X. Y." two-word fragment ending | 2026-01-21 | 2026-02-21 |
+| Opening with a scene-setting image (no "I") | 2026-03-01 | 2026-04-01 |
+| "I should be honest about my bias here" / confessing bias | 2026-03-01 | 2026-04-01 |
+| "And that's probably where my blind spot lives" | 2026-03-01 | 2026-05-01 |
+| "Splitting X. Splitting Y. Splitting Z." anaphora | 2026-03-01 | 2026-05-01 |
+| "Both paths are stuck" / parallel dead-end framing | 2026-03-01 | 2026-04-01 |
+| "I stared at that number for a while" / staring-at-data beat | 2026-03-01 | 2026-04-01 |
+| "Sounds like a promotion. In practice..." inversion | 2026-03-01 | 2026-04-01 |
+| Brownfield/greenfield as central metaphor | 2026-03-01 | 2026-05-01 |
+| Counterpoint opener: "I just wrote about X. But something kept nagging..." | 2026-03-01 | 2026-05-01 |
 
 ### How to Use This Section
 
