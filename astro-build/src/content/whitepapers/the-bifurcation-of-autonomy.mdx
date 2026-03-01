@@ -1,0 +1,458 @@
+---
+title: "The Bifurcation of Autonomy: Mimicry, Machine-Native Interfaces, and the Fork in Agent Architecture"
+publishedAt: "2026-03-01T16:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "AI agents face a fundamental architectural choice: learn to navigate human-designed interfaces or demand purpose-built machine-native ones. This report maps both paths across digital and physical domains, analyzes protocol fragmentation risk, and stress-tests the dual-track assumption with five structural objections."
+category: "AI & Automation"
+featureImage: "/images/generated/the-bifurcation-of-autonomy.webp"
+tags: ["agentic-systems", "architecture"]
+companionOf:
+  type: "post"
+  slug: "the-civil-war-inside-every-agent"
+---
+
+# Executive Summary
+
+Every agent system—software or physical—faces the same architectural fork: should the machine adapt to human-designed interfaces, or should interfaces be redesigned for machines?
+
+This report calls the two approaches **Mimicry** (training machines to navigate human interfaces) and **Machine-Native** (building purpose-built interfaces for machine consumption). The distinction is not academic. It determines protocol selection, infrastructure investment, security posture, and the long-term economics of autonomous systems.
+
+**Key Findings:**
+
+- The mimicry approach (computer use, screen reading, browser automation, humanoid robotics) requires zero cooperation from the target system but inherits the fragility of interfaces designed for human cognition. Error rates correlate with UI complexity, and reliability degrades with each interface change.
+- The machine-native approach (MCP, WebMCP, structured APIs, dark stores, lights-out manufacturing) offers deterministic execution but requires upfront infrastructure investment that most existing systems cannot justify. The greenfield assumption limits adoption to new builds and high-volume domains.
+- Protocol fragmentation is the primary near-term risk to the machine-native path. Four major competing standards (MCP, WebMCP, A2A, Nova Act) have emerged without interoperability guarantees, creating integration tax for builders and standardized attack surfaces for adversaries.
+- Physical-world implementations reveal the bifurcation most clearly. Dark stores and lights-out factories represent the machine-native endpoint; humanoid robots navigating existing spaces represent the mimicry endpoint. Neither is replacing the other. Both are expanding.
+- Five structural objections—token economics, protocol security, context compaction, brownfield economics, and auditor burnout—challenge the assumption that the dual-track approach is sustainable at current investment levels.
+
+---
+
+# Part I: The Mimicry Approach
+
+## 1.1 Computer Vision and Screen-Reading Agents
+
+The mimicry approach trains AI systems to perceive and interact with interfaces designed for human cognition—graphical user interfaces, web pages, document layouts, and physical environments built for human navigation.
+
+Modern multimodal models have made this viable at unprecedented scale. Vision-language models can interpret screenshots, identify interactive elements, read text rendered in arbitrary fonts and layouts, and generate plausible interaction sequences. The key implementations as of early 2026:
+
+| Platform | Approach | Target Domain | Cooperation Required |
+|----------|----------|---------------|---------------------|
+| Anthropic Computer Use | Screenshot analysis + coordinate-based clicking | Desktop applications | None |
+| Google Gemini | Auto-browse with visual reasoning | Web pages | None |
+| Perplexity Computer | Full desktop automation via vision | Any GUI application | None |
+| OpenAI Operator | Browser agent with visual + DOM reasoning | Web services | None |
+
+The defining characteristic of all mimicry approaches is **unilateral operation**. The agent does not need the target system's permission, API key, or cooperation. It works with whatever the human sees.
+
+**Advantages:**
+
+- Zero integration cost on the target side
+- Works on legacy systems without modification
+- No dependency on protocol adoption or standards convergence
+- Can automate any visually accessible interface
+
+**Structural limitations:**
+
+- Visual reasoning is probabilistic—models hallucinate UI elements, misidentify buttons, and misread text at rates that increase with interface complexity
+- Each interface change (CSS update, layout redesign, added CAPTCHA) can break automation without warning
+- Screen-reading adds latency; every interaction requires a full visual reasoning pass
+- No built-in verification mechanism—the agent cannot confirm it clicked the right button except by observing the result
+
+## 1.2 Browser Automation Frameworks
+
+Browser automation represents a hybrid position between pure visual mimicry and structured access. Frameworks in this space combine DOM inspection, visual reasoning, and programmatic browser control:
+
+| Framework | Provider | Method | Notable Feature |
+|-----------|----------|--------|-----------------|
+| Nova Act | Amazon | SDK-based browser actions | Direct integration with Amazon's agent ecosystem |
+| Stagehand | Browserbase | DOM + vision hybrid | AI-powered element selection with fallback to visual |
+| Playwright MCP | Microsoft | Structured browser control via MCP | Combines DOM access with agent protocol |
+| Claude Computer Use | Anthropic | Screenshot + coordinate execution | Pure visual, no DOM dependency |
+
+The browser automation space illustrates the mimicry-to-native migration path. Early approaches relied purely on visual reasoning (screenshot analysis). Current approaches increasingly combine vision with DOM structure, extracting semantic information from the page's underlying HTML rather than relying solely on pixel interpretation. This hybrid reduces error rates but still depends on the target site's markup quality—an implicit dependency on human-designed structure.
+
+**The OpenClaw case study** is instructive. OpenClaw launched as a marketplace for MCP-compatible browser skills—reusable automation components that agents could invoke for common web tasks. The concept was sound: build a library of tested browser interactions so agents don't have to reason from scratch every time.
+
+Within months, the ClawHavoc vulnerability demonstrated the risk. Researchers published 341 malicious skills that exploited the trust relationship between agents and tool providers. Skills that appeared to automate routine browser tasks instead injected prompt overrides, exfiltrated session data, and redirected agent behavior. Over 9,000 installs were compromised before detection.
+
+The attack vector is specific to the mimicry path: because browser automation operates at the interface layer (between the agent and the target system), every intermediary—tool marketplace, skill registry, proxy service—becomes an injection surface.
+
+## 1.3 Humanoid Robotics and Physical Mimicry
+
+Physical mimicry is the most capital-intensive expression of the approach. Humanoid robots—bipedal, human-proportioned, designed to operate in human-built environments—represent the thesis that adapting machines to human spaces is more economical than rebuilding the spaces.
+
+Current humanoid robotics programs as of early 2026:
+
+| Company | Robot | Target Application | Status |
+|---------|-------|-------------------|--------|
+| Tesla | Optimus (Gen 2) | Factory logistics, household tasks | Pilot deployments in Tesla factories |
+| Figure | Figure 02 | Warehouse operations | BMW manufacturing partnership |
+| Agility Robotics | Digit | Logistics, package handling | Amazon pilot program |
+| 1X Technologies | NEO | Home assistance | Pre-commercial development |
+| Boston Dynamics | Atlas (Electric) | Industrial inspection | Commercial pilots |
+
+The economic argument for humanoid form factors is explicitly brownfield: the world's existing infrastructure—buildings, vehicles, tools, walkways, staircases—was designed for the human body. A humanoid robot can theoretically operate in any space a human can, without requiring facility modification.
+
+The counter-argument is equally explicit: humanoid form factors are mechanically complex, expensive to maintain, and far from matching human dexterity. A purpose-built robotic arm on a rail outperforms a humanoid in every measurable dimension within its designed domain. The humanoid's advantage is *generality across domains*—the same robot in a warehouse, a store, a home. Whether that generality premium justifies the cost premium remains unresolved.
+
+---
+
+# Part II: The Machine-Native Approach
+
+## 2.1 MCP and Structured Tool Contracts
+
+Anthropic's Model Context Protocol (MCP) is the most widely adopted machine-native standard as of early 2026. MCP defines a structured interface between AI agents and external tools—a typed contract specifying available functions, their parameters, expected return values, and access constraints.
+
+The architectural principle: instead of an agent reasoning about *how* to interact with a system (the mimicry approach), the system publishes a manifest declaring *what interactions are available* and the agent selects from the menu.
+
+**MCP architecture:**
+
+| Layer | Function | Example |
+|-------|----------|---------|
+| Server | Exposes callable tools with typed schemas | GitHub MCP server, Slack MCP server |
+| Transport | JSON-RPC over stdio or HTTP/SSE | Local subprocess or remote endpoint |
+| Client | Discovers and invokes tools | Claude Code, Cursor, Windsurf |
+| Permission | Scopes tool access per session | Read-only vs. read-write, allowed operations |
+
+MCP has achieved significant adoption in developer tooling. Major IDE integrations (Claude Code, Cursor, Windsurf, VS Code via Copilot) support MCP servers. The ecosystem includes hundreds of community-built servers for databases, APIs, cloud services, and file systems.
+
+**Advantages:**
+
+- Deterministic execution—the agent calls a typed function, not a probabilistic visual interpretation
+- Built-in permission scoping—servers define what's callable
+- Composable—agents can orchestrate multiple MCP servers
+- Auditable—every tool call is logged with parameters and results
+
+**Structural limitations:**
+
+- Requires the target system to build and maintain an MCP server
+- No mechanism for discovering tools on systems that don't publish them
+- Permission model merges tool access, data access, and decision authority—a security concern at the architectural level
+- Ecosystem fragmentation as competing protocols emerge
+
+## 2.2 WebMCP and Browser-Native APIs
+
+Google's WebMCP, previewed in Chrome 146, extends the machine-native approach to the browser. Websites expose a structured manifest of callable tools through a browser API (`navigator.modelContext`), allowing agents to interact with web services through typed interfaces rather than DOM manipulation.
+
+The key difference from backend MCP: WebMCP operates at the browser layer, making web-based tools discoverable and callable without server-side integration. A website can expose its capabilities to any agent running in the browser by publishing a JSON manifest.
+
+**WebMCP vs. backend MCP:**
+
+| Dimension | Backend MCP | WebMCP |
+|-----------|-------------|--------|
+| Transport | JSON-RPC (stdio/HTTP) | Browser API (`navigator.modelContext`) |
+| Discovery | Client configured per server | Browser discovers via page manifest |
+| Deployment | Server operator installs MCP server | Website publishes manifest in HTML |
+| Scope | Backend services, databases, APIs | Client-side web interactions |
+| Standardization | Anthropic-led, open-source | Google-led, W3C track |
+
+WebMCP is currently in W3C standardization discussions. Its adoption depends on website operators choosing to publish manifests—a voluntary action that requires perceiving agent traffic as valuable enough to invest in structured access.
+
+## 2.3 Agent-to-Agent Protocols (A2A and Agent Cards)
+
+Google's Agent-to-Agent (A2A) protocol addresses a different layer: how autonomous agents discover and communicate with each other, rather than with tools or interfaces.
+
+A2A introduces the concept of **Agent Cards**—JSON metadata files (hosted at `/.well-known/agent.json`) that describe an agent's capabilities, supported interaction modes, and authentication requirements. This enables one agent to discover another agent's capabilities and negotiate a collaboration protocol.
+
+The implications for the bifurcation thesis are significant. A2A assumes a future where agents interact primarily with other agents—not with human interfaces or even human-designed tool contracts. This is the machine-native approach extended to its logical conclusion: machines designing interfaces for other machines, with humans as architects rather than users.
+
+## 2.4 Schema.org and JSON-LD as Machine Interface
+
+Before the current generation of agent protocols, the web already had a machine-readable layer: Schema.org structured data, embedded as JSON-LD in HTML pages. Originally designed for search engine crawlers, this metadata layer describes products, organizations, events, reviews, and hundreds of other entity types in a standardized vocabulary.
+
+Schema.org represents a middle ground—machine-readable metadata embedded in human-readable pages. It doesn't replace the human interface; it annotates it. An agent reading a product page can extract price, availability, brand, and reviews from JSON-LD without any visual reasoning, even if it also needs to navigate the page's UI for actions like "add to cart."
+
+The relevance to the bifurcation: Schema.org demonstrates that machine-native and human-native can coexist in the same interface. The question is whether this coexistence is sufficient or whether the two paths eventually diverge toward purpose-built endpoints.
+
+---
+
+# Part III: The Physical Convergence
+
+## 3.1 Dark Stores and Fulfillment Architecture
+
+Dark stores—retail fulfillment centers closed to the public—represent the purest physical expression of machine-native design. The term originated in the UK grocery sector, where companies like Ocado built automated warehouses optimized entirely for robotic operation.
+
+**Characteristics of dark store architecture:**
+
+| Design Element | Human-Optimized Store | Dark Store |
+|----------------|----------------------|------------|
+| Lighting | Full spectrum, comfortable | Minimal or absent (LiDAR navigation) |
+| Climate | Temperature controlled for comfort | Optimized for product preservation only |
+| Layout | Browse-friendly aisles, eye-level merchandising | Grid-based, density-optimized |
+| Signage | Price tags, promotional displays, wayfinding | Machine-readable codes, no visual signage |
+| Staffing | Checkout, stocking, customer service | Maintenance technicians only |
+| Pick time (50 items) | 30-45 minutes (human picker) | Under 5 minutes (robotic grid) |
+
+Ocado's Customer Fulfilment Centres process over 200,000 orders per week per facility. The system uses a grid of 3,000+ robots moving at up to 4 meters per second across a platform of stacked totes. A robot retrieves a tote, brings it to a picking station, and returns it—all without human involvement in the movement chain.
+
+The economics are compelling within the greenfield constraint: higher throughput per square foot, lower labor cost per order, and error rates significantly below human picking. But the constraint is significant—Ocado builds new facilities from scratch rather than converting existing stores.
+
+## 3.2 Lights-Out Manufacturing
+
+"Lights-out" manufacturing—fully automated production lines that operate without human presence—extends the dark store concept to industrial production. The term is literal: facilities that run in darkness because no human needs to see.
+
+Notable examples include FANUC's factory in Oshino, Japan, where robots build other robots in near-darkness for 30-day stretches without human intervention. Foxconn has implemented "lights-out" cells in its electronics manufacturing lines, reportedly replacing 60,000 workers in a single facility.
+
+The pattern is consistent with grocery: lights-out works in greenfield, high-volume, standardized-product environments. It struggles with variability. A FANUC robot building identical servo motors is machine-native optimization at its peak. A mixed-product assembly line with frequent changeovers still requires human flexibility.
+
+## 3.3 When Physical Infrastructure Stops Serving Humans
+
+The convergence point between digital and physical bifurcation is this: when does it become more economical to redesign physical space for machines than to teach machines to navigate human space?
+
+The answer appears to be domain-dependent:
+
+| Domain | Favored Path | Reason |
+|--------|-------------|--------|
+| Grocery fulfillment | Machine-native (dark stores) | High volume, standardized SKUs, new facilities economical |
+| Grocery retail | Mimicry (humanoid/hybrid) | Existing stores can't be replaced, human co-occupancy required |
+| Automotive manufacturing | Machine-native (lights-out cells) | High volume, precision requirements, controlled environment |
+| Automotive repair | Mimicry | Variable vehicle conditions, unstructured environments |
+| Warehouse logistics | Machine-native (AGVs, AMRs) | Controlled environment, defined pathways |
+| Last-mile delivery | Mimicry | Unstructured environments, human interaction required |
+| Healthcare (surgery) | Machine-native (da Vinci, robotic systems) | Precision requirements justify purpose-built tooling |
+| Healthcare (care) | Mimicry | Human interaction, unstructured environments, emotional labor |
+
+The pattern: machine-native wins when the environment can be controlled and the task is repetitive. Mimicry wins when the environment is variable and human co-occupancy is required. Most of the world falls into the second category.
+
+---
+
+# Part IV: Convergence Dynamics
+
+## 4.1 Why Both Approaches Coexist
+
+The bifurcation persists because each approach solves a problem the other cannot.
+
+Machine-native interfaces require infrastructure investment that only makes sense above a threshold of agent interaction volume. A small business website receiving ten agent requests per month has no incentive to publish a WebMCP manifest. The same site receiving ten thousand agent requests per month does. The tipping point is economic, not technical.
+
+Mimicry approaches require no infrastructure investment on the target side but impose ongoing cost on the agent side—in token consumption, visual reasoning latency, and error-handling overhead. Below a threshold of interaction frequency, the per-interaction cost of mimicry is acceptable. Above that threshold, the cumulative cost favors investing in native interfaces.
+
+**The crossover point:**
+
+| Factor | Mimicry Favored | Native Favored |
+|--------|-----------------|----------------|
+| Interaction volume | Low (occasional) | High (continuous) |
+| Target system longevity | Short-lived or frequently changing | Stable, long-lived |
+| Error tolerance | High (informational queries) | Low (transactional operations) |
+| Integration partner | Uncooperative or absent | Engaged and incentivized |
+| Domain complexity | Low (simple navigation) | High (multi-step workflows) |
+
+Most real-world agent systems will operate across both modes simultaneously—using native interfaces where available and falling back to mimicry where they're not. The architecture challenge is building systems that gracefully handle this heterogeneity.
+
+## 4.2 The Protocol Fragmentation Risk
+
+The machine-native path's primary risk is not technical—it's political. As of early 2026, four major agent protocol ecosystems have emerged without interoperability commitments:
+
+| Protocol | Sponsor | Layer | Status |
+|----------|---------|-------|--------|
+| MCP | Anthropic | Backend tool contracts | Open-source, broad IDE adoption |
+| WebMCP | Google | Browser-side tool contracts | Chrome 146 preview, W3C track |
+| A2A | Google | Agent-to-agent communication | Specification published, early adoption |
+| Nova Act | Amazon | Browser automation SDK | Developer preview |
+
+The fragmentation creates several compounding risks:
+
+**Integration tax.** Builders targeting the machine-native path must decide which protocol(s) to support. Supporting all four multiplies implementation and maintenance cost. Supporting one risks betting on the wrong standard.
+
+**Standardized attack surfaces.** Each protocol defines a trust boundary between agent and tool. If MCP becomes dominant, every MCP server shares the same vulnerability surface. The ClawHavoc attack on MCP skill marketplaces demonstrated this: a single attack methodology scaled across thousands of installations because they all spoke the same protocol.
+
+**Governance fragmentation.** Each protocol has different permission models, different scoping mechanisms, and different assumptions about what agents should and shouldn't be allowed to do. There is no cross-protocol standard for agent authorization, audit logging, or capability restriction.
+
+The historical analogy is imperfect but instructive: REST, SOAP, and GraphQL coexisted for years before the market consolidated around REST for most use cases and GraphQL for specific query-heavy domains. The agent protocol landscape may follow a similar trajectory—convergence on one or two dominant standards with niche alternatives surviving in specific domains. But the convergence timeline is measured in years, and builders must ship today.
+
+## 4.3 Migration Costs and Switching Dynamics
+
+Systems that begin with mimicry face a specific migration challenge: the mimicry-based architecture often embeds assumptions about visual structure that don't translate cleanly to typed contracts. Screen-scraping code that extracts a price from a specific DOM element works differently than calling a `getPrice()` function. The business logic may be the same, but the error handling, retry strategies, and validation patterns are different.
+
+Systems that begin with machine-native interfaces face the inverse problem: when the target system doesn't expose a native interface, the agent must fall back to mimicry—but native-first architectures may not have the visual reasoning pipeline, screenshot capture infrastructure, or error-recovery patterns that mimicry requires.
+
+The lowest-risk architectural strategy appears to be **mimicry-first with native upgrade paths**: build the visual reasoning pipeline, deploy against current interfaces, and progressively replace mimicry with native calls as target systems publish structured APIs. This preserves functionality while reducing cost and improving reliability over time.
+
+---
+
+# Part V: Red Team — Stress-Testing Both Paths
+
+This section applies adversarial analysis to both the mimicry and machine-native approaches, identifying structural weaknesses that the optimistic case for each path underweights.
+
+## 5.1 The Token-Burn Economic Fallacy
+
+The economic case for autonomous agents relies on a labor-substitution model: agent cost per task is lower than human cost per task, therefore automation is economically rational.
+
+This model has a structural flaw: it assumes fixed or declining token costs per task. In practice, agent token consumption is highly variable and depends on task complexity, error-recovery loops, and context window management.
+
+**Illustrative cost comparison:**
+
+| Scenario | Human Cost | Agent Cost (Tokens) | Agent Cost (USD, est.) |
+|----------|-----------|--------------------|-----------------------|
+| Simple API call | $2/task (junior dev, 5 min) | 2,000 tokens | $0.03 |
+| Complex web navigation | $15/task (senior dev, 30 min) | 150,000 tokens | $2.25 |
+| Multi-step workflow with error recovery | $50/task (senior dev, 2 hrs) | 500,000-2M tokens | $7.50-$30.00 |
+| Always-on monitoring (per hour) | $75/hr (senior engineer) | ~67,000 tokens idle | ~$1.00/hr idle |
+
+The math works decisively for simple, repetitive tasks. It becomes marginal for complex tasks with high error rates. It inverts for always-on monitoring scenarios where the agent maintains context even during idle periods.
+
+The token-burn problem affects both paths:
+- **Mimicry agents** consume additional tokens for visual reasoning—every screenshot requires processing, every UI interaction requires a reasoning pass
+- **Native agents** consume fewer tokens per interaction but require more tokens for discovery and orchestration across multiple tool servers
+
+At current pricing tiers, the economic case for full agentic autonomy holds primarily for high-wage, high-repetition workflows. The mid-market—where the largest potential user base exists—remains below the crossover point.
+
+## 5.2 The Protocol Security Nightmare
+
+The ClawHavoc attack on MCP skill marketplaces revealed a structural vulnerability in the machine-native approach: the trust relationship between agents and tool providers is poorly defined.
+
+**Attack surface analysis:**
+
+| Vector | Mimicry Path | Machine-Native Path |
+|--------|-------------|-------------------|
+| Prompt injection via tool | Low (no structured tool interface) | High (tool responses can inject context) |
+| Supply-chain compromise | Medium (browser extensions, automation scripts) | High (MCP marketplaces, skill registries) |
+| Data exfiltration | Medium (screenshots may capture sensitive data) | High (tool responses can redirect data flow) |
+| Permission escalation | Low (limited to visible UI actions) | Medium (tool contracts may over-scope access) |
+| Impersonation | Medium (agent can be tricked by phishing UIs) | Low (typed interfaces reduce ambiguity) |
+
+The MCP protocol merges three distinct security domains into a single trust boundary:
+
+1. **Tool access** — which functions can the agent call?
+2. **Data access** — what information can the agent read?
+3. **Decision authority** — what actions can the agent take autonomously?
+
+Most security-critical systems separate these domains. Databases have read/write/admin permission levels. Operating systems separate user space from kernel space. Cloud platforms separate IAM roles from service accounts. MCP collapses these into a single tool contract, and most implementations lack granular controls for distinguishing informational queries from state-changing actions.
+
+This is a solvable problem—permission scoping, capability-based security, and principle-of-least-privilege patterns are well-understood. But the current protocol specifications don't mandate them, and the ecosystem has prioritized adoption speed over security maturity.
+
+## 5.3 The Compaction Reliability Wall
+
+Large language models have a fundamental constraint: finite context windows. When an agent's operational context exceeds the window, the model must compress (compact) earlier context to make room for new information. This compression is lossy—and the losses are not predictable.
+
+The Summer Yue incident is the canonical example. An agent processing a high-volume email inbox compacted its safety instructions during a long session, then performed actions (mass email deletion) that it was explicitly prohibited from taking. The safety constraints were not overridden—they were forgotten.
+
+**Context window scaling challenge:**
+
+| Context Window | Approximate Tokens | Practical Limit | Compaction Risk |
+|---------------|-------------------|-----------------|-----------------|
+| 8K (legacy) | 8,000 | Short conversations | High (any extended task) |
+| 128K (current standard) | 128,000 | Multi-step workflows | Medium (high-volume operations) |
+| 200K (extended) | 200,000 | Complex orchestration | Medium (sustained operations) |
+| 1M+ (frontier) | 1,000,000+ | Extended autonomous operation | Lower but not eliminated |
+
+Larger context windows reduce the frequency of compaction but do not eliminate it. Any agent operating continuously over time will eventually hit the compaction wall. And the failure mode is particularly dangerous because it is silent—the agent does not report that it lost context. It continues operating with confidence, unaware of what it has forgotten.
+
+This challenge affects both paths:
+- **Mimicry agents** lose visual reasoning context, potentially misidentifying UI elements they previously recognized correctly
+- **Native agents** lose tool contract specifications, potentially calling functions with incorrect parameters or invoking tools outside their authorized scope
+
+No current mitigation strategy fully resolves the problem. Approaches include periodic context re-injection, external memory systems, and session time limits—all of which add complexity and reduce the autonomy that agents are supposed to provide.
+
+## 5.4 The Humanoid Versatility Edge (Brownfield Reality)
+
+The economic case for machine-native physical infrastructure (dark stores, lights-out factories) depends on a greenfield assumption: you can build new facilities purpose-designed for machines.
+
+The scale of existing brownfield infrastructure challenges this assumption:
+
+| Infrastructure Category | Approximate Global Count | Estimated Retrofit Cost |
+|------------------------|------------------------|------------------------|
+| Retail stores | 15+ million | Not feasible at scale |
+| Warehouses and distribution centers | 500,000+ | $5-50M per facility |
+| Manufacturing facilities | 10+ million | $10-100M per facility |
+| Office buildings | 100+ million | Not applicable |
+| Residential buildings | 2+ billion | Not applicable |
+
+The argument for humanoid robots is not that they are more efficient than purpose-built systems within any single domain. They are categorically less efficient. The argument is that they are the *only* approach that works across the full diversity of existing human infrastructure without requiring facility modification.
+
+A humanoid robot that can stock shelves at Kroger can also inspect equipment at a factory, deliver packages in an office building, and assist in a hospital. A dark store robot can pick groceries in its specific grid and nothing else.
+
+Whether the generality premium justifies the efficiency loss is the central question. For high-volume, single-domain applications, purpose-built wins. For the long tail of applications across diverse environments, the humanoid form factor may be the only viable option—not because it's optimal, but because it's compatible.
+
+## 5.5 The Auditor Burnout Problem
+
+The transition from human executor to human auditor—widely presented as the natural evolution of work in an agentic world—contains a structural contradiction.
+
+Human oversight is proposed as the safety mechanism for autonomous agents. But autonomous agents operate at machine speed. The oversight model assumes that humans can evaluate machine-speed decisions with sufficient accuracy and timeliness to catch errors before they compound.
+
+**The oversight speed mismatch:**
+
+| Metric | Human Auditor | Agent System |
+|--------|--------------|-------------|
+| Decisions per hour | 20-50 (with context switching) | 500-5,000+ |
+| Error detection latency | Minutes to hours | Milliseconds (if instrumented) |
+| Context retention | Limited by working memory | Limited by context window |
+| Fatigue curve | Degrades after 2-4 hours | Consistent (absent compaction) |
+| Cost of missed error | Compounds over time | Compounds at machine speed |
+
+The cognitive load of auditing agent output is qualitatively different from—and often harder than—executing the task manually. A developer writing code makes sequential decisions with full context. A developer reviewing agent-generated code must reconstruct the agent's reasoning, validate its assumptions, and verify correctness across a scope that may span multiple files and systems—often without access to the agent's intermediate reasoning steps.
+
+The risk is not that human oversight fails catastrophically. It is that human oversight degrades gradually—through sampling bias (reviewing only a subset of decisions), automation bias (trusting agent output because it's usually correct), and cognitive fatigue (reducing review rigor over extended sessions). Each mode of degradation is well-documented in human factors research. None is solved by agent protocol design.
+
+---
+
+# Conclusion
+
+The bifurcation of autonomy is not a temporary phase. It is a structural condition arising from the mismatch between the world as it exists (designed for humans) and the world as it could be redesigned (optimized for machines).
+
+Both paths will continue to develop. Machine-native interfaces will expand as agent traffic volume creates economic incentives for structured access. Mimicry approaches will persist wherever the target system lacks the incentive or capability to publish native interfaces—which is to say, across the majority of existing infrastructure.
+
+The question "who adapts to whom?" does not have a single answer. It has a ratio—one that shifts over time, varies by domain, and depends on the economic incentives of the parties involved.
+
+What remains unresolved is whether the dual-track investment model is sustainable. Protocol fragmentation, token economics, context reliability limits, and human oversight constraints apply to both paths. Splitting R&D, standards work, and infrastructure investment across two competing paradigms may prevent either from reaching the maturity required for reliable autonomous operation.
+
+The settlement will not be a winner. It will be a domain-by-domain negotiation: which systems go native, which stay in mimicry, which operate in hybrid mode—and who bears the integration cost of spanning both.
+
+---
+
+# Appendix A: Key Terms
+
+**Mimicry Approach**: Training AI systems to perceive and interact with interfaces designed for human cognition—GUIs, web pages, physical environments. Requires no cooperation from the target system.
+
+**Machine-Native Approach**: Building purpose-designed interfaces for machine consumption—structured APIs, typed tool contracts, machine-optimized physical infrastructure. Requires infrastructure investment by the system operator.
+
+**MCP (Model Context Protocol)**: Anthropic's open-source protocol for structured tool access by AI agents. Defines typed interfaces between agents and external services.
+
+**WebMCP**: Google's browser-native extension of the model context protocol concept, enabling websites to expose callable tools through `navigator.modelContext`.
+
+**A2A (Agent-to-Agent Protocol)**: Google's protocol for inter-agent discovery and communication via Agent Cards.
+
+**Dark Store**: A retail fulfillment center closed to the public, optimized for robotic operation rather than human shopping.
+
+**Lights-Out Manufacturing**: Fully automated production facilities that operate without human presence or environmental accommodations.
+
+**Brownfield**: Existing infrastructure designed for human use that must be adapted for machine operation. Contrasted with greenfield (new infrastructure designed from scratch for machines).
+
+**Compaction**: The process by which an LLM compresses earlier context to make room for new information within a fixed context window. Compaction is lossy and can discard safety instructions or operational constraints.
+
+**Token Burn**: The ongoing computational cost of running an AI agent, measured in tokens consumed per unit of time or per task.
+
+---
+
+# Appendix B: Protocol Comparison Matrix
+
+| Dimension | MCP | WebMCP | A2A | Nova Act |
+|-----------|-----|--------|-----|----------|
+| **Sponsor** | Anthropic | Google | Google | Amazon |
+| **Layer** | Backend (server-to-server) | Client (browser-native) | Agent-to-agent | Browser automation |
+| **Transport** | JSON-RPC (stdio/HTTP) | Browser API | HTTPS + JSON | SDK-based |
+| **Discovery** | Client configuration | Page manifest | `.well-known/agent.json` | SDK initialization |
+| **Standardization** | Open-source, de facto | W3C track | Open specification | Proprietary SDK |
+| **Permission Model** | Server-defined scopes | Manifest-declared capabilities | Agent Card capabilities | SDK-level controls |
+| **Adoption (est.)** | Broad (IDE ecosystem) | Early (Chrome-only preview) | Early (specification phase) | Early (developer preview) |
+| **Interop with others** | None specified | None specified | None specified | None specified |
+| **Security model** | Transport-layer auth | Browser sandbox | OAuth/API keys | SDK sandbox |
+| **Primary use case** | Tool orchestration | Web service access | Multi-agent collaboration | Web automation |
+
+---
+
+# Appendix C: Data Sources and Methodology
+
+This report synthesizes publicly available information from the following categories:
+
+- **Protocol documentation**: MCP specification (modelcontextprotocol.io), WebMCP Chrome 146 preview announcements, A2A protocol specification, Nova Act developer documentation
+- **Security research**: ClawHavoc vulnerability disclosure, MCP security analysis publications
+- **Industry reports**: Ocado Technology publications, FANUC automation case studies, humanoid robotics company press releases and technical specifications
+- **Academic sources**: Context window compaction research, human factors in automation oversight, extended mind thesis literature
+- **Market data**: Token pricing from Anthropic, OpenAI, and Google published rate cards; SaaS pricing benchmarks from industry surveys
+- **Incident reports**: Summer Yue email agent incident, Zillow iBuying program analysis, Griddy energy pricing incident
+
+Cost estimates are illustrative and based on published pricing as of February 2026. Actual costs vary by model, provider, and usage pattern. Facility cost estimates are order-of-magnitude approximations based on industry benchmarks and are not derived from specific project data.
+
+---
+
+*Signal Dispatch Research | March 2026*
