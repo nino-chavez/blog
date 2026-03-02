@@ -31,8 +31,8 @@ export const GET: APIRoute = async () => {
       endpoints: {
         posts: '/api/posts.json',
         individualPost: '/api/posts/[slug].json',
-        rss: '/rss.xml',
-        fullRss: '/full-content-rss.xml',
+        rss: '/blog/rss.xml',
+        fullRss: '/blog/full-content-rss.xml',
         llmsContext: '/llms.txt',
       },
     },

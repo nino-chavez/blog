@@ -31,7 +31,7 @@ Every agent system I've built, observed, or written about is making the same cho
 
 **Path A: Mimicry.** Train the machine to navigate human-designed interfaces. Teach it to read screens, click buttons, fill forms, interpret layouts designed for human cognition. Perplexity's Computer feature does this. Google's Gemini auto-browse does this. Every "computer use" API does this. In the physical world, humanoid robots walking through grocery stores do this.
 
-**Path B: Machine-native.** Redesign the interface so the machine doesn't have to pretend to be human. Expose structured APIs. Publish tool contracts. Build [MCP servers](/blog/two-doors-for-agents/) that tell agents exactly what's callable and what isn't. In the physical world, dark stores and lights-out factories do this.
+**Path B: Machine-native.** Redesign the interface so the machine doesn't have to pretend to be human. Expose structured APIs. Publish tool contracts. Build [MCP servers](/blog/two-doors-for-agents) that tell agents exactly what's callable and what isn't. In the physical world, dark stores and lights-out factories do this.
 
 The instinct is to pick a side. Native is cleaner, more efficient, more deterministic. Mimicry is messy, slow, brittle.
 
@@ -63,11 +63,11 @@ This is what every software team building agent systems is facing, whether they'
 
 I should be honest about my bias here.
 
-My entire stack is machine-native. The [Aegis framework](https://github.com/nchavez324/aegis) is a governance layer built for agents, not adapted from human compliance processes. My CLAUDE.md files are contracts—structured instructions that tell an agent exactly what it can do, what it should avoid, and how to verify its own work. When I build MCP tool servers, I'm publishing typed interfaces with explicit parameters and return values.
+My entire stack is machine-native. My CLAUDE.md files are contracts—structured instructions that tell an agent exactly what it can do, what it should avoid, and how to verify its own work. When I build MCP tool servers, I'm publishing typed interfaces with explicit parameters and return values.
 
 I didn't arrive at this through theory. I arrived at it through a weekend debugging session.
 
-When I was building [Overnight Dev](/blog/overnight-dev-from-rage-quit-to-release-in-72-hours-with-ai-riding-shotgun/), I spent hours trying to scrape volleyball data from a website. Two different approaches. Both fragile. Both fighting the DOM. Then I opened DevTools and found the site's internal JSON API—structured, typed, comprehensive. Claude Code consumed it in minutes. What had taken hours through the human interface took five minutes through the machine-native one.
+I was building a volleyball stats app and spent hours trying to scrape data from a website. Two different approaches. Both fragile. Both fighting the DOM. Then I opened DevTools and found the site's internal JSON API—structured, typed, comprehensive. Claude Code consumed it in minutes. What had taken hours through the human interface took five minutes through the machine-native one.
 
 That experience calcified something for me. Every time I see an agent fighting a UI—clicking through dropdown menus, parsing pixel layouts, waiting for page loads—I think: *there's a JSON endpoint behind this. Someone just hasn't exposed it yet.*
 
@@ -95,9 +95,9 @@ The brownfield reality is this: retrofitting the world's existing infrastructure
 
 ## The Pattern I Missed for Twelve Months
 
-I wrote ["Unmarked Roads"](/blog/youre-sending-self-driving-cars-down-unmarked-roads/) last June. The argument: your data isn't ready for AI because it was optimized for humans, not machines. That was the machine-native argument applied to data infrastructure.
+I wrote about "unmarked roads" last June—the argument that your data isn't ready for AI because it was optimized for humans, not machines. That was the machine-native argument applied to data infrastructure.
 
-I wrote ["Two Doors for Agents"](/blog/two-doors-for-agents/) three weeks ago. The argument: the industry is split between exploratory agents and contract-based agents—and the protocols are fragmenting.
+I wrote ["Two Doors for Agents"](/blog/two-doors-for-agents) three weeks ago. The argument: the industry is split between exploratory agents and contract-based agents—and the protocols are fragmenting.
 
 Same question. Different angles. I just didn't see the through-line until I started looking at dark stores.
 
@@ -131,4 +131,4 @@ But there's a harder question underneath all of this. One I keep circling back t
 
 If we're splitting investment, R&D, and standards work across two competing paradigms—teaching machines to navigate our world *and* rebuilding our world for machines—does either path get the critical mass it needs to actually work reliably?
 
-That's [the next post](/blog/what-if-the-fork-is-the-problem/).
+That's [the next post](/blog/what-if-the-fork-is-the-problem).
