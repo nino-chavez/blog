@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The 7-10 Year Evolution of the Web</title>
+  <meta name="author" content="Nino Chavez">
+  <meta name="description" content="From scroll to stream, from search to answers. How AI agents will reshape traffic, revenue, and trust across the internet.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-violet': '#6366f1',
+            'brand-navy': '#1e1b4b',
+            'brand-slate': '#0f172a',
+          },
+          fontFamily: {
+            display: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+
+    /* ============================================
+       SIGNAL DISPATCH PRESENTATION DESIGN SYSTEM
+       Based on Signal Forge reference implementation
+       ============================================ */
+
+    /* CSS Custom Properties (Design Tokens) */
+    :root {
+      --brand-violet: #6366f1;
+      --brand-navy: #1e1b4b;
+      --brand-slate: #0f172a;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--brand-slate);
+      color: #fafafa;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    /* ============================================
+       PRESENTATION CONTAINER
+       ============================================ */
+    .presentation-container {
+      position: fixed;
+      top: 59px;
+      left: 0;
+      right: 0;
+      bottom: 28px;
+      font-family: 'Inter', system-ui, sans-serif;
+      overflow: hidden;
+    }
+
+    /* ============================================
+       BASE SLIDE STYLING
+       ============================================ */
+    .presentation-container .slide {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      flex-direction: column;
+      background: linear-gradient(to bottom right, var(--brand-slate), var(--brand-navy), var(--brand-slate));
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 3rem 2rem 4rem 2rem;
+      box-sizing: border-box;
+    }
+
+    .presentation-container .slide.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .presentation-container .slide.active {
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+    .animate-pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
+
+    /* ============================================
+       TYPOGRAPHY
+       ============================================ */
+    .presentation-container .slide h1 {
+      font-size: 3.75rem;
+      font-weight: 800;
+      color: #fafafa;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.5rem;
+    }
+
+    .presentation-container .slide h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #fafafa;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 3rem;
+    }
+
+    .presentation-container .slide h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fafafa;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+
+    .presentation-container .slide p {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .presentation-container .slide strong {
+      color: #fafafa;
+      font-weight: 600;
+    }
+
+    .presentation-container .slide em {
+      color: var(--accent-cyan);
+      font-style: italic;
+    }
+
+    /* ============================================
+       SECTION LABELS
+       ============================================ */
+    .presentation-container .section-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .presentation-container .section-label.amber { color: var(--accent-amber); }
+    .presentation-container .section-label.cyan { color: var(--accent-cyan); }
+    .presentation-container .section-label.emerald { color: var(--accent-emerald); }
+    .presentation-container .section-label.violet { color: var(--brand-violet); }
+    .presentation-container .section-label.red { color: #f87171; }
+    .presentation-container .section-label.rose { color: #fb7185; }
+    .presentation-container .section-label.neutral { color: rgba(255, 255, 255, 0.4); }
+
+    /* ============================================
+       CONTENT CARDS
+       ============================================ */
+    .presentation-container .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .presentation-container .card.highlighted {
+      background: linear-gradient(to bottom right, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.1));
+      border-color: rgba(99, 102, 241, 0.3);
+      box-shadow: 0 0 40px rgba(99, 102, 241, 0.3);
+    }
+
+    .presentation-container .card.terminal {
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .presentation-container .card.warning {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: rgba(239, 68, 68, 0.2);
+    }
+
+    .presentation-container .card.success {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.2);
+    }
+
+    /* ============================================
+       CALLOUT BLOCKS
+       ============================================ */
+    .presentation-container .callout {
+      background: linear-gradient(to right, rgba(99, 102, 241, 0.1), transparent);
+      border-left: 4px solid var(--brand-violet);
+      padding: 1.5rem;
+      border-radius: 0 0.75rem 0.75rem 0;
+      margin-top: 2rem;
+    }
+
+    .presentation-container .callout.amber {
+      background: linear-gradient(to right, rgba(245, 158, 11, 0.1), transparent);
+      border-left-color: var(--accent-amber);
+    }
+
+    .presentation-container .callout.cyan {
+      background: linear-gradient(to right, rgba(6, 182, 212, 0.1), transparent);
+      border-left-color: var(--accent-cyan);
+    }
+
+    .presentation-container .callout.emerald {
+      background: linear-gradient(to right, rgba(16, 185, 129, 0.1), transparent);
+      border-left-color: var(--accent-emerald);
+    }
+
+    .presentation-container .callout.violet {
+      background: linear-gradient(to right, rgba(99, 102, 241, 0.1), transparent);
+      border-left-color: var(--brand-violet);
+    }
+
+    .presentation-container .callout.rose {
+      background: linear-gradient(to right, rgba(251, 113, 133, 0.1), transparent);
+      border-left-color: #fb7185;
+    }
+
+    .presentation-container .callout.red {
+      background: linear-gradient(to right, rgba(239, 68, 68, 0.1), transparent);
+      border-left-color: #f87171;
+    }
+
+    .presentation-container .callout p {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 0;
+    }
+
+    /* ============================================
+       TITLE BADGE
+       ============================================ */
+    .presentation-container .title-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(99, 102, 241, 0.2);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 9999px;
+      color: var(--brand-violet);
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
+
+    .presentation-container .title-badge .pulse-dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background: var(--brand-violet);
+      animation: pulse-slow 3s ease-in-out infinite;
+    }
+
+    /* ============================================
+       LISTS
+       ============================================ */
+    .presentation-container .slide ul,
+    .presentation-container .slide ol {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.8;
+      text-align: left;
+      margin: 1.5rem 0;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .presentation-container .slide li {
+      margin-bottom: 0.75rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .presentation-container .slide ul li::before {
+      content: '\2192';
+      position: absolute;
+      left: 0;
+      color: var(--brand-violet);
+      font-weight: 600;
+    }
+
+    /* Suppress arrows for list-none (inline markers) */
+    .presentation-container .slide ul.list-none li::before {
+      display: none;
+    }
+    .presentation-container .slide ul.list-none li {
+      padding-left: 0;
+    }
+
+    .presentation-container .slide ol { counter-reset: item; }
+    .presentation-container .slide ol li { counter-increment: item; }
+    .presentation-container .slide ol li::before {
+      content: counter(item);
+      position: absolute;
+      left: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: rgba(99, 102, 241, 0.2);
+      color: var(--brand-violet);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      top: 0.2rem;
+    }
+
+    /* ============================================
+       CODE BLOCKS
+       ============================================ */
+    .presentation-container .slide code {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(0, 0, 0, 0.4);
+      color: var(--accent-cyan);
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.9em;
+    }
+
+    .presentation-container .slide pre,
+    .presentation-container .code-block {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.75rem;
+      padding: 1rem 1.5rem;
+      overflow-x: auto;
+      text-align: left;
+      margin: 1.5rem 0;
+    }
+
+    .presentation-container .slide pre code,
+    .presentation-container .code-block code {
+      background: transparent;
+      padding: 0;
+      font-size: 0.875rem;
+      white-space: pre;
+    }
+
+    /* ============================================
+       TABLES
+       ============================================ */
+    .presentation-container .slide table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      overflow: hidden;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .presentation-container .slide th {
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 600;
+      padding: 1rem 1.25rem;
+      text-align: left;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .presentation-container .slide td {
+      padding: 1rem 1.25rem;
+      color: rgba(255, 255, 255, 0.7);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .presentation-container .slide tr:last-child td { border-bottom: none; }
+    .presentation-container .slide tr:hover td { background: rgba(255, 255, 255, 0.03); }
+
+    /* ============================================
+       BLOCKQUOTES
+       ============================================ */
+    .presentation-container .slide blockquote {
+      border-left: 4px solid var(--brand-violet);
+      padding-left: 1.5rem;
+      font-size: 1.5rem;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 2rem 0;
+    }
+
+    .presentation-container .slide blockquote p {
+      font-size: inherit;
+      margin-bottom: 0;
+    }
+
+    /* ============================================
+       LAYOUT: TITLE SLIDE
+       ============================================ */
+    .presentation-container .slide[data-layout="title"] {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .presentation-container .slide[data-layout="title"] > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .presentation-container .slide[data-layout="title"] h1 {
+      font-size: 3.75rem;
+      background: linear-gradient(to right, #fafafa, rgba(250, 250, 250, 0.6));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .presentation-container .slide[data-layout="title"] p {
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 0.5);
+      max-width: 600px;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .presentation-container .slide[data-layout="title"] p strong {
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.8);
+      display: block;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .presentation-container .slide[data-layout="title"] em {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.3);
+      display: block;
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    /* ============================================
+       LAYOUT: DEFAULT
+       ============================================ */
+    .presentation-container .slide[data-layout="default"] {
+      justify-content: center;
+      align-items: center;
+    }
+
+    .presentation-container .slide[data-layout="default"] > div {
+      max-width: 64rem;
+      width: 100%;
+    }
+
+    /* ============================================
+       LAYOUT: TABLE
+       ============================================ */
+    .presentation-container .slide[data-layout="table"] {
+      justify-content: center;
+      align-items: center;
+    }
+
+    .presentation-container .slide[data-layout="table"] > div {
+      max-width: 64rem;
+      width: 100%;
+    }
+
+    /* ============================================
+       LAYOUT: GRID
+       ============================================ */
+    .presentation-container .slide[data-layout="grid"] {
+      justify-content: center;
+      align-items: center;
+    }
+
+    .presentation-container .slide[data-layout="grid"] > div {
+      max-width: 64rem;
+      width: 100%;
+    }
+
+    /* ============================================
+       LAYOUT: QUOTE
+       ============================================ */
+    .presentation-container .slide[data-layout="quote"] {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .presentation-container .slide[data-layout="quote"] blockquote {
+      font-size: 2rem;
+      border-left: none;
+      padding: 0;
+      text-align: center;
+      max-width: 800px;
+    }
+
+    .presentation-container .slide[data-layout="quote"] blockquote::before {
+      content: '\201C';
+      font-size: 5rem;
+      color: var(--brand-violet);
+      line-height: 1;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ============================================
+       NAVIGATION
+       ============================================ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-icon {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.5rem;
+      background: linear-gradient(to bottom right, var(--brand-violet), #ea580c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-btn {
+      padding: 0.375rem 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 0.5rem;
+      transition: all 0.15s;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: transparent;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #fafafa;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .nav-btn-primary {
+      background: var(--brand-violet);
+      border-color: var(--brand-violet);
+      color: #fafafa;
+    }
+
+    .nav-btn-primary:hover:not(:disabled) {
+      background: rgba(99, 102, 241, 0.8);
+    }
+
+    .slide-counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.4);
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .progress-bar {
+      position: fixed;
+      top: 57px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(to right, var(--brand-violet), #ea580c);
+      transition: width 0.3s;
+    }
+
+    /* ============================================
+       RESPONSIVE - TABLET
+       ============================================ */
+    @media (max-width: 768px) {
+      .presentation-container .slide {
+        padding: 4rem 1.25rem 2rem 1.25rem;
+      }
+
+      .presentation-container .slide h1 { font-size: 2.25rem; margin-bottom: 1rem; }
+      .presentation-container .slide h2 { font-size: 1.75rem; margin-bottom: 2rem; }
+      .presentation-container .slide h3 { font-size: 1.125rem; }
+      .presentation-container .slide p { font-size: 1rem; line-height: 1.6; }
+
+      .presentation-container .slide[data-layout="title"] h1 { font-size: 2.25rem; }
+      .presentation-container .slide[data-layout="title"] p strong { font-size: 1.25rem; margin-bottom: 1.5rem; }
+
+      .presentation-container .card { padding: 1.25rem; margin-bottom: 1.5rem; }
+      .presentation-container .callout { padding: 1.25rem; margin-top: 1.5rem; }
+      .presentation-container .callout p { font-size: 1rem; }
+    }
+
+    /* ============================================
+       RESPONSIVE - MOBILE
+       ============================================ */
+    @media (max-width: 480px) {
+      .presentation-container .slide {
+        padding: 3.5rem 1rem 1.5rem 1rem;
+        min-height: calc(100vh - 48px);
+      }
+
+      .presentation-container .slide h1 { font-size: 1.75rem; }
+      .presentation-container .slide h2 { font-size: 1.375rem; margin-bottom: 1.5rem; }
+      .presentation-container .slide h3 { font-size: 1rem; }
+      .presentation-container .slide p { font-size: 0.9375rem; }
+
+      .presentation-container .slide[data-layout="title"] h1 { font-size: 1.75rem; }
+
+      .presentation-container .card { padding: 1rem; margin-bottom: 1rem; border-radius: 0.75rem; }
+      .presentation-container .callout { padding: 1rem; margin-top: 1rem; }
+      .presentation-container .callout p { font-size: 0.9375rem; }
+      .presentation-container .section-label { font-size: 0.75rem; }
+      .presentation-container .title-badge { padding: 0.25rem 0.625rem; font-size: 0.6875rem; margin-bottom: 1rem; }
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-title">
+      <div class="nav-icon">
+        <svg class="w-4 h-4" fill="none" stroke="white" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+        </svg>
+      </div>
+      <span style="color: rgba(255,255,255,0.9); font-weight: 600;" class="hidden sm:inline">The 7-10 Year Evolution of the Web</span>
+    </div>
+    <div class="nav-controls">
+      <button id="prevBtn" class="nav-btn" disabled>&larr; <span class="hidden sm:inline">Previous</span></button>
+      <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">18</span></span>
+      <button id="nextBtn" class="nav-btn nav-btn-primary"><span class="hidden sm:inline">Next</span> &rarr;</button>
+    </div>
+  </nav>
+
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress" style="width: 5.555555555555555%"></div>
+  </div>
+
+  <!-- Slides -->
+  <main class="presentation-container">
+    
+    <section class="slide active" data-slide="1" data-layout="title">
+      <div class="slide-content">
+        <div class="title-badge"><span class="pulse-dot"></span>Strategic Research Brief - September 2025</div>
+
+<h1>The 7-10 Year Evolution of the Web</h1>
+
+<strong>From Scroll to Stream, From Search to Answers</strong>
+
+<p>The architecture of the internet is shifting beneath us.</p>
+<span class="text-cyan-400 font-semibold">The question isn't whether—it's how fast.</span>
+
+<div class="mt-16 text-sm text-white/30">
+<p>How AI agents will reshape traffic, revenue, and trust across the internet</p>
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="2" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label amber">The Shift</div>
+
+<h2>We're Leaving the Age of the Page</h2>
+
+<div class="card">
+<div class="text-white/60 text-sm uppercase tracking-wider mb-6">Three decades of the same loop:</div>
+
+<div class="space-y-4">
+  <div class="flex items-start gap-4">
+    <span class="flex-shrink-0 w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">1</span>
+    <p class="text-lg text-white/80">Search — type keywords into a box</p>
+  </div>
+  <div class="flex items-start gap-4">
+    <span class="flex-shrink-0 w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">2</span>
+    <p class="text-lg text-white/80">Scroll — scan a ranked list of links</p>
+  </div>
+  <div class="flex items-start gap-4">
+    <span class="flex-shrink-0 w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">3</span>
+    <p class="text-lg text-white/80">Click — visit a page, maybe find what you need</p>
+  </div>
+</div>
+</div>
+
+<div class="callout amber"><p>
+<strong>That loop built the entire digital economy.</strong> Advertising, publishing, e-commerce, SEO—every business model on the web traces back to this three-step pattern. Now it's breaking.
+</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="3" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label cyan">The Paradigm</div>
+
+<h2>From Scroll to Ask</h2>
+
+<p class="text-xl text-white/60 mb-10">The fundamental interface is inverting.</p>
+
+<div class="grid grid-cols-2 gap-8 mb-8">
+  <div class="card">
+    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="text-amber-400">●</span> The Old Paradigm
+    </h3>
+    <ul class="list-none space-y-3 text-white/60">
+      <li class="flex items-start gap-2">
+        <span class="text-amber-400 mt-1">→</span>
+<p>User formulates a query</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-amber-400 mt-1">→</span>
+<p>Engine returns ranked links</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-amber-400 mt-1">→</span>
+<p>User evaluates which to trust</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-amber-400 mt-1">→</span>
+<p>Discernment is distributed</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="text-cyan-400">●</span> The New Paradigm
+    </h3>
+    <ul class="list-none space-y-3 text-white/60">
+      <li class="flex items-start gap-2">
+        <span class="text-cyan-400 mt-1">→</span>
+<p>User asks a question</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-cyan-400 mt-1">→</span>
+<p>Agent synthesizes an answer</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-cyan-400 mt-1">→</span>
+<p>Links serve as validation, not destinations</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-cyan-400 mt-1">→</span>
+<p>Discernment is centralized</p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-6">
+<strong>Already happening:</strong> Microsoft Copilot in Edge, Perplexity AI, Arc Search, ChatGPT with browsing. The URL bar persists—but it's no longer the dominant point of entry.
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="4" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label amber">The Economics</div>
+
+<h2>The Ad Model Fractures</h2>
+
+<p class="text-xl text-white/60 mb-10">Three pillars of the digital economy, all under pressure.</p>
+
+<div class="overflow-hidden rounded-2xl border border-white/10 mb-8">
+  <table class="w-full">
+    <thead>
+      <tr class="bg-white/5">
+        <th class="text-left p-4 font-semibold text-white/60 text-sm uppercase tracking-wider">Sector</th>
+        <th class="text-left p-4 font-semibold text-white/60 text-sm uppercase tracking-wider">Current Model</th>
+        <th class="text-left p-4 font-semibold text-cyan-400 text-sm uppercase tracking-wider">Agent-Era Model</th>
+        <th class="text-left p-4 font-semibold text-white/60 text-sm uppercase tracking-wider">Impact</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-white/5">
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Advertising</td>
+        <td class="p-4 text-white/60">Impressions, clicks, pageviews</td>
+        <td class="p-4 text-cyan-400">Sponsored answers in agent responses</td>
+        <td class="p-4 text-rose-400">25-45% CTR decline when AI summaries appear</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Content</td>
+        <td class="p-4 text-white/60">Pages as destinations</td>
+        <td class="p-4 text-cyan-400">Structured data feeds, API licensing</td>
+        <td class="p-4 text-rose-400">Unlicensed content risks invisibility</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Retail</td>
+        <td class="p-4 text-white/60">Multi-step funnels</td>
+        <td class="p-4 text-cyan-400">Single-turn conversational purchase</td>
+        <td class="p-4 text-rose-400">Storefronts become infrastructure</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="callout amber"><p>
+<strong>The redistribution:</strong> Revenue moves away from open web inventory toward platform-controlled agent surfaces. The middleman changes, but the dynamic doesn't.
+</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="5" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label amber">Commerce</div>
+
+<h2>E-Commerce Funnels Collapse</h2>
+
+<div class="grid grid-cols-2 gap-8 mb-8">
+  <div class="card">
+    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="text-amber-400">●</span> Traditional Funnel
+    </h3>
+    <div class="bg-black/40 rounded-lg p-4 font-mono text-sm text-white/60 mb-4">
+<p>Awareness → Interest → Consideration → Intent → Purchase</p>
+    </div>
+    <ul class="list-none space-y-3 text-white/60">
+      <li class="flex items-start gap-2">
+        <span class="text-amber-400 mt-1">→</span>
+<p>Multiple touchpoints across sessions</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-amber-400 mt-1">→</span>
+<p>Brand differentiation at every stage</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-amber-400 mt-1">→</span>
+<p>Storefront as competitive advantage</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="text-cyan-400">●</span> Agent-Mediated Commerce
+    </h3>
+    <div class="bg-black/40 rounded-lg p-4 font-mono text-sm text-cyan-400 mb-4">
+<p>Ask → Compare → Buy (single conversation)</p>
+    </div>
+    <ul class="list-none space-y-3 text-white/60">
+      <li class="flex items-start gap-2">
+        <span class="text-cyan-400 mt-1">→</span>
+<p>Discovery, evaluation, purchase in one flow</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-cyan-400 mt-1">→</span>
+<p>Agent selects on specs, reviews, price</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-cyan-400 mt-1">→</span>
+<p>Storefront becomes fulfillment layer</p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="bg-rose-500/10 border border-rose-500/20 rounded-xl p-6">
+<strong>The threat to brands:</strong> When an agent comparison-shops, the differentiator isn't your homepage design or checkout UX. It's structured data, reviews, and API accessibility. Retail becomes logistics.
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="6" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label violet">The Analogy</div>
+
+<h2>Streaming Is the Right Analogy</h2>
+
+<p class="text-xl text-white/60 mb-10">Every content industry follows the same arc.</p>
+
+<div class="overflow-hidden rounded-2xl border border-white/10 mb-8">
+  <table class="w-full">
+    <thead>
+      <tr class="bg-white/5">
+        <th class="text-left p-4 font-semibold text-white/60 text-sm uppercase tracking-wider">Industry</th>
+        <th class="text-left p-4 font-semibold text-white/60 text-sm uppercase tracking-wider">Pre-Disruption</th>
+        <th class="text-left p-4 font-semibold text-white/60 text-sm uppercase tracking-wider">Resistance Phase</th>
+        <th class="text-left p-4 font-semibold text-cyan-400 text-sm uppercase tracking-wider">Post-Disruption</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-white/5">
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Film</td>
+        <td class="p-4 text-white/60">Box office + DVD sales</td>
+        <td class="p-4 text-white/60">Sued Napster, blocked Netflix</td>
+        <td class="p-4 text-cyan-400">Licensed to streamers, lost leverage</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Music</td>
+        <td class="p-4 text-white/60">Album sales + radio</td>
+        <td class="p-4 text-white/60">DRM, lawsuits, walled gardens</td>
+        <td class="p-4 text-cyan-400">Per-stream royalties, platform dependence</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors bg-indigo-500/10">
+        <td class="p-4 font-medium text-white">Web Content</td>
+        <td class="p-4 text-amber-400">Pageviews + ad inventory</td>
+        <td class="p-4 text-amber-400">Blocking scrapers, suing AI companies</td>
+        <td class="p-4 text-cyan-400 font-semibold">Licensing deals, structured feeds, API access</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-6">
+<strong>The lesson:</strong> Aggregators consolidate distribution power. Producers lose direct audience access. Revenue compresses. The web is having its "streaming moment"—AI agents are the next aggregators.
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="7" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label emerald">New Markets</div>
+
+<h2>The Secondary Economy</h2>
+
+<p class="text-xl text-white/60 mb-10">When the primary model fractures, secondary markets emerge.</p>
+
+<div class="grid grid-cols-3 gap-6 mb-8">
+  <div class="card">
+    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="text-emerald-400">●</span> Content Licensing
+    </h3>
+    <p class="text-white/70 mb-4">Publishers license archives to AI platforms</p>
+    <ul class="list-none space-y-2 text-white/60 text-sm">
+      <ul><li>• OpenAI/News Corp deals</li>
+</ul>      <ul><li>• Per-query revenue sharing</li>
+</ul>      <ul><li>• Structured data as asset class</li>
+</ul>    </ul>
+  </div>
+
+  <div class="card">
+    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="text-cyan-400">●</span> Agent Placement
+    </h3>
+    <p class="text-white/70 mb-4">Brands pay for position in agent responses</p>
+    <ul class="list-none space-y-2 text-white/60 text-sm">
+      <ul><li>• Sponsored answers</li>
+</ul>      <ul><li>• Preferred vendor APIs</li>
+</ul>      <ul><li>• Agent-optimized product data</li>
+</ul>    </ul>
+  </div>
+
+  <div class="card">
+    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="text-violet-400">●</span> Verification Services
+    </h3>
+    <p class="text-white/70 mb-4">Trust infrastructure for agent-mediated content</p>
+    <ul class="list-none space-y-2 text-white/60 text-sm">
+      <ul><li>• Source attribution layers</li>
+</ul>      <ul><li>• Fact-checking APIs</li>
+</ul>      <ul><li>• Provenance certification</li>
+</ul>    </ul>
+  </div>
+</div>
+
+<div class="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-6">
+<strong>The pattern:</strong> Every disruption creates losers in the primary economy and winners in the secondary. The question is which side of the transition you're building for.
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="8" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label rose">Epistemics</div>
+
+<h2>The Trust Problem</h2>
+
+<div class="bg-rose-500/10 border border-rose-500/20 rounded-xl p-6 mb-8">
+<div class="text-white/60 text-sm uppercase tracking-wider mb-4">The most significant risk isn't economic—it's epistemic.</div>
+
+<p class="text-xl text-white/90 leading-relaxed mb-6">
+<p>When scrolling disappears, so does comparison. The first answer an agent delivers becomes, by default, <span class="text-rose-400 font-semibold">the accepted answer</span>.</p>
+</p>
+
+<p class="text-lg text-white/70">
+<p>Authority once distributed across billions of pages is concentrated within a handful of platforms controlling ingestion and ranking.</p>
+</p>
+</div>
+
+<div class="callout rose"><p>
+<strong>The concentration of truth:</strong> We're moving from distributed human discernment (imperfect but pluralistic) to centralized algorithmic synthesis (efficient but monopolistic). The tradeoff is real and underexamined.
+</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="9" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label cyan">Discovery</div>
+
+<h2>AEO Replaces SEO</h2>
+
+<p class="text-xl text-white/60 mb-10">Answer Engine Optimization is the successor to Search Engine Optimization.</p>
+
+<div class="overflow-hidden rounded-2xl border border-white/10 mb-8">
+  <table class="w-full">
+    <thead>
+      <tr class="bg-white/5">
+        <th class="text-left p-4 font-semibold text-white/60 text-sm uppercase tracking-wider">Dimension</th>
+        <th class="text-left p-4 font-semibold text-amber-400 text-sm uppercase tracking-wider">SEO (Search Era)</th>
+        <th class="text-left p-4 font-semibold text-cyan-400 text-sm uppercase tracking-wider">AEO (Agent Era)</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-white/5">
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Goal</td>
+        <td class="p-4 text-white/60">Rank on page one</td>
+        <td class="p-4 text-cyan-400">Be cited in the answer</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Currency</td>
+        <td class="p-4 text-white/60">Keywords, backlinks</td>
+        <td class="p-4 text-cyan-400">Structured data, schema markup</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Output</td>
+        <td class="p-4 text-white/60">Blue links</td>
+        <td class="p-4 text-cyan-400">Synthesized answers with citations</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Competition</td>
+        <td class="p-4 text-white/60">10 slots per page</td>
+        <td class="p-4 text-cyan-400">1-3 cited sources per answer</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Manipulation</td>
+        <td class="p-4 text-white/60">Keyword stuffing, link farms</td>
+        <td class="p-4 text-cyan-400">Data poisoning, schema manipulation</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-6">
+<strong>The compression:</strong> SEO had 10 results per page. AEO has 1-3 citations per answer. The winner-take-all dynamic intensifies by an order of magnitude.
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="10" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label rose">The Risks</div>
+
+<h2>Gaming the Answer</h2>
+
+<div class="bg-rose-500/10 border border-rose-500/20 rounded-xl p-6 mb-8">
+<div class="text-white/60 text-sm uppercase tracking-wider mb-4">New incentives create new attack surfaces.</div>
+
+<p class="text-lg text-white/90 leading-relaxed">
+<p>Every optimization regime creates a manipulation regime. SEO had link farms. AEO will have its own dark arts.</p>
+</p>
+</div>
+
+<div class="space-y-4 mb-8">
+  <div class="flex items-start gap-4">
+    <span class="flex-shrink-0 w-8 h-8 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold">1</span>
+    <div>
+      <p class="text-lg text-white/80 font-medium">Data Poisoning</p>
+      <p class="text-white/50">Injecting misleading structured data to manipulate agent responses</p>
+    </div>
+  </div>
+  <div class="flex items-start gap-4">
+    <span class="flex-shrink-0 w-8 h-8 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold">2</span>
+    <div>
+      <p class="text-lg text-white/80 font-medium">Paid Inclusion</p>
+      <p class="text-white/50">Undisclosed commercial relationships influencing agent citations</p>
+    </div>
+  </div>
+  <div class="flex items-start gap-4">
+    <span class="flex-shrink-0 w-8 h-8 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold">3</span>
+    <div>
+      <p class="text-lg text-white/80 font-medium">Authority Spoofing</p>
+      <p class="text-white/50">Manufacturing signals that make sources appear more authoritative to ingestion models</p>
+    </div>
+  </div>
+  <div class="flex items-start gap-4">
+    <span class="flex-shrink-0 w-8 h-8 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold">4</span>
+    <div>
+      <p class="text-lg text-white/80 font-medium">Feedback Loop Capture</p>
+      <p class="text-white/50">Optimizing content to be cited, which increases authority, which increases citation</p>
+    </div>
+  </div>
+</div>
+
+<div class="callout rose"><p>
+<strong>The uncomfortable parallel:</strong> The same people who built SEO empires are already pivoting to AEO. The manipulation won't be less sophisticated—it'll be harder to detect.
+</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="11" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label emerald">Strategy</div>
+
+<h2>Strategic Implications: Platforms</h2>
+
+<div class="grid grid-cols-2 gap-6 mb-8">
+  <div class="card">
+    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="text-cyan-400">●</span> Search Engines
+    </h3>
+    <p class="text-white/70 mb-4">Evolve or be disintermediated</p>
+    <ul class="list-none space-y-2 text-white/60 text-sm">
+      <ul><li>• Integrate agent layers (Google AI Overviews)</li>
+</ul>      <ul><li>• Defend ad revenue with sponsored answers</li>
+</ul>      <ul><li>• Acquire or build agent-native products</li>
+</ul>    </ul>
+  </div>
+
+  <div class="card">
+    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="text-emerald-400">●</span> Social Platforms
+    </h3>
+    <p class="text-white/70 mb-4">The feed survives—maybe thrives</p>
+    <ul class="list-none space-y-2 text-white/60 text-sm">
+      <ul><li>• Identity + social graph = moat</li>
+</ul>      <ul><li>• Algorithmic feed is already agent-like</li>
+</ul>      <ul><li>• User-generated content resists synthesis</li>
+</ul>    </ul>
+  </div>
+
+  <div class="card">
+    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="text-violet-400">●</span> Cloud & Infrastructure
+    </h3>
+    <p class="text-white/70 mb-4">Picks and shovels play</p>
+    <ul class="list-none space-y-2 text-white/60 text-sm">
+      <ul><li>• Compute demand explodes</li>
+</ul>      <ul><li>• Agent hosting becomes a service category</li>
+</ul>      <ul><li>• API gateway economics change</li>
+</ul>    </ul>
+  </div>
+
+  <div class="card">
+    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="text-amber-400">●</span> AI-Native Startups
+    </h3>
+    <p class="text-white/70 mb-4">Build the new stack</p>
+    <ul class="list-none space-y-2 text-white/60 text-sm">
+      <ul><li>• Perplexity, You.com, character-based agents</li>
+</ul>      <ul><li>• Vertical-specific answer engines</li>
+</ul>      <ul><li>• Compete on ingestion quality + trust</li>
+</ul>    </ul>
+  </div>
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="12" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label emerald">Strategy</div>
+
+<h2>Strategic Implications: Publishers & Retailers</h2>
+
+<div class="grid grid-cols-3 gap-6 mb-8">
+  <div class="card">
+    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="text-cyan-400">●</span> Publishers
+    </h3>
+    <ul class="list-none space-y-3 text-white/60">
+      <li class="flex items-start gap-2">
+        <span class="text-cyan-400 mt-1">→</span>
+<p>License content to AI platforms</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-cyan-400 mt-1">→</span>
+<p>Build structured data feeds</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-cyan-400 mt-1">→</span>
+<p>Develop direct audience relationships</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-cyan-400 mt-1">→</span>
+<p>Invest in brand authority signals</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="text-emerald-400">●</span> Retailers
+    </h3>
+    <ul class="list-none space-y-3 text-white/60">
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-400 mt-1">→</span>
+<p>Optimize product data for agent consumption</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-400 mt-1">→</span>
+<p>Build agent-accessible APIs</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-400 mt-1">→</span>
+<p>Compete on fulfillment, not discovery</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-400 mt-1">→</span>
+<p>Develop proprietary data advantages</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="text-violet-400">●</span> Marketplaces
+    </h3>
+    <ul class="list-none space-y-3 text-white/60">
+      <li class="flex items-start gap-2">
+        <span class="text-violet-400 mt-1">→</span>
+<p>Amazon already agent-ready (structured catalog)</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-violet-400 mt-1">→</span>
+<p>Marketplace model survives as fulfillment</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-violet-400 mt-1">→</span>
+<p>Discovery layer vulnerable to external agents</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-violet-400 mt-1">→</span>
+<p>First-party data becomes the real moat</p>
+      </li>
+    </ul>
+  </div>
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="13" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label emerald">Strategy</div>
+
+<h2>Strategic Implications: Advertisers & Developers</h2>
+
+<div class="grid grid-cols-2 gap-8 mb-8">
+  <div class="card">
+    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="text-amber-400">●</span> Advertisers
+    </h3>
+    <p class="text-white/70 mb-4">The media plan rewrites itself</p>
+    <ul class="list-none space-y-3 text-white/60">
+      <li class="flex items-start gap-2">
+        <span class="text-amber-400 mt-1">→</span>
+<p>Budget shifts from display to agent-surface sponsorship</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-amber-400 mt-1">→</span>
+<p>Attribution models break and must be rebuilt</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-amber-400 mt-1">→</span>
+<p>Brand building becomes the hedge against agent commodification</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-amber-400 mt-1">→</span>
+<p>Contextual placement in agent conversations replaces behavioral targeting</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+      <span class="text-cyan-400">●</span> Developers
+    </h3>
+    <p class="text-white/70 mb-4">The stack pivots from front-end to data-first</p>
+    <ul class="list-none space-y-3 text-white/60">
+      <li class="flex items-start gap-2">
+        <span class="text-cyan-400 mt-1">→</span>
+<p>Schema creation and structured data become core skills</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-cyan-400 mt-1">→</span>
+<p>API design matters more than UI design</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-cyan-400 mt-1">→</span>
+<p>Agent integration becomes a standard competency</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-cyan-400 mt-1">→</span>
+<p>Traditional front-end web development deprioritized</p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-6">
+<strong>The skill shift:</strong> The web developer of 2030 spends more time on data architecture and agent integration than on CSS and JavaScript frameworks. The interface layer thins as the data layer thickens.
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="14" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label neutral">Counterpoint</div>
+
+<h2>Will Agents Replace the Browser?</h2>
+
+<p class="text-xl text-white/60 mb-10">The strongest version of the argument—and why it might be wrong.</p>
+
+<div class="grid grid-cols-2 gap-8 mb-8">
+  <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+    <h3 class="font-bold text-lg mb-4 text-rose-400">The Bull Case for Replacement</h3>
+    <ul class="list-none space-y-3 text-white/60">
+      <li class="flex items-start gap-2">
+        <span class="text-rose-400 mt-1">→</span>
+<p>Conversational interfaces are more efficient for information retrieval</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-rose-400 mt-1">→</span>
+<p>Agents can act, not just answer—book, buy, schedule</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-rose-400 mt-1">→</span>
+<p>Mobile already reduced browsing to app-hopping</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-rose-400 mt-1">→</span>
+<p>Younger users default to AI for research</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+    <h3 class="font-bold text-lg mb-4 text-emerald-400">The Bear Case Against</h3>
+    <ul class="list-none space-y-3 text-white/60">
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-400 mt-1">→</span>
+<p>Visual browsing (shopping, design, entertainment) resists text synthesis</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-400 mt-1">→</span>
+<p>Regulatory friction on agent-mediated transactions</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-400 mt-1">→</span>
+<p>Browser vendors will absorb agent features, not cede ground</p>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-400 mt-1">→</span>
+<p>Serendipity and exploration have value agents can't replicate</p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-6">
+<strong>My read:</strong> The browser doesn't die. It evolves. Agent capabilities get embedded inside the browser, not outside it. Chrome with Gemini built in is more likely than a Gemini app that replaces Chrome.
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="15" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label cyan">The Exception</div>
+
+<h2>The Social Media Exception</h2>
+
+<div class="bg-gradient-to-br from-cyan-500/10 to-indigo-500/10 border border-cyan-500/20 rounded-xl p-6 mb-8">
+<p class="text-xl text-white/90 leading-relaxed mb-4">
+<p>Social media is the <span class="text-cyan-400 font-semibold">one part of the web</span> that may be largely immune to agent disruption.</p>
+</p>
+
+<div class="grid grid-cols-2 gap-6 mt-6">
+  <div>
+    <h4 class="font-semibold text-white mb-3">Why the feed survives:</h4>
+    <ul class="list-none space-y-2 text-white/70 text-sm">
+      <ul><li>• Identity is the product, not information</li>
+</ul>      <ul><li>• Social graphs can't be synthesized</li>
+</ul>      <ul><li>• The feed is already an agent (algorithmic curation)</li>
+</ul>      <ul><li>• User-generated content is the moat</li>
+</ul>    </ul>
+  </div>
+  <div>
+    <h4 class="font-semibold text-white mb-3">Where agents do penetrate:</h4>
+    <ul class="list-none space-y-2 text-white/70 text-sm">
+      <ul><li>• Content creation (AI-generated posts)</li>
+</ul>      <ul><li>• Comment moderation</li>
+</ul>      <ul><li>• Ad targeting and placement</li>
+</ul>      <ul><li>• Trend detection and curation</li>
+</ul>    </ul>
+  </div>
+</div>
+</div>
+
+<div class="callout cyan"><p>
+<strong>The strongest call in this deck:</strong> Social platforms survive because they sell identity and connection, not information. You can't synthesize a friend's opinion into an agent response. The feed is the one interface that agents augment rather than replace.
+</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="16" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label violet">The Arc</div>
+
+<h2>The Web Unbundles and Rebundles</h2>
+
+<p class="text-xl text-white/60 mb-10">This isn't new. The web has always oscillated between bundling and unbundling.</p>
+
+<div class="space-y-6 mb-8">
+  <div class="flex items-start gap-6">
+    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold border border-amber-500/30">1</div>
+    <div>
+      <h3 class="font-bold text-lg text-white mb-1">The Portal Era <span class="text-white/40 font-normal">(1995-2005)</span></h3>
+      <p class="text-white/60">Yahoo, AOL bundled everything. One destination for news, email, search, shopping.</p>
+    </div>
+  </div>
+  <div class="flex items-start gap-6">
+    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold border border-cyan-500/30">2</div>
+    <div>
+      <h3 class="font-bold text-lg text-white mb-1">The Unbundling <span class="text-white/40 font-normal">(2005-2015)</span></h3>
+      <p class="text-white/60">Google unbundled search. Craigslist unbundled classifieds. Vertical SaaS unbundled everything else.</p>
+    </div>
+  </div>
+  <div class="flex items-start gap-6">
+    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-violet-500/20 text-violet-400 flex items-center justify-center font-bold border border-violet-500/30">3</div>
+    <div>
+      <h3 class="font-bold text-lg text-white mb-1">The Platform Era <span class="text-white/40 font-normal">(2015-2025)</span></h3>
+      <p class="text-white/60">Apple, Google, Amazon rebundled around ecosystems. Walled gardens with APIs.</p>
+    </div>
+  </div>
+  <div class="flex items-start gap-6">
+    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500/30 to-violet-500/30 text-white flex items-center justify-center font-bold border border-cyan-500/30 shadow-[0_0_20px_rgba(6,182,212,0.2)]">4</div>
+    <div>
+      <h3 class="font-bold text-lg text-white mb-1">The Agent Era <span class="text-white/40 font-normal">(2025-?)</span></h3>
+      <p class="text-cyan-400">Agents rebundle everything into conversational interfaces. One entry point, infinite backends. The ultimate aggregation.</p>
+    </div>
+  </div>
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="17" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label cyan">Timeline</div>
+
+<h2>The Strategic Calendar</h2>
+
+<p class="text-xl text-white/60 mb-10">Where we are and what's coming.</p>
+
+<div class="overflow-hidden rounded-2xl border border-white/10 mb-8">
+  <table class="w-full">
+    <thead>
+      <tr class="bg-white/5">
+        <th class="text-left p-4 font-semibold text-white/60 text-sm uppercase tracking-wider">Phase</th>
+        <th class="text-left p-4 font-semibold text-white/60 text-sm uppercase tracking-wider">Timeline</th>
+        <th class="text-left p-4 font-semibold text-cyan-400 text-sm uppercase tracking-wider">What Happens</th>
+        <th class="text-left p-4 font-semibold text-white/60 text-sm uppercase tracking-wider">Key Signal</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-white/5">
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium text-amber-400">Coexistence</td>
+        <td class="p-4 text-white/60">2024-2026</td>
+        <td class="p-4 text-white/80">AI summaries alongside traditional results</td>
+        <td class="p-4 text-white/60">Google AI Overviews, Bing Copilot</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium text-cyan-400">Tipping Point</td>
+        <td class="p-4 text-white/60">2026-2028</td>
+        <td class="p-4 text-white/80">Agent-first becomes default for information queries</td>
+        <td class="p-4 text-white/60">Publisher licensing deals go mainstream</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium text-violet-400">Restructuring</td>
+        <td class="p-4 text-white/60">2028-2031</td>
+        <td class="p-4 text-white/80">Business models fully reconfigure around agent distribution</td>
+        <td class="p-4 text-white/60">Major publishers close or pivot to licensing</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors bg-indigo-500/10">
+        <td class="p-4 font-medium text-white">Maturity</td>
+        <td class="p-4 text-white/60">2031-2035</td>
+        <td class="p-4 text-white/80">New equilibrium: agents as primary interface, web as data layer</td>
+        <td class="p-4 text-white/60">Agent-native businesses outnumber web-native ones</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-6">
+<strong>Where we are now:</strong> Deep in the coexistence phase. The window for strategic positioning is open but narrowing. By the tipping point, the power dynamics will already be set.
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="18" data-layout="title">
+      <div class="slide-content">
+        <h2>The Truth Machine Crisis</h2>
+
+<div class="mt-8 max-w-3xl mx-auto">
+<div class="text-2xl text-white/80 leading-relaxed mb-8 italic">
+<p>"The early promise of the semantic web envisioned a distributed system of meaning. What is emerging instead is a commercially-driven, agent-controlled ecosystem."</p>
+</div>
+
+<p class="text-lg text-white/60 leading-relaxed mb-8">
+<p>The next decade of the web will not be defined by the quality of answers—but by the consolidation of power among those who control the machines that deliver them.</p>
+</p>
+
+<p class="text-lg text-white/50">
+<p>Whether that's dystopian or just the next iteration of how power always works on the internet—probably both.</p>
+</p>
+</div>
+
+<div class="mt-16 text-white/30 text-sm">
+<p>Signal Dispatch Research | September 2025</p>
+</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let currentSlide = 1;
+
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const currentSlideEl = document.getElementById('currentSlide');
+    const progressEl = document.getElementById('progress');
+
+    function goToSlide(n) {
+      const target = Math.max(1, Math.min(n, totalSlides));
+      if (target === currentSlide) return;
+
+      slides.forEach((slide, i) => {
+        const isTarget = i + 1 === target;
+        slide.classList.toggle('active', isTarget);
+        if (isTarget) slide.scrollTop = 0;
+      });
+
+      currentSlide = target;
+      currentSlideEl.textContent = currentSlide;
+      progressEl.style.width = (currentSlide / totalSlides * 100) + '%';
+
+      prevBtn.disabled = currentSlide === 1;
+      nextBtn.disabled = currentSlide === totalSlides;
+    }
+
+    prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+    nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+    function getActiveSlide() {
+      return document.querySelector('.slide.active');
+    }
+
+    function isSlideScrollable(slide) {
+      return slide && slide.scrollHeight > slide.clientHeight + 2;
+    }
+
+    function isAtScrollBottom(slide) {
+      return slide.scrollTop + slide.clientHeight >= slide.scrollHeight - 2;
+    }
+
+    function isAtScrollTop(slide) {
+      return slide.scrollTop <= 2;
+    }
+
+    document.addEventListener('keydown', (e) => {
+      const active = getActiveSlide();
+      const scrollable = isSlideScrollable(active);
+
+      switch (e.key) {
+        case 'ArrowRight': case 'PageDown':
+          e.preventDefault();
+          if (scrollable && !isAtScrollBottom(active)) {
+            active.scrollBy({ top: active.clientHeight * 0.8, behavior: 'smooth' });
+          } else {
+            goToSlide(currentSlide + 1);
+          }
+          break;
+        case ' ':
+          e.preventDefault();
+          if (scrollable && !isAtScrollBottom(active)) {
+            active.scrollBy({ top: active.clientHeight * 0.8, behavior: 'smooth' });
+          } else {
+            goToSlide(currentSlide + 1);
+          }
+          break;
+        case 'ArrowDown':
+          if (scrollable && !isAtScrollBottom(active)) {
+            // let native scroll happen
+          } else {
+            e.preventDefault();
+            goToSlide(currentSlide + 1);
+          }
+          break;
+        case 'ArrowLeft': case 'PageUp':
+          e.preventDefault();
+          if (scrollable && !isAtScrollTop(active)) {
+            active.scrollBy({ top: -active.clientHeight * 0.8, behavior: 'smooth' });
+          } else {
+            goToSlide(currentSlide - 1);
+          }
+          break;
+        case 'ArrowUp':
+          if (scrollable && !isAtScrollTop(active)) {
+            // let native scroll happen
+          } else {
+            e.preventDefault();
+            goToSlide(currentSlide - 1);
+          }
+          break;
+        case 'Home': e.preventDefault(); goToSlide(1); break;
+        case 'End': e.preventDefault(); goToSlide(totalSlides); break;
+        case 'f': case 'F':
+          e.preventDefault();
+          if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+          else document.exitFullscreen();
+          break;
+      }
+    });
+
+    goToSlide(1);
+  </script>
+
+  <footer style="position: fixed; bottom: 0; left: 0; right: 0; padding: 0.5rem; text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.3); background: rgba(15, 23, 42, 0.95); z-index: 40; border-top: 1px solid rgba(255,255,255,0.05);">
+    Nino Chavez &middot; Signal Dispatch &middot; 2026
+  </footer>
+</body>
+</html>

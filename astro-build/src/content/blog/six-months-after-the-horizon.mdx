@@ -1,0 +1,103 @@
+---
+title: "Six Months After the Horizon"
+publishedAt: "2026-03-03T12:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "I published a prediction deck about the agentic web last September. Six months later, some of it looks prescient, some of it looks naive, and the most important developments weren't in the deck at all."
+category: "AI & Automation"
+featureImage: "/images/generated/six-months-after-the-horizon.webp"
+tags: ["reflection", "product-strategy", "ai-development"]
+featured: true
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+Last September I published a [20-slide deck](/blog/presentations/the-7-10-year-evolution-of-the-web) about how AI agents would reshape the web over the next decade. The core thesis was blunt: the search-scroll-click loop that powered the entire digital economy for thirty years was breaking apart, and what replaced it would redistribute traffic, revenue, and trust across the internet.
+
+I've been rereading it. There's this Kierkegaard line people like to trot out—"life can only be understood backwards; but it must be lived forwards"—and six months isn't enough time for real understanding. But it's enough time to notice where the map diverges from the terrain.
+
+Some of the predictions look sharper than I expected. Some look embarrassingly surface-level. And the developments that actually matter most? Nowhere in the deck.
+
+---
+
+## What Six Months Confirmed
+
+The macro-level behavioral shift held up. People are genuinely using Perplexity, ChatGPT with browsing, and Gemini as entry points for the kinds of queries that used to begin in a search bar. Not all queries. Not most queries. But the trajectory is clear and accelerating.
+
+The streaming analogy I leaned on—comparing web content licensing to what happened with Netflix and Spotify—turned out to have real teeth. The OpenAI/News Corp deals, the Associated Press licensing, Axel Springer—these aren't experiments anymore. They're a new revenue category. Publishers are making the same calculation that music labels made in 2014: license now while you still have leverage, or get disintermediated later.
+
+The social media exception was probably the strongest call in the deck. I argued that feeds would survive because they sell identity and connection, not information—and that agents would augment social platforms rather than replace them. Six months later, that looks right. TikTok, Instagram, X—the feed is the one interface where agents work *with* the existing model instead of against it.
+
+And the developer skill shift toward agent integration is happening faster than I projected. Not hypothetically—in hiring patterns, in the tools people actually reach for, in what gets built at hackathons.
+
+<Callout type="signal" title="The Pattern">
+The macro predictions held. The direction was right. It's the mechanisms underneath that were off—and that's where the interesting failures live.
+</Callout>
+
+---
+
+## Directionally Right, Magnitude Wrong
+
+I wrote that AEO (Answer Engine Optimization) would replace SEO. The direction is correct—AEO is a real practice now, with agencies and tooling emerging around it. But "replace" was too strong. SEO adapted. It absorbed the new reality the way it's absorbed every Google algorithm update for twenty years. The SEO industry didn't die; it expanded its scope.
+
+I also projected the advertising model would "fracture." Six months later, global digital ad spend is still climbing toward $700 billion. The $400 billion Google-Meta duopoly is intact. Click-through rates have declined in categories where AI summaries appear, yes—but advertisers shifted budgets to new surfaces rather than pulling back entirely.
+
+The fracture is real, but it's happening at the edges, not the center. More crack than collapse.
+
+---
+
+## Wrong Framing
+
+The e-commerce funnel section aged the worst. I wrote about funnels "collapsing" into single-turn agent conversations. What actually happened is more nuanced: funnels *bent*. Some discovery moved into conversational interfaces. But comparison shopping, visual browsing, the dopamine hit of scrolling through products—these behaviors are stickier than I gave them credit for.
+
+The browser question was where my framing was most off. I set up a "will agents replace the browser?" binary, then hedged my way to "probably not." What actually happened is more interesting than either position: the browser absorbed the agent. Chrome has Gemini. Edge has Copilot. Safari is integrating Apple Intelligence. The browser didn't get replaced—it got upgraded.
+
+<PullQuote>The browser didn't get replaced. It evolved. And that's a more interesting story than either disruption narrative would've predicted.</PullQuote>
+
+The "truth machine crisis"—my closing argument about epistemic risk—was the most dramatic miss. I projected growing concentration of truth into opaque agent systems. What's happened instead is an arms race toward transparency: citations, grounding, source links, retrieval-augmented generation as a standard pattern. The incentive structures pushed toward *more* verifiability, not less. Not because platforms are virtuous, but because hallucination is a liability.
+
+---
+
+## What I Missed Entirely
+
+This is the section that matters most. Not the things I got wrong in degree—the things I didn't see at all.
+
+**MCP and tool-use protocols.** The deck was entirely about agents that *answer*. The real story of the last six months is agents that *act*. The Model Context Protocol, function calling, tool use—the shift from "AI as search replacement" to "AI as programmable interface to everything" is a fundamentally different thesis. I was writing about answer engines while the market was building action engines.
+
+**Agent coding as the killer app.** Cursor, Claude Code, GitHub Copilot's agent mode—these aren't just code completion tools anymore. They're autonomous development environments. The biggest consumer of "agentic web" capabilities isn't consumers searching for information. It's developers building software. That wasn't in the deck because I was thinking about end-user behavior, not tool-mediated creation.
+
+**The open-source model explosion.** My deck implicitly assumed concentration—a handful of frontier labs controlling the agent layer. What happened instead was DeepSeek, Mistral, Llama 3, Qwen, and dozens of specialized open models blowing the market wide open. The concentration thesis was undermined from below.
+
+**Multi-modal as table stakes.** I wrote a deck about text. Within six months, vision, audio, and video understanding became default capabilities. The agentic web isn't just conversational—it sees, it hears, it processes documents, it understands images. I was predicting the future of one modality when the actual future was all of them simultaneously.
+
+<Callout type="warning" title="The Mechanism Problem">
+Every miss was about mechanism, not direction. Direction is easy to get right—"the web is changing" is barely even a prediction. Mechanism is where forecasting actually fails. *How* it changes, *what* drives the change, *where* the value accrues—that's the hard part, and that's where the deck whiffed.
+</Callout>
+
+---
+
+## The Pattern
+
+There's a well-documented failure mode in technology prediction. The macro trend is obvious. The timeline is roughly right. The mechanism is wrong.
+
+People predicted video calling would replace phone calls. The direction was correct. The mechanism—Skype, then FaceTime, then Zoom, then embedded in every app—was unpredictable. People predicted mobile would change computing. Obviously right. That it would primarily change computing through social apps and cameras rather than through productivity tools—nobody saw that clearly.
+
+My deck got the "what" right and the "how" wrong. That's not unusual. It might even be the *expected* outcome of any honest attempt at technology forecasting. The value isn't in the accuracy of the mechanism—it's in forcing yourself to think structurally about what's changing and where the pressure points are.
+
+But I'd be lying if I said the misses don't sting. Especially the MCP one. I was already building with agents when I wrote the deck. I should have seen that "agents that act" was a bigger story than "agents that answer." I didn't.
+
+---
+
+## Where This Leaves Me
+
+The [original article](/blog/the-710-year-evolution-of-the-web) was written in August 2025. The deck was published on [LinkedIn](https://www.linkedin.com/pulse/710-year-evolution-web-nino-chavez-fjl2c) a month later. This retrospective lands six months after that. It's a trilogy of the same idea at different stages of digestion—each one a little more honest than the last.
+
+The revised thesis, if I had to compress it: the agentic web isn't about replacing browsers with chatbots. It's about embedding intelligence into every surface, every tool, every interaction layer. The disruption isn't a single interface shift. It's intelligence becoming ambient—available everywhere, specialized for everything, integrated into the infrastructure of every digital experience.
+
+That's harder to put on a slide. It's also closer to what's actually happening.
+
+The next six months will probably make this retrospective look as naive as the deck. I'm building a [presentation](/blog/presentations/the-7-10-year-evolution-of-the-web) that says one thing and a blog post that says "actually, here's what I got wrong"—and in September, I'll probably need to write a third piece about what *this* piece got wrong.
+
+That's the real lesson. Not about prediction accuracy. About the practice of publicly revisiting your own thinking and being specific about where it failed. The deck was useful not because it was right, but because it was concrete enough to be *wrong* in identifiable ways.
+
+Most predictions are too vague to fail. I'm trying to make mine specific enough to learn from.

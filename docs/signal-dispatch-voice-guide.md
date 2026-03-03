@@ -45,7 +45,7 @@ These phrases were once authentic expressions of Nino's voice. Through repetitio
 
 ## Freshness Check (Rolling)
 
-> **Updated**: 2026-03-01
+> **Updated**: 2026-03-03
 > **Review Cadence**: After every 5 posts or monthly, whichever comes first
 
 This section tracks patterns and phrases that have appeared in *recent* posts. Even if they're not on the permanent "overused tells" list, repetition across a short window creates staleness. Avoid these in upcoming posts.
@@ -64,6 +64,10 @@ This section tracks patterns and phrases that have appeared in *recent* posts. E
 | "Sounds like a promotion. In practice..." inversion | 2026-03-01 | 2026-04-01 |
 | Brownfield/greenfield as central metaphor | 2026-03-01 | 2026-05-01 |
 | Counterpoint opener: "I just wrote about X. But something kept nagging..." | 2026-03-01 | 2026-05-01 |
+| Prediction scorecard / "what I got right vs wrong" structure | 2026-03-03 | 2026-05-03 |
+| Kierkegaard "understood backwards, lived forwards" reference | 2026-03-03 | 2026-05-03 |
+| "The map diverges from the terrain" metaphor | 2026-03-03 | 2026-05-03 |
+| Trilogy framing (article → deck → retrospective) | 2026-03-03 | 2026-05-03 |
 
 ### How to Use This Section
 
