@@ -1,5 +1,9 @@
 import { useMemo, useState } from "react";
 
+const CF_ACCOUNT_HASH = 'wg34HB28-JkySWVm5fW4kA';
+const cfUrl = (id: string, variant: string) => `https://imagedelivery.net/${CF_ACCOUNT_HASH}/${id}/${variant}`;
+const cfSrcSet = (id: string) => `${cfUrl(id, 'grid')} 400w, ${cfUrl(id, 'medium')} 800w, ${cfUrl(id, 'large')} 1600w`;
+
 interface Post {
   id: string;
   title: string;
@@ -84,19 +88,22 @@ const getCategorySlug = (category: string): string => {
   return slugs[category] || "ai-automation";
 };
 
+// Get CF image ID for category-based post images
+const getCategoryImageId = (post: Post): string => {
+  const slug = getCategorySlug(post.category || "");
+  const variantCount: Record<string, number> = { "ai-automation": 5, photography: 2 };
+  const variants = variantCount[slug] || 3;
+  const hash = post.id
+    .split("")
+    .reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const variant = (hash % variants) + 1;
+  return `blog-${slug}-${variant}`;
+};
+
 // Get image for post
 const getPostImage = (post: Post): string => {
   if (post.featureImage) return post.featureImage;
-  if (post.category) {
-    const slug = getCategorySlug(post.category);
-    const variants = slug === "ai-automation" ? 5 : 3;
-    const hash = post.id
-      .split("")
-      .reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    const variant = (hash % variants) + 1;
-    return `/blog/generated/categories/${slug}-${variant}.webp`;
-  }
-  return "/blog/generated/categories/ai-automation-1.webp";
+  return cfUrl(getCategoryImageId(post), 'medium');
 };
 
 // Fallback image handler
@@ -427,6 +434,8 @@ export default function BlogList({ posts }: BlogListProps) {
                       <div className="relative aspect-[16/9] overflow-hidden">
                         <img
                           src={getPostImage(post)}
+                          srcSet={!post.featureImage ? cfSrcSet(getCategoryImageId(post)) : undefined}
+                          sizes="(max-width: 768px) 100vw, 50vw"
                           alt={post.title}
                           width={800}
                           height={450}
@@ -513,6 +522,8 @@ export default function BlogList({ posts }: BlogListProps) {
                     <div className="relative aspect-[16/9] overflow-hidden">
                       <img
                         src={getPostImage(post)}
+                        srcSet={!post.featureImage ? cfSrcSet(getCategoryImageId(post)) : undefined}
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         alt={post.title}
                         width={800}
                         height={450}

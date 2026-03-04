@@ -6,6 +6,8 @@ import SiteHeader from '../../components/SiteHeader.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import { generateWebsiteSchema, generateBlogSchema, generatePersonSchema } from '../../utils/schema';
 
+export const prerender = true;
+
 // Get all published posts sorted by date
 const posts = await getCollection('blog', ({ data }) => data.status !== 'draft');
 const sortedPosts = posts.sort(
@@ -42,7 +44,7 @@ const personSchema = generatePersonSchema();
 
     <!-- Blog Content -->
     <section class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8">
-      <BlogList posts={postsData} client:load />
+      <BlogList posts={postsData} client:idle />
     </section>
 
     <SiteFooter />

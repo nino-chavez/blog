@@ -4,6 +4,8 @@ import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { generatePersonSchema } from '../utils/schema';
 
+export const prerender = true;
+
 const personSchema = generatePersonSchema();
 
 const expertise = [

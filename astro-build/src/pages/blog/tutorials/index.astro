@@ -5,6 +5,8 @@ import SiteHeader from '../../../components/SiteHeader.astro';
 import SiteFooter from '../../../components/SiteFooter.astro';
 import { generateCollectionSchema } from '../../../utils/schema';
 
+export const prerender = true;
+
 const tutorials = await getCollection('tutorials');
 const presentations = await getCollection('presentations');
 const blogPosts = await getCollection('blog');

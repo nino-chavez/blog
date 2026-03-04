@@ -8,7 +8,15 @@ import ReadingProgress from '../../components/ReadingProgress';
 import SeriesNav from '../../components/SeriesNav.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 
-// In SSR mode, get the post from the slug parameter
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts
+    .filter((p) => p.data.status !== 'draft')
+    .map((post) => ({ params: { slug: post.id } }));
+}
+
 const { slug } = Astro.params;
 const posts = await getCollection('blog');
 const post = posts.find((p) => p.id === slug && p.data.status !== 'draft');
@@ -74,7 +82,7 @@ const challengingCounterpoint = counterpoints.find(
   jsonLd={[articleSchema, breadcrumbSchema]}
 >
   <!-- Reading Progress Bar -->
-  <ReadingProgress client:load />
+  <ReadingProgress client:idle />
 
   <main class="min-h-screen">
     <SiteHeader currentPage="blog" />

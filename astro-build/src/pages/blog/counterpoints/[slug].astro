@@ -6,7 +6,13 @@ import SiteFooter from '../../../components/SiteFooter.astro';
 import { generateArticleSchema } from '../../../utils/schema';
 import ReadingProgress from '../../../components/ReadingProgress';
 
-// In SSR mode, get the counterpoint from the slug parameter
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const counterpoints = await getCollection('counterpoints');
+  return counterpoints.map((c) => ({ params: { slug: c.id } }));
+}
+
 const { slug } = Astro.params;
 const counterpoints = await getCollection('counterpoints');
 const counterpoint = counterpoints.find((c) => c.id === slug);
@@ -64,7 +70,7 @@ const sourceTypeLabels: Record<string, string> = {
   jsonLd={[articleSchema]}
 >
   <!-- Reading Progress Bar -->
-  <ReadingProgress client:load />
+  <ReadingProgress client:idle />
 
   <main class="min-h-screen">
     <SiteHeader currentPage="counterpoints" />

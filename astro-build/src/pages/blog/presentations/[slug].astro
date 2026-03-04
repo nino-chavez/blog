@@ -4,7 +4,13 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { generateArticleSchema } from '../../../utils/schema';
 import { PresentationNavigation } from '../../../components/presentations';
 
-// In SSR mode, get the presentation from the slug parameter
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const presentations = await getCollection('presentations');
+  return presentations.map((p) => ({ params: { slug: p.id } }));
+}
+
 const { slug } = Astro.params;
 const presentations = await getCollection('presentations');
 const presentation = presentations.find((p) => p.id === slug);

@@ -6,7 +6,13 @@ import SiteFooter from '../../../components/SiteFooter.astro';
 import { generateArticleSchema, generateBreadcrumbSchema } from '../../../utils/schema';
 import ReadingProgress from '../../../components/ReadingProgress';
 
-// In SSR mode, get the whitepaper from the slug parameter
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const whitepapers = await getCollection('whitepapers');
+  return whitepapers.map((w) => ({ params: { slug: w.id } }));
+}
+
 const { slug } = Astro.params;
 const whitepapers = await getCollection('whitepapers');
 const whitepaper = whitepapers.find((w) => w.id === slug);
@@ -46,7 +52,7 @@ const readingTime = Math.ceil(wordCount / 200);
   jsonLd={[articleSchema]}
 >
   <!-- Reading Progress Bar -->
-  <ReadingProgress client:load />
+  <ReadingProgress client:idle />
 
   <main class="min-h-screen">
     <SiteHeader currentPage="whitepapers" />

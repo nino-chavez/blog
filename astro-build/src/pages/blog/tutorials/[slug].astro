@@ -6,6 +6,13 @@ import SiteFooter from '../../../components/SiteFooter.astro';
 import { generateArticleSchema } from '../../../utils/schema';
 import ReadingProgress from '../../../components/ReadingProgress';
 
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const tutorials = await getCollection('tutorials');
+  return tutorials.map((t) => ({ params: { slug: t.id } }));
+}
+
 const { slug } = Astro.params;
 const tutorials = await getCollection('tutorials');
 const tutorial = tutorials.find((t) => t.id === slug);
@@ -78,7 +85,7 @@ const companion = getCompanionContent();
   author={tutorial.data.author}
   jsonLd={[articleSchema]}
 >
-  <ReadingProgress client:load />
+  <ReadingProgress client:idle />
 
   <main class="min-h-screen">
     <SiteHeader currentPage="tutorials" />

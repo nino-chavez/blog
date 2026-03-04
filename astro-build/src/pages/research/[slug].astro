@@ -6,7 +6,15 @@ import SiteFooter from '../../components/SiteFooter.astro';
 import { generateArticleSchema } from '../../utils/schema';
 import ReadingProgress from '../../components/ReadingProgress';
 
-// In SSR mode, get the research note from the slug parameter
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const researchNotes = await getCollection('research-notes');
+  return researchNotes
+    .filter((n) => n.data.visibility === 'published')
+    .map((n) => ({ params: { slug: n.data.slug } }));
+}
+
 const { slug } = Astro.params;
 const researchNotes = await getCollection('research-notes');
 const note = researchNotes.find((n) => n.data.slug === slug);
@@ -72,7 +80,7 @@ const originLabel = originLabels[note.data.origin] || 'Research';
   jsonLd={[articleSchema]}
 >
   <!-- Reading Progress Bar -->
-  <ReadingProgress client:load />
+  <ReadingProgress client:idle />
 
   <main class="min-h-screen">
     <SiteHeader currentPage="research" />

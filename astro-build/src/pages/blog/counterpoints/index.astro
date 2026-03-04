@@ -5,6 +5,8 @@ import SiteHeader from '../../../components/SiteHeader.astro';
 import SiteFooter from '../../../components/SiteFooter.astro';
 import { generateCollectionSchema } from '../../../utils/schema';
 
+export const prerender = true;
+
 // Get all counterpoints sorted by date
 const counterpoints = await getCollection('counterpoints');
 const sortedCounterpoints = counterpoints.sort(

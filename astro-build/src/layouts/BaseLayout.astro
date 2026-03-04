@@ -18,7 +18,7 @@ interface Props {
 const {
   title,
   description = 'Architecture, commerce, and the signals that matter. Exploring AI workflows, systems thinking, and leadership through practical experience.',
-  image = '/blog/og_image.png',
+  image = '/blog/og_image.webp',
   type = 'website',
   publishedTime,
   modifiedTime,
@@ -53,8 +53,10 @@ const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
         rel="preload"
         as="image"
         href={image}
-        imagesrcset={`${image.replace('.webp', '-600w.webp')} 600w, ${image} 1200w`}
-        imagesizes="(max-width: 768px) 100vw, 1200px"
+        imagesrcset={image.includes('imagedelivery.net')
+          ? undefined
+          : `${image.replace('.webp', '-600w.webp')} 600w, ${image} 1200w`}
+        imagesizes={image.includes('imagedelivery.net') ? undefined : "(max-width: 768px) 100vw, 1200px"}
         fetchpriority="high"
       />
     )}

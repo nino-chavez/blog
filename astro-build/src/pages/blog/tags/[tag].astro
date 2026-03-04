@@ -5,6 +5,8 @@ import SiteHeader from '../../../components/SiteHeader.astro';
 import SiteFooter from '../../../components/SiteFooter.astro';
 import { generateCollectionSchema } from '../../../utils/schema';
 
+export const prerender = true;
+
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog', ({ data }) => data.status !== 'draft');
   const allTags = Array.from(

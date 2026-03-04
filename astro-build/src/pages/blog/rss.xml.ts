@@ -1,5 +1,8 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
+
+export const prerender = true;
+
 export async function GET() {
   const posts = await getCollection('blog', ({ data }) => data.status !== 'draft');
 

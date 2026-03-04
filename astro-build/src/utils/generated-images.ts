@@ -1,7 +1,9 @@
 /**
  * Generated Image Utilities
- * Maps categories to AI-generated images with Unsplash fallbacks
+ * Maps categories to AI-generated images served via Cloudflare Images CDN
  */
+
+import { cfImageUrl, cfSrcSet } from './cloudflare-images';
 
 const CATEGORY_SLUGS: Record<string, string> = {
   "AI & Automation": "ai-automation",
@@ -68,7 +70,33 @@ export function getGeneratedCategoryImage(
     variantIndex = (hash % variants) + 1;
   }
 
-  return `/blog/generated/categories/${slug}-${variantIndex}.webp`;
+  const cfId = `blog-${slug}-${variantIndex}`;
+  return cfImageUrl(cfId, 'medium');
+}
+
+export function getGeneratedCategoryImageId(
+  category: string,
+  postSlug?: string
+): string {
+  const slug = getCategorySlug(category);
+  const variants = CATEGORY_VARIANTS[slug] || 3;
+
+  let variantIndex = 1;
+  if (postSlug) {
+    const hash = postSlug
+      .split("")
+      .reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    variantIndex = (hash % variants) + 1;
+  }
+
+  return `blog-${slug}-${variantIndex}`;
+}
+
+export function getGeneratedCategorySrcSet(
+  category: string,
+  postSlug?: string
+): string {
+  return cfSrcSet(getGeneratedCategoryImageId(category, postSlug));
 }
 
 export function getUnsplashFallback(category: string): string {

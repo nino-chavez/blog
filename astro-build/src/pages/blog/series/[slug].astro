@@ -5,7 +5,13 @@ import SiteHeader from '../../../components/SiteHeader.astro';
 import SiteFooter from '../../../components/SiteFooter.astro';
 import { generateArticleSchema } from '../../../utils/schema';
 
-// Get the series from the slug parameter
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const allSeries = await getCollection('series');
+  return allSeries.map((s) => ({ params: { slug: s.id } }));
+}
+
 const { slug } = Astro.params;
 const allSeries = await getCollection('series');
 const series = allSeries.find((s) => s.id === slug);
