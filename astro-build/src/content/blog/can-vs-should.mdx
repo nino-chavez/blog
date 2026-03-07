@@ -1,0 +1,169 @@
+---
+title: "Can vs. Should"
+publishedAt: "2026-03-07T12:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "I've been asking 'can an agent do this?' so reflexively that I stopped noticing when the answer should have been 'but should it?'"
+category: "AI & Automation"
+featureImage: "/images/generated/can-vs-should.webp"
+tags: ["agentic-systems", "reflection"]
+featured: true
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+I caught myself last week mid-sentence, explaining to someone how I'd wired up an agent to handle something I used to do manually. I was proud of it. Genuinely. The orchestration was clean, the output was reliable, and it saved me real time.
+
+Then they asked a question I wasn't ready for.
+
+"Why?"
+
+Not *why does it work*. Why did I *automate it in the first place*.
+
+---
+
+## The Hammer Problem
+
+There's an old line about hammers and nails. You know it. When you get good with a tool, everything starts looking like a use case for that tool.
+
+I've been living inside that proverb for months.
+
+Every friction point in my workflow, every repetitive task, every decision that felt even slightly pattern-matchable—my first instinct has become: *can an agent handle this?*
+
+And the answer is usually yes. That's the dangerous part. The capability is real. The agents *can* do most of what I throw at them. The models are good enough, the tooling is mature enough, and I've gotten fluent enough at orchestration that spinning up a new automation feels almost trivial.
+
+So I kept swinging.
+
+---
+
+## The Conversation That Changed the Question
+
+The specifics of the conversation don't matter as much as the pivot point. Someone I respect pushed back—not on the technical execution, but on the *decision to automate* in the first place.
+
+Their argument was simple: some tasks are valuable *because* you do them yourself.
+
+Not because an agent can't. Because the doing is where the thinking happens.
+
+<PullQuote>
+"Can an agent do this?" is a capability question. "Should an agent do this?" is a judgment question. I'd been treating them as the same thing.
+</PullQuote>
+
+I'd collapsed two very different questions into one. The first is about feasibility. The second is about wisdom. And I'd been so focused on the first that the second never got airtime.
+
+---
+
+## Where "Can" and "Should" Diverge
+
+Once I started pulling the thread, the examples piled up fast.
+
+**Code review.** I'd automated parts of my review process—linting, pattern checks, consistency scans. All fine. But I'd also started delegating the *judgment* layer. The "does this architecture decision make sense for where we're headed" layer. An agent can generate opinions about that. It can even generate good ones. But the act of reading the code myself, sitting with the tradeoffs, *feeling* the friction—that's where my own technical intuition gets sharpened.
+
+Delegating that didn't save me time. It cost me a feedback loop.
+
+**Writing.** I use agents in my writing workflow—research, outlining, structural suggestions. But there's a version of this where I hand off so much that the post comes back and I'm editing someone else's thinking instead of developing my own. The draft might be *better* in some measurable way. Tighter. More structured. But it's not mine in the way that matters.
+
+**Decision-making.** I'd started feeding business decisions through agent-assisted analysis. Pros, cons, risk matrices, scenario modeling. All useful inputs. But I noticed I was spending more time evaluating the agent's framework than building my own. The analysis became a crutch that looked like rigor.
+
+<Callout type="signal" title="The Pattern">
+The risk isn't that agents do the task poorly. It's that they do it well enough that you stop doing the thing that made you good at the task in the first place.
+</Callout>
+
+---
+
+## Skill Atrophy Is Real, but It's Not the Whole Story
+
+The obvious concern is skill atrophy. Delegate enough cognitive work and you lose the muscle. That's real, and I've written about adjacent versions of it before.
+
+But there's something more subtle happening too.
+
+When I do a task myself—especially a hard one, especially one that requires judgment—I'm not just producing an output. I'm *calibrating*. I'm updating my internal model of what good looks like, where the edges are, what surprised me. That calibration is invisible. It doesn't show up in any productivity metric.
+
+An agent gives me the output. It doesn't give me the calibration.
+
+And I didn't notice the calibration was missing until I hit a decision that felt unfamiliar—something that *should* have felt routine, given how many times I'd "done" it recently. Except I hadn't done it. I'd delegated it.
+
+---
+
+## The Amended Question
+
+I'm not backing off agents. That's not the point. The tooling is too good, the leverage is too real, and the problems I'm solving are too complex to go back to doing everything manually.
+
+But I'm amending my default question.
+
+It's no longer just "can an agent do this?"
+
+It's "can an agent do this—and what do I lose if it does?"
+
+Sometimes the answer is: nothing. Automate it. Move on. There's a whole category of tasks where the doing has no residual value beyond the output. Format conversions. Data transformations. Boilerplate generation. Rote pattern application. Let the machines have those.
+
+But there's another category—and it's bigger than I thought—where the residual value of doing it yourself *is the point*. Where the friction is the feature. Where the struggle is what keeps your judgment sharp.
+
+<Callout type="insight">
+The goal isn't to automate less. It's to automate with awareness of what you're trading away. Some trades are excellent. Some are quietly expensive.
+</Callout>
+
+---
+
+## The Problem with Knowing in Advance
+
+Here's where my own framework gets uncomfortable.
+
+I'm laying out this clean distinction—tasks where the value is in the output vs. tasks where the value is in the doing. As if those categories are obvious. As if I can sort them ahead of time.
+
+But these tools are *new*. Genuinely new. Not "new version of an old thing" new—new in kind. Which means I often don't know whether something is a nail until I've already swung at it.
+
+I automated parts of my code review process and only realized months later that I'd lost a calibration loop. I didn't see it coming. I couldn't have. The feedback I was missing was invisible until the absence created a gap I could feel but couldn't immediately name.
+
+That's the uncomfortable truth about working at the edge of new capability: the taxonomy of "what to automate" and "what to protect" doesn't exist yet. We're building it in real time, and the tuition is paid in mistakes you only recognize in retrospect.
+
+So when I say "ask whether an agent *should* do this"—I mean it. But I'm also honest that sometimes the only way to answer that question is to let the agent do it, watch what happens, and pay attention to what goes missing.
+
+The skill isn't perfect foresight. It's fast pattern recognition *after* the swing.
+
+---
+
+## The Jig Problem
+
+I've started using a different analogy when I talk about this in person. Carpentry.
+
+A master carpenter doesn't build every piece from scratch. They build *jigs*—custom tools that hold material at the right angle, guide a cut along a precise line, make a repeatable operation fast and accurate. The jig isn't the product. It's the thing that accelerates the real work of making the product.
+
+Agents are excellent at making jigs.
+
+Need a script that reformats data before you analyze it? Jig. A workflow that pre-screens inputs so you can focus on the interesting ones? Jig. A template that scaffolds a document so you can jump straight to the hard parts? Jig.
+
+This is where agents shine. They're not doing the cabinetry—they're building the fixtures that let *you* do the cabinetry faster and more precisely.
+
+But here's where it gets dangerous.
+
+Jigs are supposed to be general enough to reuse, specific enough to be useful. The sweet spot is narrow. And when you can spin up a new jig in minutes instead of hours, you stop being disciplined about that sweet spot. You build a jig for one specific situation. Then another. Then another. Each one slightly different, each one tuned to a context that may never repeat.
+
+Before you know it, you have a workshop full of snowflakes. Custom tooling that only works for the exact scenario that spawned it. And now you're spending more time managing your jigs than doing the work the jigs were supposed to accelerate.
+
+<Callout type="warning" title="The Catch">
+The cost of building a jig used to enforce discipline—you only built one if the task was worth the investment. When agents drop that cost to near zero, the discipline has to come from somewhere else. Usually from you, after you've already accumulated a drawer full of one-off tools you'll never touch again.
+</Callout>
+
+---
+
+## What I'm Doing Differently
+
+Nothing dramatic. Just a pause before the reflex kicks in.
+
+When I catch myself reaching for "can an agent handle this?"—I hold for a beat. I ask the follow-up:
+
+- Is the value in the output, or in the process of creating it?
+- Will I lose a feedback loop I don't currently appreciate?
+- Am I automating because it's smart, or because I *can*?
+
+That third one stings a little. Because the honest answer, more often than I'd like, is: because I can. Because the hammer is in my hand and the thing in front of me looks enough like a nail.
+
+---
+
+## Still Swinging
+
+I still reach for the hammer constantly. The instinct isn't wrong—it's just incomplete.
+
+The conversation that forced the amendment wasn't comfortable. But the best corrections rarely are. I'd rather catch the blind spot now than discover six months from now that I've optimized myself out of the loop on the things that actually matter.
+
+The hammer's still in my hand. I'm just checking what I'm hitting before I swing.
