@@ -1,0 +1,115 @@
+---
+title: "The Jevons Trap"
+publishedAt: "2026-03-09T22:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "Every productivity wave in software history expanded demand for developers instead of shrinking it. AI should follow the same pattern. Unless the thing it produces is just good enough to ship and just bad enough to compound."
+category: "AI & Automation"
+featureImage: "/images/generated/the-jevons-trap.webp"
+tags: ["ai-development", "engineering", "career"]
+featured: false
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+A week ago I published a post arguing that [the routing layer was always there](/blog/the-source-of-their-intelligence) — that a significant chunk of the developer workforce had been operating as a search-and-assembly pipeline between problems and pre-existing solutions, and AI just made that visible.
+
+I got responses. Some agreed. Some pushed back hard. But the strongest counter-argument wasn't in any reply — it was in the historical record.
+
+---
+
+## The Pattern That Should Kill My Thesis
+
+In 1969, COBOL was supposed to let business analysts write their own software. In the 1980s, CASE tools promised 10x productivity gains and the GAO later concluded there was "little evidence" they delivered. In the 1990s, Visual Basic and 4GLs were going to make professional programmers obsolete. In the 2010s, low-code platforms were the final nail.
+
+None of them reduced the developer workforce. Every single one expanded it.
+
+This isn't anecdotal. It's a pattern with a name: the **Jevons Paradox**. William Stanley Jevons observed in 1865 that making coal engines more efficient didn't reduce coal consumption — it made coal *cheaper to use*, which increased total demand. The same dynamic has played out in software for 56 years. Better tools make development cheaper. Cheaper development means more ambitious projects. More ambitious projects need more developers. The pie grows faster than the slice shrinks.
+
+The Bureau of Labor Statistics is projecting 15% growth in software developer employment from 2024 to 2034 — "much faster than average" — with roughly 129,000 openings per year. PwC analyzed a billion job postings across six continents and found AI-exposed roles growing 38%, with a 56% wage premium for AI skills. Meta grew engineering headcount 19% since January 2022. OpenAI and Anthropic are hiring junior engineers for the first time.
+
+If the Jevons Paradox holds, the routing layer doesn't get eliminated. It gets redirected. The developers who were assembling CRUD endpoints start assembling AI-orchestrated workflows instead. The productivity gain creates new categories of software that didn't exist before, and those categories need people.
+
+That's the steelman. And it's strong enough that I need to sit with it.
+
+---
+
+## Where It Breaks Down
+
+Here's what kept me up: the Jevons Paradox assumes the output of the efficiency gain is *functional*. Coal engines got more efficient, but the coal still burned correctly. The steam still drove the piston. The mechanical output was reliable.
+
+What if the output is unreliable in ways that aren't immediately visible?
+
+GitClear analyzed 211 million changed lines across repositories owned by Google, Microsoft, and Meta. Between 2021 and 2024, refactoring dropped from 25% of changed lines to under 10%. Code churn — newly written code that gets revised or reverted within two weeks — increased 41%. Copy-pasted code surged 48%.
+
+The code is shipping faster. It's also rotting faster.
+
+Cortex's 2026 engineering benchmark found that pull requests per author increased 20% year over year. But incidents per pull request increased 23.5%. Change failure rates rose roughly 30%. More code, more breakage, roughly the same delivery velocity once you account for the cleanup.
+
+<Callout type="warning" title="The Competence Illusion">
+METR ran a randomized controlled trial with 16 experienced open-source developers across 246 tasks. Developers using AI tools were 19% slower. Before starting, they predicted they'd be 24% faster. After finishing, they believed they'd been 20% faster. The gap between perceived and actual performance is the Quality Tax in microcosm.
+</Callout>
+
+The METR study is small — 16 developers, repositories they'd worked on for years. It doesn't generalize to every context. But the shape of the finding is what matters: the speed of initial generation masks the cost of verification, integration, and maintenance. Developers *feel* faster because the first draft appears instantly. The second, third, and fourth passes — the ones that matter for production — take longer because the code wasn't reasoned through.
+
+---
+
+## The Quality Tax
+
+Veracode tested over 100 LLMs across four languages and found that 45% of AI-generated code samples failed security tests. Java was worst at 72%. CodeRabbit's analysis of 470 GitHub pull requests showed AI-coauthored code carrying 1.7x more major issues and 75% more logic errors than human-written code. Tenzai had five coding agents — Claude Code, Codex, Cursor, Replit, and Devin — each build the same three applications. They found 69 vulnerabilities across 15 apps, six of them critical. Zero applications implemented CSRF protection.
+
+These aren't edge cases. This is the baseline.
+
+And the most instructive failure isn't a study — it's a product. EnrichLead was a lead enrichment SaaS built entirely with AI-assisted coding. Zero hand-written code. It launched, acquired users, and then started breaking under real-world load — API keys exposed in frontend code, subscription logic bypassed, database corruption. The developer couldn't debug it because the code wasn't *his*. He hadn't reasoned through it. He'd assembled it.
+
+The product shut down.
+
+<Callout type="signal" title="Where Jevons Fails">
+Previous productivity waves produced output that worked reliably at the mechanical level. COBOL programs ran. Visual Basic apps executed. Low-code platforms generated functional (if limited) applications. AI-generated code *appears* functional but accumulates structural debt at a rate that previous waves didn't. The Jevons Paradox assumes the efficiency gain produces value. If it produces *liability*, the math inverts.
+</Callout>
+
+---
+
+## The Klarna Correction
+
+There's a case study that captures this inversion perfectly.
+
+In 2023, Klarna publicly replaced 700 workers with AI. The CEO declared AI "can do all human jobs." It was the poster child for the compression thesis. By May 2025, they were hiring people again. The CEO admitted that cost had been "a too predominant evaluation factor" and that quality had suffered.
+
+Klarna didn't discover that AI doesn't work. They discovered that AI-generated output needs humans to maintain, verify, and course-correct — and that those humans need enough understanding of the system to do that job well. The routing layer wasn't eliminated. It was compressed, broke under load, and had to be reconstituted.
+
+This is the part the compression narrative misses. Yes, Block cut 40% of headcount and deployed Goose to 12,000 employees. Yes, Vercel moved 9 of 10 inbound SDRs off manual processing. But the Vercel SDRs weren't fired — they were redeployed to outbound sales. And Block's restructuring is six weeks old. The Klarna cycle took 18 months from cut to rehire. We haven't seen the second act yet.
+
+---
+
+## What This Actually Looks Like
+
+I keep coming back to a specific data point from Plandek's 2026 engineering benchmark: AI tools helped bottom-quartile teams 4x more than top-quartile teams. Bottom teams cut lead time by 50%. Top teams moved 10-15%.
+
+That's the Jevons Paradox working *and* failing simultaneously.
+
+It's working because the floor rose. Teams that were slow because of routing inefficiency — searching for answers, assembling boilerplate, writing basic tests — got faster. That's real. The pie expands because things that were too expensive to build become buildable.
+
+It's failing because the ceiling didn't move. The teams doing novel architecture, debugging production systems at scale, maintaining institutional knowledge about why the config has that weird flag from 2019 — they didn't get meaningfully faster. And the gap between generating code and maintaining code is widening, which means the new floor is producing more surface area for the ceiling to worry about.
+
+<PullQuote>The trap isn't that AI makes developers more productive. It's that it makes them productive at the wrong layer — generating code that compiles but doesn't compound.</PullQuote>
+
+Stack Overflow's 2025 developer survey — 49,000 respondents — found that only 33% of developers trust the accuracy of AI-generated output. Forty-six percent actively distrust it. And this is the population *using* the tools daily. They're faster at producing code they don't trust. That's a strange kind of efficiency.
+
+---
+
+## Where I've Landed
+
+The Jevons Paradox is real. It's probably still operating. AI will likely create more total demand for software, which will create demand for people who can build and maintain it.
+
+But "people who can build and maintain it" is doing a lot of work in that sentence. If the quality of AI-generated code continues on its current trajectory — more churn, less refactoring, more security vulnerabilities, more incidents per deployment — then the demand isn't for the routing layer. It's for the people who can *clean up after* the routing layer.
+
+That's not the same thing as saying developers are safe. It's saying a specific *kind* of developer becomes more valuable: the one who can look at a codebase generated in an afternoon and tell you which parts will hold under load and which will crack at 2 AM on a Saturday.
+
+The METR developers thought they were faster. The GitClear data says the code is rotting. Klarna thought they'd solved the headcount problem and had to reverse course in 18 months. The pattern isn't that AI doesn't work. The pattern is that the *gap between apparent and actual performance* is the new cost center — and most organizations haven't figured out how to account for it.
+
+My post last week argued that AI makes it impossible to hide. I still believe that. But the thing it's exposing isn't just who was routing. It's exposing what happens when you optimize for generation speed in a system that fails at maintenance speed.
+
+The Jevons Paradox says the pie gets bigger. The Quality Tax says the pie might be poisoned.
+
+I'm watching to see which one wins.
