@@ -1,0 +1,121 @@
+---
+title: "The Cart Is a Protocol Now"
+publishedAt: "2026-03-19T12:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "Etsy and Wayfair are already processing agentic checkout through Google's Universal Commerce Protocol. OpenAI and Stripe shipped a competing one. Cart and checkout are becoming infrastructure services — and the standards war is already here."
+category: "AI & Automation"
+featureImage: "/images/generated/the-cart-is-a-protocol-now.webp"
+tags: ["agentic-systems", "commerce", "product-strategy"]
+featured: false
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+There's a question I can't stop turning over: what happens when a shopping cart stops being a feature of a platform and starts being a feature of the internet?
+
+Google's [Universal Commerce Protocol updates](https://blog.google/products-and-platforms/products/shopping/ucp-updates/) dropped today — new cart capabilities, simplified merchant onboarding, and a clearer path toward standardized agentic transactions. The headline framing is about AI shopping getting simpler. The structural implication runs deeper.
+
+UCP wasn't built in a vacuum. It was [co-developed with Shopify](https://shopify.engineering/UCP) and supported by Etsy, Wayfair, Target, and Walmart, with over twenty endorsers including Visa, Mastercard, Stripe, and American Express. It's open-source under Apache 2.0. And it's [already live](https://www.pymnts.com/artificial-intelligence-2/2026/google-launches-agentic-commerce-with-etsy-and-wayfair/) — Etsy and Wayfair are processing agentic checkout through Google's AI Mode and Gemini right now.
+
+The protocol turns the cart into a standardized data object. Not a page on Shopify. Not a React component in someone's storefront. A protocol-level primitive that can live in an AI agent's context, in a browser extension, at an edge node — anywhere that speaks the protocol. Products declare their attributes. Agents discover them. Carts accumulate items across merchants. Checkout follows a standard flow.
+
+If that sounds familiar, it should. AWS launched S3 and EC2 in 2006. The pattern is the same.
+
+---
+
+## Commerce as a Service
+
+AWS didn't make servers disappear. It made *owning them* unnecessary for most use cases. The physical infrastructure still existed — someone still racked machines in data centers. But the interface shifted. You stopped buying hardware and started calling APIs. Compute became a service, then a commodity, then something you stopped thinking about entirely.
+
+UCP is the same structural move applied to transactional commerce.
+
+If a protocol can standardize product discovery, cart management, and checkout — the three core operations every e-commerce platform provides — those operations migrate from *platform features* to *infrastructure services*. The platform doesn't disappear. It gets pushed down the stack.
+
+<PullQuote>The hyperscalers already provide compute, storage, networking, and inference as standardized services. Cart and checkout are just the next layer up.</PullQuote>
+
+The stack, if this plays out:
+
+- **Inference providers** (Google, OpenAI, Anthropic) become the frontend — AI agents using UCP to interact with any merchant on behalf of any consumer
+- **Cloud platforms** (Google Cloud, AWS) provide the backend — hosting UCP-compliant product catalogs, handling identity resolution, processing the protocol operations
+- **Payment networks** (Stripe, Adyen, the card rails) become pure transaction infrastructure — no longer embedded in a specific platform, just plugged into the protocol layer
+
+The retailer still owns the hard parts: inventory management, fulfillment logistics, returns handling, loyalty programs, brand. That complexity doesn't evaporate. But the *transactional layer* — the cart, the checkout, the product data exchange — becomes a commodity. Something you consume as a service rather than build or buy as a platform.
+
+---
+
+## Protocol Over Platform
+
+This isn't just a Google product announcement. It fits a pattern that's been accelerating for eighteen months.
+
+MCP standardized how agents connect to tools — the integration surface went from n-squared to linear. Tools declare capabilities, agents discover them through a shared protocol. No more bespoke API wrappers.
+
+UCP does the same thing for commerce. Products declare. Agents discover. Carts accumulate. Checkout executes. The "tools" are buy, compare, add-to-cart, and ship — and the protocol handles the plumbing.
+
+UCP isn't just adjacent to these protocols — it [orchestrates them](https://developers.googleblog.com/under-the-hood-universal-commerce-protocol-ucp/). Google's developer docs describe UCP as supporting MCP for product discovery, A2A for agent-to-agent coordination, and a new protocol called [AP2](https://cloud.google.com/blog/products/ai-machine-learning/announcing-agents-to-payments-ap2-protocol) (Agent Payments Protocol) for secure payment authorization. AP2 was built with Coinbase and over sixty organizations, using digitally signed "mandates" for agent-level transaction permissions.
+
+The full stack: MCP for tool discovery. A2A for agent coordination. UCP for commerce operations. AP2 for payment authorization. Each protocol handles one layer. Together they cover the entire transaction lifecycle.
+
+<Callout type="insight" title="The Internet Grows in Protocols">
+HTTP for documents. SMTP for email. OAuth for identity. MCP for tools. A2A for agents. UCP for commerce. AP2 for payments. The stack isn't converging on a single AI platform — it's converging on interoperable protocols. This is how the internet has always expanded. Not by one company winning, but by the interfaces becoming standardized enough that anyone can build on top.
+</Callout>
+
+I [wrote about this shift](/blog/six-months-after-the-horizon) earlier this month — how the real story of the last six months was agents that *act*, not agents that *answer*. MCP was the thing I'd missed entirely in my predictions from September. UCP is MCP's natural extension into commerce: the protocol layer that turns shopping from a human UI problem into a machine-to-machine interaction.
+
+---
+
+## The Invisible-ization of Vendor Platforms
+
+Here's the uncomfortable part for anyone who builds on BigCommerce or Salesforce Commerce Cloud — because Shopify is already on the other side of this.
+
+Shopify co-developed UCP. They're not resisting the protocol shift; they're betting that their operational backend (fulfillment, payments, merchant tools) is valuable enough to survive the transaction surface becoming a commodity. That's a bold bet. It's also an implicit admission that the storefront-as-destination model has a shelf life.
+
+The platforms that *didn't* co-develop UCP are in a harder position. Their business model depends on being the *destination* — the place where the storefront, the cart, and the checkout all live together. The merchant pays for the bundle. The consumer interacts with the bundle. The platform owns the transaction surface.
+
+If UCP commoditizes the transaction surface, the platform's value proposition shifts. It doesn't vanish — there's genuine complexity in commerce operations that won't get abstracted away by a protocol. But the platform stops being the destination and starts being the engine. Invisible. Headless in the deepest sense — not just a decoupled frontend, but a decoupled *everything* except the business logic.
+
+There's a difference between a platform offering a headless option and an open protocol making headless the *default*. One is a feature. The other is a structural change.
+
+<Callout type="signal" title="The Merchant's Question">
+If an AI agent can build a cart across five different merchants using a standard protocol, route the checkout through a standard payment flow, and handle the transaction without ever touching a storefront — what is the merchant paying the platform for? The answer is everything behind the transaction: supply chain, fulfillment, analytics, brand. But those are different products at different price points than "we host your store."
+</Callout>
+
+---
+
+## Where This Gets Fragile
+
+I'm tracking three things that could prevent this from playing out cleanly.
+
+**The standards war is already here.** OpenAI and Stripe [launched their own Agentic Commerce Protocol](https://openai.com/index/buy-it-in-chatgpt/) (ACP) — open-source, Apache 2.0, powering "Instant Checkout" in ChatGPT. Salesforce has announced ACP support. So the "universal" in UCP is already contested. Two competing open protocols backed by different power centers: Google's UCP (co-developed with Shopify, supported by Walmart, Target, Etsy, Wayfair) versus OpenAI's ACP (co-developed with Stripe, supported by Salesforce). The industry is currently treating them as interoperable through adapter layers, but that's early-stage diplomacy. Whether they converge into one standard or fragment the ecosystem is the single biggest variable in this story.
+
+**Checkout is trust, not data.** AP2 addresses the *technical* side of protocol-level payments — digitally signed mandates, authorization flows, sixty-plus organizations contributing. But checkout also involves the behavioral reality that consumers trust specific brands with their money. Amazon's checkout converts because people trust Amazon. A protocol-level checkout powered by AP2 has to earn that trust, not just standardize the data interchange. That's behavioral, not technical — and it's the part no protocol spec can solve on its own.
+
+**Data quality is the unglamorous bottleneck.** The protocols are ready. The merchant data isn't. Inconsistent product attributes, stale inventory feeds, mismatched catalogs — these are the mundane problems that will cause agentic checkout to fail in practice even when the architecture works in theory. An agent that adds an out-of-stock item to a protocol-level cart is still a bad experience. The plumbing matters less than what flows through it.
+
+---
+
+## What I'm Watching
+
+Six months ago, the signals I would have watched for were hypothetical: *will* anyone build protocol-level payments? *Will* competitors adopt or resist? Those questions have answers now.
+
+Etsy and Wayfair are live on UCP checkout. AP2 exists with sixty-plus organizations. OpenAI and Stripe shipped a competing protocol. Shopify co-developed UCP. Walmart and Target signed on as supporters rather than resisting. The ecosystem mobilized faster than I would have predicted.
+
+The open questions have shifted:
+
+**UCP vs. ACP convergence.** Do these protocols merge, interoperate through adapters, or fracture the market? If merchants have to support both — and consumers end up on different agents using different protocols — the "universal" thesis weakens. If they converge (or adapters make the difference invisible), the commoditization thesis strengthens.
+
+**Consumer trust migration.** Etsy and Wayfair are live, but both are brands consumers already trust. The real test is whether a protocol-level checkout works for merchants that *don't* have brand-level trust — the long tail of smaller retailers where the platform was the trust signal. If the agent becomes the trust layer (people trust Gemini or ChatGPT to handle their money), that's a fundamental power shift.
+
+**Data quality at scale.** Walmart and Target are next in the UCP pipeline. These are massive catalogs with complex inventory — multiple fulfillment centers, real-time stock levels, regional pricing. If agentic checkout works at that scale, the infrastructure thesis is validated. If it breaks on data quality, the protocol is ahead of the ecosystem's readiness.
+
+---
+
+## The Revised Picture
+
+I [predicted](/blog/six-months-after-the-horizon) that e-commerce funnels would collapse into agent conversations and had to walk it back. The mechanism was wrong. UCP suggests the actual mechanism: the funnel doesn't collapse — it migrates into a protocol layer. Every stage survives. None of them require a storefront. The agent handles the interaction surface. The protocol handles the transaction logic. The platform handles the operational backend.
+
+Six months ago, that was a thesis. Today, Etsy and Wayfair are processing real transactions through it. Walmart and Target are in the pipeline. Two competing protocols exist. Payment authorization has its own protocol layer. The coalitions have formed.
+
+We've already accepted that compute is a service. Storage is a service. Networking is a service. Inference is a service. Cart and checkout aren't the *next candidate* anymore — they're mid-migration. The infrastructure question is settled. The open question is whether the ecosystem follows, or whether the standards war and data quality problems slow it down enough for the existing platforms to adapt.
+
+That's the part worth watching. Not whether commerce becomes a protocol — that's already happening. But whether the transition is fast enough to reshape the stack before the incumbents absorb it.
