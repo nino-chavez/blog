@@ -1,0 +1,323 @@
+---
+title: "Set Up an AI-Native Dev Environment"
+publishedAt: "2026-03-20T14:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "Build the infrastructure behind 223 sessions and 38,000 prompts. Configure project-scoped context, persistent memory, automated skills, and the cross-pollination workflow that makes AI-assisted development sustainable at scale."
+category: "AI & Automation"
+featureImage: "/images/generated/setting-up-an-ai-native-dev-environment.webp"
+tags: ["ai-development", "tutorial", "engineering"]
+duration: "45 min"
+difficulty: "intermediate"
+prerequisites:
+  - "Claude Code installed and working"
+  - "At least one active project you're building"
+  - "Completed the Beyond Chat workshop (or equivalent CLAUDE.md setup)"
+  - "Terminal access on macOS or Linux"
+objectives:
+  - "Organize your workspace so each project inherits scoped context automatically"
+  - "Build a memory system that persists corrections and preferences across sessions"
+  - "Create custom skills that eliminate repetitive prompts"
+  - "Establish a cross-pollination workflow between AI tools"
+companionOf:
+  type: presentation
+  slug: anatomy-of-ai-native-development
+---
+
+import { Exercise } from '@/components/tutorials/Exercise';
+import { Template } from '@/components/tutorials/Template';
+import { Checkpoint } from '@/components/tutorials/Checkpoint';
+
+# Beyond the First CLAUDE.md
+
+The [Beyond Chat workshop](/blog/tutorials/beyond-chat-workshop) gets you from zero to "my AI knows my project." This workshop picks up where that left off.
+
+If you've been using Claude Code for a few weeks, you've probably noticed a pattern: the CLAUDE.md handles project context well, but you're still repeating yourself across sessions. You correct the same behavior. You type the same setup prompts. You explain the same cross-project relationships. And every time you switch projects, you lose momentum.
+
+This workshop builds the next three layers of infrastructure — the ones that turned my setup from "functional" into something that produced 38,000 prompts across 32 projects in a single month without constant hand-holding.
+
+---
+
+## The Architecture
+
+| Layer | Problem | Solution | This Workshop |
+|-------|---------|----------|:---:|
+| **Session Bootstrap** | AI forgets between sessions | CLAUDE.md | Prerequisite |
+| **Workspace Structure** | Context bleeds across projects | Directory conventions | Exercise 1 |
+| **Persistent Memory** | Corrections don't stick | File-based memory system | Exercise 2 |
+| **Automated Skills** | Same prompts typed repeatedly | Custom slash commands | Exercise 3 |
+| **Cross-Pollination** | AI tools are silos | Convergence workflow | Exercise 4 |
+
+Each layer builds on the previous. By the end, you'll have the infrastructure that makes high-volume AI-assisted development sustainable.
+
+---
+
+<Exercise number={1} title="Workspace Structure: Scope Your Conversations" duration="10 min">
+
+## Why this matters
+
+AI tools scope conversations to the directory you launch them from. Launch from your home folder and Claude sees everything — which means it understands nothing well. Launch from a specific project and it gets focused context automatically.
+
+But the structure of your workspace determines *how well* that scoping works. If all your projects are flat siblings in `~/projects/`, there's no hierarchy to signal lifecycle, purpose, or relationship.
+
+## The pattern
+
+Organize projects by lifecycle stage, not by technology or client:
+
+```
+~/Workspace/dev/
+├── apps/           # Production — deployed, has users
+├── client/         # Client work — external stakeholders
+├── wip/            # Work in progress — still finding shape
+└── tools/          # Internal tooling — serves other projects
+```
+
+The categories signal intent to both you and the AI:
+- `apps/` = production code, be careful
+- `client/` = external deliverables, maintain professionalism
+- `wip/` = experimental, iterate fast
+- `tools/` = shared infrastructure, stability matters
+
+## Your turn
+
+Look at your current project layout. Reorganize into lifecycle categories. You don't need to use these exact names — pick categories that match your actual work patterns.
+
+Then create a CLAUDE.md at the workspace root level for cross-project sessions:
+
+</Exercise>
+
+<Template title="Workspace Root CLAUDE.md" description="For sessions that span multiple projects">
+
+````markdown
+# [Your Name]'s Workspace
+
+## Layout
+- `apps/` — Production applications
+- `client/` — Client projects
+- `wip/` — Work in progress
+- `tools/` — Shared internal tools
+
+## Preferences
+- [Your commit style, e.g., "Descriptive, conventional-ish"]
+- [Push behavior, e.g., "Push after commit when asked"]
+- [Output style, e.g., "No emoji, terse responses"]
+- [Editing preference, e.g., "Prefer editing existing files over creating new ones"]
+````
+
+</Template>
+
+<Checkpoint>
+
+**Test it.** Open Claude Code from your workspace root (`~/Workspace/dev/` or equivalent). Ask: *"Show me the status of all projects."* Claude should be able to navigate the directory structure and understand what each project is based on the layout.
+
+Then open Claude Code from inside a specific project. Ask: *"What's the build command?"* It should answer from that project's CLAUDE.md without bleeding in context from sibling projects.
+
+If both work — your scoping is right.
+
+</Checkpoint>
+
+---
+
+<Exercise number={2} title="Persistent Memory: Make Corrections Stick" duration="15 min">
+
+## Why this matters
+
+You've corrected Claude's behavior before. "Don't mock the database in tests." "Use dark mode for dashboards." "Single PR is fine for refactors in this area." Each correction costs you a prompt and a context switch.
+
+Without memory, you pay that cost every session. With memory, you pay it once.
+
+## How it works
+
+Claude Code has a file-based memory system at `~/.claude/projects/{project-path}/memory/`. Each memory is a markdown file with YAML frontmatter. An index file (`MEMORY.md`) acts as a table of contents.
+
+There are four types:
+
+| Type | What to Save | Example |
+|------|-------------|---------|
+| **user** | Your role, expertise, preferences | "Deep Go experience, new to React frontend" |
+| **feedback** | Corrections AND confirmations | "Don't mock the database — real DB tests caught a broken migration last quarter" |
+| **project** | Decisions, deadlines, state | "Merge freeze starts March 5 for mobile release" |
+| **reference** | Pointers to external resources | "Pipeline bugs tracked in Linear project INGEST" |
+
+The critical type most people miss: **feedback**. Both corrections *and* confirmations.
+
+When Claude does something you correct — save it. But also: when Claude makes a non-obvious choice that works — save that too. If you only save corrections, Claude becomes overly cautious. Confirmations tell it "this approach is validated — keep doing this."
+
+## Your turn
+
+Create your first three memory files. Start with the ones that will save you the most re-explaining.
+
+</Exercise>
+
+<Template title="Memory File Structure" description="Each memory gets its own file in the memory directory">
+
+````markdown
+---
+name: feedback_testing
+description: Integration tests must use real database, not mocks
+type: feedback
+---
+
+Integration tests must hit a real database, not mocks.
+
+**Why:** Prior incident where mock/prod divergence masked a broken migration.
+
+**How to apply:** When writing or suggesting tests for any database operation,
+use the real Supabase client against a test database. Never suggest
+jest.mock() or vitest.mock() for database modules.
+````
+
+</Template>
+
+<Template title="MEMORY.md Index" description="Keep under 200 lines — Claude reads this every session">
+
+````markdown
+# Memory Index
+
+## User
+- [user_role.md](user_role.md) — Background, expertise, and response calibration
+
+## Feedback
+- [feedback_testing.md](feedback_testing.md) — Real DB tests, no mocks
+- [feedback_style.md](feedback_style.md) — Terse responses, no trailing summaries
+
+## Project
+- [project_freeze.md](project_freeze.md) — Merge freeze dates and scope
+````
+
+</Template>
+
+<Checkpoint>
+
+**Test it.** Start a new Claude Code session in a project where you've saved memory. Trigger the situation your feedback memory addresses. For example, if you saved "don't mock the database," ask Claude to write a test for a database operation.
+
+Does it follow the memory without being reminded? If yes — the memory system is working. If no, check that your MEMORY.md index links to the file correctly and that the `description` field is specific enough for Claude to judge relevance.
+
+</Checkpoint>
+
+---
+
+<Exercise number={3} title="Custom Skills: Stop Typing the Same Prompts" duration="10 min">
+
+## Why this matters
+
+Over the past month, 47 of my 223 sessions started with "Implement the following plan:" and 11 started with "Pull latest." These are recurring prompts — same intent, same structure, slightly different parameters each time.
+
+Custom skills turn these into one-word commands.
+
+## How it works
+
+Create markdown files in `.claude/commands/` (project-level) or `~/.claude/commands/` (global). Each file becomes a slash command.
+
+```
+.claude/commands/
+├── doc-audit.md         # /doc-audit
+├── workspace-status.md  # /workspace-status
+└── pull-and-start.md    # /pull-and-start
+```
+
+The file content is the full prompt that gets injected when you type the command.
+
+## Your turn
+
+Identify your three most common session openers. Create a skill for each one. Start simple — you can add sophistication later.
+
+</Exercise>
+
+<Template title="Skill File Examples" description="Place in .claude/commands/ — filename becomes the command">
+
+````markdown
+# pull-and-start.md
+Pull latest changes from the remote. If there are conflicts, report them
+and stop. Otherwise, install any new dependencies, then start the dev
+server. Report the local URL when ready.
+````
+
+````markdown
+# doc-audit.md
+Audit all documentation in this project:
+1. Check that README accurately reflects current project state
+2. Verify all internal links resolve
+3. Flag any docs older than 30 days that reference changed code
+4. Report findings as a checklist with pass/fail for each item
+````
+
+````markdown
+# workspace-status.md
+Show the status of all projects in this workspace. For each project:
+1. Git status (branch, uncommitted changes, ahead/behind remote)
+2. Last commit date and message
+3. Any failing builds or tests
+Report as a table sorted by most recently active.
+````
+
+</Template>
+
+<Checkpoint>
+
+**Test it.** Type `/` in your Claude Code session — you should see your new commands in the autocomplete list. Run one. Does it execute the full prompt without you typing anything beyond the command name?
+
+**Level up.** If a skill has a variable part (like a file name or feature description), use `$ARGUMENTS` in the skill file — whatever you type after the command becomes the argument. For example: `/doc-audit src/routes` passes `src/routes` as the scope.
+
+</Checkpoint>
+
+---
+
+<Exercise number={4} title="Cross-Pollination: The Convergence Workflow" duration="10 min">
+
+## Why this matters
+
+If you use multiple AI tools — Gemini for research, ChatGPT for brainstorming, Claude Code for execution — they're probably silos. Each one has a piece of the picture. None of them can see the whole thing.
+
+The fix isn't a single tool that does everything. It's a workflow where one tool becomes the convergence point — the place where ideas from everywhere get turned into shipped artifacts.
+
+## The pattern
+
+```
+[Gemini deep research]  ─┐
+[Slack conversation]     ─┤
+[Client email]           ─┼─→ [Claude Code session] → [Shipped artifact]
+[Competitor screenshot]  ─┤
+[Other Claude session]   ─┘
+```
+
+Claude Code is the execution layer. Everything else is input. The key behavior: **paste external context directly into your Claude Code session as the prompt.**
+
+Examples from actual sessions:
+
+- "Consider this Gemini exchange about e-commerce protocols. What's the blog post angle?"
+- Drop a screenshot of a competitor's site: "Audit this layout against our design system."
+- Paste a client's feedback email: "Update the proposal to address these concerns."
+- Copy output from another Claude session: "This brainstorm identified three approaches. Implement option 2."
+
+## Your turn
+
+Pick a real piece of external context — an article, a Slack message, a screenshot, output from another AI tool. Paste it into a Claude Code session in the relevant project directory with a clear directive.
+
+Watch what happens when Claude has both the project context (from CLAUDE.md) and the external input (from your paste). The combination is more than either piece alone.
+
+</Exercise>
+
+<Checkpoint>
+
+**The real test.** Over the next week, track how many times you bring external context into a Claude Code session. If the number is zero, you're probably doing too much work inside a single tool. If it's happening naturally, you've built the convergence workflow.
+
+**The meta-test.** After a week, look at what you shipped. Count the artifacts that involved context from more than one source. That ratio — multi-source artifacts vs. single-source — is a rough measure of how well the cross-pollination workflow is working.
+
+</Checkpoint>
+
+---
+
+## What Comes Next
+
+You now have four layers of infrastructure:
+
+1. **Workspace structure** that scopes conversations automatically
+2. **Memory system** that makes corrections permanent
+3. **Custom skills** that eliminate repetitive prompts
+4. **Cross-pollination** habit that connects your tools
+
+The fifth layer — hooks and automated behaviors — grows from these. When you notice that you *always* want a React quality check after editing `.tsx` files, that becomes a hook. When you notice that you *always* want the voice guide loaded when writing blog content, that becomes a hook. Don't build hooks for hypothetical needs. Build them for friction you've actually felt.
+
+The companion blog post — [What 223 Sessions Taught Me About Working with AI](/blog/what-223-sessions-taught-me-about-working-with-ai) — shows what this infrastructure looks like at scale after a month of use. The presentation — [Anatomy of AI-Native Development](/presentations/anatomy-of-ai-native-development) — distills it into slides.
+
+None of this started as a grand system. It started with a CLAUDE.md file and a habit of launching from the right directory. Everything else grew from actual friction.
