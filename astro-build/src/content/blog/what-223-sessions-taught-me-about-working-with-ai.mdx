@@ -1,0 +1,195 @@
+---
+title: "What 223 Sessions Taught Me About Working with AI"
+publishedAt: "2026-03-20T12:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "I pulled 30 days of Claude Code session data — 223 sessions, 38,000+ prompts, 32 projects, 1.2 GB of conversation. The numbers tell a story about what AI-native development actually looks like when nobody's watching."
+category: "AI & Automation"
+featureImage: "/images/generated/what-223-sessions-taught-me-about-working-with-ai.webp"
+tags: ["ai-development", "field-notes", "engineering"]
+featured: true
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+I've been building with Claude Code for months now. Shipping real products, writing client proposals, managing a photography gallery, coaching volleyball — all of it running through the same CLI tool on the same laptop. But I'd never actually measured what that looked like from the outside.
+
+So I pulled the data.
+
+Not from a dashboard or an analytics product. From the raw session files — the `.jsonl` logs that Claude Code writes to disk every time you start a conversation. I wrote a script, pointed it at the last 30 days, and let the numbers tell me what I'd actually been doing.
+
+---
+
+## The Numbers
+
+**30 days. 223 sessions. 38,322 prompts. 1.2 GB of conversation data.**
+
+Across 32 distinct projects. Some days I ran 19 sessions. Some days, one session ran over 2,300 prompts.
+
+Here's the daily breakdown:
+
+| Date | Sessions | Prompts |
+|------|----------|---------|
+| Feb 22 | 19 | 2,299 |
+| Feb 24 | 11 | 2,341 |
+| Feb 25 | 6 | 2,194 |
+| Mar 1 | 16 | 2,404 |
+| Mar 2 | 9 | 2,268 |
+| Mar 5 | 13 | 2,156 |
+| Mar 9 | 14 | 2,118 |
+| Mar 12 | 4 | 2,180 |
+| Mar 15 | 1 | 2,324 |
+
+That last one — 2,324 prompts in a single session. One project, one conversation, one unbroken arc of work.
+
+The average session was 172 prompts. But the distribution tells the real story.
+
+---
+
+## How Sessions Actually Break Down
+
+| Length | Prompts | Sessions | Share |
+|--------|---------|----------|-------|
+| Quick | 1-10 | 14 | 6% |
+| Medium | 11-50 | 47 | 21% |
+| Deep | 51-150 | 93 | 42% |
+| Marathon | 151-500 | 54 | 24% |
+| Ultra | 501+ | 14 | 6% |
+
+The bulk of the work — 42% — happens in sessions between 51 and 150 prompts. Not quick fire-and-forget interactions. Not day-long marathons. Something in between: focused work arcs that last long enough to build real momentum.
+
+But the marathons and ultras account for 30% of sessions and a disproportionate share of actual output. Those are the sessions where an entire feature gets built, a client proposal gets written and revised, or a new product goes from brainstorm to deployed prototype.
+
+<PullQuote>The most productive sessions aren't the longest ones. They're the ones where the context never breaks.</PullQuote>
+
+---
+
+## What the Work Actually Was
+
+This is the part that surprised me. I expected "coding" to dominate. It didn't. Not even close.
+
+| Category | Sessions | Prompts | Share |
+|----------|----------|---------|-------|
+| Product Development (AI analytics) | 46 | 12,056 | 30% |
+| Cross-cutting / meta-work | 55 | 8,039 | 21% |
+| Product Development (sports tech) | 28 | 6,154 | 16% |
+| Enterprise (employer) | 15 | 3,552 | 9% |
+| Product Development (photography) | 28 | 3,330 | 9% |
+| Client work | 11 | 1,879 | 5% |
+| Content & thought leadership | 25 | 1,459 | 4% |
+| Internal tooling | 7 | 1,113 | 3% |
+| Brand & marketing | 7 | 613 | 2% |
+| R&D / greenfield | 1 | 548 | 1% |
+
+The biggest category — 30% of all prompts — was a single product: an AI analytics dashboard I'm building. That tracks. It's the most complex project in the workspace and the one in the heaviest development phase.
+
+But look at the second line. "Cross-cutting / meta-work" — 21% of all prompts — is the work that doesn't belong to any single project. Brainstorming new ideas. Auditing the workspace. Organizing files across projects. Building shared tools.
+
+This is the work that doesn't show up in a sprint board or a git log. It's connective tissue — the thinking that links one project's lessons to another's requirements.
+
+---
+
+## The Session-per-Project Pattern
+
+I don't use Claude the way most people seem to describe using AI tools.
+
+I don't ask it quick questions. I don't use it as a search engine with attitude. Instead, I spin up a conversation inside a specific project directory and ride it for hours. Sometimes days, resuming the same session across multiple sittings.
+
+Each project has its own `CLAUDE.md` file — a persistent instruction set that tells Claude who it's working with, what the project conventions are, what to avoid, and where to find things. When I start a session inside that project, Claude already knows the stack, the design system, the deployment target, the voice, the file structure.
+
+That means I don't spend the first 15 minutes re-explaining context. The session starts at full velocity.
+
+<Callout type="signal" title="Project-Scoped Context, Not Global Chat">
+The key insight: one conversation per project per work stream. Not one general-purpose assistant. Each session inherits the project's rules, memory, and conventions through file-based configuration. The AI doesn't need to be told what framework you're using — it reads the config and figures it out.
+</Callout>
+
+Here's what 30 days of that looks like across projects:
+
+- **QuantifAI** (AI analytics platform): 47 sessions, from red team security audits to landing page copy to domain name brainstorming to user invitation flows
+- **Rally HQ** (tournament platform): 19 sessions, from Swiss format implementation to organizer UX audit to beta user onboarding documentation
+- **Photography gallery**: 27 sessions, including a full migration of 20,000+ photos from SmugMug to Cloudflare Images
+- **Client sites**: 11 sessions across four clients — site redesigns, MVP launches, DNS migrations, SEO preservation
+- **Signal Dispatch** (this blog): 17 sessions for writing, editing, and publishing
+
+None of those are "just coding." Every project blends strategy, design, writing, debugging, and deployment. The AI handles all of it in the same conversation.
+
+---
+
+## What I'm Actually Typing
+
+I looked at the most common ways sessions start:
+
+| Opener | Count |
+|--------|-------|
+| "Implement the following plan:" | 47 |
+| *(Resumed/interrupted session)* | 49 |
+| Brainstorm / consider an idea | 15 |
+| "Pull latest" | 11 |
+| Fix / address an issue | 4 |
+| New project kickoff | 3 |
+| Audit / review request | 3 |
+
+Almost a quarter of sessions start with "Implement the following plan:" — meaning I've already done the thinking and I'm handing off execution. Another 22% are resumed sessions — picking up where a previous conversation left off.
+
+That ratio feels important. Most of my interaction with AI isn't ideation or exploration. It's *delegation with context*. I show up with a plan, hand it to the agent, and monitor execution.
+
+The brainstorming sessions (15) are real too — product ideas, competitive analysis, "consider this conversation from Gemini and tell me what you think." But they're the minority. The dominant mode is directed execution.
+
+---
+
+## The Cross-Pollination Effect
+
+One pattern I didn't expect: I frequently paste output from other AI tools — Gemini deep research reports, Slack conversations, screenshots, even other Claude sessions — directly into a Claude Code conversation as input.
+
+This happens constantly:
+
+- Pasting a Gemini exchange about e-commerce protocols into a blog drafting session
+- Dropping a Slack message from a colleague into a project planning session
+- Screenshotting a deployed site and asking Claude to audit the layout
+- Copying a client's feedback email into a design revision session
+
+Claude Code isn't a silo. It's the *execution layer* for ideas that originate everywhere. The thinking might start in a Gemini conversation, a Slack thread, a competitor's website, or a phone call. But it converges in a Claude Code session where it gets turned into artifacts — code, docs, proposals, deployments.
+
+<Callout type="insight">
+The tool that wins isn't the one that generates the best ideas. It's the one that can take input from anywhere and turn it into shipped work.
+</Callout>
+
+---
+
+## The Infrastructure That Makes It Work
+
+The raw numbers don't explain *why* this works. The infrastructure does.
+
+**CLAUDE.md files** — every project has one. It's the persistent context layer. Conventions, stack details, deployment targets, off-limits files, preferred approaches. Claude reads this on session start and operates within those boundaries without being told.
+
+**Memory system** — a file-based memory that persists across sessions. Who the user is, past decisions, project state, feedback corrections. This is how Claude knows that I prefer dark mode, that 630 Volleyball uses Supabase, that I don't want emoji in my output.
+
+**Custom skills and hooks** — automated behaviors triggered by specific actions. When I edit a `.tsx` file, a React best-practices checker runs. When I start a dev server, a browser verification agent launches. When I write a blog post, the voice guide loads automatically.
+
+**Plans and tasks** — structured thinking for non-trivial work. Before a complex implementation, Claude drafts a plan. I approve, adjust, or reject it. Then it executes against that plan, tracking progress through discrete tasks.
+
+This isn't a chat interface with autocomplete. It's a development environment where the AI has persistent state, operational constraints, and enough context to make judgment calls.
+
+---
+
+## What the Data Doesn't Show
+
+The numbers miss some things.
+
+They don't capture the sessions where I started, hit a wall, and abandoned the approach. The 49 "resumed/interrupted" sessions represent just the ones I came back to. There are more I didn't.
+
+They don't show the quality distribution. Some of those 38,000 prompts were "commit and push." Others were "audit this entire site for cognitive overhead and rate how self-serve it is." The prompts aren't equal.
+
+And they definitely don't show the human judgment layer — the decisions I made between sessions about *which* project to work on next, *when* to stop iterating and ship, *whether* to accept Claude's approach or redirect. That orchestration is invisible in the data but it's the whole game.
+
+---
+
+## What I'd Tell Someone Starting
+
+The question I keep getting — from colleagues, from LinkedIn connections, from friends who see me ship at this pace — is some version of: *how do you actually work with this thing?*
+
+The honest answer is: I stopped treating it like a tool and started treating it like a team member who needs onboarding. The `CLAUDE.md` file is the onboarding doc. The memory system is the tribal knowledge. The skills and hooks are the standard operating procedures. The project-scoped conversations are the stand-ups.
+
+None of that is complicated. It's just... deliberate. The same thing that makes any team effective: clear context, consistent conventions, and enough trust to delegate without micromanaging.
+
+The 223 sessions and 38,000 prompts aren't the impressive part. The impressive part is that most of them didn't require me to explain the same thing twice.

@@ -1,0 +1,304 @@
+---
+title: "Setting Up an AI-Native Dev Environment"
+publishedAt: "2026-03-20T14:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "The practical companion to 'What 223 Sessions Taught Me.' How to set up CLAUDE.md files, the memory system, custom skills, project-scoped conversations, and the infrastructure that makes AI-assisted development actually sustainable."
+category: "AI & Automation"
+featureImage: "/images/generated/setting-up-an-ai-native-dev-environment.webp"
+tags: ["ai-development", "tutorial", "engineering"]
+featured: false
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+This is the companion post to [What 223 Sessions Taught Me About Working with AI](/blog/what-223-sessions-taught-me-about-working-with-ai). That post was the data. This one is the how.
+
+Everything here assumes you're using [Claude Code](https://claude.ai/claude-code) — Anthropic's CLI tool for agentic development. The principles apply to other AI coding tools, but the specifics are Claude Code-native.
+
+---
+
+## The Directory Structure
+
+Before anything else: how you organize your workspace matters more than you'd think.
+
+AI tools scope conversations to the directory you launch them from. If all your projects live in one flat folder, every session drowns in irrelevant context. If they're organized by purpose, each session starts with only the context it needs.
+
+Here's how mine looks:
+
+```
+~/Workspace/dev/
+├── apps/           # Production applications
+│   ├── rally-hq/       # Tournament platform
+│   ├── photography/     # Photo gallery
+│   ├── blog/            # Signal Dispatch (this site)
+│   └── 630-apps/        # Volleyball org tools
+├── client/         # Client projects
+│   ├── allen-wellness-center/
+│   ├── creative-floors/
+│   └── urvil-performance/
+├── wip/            # Work in progress
+│   ├── quantifai-lite/
+│   ├── partner-ai/
+│   └── cortex/
+└── tools/          # Shared internal tools
+    ├── image-gen/
+    └── signal-forge/
+```
+
+The categories — `apps/`, `client/`, `wip/`, `tools/` — aren't arbitrary. They signal lifecycle stage. When I open a terminal in `wip/quantifai-lite/`, Claude knows this is a project in active development without me saying so. When I'm in `apps/rally-hq/`, it knows this is production code with users.
+
+---
+
+## Step 1: The CLAUDE.md File
+
+This is the most important file in the system. It's the persistent instruction set that Claude reads on every session start.
+
+Create a `CLAUDE.md` file in the root of each project. Here's the minimal version:
+
+```markdown
+# Project Name
+
+## Stack
+- Framework, language, CSS approach
+- Database and auth provider
+- Hosting/deployment target
+
+## Conventions
+- Naming patterns
+- File organization
+- Test approach
+
+## Off-Limits
+- Files that should never be modified
+- Directories to skip
+```
+
+<Callout type="signal" title="What Makes a Good CLAUDE.md">
+The goal isn't documentation. It's *constraints*. Tell Claude what to do, what not to do, and where to find things. Skip the prose — bullet points work better. The file gets loaded into every session's context window, so keep it concise.
+</Callout>
+
+Here's a real example from one of my projects:
+
+```markdown
+# Rally HQ - Tournament Management Platform
+
+## Stack
+- SvelteKit 2.x / Svelte 5 (runes) / TypeScript / Tailwind CSS v4
+- Supabase (PostgreSQL + Auth + Storage)
+- Vercel deployment via GitHub push
+
+## Conventions
+- Components in src/lib/components/
+- Server routes in src/routes/api/
+- Supabase types auto-generated from schema
+- No emoji unless explicitly requested
+
+## Off-Limits
+- .env* files
+- supabase/migrations/ (generated, don't edit manually)
+```
+
+The key insight: this file isn't for you. It's for the AI. Write it like you're onboarding a new engineer who's about to make their first commit.
+
+---
+
+## Step 2: Global Instructions
+
+Beyond per-project files, you can set global instructions that apply to every session regardless of which project you're in.
+
+Create `~/.claude/CLAUDE.md`:
+
+```markdown
+# Global Context
+
+## Owner
+Your name, role, what you're working on
+
+## Preferences
+- Commit message style
+- Whether to push after commit
+- Output verbosity
+- Any stylistic preferences
+```
+
+This is where personality-level preferences go. Things like "no emoji," "prefer editing existing files over creating new ones," "don't over-engineer." These apply everywhere, so they live at the global level.
+
+---
+
+## Step 3: The Memory System
+
+Claude Code has a built-in memory system — a file-based persistence layer at `~/.claude/projects/{project-path}/memory/`.
+
+Memory files are markdown with YAML frontmatter:
+
+```markdown
+---
+name: user_role
+description: Nino's background and how to tailor responses
+type: user
+---
+
+Software engineer. 25 years experience. Runs a volleyball org.
+Prefers terse responses. Knows SvelteKit, Supabase, Tailwind
+deeply. New to some React patterns.
+```
+
+There are four types of memory:
+
+- **user** — who you are, your expertise, how to calibrate responses
+- **feedback** — corrections and confirmations ("don't mock the database," "single PR was the right call")
+- **project** — ongoing state that isn't in the code ("merge freeze starts Thursday")
+- **reference** — pointers to external resources ("bugs tracked in Linear project INGEST")
+
+<Callout type="insight">
+**Feedback memories are the most valuable.** Every time Claude does something you correct — or does something non-obvious that you confirm — save it. This prevents the same mistake from happening in the next session. Corrections are easy to notice. Confirmations are quieter — watch for them.
+</Callout>
+
+Memory is indexed through a `MEMORY.md` file that acts as a table of contents. Keep it under 200 lines — Claude reads this at the start of every session.
+
+---
+
+## Step 4: Project-Scoped Conversations
+
+The mental model: **one conversation per project per work stream.**
+
+Don't open Claude Code in your home directory and try to work across projects. Instead:
+
+```bash
+cd ~/Workspace/dev/apps/rally-hq
+claude
+```
+
+This scopes the session to that project. Claude loads the project's `CLAUDE.md`, the relevant memory files, and has access to the project's file tree. It won't get confused by files from other projects.
+
+When you need to do cross-project work — workspace audits, shared tooling, brainstorming that doesn't belong to any project — use the parent directory:
+
+```bash
+cd ~/Workspace/dev
+claude
+```
+
+This gives Claude visibility into everything, which is what you want for meta-work.
+
+---
+
+## Step 5: How Sessions Start
+
+This is where the practical pattern differs most from how people expect to use AI tools.
+
+**Most of my sessions don't start with a question.** They start with a directive:
+
+```
+Implement the following plan:
+
+1. Add Swiss format support to tournament creation
+2. Update the bracket generation to handle Swiss pairings
+3. Add round-by-round standings calculation
+4. Create the organizer UI for advancing rounds
+```
+
+The thinking happens before the session. The session is for execution.
+
+When I *do* explore or brainstorm, I'm explicit about it:
+
+```
+Consider this Gemini exchange about e-commerce protocols.
+What's the blog post angle here?
+```
+
+```
+Help me brainstorm: should QuantifAI have a free tier
+with terms of service, or stay invite-only?
+```
+
+The distinction matters because it changes how Claude allocates effort. "Implement" means write code, run tests, commit. "Consider" means think, compare, suggest. "Brainstorm" means explore freely without committing to an approach.
+
+---
+
+## Step 6: Skills and Hooks
+
+This is the automation layer. Skills are reusable prompts. Hooks are triggers that run automatically when certain events happen.
+
+**Skills** are slash commands you define:
+
+```bash
+# In .claude/commands/
+doc-audit.md     # Run documentation audit
+workspace-status.md  # Report status of all projects
+```
+
+When you type `/doc-audit` in a Claude session, it loads the full prompt from that file.
+
+**Hooks** are event-driven. They fire when Claude performs specific actions:
+
+```json
+{
+  "PreToolUse": [{
+    "matcher": "Read|Edit|Write",
+    "hooks": [{
+      "type": "command",
+      "command": "node inject-context.mjs"
+    }]
+  }]
+}
+```
+
+This is how I get automatic behavior like:
+- React best-practices checks when editing `.tsx` files
+- Voice guide loading when writing blog posts
+- Browser verification when starting a dev server
+
+The power is in composition. Skills handle the "what." Hooks handle the "when."
+
+<Callout type="warning" title="Start Simple">
+Don't build an elaborate skill/hook system on day one. Start with a CLAUDE.md file. Add memory when you notice yourself repeating corrections. Add skills when you notice yourself typing the same prompt repeatedly. Add hooks when you want something to happen automatically every time. Let the system grow from actual friction, not anticipated friction.
+</Callout>
+
+---
+
+## Step 7: The Cross-Pollination Workflow
+
+The last piece isn't a configuration. It's a habit.
+
+I constantly bring context from other tools into Claude Code sessions:
+
+- **Gemini deep research** — paste the output as context for a brainstorm or blog post
+- **Slack messages** — paste a colleague's question as the prompt for a planning session
+- **Screenshots** — drop a screenshot of a deployed site and ask Claude to audit the layout
+- **Other Claude sessions** — copy a summary from one project's session into another project's conversation
+
+Claude Code is the *execution convergence point*. Ideas originate everywhere. But they get turned into artifacts — code, docs, proposals, deployments — inside a Claude Code session with the right project context loaded.
+
+---
+
+## What This Looks Like in Practice
+
+A typical day:
+
+**Morning** — Open `wip/quantifai-lite/`. Resume yesterday's session. "Pull latest, start backend and frontend servers, refresh local data ingestion." The session already knows the stack, the database config, and the startup sequence.
+
+**Mid-morning** — Switch to `apps/rally-hq/`. New session. "Address build issue: 15:53:25.703 Running build in Washington, D.C..." Paste the Vercel build log. Claude reads the project config, identifies the issue, fixes it, pushes.
+
+**Afternoon** — Open `client/allen-wellness-center/`. "I need a launch plan for an MVP of this site. I've designed a full relaunch but all of that still needs review and approval from the site owner..." Conversational planning that turns into a structured document.
+
+**Evening** — Open `apps/blog/`. "Reference my previous post about AI predictions. Then take in this recent announcement..." Paste a Google blog post URL. The voice guide loads automatically. A new draft emerges in Signal Dispatch's voice.
+
+Four projects. Four separate conversations. Each one starts with full context. None of them required me to explain what framework I'm using or how I like my code formatted.
+
+<PullQuote>The goal isn't to use AI more. It's to use it without friction — so the bottleneck shifts from "getting the AI to understand" to "deciding what to build next."</PullQuote>
+
+---
+
+## Getting Started — The Minimum Viable Setup
+
+If you take one thing from this:
+
+1. **Create a `CLAUDE.md` in your most active project.** List the stack, conventions, and off-limits files. Keep it under 50 lines.
+2. **Launch Claude Code from inside that project directory.** Not from your home folder.
+3. **When Claude does something you correct, tell it to remember.** "Remember: don't mock the database in tests." It saves a memory file.
+4. **When you notice yourself typing the same instructions repeatedly, create a skill.** Put the prompt in `.claude/commands/{name}.md`.
+
+That's it. Four steps. The rest grows organically from how you actually work.
+
+The 223 sessions and 38,000 prompts I logged in a month didn't start with a grand system. They started with a `CLAUDE.md` file and a habit of launching from the right directory.

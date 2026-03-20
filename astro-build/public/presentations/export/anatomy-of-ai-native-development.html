@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anatomy of AI-Native Development</title>
+  <meta name="author" content="Nino Chavez">
+  <meta name="description" content="30 days of Claude Code session data — 223 sessions, 38,000+ prompts, 32 projects. What does AI-native development actually look like at scale? A data-driven walkthrough of the environment, the mental model, and the infrastructure that makes it work.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-violet': '#6366f1',
+            'brand-navy': '#1e1b4b',
+            'brand-slate': '#0f172a',
+          },
+          fontFamily: {
+            display: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+
+    /* ============================================
+       SIGNAL DISPATCH PRESENTATION DESIGN SYSTEM
+       Based on Signal Forge reference implementation
+       ============================================ */
+
+    /* CSS Custom Properties (Design Tokens) */
+    :root {
+      --brand-violet: #6366f1;
+      --brand-navy: #1e1b4b;
+      --brand-slate: #0f172a;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--brand-slate);
+      color: #fafafa;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    /* ============================================
+       PRESENTATION CONTAINER
+       ============================================ */
+    .presentation-container {
+      position: fixed;
+      top: 59px;
+      left: 0;
+      right: 0;
+      bottom: 28px;
+      font-family: 'Inter', system-ui, sans-serif;
+      overflow: hidden;
+    }
+
+    /* ============================================
+       BASE SLIDE STYLING
+       ============================================ */
+    .presentation-container .slide {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      flex-direction: column;
+      background: linear-gradient(to bottom right, var(--brand-slate), var(--brand-navy), var(--brand-slate));
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 3rem 2rem 4rem 2rem;
+      box-sizing: border-box;
+    }
+
+    .presentation-container .slide.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .presentation-container .slide.active {
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+    .animate-pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
+
+    /* ============================================
+       TYPOGRAPHY
+       ============================================ */
+    .presentation-container .slide h1 {
+      font-size: 3.75rem;
+      font-weight: 800;
+      color: #fafafa;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.5rem;
+    }
+
+    .presentation-container .slide h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #fafafa;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 3rem;
+    }
+
+    .presentation-container .slide h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fafafa;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+
+    .presentation-container .slide p {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .presentation-container .slide strong {
+      color: #fafafa;
+      font-weight: 600;
+    }
+
+    .presentation-container .slide em {
+      color: var(--accent-cyan);
+      font-style: italic;
+    }
+
+    /* ============================================
+       SECTION LABELS
+       ============================================ */
+    .presentation-container .section-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .presentation-container .section-label.amber { color: var(--accent-amber); }
+    .presentation-container .section-label.cyan { color: var(--accent-cyan); }
+    .presentation-container .section-label.emerald { color: var(--accent-emerald); }
+    .presentation-container .section-label.violet { color: var(--brand-violet); }
+    .presentation-container .section-label.red { color: #f87171; }
+    .presentation-container .section-label.rose { color: #fb7185; }
+    .presentation-container .section-label.neutral { color: rgba(255, 255, 255, 0.4); }
+
+    /* ============================================
+       CONTENT CARDS
+       ============================================ */
+    .presentation-container .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .presentation-container .card.highlighted {
+      background: linear-gradient(to bottom right, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.1));
+      border-color: rgba(99, 102, 241, 0.3);
+      box-shadow: 0 0 40px rgba(99, 102, 241, 0.3);
+    }
+
+    .presentation-container .card.terminal {
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .presentation-container .card.warning {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: rgba(239, 68, 68, 0.2);
+    }
+
+    .presentation-container .card.success {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.2);
+    }
+
+    /* ============================================
+       CALLOUT BLOCKS
+       ============================================ */
+    .presentation-container .callout {
+      background: linear-gradient(to right, rgba(99, 102, 241, 0.1), transparent);
+      border-left: 4px solid var(--brand-violet);
+      padding: 1.5rem;
+      border-radius: 0 0.75rem 0.75rem 0;
+      margin-top: 2rem;
+    }
+
+    .presentation-container .callout.amber {
+      background: linear-gradient(to right, rgba(245, 158, 11, 0.1), transparent);
+      border-left-color: var(--accent-amber);
+    }
+
+    .presentation-container .callout.cyan {
+      background: linear-gradient(to right, rgba(6, 182, 212, 0.1), transparent);
+      border-left-color: var(--accent-cyan);
+    }
+
+    .presentation-container .callout.emerald {
+      background: linear-gradient(to right, rgba(16, 185, 129, 0.1), transparent);
+      border-left-color: var(--accent-emerald);
+    }
+
+    .presentation-container .callout.violet {
+      background: linear-gradient(to right, rgba(99, 102, 241, 0.1), transparent);
+      border-left-color: var(--brand-violet);
+    }
+
+    .presentation-container .callout.rose {
+      background: linear-gradient(to right, rgba(251, 113, 133, 0.1), transparent);
+      border-left-color: #fb7185;
+    }
+
+    .presentation-container .callout.red {
+      background: linear-gradient(to right, rgba(239, 68, 68, 0.1), transparent);
+      border-left-color: #f87171;
+    }
+
+    .presentation-container .callout p {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 0;
+    }
+
+    /* ============================================
+       TITLE BADGE
+       ============================================ */
+    .presentation-container .title-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(99, 102, 241, 0.2);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 9999px;
+      color: var(--brand-violet);
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
+
+    .presentation-container .title-badge .pulse-dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background: var(--brand-violet);
+      animation: pulse-slow 3s ease-in-out infinite;
+    }
+
+    /* ============================================
+       LISTS
+       ============================================ */
+    .presentation-container .slide ul,
+    .presentation-container .slide ol {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.8;
+      text-align: left;
+      margin: 1.5rem 0;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .presentation-container .slide li {
+      margin-bottom: 0.75rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .presentation-container .slide ul li::before {
+      content: '\2192';
+      position: absolute;
+      left: 0;
+      color: var(--brand-violet);
+      font-weight: 600;
+    }
+
+    /* Suppress arrows for list-none (inline markers) */
+    .presentation-container .slide ul.list-none li::before {
+      display: none;
+    }
+    .presentation-container .slide ul.list-none li {
+      padding-left: 0;
+    }
+
+    .presentation-container .slide ol { counter-reset: item; }
+    .presentation-container .slide ol li { counter-increment: item; }
+    .presentation-container .slide ol li::before {
+      content: counter(item);
+      position: absolute;
+      left: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: rgba(99, 102, 241, 0.2);
+      color: var(--brand-violet);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      top: 0.2rem;
+    }
+
+    /* ============================================
+       CODE BLOCKS
+       ============================================ */
+    .presentation-container .slide code {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(0, 0, 0, 0.4);
+      color: var(--accent-cyan);
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.9em;
+    }
+
+    .presentation-container .slide pre,
+    .presentation-container .code-block {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.75rem;
+      padding: 1rem 1.5rem;
+      overflow-x: auto;
+      text-align: left;
+      margin: 1.5rem 0;
+    }
+
+    .presentation-container .slide pre code,
+    .presentation-container .code-block code {
+      background: transparent;
+      padding: 0;
+      font-size: 0.875rem;
+      white-space: pre;
+    }
+
+    /* ============================================
+       TABLES
+       ============================================ */
+    .presentation-container .slide table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+      overflow: hidden;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .presentation-container .slide th {
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 600;
+      padding: 1rem 1.25rem;
+      text-align: left;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .presentation-container .slide td {
+      padding: 1rem 1.25rem;
+      color: rgba(255, 255, 255, 0.7);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .presentation-container .slide tr:last-child td { border-bottom: none; }
+    .presentation-container .slide tr:hover td { background: rgba(255, 255, 255, 0.03); }
+
+    /* ============================================
+       BLOCKQUOTES
+       ============================================ */
+    .presentation-container .slide blockquote {
+      border-left: 4px solid var(--brand-violet);
+      padding-left: 1.5rem;
+      font-size: 1.5rem;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 2rem 0;
+    }
+
+    .presentation-container .slide blockquote p {
+      font-size: inherit;
+      margin-bottom: 0;
+    }
+
+    /* ============================================
+       LAYOUT: TITLE SLIDE
+       ============================================ */
+    .presentation-container .slide[data-layout="title"] {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .presentation-container .slide[data-layout="title"] > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .presentation-container .slide[data-layout="title"] h1 {
+      font-size: 3.75rem;
+      background: linear-gradient(to right, #fafafa, rgba(250, 250, 250, 0.6));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .presentation-container .slide[data-layout="title"] p {
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 0.5);
+      max-width: 600px;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .presentation-container .slide[data-layout="title"] p strong {
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.8);
+      display: block;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .presentation-container .slide[data-layout="title"] em {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.3);
+      display: block;
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    /* ============================================
+       LAYOUT: DEFAULT
+       ============================================ */
+    .presentation-container .slide[data-layout="default"] {
+      justify-content: center;
+      align-items: center;
+    }
+
+    .presentation-container .slide[data-layout="default"] > div {
+      max-width: 64rem;
+      width: 100%;
+    }
+
+    /* ============================================
+       LAYOUT: TABLE
+       ============================================ */
+    .presentation-container .slide[data-layout="table"] {
+      justify-content: center;
+      align-items: center;
+    }
+
+    .presentation-container .slide[data-layout="table"] > div {
+      max-width: 64rem;
+      width: 100%;
+    }
+
+    /* ============================================
+       LAYOUT: GRID
+       ============================================ */
+    .presentation-container .slide[data-layout="grid"] {
+      justify-content: center;
+      align-items: center;
+    }
+
+    .presentation-container .slide[data-layout="grid"] > div {
+      max-width: 64rem;
+      width: 100%;
+    }
+
+    /* ============================================
+       LAYOUT: QUOTE
+       ============================================ */
+    .presentation-container .slide[data-layout="quote"] {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .presentation-container .slide[data-layout="quote"] blockquote {
+      font-size: 2rem;
+      border-left: none;
+      padding: 0;
+      text-align: center;
+      max-width: 800px;
+    }
+
+    .presentation-container .slide[data-layout="quote"] blockquote::before {
+      content: '\201C';
+      font-size: 5rem;
+      color: var(--brand-violet);
+      line-height: 1;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ============================================
+       NAVIGATION
+       ============================================ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-icon {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.5rem;
+      background: linear-gradient(to bottom right, var(--brand-violet), #ea580c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-btn {
+      padding: 0.375rem 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 0.5rem;
+      transition: all 0.15s;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: transparent;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #fafafa;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .nav-btn-primary {
+      background: var(--brand-violet);
+      border-color: var(--brand-violet);
+      color: #fafafa;
+    }
+
+    .nav-btn-primary:hover:not(:disabled) {
+      background: rgba(99, 102, 241, 0.8);
+    }
+
+    .slide-counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.4);
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .progress-bar {
+      position: fixed;
+      top: 57px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(to right, var(--brand-violet), #ea580c);
+      transition: width 0.3s;
+    }
+
+    /* ============================================
+       RESPONSIVE - TABLET
+       ============================================ */
+    @media (max-width: 768px) {
+      .presentation-container .slide {
+        padding: 4rem 1.25rem 2rem 1.25rem;
+      }
+
+      .presentation-container .slide h1 { font-size: 2.25rem; margin-bottom: 1rem; }
+      .presentation-container .slide h2 { font-size: 1.75rem; margin-bottom: 2rem; }
+      .presentation-container .slide h3 { font-size: 1.125rem; }
+      .presentation-container .slide p { font-size: 1rem; line-height: 1.6; }
+
+      .presentation-container .slide[data-layout="title"] h1 { font-size: 2.25rem; }
+      .presentation-container .slide[data-layout="title"] p strong { font-size: 1.25rem; margin-bottom: 1.5rem; }
+
+      .presentation-container .card { padding: 1.25rem; margin-bottom: 1.5rem; }
+      .presentation-container .callout { padding: 1.25rem; margin-top: 1.5rem; }
+      .presentation-container .callout p { font-size: 1rem; }
+    }
+
+    /* ============================================
+       RESPONSIVE - MOBILE
+       ============================================ */
+    @media (max-width: 480px) {
+      .presentation-container .slide {
+        padding: 3.5rem 1rem 1.5rem 1rem;
+        min-height: calc(100vh - 48px);
+      }
+
+      .presentation-container .slide h1 { font-size: 1.75rem; }
+      .presentation-container .slide h2 { font-size: 1.375rem; margin-bottom: 1.5rem; }
+      .presentation-container .slide h3 { font-size: 1rem; }
+      .presentation-container .slide p { font-size: 0.9375rem; }
+
+      .presentation-container .slide[data-layout="title"] h1 { font-size: 1.75rem; }
+
+      .presentation-container .card { padding: 1rem; margin-bottom: 1rem; border-radius: 0.75rem; }
+      .presentation-container .callout { padding: 1rem; margin-top: 1rem; }
+      .presentation-container .callout p { font-size: 0.9375rem; }
+      .presentation-container .section-label { font-size: 0.75rem; }
+      .presentation-container .title-badge { padding: 0.25rem 0.625rem; font-size: 0.6875rem; margin-bottom: 1rem; }
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-title">
+      <div class="nav-icon">
+        <svg class="w-4 h-4" fill="none" stroke="white" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+        </svg>
+      </div>
+      <span style="color: rgba(255,255,255,0.9); font-weight: 600;" class="hidden sm:inline">Anatomy of AI-Native Development</span>
+    </div>
+    <div class="nav-controls">
+      <button id="prevBtn" class="nav-btn" disabled>&larr; <span class="hidden sm:inline">Previous</span></button>
+      <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">10</span></span>
+      <button id="nextBtn" class="nav-btn nav-btn-primary"><span class="hidden sm:inline">Next</span> &rarr;</button>
+    </div>
+  </nav>
+
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress" style="width: 10%"></div>
+  </div>
+
+  <!-- Slides -->
+  <main class="presentation-container">
+    
+    <section class="slide active" data-slide="1" data-layout="title">
+      <div class="slide-content">
+        <div class="title-badge"><span class="pulse-dot"></span>Signal Dispatch - March 2026</div>
+
+<h1>Anatomy of AI-Native Development</h1>
+
+<strong>What 223 Sessions and 38,000 Prompts Actually Look Like</strong>
+
+<p>Not a demo. Not a tutorial. <span class="text-cyan-400 font-semibold">A data-driven autopsy of one month of real AI-assisted work.</span></p>
+
+<div class="mt-16 text-sm text-white/30">
+<p>Based on 30 days of Claude Code session data — Feb 19 to Mar 19, 2026</p>
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="2" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label amber">The Raw Numbers</div>
+
+<h2>30 Days at a Glance</h2>
+
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6 my-8">
+  <div class="card">
+    <div class="text-4xl font-bold text-amber-400">223</div>
+    <div class="text-white/60 text-sm mt-1">Sessions</div>
+  </div>
+  <div class="card">
+    <div class="text-4xl font-bold text-cyan-400">38,322</div>
+    <div class="text-white/60 text-sm mt-1">Prompts sent</div>
+  </div>
+  <div class="card">
+    <div class="text-4xl font-bold text-emerald-400">32</div>
+    <div class="text-white/60 text-sm mt-1">Distinct projects</div>
+  </div>
+  <div class="card">
+    <div class="text-4xl font-bold text-violet-400">1.2 GB</div>
+    <div class="text-white/60 text-sm mt-1">Conversation data</div>
+  </div>
+</div>
+
+<div class="callout amber"><p>
+<strong>Where did the data come from?</strong> Claude Code writes <code>.jsonl</code> log files for every session. I wrote a script to parse them — extracting timestamps, turn counts, project directories, and first messages.
+</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="3" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label cyan">Session Shape</div>
+
+<h2>Not All Sessions Are Created Equal</h2>
+
+<div class="overflow-hidden rounded-2xl border border-white/10 my-8">
+  <table class="w-full">
+    <thead>
+      <tr class="bg-white/5">
+        <th class="text-left p-4 font-semibold text-white/60 text-sm uppercase tracking-wider">Type</th>
+        <th class="text-left p-4 font-semibold text-white/60 text-sm uppercase tracking-wider">Prompts</th>
+        <th class="text-left p-4 font-semibold text-cyan-400 text-sm uppercase tracking-wider">Sessions</th>
+        <th class="text-left p-4 font-semibold text-white/60 text-sm uppercase tracking-wider">Share</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-white/5">
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Quick</td>
+        <td class="p-4 text-white/60">1–10</td>
+        <td class="p-4 text-cyan-400">14</td>
+        <td class="p-4 text-white/60">6%</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Medium</td>
+        <td class="p-4 text-white/60">11–50</td>
+        <td class="p-4 text-cyan-400">47</td>
+        <td class="p-4 text-white/60">21%</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors bg-white/5">
+        <td class="p-4 font-medium text-cyan-400">Deep</td>
+        <td class="p-4 text-cyan-400">51–150</td>
+        <td class="p-4 text-cyan-400 font-bold">93</td>
+        <td class="p-4 text-cyan-400 font-bold">42%</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Marathon</td>
+        <td class="p-4 text-white/60">151–500</td>
+        <td class="p-4 text-cyan-400">54</td>
+        <td class="p-4 text-white/60">24%</td>
+      </tr>
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-4 font-medium">Ultra</td>
+        <td class="p-4 text-white/60">501+</td>
+        <td class="p-4 text-cyan-400">14</td>
+        <td class="p-4 text-white/60">6%</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="callout cyan"><p>
+<strong>The sweet spot is 51–150 prompts.</strong> Long enough to build momentum. Short enough to stay focused. But the 30% in Marathon/Ultra is where the biggest artifacts get built — entire features, full client proposals, complete site migrations.
+</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="4" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label emerald">Work Distribution</div>
+
+<h2>It's Not Just Coding</h2>
+
+<div class="space-y-3 my-8">
+  <div class="flex items-center gap-4">
+    <div class="w-32 text-right text-sm text-white/60">AI Analytics</div>
+    <div class="flex-1 bg-white/5 rounded-full h-6 overflow-hidden">
+      <div class="bg-emerald-500/60 h-full rounded-full" style={{width: '30%'}}></div>
+    </div>
+    <div class="w-12 text-sm text-emerald-400">30%</div>
+  </div>
+  <div class="flex items-center gap-4">
+    <div class="w-32 text-right text-sm text-white/60">Cross-cutting</div>
+    <div class="flex-1 bg-white/5 rounded-full h-6 overflow-hidden">
+      <div class="bg-violet-500/60 h-full rounded-full" style={{width: '21%'}}></div>
+    </div>
+    <div class="w-12 text-sm text-violet-400">21%</div>
+  </div>
+  <div class="flex items-center gap-4">
+    <div class="w-32 text-right text-sm text-white/60">Sports Tech</div>
+    <div class="flex-1 bg-white/5 rounded-full h-6 overflow-hidden">
+      <div class="bg-cyan-500/60 h-full rounded-full" style={{width: '16%'}}></div>
+    </div>
+    <div class="w-12 text-sm text-cyan-400">16%</div>
+  </div>
+  <div class="flex items-center gap-4">
+    <div class="w-32 text-right text-sm text-white/60">Enterprise</div>
+    <div class="flex-1 bg-white/5 rounded-full h-6 overflow-hidden">
+      <div class="bg-amber-500/60 h-full rounded-full" style={{width: '9%'}}></div>
+    </div>
+    <div class="w-12 text-sm text-amber-400">9%</div>
+  </div>
+  <div class="flex items-center gap-4">
+    <div class="w-32 text-right text-sm text-white/60">Photography</div>
+    <div class="flex-1 bg-white/5 rounded-full h-6 overflow-hidden">
+      <div class="bg-rose-500/60 h-full rounded-full" style={{width: '9%'}}></div>
+    </div>
+    <div class="w-12 text-sm text-rose-400">9%</div>
+  </div>
+  <div class="flex items-center gap-4">
+    <div class="w-32 text-right text-sm text-white/60">Client Work</div>
+    <div class="flex-1 bg-white/5 rounded-full h-6 overflow-hidden">
+      <div class="bg-orange-500/60 h-full rounded-full" style={{width: '5%'}}></div>
+    </div>
+    <div class="w-12 text-sm text-orange-400">5%</div>
+  </div>
+  <div class="flex items-center gap-4">
+    <div class="w-32 text-right text-sm text-white/60">Blog & Content</div>
+    <div class="flex-1 bg-white/5 rounded-full h-6 overflow-hidden">
+      <div class="bg-sky-500/60 h-full rounded-full" style={{width: '4%'}}></div>
+    </div>
+    <div class="w-12 text-sm text-sky-400">4%</div>
+  </div>
+  <div class="flex items-center gap-4">
+    <div class="w-32 text-right text-sm text-white/60">Tooling & Other</div>
+    <div class="flex-1 bg-white/5 rounded-full h-6 overflow-hidden">
+      <div class="bg-white/30 h-full rounded-full" style={{width: '6%'}}></div>
+    </div>
+    <div class="w-12 text-sm text-white/40">6%</div>
+  </div>
+</div>
+
+<div class="callout emerald"><p>
+<strong>21% of all prompts are "meta-work"</strong> — brainstorming, workspace audits, cross-project organization, shared tooling. The connective tissue between projects that doesn't show up in any sprint board.
+</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="5" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label amber">Mental Model</div>
+
+<h2>How Sessions Get Launched</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+  <div class="card">
+    <div class="text-2xl font-bold text-amber-400 mb-2">47x</div>
+    <div class="text-lg font-semibold mb-2">"Implement the plan"</div>
+    <div class="text-white/60 text-sm">Thinking is done. Hand off execution.</div>
+  </div>
+  <div class="card">
+    <div class="text-2xl font-bold text-cyan-400 mb-2">49x</div>
+    <div class="text-lg font-semibold mb-2">Resume session</div>
+    <div class="text-white/60 text-sm">Pick up where the last conversation left off.</div>
+  </div>
+  <div class="card">
+    <div class="text-2xl font-bold text-emerald-400 mb-2">15x</div>
+    <div class="text-lg font-semibold mb-2">Brainstorm</div>
+    <div class="text-white/60 text-sm">"Consider this idea..." or "What do you think about..."</div>
+  </div>
+</div>
+
+<p>The dominant mode is <strong>directed execution</strong> — not exploration. The human does the thinking, the AI does the building. But the AI has enough context to make judgment calls without constant hand-holding.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="6" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label cyan">The Environment</div>
+
+<h2>What Makes This Possible</h2>
+
+<div class="space-y-6 my-8">
+  <div class="card">
+    <div class="flex items-start gap-4">
+      <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-lg">1</div>
+      <div>
+        <div class="font-semibold text-lg mb-1">CLAUDE.md — Project-Level Instructions</div>
+        <div class="text-white/60">Every project has a persistent config file. Stack, conventions, deployment targets, off-limits files. Claude reads this on session start. No re-explaining.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="flex items-start gap-4">
+      <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-lg">2</div>
+      <div>
+        <div class="font-semibold text-lg mb-1">Memory System — Cross-Session Persistence</div>
+        <div class="text-white/60">User preferences, past decisions, feedback corrections. File-based memory that survives across conversations. Claude knows who you are without being told.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="flex items-start gap-4">
+      <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-lg">3</div>
+      <div>
+        <div class="font-semibold text-lg mb-1">Skills & Hooks — Automated Behaviors</div>
+        <div class="text-white/60">Edit a TSX file? React checker runs. Start a dev server? Browser verification launches. Write a blog post? Voice guide loads automatically.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="flex items-start gap-4">
+      <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-violet-500/20 text-violet-400 flex items-center justify-center font-bold text-lg">4</div>
+      <div>
+        <div class="font-semibold text-lg mb-1">Project-Scoped Conversations</div>
+        <div class="text-white/60">One conversation per project per work stream. Each session inherits the project's context automatically. No mixing, no context pollution.</div>
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="7" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label emerald">Cross-Pollination</div>
+
+<h2>The Multi-Tool Workflow</h2>
+
+<p>Claude Code isn't a silo. It's the <strong>execution layer</strong> for ideas that originate everywhere.</p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+  <div class="card">
+    <div class="text-amber-400 font-semibold mb-3">Inputs</div>
+    <ul class="space-y-2 text-white/60">
+      <ul><li>Gemini deep research reports</li>
+</ul>      <ul><li>Slack conversations with colleagues</li>
+</ul>      <ul><li>Screenshots of deployed sites</li>
+</ul>      <ul><li>Client feedback emails</li>
+</ul>      <ul><li>Competitor site analysis</li>
+</ul>      <ul><li>Output from other Claude sessions</li>
+</ul>    </ul>
+  </div>
+  <div class="card">
+    <div class="text-cyan-400 font-semibold mb-3">Outputs</div>
+    <ul class="space-y-2 text-white/60">
+      <ul><li>Deployed applications</li>
+</ul>      <ul><li>Client proposals and plans</li>
+</ul>      <ul><li>Blog posts and presentations</li>
+</ul>      <ul><li>Design mockups and prototypes</li>
+</ul>      <ul><li>Database migrations</li>
+</ul>      <ul><li>Git commits pushed to production</li>
+</ul>    </ul>
+  </div>
+</div>
+
+<div class="callout emerald"><p>
+<p>The tool that wins isn't the one that generates the best ideas. It's the one that can <strong>take input from anywhere</strong> and turn it into shipped work.</p>
+</p></div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="8" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label violet">The Real Projects</div>
+
+<h2>What Got Built in 30 Days</h2>
+
+<div class="space-y-4 my-8">
+  <div class="card">
+    <div class="flex justify-between items-start">
+      <div>
+        <div class="font-semibold text-lg">QuantifAI</div>
+        <div class="text-white/60 text-sm">AI analytics platform — enterprise fork + public lite version</div>
+      </div>
+      <div class="text-amber-400 text-sm">47 sessions</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="flex justify-between items-start">
+      <div>
+        <div class="font-semibold text-lg">Rally HQ</div>
+        <div class="text-white/60 text-sm">Tournament platform — Swiss format, beta users, UX audit</div>
+      </div>
+      <div class="text-cyan-400 text-sm">19 sessions</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="flex justify-between items-start">
+      <div>
+        <div class="font-semibold text-lg">Photography Gallery</div>
+        <div class="text-white/60 text-sm">20,000+ photo migration from SmugMug to Cloudflare Images</div>
+      </div>
+      <div class="text-emerald-400 text-sm">27 sessions</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="flex justify-between items-start">
+      <div>
+        <div class="font-semibold text-lg">Client Sites</div>
+        <div class="text-white/60 text-sm">4 clients — redesigns, MVPs, DNS migrations, proposals</div>
+      </div>
+      <div class="text-rose-400 text-sm">11 sessions</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="flex justify-between items-start">
+      <div>
+        <div class="font-semibold text-lg">Signal Dispatch</div>
+        <div class="text-white/60 text-sm">Blog posts, whitepapers, presentations — including this one</div>
+      </div>
+      <div class="text-violet-400 text-sm">17 sessions</div>
+    </div>
+  </div>
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="9" data-layout="default">
+      <div class="slide-content">
+        <div class="section-label amber">Key Insight</div>
+
+<h2>The Onboarding Metaphor</h2>
+
+<div class="text-center my-12">
+  <div class="text-3xl font-bold text-white/90 leading-relaxed max-w-3xl mx-auto">
+<p>I stopped treating AI like a tool and started treating it like a <span class="text-cyan-400">team member who needs onboarding.</span></p>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+  <div class="card">
+    <div class="text-amber-400 font-semibold mb-3">Traditional Team</div>
+    <ul class="space-y-2 text-white/60 text-sm">
+      <ul><li>Onboarding docs → <span class="text-white/80">CLAUDE.md</span></li>
+</ul>      <ul><li>Tribal knowledge → <span class="text-white/80">Memory system</span></li>
+</ul>      <ul><li>SOPs → <span class="text-white/80">Skills & hooks</span></li>
+</ul>      <ul><li>Stand-ups → <span class="text-white/80">Project-scoped sessions</span></li>
+</ul>      <ul><li>Code review → <span class="text-white/80">Automated verification</span></li>
+</ul>    </ul>
+  </div>
+  <div class="card">
+    <div class="text-cyan-400 font-semibold mb-3">Why This Works</div>
+    <ul class="space-y-2 text-white/60 text-sm">
+      <ul><li>Context is <span class="text-white/80">persistent</span>, not re-explained</li>
+</ul>      <ul><li>Conventions are <span class="text-white/80">enforced</span>, not suggested</li>
+</ul>      <ul><li>Quality is <span class="text-white/80">automated</span>, not manual</li>
+</ul>      <ul><li>Delegation is <span class="text-white/80">trusted</span>, not micromanaged</li>
+</ul>      <ul><li>Output is <span class="text-white/80">consistent</span>, not variable</li>
+</ul>    </ul>
+  </div>
+</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="10" data-layout="title">
+      <div class="slide-content">
+        <h1>The 223 Sessions Aren't the Impressive Part</h1>
+
+<p>The impressive part is that most of them <span class="text-cyan-400 font-semibold">didn't require explaining the same thing twice.</span></p>
+
+<div class="mt-12 space-y-2 text-white/40 text-sm">
+  <p>Companion blog post: ninochavez.co/blog/what-223-sessions-taught-me-about-working-with-ai</p>
+  <p>Tutorial: ninochavez.co/blog/setting-up-an-ai-native-dev-environment</p>
+  <p>Signal Dispatch — ninochavez.co/blog</p>
+</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let currentSlide = 1;
+
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const currentSlideEl = document.getElementById('currentSlide');
+    const progressEl = document.getElementById('progress');
+
+    function goToSlide(n) {
+      const target = Math.max(1, Math.min(n, totalSlides));
+      if (target === currentSlide) return;
+
+      slides.forEach((slide, i) => {
+        const isTarget = i + 1 === target;
+        slide.classList.toggle('active', isTarget);
+        if (isTarget) slide.scrollTop = 0;
+      });
+
+      currentSlide = target;
+      currentSlideEl.textContent = currentSlide;
+      progressEl.style.width = (currentSlide / totalSlides * 100) + '%';
+
+      prevBtn.disabled = currentSlide === 1;
+      nextBtn.disabled = currentSlide === totalSlides;
+    }
+
+    prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+    nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+    function getActiveSlide() {
+      return document.querySelector('.slide.active');
+    }
+
+    function isSlideScrollable(slide) {
+      return slide && slide.scrollHeight > slide.clientHeight + 2;
+    }
+
+    function isAtScrollBottom(slide) {
+      return slide.scrollTop + slide.clientHeight >= slide.scrollHeight - 2;
+    }
+
+    function isAtScrollTop(slide) {
+      return slide.scrollTop <= 2;
+    }
+
+    document.addEventListener('keydown', (e) => {
+      const active = getActiveSlide();
+      const scrollable = isSlideScrollable(active);
+
+      switch (e.key) {
+        case 'ArrowRight': case 'PageDown':
+          e.preventDefault();
+          if (scrollable && !isAtScrollBottom(active)) {
+            active.scrollBy({ top: active.clientHeight * 0.8, behavior: 'smooth' });
+          } else {
+            goToSlide(currentSlide + 1);
+          }
+          break;
+        case ' ':
+          e.preventDefault();
+          if (scrollable && !isAtScrollBottom(active)) {
+            active.scrollBy({ top: active.clientHeight * 0.8, behavior: 'smooth' });
+          } else {
+            goToSlide(currentSlide + 1);
+          }
+          break;
+        case 'ArrowDown':
+          if (scrollable && !isAtScrollBottom(active)) {
+            // let native scroll happen
+          } else {
+            e.preventDefault();
+            goToSlide(currentSlide + 1);
+          }
+          break;
+        case 'ArrowLeft': case 'PageUp':
+          e.preventDefault();
+          if (scrollable && !isAtScrollTop(active)) {
+            active.scrollBy({ top: -active.clientHeight * 0.8, behavior: 'smooth' });
+          } else {
+            goToSlide(currentSlide - 1);
+          }
+          break;
+        case 'ArrowUp':
+          if (scrollable && !isAtScrollTop(active)) {
+            // let native scroll happen
+          } else {
+            e.preventDefault();
+            goToSlide(currentSlide - 1);
+          }
+          break;
+        case 'Home': e.preventDefault(); goToSlide(1); break;
+        case 'End': e.preventDefault(); goToSlide(totalSlides); break;
+        case 'f': case 'F':
+          e.preventDefault();
+          if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+          else document.exitFullscreen();
+          break;
+      }
+    });
+
+    goToSlide(1);
+  </script>
+
+  <footer style="position: fixed; bottom: 0; left: 0; right: 0; padding: 0.5rem; text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.3); background: rgba(15, 23, 42, 0.95); z-index: 40; border-top: 1px solid rgba(255,255,255,0.05);">
+    Nino Chavez &middot; Signal Dispatch &middot; 2026
+  </footer>
+</body>
+</html>

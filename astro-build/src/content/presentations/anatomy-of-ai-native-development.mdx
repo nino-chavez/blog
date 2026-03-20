@@ -1,0 +1,391 @@
+---
+title: "Anatomy of AI-Native Development"
+publishedAt: "2026-03-20T14:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "30 days of Claude Code session data — 223 sessions, 38,000+ prompts, 32 projects. What does AI-native development actually look like at scale? A data-driven walkthrough of the environment, the mental model, and the infrastructure that makes it work."
+category: "AI & Automation"
+featureImage: "/images/generated/anatomy-of-ai-native-development.webp"
+tags: ["ai-development", "field-notes", "engineering"]
+duration: "25 min"
+audience: "Engineers, technical leads, and anyone building a personal AI development workflow"
+mode: "technical-deep-dive"
+---
+
+import { Slide, SectionLabel, Card, Callout, TitleBadge, CodeBlock } from '@/components/presentations';
+
+<Slide layout="title">
+<TitleBadge>Signal Dispatch - March 2026</TitleBadge>
+
+# Anatomy of AI-Native Development
+
+**What 223 Sessions and 38,000 Prompts Actually Look Like**
+
+Not a demo. Not a tutorial. <span className="text-cyan-400 font-semibold">A data-driven autopsy of one month of real AI-assisted work.</span>
+
+<div className="mt-16 text-sm text-white/30">
+Based on 30 days of Claude Code session data — Feb 19 to Mar 19, 2026
+</div>
+</Slide>
+
+<Slide>
+<SectionLabel color="amber">The Raw Numbers</SectionLabel>
+
+## 30 Days at a Glance
+
+<div className="grid grid-cols-2 md:grid-cols-4 gap-6 my-8">
+  <Card>
+    <div className="text-4xl font-bold text-amber-400">223</div>
+    <div className="text-white/60 text-sm mt-1">Sessions</div>
+  </Card>
+  <Card>
+    <div className="text-4xl font-bold text-cyan-400">38,322</div>
+    <div className="text-white/60 text-sm mt-1">Prompts sent</div>
+  </Card>
+  <Card>
+    <div className="text-4xl font-bold text-emerald-400">32</div>
+    <div className="text-white/60 text-sm mt-1">Distinct projects</div>
+  </Card>
+  <Card>
+    <div className="text-4xl font-bold text-violet-400">1.2 GB</div>
+    <div className="text-white/60 text-sm mt-1">Conversation data</div>
+  </Card>
+</div>
+
+<Callout color="amber">
+**Where did the data come from?** Claude Code writes `.jsonl` log files for every session. I wrote a script to parse them — extracting timestamps, turn counts, project directories, and first messages.
+</Callout>
+</Slide>
+
+<Slide>
+<SectionLabel color="cyan">Session Shape</SectionLabel>
+
+## Not All Sessions Are Created Equal
+
+<div className="overflow-hidden rounded-2xl border border-white/10 my-8">
+  <table className="w-full">
+    <thead>
+      <tr className="bg-white/5">
+        <th className="text-left p-4 font-semibold text-white/60 text-sm uppercase tracking-wider">Type</th>
+        <th className="text-left p-4 font-semibold text-white/60 text-sm uppercase tracking-wider">Prompts</th>
+        <th className="text-left p-4 font-semibold text-cyan-400 text-sm uppercase tracking-wider">Sessions</th>
+        <th className="text-left p-4 font-semibold text-white/60 text-sm uppercase tracking-wider">Share</th>
+      </tr>
+    </thead>
+    <tbody className="divide-y divide-white/5">
+      <tr className="hover:bg-white/5 transition-colors">
+        <td className="p-4 font-medium">Quick</td>
+        <td className="p-4 text-white/60">1–10</td>
+        <td className="p-4 text-cyan-400">14</td>
+        <td className="p-4 text-white/60">6%</td>
+      </tr>
+      <tr className="hover:bg-white/5 transition-colors">
+        <td className="p-4 font-medium">Medium</td>
+        <td className="p-4 text-white/60">11–50</td>
+        <td className="p-4 text-cyan-400">47</td>
+        <td className="p-4 text-white/60">21%</td>
+      </tr>
+      <tr className="hover:bg-white/5 transition-colors bg-white/5">
+        <td className="p-4 font-medium text-cyan-400">Deep</td>
+        <td className="p-4 text-cyan-400">51–150</td>
+        <td className="p-4 text-cyan-400 font-bold">93</td>
+        <td className="p-4 text-cyan-400 font-bold">42%</td>
+      </tr>
+      <tr className="hover:bg-white/5 transition-colors">
+        <td className="p-4 font-medium">Marathon</td>
+        <td className="p-4 text-white/60">151–500</td>
+        <td className="p-4 text-cyan-400">54</td>
+        <td className="p-4 text-white/60">24%</td>
+      </tr>
+      <tr className="hover:bg-white/5 transition-colors">
+        <td className="p-4 font-medium">Ultra</td>
+        <td className="p-4 text-white/60">501+</td>
+        <td className="p-4 text-cyan-400">14</td>
+        <td className="p-4 text-white/60">6%</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<Callout color="cyan">
+**The sweet spot is 51–150 prompts.** Long enough to build momentum. Short enough to stay focused. But the 30% in Marathon/Ultra is where the biggest artifacts get built — entire features, full client proposals, complete site migrations.
+</Callout>
+</Slide>
+
+<Slide>
+<SectionLabel color="emerald">Work Distribution</SectionLabel>
+
+## It's Not Just Coding
+
+<div className="space-y-3 my-8">
+  <div className="flex items-center gap-4">
+    <div className="w-32 text-right text-sm text-white/60">AI Analytics</div>
+    <div className="flex-1 bg-white/5 rounded-full h-6 overflow-hidden">
+      <div className="bg-emerald-500/60 h-full rounded-full" style={{width: '30%'}}></div>
+    </div>
+    <div className="w-12 text-sm text-emerald-400">30%</div>
+  </div>
+  <div className="flex items-center gap-4">
+    <div className="w-32 text-right text-sm text-white/60">Cross-cutting</div>
+    <div className="flex-1 bg-white/5 rounded-full h-6 overflow-hidden">
+      <div className="bg-violet-500/60 h-full rounded-full" style={{width: '21%'}}></div>
+    </div>
+    <div className="w-12 text-sm text-violet-400">21%</div>
+  </div>
+  <div className="flex items-center gap-4">
+    <div className="w-32 text-right text-sm text-white/60">Sports Tech</div>
+    <div className="flex-1 bg-white/5 rounded-full h-6 overflow-hidden">
+      <div className="bg-cyan-500/60 h-full rounded-full" style={{width: '16%'}}></div>
+    </div>
+    <div className="w-12 text-sm text-cyan-400">16%</div>
+  </div>
+  <div className="flex items-center gap-4">
+    <div className="w-32 text-right text-sm text-white/60">Enterprise</div>
+    <div className="flex-1 bg-white/5 rounded-full h-6 overflow-hidden">
+      <div className="bg-amber-500/60 h-full rounded-full" style={{width: '9%'}}></div>
+    </div>
+    <div className="w-12 text-sm text-amber-400">9%</div>
+  </div>
+  <div className="flex items-center gap-4">
+    <div className="w-32 text-right text-sm text-white/60">Photography</div>
+    <div className="flex-1 bg-white/5 rounded-full h-6 overflow-hidden">
+      <div className="bg-rose-500/60 h-full rounded-full" style={{width: '9%'}}></div>
+    </div>
+    <div className="w-12 text-sm text-rose-400">9%</div>
+  </div>
+  <div className="flex items-center gap-4">
+    <div className="w-32 text-right text-sm text-white/60">Client Work</div>
+    <div className="flex-1 bg-white/5 rounded-full h-6 overflow-hidden">
+      <div className="bg-orange-500/60 h-full rounded-full" style={{width: '5%'}}></div>
+    </div>
+    <div className="w-12 text-sm text-orange-400">5%</div>
+  </div>
+  <div className="flex items-center gap-4">
+    <div className="w-32 text-right text-sm text-white/60">Blog & Content</div>
+    <div className="flex-1 bg-white/5 rounded-full h-6 overflow-hidden">
+      <div className="bg-sky-500/60 h-full rounded-full" style={{width: '4%'}}></div>
+    </div>
+    <div className="w-12 text-sm text-sky-400">4%</div>
+  </div>
+  <div className="flex items-center gap-4">
+    <div className="w-32 text-right text-sm text-white/60">Tooling & Other</div>
+    <div className="flex-1 bg-white/5 rounded-full h-6 overflow-hidden">
+      <div className="bg-white/30 h-full rounded-full" style={{width: '6%'}}></div>
+    </div>
+    <div className="w-12 text-sm text-white/40">6%</div>
+  </div>
+</div>
+
+<Callout color="emerald">
+**21% of all prompts are "meta-work"** — brainstorming, workspace audits, cross-project organization, shared tooling. The connective tissue between projects that doesn't show up in any sprint board.
+</Callout>
+</Slide>
+
+<Slide>
+<SectionLabel color="amber">Mental Model</SectionLabel>
+
+## How Sessions Get Launched
+
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+  <Card>
+    <div className="text-2xl font-bold text-amber-400 mb-2">47x</div>
+    <div className="text-lg font-semibold mb-2">"Implement the plan"</div>
+    <div className="text-white/60 text-sm">Thinking is done. Hand off execution.</div>
+  </Card>
+  <Card>
+    <div className="text-2xl font-bold text-cyan-400 mb-2">49x</div>
+    <div className="text-lg font-semibold mb-2">Resume session</div>
+    <div className="text-white/60 text-sm">Pick up where the last conversation left off.</div>
+  </Card>
+  <Card>
+    <div className="text-2xl font-bold text-emerald-400 mb-2">15x</div>
+    <div className="text-lg font-semibold mb-2">Brainstorm</div>
+    <div className="text-white/60 text-sm">"Consider this idea..." or "What do you think about..."</div>
+  </Card>
+</div>
+
+The dominant mode is **directed execution** — not exploration. The human does the thinking, the AI does the building. But the AI has enough context to make judgment calls without constant hand-holding.
+</Slide>
+
+<Slide>
+<SectionLabel color="cyan">The Environment</SectionLabel>
+
+## What Makes This Possible
+
+<div className="space-y-6 my-8">
+  <Card>
+    <div className="flex items-start gap-4">
+      <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-lg">1</div>
+      <div>
+        <div className="font-semibold text-lg mb-1">CLAUDE.md — Project-Level Instructions</div>
+        <div className="text-white/60">Every project has a persistent config file. Stack, conventions, deployment targets, off-limits files. Claude reads this on session start. No re-explaining.</div>
+      </div>
+    </div>
+  </Card>
+  <Card>
+    <div className="flex items-start gap-4">
+      <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-lg">2</div>
+      <div>
+        <div className="font-semibold text-lg mb-1">Memory System — Cross-Session Persistence</div>
+        <div className="text-white/60">User preferences, past decisions, feedback corrections. File-based memory that survives across conversations. Claude knows who you are without being told.</div>
+      </div>
+    </div>
+  </Card>
+  <Card>
+    <div className="flex items-start gap-4">
+      <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-lg">3</div>
+      <div>
+        <div className="font-semibold text-lg mb-1">Skills & Hooks — Automated Behaviors</div>
+        <div className="text-white/60">Edit a TSX file? React checker runs. Start a dev server? Browser verification launches. Write a blog post? Voice guide loads automatically.</div>
+      </div>
+    </div>
+  </Card>
+  <Card>
+    <div className="flex items-start gap-4">
+      <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-violet-500/20 text-violet-400 flex items-center justify-center font-bold text-lg">4</div>
+      <div>
+        <div className="font-semibold text-lg mb-1">Project-Scoped Conversations</div>
+        <div className="text-white/60">One conversation per project per work stream. Each session inherits the project's context automatically. No mixing, no context pollution.</div>
+      </div>
+    </div>
+  </Card>
+</div>
+</Slide>
+
+<Slide>
+<SectionLabel color="emerald">Cross-Pollination</SectionLabel>
+
+## The Multi-Tool Workflow
+
+Claude Code isn't a silo. It's the **execution layer** for ideas that originate everywhere.
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+  <Card>
+    <div className="text-amber-400 font-semibold mb-3">Inputs</div>
+    <ul className="space-y-2 text-white/60">
+      <li>Gemini deep research reports</li>
+      <li>Slack conversations with colleagues</li>
+      <li>Screenshots of deployed sites</li>
+      <li>Client feedback emails</li>
+      <li>Competitor site analysis</li>
+      <li>Output from other Claude sessions</li>
+    </ul>
+  </Card>
+  <Card>
+    <div className="text-cyan-400 font-semibold mb-3">Outputs</div>
+    <ul className="space-y-2 text-white/60">
+      <li>Deployed applications</li>
+      <li>Client proposals and plans</li>
+      <li>Blog posts and presentations</li>
+      <li>Design mockups and prototypes</li>
+      <li>Database migrations</li>
+      <li>Git commits pushed to production</li>
+    </ul>
+  </Card>
+</div>
+
+<Callout color="emerald">
+The tool that wins isn't the one that generates the best ideas. It's the one that can **take input from anywhere** and turn it into shipped work.
+</Callout>
+</Slide>
+
+<Slide>
+<SectionLabel color="violet">The Real Projects</SectionLabel>
+
+## What Got Built in 30 Days
+
+<div className="space-y-4 my-8">
+  <Card>
+    <div className="flex justify-between items-start">
+      <div>
+        <div className="font-semibold text-lg">QuantifAI</div>
+        <div className="text-white/60 text-sm">AI analytics platform — enterprise fork + public lite version</div>
+      </div>
+      <div className="text-amber-400 text-sm">47 sessions</div>
+    </div>
+  </Card>
+  <Card>
+    <div className="flex justify-between items-start">
+      <div>
+        <div className="font-semibold text-lg">Rally HQ</div>
+        <div className="text-white/60 text-sm">Tournament platform — Swiss format, beta users, UX audit</div>
+      </div>
+      <div className="text-cyan-400 text-sm">19 sessions</div>
+    </div>
+  </Card>
+  <Card>
+    <div className="flex justify-between items-start">
+      <div>
+        <div className="font-semibold text-lg">Photography Gallery</div>
+        <div className="text-white/60 text-sm">20,000+ photo migration from SmugMug to Cloudflare Images</div>
+      </div>
+      <div className="text-emerald-400 text-sm">27 sessions</div>
+    </div>
+  </Card>
+  <Card>
+    <div className="flex justify-between items-start">
+      <div>
+        <div className="font-semibold text-lg">Client Sites</div>
+        <div className="text-white/60 text-sm">4 clients — redesigns, MVPs, DNS migrations, proposals</div>
+      </div>
+      <div className="text-rose-400 text-sm">11 sessions</div>
+    </div>
+  </Card>
+  <Card>
+    <div className="flex justify-between items-start">
+      <div>
+        <div className="font-semibold text-lg">Signal Dispatch</div>
+        <div className="text-white/60 text-sm">Blog posts, whitepapers, presentations — including this one</div>
+      </div>
+      <div className="text-violet-400 text-sm">17 sessions</div>
+    </div>
+  </Card>
+</div>
+</Slide>
+
+<Slide>
+<SectionLabel color="amber">Key Insight</SectionLabel>
+
+## The Onboarding Metaphor
+
+<div className="text-center my-12">
+  <div className="text-3xl font-bold text-white/90 leading-relaxed max-w-3xl mx-auto">
+    I stopped treating AI like a tool and started treating it like a <span className="text-cyan-400">team member who needs onboarding.</span>
+  </div>
+</div>
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+  <Card>
+    <div className="text-amber-400 font-semibold mb-3">Traditional Team</div>
+    <ul className="space-y-2 text-white/60 text-sm">
+      <li>Onboarding docs → <span className="text-white/80">CLAUDE.md</span></li>
+      <li>Tribal knowledge → <span className="text-white/80">Memory system</span></li>
+      <li>SOPs → <span className="text-white/80">Skills & hooks</span></li>
+      <li>Stand-ups → <span className="text-white/80">Project-scoped sessions</span></li>
+      <li>Code review → <span className="text-white/80">Automated verification</span></li>
+    </ul>
+  </Card>
+  <Card>
+    <div className="text-cyan-400 font-semibold mb-3">Why This Works</div>
+    <ul className="space-y-2 text-white/60 text-sm">
+      <li>Context is <span className="text-white/80">persistent</span>, not re-explained</li>
+      <li>Conventions are <span className="text-white/80">enforced</span>, not suggested</li>
+      <li>Quality is <span className="text-white/80">automated</span>, not manual</li>
+      <li>Delegation is <span className="text-white/80">trusted</span>, not micromanaged</li>
+      <li>Output is <span className="text-white/80">consistent</span>, not variable</li>
+    </ul>
+  </Card>
+</div>
+</Slide>
+
+<Slide layout="title">
+
+# The 223 Sessions Aren't the Impressive Part
+
+The impressive part is that most of them <span className="text-cyan-400 font-semibold">didn't require explaining the same thing twice.</span>
+
+<div className="mt-12 space-y-2 text-white/40 text-sm">
+  <p>Companion blog post: ninochavez.co/blog/what-223-sessions-taught-me-about-working-with-ai</p>
+  <p>Tutorial: ninochavez.co/blog/setting-up-an-ai-native-dev-environment</p>
+  <p>Signal Dispatch — ninochavez.co/blog</p>
+</div>
+</Slide>
