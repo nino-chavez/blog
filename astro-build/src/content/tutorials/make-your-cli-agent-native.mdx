@@ -1,0 +1,462 @@
+---
+title: "Make Your CLI Agent-Native in Three Layers"
+publishedAt: "2026-03-25T14:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "Add an agent-native surface to any CLI tool. Three files, one schema, zero doc-reading required. Walk through AGENTS.md orientation, CLAUDE.md constraints, and schema-generated prompt payloads."
+category: "Engineering"
+featureImage: "/images/generated/make-your-cli-agent-native.webp"
+tags: ["agentic-systems", "tutorial", "engineering"]
+duration: "30 min"
+difficulty: "intermediate"
+prerequisites:
+  - "A CLI tool you maintain (or want to practice on)"
+  - "Claude Code installed and working"
+  - "Read the companion post: Skip the Steps"
+objectives:
+  - "Write an AGENTS.md that disambiguates intent before the agent acts"
+  - "Write a CLAUDE.md that constrains agent behavior with verifiable rules"
+  - "Build an agent-prompt command that generates structured payloads from your tool's schema"
+  - "Understand the spectrum from agent-hostile to agent-native"
+companionOf:
+  type: blog
+  slug: skip-the-steps
+---
+
+import { Exercise } from '@/components/tutorials/Exercise';
+import { Template } from '@/components/tutorials/Template';
+import { Checkpoint } from '@/components/tutorials/Checkpoint';
+
+# The Problem With Good Documentation
+
+In [Skip the Steps](/blog/skip-the-steps), I argued that developer tools are entering a phase transition — the primary operator is becoming an agent, with the human as director. Supabase's "Copy prompt" button. Brand-forge's "Ask the Human" pattern. Same instinct, different implementations.
+
+This workshop is the build. You'll add an agent-native surface to a CLI tool in three layers, each with a clear job:
+
+| Layer | File | Job | Who reads it |
+|-------|------|-----|-------------|
+| 1 | `AGENTS.md` | Orient + disambiguate | Every agent, first |
+| 2 | `CLAUDE.md` | Rules + boundaries | Claude Code automatically; others on request |
+| 3 | `agent-prompt` command | Structured payload | Agent receives, human copies |
+
+Each layer adds specificity. An agent that only reads Layer 1 can still be useful. An agent with all three is fully autonomous for the task at hand.
+
+I'll use [brand-forge](https://github.com/ninochavez/brand-forge) — a CLI that manages brand design systems through a single JSON schema — as the running example. But the pattern works for any CLI tool. If your tool has commands, options, and context that an agent needs before it can act, this applies.
+
+---
+
+## Why Good Docs Aren't Enough
+
+Before I added the agent surface, here's what happened when I pointed Claude Code at brand-forge:
+
+1. Agent reads README.md — thorough, well-structured, 400 lines
+2. Agent reads CLI help output — eight commands, dozens of flags
+3. Agent runs `brand-forge generate palette` without specifying a brand kit
+4. Tool errors: "No kit specified"
+5. Agent guesses: `--kit brand.json` — file doesn't exist
+6. Agent scans directory, finds `presets/`, tries `--kit presets/flickday.json`
+7. Finally works — but picked Flickday when I needed 630volleyball
+
+Four wasted steps because the agent had to *discover* context that I could have *told* it in ten seconds.
+
+The docs weren't bad. The interface was wrong for the user.
+
+---
+
+<Exercise number={1} title="AGENTS.md — The Ingress Contract" duration="10 min">
+
+## Why this matters
+
+AGENTS.md is the first file any agent reads when entering your project. Its job isn't to teach the tool — it's to teach the agent how to ask the *human* what they need.
+
+Without it, the agent guesses. It infers from file structure, reads hundreds of lines of README, and often gets the *capability* right but the *context* wrong. The wrong brand. The wrong environment. The wrong task.
+
+A disambiguation prompt eliminates guessing with two questions.
+
+## The structure
+
+An AGENTS.md has three sections:
+
+**Section 1: One-paragraph orientation.** Not a feature list — a mental model. "One schema, multiple outputs." That's enough for an agent to understand the architecture.
+
+**Section 2: The disambiguation prompt.** The agent presents this to the human, gets answers, and has everything it needs. List options explicitly — no file-system scanning required.
+
+**Section 3: Three to five guardrails.** Not your full style guide — just the rules that prevent the highest-damage mistakes. Rules that break builds or corrupt data.
+
+## Your turn
+
+Write an AGENTS.md for your CLI tool. Start with the three sections below. Replace the brand-forge specifics with your own tool's concepts — what's the core mental model? What two questions does the agent need answered? What three rules prevent disaster?
+
+</Exercise>
+
+<Template title="AGENTS.md" description="The ingress contract — every agent reads this first">
+
+````markdown
+# AGENTS.md
+
+## What This Project Is
+[Tool name] is a [one-sentence mental model]. [One sentence about
+how the tool is structured — schema-first? config-driven? convention-based?]
+
+## Before You Do Anything
+You cannot do useful work without knowing [context variable] and [task].
+Present this prompt to the human:
+
+---
+
+I've loaded the [tool name] project. To help you, I need:
+
+1. **[Context question]?** (pick one or describe a new one)
+   Available options: [list explicitly]
+
+2. **What do you want to do?**
+   - [Task 1] (`command-name`)
+   - [Task 2] (`command-name`)
+   - [Task 3] (`command-name`)
+   - Something else?
+
+---
+
+## Key Rules
+- [Rule that prevents data corruption or build breakage]
+- [Rule about human approval gates]
+- [Rule about format constraints]
+- Read CLAUDE.md for full project rules.
+````
+
+</Template>
+
+<Template title="AGENTS.md — Brand-Forge Example" description="What this looks like filled in for a real tool">
+
+````markdown
+# AGENTS.md
+
+## What This Project Is
+Brand-forge is a CLI-first design toolkit. One JSON schema (the Brand Kit)
+defines a brand's colors, typography, voice, and spacing. Exporters turn
+that schema into CSS, Tailwind, Figma tokens, and media assets. Generators
+use AI to propose creative options that humans approve.
+
+## Before You Do Anything
+You cannot do useful work without knowing which brand and what task.
+Present this prompt to the human:
+
+---
+
+I've loaded the brand-forge project. To help you, I need:
+
+1. **Which brand kit?** (pick one or tell me a new brand name)
+   Available presets: 630volleyball, flickday, letspepper,
+   signal-dispatch, volley-rx
+
+2. **What do you want to do?**
+   - Create a new brand from scratch (`init`)
+   - Generate creative proposals — palette, fonts, voice (`generate`)
+   - Export to a format — CSS, Tailwind, Figma, Markdown (`export`)
+   - Render media — social card, flyer, favicon (`media`)
+   - Full asset package (`batch`)
+   - Review/validate an existing kit (`review`)
+   - Something else?
+
+---
+
+## Key Rules
+- Exporters are pure functions. No AI, no network, no randomness.
+- Generators propose. Humans approve. Never auto-apply.
+- All colors are #rrggbb. No shorthand, no rgb(), no named colors.
+- Review gates must pass before export.
+- Read CLAUDE.md for full project rules.
+````
+
+</Template>
+
+<Checkpoint>
+
+**Test it.** Open a new Claude Code session in your project directory. If you've placed AGENTS.md at the project root, Claude should read it on session start (or when you ask it to).
+
+The agent should present the disambiguation prompt to you — asking which context and which task — before attempting any commands. If it skips the prompt and starts guessing, your AGENTS.md isn't prominent enough or the "Before You Do Anything" section isn't directive enough.
+
+**The signal that it's working:** the agent asks you two questions before running anything. Not one. Not zero. Two.
+
+</Checkpoint>
+
+---
+
+<Exercise number={2} title="CLAUDE.md — Rules and Boundaries" duration="10 min">
+
+## Why this matters
+
+Where AGENTS.md says "here's what you can do," CLAUDE.md says "here's what you must not do."
+
+Claude Code loads CLAUDE.md automatically at session start — no instruction needed. Its job isn't orientation. It's constraint. Module boundaries so the agent doesn't put network calls in a pure function. A pre-commit checklist so the agent validates its own work. Hard rules stated as imperatives.
+
+The best CLAUDE.md rules are ones where violation is *detectable*. "Exporters are pure" can be verified by grepping for `fetch` in `src/exporters/`. "All imports use `.js` extension" can be checked with a linter. Rules the agent can self-check are rules the agent will follow.
+
+## The structure
+
+Three sections:
+
+**Module boundaries** — where code lives and what each directory's contract is. Not architecture docs. Just: "this directory does X, never Y."
+
+**Pre-commit checklist** — the validation commands the agent should run before committing. Lint, test, validate. If the agent can run these itself, it catches its own mistakes.
+
+**Rules as imperatives** — "Never" and "Always" statements. No suggestions. No "consider." Constraints.
+
+## Your turn
+
+Write a CLAUDE.md for your tool. Focus on the rules that would cause the most damage if violated. Don't duplicate your README — the agent already has that. This is about boundaries, not tutorials.
+
+</Exercise>
+
+<Template title="CLAUDE.md" description="Rules and boundaries — Claude Code loads this automatically">
+
+````markdown
+# CLAUDE.md
+
+## Module Boundaries
+- `src/[module-a]/` — [What it does]. [What it must NOT do].
+- `src/[module-b]/` — [What it does]. [Constraints].
+- `src/[module-c]/` — [What it does]. Source of truth for [schema/config].
+
+## Pre-Commit Checklist
+1. `[lint command]` passes
+2. `[test command]` passes
+3. [Validation specific to your tool]
+4. No `any` types introduced
+
+## Rules
+1. [Hard constraint about purity/side effects]
+2. [Hard constraint about human approval gates]
+3. [Hard constraint about schema/format]
+4. [Hard constraint about file conventions]
+5. Don't modify [protected files/directories] unless explicitly asked.
+````
+
+</Template>
+
+<Template title="CLAUDE.md — Brand-Forge Example" description="What this looks like filled in for a real tool">
+
+````markdown
+# CLAUDE.md
+
+## Module Boundaries
+- `src/generators/` — AI proposals. Always async. Always interactive.
+- `src/exporters/` — Pure functions. NO AI. NO network. NO randomness.
+- `src/extractors/` — Regex-based parsing. NO AI. NO prompts.
+- `src/schema/` — Zod validation. Source of truth for BrandKit shape.
+- `src/media/` — Satori JSX → SVG → PNG rendering.
+
+## Pre-Commit Checklist
+1. `npm run lint` passes
+2. All five presets parse: `npm run dev -- review --kit presets/*.json`
+3. No `any` types introduced
+4. All imports use `.js` extension (ESM-only)
+
+## Rules
+1. Exporters are pure. Same input → same output. Always.
+2. Generators propose via interactive prompt. Never auto-apply results.
+3. Schema changes cascade — update ALL presets and run ALL tests.
+4. Every color value is #rrggbb (6-digit hex, lowercase).
+5. Every preset must pass both parseBrandKit() and reviewBrandKit().
+6. Don't modify presets/ files unless explicitly asked.
+````
+
+</Template>
+
+<Checkpoint>
+
+**Test it.** Start a new Claude Code session in your project. Ask Claude to make a change that would violate one of your rules — for example, ask it to add a `fetch()` call inside a module you've marked as pure.
+
+Does it refuse or flag the conflict? If yes, the rules are clear enough. If it proceeds without hesitation, the rule isn't specific enough — tighten the language or add the specific keyword to grep for.
+
+**Adapting for other agents.** Claude Code picks up CLAUDE.md automatically. For Cursor, put equivalent rules in `.cursorrules`. For Copilot, use `.github/copilot-instructions.md`. For a generic agent, add a line to AGENTS.md: "Read CLAUDE.md for project rules before making changes." The content is the same — the delivery mechanism varies by tool.
+
+</Checkpoint>
+
+---
+
+<Exercise number={3} title="The Agent-Prompt Command — Schema-Generated Payloads" duration="10 min">
+
+## Why this matters
+
+This is the Supabase "Copy prompt" equivalent — but generated from your tool's own schema instead of hand-written.
+
+The idea: a CLI command that emits a self-contained instruction block. The human runs it, copies the output, pastes it into their agent. The agent receives structured context — not documentation.
+
+The critical design decision: **generate the prompt from the same source of truth that validates the tool.** When you add a new export format or command, the agent prompt updates automatically. No drift between what the tool can do and what the agent knows about.
+
+## The output format
+
+An agent-prompt command should emit five sections:
+
+1. **Context** — which target, what it looks like, key attributes
+2. **Available actions** — the specific commands for this task, pre-filled with the right arguments
+3. **Constraints** — the rules from CLAUDE.md, scoped to this task
+4. **Commands** — copy-paste-ready commands with all flags filled in
+5. **Validation** — how to verify the work is correct
+
+## Your turn
+
+Build an `agent-prompt` command (or script) for your tool. The implementation below is TypeScript, but the pattern works in any language. The key: read your tool's config or schema, and emit the prompt from that data — don't hand-write it.
+
+If your tool doesn't have a schema, start with a simpler version: a shell script that reads your config file and emits a formatted prompt block.
+
+</Exercise>
+
+<Template title="agent-prompt command — TypeScript" description="Generates structured prompt payloads from the tool's own schema">
+
+````typescript
+// src/commands/agent-prompt.ts
+
+import { parseBrandKit } from '../schema/brand-kit.js';
+import { EXPORT_FORMATS } from '../exporters/index.js';
+import { readFileSync } from 'node:fs';
+
+export async function agentPrompt(kitPath: string, task: string) {
+  const raw = JSON.parse(readFileSync(kitPath, 'utf-8'));
+  const kit = parseBrandKit(raw); // Same validation as the real CLI
+
+  const brandSummary = [
+    `- **Name**: ${kit.meta.name}`,
+    `- **Theme**: ${kit.colors.mode}`,
+    `- **Primary**: ${kit.colors.primary}`,
+    `- **Font Display**: ${kit.typography.display.family}`,
+    `- **Font Body**: ${kit.typography.body.family}`,
+  ].join('\n');
+
+  const formats = Object.keys(EXPORT_FORMATS)
+    .map(f => `- \`export ${f}\` — ${EXPORT_FORMATS[f].description}`)
+    .join('\n');
+
+  const commands = task === 'export'
+    ? Object.keys(EXPORT_FORMATS)
+        .map(f => `npm run dev -- export ${f} --kit ${kitPath}`)
+        .join('\n')
+    : `npm run dev -- ${task} --kit ${kitPath}`;
+
+  return `## Context
+You are working with brand-forge on the "${kit.meta.name}" brand kit.
+
+### Brand Summary
+${brandSummary}
+
+### Available ${task === 'export' ? 'Export Formats' : 'Commands'}
+${formats}
+
+### Constraints
+- Exporters are pure functions. No AI or network calls.
+- All color values must be #rrggbb format.
+- Run review after any changes to verify the kit passes validation.
+
+### Commands
+\`\`\`
+${commands}
+\`\`\`
+
+### Validation
+\`\`\`
+npm run dev -- review --kit ${kitPath}
+\`\`\``;
+}
+````
+
+</Template>
+
+<Template title="agent-prompt command — Shell Script (simpler version)" description="For tools without a TypeScript schema — reads config and emits a prompt block">
+
+````bash
+#!/usr/bin/env bash
+# agent-prompt.sh — Generate a structured prompt for AI agents
+# Usage: ./agent-prompt.sh <config-file> <task>
+
+set -euo pipefail
+
+CONFIG="$1"
+TASK="${2:-help}"
+
+if [ ! -f "$CONFIG" ]; then
+  echo "Config not found: $CONFIG"
+  echo "Available configs:"
+  ls configs/ 2>/dev/null || echo "  (no configs/ directory)"
+  exit 1
+fi
+
+# Extract key fields from your config (adapt to your format)
+NAME=$(grep -m1 '"name"' "$CONFIG" | sed 's/.*: *"\(.*\)".*/\1/')
+
+# List available commands from --help or a known set
+COMMANDS=$(your-tool --help 2>&1 | grep '^\s\s' | head -10)
+
+cat <<EOF
+## Context
+You are working with [your-tool] on the "${NAME}" configuration.
+
+### Available Commands
+${COMMANDS}
+
+### Constraints
+- [Your key rules here]
+- Run \`your-tool validate --config ${CONFIG}\` after any changes.
+
+### Validation
+\`\`\`
+your-tool validate --config ${CONFIG}
+your-tool test --config ${CONFIG}
+\`\`\`
+EOF
+````
+
+</Template>
+
+<Checkpoint>
+
+**Test it.** Run your agent-prompt command with a real config and task:
+
+```bash
+npx brand-forge agent-prompt --kit presets/flickday.json --task export
+```
+
+(Or your equivalent: `./agent-prompt.sh configs/production.json deploy`)
+
+Copy the output. Paste it into a new Claude Code session (or any agent). Give it a directive: "Export CSS tokens for this brand" or "Run the deploy task."
+
+**What to watch for:**
+
+- Does the agent execute without asking clarifying questions? If yes, the prompt has enough context.
+- Does the agent run validation after completing the task? If yes, the validation section is working.
+- If you recently added a new feature to your tool, does the prompt include it? If yes, your schema-generation approach prevents drift.
+
+**The drift test.** Add a new capability to your tool (even a stub). Run the agent-prompt command again. If the new capability appears in the output automatically, you've achieved the core goal: one source of truth, two interfaces. If it doesn't appear, your prompt generation is reading from a stale source — trace back to where the capability registry lives and wire it in.
+
+</Checkpoint>
+
+---
+
+## What You Built
+
+Three layers, each with a different audience and job:
+
+| Layer | What it does | Key design choice |
+|-------|-------------|-------------------|
+| AGENTS.md | Asks the human two questions before acting | List options explicitly — no file scanning |
+| CLAUDE.md | Constrains agent behavior | Every rule should be grep-verifiable |
+| agent-prompt | Emits structured payloads | Generated from the schema, not hand-written |
+
+The layers are additive. An agent with just AGENTS.md is already better than one reading your README. An agent with all three is operating from the same source of truth as the tool itself.
+
+## What I'd Do Differently
+
+A few things I learned building this that aren't obvious:
+
+**List options explicitly in AGENTS.md.** My first version said "check the `presets/` directory." That's an extra file-system operation for the agent and a chance for it to get confused by non-JSON files. Just list them.
+
+**Keep CLAUDE.md rules verifiable.** "Write clean code" is useless. "All imports use `.js` extension" is checkable. Every rule should have a corresponding grep, lint, or test command.
+
+**The agent-prompt command should fail helpfully.** If someone passes a config that doesn't exist, emit the list of available configs — don't stack trace. The agent recovers better from a helpful error than a crash.
+
+**Don't over-specify.** My first AGENTS.md was 200 lines. I cut it to 40. The agent doesn't need architectural history or design rationale. It needs: what is this, what do you want, and what can go wrong. Brevity is a feature.
+
+## Where This Is Heading
+
+I don't think AGENTS.md files and agent-prompt commands are the final form of this pattern. They're the hand-rolled version of something that will eventually be standardized — maybe through MCP server descriptions, maybe through a convention that package managers adopt.
+
+But right now, today, these three layers get you there. One file for orientation, one file for rules, one command for structured context. The agent doesn't need your docs. It needs your intent, your constraints, and the exact commands to run.
