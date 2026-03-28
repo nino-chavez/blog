@@ -8,3 +8,4 @@ export { Figure } from './Figure';
 export { PullQuote } from './PullQuote';
 export { BeforeAfter } from './BeforeAfter';
 export { default as Mermaid } from './Mermaid';
+export { ResonanceCard } from './ResonanceCard';
