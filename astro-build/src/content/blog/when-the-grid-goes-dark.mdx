@@ -1,0 +1,145 @@
+---
+title: "When the Grid Goes Dark"
+publishedAt: "2026-04-06T12:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "AI stopped being a tool the moment I couldn't work without it. That's not adoption — that's dependency. And dependency without understanding is just a blackout waiting to happen."
+category: "AI & Automation"
+featureImage: "/images/generated/when-the-grid-goes-dark.webp"
+tags: ["ai-development", "leadership", "career"]
+featured: false
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+There's a conversation happening inside every company that's adopted AI tooling. I've heard versions of it across orgs, in Slack threads, in leadership meetings, in hallway debates that don't make it into the deck.
+
+The product side says: *"We just need to put Claude in the hands of everyone. Everyone can ship."*
+
+The engineering side says: *"If you ship code to prod, you have to be on-call to support the code. Not just your code — the whole platform. To do that, you have to understand the system."*
+
+And somewhere in between sits someone like me — a builder who's demonstrated that a solo operator can go from zero to a working application using AI, but can't answer the question that follows: *What happens when I'm not the only one doing this, and what happens when the thing I built breaks at 3 AM?*
+
+I don't have a clean answer for that yet. But I've been circling something that finally has a shape.
+
+---
+
+## The Thing I've Been Writing Around
+
+I've spent the last year building a metaphor for AI as infrastructure. [The grid is live](./wired-for-power-ai-is-the-grid-youre-the-architect). The current is flowing. The question was always about wiring — about having a blueprint, not just an outlet.
+
+I've written about [kitchens where everyone got professional equipment](./the-masterchef-problem) but nobody designed the challenges that build actual skill. I've written about how [ChatGPT doesn't eat](./chatgpt-doesnt-eat-so-why-do-i-keep-asking-it-to-cook) — it can describe a dish but can't taste the sauce.
+
+All of that assumed the power stays on.
+
+I never wrote the blackout post. The one where the grid goes dark, the Thermomix is dead weight on the counter, and the only question that matters is: *can you still cook?*
+
+---
+
+## What a Blackout Actually Feels Like
+
+I know what it feels like because it's happened. Not metaphorically — literally. Claude goes down, or the API throttles, or the model starts hallucinating in ways that waste more time than it saves. And in those moments, I discover something uncomfortable about my own workflow.
+
+The first hour isn't productive. It's *archaeological*. I'm reading code I technically own but didn't fully write. I'm reverse-engineering decisions that made sense at generation time but weren't committed to my own memory. I'm grep-ing through files looking for the logic I approved but never internalized.
+
+Here's the part I don't love admitting: my 25 years of experience do kick in. Eventually. The patterns are still there — the instinct for where a bug lives, the muscle memory of debugging, the architectural intuition that says *this function is doing too much*. But there's a delay now. A gap between "I own this" and "I understand this" that didn't used to exist.
+
+That gap is the thing everyone in this conversation is dancing around.
+
+---
+
+## The Candidate Who Broke Down
+
+An engineering director I know told me about an interview. The candidate walked in with a polished workflow — screen-shared their whole process for shipping features with AI. Prompt engineering, code generation, automated testing, deployment. Impressive velocity.
+
+Then the interviewer asked: *"If this breaks in production at 2 AM and Claude is down, walk me through how you'd debug it."*
+
+The candidate couldn't.
+
+Not "struggled." Not "took a while." *Couldn't.* The mental model wasn't there. They'd been orchestrating outputs without building understanding. The AI was doing the thinking, and the candidate was doing the typing.
+
+<Callout type="signal" title="The 3 AM Test">
+If the AI is unavailable and the feature breaks, can the person who shipped it explain the logic to a senior engineer over the phone? If the answer is no, that code is unmaintainable — regardless of how well it works today.
+</Callout>
+
+That interview haunts me because I have to ask myself how far I am from the same failure. Not in the same way — I have decades of context the candidate didn't. But the *mechanism* is the same. Every function I approve without fully internalizing is a piece of my own codebase I'm renting instead of owning.
+
+---
+
+## The Thermomix Chef
+
+This is where the kitchen metaphor comes back.
+
+In *The MasterChef Problem*, I argued that everyone got a professional kitchen but nobody designed the challenges that build skill. The Mystery Box, the Skills Test, the Pressure Test — those constraints are what separate someone who operates equipment from someone who actually cooks.
+
+But there's a version of this I didn't explore: the chef who's *only* ever cooked with a Thermomix.
+
+The Thermomix is an extraordinary piece of equipment. It weighs, chops, stirs, heats, and times everything for you. You follow the screen, and restaurant-quality food comes out. Consistently. Reliably. Impressively.
+
+Then the power goes out mid-service.
+
+A real chef pivots. Open flame. Manual knife work. Adjusting seasoning by taste. The food might not be as precise, but the kitchen doesn't stop.
+
+A Thermomix operator stares at a dead screen on a countertop.
+
+That's the gap between AI-*directing* and AI-*driven*. Between someone who uses the tool to amplify what they already know and someone whose knowledge *is* the tool. The candidate in that interview was a Thermomix operator. The question I keep asking myself is whether I'm slowly becoming one too — just with enough instinct left to hide it.
+
+---
+
+## Three Voices, One Knot
+
+Back to the room with the three perspectives.
+
+**The product side sees democratization.** If the barrier to shipping is gone, then the bottleneck of engineering is cleared. Everyone can contribute. Speed to value collapses. This is genuinely exciting, and it's not wrong.
+
+**The engineering side sees accountability.** Code in production isn't a prototype — it's a promise. If it pages someone at 3 AM, someone has to answer. That someone needs to understand the platform, not just the feature. This is also not wrong.
+
+**I see the gap between them.** I've proven that a builder with AI can ship real, working software. But building it and owning it in production are different things. And I haven't demonstrated that my approach scales beyond a solo operator with 25 years of context.
+
+The honest version: I've demonstrated 0-to-1. I haven't demonstrated 1-to-100. And the distance between those two is where product optimism collides with engineering reality.
+
+<PullQuote>
+Everyone got the grid. Not everyone can work by candlelight.
+</PullQuote>
+
+---
+
+## Knowledge Debt
+
+We used to talk about technical debt — conscious shortcuts in code that you plan to fix later. AI has introduced something different. Call it *knowledge debt*: shipping code faster than it can be understood.
+
+Technical debt is a choice. You know you're cutting a corner. Knowledge debt is invisible. The code passes tests. It looks reasonable. It works. But nobody on the team can explain *why* a particular approach was chosen because the approach was chosen by a model that optimized for "working" over "comprehensible."
+
+This produces what I've started calling **zombie logic** — functions that are alive in production but dead in terms of human understanding. `processData()` handles four undocumented responsibilities. A utility function exists because Claude thought it was a good abstraction, not because an engineer made an architectural decision.
+
+The scariest part of knowledge debt is that it compounds silently. You don't feel it accumulating. You feel it when something breaks and the person debugging has to do archaeology before they can do engineering.
+
+---
+
+## The Hollowing Out
+
+There's a talent dimension to this that keeps nagging at me.
+
+AI makes senior engineers faster because they already have the mental models. They're using the tool to skip the tedious parts, not the thinking parts. And AI helps junior engineers get started — generating boilerplate, explaining patterns, scaffolding projects.
+
+But the middle is getting hollowed out.
+
+The mid-level engineer — the one who's supposed to be building architectural intuition through years of painful debugging, refactoring, and system design — is the one most at risk of skipping the struggle that creates the instinct. If you never debug a memory leak yourself, you never develop the sense for where memory leaks hide. If you never untangle a spaghetti module, you never learn to feel when a module is about to become spaghetti.
+
+We're at risk of producing a generation split between *prompters* and *architects*, with nothing in between. And that gap is where organizations break.
+
+---
+
+## No Framework, Just the Tension
+
+I don't have a resolution for the two sides of this argument. Product isn't going to stop wanting democratized shipping. Engineering isn't going to relax on-call accountability. And I'm not going to stop building with AI — because the leverage is real.
+
+But I'm done pretending the leverage is free.
+
+Every time I let Claude generate a function I don't fully trace, I'm taking on knowledge debt. Every time I approve a pattern without asking myself *would I have built it this way?*, I'm one step closer to the Thermomix operator. Every time someone ships to production because the AI made it easy, we're betting that the grid stays up.
+
+The grid doesn't always stay up.
+
+I keep coming back to something simple: **the blackout reveals the chef.** Not the equipment, not the recipe, not the kitchen — the person standing in it when the lights go out.
+
+I want to be that person. I'm not entirely sure I still am. And I think that uncertainty is the most honest thing I can say about where AI development is right now.
