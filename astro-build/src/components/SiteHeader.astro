@@ -5,22 +5,26 @@ interface Props {
 
 const { currentPage } = Astro.props;
 
-// Primary content types — always visible at md+
+// Primary sections — always visible at md+
 const primaryLinks = [
   { href: '/blog', label: 'Blog', id: 'blog' },
+  { href: '/blog/series', label: 'Series', id: 'series' },
   { href: '/blog/fiction', label: 'Fiction', id: 'fiction' },
+];
+
+// Everything else — behind "More" dropdown on desktop, own section in mobile drawer
+const moreLinks = [
   { href: '/blog/whitepapers', label: 'Whitepapers', id: 'whitepapers' },
   { href: '/blog/presentations', label: 'Presentations', id: 'presentations' },
   { href: '/blog/tutorials', label: 'Tutorials', id: 'tutorials' },
+  { href: '/blog/counterpoints', label: 'Counterpoints', id: 'counterpoints' },
+  { href: '/blog/tags', label: 'Tags', id: 'tags' },
   { href: '/about', label: 'About', id: 'about' },
 ];
 
-// Secondary / discovery — visible at lg+ in a muted treatment
-const secondaryLinks = [
-  { href: '/blog/series', label: 'Series', id: 'series' },
-  { href: '/blog/tags', label: 'Tags', id: 'tags' },
-  { href: '/blog/counterpoints', label: 'Counterpoints', id: 'counterpoints' },
-];
+// Highlight "More" when the current page is one of the demoted sections
+const moreIds = moreLinks.map((l) => l.id);
+const moreActive = currentPage ? moreIds.includes(currentPage) : false;
 
 function linkClasses(id: string, base: string) {
   return currentPage === id
@@ -31,67 +35,81 @@ function linkClasses(id: string, base: string) {
 
 <header class="sticky top-0 z-50 bg-zinc-950/95 backdrop-blur-xl border-b border-zinc-800/30">
   <nav class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-14 md:h-[73px]">
-      <!-- Logo -->
-      <a href="/blog" class="flex items-center gap-3 flex-shrink-0">
+    <div class="flex items-center justify-between h-14 md:h-16">
+      <!-- Logo (tagline dropped intentionally) -->
+      <a href="/blog" class="flex items-center gap-2 flex-shrink-0">
         <span class="text-base sm:text-lg font-bold bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange bg-clip-text text-transparent whitespace-nowrap">
           Signal Dispatch
-        </span>
-        <span class="hidden xl:inline text-sm text-zinc-500 whitespace-nowrap">
-          · Strategy, insights, and the signals that matter
         </span>
       </a>
 
       <!-- Desktop nav (md+) -->
       <div class="hidden md:flex items-center gap-1">
-        <!-- Primary links (always visible at md+) -->
         {primaryLinks.map((link) => (
           <a
             href={link.href}
-            class={linkClasses(link.id, 'text-sm px-2.5 py-1 rounded-md transition-colors')}
+            class={linkClasses(link.id, 'text-sm px-3 py-1.5 rounded-md transition-colors')}
           >
             {link.label}
           </a>
         ))}
 
-        <!-- Divider between primary and secondary -->
-        <div class="hidden lg:block border-l border-zinc-800/50 h-4 mx-2"></div>
-
-        <!-- Secondary / discovery links (lg+ only, muted) -->
-        {secondaryLinks.map((link) => (
-          <a
-            href={link.href}
-            class={currentPage === link.id
-              ? 'hidden lg:block text-xs px-2 py-1 rounded-md text-zinc-300 bg-zinc-800/40 transition-colors'
-              : 'hidden lg:block text-xs px-2 py-1 rounded-md text-zinc-500 hover:text-zinc-300 transition-colors'}
+        <!-- More dropdown (content sections only) -->
+        <details class="relative more-dropdown">
+          <summary
+            class={`list-none cursor-pointer select-none text-sm px-3 py-1.5 rounded-md transition-colors flex items-center gap-1 ${
+              moreActive
+                ? 'text-white bg-zinc-800/60 font-medium'
+                : 'text-zinc-400 hover:text-white'
+            }`}
+            aria-haspopup="menu"
           >
-            {link.label}
-          </a>
-        ))}
+            More
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 more-caret" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div
+            class="absolute right-0 mt-2 w-56 rounded-lg border border-zinc-800 bg-zinc-950/98 backdrop-blur-xl shadow-xl shadow-black/50 overflow-hidden py-1"
+            role="menu"
+          >
+            {moreLinks.map((link) => (
+              <a
+                href={link.href}
+                role="menuitem"
+                class={`block px-4 py-2.5 text-sm transition-colors ${
+                  currentPage === link.id
+                    ? 'text-white bg-zinc-800/60 font-medium'
+                    : 'text-zinc-400 hover:text-white hover:bg-zinc-800/40'
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </details>
 
-        <!-- Icon divider -->
+        <!-- Utility cluster -->
         <div class="border-l border-zinc-800/50 h-5 mx-2"></div>
-
-        <!-- RSS -->
         <a
           href="/blog/rss.xml"
           class="flex items-center justify-center w-8 h-8 rounded-md text-zinc-400 hover:text-white transition-colors"
           title="RSS Feed"
+          aria-label="RSS Feed"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z" />
           </svg>
         </a>
-
-        <!-- Portfolio -->
         <a
           href="https://ninochavez.co"
           target="_blank"
           rel="noopener noreferrer"
           class="flex items-center justify-center w-8 h-8 rounded-md text-zinc-400 hover:text-white transition-colors"
           title="ninochavez.co"
+          aria-label="Portfolio"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
           </svg>
         </a>
@@ -106,11 +124,9 @@ function linkClasses(id: string, base: string) {
         aria-controls="mobile-menu"
       >
         <span class="sr-only">Open menu</span>
-        <!-- Hamburger icon -->
         <svg id="menu-icon-open" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
-        <!-- X icon (hidden by default) -->
         <svg id="menu-icon-close" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
@@ -128,9 +144,9 @@ function linkClasses(id: string, base: string) {
   aria-label="Navigation menu"
 >
   <nav class="max-w-7xl mx-auto px-6 py-8">
-    <!-- Primary section -->
+    <!-- Primary sections -->
     <div class="mb-8">
-      <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">Read</h2>
+      <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">Sections</h2>
       <div class="flex flex-col gap-1">
         {primaryLinks.map((link) => (
           <a
@@ -147,11 +163,11 @@ function linkClasses(id: string, base: string) {
       </div>
     </div>
 
-    <!-- Secondary section -->
+    <!-- More sections -->
     <div class="mb-8">
-      <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">Explore</h2>
+      <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">More</h2>
       <div class="flex flex-col gap-1">
-        {secondaryLinks.map((link) => (
+        {moreLinks.map((link) => (
           <a
             href={link.href}
             class={`py-3 px-3 text-lg rounded-lg transition-colors ${
@@ -166,9 +182,9 @@ function linkClasses(id: string, base: string) {
       </div>
     </div>
 
-    <!-- More section -->
+    <!-- Utility -->
     <div>
-      <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">More</h2>
+      <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">Utility</h2>
       <div class="flex flex-col gap-1">
         <a
           href="/blog/rss.xml"
@@ -182,12 +198,29 @@ function linkClasses(id: string, base: string) {
           rel="noopener noreferrer"
           class="py-3 px-3 text-lg text-zinc-300 hover:text-white hover:bg-zinc-800/30 rounded-lg transition-colors"
         >
-          ninochavez.co
+          ninochavez.co ↗
         </a>
       </div>
     </div>
   </nav>
 </div>
+
+<style>
+  /* Remove default marker on <details> summary */
+  .more-dropdown summary::-webkit-details-marker {
+    display: none;
+  }
+  .more-dropdown summary {
+    list-style: none;
+  }
+  /* Rotate caret when open */
+  .more-caret {
+    transition: transform 0.15s ease;
+  }
+  .more-dropdown[open] .more-caret {
+    transform: rotate(180deg);
+  }
+</style>
 
 <script>
   const btn = document.getElementById('mobile-menu-btn');
@@ -223,8 +256,24 @@ function linkClasses(id: string, base: string) {
   btn?.addEventListener('click', toggleMenu);
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !menu?.classList.contains('hidden')) {
-      closeMenu();
+    if (e.key === 'Escape') {
+      // Close mobile menu if open
+      if (menu && !menu.classList.contains('hidden')) {
+        closeMenu();
+      }
+      // Close desktop More dropdown if open
+      const more = document.querySelector('.more-dropdown') as HTMLDetailsElement | null;
+      if (more?.open) {
+        more.open = false;
+      }
+    }
+  });
+
+  // Close "More" dropdown on outside click
+  const moreDropdown = document.querySelector('.more-dropdown') as HTMLDetailsElement | null;
+  document.addEventListener('click', (e) => {
+    if (moreDropdown && moreDropdown.open && !moreDropdown.contains(e.target as Node)) {
+      moreDropdown.open = false;
     }
   });
 </script>

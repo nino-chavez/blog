@@ -186,7 +186,7 @@ export default function BlogList({ posts }: BlogListProps) {
   return (
     <div className="space-y-8">
       {/* Sticky Filter Bar */}
-      <div className="sticky top-[56px] sm:top-[73px] z-40 -mx-3 sm:-mx-4 px-3 sm:px-4 py-3 sm:py-4 bg-zinc-950/95 backdrop-blur-lg border-b border-zinc-800/50">
+      <div className="sticky top-14 md:top-16 z-40 -mx-3 sm:-mx-4 px-3 sm:px-4 py-3 sm:py-4 bg-zinc-950/95 backdrop-blur-lg border-b border-zinc-800/50">
         {/* Mobile: Stack search above filters */}
         <div className="flex flex-col gap-3 sm:hidden">
           {/* Search - Full width on mobile */}
@@ -213,58 +213,67 @@ export default function BlogList({ posts }: BlogListProps) {
             />
           </div>
 
-          {/* Horizontally scrollable category filters */}
-          <div className="-mx-3 px-3 overflow-x-auto scrollbar-hide">
-            <div className="flex items-center gap-2 pb-1" style={{ minWidth: 'max-content' }}>
-              {/* All Posts */}
-              <button
-                onClick={() => setSelectedCategory(null)}
-                className={`text-xs font-semibold px-4 py-2 rounded-full border transition-all whitespace-nowrap ${
-                  !selectedCategory
-                    ? "bg-athletic-brand-violet text-white border-athletic-brand-violet"
-                    : "bg-zinc-900/50 text-zinc-400 border-zinc-800 active:bg-zinc-800"
-                }`}
-              >
-                All ({posts.length})
-              </button>
+          {/* Wrapping category filters */}
+          <div className="flex flex-wrap items-center gap-2">
+            {/* All Posts */}
+            <button
+              onClick={() => setSelectedCategory(null)}
+              className={`text-xs font-semibold px-3.5 py-1.5 rounded-full border transition-all whitespace-nowrap ${
+                !selectedCategory
+                  ? "bg-athletic-brand-violet text-white border-athletic-brand-violet"
+                  : "bg-zinc-900/50 text-zinc-400 border-zinc-800 active:bg-zinc-800"
+              }`}
+            >
+              All <span className="text-[0.65rem] opacity-60">{posts.length}</span>
+            </button>
 
-              {/* Top Categories */}
-              {topCategories.map((cat) => {
-                const colors = getCategoryColors(cat);
-                const isSelected = selectedCategory === cat;
-                return (
-                  <button
-                    key={cat}
-                    onClick={() => setSelectedCategory(isSelected ? null : cat)}
-                    className={`text-xs font-semibold px-4 py-2 rounded-full border transition-all whitespace-nowrap ${
-                      isSelected
-                        ? `${colors.bg} ${colors.border} ${colors.text}`
-                        : "bg-zinc-900/50 text-zinc-400 border-zinc-800 active:bg-zinc-800"
-                    }`}
-                  >
-                    {cat} ({postCounts[cat]})
-                  </button>
-                );
-              })}
-
-              {/* Other dropdown */}
-              {otherCategories.length > 0 && (
+            {/* Top Categories */}
+            {topCategories.map((cat) => {
+              const colors = getCategoryColors(cat);
+              const isSelected = selectedCategory === cat;
+              return (
                 <button
-                  onClick={() =>
-                    setSelectedCategory(
-                      selectedCategory === "Other" ? null : "Other"
-                    )
-                  }
-                  className={`text-xs font-semibold px-4 py-2 rounded-full border transition-all whitespace-nowrap ${
-                    selectedCategory === "Other"
-                      ? "bg-zinc-700 text-white border-zinc-600"
+                  key={cat}
+                  onClick={() => setSelectedCategory(isSelected ? null : cat)}
+                  className={`text-xs font-semibold px-3.5 py-1.5 rounded-full border transition-all whitespace-nowrap ${
+                    isSelected
+                      ? `${colors.bg} ${colors.border} ${colors.text}`
                       : "bg-zinc-900/50 text-zinc-400 border-zinc-800 active:bg-zinc-800"
                   }`}
                 >
-                  Other ({postCounts["Other"]})
+                  {cat} <span className="text-[0.65rem] opacity-60">{postCounts[cat]}</span>
                 </button>
-              )}
-            </div>
+              );
+            })}
+
+            {/* Other dropdown */}
+            {otherCategories.length > 0 && (
+              <button
+                onClick={() =>
+                  setSelectedCategory(
+                    selectedCategory === "Other" ? null : "Other"
+                  )
+                }
+                className={`text-xs font-semibold px-3.5 py-1.5 rounded-full border transition-all whitespace-nowrap ${
+                  selectedCategory === "Other"
+                    ? "bg-zinc-700 text-white border-zinc-600"
+                    : "bg-zinc-900/50 text-zinc-400 border-zinc-800 active:bg-zinc-800"
+                }`}
+              >
+                Other <span className="text-[0.65rem] opacity-60">{postCounts["Other"]}</span>
+              </button>
+            )}
+
+            {/* Browse Topics Link (parity with desktop) */}
+            <a
+              href="/blog/tags"
+              className="text-xs font-medium px-3.5 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 active:bg-zinc-800 transition-all flex items-center gap-1.5 whitespace-nowrap"
+            >
+              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+              </svg>
+              Topics
+            </a>
           </div>
         </div>
 
