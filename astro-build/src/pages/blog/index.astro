@@ -1,34 +1,112 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import BlogList from '../../components/BlogList';
 import SiteHeader from '../../components/SiteHeader.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import { generateWebsiteSchema, generateBlogSchema, generatePersonSchema } from '../../utils/schema';
 
 export const prerender = true;
 
-// Get all published posts sorted by date
-const posts = await getCollection('blog', ({ data }) => data.status !== 'draft');
-const sortedPosts = posts.sort(
+// ── Data ────────────────────────────────────────────────────────────────────
+
+const allPosts = await getCollection('blog', ({ data }) => data.status !== 'draft');
+const sortedPosts = allPosts.sort(
   (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime()
 );
+const latestEssays = sortedPosts.slice(0, 6);
+const totalPosts = sortedPosts.length;
 
-// Prepare posts data for BlogList component
-const postsData = sortedPosts.map((post) => ({
-  id: post.id,
-  title: post.data.title,
-  excerpt: post.data.excerpt || '',
-  publishedAt: typeof post.data.publishedAt === 'string'
-    ? post.data.publishedAt
-    : post.data.publishedAt.toISOString(),
-  category: post.data.category,
-  tags: post.data.tags,
-  featured: post.data.featured,
-  featureImage: post.data.featureImage,
-}));
+// Fiction (serialized works)
+const fictionAll = await getCollection('fiction', ({ data }) => data.status !== 'draft');
+type FictionEntry = typeof fictionAll[number];
+const fictionSeriesMap = new Map<string, { title: string; slug: string; chapters: FictionEntry[]; totalChapters?: number; latestDate: number }>();
 
-// Generate JSON-LD schemas
+for (const story of fictionAll) {
+  if (story.data.series) {
+    const slug = story.data.series.slug;
+    if (!fictionSeriesMap.has(slug)) {
+      fictionSeriesMap.set(slug, {
+        title: story.data.series.title,
+        slug,
+        chapters: [],
+        totalChapters: story.data.series.totalChapters,
+        latestDate: 0,
+      });
+    }
+    const s = fictionSeriesMap.get(slug)!;
+    s.chapters.push(story);
+    const d = new Date(story.data.publishedAt).getTime();
+    if (d > s.latestDate) s.latestDate = d;
+  }
+}
+
+for (const [, s] of fictionSeriesMap) {
+  s.chapters.sort(
+    (a, b) => (a.data.series?.position || 0) - (b.data.series?.position || 0)
+  );
+}
+
+const activeFictionSerial = Array.from(fictionSeriesMap.values())
+  .sort((a, b) => b.latestDate - a.latestDate)[0];
+
+// Series (blog post series groupings)
+const seriesAll = await getCollection('series');
+const activeSeries = seriesAll
+  .filter((s) => s.data.status !== 'completed')
+  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime())
+  .slice(0, 3);
+
+// Latest across other content types
+async function latestFrom<T extends 'whitepapers' | 'tutorials' | 'presentations' | 'counterpoints'>(
+  collection: T
+) {
+  const items = await getCollection(collection);
+  const sorted = items.sort(
+    (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime()
+  );
+  return sorted[0];
+}
+
+const latestWhitepaper = await latestFrom('whitepapers');
+const latestTutorial = await latestFrom('tutorials');
+const latestPresentation = await latestFrom('presentations');
+const latestCounterpoint = await latestFrom('counterpoints');
+
+// ── Helpers ─────────────────────────────────────────────────────────────────
+
+const romanNumerals = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+
+function formatDate(d: string | Date) {
+  return new Date(d).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+function formatShortDate(d: string | Date) {
+  return new Date(d).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+  });
+}
+
+// Category colors for essay cards
+const categoryColors: Record<string, { bg: string; border: string; text: string }> = {
+  'AI & Automation': { bg: 'bg-purple-500/10', border: 'border-purple-500/30', text: 'text-purple-400' },
+  'Commerce': { bg: 'bg-orange-500/10', border: 'border-orange-500/30', text: 'text-orange-400' },
+  'Leadership': { bg: 'bg-blue-500/10', border: 'border-blue-500/30', text: 'text-blue-400' },
+  'Meta': { bg: 'bg-zinc-500/10', border: 'border-zinc-500/30', text: 'text-zinc-400' },
+  'Field Notes': { bg: 'bg-green-500/10', border: 'border-green-500/30', text: 'text-green-400' },
+  'Consulting Practice': { bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', text: 'text-cyan-400' },
+  default: { bg: 'bg-athletic-brand-violet/10', border: 'border-athletic-brand-violet/30', text: 'text-athletic-brand-violet' },
+};
+
+function catColors(category?: string) {
+  return categoryColors[category || ''] || categoryColors.default;
+}
+
+// JSON-LD
 const websiteSchema = generateWebsiteSchema();
 const blogSchema = generateBlogSchema(sortedPosts);
 const personSchema = generatePersonSchema();
@@ -36,16 +114,295 @@ const personSchema = generatePersonSchema();
 
 <BaseLayout
   title="Signal Dispatch"
-  description="Architecture, commerce, and the signals that matter. Exploring AI workflows, systems thinking, and leadership through practical experience."
+  description="Architecture, commerce, and the signals that matter. Essays, fiction, whitepapers, and research."
   jsonLd={[websiteSchema, blogSchema, personSchema]}
 >
   <main class="min-h-screen">
     <SiteHeader currentPage="blog" />
 
-    <!-- Blog Content -->
-    <section class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8">
-      <BlogList posts={postsData} client:idle />
+    <!-- Hero -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12 md:pt-24 md:pb-16 text-center">
+      <h1 class="font-serif text-5xl md:text-7xl text-white leading-[1.05] tracking-tight mb-5">
+        Signal Dispatch
+      </h1>
+      <p class="font-serif italic text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto">
+        Architecture, commerce, and the signals that matter.
+      </p>
     </section>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 space-y-20">
+
+      <!-- ── Currently Serializing ── -->
+      {activeFictionSerial && (
+        <section>
+          <div class="flex items-baseline justify-between mb-8 pb-4 border-b border-zinc-800/60">
+            <h2 class="text-xs uppercase tracking-[0.25em] text-zinc-500">
+              Currently Serializing
+            </h2>
+            <a
+              href="/blog/fiction"
+              class="text-xs text-zinc-600 hover:text-athletic-court-orange transition-colors"
+            >
+              All fiction →
+            </a>
+          </div>
+
+          <article>
+            <a href={`/blog/fiction/${activeFictionSerial.chapters[0].id}`} class="group block mb-6">
+              <div class="flex items-center gap-3 text-xs uppercase tracking-wider text-zinc-600 mb-3">
+                <span>Novella</span>
+                <span class="text-zinc-800">&middot;</span>
+                <span>
+                  {activeFictionSerial.chapters.length} of {activeFictionSerial.totalChapters || activeFictionSerial.chapters.length} chapters
+                </span>
+              </div>
+              <h3 class="font-serif text-4xl md:text-5xl text-white group-hover:text-athletic-court-orange transition-colors leading-tight mb-4">
+                {activeFictionSerial.title}
+              </h3>
+              {activeFictionSerial.chapters[0].data.excerpt && (
+                <p class="font-serif italic text-lg text-zinc-400 leading-relaxed max-w-2xl">
+                  {activeFictionSerial.chapters[0].data.excerpt}
+                </p>
+              )}
+            </a>
+
+            <ol class="space-y-0 border-l border-zinc-800/60 pl-6 ml-1">
+              {activeFictionSerial.chapters.map((chapter) => {
+                const dateLabel = formatShortDate(chapter.data.publishedAt);
+                return (
+                  <li>
+                    <a
+                      href={`/blog/fiction/${chapter.id}`}
+                      class="group/chapter flex items-baseline gap-5 py-3 hover:pl-2 transition-all duration-150"
+                    >
+                      <span class="font-serif text-xs text-zinc-700 w-6 flex-shrink-0">
+                        {romanNumerals[chapter.data.series!.position] || chapter.data.series!.position}
+                      </span>
+                      <span class="font-serif text-lg text-zinc-400 group-hover/chapter:text-white transition-colors flex-1">
+                        {chapter.data.title}
+                      </span>
+                      <time class="text-xs text-zinc-700 font-mono flex-shrink-0">{dateLabel}</time>
+                    </a>
+                  </li>
+                );
+              })}
+            </ol>
+
+            <a
+              href={`/blog/fiction/${activeFictionSerial.chapters[0].id}`}
+              class="inline-flex items-center gap-2 mt-8 text-sm font-medium text-athletic-court-orange hover:text-white transition-colors"
+            >
+              Start from the beginning
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </article>
+        </section>
+      )}
+
+      <!-- ── Latest Essays ── -->
+      <section>
+        <div class="flex items-baseline justify-between mb-8 pb-4 border-b border-zinc-800/60">
+          <h2 class="text-xs uppercase tracking-[0.25em] text-zinc-500">
+            Latest Essays
+          </h2>
+          <a
+            href="/blog/archive"
+            class="text-xs text-zinc-600 hover:text-athletic-court-orange transition-colors"
+          >
+            All {totalPosts} essays →
+          </a>
+        </div>
+
+        <div class="grid gap-8 md:grid-cols-2">
+          {latestEssays.map((post, idx) => {
+            const colors = catColors(post.data.category);
+            const isFirst = idx === 0;
+            return (
+              <a
+                href={`/blog/${post.id}`}
+                class={`group block ${isFirst ? 'md:col-span-2' : ''}`}
+              >
+                <article class={`space-y-4 ${isFirst ? 'md:flex md:gap-6 md:space-y-0' : ''}`}>
+                  {post.data.featureImage && (
+                    <div class={`relative aspect-video overflow-hidden rounded-lg border border-zinc-800/60 ${isFirst ? 'md:w-1/2 md:aspect-[4/3]' : ''}`}>
+                      <img
+                        src={post.data.featureImage}
+                        alt={post.data.title}
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                  )}
+                  <div class={`space-y-2 ${isFirst ? 'md:flex-1 md:flex md:flex-col md:justify-center' : ''}`}>
+                    <div class="flex items-center gap-3 text-xs flex-wrap">
+                      {post.data.category && (
+                        <span class={`font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border ${colors.bg} ${colors.border} ${colors.text}`}>
+                          {post.data.category}
+                        </span>
+                      )}
+                      <time class="text-zinc-600">
+                        {formatDate(post.data.publishedAt)}
+                      </time>
+                    </div>
+                    <h3 class={`font-bold text-white group-hover:text-athletic-court-orange transition-colors leading-tight ${isFirst ? 'text-2xl md:text-3xl' : 'text-xl'}`}>
+                      {post.data.title}
+                    </h3>
+                    {post.data.excerpt && (
+                      <p class="text-zinc-400 leading-relaxed line-clamp-2 text-sm">
+                        {post.data.excerpt}
+                      </p>
+                    )}
+                  </div>
+                </article>
+              </a>
+            );
+          })}
+        </div>
+
+        <div class="mt-10 text-center">
+          <a
+            href="/blog/archive"
+            class="inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-athletic-court-orange transition-colors"
+          >
+            See all {totalPosts} essays
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- ── Active Series ── -->
+      {activeSeries.length > 0 && (
+        <section>
+          <div class="flex items-baseline justify-between mb-8 pb-4 border-b border-zinc-800/60">
+            <h2 class="text-xs uppercase tracking-[0.25em] text-zinc-500">
+              Essay Series
+            </h2>
+            <a
+              href="/blog/series"
+              class="text-xs text-zinc-600 hover:text-athletic-court-orange transition-colors"
+            >
+              All series →
+            </a>
+          </div>
+
+          <div class="grid gap-6 md:grid-cols-3">
+            {activeSeries.map((series) => (
+              <a
+                href={`/blog/series/${series.id}`}
+                class="group block p-5 rounded-lg border border-zinc-800/60 hover:border-zinc-700 transition-colors"
+              >
+                <div class="text-xs uppercase tracking-wider text-zinc-600 mb-2">
+                  Series
+                </div>
+                <h3 class="font-bold text-lg text-white group-hover:text-athletic-court-orange transition-colors leading-tight mb-2">
+                  {series.data.title}
+                </h3>
+                <p class="text-sm text-zinc-500 leading-relaxed line-clamp-3">
+                  {series.data.description}
+                </p>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- ── Other content types ── -->
+      <section>
+        <div class="mb-8 pb-4 border-b border-zinc-800/60">
+          <h2 class="text-xs uppercase tracking-[0.25em] text-zinc-500">
+            More
+          </h2>
+        </div>
+
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
+          {latestWhitepaper && (
+            <a href={`/blog/whitepapers/${latestWhitepaper.id}`} class="group block p-6 rounded-lg border border-zinc-800/60 hover:border-zinc-700 transition-colors">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs uppercase tracking-[0.2em] text-zinc-600">Whitepaper</span>
+                <span class="text-xs text-zinc-700">Latest</span>
+              </div>
+              <h3 class="font-bold text-lg text-white group-hover:text-athletic-court-orange transition-colors leading-tight mb-3">
+                {latestWhitepaper.data.title}
+              </h3>
+              {latestWhitepaper.data.excerpt && (
+                <p class="text-sm text-zinc-500 leading-relaxed line-clamp-2 mb-4">
+                  {latestWhitepaper.data.excerpt}
+                </p>
+              )}
+              <div class="text-xs text-zinc-600 group-hover:text-athletic-court-orange transition-colors">
+                All whitepapers →
+              </div>
+            </a>
+          )}
+
+          {latestTutorial && (
+            <a href={`/blog/tutorials/${latestTutorial.id}`} class="group block p-6 rounded-lg border border-zinc-800/60 hover:border-zinc-700 transition-colors">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs uppercase tracking-[0.2em] text-zinc-600">Tutorial</span>
+                <span class="text-xs text-zinc-700">Latest</span>
+              </div>
+              <h3 class="font-bold text-lg text-white group-hover:text-athletic-court-orange transition-colors leading-tight mb-3">
+                {latestTutorial.data.title}
+              </h3>
+              {latestTutorial.data.excerpt && (
+                <p class="text-sm text-zinc-500 leading-relaxed line-clamp-2 mb-4">
+                  {latestTutorial.data.excerpt}
+                </p>
+              )}
+              <div class="text-xs text-zinc-600 group-hover:text-athletic-court-orange transition-colors">
+                All tutorials →
+              </div>
+            </a>
+          )}
+
+          {latestPresentation && (
+            <a href={`/blog/presentations/${latestPresentation.id}`} class="group block p-6 rounded-lg border border-zinc-800/60 hover:border-zinc-700 transition-colors">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs uppercase tracking-[0.2em] text-zinc-600">Presentation</span>
+                <span class="text-xs text-zinc-700">Latest</span>
+              </div>
+              <h3 class="font-bold text-lg text-white group-hover:text-athletic-court-orange transition-colors leading-tight mb-3">
+                {latestPresentation.data.title}
+              </h3>
+              {latestPresentation.data.excerpt && (
+                <p class="text-sm text-zinc-500 leading-relaxed line-clamp-2 mb-4">
+                  {latestPresentation.data.excerpt}
+                </p>
+              )}
+              <div class="text-xs text-zinc-600 group-hover:text-athletic-court-orange transition-colors">
+                All presentations →
+              </div>
+            </a>
+          )}
+
+          {latestCounterpoint && (
+            <a href={`/blog/counterpoints/${latestCounterpoint.id}`} class="group block p-6 rounded-lg border border-zinc-800/60 hover:border-zinc-700 transition-colors">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs uppercase tracking-[0.2em] text-zinc-600">Counterpoint</span>
+                <span class="text-xs text-zinc-700">Latest</span>
+              </div>
+              <h3 class="font-bold text-lg text-white group-hover:text-athletic-court-orange transition-colors leading-tight mb-3">
+                {latestCounterpoint.data.title}
+              </h3>
+              {latestCounterpoint.data.excerpt && (
+                <p class="text-sm text-zinc-500 leading-relaxed line-clamp-2 mb-4">
+                  {latestCounterpoint.data.excerpt}
+                </p>
+              )}
+              <div class="text-xs text-zinc-600 group-hover:text-athletic-court-orange transition-colors">
+                All counterpoints →
+              </div>
+            </a>
+          )}
+        </div>
+      </section>
+
+    </div>
 
     <SiteFooter />
   </main>
