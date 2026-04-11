@@ -1,24 +1,25 @@
 ---
 interface Props {
-  currentPage?: 'blog' | 'series' | 'tags' | 'whitepapers' | 'presentations' | 'tutorials' | 'counterpoints' | 'research' | 'about';
+  currentPage?: 'blog' | 'series' | 'tags' | 'whitepapers' | 'presentations' | 'tutorials' | 'fiction' | 'counterpoints' | 'research' | 'about';
 }
 
 const { currentPage } = Astro.props;
 
-const contentLinks = [
+// Primary content types — always visible at md+
+const primaryLinks = [
+  { href: '/blog', label: 'Blog', id: 'blog' },
+  { href: '/blog/fiction', label: 'Fiction', id: 'fiction' },
   { href: '/blog/whitepapers', label: 'Whitepapers', id: 'whitepapers' },
   { href: '/blog/presentations', label: 'Presentations', id: 'presentations' },
   { href: '/blog/tutorials', label: 'Tutorials', id: 'tutorials' },
-  { href: '/blog/counterpoints', label: 'Counterpoints', id: 'counterpoints' },
+  { href: '/about', label: 'About', id: 'about' },
 ];
 
-const discoveryLinks = [
+// Secondary / discovery — visible at lg+ in a muted treatment
+const secondaryLinks = [
   { href: '/blog/series', label: 'Series', id: 'series' },
   { href: '/blog/tags', label: 'Tags', id: 'tags' },
-];
-
-const utilityLinks = [
-  { href: '/about', label: 'About', id: 'about' },
+  { href: '/blog/counterpoints', label: 'Counterpoints', id: 'counterpoints' },
 ];
 
 function linkClasses(id: string, base: string) {
@@ -43,8 +44,8 @@ function linkClasses(id: string, base: string) {
 
       <!-- Desktop nav (md+) -->
       <div class="hidden md:flex items-center gap-1">
-        <!-- Content links (always visible at md+) -->
-        {contentLinks.map((link) => (
+        <!-- Primary links (always visible at md+) -->
+        {primaryLinks.map((link) => (
           <a
             href={link.href}
             class={linkClasses(link.id, 'text-sm px-2.5 py-1 rounded-md transition-colors')}
@@ -53,23 +54,16 @@ function linkClasses(id: string, base: string) {
           </a>
         ))}
 
-        <!-- Discovery links (lg+ only) -->
-        <span class="hidden lg:inline text-zinc-700 mx-0.5">·</span>
-        {discoveryLinks.map((link) => (
-          <a
-            href={link.href}
-            class={linkClasses(link.id, 'hidden lg:block text-sm px-2.5 py-1 rounded-md transition-colors')}
-          >
-            {link.label}
-          </a>
-        ))}
+        <!-- Divider between primary and secondary -->
+        <div class="hidden lg:block border-l border-zinc-800/50 h-4 mx-2"></div>
 
-        <!-- Utility links -->
-        <span class="text-zinc-700 mx-0.5 hidden lg:inline">·</span>
-        {utilityLinks.map((link) => (
+        <!-- Secondary / discovery links (lg+ only, muted) -->
+        {secondaryLinks.map((link) => (
           <a
             href={link.href}
-            class={linkClasses(link.id, 'text-sm px-2.5 py-1 rounded-md transition-colors')}
+            class={currentPage === link.id
+              ? 'hidden lg:block text-xs px-2 py-1 rounded-md text-zinc-300 bg-zinc-800/40 transition-colors'
+              : 'hidden lg:block text-xs px-2 py-1 rounded-md text-zinc-500 hover:text-zinc-300 transition-colors'}
           >
             {link.label}
           </a>
@@ -134,11 +128,11 @@ function linkClasses(id: string, base: string) {
   aria-label="Navigation menu"
 >
   <nav class="max-w-7xl mx-auto px-6 py-8">
-    <!-- Content section -->
+    <!-- Primary section -->
     <div class="mb-8">
-      <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">Content</h2>
+      <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">Read</h2>
       <div class="flex flex-col gap-1">
-        {contentLinks.map((link) => (
+        {primaryLinks.map((link) => (
           <a
             href={link.href}
             class={`py-3 px-3 text-lg rounded-lg transition-colors ${
@@ -153,11 +147,11 @@ function linkClasses(id: string, base: string) {
       </div>
     </div>
 
-    <!-- Discover section -->
+    <!-- Secondary section -->
     <div class="mb-8">
-      <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">Discover</h2>
+      <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">Explore</h2>
       <div class="flex flex-col gap-1">
-        {discoveryLinks.map((link) => (
+        {secondaryLinks.map((link) => (
           <a
             href={link.href}
             class={`py-3 px-3 text-lg rounded-lg transition-colors ${
@@ -176,18 +170,6 @@ function linkClasses(id: string, base: string) {
     <div>
       <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">More</h2>
       <div class="flex flex-col gap-1">
-        {utilityLinks.map((link) => (
-          <a
-            href={link.href}
-            class={`py-3 px-3 text-lg rounded-lg transition-colors ${
-              currentPage === link.id
-                ? 'text-white bg-zinc-800/60 font-medium'
-                : 'text-zinc-300 hover:text-white hover:bg-zinc-800/30'
-            }`}
-          >
-            {link.label}
-          </a>
-        ))}
         <a
           href="/blog/rss.xml"
           class="py-3 px-3 text-lg text-zinc-300 hover:text-white hover:bg-zinc-800/30 rounded-lg transition-colors"

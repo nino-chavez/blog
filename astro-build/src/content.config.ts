@@ -120,6 +120,36 @@ const tutorialCollection = defineCollection({
   }),
 });
 
+const fictionCollection = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/fiction' }),
+  schema: z.object({
+    title: z.string(),
+    slug: z.string().optional(),
+    publishedAt: z.string().or(z.date()),
+    updatedAt: z.string().or(z.date()).optional(),
+    author: z.string().default('Nino Chavez'),
+    status: z.enum(['published', 'draft']).default('published'),
+    excerpt: z.string().optional().default(''),
+    tags: z.array(z.string()).optional(),
+    featureImage: z.string().optional(),
+    // Fiction-specific fields
+    form: z.enum(['flash', 'short-story', 'novelette', 'novella']).default('short-story'),
+    genre: z.array(z.string()).optional(),
+    contentWarnings: z.array(z.string()).optional(),
+    // Series membership - for serialized fiction (chapters of a longer work)
+    series: z.object({
+      slug: z.string(),
+      title: z.string(),
+      position: z.number().int().positive(),
+      totalChapters: z.number().int().positive().optional(),
+    }).optional(),
+    seo: z.object({
+      metaTitle: z.string().optional(),
+      metaDescription: z.string().optional(),
+    }).optional(),
+  }),
+});
+
 const counterpointCollection = defineCollection({
   loader: glob({ pattern: '**/*.mdx', base: './src/content/counterpoints' }),
   schema: z.object({
@@ -222,6 +252,7 @@ export const collections = {
   whitepapers: whitepaperCollection,
   presentations: presentationCollection,
   tutorials: tutorialCollection,
+  fiction: fictionCollection,
   counterpoints: counterpointCollection,
   series: seriesCollection,
   'research-notes': researchNotesCollection,

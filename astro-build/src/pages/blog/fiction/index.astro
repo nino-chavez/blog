@@ -1,0 +1,186 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooter from '../../../components/SiteFooter.astro';
+
+export const prerender = true;
+
+const stories = await getCollection('fiction', ({ data }) => data.status !== 'draft');
+
+// Group by series
+type FictionEntry = typeof stories[number];
+const seriesMap = new Map<string, { title: string; chapters: FictionEntry[]; totalChapters?: number }>();
+const standaloneStories: FictionEntry[] = [];
+
+for (const story of stories) {
+  if (story.data.series) {
+    const slug = story.data.series.slug;
+    if (!seriesMap.has(slug)) {
+      seriesMap.set(slug, {
+        title: story.data.series.title,
+        chapters: [],
+        totalChapters: story.data.series.totalChapters,
+      });
+    }
+    seriesMap.get(slug)!.chapters.push(story);
+  } else {
+    standaloneStories.push(story);
+  }
+}
+
+// Sort chapters within each series
+for (const [, series] of seriesMap) {
+  series.chapters.sort(
+    (a, b) => (a.data.series?.position || 0) - (b.data.series?.position || 0)
+  );
+}
+
+// Sort standalones by date desc
+standaloneStories.sort(
+  (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime()
+);
+
+const formLabel: Record<string, string> = {
+  'flash': 'Flash',
+  'short-story': 'Short Story',
+  'novelette': 'Novelette',
+  'novella': 'Novella',
+};
+
+const romanNumerals = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+
+// Convert seriesMap to sorted array (by most recent chapter)
+const seriesList = Array.from(seriesMap.entries())
+  .map(([slug, s]) => ({ slug, ...s }))
+  .sort((a, b) => {
+    const aLatest = Math.max(...a.chapters.map((c) => new Date(c.data.publishedAt).getTime()));
+    const bLatest = Math.max(...b.chapters.map((c) => new Date(c.data.publishedAt).getTime()));
+    return bLatest - aLatest;
+  });
+---
+
+<BaseLayout
+  title="Fiction — Signal Dispatch"
+  description="Short fiction about what the machines are for, and what we become when the friction goes away."
+>
+  <main class="min-h-screen">
+    <SiteHeader currentPage="fiction" />
+
+    <section class="max-w-3xl mx-auto px-4 py-16">
+      <header class="mb-16 pb-12 border-b border-zinc-800/50">
+        <h1 class="font-serif text-6xl md:text-7xl text-white leading-tight tracking-tight mb-6">
+          Fiction
+        </h1>
+        <p class="font-serif italic text-lg text-zinc-500 leading-relaxed max-w-2xl">
+          Published in chapters. Read in order, or not.
+        </p>
+      </header>
+
+      {stories.length === 0 ? (
+        <p class="text-zinc-500 italic">No stories published yet.</p>
+      ) : (
+        <div class="space-y-20">
+          {/* Serialized works (novellas with chapters) */}
+          {seriesList.length > 0 && (
+            <div class="space-y-14">
+              {seriesList.map((series) => {
+                const firstChapter = series.chapters[0];
+                const chapterCount = series.chapters.length;
+                const totalChapters = series.totalChapters;
+                const publishedCount = chapterCount;
+                return (
+                  <article class="group">
+                    <div class="flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-zinc-600 mb-4">
+                      <span>Serialized Novella</span>
+                      <span class="text-zinc-800">&middot;</span>
+                      <span>
+                        {publishedCount} {publishedCount === 1 ? 'chapter' : 'chapters'}
+                        {totalChapters && ` of ${totalChapters}`} published
+                      </span>
+                    </div>
+
+                    <a href={`/blog/fiction/${firstChapter.id}`} class="block">
+                      <h2 class="font-serif text-4xl md:text-5xl text-white group-hover:text-athletic-court-orange transition-colors leading-tight mb-5">
+                        {series.title}
+                      </h2>
+                    </a>
+
+                    {firstChapter.data.excerpt && (
+                      <p class="font-serif italic text-lg text-zinc-400 leading-relaxed mb-8 max-w-2xl">
+                        {firstChapter.data.excerpt}
+                      </p>
+                    )}
+
+                    <ol class="space-y-0 border-l border-zinc-800/60 pl-6 ml-1">
+                      {series.chapters.map((chapter) => {
+                        const date = new Date(chapter.data.publishedAt);
+                        const dateLabel = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                        return (
+                          <li>
+                            <a
+                              href={`/blog/fiction/${chapter.id}`}
+                              class="group/chapter flex items-baseline gap-5 py-3 hover:pl-2 transition-all duration-150"
+                            >
+                              <span class="font-serif text-xs text-zinc-700 w-6 flex-shrink-0">
+                                {romanNumerals[chapter.data.series!.position] || chapter.data.series!.position}
+                              </span>
+                              <span class="font-serif text-lg text-zinc-400 group-hover/chapter:text-white transition-colors flex-1">
+                                {chapter.data.title}
+                              </span>
+                              <time class="text-xs text-zinc-700 font-mono flex-shrink-0">{dateLabel}</time>
+                            </a>
+                          </li>
+                        );
+                      })}
+                    </ol>
+                  </article>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Standalone stories */}
+          {standaloneStories.length > 0 && (
+            <div>
+              {seriesList.length > 0 && (
+                <h3 class="text-xs uppercase tracking-[0.25em] text-zinc-500 mb-10 pb-4 border-b border-zinc-800/50">
+                  Standalone Stories
+                </h3>
+              )}
+              <ul class="space-y-12">
+                {standaloneStories.map((story) => {
+                  const date = new Date(story.data.publishedAt);
+                  const formatted = date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  });
+                  return (
+                    <li>
+                      <a href={`/blog/fiction/${story.id}`} class="group block">
+                        <div class="flex items-center gap-3 text-xs uppercase tracking-wider text-zinc-500 mb-3">
+                          <span>{formLabel[story.data.form] || 'Short Story'}</span>
+                          <span class="text-zinc-700">&middot;</span>
+                          <time datetime={date.toISOString()}>{formatted}</time>
+                        </div>
+                        <h2 class="font-serif text-3xl md:text-4xl text-white group-hover:text-athletic-court-orange transition-colors leading-snug mb-3">
+                          {story.data.title}
+                        </h2>
+                        {story.data.excerpt && (
+                          <p class="text-zinc-400 leading-relaxed">{story.data.excerpt}</p>
+                        )}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
+    </section>
+
+    <SiteFooter />
+  </main>
+</BaseLayout>
