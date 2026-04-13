@@ -1,0 +1,147 @@
+---
+title: "The Walk-In Is Full"
+publishedAt: "2026-04-13T15:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "I ship an end-to-end project most Saturdays and put it in a drawer I never reopen. So does everyone I know. The walk-in is full — not with abundance, but with relocated scarcity. What looked like software culture was partly muscle memory, an involuntary reflex held up by cost, and it's atrophying now that nothing fires it."
+category: "AI & Automation"
+featureImage: "/images/generated/the-walk-in-is-full.webp"
+tags: ["ai-development", "engineering", "reflection"]
+featured: false
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+There's a specific moment that keeps repeating in my week.
+
+I sit down on a Saturday, spin up a project, ship something end-to-end by Sunday night, and then put it in a drawer. Three weeks later I do it again. Different domain, different stack, same outcome. I never revisit the thing from last month. I never ship it to anyone. I never even open the repo.
+
+The first time this happened, I thought it was laziness. The second time, I thought it was indecision. After the fifth or sixth cycle, I started to think it was something else entirely — and it wasn't about me.
+
+---
+
+## Not More Than We Can Sell. More Than We Can *Use*.
+
+A talk I watched this week made a claim that's been rattling around in my head for days.
+
+The argument was that coding agents have made building so cheap that we now build more than we use. Not more than we can maintain. Not more than we can sell. More than we can *use*. That verb did something to me.
+
+I've been leaning on [kitchen analogies](/blog/the-masterchef-problem) for a while because they hold up. Cooking and software share a structure: raw materials, skill, tooling, output, consumption. And for months I've been writing about the production side — who can cook, what challenges reveal skill, what happens when everyone gets a professional kitchen.
+
+What I wasn't writing about was the eating.
+
+When I thought about my Saturday build cycle through that lens, something shifted. I wasn't cooking for anyone. I wasn't even cooking for myself, not really — I was cooking for the sake of the cooking, and the dishes were piling up in a walk-in I'd never reopen.
+
+---
+
+## The Kitchen Isn't the Constraint
+
+I wrote a post a few weeks ago arguing that everyone got a professional kitchen and nobody designed the challenges. I still believe that. The MasterChef rounds — Mystery Box, Skills Test, Team Challenge — are the structures that reveal who can cook. Without them, we're just twenty amateurs with nice equipment making whatever they want.
+
+But I was answering the wrong question.
+
+I was asking *what's missing on the production side*. What challenges do we need to separate the people who can cook from the people who can prompt? That question still matters. It's just not the most important one.
+
+The question I should have been asking is what's missing on the **consumption side**.
+
+A kitchen isn't useful because it cooks food. A kitchen is useful because someone eats what comes out of it. The pass exists because a ticket came in. Every motion in a real kitchen is organized around an order that originated outside the kitchen — a diner who wanted something, was willing to pay for it, and sent it back if it wasn't right.
+
+Remove the diner and the kitchen doesn't get *more* productive. It gets structurally unnecessary.
+
+---
+
+## Restaurants Are Amortization Machines
+
+A restaurant doesn't exist because cooking is hard. Cooking is hard, but people cook at home every day. A restaurant exists because cooking *for strangers at scale* is expensive, and the only way to make the economics work is to pool that cost across many diners. The chef's labor, the walk-in, the grease trap, the gas line, the liquor license — all of it amortizes across the seats.
+
+If cooking were free, restaurants wouldn't exist. Everyone would cook at home.
+
+The temptation is to drop that frame directly onto SaaS and declare: SaaS was an amortization model, the cost it was amortizing was development, remove development cost and SaaS has no reason to exist. Clean. Satisfying. Wrong in a specific way that matters.
+
+SaaS was never *just* amortizing code. It was amortizing a whole stack of things that aren't code:
+
+- **Operations.** Someone has to run production at 3 AM on a Saturday when the API goes down. That labor doesn't get cheaper because code generation did.
+- **Risk transfer.** Companies pay for a single throat to choke — for the contractual assurance that when something breaks, there's a party legally responsible. Agents don't assume liability.
+- **Interoperability.** A shared schema lets data flow across systems. That's real infrastructure, not a vestige — it exists because enough companies agreed on it back when agreeing was expensive, and the agreements are still load-bearing.
+- **Compliance, security, SLA.** All the unglamorous overhead that keeps software running in regulated industries. None of it gets absorbed by an agent that writes the first draft of a function.
+
+<PullQuote>What agents ate was the code moat. The operational moat is still standing — for now.</PullQuote>
+
+That's a smaller claim than "SaaS is dead," and it's the one I can actually defend. The code portion of SaaS — the part where someone paid engineers to build the thing in the first place — is the part agents have reduced to near-zero marginal cost. The operations portion, the risk portion, the interop portion: those still cost real money, and they're still most of what companies are paying for when they sign a Salesforce contract.
+
+Which matters for the argument I'm about to make, because the consensus reflex I'm going to describe isn't atrophying because SaaS is broken. It's atrophying because **the specific cost layer it was firing against — the cost of making the thing in the first place — has evaporated.** The other layers are still expensive. But the consensus reflex was never responding to ops cost. It was responding to *making* cost. Standards, canonical tools, design systems, shared vocabulary — all of those existed because building the wrong thing twice was ruinous, and the industry's involuntary response was to agree. Agents made building the wrong thing approximately free. The stimulus is gone. The reflex has nothing to fire against. The muscle is losing tone.
+
+---
+
+## Consensus Was a Reflex
+
+The part of this that feels the most important — and the most uncomfortable — is what happens to the cultural machinery that used to sit on top of the economic machinery.
+
+Committees existed because you couldn't afford to build the wrong thing twice. PRDs existed because shipping required alignment across people whose time was expensive. Standards existed because interoperability was the only way small teams could reach large markets. Design systems existed because reinventing the button was a waste of hours that cost real money.
+
+All of those things look like virtues from the inside. They're the sound of grown-ups making decisions. Due process. Alignment. Stewardship. Taste.
+
+But they're not virtues. They're **reflexes**.
+
+They're the automatic response a whole industry made when cost kept firing the stimulus. We didn't agree because agreement was morally correct. We agreed because cost kept asking *"can you afford to disagree?"* and the answer kept coming back *no*. We experienced that continuous *no* as deliberation — as mature decision-making — when it was closer to the way your body adjusts its heart rate when you stand up. Involuntary. Continuous. Invisible until it stops.
+
+<Callout type="signal" title="The Claim">
+When something is expensive to make, consensus isn't a choice — it's a reflex the environment fires involuntarily. When it's cheap to make, the stimulus disappears and the reflex stops. What looked like culture turns out to have been muscle memory, and the muscle is atrophying now that nothing fires it.
+</Callout>
+
+Remove the cost and watch what goes with it:
+
+- **The canonical disappears.** There used to be *a* canonical way to do X because someone paid to build it and everyone else adopted it to save cost. Now everyone rolls their own. No one is wrong. No one is right. There's just a distribution.
+- **Standards erode.** Standards are consensus artifacts. No consensus pressure, no standards.
+- **Network effects weaken.** My tool doesn't talk to your tool. Neither of us is wrong about that — which is exactly the problem. The social graph of software fragments into a million private islands.
+- **Specialization stratifies.** The three-star chef who spent ten years perfecting one dish loses audience — anyone can cook that dish at home now. But the specialist who can make two incompatible kitchens produce a coherent meal becomes the scarce resource. Product specialization collapses into self-service. Coordination specialization — translation, integration, holding coherence across fragments — gets *more* valuable, not less. The gap widens.
+
+Each of these things used to ride on cost the way a fly rides a horse. Take the horse away and the flies scatter.
+
+---
+
+## The Bottleneck Moved Indoors
+
+There's a reframe I keep coming back to that might be the whole point of the post.
+
+This isn't post-scarcity. It's **relocated scarcity**.
+
+The constraint on software used to live outside you. It lived in the org chart. It lived in the budget. It lived in the release train, the review queue, the quarterly planning cycle, the three-week dependency on the other team that owned the API. All of those things were exhausting, but they were *external*. You could name them. You could point at them. You could blame them for why the thing hadn't shipped.
+
+Remove the cost and you remove the external constraints. What you're left with is a version of the problem that has nowhere to hide.
+
+The question isn't "can I build this?" anymore. The question is "do I actually want to?" And it turns out "do I actually want to" is a harder question than any of the ones we used to spend quarters answering. It requires knowing what you want. It requires the capacity to want one thing badly enough to finish it while ten cheaper, easier, equally-interesting alternatives are whispering at you from the next tab.
+
+<Callout type="insight">
+The bottleneck used to live in the org chart. Now it lives in the person. We didn't eliminate the constraint. We relocated it from outside you to inside you.
+</Callout>
+
+External cost wasn't just a nuisance — it was a selection mechanism. It filtered the work by forcing the question of whether the thing was worth the cost. Internal appetite is a *weaker* filter than cost. Cost said no when you couldn't afford to say yes. Appetite says maybe, later, probably not — and then never, quietly. That's not a clean upgrade. The Saturday drawer is evidence that the new filter is duller than the old one. Which is its own kind of problem, not a reframing of the old one.
+
+That's a weirder inversion than "everyone is a developer now." It's: every solo builder is now forced to confront the question of what they'd make if nothing were stopping them, and the answer is often *the same dish I made last Saturday*.
+
+---
+
+## What Cost Was Carrying
+
+I don't know which parts of software culture were load-bearing and which were scaffolding held up by cost. We're about to find out, and I suspect not all of it was scaffolding. Some of it was the thing.
+
+Specialization might have been the thing. A generation of craftspeople who went deep on one problem because there was a market reason to go deep. That market reason is disappearing for most categories of software, and I don't know what replaces it.
+
+Shared language might have been the thing. A vocabulary that strangers could use to coordinate because a few dominant products had trained all of us to think the same way about files, folders, windows, permissions, URLs. If everyone builds their own, there's no shared vocabulary. We're each writing in a private language, and translation gets more expensive, not less.
+
+Legibility might have been the thing. The ability for someone new to walk into a company and know what a ticket is, what a sprint is, what a standup is — because those primitives had been polished to near-universality by thousands of companies using the same tools. Strip the tools out and the primitives become local custom again.
+
+None of these disappear overnight. They atrophy. The structures are still here, but the muscle holding them up is losing tone without the stimulus that kept it firing. The consequences aren't absent — they're *displaced in time*, and they arrive as a slow cascade of dependent systems quietly losing function rather than a single collapse. We're going to notice the muscle isn't there when we try to rest something heavy on it — and by then there won't be a replacement, because nothing was forcing anyone to build one.
+
+---
+
+## Where I'm Looking
+
+I'm not writing this to be gloomy about it. Relocated scarcity is still scarcity. It's not the end of software. It's a different phase of it. The people who noticed the new shape of the constraint reorganized around it. I don't know yet if I'm one of them.
+
+The shape of the new constraint is internal. What you want, how badly you want it, whether you can still finish something when nothing external is pushing you. The hard skill for the next decade isn't building things. It's **wanting things** — specifically enough, and consistently enough, to matter.
+
+That's the part I'm watching in myself, mostly. The Saturday projects in the drawer aren't evidence of abundance. They're evidence that I haven't yet figured out what I'd actually build if the only thing gating me were my own appetite.
+
+Which is its own kind of work. Maybe the work.
