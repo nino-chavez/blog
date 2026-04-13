@@ -66,9 +66,9 @@ Software is structurally unlike every other creative medium in three specific wa
 
 **1. Software compounds.**
 
-A bad painting doesn't make future paintings worse. A bad song doesn't contaminate the song on the shelf next to it. A bad essay sits in a folder on Substack and fails to be read, and the failure is contained. All of these are **static outputs**. You can ignore the bad ones.
+Every other creative output is static. A painting, a song, a novel — once made, they sit in isolation. You can ignore the bad ones. They don't reach back into the good ones and make them worse. The badness is contained inside the artifact.
 
-Software is not static. Software is a system. Every piece of software exists inside a dependency graph — it imports other software, is imported by other software, touches data, triggers workflows, runs in production next to other software that doesn't know it's broken. Bad software doesn't sit on a shelf being bad. It *propagates*. Every other piece of software that calls it inherits its problems. Jevons plus static outputs produces a flood you can mostly ignore. Jevons plus compounding produces pollution in the water supply.
+Software is not static. Software is a system. Every piece of software exists inside a dependency graph — it imports other software, is imported by other software, touches data, triggers workflows, runs in production alongside other software that doesn't know it's broken. Bad software doesn't sit in isolation. It *propagates*. Every other piece that calls it inherits its problems. Jevons plus static outputs produces a flood you can mostly ignore. Jevons plus compounding produces pollution in the water supply.
 
 <Callout type="warning" title="Why the Metaphor Matters">
 A flood of bad music is a shelf you don't shop from. A flood of bad software is rising water in the foundation of the house you already live in.
@@ -76,17 +76,17 @@ A flood of bad music is a shelf you don't shop from. A flood of bad software is 
 
 **2. Software has causal consequences.**
 
-Art needs a consumer to matter. You have to listen to a song for it to affect you. You have to watch a film. You have to read a book. Bad art in isolation does nothing — it waits, inert, for an audience. The audience is a gate.
+Art needs an audience to matter. Nothing in a painting, a song, or a novel has effects until someone engages with it. Bad art waits, inert, for a consumer who can choose not to arrive. The audience is a gate.
 
-Software has no gate. Software runs. It touches data, takes money, moves records, authenticates users, syncs state, calls APIs, fires webhooks. It does things whether or not anyone is paying attention. A bad song needs to be heard to be bad. A bad library can silently corrupt a database for six months before anyone notices. The consequences are not mediated by engagement. They are mediated by *the software executing*, which is happening all the time, everywhere, in the background, with no one watching.
+Software has no gate. Software runs. It touches data, takes money, moves records, authenticates users, syncs state, calls APIs, fires webhooks. It does things whether or not anyone is paying attention. A bad song needs a listener to hurt you. A bad library can silently corrupt a database for six months before anyone notices, and no one had to opt in for the damage to accrue. The consequences are not mediated by engagement. They are mediated by *the software executing*, which is happening all the time, everywhere, in the background, with no one watching.
 
-Every bad-software story I can think of is a story about something failing that nobody knew was there. The badness wasn't on the shelf. It was in the plumbing.
+Every bad-software story I can think of is a story about something failing that nobody knew was there. The badness isn't waiting for an audience. It's already running.
 
 **3. Software has to compose.**
 
 This is the one that actually decides whether curation can save us, and it's the one nobody is talking about.
 
-An album doesn't need to interoperate with the album next to it. You don't need Radiohead to be structurally compatible with Led Zeppelin for both to live on the same playlist. A book doesn't need to share a data format with the book on the shelf beside it. Art doesn't compose. Art *accumulates*, and accumulation is not the same thing.
+Art doesn't have a coordination problem. A music library is a set of independent objects that happen to share a listener. Nothing in the library needs to know anything about anything else in the library. Radiohead doesn't need to be structurally compatible with Led Zeppelin for both to live on the same playlist — the playlist is just a sequence of isolated objects a single human decided to hold together. Art *accumulates*. Accumulation is not composition.
 
 Software has to compose. Piece A has to talk to piece B. Both have to share assumptions about state, about types, about error handling, about the shape of the world they're operating inside. Composition is what happens when two pieces of software have to *agree* about something before either of them can function. And composition is exactly what the atrophying consensus reflex was quietly holding up.
 
@@ -98,11 +98,13 @@ Every other medium's Jevons flood was solved by a specific move: **the curation 
 
 Spotify didn't fix the fact that most recorded music is mediocre. Spotify fixed the *discovery* problem. You still have to wade through the garbage, but now a recommendation engine wades for you, and the top 5% of songs that reach your ears are pre-filtered. The flood is still there. It's just behind a wall you don't have to look at.
 
-That move doesn't work for software. And here's the reason: **the problem software has isn't discovery. It's composition.**
+Software has its Spotifys. Product Hunt curates launches. Hacker News filters what rises to the top of the developer conversation. GitHub trending surfaces active repositories. Awesome-lists are human-maintained curation at the library level. Package-registry rankings tell you what's popular. Developer Twitter and subreddit communities operate as real-time signal. These things exist. They work — for what they are. If your question is "what's a good tool for X," software already has half a dozen ways to answer it, and they're getting better.
 
-<PullQuote>Curation rescues art by finding the good pieces. Software doesn't have "pieces" — it has systems. A system of individually-curated bad components is still a broken system.</PullQuote>
+What none of them fix — and what no curation layer in any medium has been asked to fix — is **composition**. And that's the difference that decides this.
 
-A recommendation engine can surface a good library. It cannot make the good library *work with the other libraries you're using*. The composition problem is upstream of the discovery problem, and it doesn't get solved by finding better individual components. It gets solved by the components having been built against a shared set of assumptions — which is the exact thing the atrophying consensus reflex used to produce, and which is exactly what agent-generated software does not have.
+<PullQuote>Curation rescues art by finding the good pieces. Software doesn't have "pieces" — it has systems. A set of individually-curated good components is still a broken system if they were never designed to work together.</PullQuote>
+
+Product Hunt can surface a great auth library. Hacker News can upvote a great database helper. GitHub can trend a great UI framework. None of these curation layers can make the three of them *work with each other* in your actual codebase. The composition problem is upstream of the discovery problem, and it doesn't get solved by finding better individual components. It gets solved by the components having been built against a shared set of assumptions — which is the exact thing the atrophying consensus reflex used to produce, and which is exactly what agent-generated software does not have.
 
 You can Spotify your way out of a flood of bad songs. You can't Spotify your way out of dependency hell. Dependency hell is not a curation problem. It's a coordination problem. Curation doesn't fix coordination, because coordination requires the *makers* to agree on something before the consumer is looking — and the makers in 2026 are agents, and the agents aren't coordinating with anyone, including each other.
 
