@@ -1,0 +1,133 @@
+---
+title: "Curation Is Not Composition"
+publishedAt: "2026-04-17T15:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "Every creative medium that got cheap hit this moment. Art, music, publishing — all flooded, all eventually rescued by a curation layer that scaled up to match the garbage. Software is in the flood now. Curation isn't going to save it, and I don't think we've noticed the reason yet."
+category: "AI & Automation"
+featureImage: "/images/generated/curation-is-not-composition.webp"
+tags: ["ai-development", "architecture", "engineering"]
+featured: false
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+I've been sitting with [the post I wrote last week](/blog/the-walk-in-is-full) — the one arguing that cost was a reflex, not a virtue — and an image keeps surfacing that I can't shake.
+
+It's a specific look that defined the first years of desktop publishing. If you're old enough, you can picture it without me describing it. Five fonts on the cover. Headlines in Impact because Impact had just arrived and the person laying out the page had never seen it before. Straight margins wobbling because somebody had discovered justified text without discovering what it does to line spacing. The italicized *joyful*, twice per paragraph. Church bulletins and community newsletters and small-town real-estate flyers, all hit by the same flood at the same time, all looking a little bit like ransom notes.
+
+These things read as jokes when I first saw them. I couldn't have told you at the time why I thought they were funny, except that I'd grown up around professionally-typeset books and the new desktop-published stuff looked like someone's cousin had hit the keyboard. What I was actually looking at — this only hit me forty years later — was the first minutes of a species-level experiment. *What happens when you drop the cost of making something, and the consensus that used to be enforced by a profession suddenly has no forcing function, and nobody notices because everyone is too excited to make their own thing?*
+
+The experiment has been run before. It's being run again. This time, I think it's going to go differently, and not in a good way.
+
+---
+
+## We've Had This Moment Before
+
+Every creative medium that got cheap hit its own version of this.
+
+- **Print got cheap in 1985.** Aldus PageMaker and the Apple LaserWriter made layout nearly free. The consensus typographers had quietly enforced for centuries — grid, hierarchy, white space, font discipline — atrophied within a few years, and the visual commons of American print briefly became a landfill.
+- **Music got cheap in the 2000s.** Pro Tools, then Ableton, then bedroom DAWs dropped studio-level production cost to near-zero. Everyone could make a beat. Most beats were bad. The signal-to-noise ratio on new releases collapsed.
+- **Video got cheap with DV cameras, then iMovie, then iPhones, then YouTube.** The old consensus about how a TV show or film was supposed to look lost its forcing function. The flood came.
+- **Writing got cheap with blogs, then Twitter, then Substack.** Editorial consensus about what was fit to publish lost its anchor. The flood came.
+
+Every one of these followed the same four-step arc:
+
+1. **Cost drops.** The reflex that was enforcing consensus stops firing.
+2. **Flood.** Volume explodes. Quality plummets. The old craft class watches in horror.
+3. **Curation layer emerges.** Eventually — sometimes over years, sometimes decades — a new institutional layer arrives that filters the flood. Radio, then MTV, then iTunes, then Spotify. Galleries, then Instagram, then algorithmic feeds. Television, then cable, then streaming, then recommendation engines.
+4. **Curation becomes the economy.** The people making money shift from being makers to being the ones who filter. The garbage doesn't go away — the filtering layer scales up to match it.
+
+That's the Jevons Paradox with a consumer-facing coda. [I wrote about the Jevons side of this earlier](/blog/the-jevons-trap) — how agent-generated software is producing more code while producing more breakage at the same time. The Quality Tax is real. What I didn't say in that post is that every medium before software has hit this same wall, and every medium before software has eventually built the curation layer that rescued it.
+
+Software is in the flood now. And the reason I'm writing this post is that I don't think the rescue is coming. Not the way it came for the others. I think we're going to have to build something different, and I don't know yet what it is.
+
+---
+
+## Is Software Different?
+
+This is the question that kept me up.
+
+Everything I just described — DTP, music, video, writing — follows one master pattern. Tool gets cheap. Consensus reflex stops firing. Flood. Curation catches up. Life continues, thinner and weirder, with a new filtering layer where the old forcing function used to be.
+
+If software is just the next one in line, then we already know how this ends. We'll get a GitHub Spotify. Someone will build Discover Weekly for developer tools. The flood will stay — the garbage doesn't go away in any of the other mediums — but we'll adapt the way every other generation adapted to their own Jevons moment.
+
+So: is software just the next one?
+
+The honest answer, I think, is *no*. And the reason matters.
+
+---
+
+## Three Ways Software Isn't Art
+
+Software is structurally unlike every other creative medium in three specific ways. The differences decide what the flood does to us, and whether curation can save us from it.
+
+**1. Software compounds.**
+
+A bad painting doesn't make future paintings worse. A bad song doesn't contaminate the song on the shelf next to it. A bad essay sits in a folder on Substack and fails to be read, and the failure is contained. All of these are **static outputs**. You can ignore the bad ones.
+
+Software is not static. Software is a system. Every piece of software exists inside a dependency graph — it imports other software, is imported by other software, touches data, triggers workflows, runs in production next to other software that doesn't know it's broken. Bad software doesn't sit on a shelf being bad. It *propagates*. Every other piece of software that calls it inherits its problems. Jevons plus static outputs produces a flood you can mostly ignore. Jevons plus compounding produces pollution in the water supply.
+
+<Callout type="warning" title="Why the Metaphor Matters">
+A flood of bad music is a shelf you don't shop from. A flood of bad software is rising water in the foundation of the house you already live in.
+</Callout>
+
+**2. Software has causal consequences.**
+
+Art needs a consumer to matter. You have to listen to a song for it to affect you. You have to watch a film. You have to read a book. Bad art in isolation does nothing — it waits, inert, for an audience. The audience is a gate.
+
+Software has no gate. Software runs. It touches data, takes money, moves records, authenticates users, syncs state, calls APIs, fires webhooks. It does things whether or not anyone is paying attention. A bad song needs to be heard to be bad. A bad library can silently corrupt a database for six months before anyone notices. The consequences are not mediated by engagement. They are mediated by *the software executing*, which is happening all the time, everywhere, in the background, with no one watching.
+
+Every bad-software story I can think of is a story about something failing that nobody knew was there. The badness wasn't on the shelf. It was in the plumbing.
+
+**3. Software has to compose.**
+
+This is the one that actually decides whether curation can save us, and it's the one nobody is talking about.
+
+An album doesn't need to interoperate with the album next to it. You don't need Radiohead to be structurally compatible with Led Zeppelin for both to live on the same playlist. A book doesn't need to share a data format with the book on the shelf beside it. Art doesn't compose. Art *accumulates*, and accumulation is not the same thing.
+
+Software has to compose. Piece A has to talk to piece B. Both have to share assumptions about state, about types, about error handling, about the shape of the world they're operating inside. Composition is what happens when two pieces of software have to *agree* about something before either of them can function. And composition is exactly what the atrophying consensus reflex was quietly holding up.
+
+---
+
+## Why the Usual Fix Doesn't Work
+
+Every other medium's Jevons flood was solved by a specific move: **the curation layer scaled up to match the flood and became the dominant economic activity of the medium.**
+
+Spotify didn't fix the fact that most recorded music is mediocre. Spotify fixed the *discovery* problem. You still have to wade through the garbage, but now a recommendation engine wades for you, and the top 5% of songs that reach your ears are pre-filtered. The flood is still there. It's just behind a wall you don't have to look at.
+
+That move doesn't work for software. And here's the reason: **the problem software has isn't discovery. It's composition.**
+
+<PullQuote>Curation rescues art by finding the good pieces. Software doesn't have "pieces" — it has systems. A system of individually-curated bad components is still a broken system.</PullQuote>
+
+A recommendation engine can surface a good library. It cannot make the good library *work with the other libraries you're using*. The composition problem is upstream of the discovery problem, and it doesn't get solved by finding better individual components. It gets solved by the components having been built against a shared set of assumptions — which is the exact thing the atrophying consensus reflex used to produce, and which is exactly what agent-generated software does not have.
+
+You can Spotify your way out of a flood of bad songs. You can't Spotify your way out of dependency hell. Dependency hell is not a curation problem. It's a coordination problem. Curation doesn't fix coordination, because coordination requires the *makers* to agree on something before the consumer is looking — and the makers in 2026 are agents, and the agents aren't coordinating with anyone, including each other.
+
+This is where the weight in the Walk-In post starts to land. The consensus reflex that used to handle coordination wasn't just holding up taste or style. It was holding up *the assumption that software would compose*. We treated composition as a property of the tools, the languages, the frameworks. It wasn't. It was a property of the people using those tools all making roughly similar choices because cost kept asking them the same question and they kept answering it the same way.
+
+---
+
+## What the Flood Looks Like
+
+I'm watching this happen in slow motion in my own work, and I don't see any curation layer catching it, because what's breaking isn't the quality of the individual pieces.
+
+I can generate a solid database helper in an afternoon. Another agent can generate a solid auth layer. Another one can generate a solid UI. All three of them, evaluated individually, are *good*. A curator looking at any of them in isolation would approve. But when I try to put them together, the database helper assumes timestamps in one format and the auth layer assumes them in another and the UI expects them in a third, and none of this is wrong exactly — each piece is internally consistent — but the system doesn't work, and no individual piece is to blame.
+
+What's breaking isn't quality. What's breaking is **shared assumption**. The old consensus reflex was quietly synchronizing the assumptions of everyone writing software — not by making their code better, but by making their choices converge on a small set of defaults everyone else was also choosing. Convergence is a coordination achievement. The reflex made it free. The reflex is gone.
+
+The flood we're entering isn't a flood of bad code. It's a flood of *good code that doesn't agree with other good code*, and the difference matters because you can't curate your way out of disagreement. You can only solve disagreement by going upstream and making the makers agree, and the makers are agents, and the agents have no forcing function telling them to.
+
+---
+
+## What I'm Watching For
+
+I don't know what the replacement looks like. I know the curation-layer answer that worked in every other medium is not going to work here. I suspect the actual replacement — if it comes — is going to be some version of *enforced coordination at the agent layer*: some new forcing function we consciously install to do what cost used to do involuntarily. Standards bodies for agent output. Shared schemas agents can't ignore. Composition-first tooling that refuses to generate code until the coordination question is answered.
+
+Those are all guesses. What I know is that none of them are curation, and the difference is where the next decade of software is going to be decided.
+
+The other thing I know — and this is the hard part — is that every previous medium's flood took years to find its fix. Print found typography's new consensus through the conscious rebuilding of design education, CSS, and the web standards movement, and that took at least a decade from PageMaker to stable. Music took longer. Video is still figuring it out.
+
+Software is in the gap now. And software's flood, unlike the others, is rising into a system we all depend on for things that matter. We don't have the option of waiting for the curation layer to arrive, because the thing we need isn't curation. We're going to have to notice what coordination was doing while it was invisible, and figure out how to do it on purpose, before the water gets much higher.
+
+The church bulletin in Comic Sans was funny. The software equivalent of the church bulletin in Comic Sans is the database schema that silently corrupts your records for six months. I wish I thought someone was going to Spotify it away.
