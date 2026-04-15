@@ -43,7 +43,7 @@ export default defineConfig({
     }),
     react(),
     sitemap({
-      filter: (page) => !page.includes("/draft/"),
+      filter: (page) => !page.includes("/draft/") && !page.includes("/private/"),
       changefreq: "weekly",
       priority: 0.7,
       lastmod: new Date(),

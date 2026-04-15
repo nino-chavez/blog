@@ -9,7 +9,7 @@ import { generateWebsiteSchema, generateBlogSchema, generatePersonSchema } from 
 export const prerender = true;
 
 // Get all published posts sorted by date
-const posts = await getCollection('blog', ({ data }) => data.status !== 'draft');
+const posts = await getCollection('blog', ({ data }) => data.status === 'published');
 const sortedPosts = posts.sort(
   (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime()
 );

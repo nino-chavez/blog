@@ -1,0 +1,165 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../../components/SiteHeader.astro';
+import SiteFooter from '../../../../components/SiteFooter.astro';
+import ReadingProgress from '../../../../components/ReadingProgress';
+import TableOfContents from '../../../../components/TableOfContents.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts
+    .filter((p) => p.data.status === 'unlisted' && p.data.privateToken)
+    .map((post) => ({
+      params: {
+        token: post.data.privateToken!,
+        slug: post.id,
+      },
+    }));
+}
+
+const { token, slug } = Astro.params;
+const posts = await getCollection('blog');
+const post = posts.find(
+  (p) =>
+    p.id === slug &&
+    p.data.status === 'unlisted' &&
+    p.data.privateToken === token
+);
+
+if (!post) {
+  return new Response('Not found', { status: 404 });
+}
+
+const { Content, headings } = await render(post);
+
+const publishedDate = new Date(post.data.publishedAt);
+const formattedDate = publishedDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const wordCount = post.body?.split(/\s+/).length || 0;
+const readingTime = Math.ceil(wordCount / 200);
+
+const categoryColors: Record<string, { bg: string; border: string; text: string }> = {
+  'AI & Automation': { bg: 'bg-purple-500/10', border: 'border-purple-500/30', text: 'text-purple-400' },
+  'Commerce': { bg: 'bg-orange-500/10', border: 'border-orange-500/30', text: 'text-orange-400' },
+  'Leadership': { bg: 'bg-blue-500/10', border: 'border-blue-500/30', text: 'text-blue-400' },
+  'Meta': { bg: 'bg-zinc-500/10', border: 'border-zinc-500/30', text: 'text-zinc-400' },
+  'Field Notes': { bg: 'bg-green-500/10', border: 'border-green-500/30', text: 'text-green-400' },
+  'Consulting Practice': { bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', text: 'text-cyan-400' },
+  'default': { bg: 'bg-athletic-brand-violet/10', border: 'border-athletic-brand-violet/30', text: 'text-athletic-brand-violet' },
+};
+
+const colors = categoryColors[post.data.category || ''] || categoryColors.default;
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.excerpt}
+  image={post.data.featureImage}
+  type="article"
+  publishedTime={publishedDate.toISOString()}
+  modifiedTime={post.data.updatedAt ? new Date(post.data.updatedAt).toISOString() : undefined}
+  author={post.data.author}
+  tags={post.data.tags}
+  noIndex={true}
+>
+  <ReadingProgress client:idle />
+
+  <main class="min-h-screen">
+    <SiteHeader currentPage="blog" />
+
+    <div class="max-w-3xl mx-auto px-4 py-12">
+      <!-- Private banner -->
+      <div class="mb-8 px-4 py-3 rounded-xl border border-amber-500/30 bg-amber-500/5 flex items-start gap-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+        <div class="text-sm">
+          <p class="text-amber-300 font-semibold">Private draft — unlisted</p>
+          <p class="text-zinc-400 mt-0.5">
+            Only people with this link can read it. Not indexed by search engines, not on the blog, not in feeds.
+          </p>
+        </div>
+      </div>
+
+      <article class="space-y-6">
+        {post.data.featureImage && (() => {
+          const src = post.data.featureImage;
+          const mobile = src.replace('.webp', '-600w.webp');
+          return (
+            <div class="relative -mx-4 md:-mx-8 lg:mx-0 aspect-video overflow-hidden rounded-2xl border border-zinc-800">
+              <img
+                src={src}
+                srcset={`${mobile} 600w, ${src} 1200w`}
+                sizes="(max-width: 768px) 100vw, 1200px"
+                alt={post.data.title}
+                class="w-full h-full object-cover"
+                width="1200"
+                height="675"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
+            </div>
+          );
+        })()}
+
+        <header class="space-y-3 pb-6 border-b border-zinc-800/50">
+          <div class="flex items-center gap-3 text-sm flex-wrap">
+            {post.data.category && (
+              <span class={`font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border transition-colors ${colors.bg} ${colors.border} ${colors.text}`}>
+                {post.data.category}
+              </span>
+            )}
+            {post.data.category && <span class="text-zinc-700">•</span>}
+            <time datetime={publishedDate.toISOString()} class="text-zinc-500">
+              {formattedDate}
+            </time>
+            <span class="text-zinc-700">•</span>
+            <span class="flex items-center gap-1.5 text-zinc-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              {readingTime} min read
+            </span>
+          </div>
+
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight">
+            {post.data.title}
+          </h1>
+
+          {post.data.excerpt && (
+            <p class="excerpt text-xl text-zinc-400 leading-relaxed">
+              {post.data.excerpt}
+            </p>
+          )}
+
+          <div class="flex items-center gap-4 pt-6 mt-2 border-t border-zinc-800/30">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-athletic-brand-violet to-athletic-court-orange flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-athletic-brand-violet/20">
+              NC
+            </div>
+            <div>
+              <p class="text-white font-semibold">{post.data.author || 'Nino Chavez'}</p>
+              <p class="text-zinc-500 text-sm">Product Architect at commerce.com</p>
+            </div>
+          </div>
+        </header>
+
+        <TableOfContents headings={headings} />
+
+        <div class="prose max-w-none text-lg">
+          <Content />
+        </div>
+      </article>
+    </div>
+
+    <SiteFooter />
+  </main>
+</BaseLayout>

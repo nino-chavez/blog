@@ -1,0 +1,134 @@
+---
+title: "The Muscle Memory of Expensive Things"
+publishedAt: "2026-04-23T15:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "Matt Mullenweg used a clinical word for what's wrong with WordPress: iatrogenic. Harm caused by the treatment itself. It's the exact right word, and it's a bigger word than the WordPress story it was written about."
+category: "AI & Automation"
+featureImage: "/images/generated/the-muscle-memory-of-expensive-things.webp"
+tags: ["ai-development", "architecture", "leadership"]
+featured: false
+status: "unlisted"
+privateToken: "41fb78245d2b3f19"
+---
+
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+Sometime on Sunday evening, on a flight home from WordCamp Asia, Matt Mullenweg opened Slack and caught up on a ten-day-old ping about a disputed ticket. What followed, by his own description, was hours of venting into `#core-committers` — a rolling critique of the WordPress project, its release culture, its governance, and the state of wordpress.org itself.
+
+The line that stayed with me wasn't the most quoted one. It was this:
+
+> We are not being killed by competition, I believe we have done this to ourselves. We did it by blindly following rules and ideals to a point when they became iatrogenic.
+
+*Iatrogenic.* The word is clinical. It means harm caused by the treatment itself — the surgery that saves the patient and also kills her, the medicine whose side effects are worse than the disease. Doctors reach for it when the damage comes from inside the system of care, not from outside.
+
+It's the exact right word. And I think it's a bigger word than the WordPress story it was written about.
+
+---
+
+## What Actually Broke
+
+Read Rae Morey's [account of the Slack thread](https://www.therepository.email/matt-mullenweg-says-the-wheels-have-fallen-off-in-wide-ranging-wordpress-critique) and the specific complaints pile up fast.
+
+A Trac backlog of 8,094 open tickets, hidden behind a custom query so nobody has to see the number. A "blank page with three or four buttons on it" — the new AI Connectors screen — that somehow consumed the back half of an entire release cycle. A theme submission process that rejected a submission over an AI-generated image and required underlining every link on the page. A News page on wordpress.org that Mullenweg said no core committer would ever ship if it were actual code. Good people driven away. Good features deferred. Good discussions that took weeks and produced what he called *boring or mediocre crap.*
+
+The individual complaints are almost beside the point. What unifies them is a shape.
+
+Every one of those rituals — public discussion before decisions, broad consensus, tz-inclusive scheduling, weeks-long Slack threads on minor tickets, design reviews, theme guidelines, governance committees — was defensible when it was introduced. Most of them were more than defensible. They were *correct.* They existed because coordination was expensive, mistakes were expensive, and the wrong decision made privately by the wrong person could put a two-decade-old open source project at risk of capture. The rituals were a continuous, involuntary insurance policy against a specific cost.
+
+The rituals didn't change. The cost did.
+
+When Mullenweg points at Cloudflare's EmDash and says *they shipped the entire functionality of WordPress, and then some, in two months,* the stopwatch isn't the story. The stopwatch is what makes the story legible. The actual story is that the rituals kept running as if coordination and shipping still cost what they cost in 2010, long after they stopped costing that. At some point, the insurance premium exceeded the thing it was insuring.
+
+That's what iatrogenic means when you apply it to an institution instead of a patient.
+
+---
+
+## The Thing I Said Two Days Ago, Said Back at Me
+
+A couple of days ago I wrote [a post about a different symptom of the same thing](/blog/the-walk-in-is-full). The frame there was personal: I ship weekend projects into a drawer I never reopen, so does everyone I know, and the reason isn't that we're lazy — it's that the cultural muscles we treat as craft were partly a reflex to expense. When the expense drops out, the reflex atrophies. I wasn't thinking about WordPress when I wrote it. I was thinking about the way a full kitchen walk-in used to mean abundance and now mostly means *nothing is scarce enough to force a choice.*
+
+The WordPress story is the same argument at organizational scale. It's uglier because more people depend on it, and because you can watch it happening in the Slack archive in real time, and because the founder is the one saying it out loud.
+
+There's a version of this post I could write where I claim prescience. I won't. The "cost was a reflex, not a virtue" read isn't mine alone — anyone who's watched a software project mature has felt some shape of it. What Mullenweg's thread did was give me the clinical word for it. *Iatrogenic.* The culture an institution builds to protect itself is now the thing hurting it. Not metaphorically. Mechanically.
+
+---
+
+## Load-Bearing vs. Ritual
+
+Here's the distinction I keep coming back to.
+
+Every mature institution carries weight. Some of that weight is **load-bearing**:
+
+- Distribution — the fact that you're already installed everywhere
+- Trust — the fact that people believe your name on the tin
+- Install base — the millions of sites that can't rip you out on a weekend
+- Governance that actually prevents capture — the kind that keeps a billion-dollar acquirer from quietly rewriting the license
+
+And some of that weight is **ritual**:
+
+- Approval chains whose original risk has quietly evaporated
+- Review gates that catch a class of error that no longer happens
+- Consensus requirements designed for a team that has since tripled
+- Policies drafted to solve a problem that got solved a different way two years later
+
+Both kinds of weight look identical from the inside. That's the whole trap. Both are called *how we do things.* Both are defended by people who remember exactly why they were introduced. Both have the same institutional texture — rules, conventions, handoffs, committees, sign-offs. You cannot tell them apart by looking at them.
+
+You can only tell them apart by asking what each one is currently protecting — and whether the thing it's protecting *from* is still in the room.
+
+<PullQuote>
+AI's real effect on incumbents isn't speed. It's that collapsing the cost of building exposes which weight was load-bearing and which weight was ritual.
+</PullQuote>
+
+The stuff that was actually doing work keeps doing work. The stuff that was doing work *once,* and coasting on muscle memory since, gets suddenly, visibly, painfully unmasked. Not because AI built a competitor — though sometimes it did — but because the comparison finally became possible. Until recently, you could not ship a WordPress replacement in two months. Now you can. Which means the question *what exactly has WordPress been doing for the last three years* became answerable for the first time.
+
+The incumbents who survive this decade will be the ones who can tell the two kinds of weight apart and shed the wrong one. The ones who can't will get hollowed out from the inside while the logo stays on the building.
+
+---
+
+## How Would You Even Tell?
+
+The honest objection, the one I'd hit first from inside the room, is: *how are you supposed to know which weight is which without tearing one of them down and seeing what falls over?* The answer isn't comforting.
+
+Usually you can't.
+
+The ritual that feels most load-bearing is almost always the one that *used* to be load-bearing — the one that successfully prevented a real disaster, the one whose origin everyone remembers, the one that earned its place in the culture by working. That's exactly the kind of rule that gets followed past the point where it stopped working, because the people in the room can still feel the last time it saved them. The memory is real. The protection, by the time you notice, may not be.
+
+And the rituals that look most like pure overhead — the ones the cynics roll their eyes at, the ones nobody can quite explain — are sometimes the ones keeping the whole thing from unraveling in ways that would only become visible the week after you removed them.
+
+You cannot safely reason about this by intuition. Intuition is what *produced* the problem in the first place. Every step of the ossification was an intuitive, locally reasonable response to a locally real situation. Nothing in the sequence looked wrong at the time it was added. That's how you get to 8,094 tickets and a custom query that hides the number.
+
+The only halfway honest move is to ask a narrower question: *what was this specific process protecting us from, and when was the last time that thing actually happened?* If nobody in the room can name the last time — not a hypothetical, an actual — you're almost certainly looking at ritual. If they can name it, and it's from this year, you're looking at load-bearing weight. If they can name it but it's from five years ago, in a radically different environment, you're looking at the hardest case: something that *was* load-bearing, might still be, and cannot be safely interrogated without doing the work.
+
+Most rooms don't do the work. They default to keeping the ritual, because the cost of keeping it is distributed across everyone and the cost of removing it is concentrated on whoever decided to remove it.
+
+---
+
+## The War Powers Trap
+
+There's a version of this story where the lesson is: *bring back the founder, give them full authority, let them cut.* Mullenweg's own Slack thread gestures at that read. A prominent WordPress product founder publicly suggested granting him "War Powers" for a period. The implication being that the rituals are the problem, the founder is the one person in the room who remembers what was load-bearing and what wasn't, and therefore the fix is to let the founder override the rituals by force.
+
+I think this is wrong in a specific, instructive way.
+
+The top comment on the article reporting the Slack thread is from a company that used to be all-in on WordPress and left the platform entirely — not because WordPress moved too slowly, but because of Mullenweg's last attempt at decisive action, a public dispute with a hosting company eighteen months ago that went nuclear in a way that unsettled customers who had nothing to do with it. That customer took their work elsewhere and stayed gone.
+
+That's what it looks like when the proposed remedy for iatrogenic institutional weight is *more intervention from the top.* The founder's trust capital — their ability to walk into any room and be believed — is itself load-bearing weight. It's the thing that made the institution work in the first place. Spending that capital to route around your own governance is just moving the wound. The organization loses the ritual layer *and* the founder layer. What it had was rotting process. What it now has is rotting process plus a founder nobody wants to follow.
+
+The War Powers move is a symptom of the same disease, not its cure. It's what happens when the founder can see the ritual problem clearly but has no mechanism for fixing it except the one mechanism an institution like this was specifically designed to prevent: unilateral override. If the only way to shed ritual weight is by burning trust capital, you don't actually have a way of shedding ritual weight. You have a way of destroying the institution slightly faster than the iatrogenic damage would.
+
+The uncomfortable read is that nobody inside an ossified institution has a clean move. The governance can't reform the governance — that's the whole problem. The founder can't reform the governance without spending the capital that made them a founder. Outside pressure mostly just accelerates the atrophy by giving the rituals something new to protect against. It isn't clear, watching this from the outside, what a successful version of this story would even look like.
+
+---
+
+## What You Can Actually See From the Inside
+
+I work inside a mature institution. Not WordPress. A different kind of large, serious organization with its own rituals, its own governance layers, its own 8,094-equivalent backlog hidden behind some custom view that nobody looks at. Most people reading this work inside one too.
+
+The thing I've started noticing — and this is observational, not prescriptive, because I don't have a clean rule yet — is how little we check. How little anyone checks. A process gets introduced to solve a specific problem. The problem goes away, either because the process worked or because the world changed out from under it. The process stays. A new person joins; the process is explained to them as *how we do things.* They learn it, they follow it, they eventually explain it to the next new person, and within a few cycles nobody in the chain was present for the original problem. The process has drifted from load-bearing weight into ritual, and the drift is invisible, because the thing that would have made it visible — somebody asking *what is this actually protecting us from* — isn't part of the ritual's own operating procedure.
+
+AI is starting to make that drift visible in a particular way, which is why the WordPress story landed so hard for so many people at once. It's not that AI is faster. It's that AI makes it cheap enough to build comparison cases that the ritual layer can no longer hide behind *this is just how long these things take.* The stopwatch exists now. Somebody is going to hold it up to whatever institution you're part of, probably within the next couple of years, and the number on it is going to be uncomfortable.
+
+I don't think the answer is to preemptively tear things down. I've watched enough tearing-down to know it mostly just destroys the wrong things first, because the people doing the tearing usually can't tell the difference between the two kinds of weight any better than the people defending it. But I think the question I'm going to start asking more often — in my own work, about my own rules, before I ask it about anyone else's — is some version of this:
+
+*What was this originally protecting us from? Is that threat still in the room? And if it isn't, what is this process doing now?*
+
+Three questions. No clean answers. The ritual layer lives in the gap between the second question and the third one, and most of us, most of the time, never ask either.

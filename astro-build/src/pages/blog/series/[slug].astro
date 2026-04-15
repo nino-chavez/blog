@@ -24,7 +24,7 @@ const { Content } = await render(series);
 
 // Get all blog posts in this series, sorted by position
 const blogPosts = await getCollection('blog', ({ data }) =>
-  data.status !== 'draft' && data.series?.slug === slug
+  data.status === 'published' && data.series?.slug === slug
 );
 const sortedPosts = blogPosts.sort((a, b) =>
   (a.data.series?.position || 0) - (b.data.series?.position || 0)

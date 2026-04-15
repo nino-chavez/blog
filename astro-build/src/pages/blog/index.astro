@@ -9,7 +9,7 @@ export const prerender = true;
 
 // ── Data ────────────────────────────────────────────────────────────────────
 
-const allPosts = await getCollection('blog', ({ data }) => data.status !== 'draft');
+const allPosts = await getCollection('blog', ({ data }) => data.status === 'published');
 const sortedPosts = allPosts.sort(
   (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime()
 );

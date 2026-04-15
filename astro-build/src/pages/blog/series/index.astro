@@ -14,7 +14,7 @@ const sortedSeries = allSeries.sort(
 );
 
 // Get all blog posts to count posts per series
-const blogPosts = await getCollection('blog', ({ data }) => data.status !== 'draft');
+const blogPosts = await getCollection('blog', ({ data }) => data.status === 'published');
 
 // Count posts per series
 const getPostCount = (seriesSlug: string) => {

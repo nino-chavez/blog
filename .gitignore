@@ -50,3 +50,9 @@ lerna-debug.log*
 
 # OS files
 Thumbs.db
+
+# Repo-root scratch artifacts (Playwright MCP, ad-hoc UI screenshots, stray files)
+/*.png
+/.playwright-mcp/
+/AGENTS.md
+/package-lock.json

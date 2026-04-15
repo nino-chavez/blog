@@ -8,7 +8,7 @@ import { generateCollectionSchema } from '../../../utils/schema';
 export const prerender = true;
 
 // Get all published posts
-const allPosts = await getCollection('blog', ({ data }) => data.status !== 'draft');
+const allPosts = await getCollection('blog', ({ data }) => data.status === 'published');
 
 // Extract all unique tags and count posts per tag
 const tagCounts = new Map<string, number>();

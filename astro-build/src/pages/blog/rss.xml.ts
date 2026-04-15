@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 export const prerender = true;
 
 export async function GET() {
-  const posts = await getCollection('blog', ({ data }) => data.status !== 'draft');
+  const posts = await getCollection('blog', ({ data }) => data.status === 'published');
 
   const sortedPosts = posts.sort(
     (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime()

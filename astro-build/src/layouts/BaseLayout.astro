@@ -14,6 +14,7 @@ interface Props {
   tags?: string[];
   canonicalUrl?: string;
   jsonLd?: object | object[];
+  noIndex?: boolean;
 }
 
 const {
@@ -27,6 +28,7 @@ const {
   tags = [],
   canonicalUrl,
   jsonLd,
+  noIndex = false,
 } = Astro.props;
 
 const siteUrl = 'https://ninochavez.co';
@@ -100,8 +102,17 @@ const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <meta name="twitter:image" content={fullImage} />
 
     <!-- Robots / LLM Crawler Signals -->
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="googlebot" content="index, follow, max-image-preview:large" />
+    {noIndex ? (
+      <>
+        <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+        <meta name="googlebot" content="noindex, nofollow" />
+      </>
+    ) : (
+      <>
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow, max-image-preview:large" />
+      </>
+    )}
 
     <!-- AI/LLM Content Declaration -->
     <meta name="ai-content-declaration" content="human-authored" />

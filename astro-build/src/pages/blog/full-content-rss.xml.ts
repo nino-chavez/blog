@@ -4,7 +4,7 @@ import type { APIContext } from 'astro';
 export const prerender = true;
 
 export async function GET(context: APIContext) {
-  const posts = await getCollection('blog', ({ data }) => data.status !== 'draft');
+  const posts = await getCollection('blog', ({ data }) => data.status === 'published');
 
   const sortedPosts = posts.sort(
     (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime()

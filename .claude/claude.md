@@ -9,7 +9,7 @@ Astro-based blog with three content types: blog posts (MDX), whitepapers (plain 
 - **Voice guide enforcement:** All blog content follows `/docs/signal-dispatch-voice-guide.md`. Open with tension, show the work, self-interrogate, end provisionally.
 - **Whitepapers use NO MDX components** -- plain markdown only, tables liberally. Escape `<` in tables ("Under 50ms" not "<50ms").
 - **Canonical tags only:** Must use approved tags from `astro-build/src/config/tags.ts` (18 total). 1-3 per post. No new tags without updating `tags.ts`.
-- **Feature images are generated:** `node scripts/generate-illustration-images.js --dir {blog|whitepapers|presentations} {filename}.mdx` (requires `OPENROUTER_API_KEY`).
+- **Feature images are generated:** `node scripts/generate-illustration-images.js --dir {blog|whitepapers|presentations} {filename}.mdx` (requires `OPENROUTER_API_KEY` from `astro-build/.env` — source it with `export $(grep OPENROUTER_API_KEY .env)` before running).
 - **Presentations export to standalone HTML:** `node scripts/export-presentation-html.js {slug}` -> `public/presentations/export/{slug}.html`.
 
 ## Content Locations
@@ -57,6 +57,28 @@ import { PullQuote } from '@/components/mdx/PullQuote';
 3. For presentations: export HTML with `node scripts/export-presentation-html.js {slug}`
 4. Verify: `npm run build`
 5. Publish (if requested): commit and push
+
+## Post Status: Published, Draft, Unlisted
+
+Blog posts have a `status` field with three values (default `"published"`):
+
+- **`published`** — normal. Appears in indexes, RSS, tags, sitemap, and search. Accessible at `/blog/{slug}`.
+- **`draft`** — work-in-progress. Filtered out of all public surfaces. Previewable at `/blog/draft/{slug}`.
+- **`unlisted`** — shareable privately. Filtered out of all public surfaces AND the sitemap. Carries `noindex, nofollow` meta. Accessible only at `/blog/private/{privateToken}/{slug}`.
+
+### Unlisted post workflow (for private sharing)
+
+When sharing a post via link without wanting it found via search or public browsing:
+
+1. Add to frontmatter:
+   ```yaml
+   status: "unlisted"
+   privateToken: "41fb78245d2b3f19"  # generate with: openssl rand -hex 8
+   ```
+2. Share the URL: `https://ninochavez.co/blog/private/{privateToken}/{slug}`
+3. To publish for real: remove `privateToken`, flip `status` to `"published"`
+
+The private route renders the post with a visible amber "unlisted" banner so the private view is never confused with the public one. All public filters use `status === 'published'` (not `!== 'draft'`) so unlisted posts are also excluded from RSS, tags, index, archive, series, related-posts, and the sitemap.
 
 ## Commands
 

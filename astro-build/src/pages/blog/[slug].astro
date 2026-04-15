@@ -13,13 +13,13 @@ export const prerender = true;
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts
-    .filter((p) => p.data.status !== 'draft')
+    .filter((p) => p.data.status === 'published')
     .map((post) => ({ params: { slug: post.id } }));
 }
 
 const { slug } = Astro.params;
 const posts = await getCollection('blog');
-const post = posts.find((p) => p.id === slug && p.data.status !== 'draft');
+const post = posts.find((p) => p.id === slug && p.data.status === 'published');
 
 if (!post) {
   return Astro.redirect('/blog');
@@ -57,7 +57,7 @@ const categoryColors: Record<string, { bg: string; border: string; text: string 
 const colors = categoryColors[post.data.category || ''] || categoryColors.default;
 
 // Get related posts (same category, excluding current)
-const allPosts = await getCollection('blog', ({ data }) => data.status !== 'draft');
+const allPosts = await getCollection('blog', ({ data }) => data.status === 'published');
 const relatedPosts = allPosts
   .filter((p) => p.id !== post.id && p.data.category === post.data.category)
   .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime())
