@@ -1,0 +1,76 @@
+---
+title: "I Don't Write Any Code"
+publishedAt: "2026-04-21T15:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "I spent a session trying to map my skills across sixty-five projects and the output came back dressed up as a senior engineer. That wasn't right. The correction I typed back is the one I think a lot of people are currently refusing to type back."
+category: "Reflection"
+featureImage: "/images/generated/i-dont-write-any-code.webp"
+tags: ["career", "reflection", "agentic-systems"]
+featured: false
+---
+
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+The audit came back and the report framed me as a Staff AI Engineer. I read it, and then I typed this back:
+
+> now to be brutally honest. i didn't write any specs or any lines of code. this is all the result of me using coding agents and agent harnesses.
+
+The next reply was a prep plan for interviewing into those roles — forty to sixty hours of reverse-engineering drills, so I could defend the code in a whiteboard if the LLM wasn't in the room. I read that and typed this back:
+
+> i also don't write ANY code. or design any system. i've given options from agents and i make selections.
+
+That second sentence is the one. Everything interesting in the session happens after it.
+
+---
+
+## The Gate Moved, Not the Job
+
+Here is the part I want to describe carefully, because I think it generalizes past my specific situation.
+
+For most of my career, the job title "architect" meant a person who draws the system on a whiteboard and then a team of engineers types it into existence. The architect's leverage was the team. If the team was good, the architecture shipped. If the team was bad, the architecture stayed on the whiteboard.
+
+What's changed, for me, is that the team went away and the architecture still shipped.
+
+Not a metaphor. I build production systems — authentication, migrations, deploy pipelines, the boring parts that break — and I have not typed the code.
+
+Agents typed the code. I read the code, selected between options, rejected the ones that were wrong, pushed back when the shape was off.
+
+Here's what one of those moments looks like. An agent proposed wrapping a commerce API as an MCP server instead of maintaining the existing tool wrappers. Before accepting, I asked whether building the MCP server would automatically pick up new tools when the underlying API changed, or whether I'd still be stuck maintaining the MCP server the same way I'd maintain the wrappers. The answer was honest: same work, different file. I typed back:
+
+> ok. skip mcp. keep curated tools.
+
+Five words. No code written. The call held — not because I knew the MCP spec cold, but because I could feel the shape of the tradeoff before the agent finished proposing it.
+
+The output shipped. Real users hit it. It held.
+
+The question I was trying to answer in that session was: *what do I call this?* Because in interview format, "I directed agents" sounds like a confession. It sounds like the thing an engineer apologizes for. Whereas in outcome format — commits landed, URL deployed, user flow works — it looks exactly like the thing an engineer gets credit for.
+
+Both of those are true at the same time. That's the problem.
+
+---
+
+## Stop Benchmarking Against Staff Engineers
+
+The reframe that eventually landed in the session was this: your peer group is architects, not ICs.
+
+Directors at Google don't write code. Staff product leads at Stripe write less code than their juniors. CTOs at Series B startups write none. What they do is decide, evaluate, unblock, hire, communicate. The only part of that list I'm doing differently is the hire step — my execution layer is agents instead of a team of engineers, and my team budget is zero.
+
+That's not a downgrade from IC. It's a different-shaped role that existed before AI and still exists. The AI part just removed the requirement for the team of engineers underneath it. Which means the category of person who can do that job used to be gated by "can you get ten engineers to follow you" and now is gated by "can you hold the shape of a system in your head and direct an execution layer that types for you."
+
+<PullQuote>The gate moved. The job didn't.</PullQuote>
+
+---
+
+## The Forty Percent
+
+Here is the part I'm less sure about, so I want to say it provisionally.
+
+Roughly forty percent of the market currently believes this. The other sixty percent reads "I don't type code" and hears "I can't type code," and there's no response to that inside an interview loop that will flip them. I think trying to flip them is the mistake most people in my position make. You cannot argue someone out of a priors-based rejection; you can only find the rooms where the priors are already in your favor.
+
+Which means the work isn't *becoming legible to everyone*. The work is *finding the forty percent* and letting the other sixty go. That feels uncomfortable because it feels like giving up ground. But the ground you'd be winning by converting a skeptical hiring manager is a job you'd then have to do for a person who thinks the thing you do doesn't count. Which is not a job.
+
+I notice as I write this that it sounds like a rationalization — *the market is wrong, I'm fine*. That's a failure mode. So let me name the other possibility: I'm early, the forty percent is actually twenty, and the next two years are going to be harder than I'm framing them. I don't know which one is true. The honest position is something like *act as though the forty percent is real, and recalibrate fast if the rooms keep saying no*.
+
+What I'm not willing to do is pretend I typed the code. The thing I actually do is the thing I should be able to say I do, even if the sentence is uncomfortable in an interview. If the sentence disqualifies me from a room, that room was going to disqualify me later anyway, after a longer stretch of me performing a job I don't actually do.
+
+I don't write code. I hold the shape and select the options. The output is real. The category is new, or newly visible, depending on how you count. That's the claim. I'd rather test it than dress it up.
