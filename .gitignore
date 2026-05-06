@@ -56,3 +56,4 @@ Thumbs.db
 /.playwright-mcp/
 /AGENTS.md
 /package-lock.json
+.wrangler

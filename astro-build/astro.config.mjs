@@ -8,14 +8,32 @@ import rehypePrettyCode from "rehype-pretty-code";
 import remarkEmoji from "remark-emoji";
 import remarkGfm from "remark-gfm";
 
-import vercel from "@astrojs/vercel";
+import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://blog.ninochavez.co",
   output: "server",
-  adapter: vercel(),
-
+  adapter: cloudflare({
+    routes: {
+      extend: {
+        exclude: [{ pattern: "/blog/*" }]
+      }
+    }
+  }),
+  vite: {
+    ssr: {
+      noExternal: ["@astrojs/react"]
+    },
+    resolve: {
+      alias: [
+        {
+          find: "react-dom/server",
+          replacement: "react-dom/server.edge"
+        }
+      ]
+    }
+  },
   integrations: [
     mdx({
       remarkPlugins: [remarkGfm, remarkEmoji],
