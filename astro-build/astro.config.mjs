@@ -12,7 +12,7 @@ import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://blog.ninochavez.co",
+  site: "https://ninochavez.co",
   output: "server",
   adapter: cloudflare({
     routes: {
