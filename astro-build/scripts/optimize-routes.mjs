@@ -36,10 +36,16 @@ for (const key of ["include", "exclude"]) {
   const wildcards = rules.filter((r) => r.endsWith("/*"));
   // A wildcard is "broad" if no OTHER wildcard covers it
   const broad = wildcards.filter((w) => !coveredByWildcard(w, wildcards));
-  const deduped = rules.filter((r) => {
-    if (broad.includes(r)) return true;
-    return !coveredByWildcard(r, broad, true);
-  });
+  // First: drop rules covered by broad wildcards. Then: dedupe exact matches.
+  const seen = new Set();
+  const deduped = [];
+  for (const r of rules) {
+    if (seen.has(r)) continue;
+    if (broad.includes(r) || !coveredByWildcard(r, broad, true)) {
+      seen.add(r);
+      deduped.push(r);
+    }
+  }
   console.log(`[optimize-routes] ${key}: ${rules.length} -> ${deduped.length}`);
   data[key] = deduped;
 }

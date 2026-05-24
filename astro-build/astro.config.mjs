@@ -17,9 +17,16 @@ export default defineConfig({
   adapter: cloudflare({
     routes: {
       extend: {
-        exclude: [{ pattern: "/blog/*" }]
-      }
-    }
+        // Excluded paths bypass the Pages Function and are served by the
+        // static layer. /_redirects only fires for excluded paths, so
+        // legacy RSS URLs must live here to redirect to /blog/*.
+        exclude: [
+          { pattern: "/blog/*" },
+          { pattern: "/rss.xml" },
+          { pattern: "/full-content-rss.xml" },
+        ],
+      },
+    },
   }),
   integrations: [
     mdx({
