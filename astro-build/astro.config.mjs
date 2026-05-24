@@ -76,7 +76,9 @@ export default defineConfig({
     resolve: {
       alias: [
         { find: "@", replacement: "/src" },
-        { find: "react-dom/server", replacement: "react-dom/server.edge" },
+        ...(process.env.NODE_ENV === "production"
+          ? [{ find: "react-dom/server", replacement: "react-dom/server.edge" }]
+          : []),
       ],
     },
   },
