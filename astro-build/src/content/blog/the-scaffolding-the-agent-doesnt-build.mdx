@@ -25,10 +25,10 @@ I read that line twice and realized I didn't believe it.
 
 The last two months of commit messages in my own repos:
 
-- audit gates and design-system unification in Atelier
-- a hive layer in bc-subscriptions that reconciles GitHub issues, git log, and a D1 store
-- traceability badges on prototype slices in Rally HQ
-- owner-spec patterns and freshness-lint in big-blueprint
+- audit gates and design-system unification on one platform
+- a reconciliation layer that joins GitHub issues, git log, and a D1 store on another
+- traceability badges on prototype slices in a third codebase
+- owner-spec patterns and freshness-lint in a workflow tool
 - archaeology substrate, doc-surface discipline, tiered orchestration patterns
 
 None of it shipped a user-facing feature on its own. All of it was scaffolding for the thing that ships.
@@ -42,8 +42,6 @@ The interesting question is *why* it got fabricated that way.
 ## Bender's Word for It
 
 Bender's central claim — the line the draft correctly identified before getting the rest wrong — is that AI is a **directionless amplifier**. It scales magnitude, not direction. Strong fundamentals get 10x'd. Confusion and technical debt get 10x'd just as fast. The agent doesn't care which one you've got more of.
-
-<PullQuote>The agent doesn't care which one you've got more of.</PullQuote>
 
 The body of his talk is a walk through what breaks when code generation goes 10x while the rest of the ecosystem stays where it is.
 
@@ -66,6 +64,8 @@ If you spend two months building substrate — audit gates, reconciliation layer
 I've written before about [directing agents instead of typing code](/blog/i-dont-write-any-code). The position there was that the gate moved, not the job: the architect tier never did require typing, and the AI shift just removed the requirement for the team of engineers underneath.
 
 What I didn't have a clean word for in that post: the work that replaces typing isn't *prompting*. It's scaffolding. It's the surrounding apparatus that keeps the agent's output from drifting into the ecosystem unchecked.
+
+<PullQuote>The work that replaces typing isn't prompting. It's scaffolding.</PullQuote>
 
 Bender names this directly at the end of his talk. The pivot: stop optimizing the code machine. Use AI to keep humans able to reason about systems no single one of us can hold in our head — interactive architecture maps, queryable dependency state, intellectual control as a first-class output.
 
@@ -95,6 +95,6 @@ Magnitude without direction.
 
 Bender's frame gives me a clean word for it. The work the agent doesn't do is mine.
 
-Audit gates. Traceability joins. Reconciliation layers. Owner-spec patterns. Design-system unification. Hive boards derived from GitHub issues, git log, and D1 state. These aren't side projects to the thing the agent ships. They're what makes the thing the agent ships safe to land.
+Audit gates. Traceability joins. Reconciliation layers. Owner-spec patterns. Design-system unification. Operational boards derived from GitHub issues, git log, and D1 state. These aren't side projects to the thing the agent ships. They're what makes the thing the agent ships safe to land.
 
 The forest, not the leaves.
