@@ -25,11 +25,11 @@ I read that line twice and realized I didn't believe it.
 
 The last two months of commit messages in my own repos:
 
-- audit gates and design-system unification on one platform
-- a reconciliation layer that joins GitHub issues, git log, and a D1 store on another
-- traceability badges on prototype slices in a third codebase
-- owner-spec patterns and freshness-lint in a workflow tool
-- archaeology substrate, doc-surface discipline, tiered orchestration patterns
+- automated checks that block agent-generated code from landing when it breaks the system's rules, and the work of consolidating several parallel UI design systems into one
+- a layer that joins GitHub issues, the git log, and a Cloudflare D1 store and flags every place those three disagree
+- a way to pin each prototype change back to the spec it implements, so a reviewer can verify intent before reading code
+- templates that name a human owner for every module's behavior, paired with a linter that flags documentation that's fallen behind the code it describes
+- tooling that reads git history as a source of past-decision context, plus the connective work of keeping documentation surfaces (READMEs, agent context files) coherent across projects, plus patterns for sequencing multi-layer agent execution so the steps stay legible
 
 None of it shipped a user-facing feature on its own. All of it was scaffolding for the thing that ships.
 
@@ -59,7 +59,7 @@ That sentence is where the fabricated caption and the actual work diverged.
 
 ## The Scaffolding Isn't the Side Project
 
-If you spend two months building substrate — audit gates, reconciliation layers, traceability joins, owner-spec patterns — you don't read Bender's talk as a cautionary tale. You read it as someone giving public language to a category of work you've been doing in commits for months.
+If you spend two months building substrate of that kind, you don't read Bender's talk as a cautionary tale. You read it as someone giving public language to a category of work you've been doing in commits for months.
 
 I've written before about [directing agents instead of typing code](/blog/i-dont-write-any-code). The position there was that the gate moved, not the job: the architect tier never did require typing, and the AI shift just removed the requirement for the team of engineers underneath.
 
@@ -95,6 +95,6 @@ Magnitude without direction.
 
 Bender's frame gives me a clean word for it. The work the agent doesn't do is mine.
 
-Audit gates. Traceability joins. Reconciliation layers. Owner-spec patterns. Design-system unification. Operational boards derived from GitHub issues, git log, and D1 state. These aren't side projects to the thing the agent ships. They're what makes the thing the agent ships safe to land.
+The checks that block bad agent output before it lands. The joins that surface where independent systems disagree. The traces that tie code back to the intent it was supposed to serve. The templates that say who owns what. The dashboards that make scattered state legible. These aren't side projects to the thing the agent ships. They're what makes the thing the agent ships safe to land.
 
 The forest, not the leaves.

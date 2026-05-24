@@ -1,8 +1,8 @@
 # Signal Dispatch: Voice & Tone Guide
 ## Copy Editor and Ghostwriter Touchstone
 
-**Version**: 1.1
-**Last Updated**: 2026-01-21
+**Version**: 1.2
+**Last Updated**: 2026-05-24
 **Source**: Empirical analysis of 156 blog posts, 15 deep-read corpus sample
 
 ---
@@ -364,6 +364,42 @@ I need to show up, read the room, make good decisions, and leave people better o
 
 ---
 
+## Concrete Over Coined
+
+### The Rule
+
+A reader who has never been inside your projects must be able to picture every concrete thing you name. Coined internal terms — project names, in-house artifact names, personal shorthand for patterns — fail that test by default. They feel weighty to you because you built the thing; they're cipher to a reader who hasn't.
+
+### The Failure Shape
+
+A list of three or more coined terms in a row, with no gloss, is the most reliable form of this trap:
+
+```
+❌ "I spent two months on audit gates, reconciliation layers, traceability joins, and owner-spec patterns."
+```
+
+To you, that's a precise inventory. To a reader, it's four opaque words pretending to be evidence. The bitter version: a post arguing that AI-generated content fails because it has the *shape* of substance without the substance — written in coined terms that have the *shape* of evidence without the picture. The post becomes the example of the failure mode it diagnoses.
+
+### The Fix
+
+For every coined term, choose one:
+
+1. **Gloss it the first time.** "Audit gates — automated checks that block agent-generated code from landing when it breaks the system's rules."
+2. **Replace it with what it does.** "Templates that name a human owner for every module's behavior" instead of "owner-spec patterns."
+3. **Cut it.** If the term isn't load-bearing, remove it. Most coined terms are name-the-noun signaling; they read as authority but carry no payload.
+
+### When Coined Terms Are OK
+
+After you have grounded a term — described what it does plainly — you can use the coined version as shorthand later in the same post. A closing staccato list can pull the punchier coined names *if the body has already shown each one*. But never open with jargon, and never let a coined term carry a claim the reader can't picture.
+
+### Adjacent Rules
+
+- **Project / repo / tool names**: in posts intended for a public audience, sanitize internal names to generic descriptors ("a workflow tool", "another codebase"). Real names invite inference about employer, clients, and stack that may not be intended.
+- **Inventories are highest-risk**: a list of items the reader has not met is where this trap is most likely to fire. Inventories must be either glossed inline or rewritten as function-descriptions.
+- **Function fragments beat noun lists** at the climax of a post: "The checks that block bad output. The joins that surface where systems disagree. The traces that tie code back to intent." Each fragment carries meaning without requiring a glossary.
+
+---
+
 ## Content Themes (What to Write About)
 
 ### Primary Themes (Evidence from Corpus)
@@ -496,6 +532,7 @@ Before publishing, verify:
 - [ ] Acknowledges complexity and nuance
 - [ ] Leaves room for reader interpretation
 - [ ] Links to related posts when relevant
+- [ ] A reader without insider context can picture every artifact you name (no coined terms — project names, in-house pattern names — without a gloss)
 
 ---
 
@@ -561,6 +598,7 @@ When evaluating AI drafts:
 - "You should always..."
 - No questions, all answers
 - Too polished, no texture
+- Three or more coined internal terms in a row with no gloss (see "Concrete Over Coined")
 
 ---
 
@@ -587,6 +625,16 @@ When evaluating AI drafts:
 
 ### After (Signal Dispatch Voice)
 > "If you're starting your AI journey, don't wait for a perfect plan. Here's what I wish I had on day one—not rules, just patterns that worked for me."
+
+---
+
+### Before (Too Opaque — Coined Terms Without Referent)
+> "Two months of commits: audit gates and design-system unification, a hive layer that reconciles GitHub issues, git log, and a D1 store, traceability badges on prototype slices, owner-spec patterns and freshness-lint."
+
+### After (Concrete — Reader Can Picture Each Item)
+> "Two months of commits: automated checks that block agent-generated code from landing when it breaks the system's rules. A layer that joins GitHub issues, git log, and a Cloudflare D1 store and flags every place those three disagree. A way to pin each prototype change back to the spec it implements. Templates naming a human owner for every module's behavior, paired with a linter that flags documentation that's fallen behind the code."
+
+The "before" version reads as authoritative to the writer because it names real artifacts. To a reader who has not been inside the projects, every term is a cipher. The "after" version trades word count for picturability — each item lands as a concrete thing the reader can hold in their head.
 
 ---
 
