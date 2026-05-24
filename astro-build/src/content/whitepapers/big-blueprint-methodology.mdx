@@ -1,0 +1,222 @@
+---
+title: "Big Blueprint: A Production Line for Agent-Assisted Product Work"
+publishedAt: "2026-05-24T22:30:00.000Z"
+author: "Nino Chavez"
+featureImage: "/images/generated/big-blueprint-methodology.webp"
+companionOf:
+  type: "post"
+  slug: "the-backport-i-didnt-make"
+---
+
+# Executive Summary
+
+This document is the technical companion to [The A/B Test That Built the Lathe](/blog/the-backport-i-didnt-make). The post argues that the work that compounds in agent-assisted product development is the chassis around the LLM, not the LLM itself. This document specifies the chassis — the components, contracts, and refinement loop that came out of an A/B test in March 2026 and has since been applied to four production prototypes.
+
+**Key findings:**
+
+- A strategy-package build that took ~48 hours of human-steered agent work produced a complete deliverable set (eleven prototype pages, four strategy documents validated against the production codebase, thirty-plus cited research sources, an extracted design system).
+- An A/B test against the same kind of input with no human feedback produced **70-80% of the quality in 10-15x less time**. The 20-30% shortfall was attributable to eight specific template gaps, not generation failure.
+- Closing those gaps required eight surgical template fixes — populated terminology tables, citation-URL requirements, methodology-questioning audit steps, and structural scaffolding for files the agent kept tripping over.
+- The resulting tool (`big-blueprint`) has since been applied to three additional projects. Each application surfaced one or more refinements that fed back into the template, sharpening the chassis on every pass.
+- The compounding mechanism is not prompt engineering or agent design. It is the *artifacts the agent reads* getting more precise. The template is the spec, not a description of the spec.
+
+---
+
+# Part I: The Origin Run
+
+## 1.1 The setup
+
+On March 13, 2026, a two-paragraph plan was pasted into a terminal. The plan described two parallel workstreams for a pricing-and-packaging initiative at a commerce platform: a set of leadership-aligned strategy documents, and an agentic billing-support prototype with multiple merchant personas. The instruction was: "Implement the following plan."
+
+Forty-eight hours later, the following was deployed and merged:
+
+| Deliverable | Volume |
+|---|---|
+| Interactive prototype pages | 11 |
+| Strategy documents (validated against production code) | 4 |
+| Cross-industry research platforms covered | 14 |
+| Cited research sources | 30+ |
+| AI billing-support agent tools | 8 |
+| Mock merchant personas | 6 |
+| Design system tokens extracted from existing product screenshots | full kit |
+
+No lines of code or words of doc copy were written by hand. Every artifact was produced by Claude, steered through prompts.
+
+## 1.2 The correction work
+
+The first eighteen hours were not generation — they were correction. Four distinct categories of error emerged, each caught by a single human reading the output and asking "is this right?"
+
+### Wrong voice (Hour 1-2)
+
+The content-generation pipeline (`forge-signal`) defaulted to an external-consultant tone — narrative arcs, provisional hedging, rhetorical questions. The hardcoded reference brand in the prompts was a major consulting firm. Both assumptions were wrong for the work: internal strategy documents need conclusions first, evidence second, tables for data, bullets for facts.
+
+The fix was deeper than swapping the brand name. A new voice mode (Internal Strategy) was added to `forge-signal`'s taxonomy alongside Thought Leadership, Executive Advisory, and Solution Architecture.
+
+### Wrong components (Hour 3-5)
+
+The prototype's first pass used UI patterns that did not exist in the actual product — blue alert banners, colored type tags, progress bars, inline explainer boxes. The existing product UI used white cards, simple tables, muted badges, and label-value pairs. The agent had invented an aspirational UI without flagging it as aspirational.
+
+The fix produced a design principle: **match the existing product**. If a component does not exist today, mark it as PROPOSED. Do not present aspirational UI as buildable reality.
+
+### Wrong words (Hour 5-8)
+
+The agent's first draft used terminology that created merchant anxiety: "surcharge," "non-preferred gateway," "downgrade," "BLOCKED," "you exceeded your GMV cap." Every one of those words framed cost-saving actions as penalties or fault assignments.
+
+The fix was a 120+ word replacement audit across 16 files. "Surcharge" → "processing fee." "Non-preferred" → "third-party." "GMV cap" → "sales limit." "10% haircut" → "10% adjustment." Cost-related messages were reframed to lead with savings, not charges.
+
+### Missing research (Hour 8-12)
+
+The plan did not call for cross-industry research. But the human noticed gaps in the evidence base and added research spikes on instinct: utility billing portals (call center reduction data), telecom litigation for mid-contract surcharges, screenshots from SaaS billing pages (Vercel, Resend, Supabase, Cloudflare). These produced the strongest evidence in the final deliverable — and none of it was in the original plan.
+
+This is what the case study calls the *25-30% of quality the agent cannot produce on its own*: the human seeing the output and asking "what else should we look at?"
+
+## 1.3 The credibility check (Hour 12-18)
+
+The agent was asked to validate its own claims against actual screenshots and source code. It found four false claims in its own output:
+
+| Claim | Reality |
+|---|---|
+| "Self-service plan changes: No" | Self-service upgrades exist; only downgrades are missing |
+| "Click-to-cancel is Phase 3 future work" | A cancel flow already exists for specific plan tiers |
+| "Usage/GMV dashboard: No" | Store Details already shows 12-month sales volume |
+| "Invoice PDFs lack line item detail" | They contain detailed line items |
+
+A separate review by a different model (Gemini) caught additional numerical and framing errors. Both passes surfaced issues that would have lost stakeholder trust if the documents had shipped uncorrected.
+
+---
+
+# Part II: The Extraction
+
+## 2.1 The question at Hour 18
+
+By hour eighteen the work was effectively done. The question that followed was the load-bearing one: *can this happen again, for a different initiative, without me in the feedback loop?*
+
+The answer required two things. First, extract the methodology that had emerged from the corrections into a reusable form. Second, test whether that extraction could reproduce the outcome with no human-in-the-loop corrections.
+
+## 2.2 What got extracted
+
+`big-blueprint` came out of the next six hours. Its components:
+
+| Component | Purpose |
+|---|---|
+| Template directory | Cloning source for new projects |
+| 5 skills (slash commands) | One per pipeline stage (research, prototype, doc, audit, A/B test) |
+| 4 agent definitions | Researcher, prototype-builder, doc-writer, validator |
+| `blueprint.yml` | Configuration — execution depth, voice modes, research scope |
+| `CLAUDE.md` | Project-level conventions, banned words, design principles |
+
+The tool is composable. `big-blueprint` operates standalone but integrates with `specchain` (for implementation specs) and `forge-signal` (for content generation). Adding or removing either does not break the others.
+
+---
+
+# Part III: The A/B Test
+
+## 3.1 Test design
+
+A fresh project was created from the `big-blueprint` template and pointed at the same kind of input that drove the origin run. The agent ran without any of the corrections that had shaped the original deliverable — no "is this right?" check on voice, no audit against existing product UI, no terminology pushback, no human-initiated research spikes.
+
+## 3.2 Result
+
+The template version came back at **70-80% of the quality, in 10-15x less time** relative to the origin run.
+
+The 70-80% mattered more than the 10-15x. The shortfall was specific and itemizable. The agent used placeholder terminology from the template instead of actual product terms ("deflectable" instead of "resolvable without support"). It did not flag a methodology contradiction the origin run had caught. It cited research sources by name but not by URL. None of these were generation failures. They were template gaps — inputs the origin run had that the template had not carried forward.
+
+## 3.3 The eight template fixes
+
+Eight surgical changes closed the gap. Six landed in the template directly; two landed in agent definitions.
+
+| # | Fix | Location | Symptom it addresses |
+|---|---|---|---|
+| 1 | Populated terminology table | Template `DESIGN.md` | Agent substituted placeholder vocabulary |
+| 2 | Citation-URL requirement | Researcher agent definition | Sources cited by name but not resolvable |
+| 3 | Methodology-questioning audit step | Validator agent definition | Internal contradictions in data tables went uncaught |
+| 4 | Skeleton `index.html` | Template `prototype/` | Doc pipeline blocked on missing entry file |
+| 5 | `.gitkeep` files for empty directories | Template structure | Agent kept tripping over missing scaffolding |
+| 6 | Working `docs/package.json` | Template `docs/` | Doc build silently failed |
+| 7 | Explicit ban on metadata headers | Doc-writer agent definition | Generated Date/Audience/Status fluff despite `CLAUDE.md` rule |
+| 8 | "First sentence of the DOCUMENT" rule | Doc-writer agent definition | Lede was buried mid-document |
+
+## 3.4 Re-test
+
+The re-test passed all eight checks. The agent used correct terminology on the first draft. It flagged the methodology contradiction unprompted. It cited nineteen URLs. It spontaneously self-reviewed its output against the banned-words list before completing.
+
+**Key observation:** the agent did not get smarter between the two tests. The artifacts the agent reads got more precise. Behavior that had to be coaxed by human feedback in the first test emerged spontaneously in the second once the rules and reference data were in the template.
+
+---
+
+# Part IV: The Refinement Loop
+
+After the A/B test, `big-blueprint` ran against three additional projects. Each surfaced refinements that fed back into the template.
+
+| Project | Domain | What surfaced |
+|---|---|---|
+| Subscriptions prototype | Merchant-native subscriptions on a commerce platform | The "ship the artifact, don't describe it" pattern at the slice-shell level — replaced prose descriptions of slice shape with a `prototypes/_template/` directory the agent clones via `cp -r` |
+| rally-hq | Volleyball tournament platform | Different domain entirely; pattern held; gaps in the discovery/diagnose phase got named and absorbed |
+| ninochavez.co (v3) | Personal site | Different reason for existing; pattern held again; refinements to the prescription stage to handle non-commerce contexts |
+
+The current state of `big-blueprint` is not the state it was in after the March extraction. Each application polished the chassis against friction it was not originally designed for. The total feedback path:
+
+1. Run against a project the chassis does not yet fit
+2. Notice what the chassis cannot absorb
+3. Either adapt the chassis (most cases) or accept the project-specific divergence (rare)
+4. The next project starts from the adapted chassis
+
+This is the same loop the A/B test established at small scale, now operating at project scale.
+
+---
+
+# Part V: The Production Line
+
+`big-blueprint` does not operate in isolation. It sits inside a chain of tools, each of which consumes the previous tool's output as input.
+
+| Tool | Consumes | Produces |
+|---|---|---|
+| `specchain` | Intent (a plan, a problem statement) | A spec + a task list with role delegation |
+| `big-blueprint` | A spec | A scaffolded project with template, skills, agent definitions |
+| `forge-brand` | A brand kit JSON | A typed design system (tokens, components, docs) |
+| `forge-signal` | A brand bridge + content mode | Voice-aware prose (docs, blog posts, briefs, decks) |
+| `gen-images` | A scene description or HTML | Hero images, social cards, branded media |
+
+Each tool can be invoked standalone. The chain emerges from convention — one tool's output structure matches the next tool's input expectation. Adding or removing a link does not break the others.
+
+The contracts that make this work are explicit:
+
+- `specchain` produces specs with a defined frontmatter and section structure that `big-blueprint`'s scaffolding skill expects.
+- `big-blueprint`'s template directory has a known shape (`prototype/`, `docs/`, `decisions/`, `research/`) that all downstream pipeline stages assume.
+- `forge-brand` emits tokens in a format `forge-signal`'s voice modes can read.
+- `forge-signal`'s output respects the same banned-words list that `big-blueprint`'s validator agent enforces.
+
+When any contract changes, every consumer of that contract has to be updated. The discipline is enforced not by review but by the agent definitions referencing the artifacts directly — a `DESIGN.md` change propagates to every project that reads from `DESIGN.md` because the agents read it as input, not as documentation.
+
+---
+
+# Part VI: What Compounds and What Doesn't
+
+## 6.1 What compounds
+
+- **Templates.** Every project starts from a sharper version of the chassis than the previous project did.
+- **Banned-words lists, terminology tables, design principles.** Rules that live in artifacts the agent reads produce self-correcting behavior. Rules that live in prose the human has to remember to enforce do not.
+- **Agent definitions with explicit, specific patterns.** "Use appropriate terminology" does not trigger self-review. "Banned: surcharge, non-preferred, BLOCKED. Replace with: processing fee, third-party, [reframe as save-not-charge]" does.
+- **Composable tool chains.** Adding `forge-signal` to a `big-blueprint` project adds content generation without breaking the prototype pipeline. Removing it does not break anything either.
+
+## 6.2 What does not compound
+
+- **Research depth.** The strongest evidence in the origin run came from human-initiated spikes ("what about utility billing? what about Comcast and AT&T?"). The agent did not generate these on its own and the template cannot encode them — they require the human seeing the output and noticing what is missing.
+- **Visual design judgment.** The agent matched the existing product UI when given screenshots and CSS, but every invented component, color clash, or layout problem was caught by the human looking at the prototype in a browser.
+- **Stakeholder context.** The agent does not know which executive will read the document, which competing initiative this work is responding to, or which past commitment is still in play. The human carries that context.
+
+These are the parts of the work that remain human even when the production volume scales.
+
+## 6.3 Open questions
+
+**The trust problem.** When the work and the thinking are both buried in a prompt session, "showing your work" no longer has a defined form. The case study epilogue lays this out at length: the deliverables can be validated, the prompts can be documented, but the connection between them — the reasoning that turned a plan into a deployed prototype with validated documents — is a black box to anyone who was not in the session.
+
+`big-blueprint` makes partial progress on this: the strategy panels on each prototype page surface the why behind design decisions, the `TEST-LOG.md` from the A/B test makes the methodology reproducible, the citation requirements make claims verifiable. But there is no equivalent yet of the design file a designer makes, the code commit a developer writes with reasoning in the PR description, or the tracked changes on a strategist's draft. The reasoning path remains ephemeral.
+
+**Team contact.** Every application of `big-blueprint` to date has been solo. Whether the chassis holds shape when other people are also turning the crank — whether two people running parallel projects from the same template produce compatible outputs without coordination overhead — is the most consequential untested question. The bet is that the artifacts-are-spec discipline scales to teams because the rules live in the artifacts rather than in any individual's head. The bet is not yet validated.
+
+**Scaling the production line.** Adding new tools to the chain (a `forge-data` for analytics scaffolding, a `forge-test` for test-suite generation) follows the same contract-first pattern in principle. Whether the cognitive load of maintaining the chain stays manageable as it grows is an open question.
+
+---
+
+The methodology is documented here so it can be argued with, not so it can be adopted. The artifacts that make it work — the templates, the terminology tables, the agent definitions — are project-specific. The pattern of *extract while running, A/B test the extraction, fix the gaps the test surfaces, then reapply* is general. The pattern is what this document is for.
