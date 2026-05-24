@@ -21,19 +21,6 @@ export default defineConfig({
       }
     }
   }),
-  vite: {
-    ssr: {
-      noExternal: ["@astrojs/react"]
-    },
-    resolve: {
-      alias: [
-        {
-          find: "react-dom/server",
-          replacement: "react-dom/server.edge"
-        }
-      ]
-    }
-  },
   integrations: [
     mdx({
       remarkPlugins: [remarkGfm, remarkEmoji],
@@ -76,10 +63,14 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    ssr: {
+      noExternal: ["@astrojs/react"],
+    },
     resolve: {
-      alias: {
-        "@": "/src",
-      },
+      alias: [
+        { find: "@", replacement: "/src" },
+        { find: "react-dom/server", replacement: "react-dom/server.edge" },
+      ],
     },
   },
 });
