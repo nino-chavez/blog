@@ -1,0 +1,25 @@
+{
+  "id": "counterpoint-detail",
+  "title": "Counterpoint detail",
+  "group": "reading",
+  "surface": "Stress-test surface — signals intellectual honesty",
+  "phase": "Stage 3",
+  "route": "/pages/counterpoint-detail.html",
+  "summary": "Counterpoints are architecturally important for the hiring-evaluator persona (signals intellectual honesty) but underused in v1 (4 of 276 items). v2 elevates discoverability and clarifies reader-facing label per Rule 2.",
+  "strategy": {
+    "decision": "Preserve v1's counterpoint reading shape (Executive Summary + numbered formal sections + challengesPost binding). Increase discoverability: surface counterpoints in the parent post's footer affordance, in the home-page Recent stream, and in the Library under a clear reader-facing label (D8).",
+    "why": "Hiring-evaluator persona explicitly samples counterpoints to test for intellectual honesty (per persona file). v1's auto-link banner on the parent post (per blog template) is good but discoverability stops there. The 4-of-276 ratio suggests counterpoints aren't visible enough — v2 elevates them.",
+    "shipped": "v1 counterpoint: Executive Summary + numbered formal sections + auto-link banner on parent post via challengesPost binding lookup. Counterpoint-detail surfaces in the counterpoints index (working well per F6-positive).",
+    "gap": "v2 keeps the structure; changes are: (a) reader-facing label (D8) instead of the methodology term 'counterpoint', (b) elevated discoverability (parent-post footer + home-page Recent + Library), (c) format badge consistent with post-detail.",
+    "question": "D8: what does v2 call this surface for readers? 'Counterpoint' is the methodology term and the schema field; 'the case against', 'stress-test', or another term may read better. Doesn't block build but blocks copy pass."
+  },
+  "inheritsFromV1": ["Executive Summary + numbered formal sections", "challengesPost frontmatter binding", "auto-link banner on parent post via [slug].astro template", "formal voice register"],
+  "breaksFromV1": ["reader-facing label per D8", "elevated discoverability (home page Recent + Library)", "format badge consistent with post-detail"],
+  "decisionDependencies": ["D8"],
+  "currentState": {
+    "route": "https://ninochavez.co/blog/counterpoints/[any-slug]",
+    "summary": "v1 counterpoint: formal sections, Executive Summary, auto-link to parent post. 4 items currently.",
+    "sourceFiles": ["astro-build/src/pages/blog/counterpoints/[slug].astro", "astro-build/src/content/counterpoints/*.mdx", "astro-build/src/pages/blog/[slug].astro (auto-link banner logic at lines ~67-69)"],
+    "annotation": "v2 keeps the format and the auto-link, changes the reader-facing label, and elevates discoverability so the 4-of-276 ratio stops hiding intellectual-honesty signal."
+  }
+}

@@ -1,23 +1,39 @@
 {
-  "name": "Signal Dispatch Blueprint",
-  "tagline": "Brownfield redesign review for Signal Dispatch — current-state audit + proposed-state prototype with strategy rationale, comparison toggle, and AI chat grounded in the project corpus.",
-  "slices": [
-    "example-slice"
-  ],
+  "name": "Signal Dispatch v2 Blueprint",
+  "tagline": "Greenfield re-conception of Signal Dispatch — proposed-state prototype for a new publication, with current-state comparison against v1 (ninochavez.co/blog), strategy rationale per surface, and AI chat grounded in the v2 design corpus.",
   "groups": [
-    { "id": "reading",   "label": "Reading",     "color": "brand" },
-    { "id": "discovery", "label": "Discovery",   "color": "accent" },
-    { "id": "operator",  "label": "Operator",    "color": "neutral" }
+    { "id": "reading",    "label": "Reading",    "color": "brand" },
+    { "id": "discovery",  "label": "Discovery",  "color": "accent" },
+    { "id": "identity",   "label": "Identity",   "color": "neutral" }
   ],
   "pages": [
-    "example"
+    "home",
+    "post-detail",
+    "whitepaper-detail",
+    "series-detail",
+    "counterpoint-detail",
+    "library",
+    "about-colophon",
+    "subscribe-follow"
   ],
   "flows": [
     {
-      "id": "main-journey",
-      "label": "Main journey",
-      "summary": "Replace with the primary reader's end-to-end flow — landing on a post, scanning related posts, subscribing.",
-      "pages": ["example"]
+      "id": "cold-arrival-peer-architect",
+      "label": "Cold arrival — peer architect",
+      "summary": "Search-driven arrival on a substantive piece, sample for voice consistency, follow series thread, RSS-subscribe.",
+      "pages": ["post-detail", "series-detail", "subscribe-follow"]
+    },
+    {
+      "id": "cold-arrival-hiring-evaluator",
+      "label": "Cold arrival — hiring evaluator",
+      "summary": "LinkedIn referral to a flagship post, sample 2-3 more posts and a counterpoint to test voice + intellectual honesty, check About for positioning.",
+      "pages": ["post-detail", "counterpoint-detail", "post-detail", "about-colophon"]
+    },
+    {
+      "id": "warm-return-rss",
+      "label": "Warm return — RSS subscriber",
+      "summary": "RSS pushes a new piece, return for the read, optionally check Library for context on the broader argument.",
+      "pages": ["post-detail", "library"]
     }
   ]
 }

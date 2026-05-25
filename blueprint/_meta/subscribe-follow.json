@@ -1,0 +1,25 @@
+{
+  "id": "subscribe-follow",
+  "title": "Subscribe / Follow",
+  "group": "identity",
+  "surface": "RSS + LinkedIn, no email — preserves v1 posture",
+  "phase": "Stage 3",
+  "route": "/pages/subscribe-follow.html",
+  "summary": "One-surface page for follow options: RSS, full-content RSS, LinkedIn link. No email capture. Preserves v1's intentional no-marketing-tells posture.",
+  "strategy": {
+    "decision": "Inherit v1's no-email-capture rule unchanged. Add a dedicated Subscribe page (vs v1's footer-link-only treatment) so the affordance is discoverable without breaking the no-marketing-tells rule. Show RSS URL + full-content RSS URL + LinkedIn-follow URL on one page, each with a one-line explanation.",
+    "why": "Hiring-evaluator persona's drop-pattern: marketing tells (Subscribe! popups, email gates, trending widgets) read as personal-brand performance. v1 explicitly chose to not capture emails. v2 inherits that. The only change is making the existing RSS affordance discoverable as a surface, not just a footer link.",
+    "shipped": "v1: RSS surfaces in footer (/blog/rss.xml and /blog/full-content-rss.xml), in 'More' nav menu, and as link in /llms.txt (now fixed in 628d93f). No on-site subscribe affordance beyond those links.",
+    "gap": "v2 Subscribe-Follow surface gives the affordance a page-level home: explainer copy + RSS URL + full-content RSS URL + LinkedIn-follow link. Discoverable from primary nav (or About) without being a popup or modal interruption mid-post.",
+    "question": "None blocking. Optional consideration: should the Subscribe-Follow surface explain *what the cadence is* per D4 (so readers know what they're subscribing to)?"
+  },
+  "inheritsFromV1": ["no email capture (intentional)", "RSS at /blog/rss.xml and /blog/full-content-rss.xml", "LinkedIn cross-publication as the warm-channel-of-record"],
+  "breaksFromV1": ["dedicated Subscribe surface with explainer (vs footer-link-only)"],
+  "decisionDependencies": ["D4"],
+  "currentState": {
+    "route": "https://ninochavez.co/blog (footer)",
+    "summary": "v1: subscribe affordances exist (RSS URLs in footer) but no dedicated surface. Reader has to look for them.",
+    "sourceFiles": ["astro-build/src/components/Footer.astro", "astro-build/src/pages/blog/rss.xml.ts", "astro-build/src/pages/blog/full-content-rss.xml.ts"],
+    "annotation": "v2 adds the surface without violating no-marketing-tells. Same affordances, more discoverable."
+  }
+}
