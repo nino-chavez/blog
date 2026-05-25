@@ -1,0 +1,4 @@
+# Capture PNGs are regenerated from `blueprint/scripts/capture-current-state.mjs`.
+# Not committed — re-run the script when re-verification is needed (the file naming
+# is deterministic, so cited filenames in 01-diagnose.md resolve after a re-run).
+*.png

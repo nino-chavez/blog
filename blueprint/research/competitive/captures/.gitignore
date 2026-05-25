@@ -1,0 +1,4 @@
+# Competitive captures regenerated via `blueprint/scripts/capture-competitive.mjs`.
+# Not committed — re-run the script when peer publications shift IA or when
+# new sites are added to the comparison set.
+*.png
