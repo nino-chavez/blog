@@ -170,7 +170,7 @@ const counterpointCollection = defineCollection({
     // Who generated this challenge?
     challengeSource: z.object({
       name: z.string(),
-      type: z.enum(['ai-analysis', 'external-contributor', 'self-critique']).default('ai-analysis'),
+      type: z.enum(['ai-analysis', 'external-contributor', 'self-critique', 'external-validation']).default('ai-analysis'),
       url: z.string().optional(),
     }),
     // Research notes that support this content
