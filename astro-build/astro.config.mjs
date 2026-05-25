@@ -24,6 +24,7 @@ export default defineConfig({
           { pattern: "/blog/*" },
           { pattern: "/rss.xml" },
           { pattern: "/full-content-rss.xml" },
+          { pattern: "/llms.txt" },
         ],
       },
     },
