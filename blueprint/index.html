@@ -4,16 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Signal Dispatch Blueprint — Front Door</title>
+  <title>Signal Dispatch v2 Blueprint — Front Door</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/shared.css?v=20260524-1400">
+  <link rel="stylesheet" href="/shared.css?v=20260525-1700">
   <style>
     body { background: var(--bg); }
     main.container { padding-top: var(--space-12); padding-bottom: var(--space-12); }
 
-    /* Hero — paired with audience pills on the right */
     .hero-row {
       display: flex;
       align-items: flex-end;
@@ -46,7 +45,7 @@
       font-weight: 700;
       text-transform: none;
       margin-top: var(--space-4);
-      max-width: 16ch;
+      max-width: 18ch;
       color: var(--text-primary);
     }
 
@@ -89,7 +88,6 @@
       line-height: 1.65;
     }
 
-    /* Stats — richer breakdowns */
     .stat-row {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -119,12 +117,6 @@
       line-height: 1;
       letter-spacing: -0.02em;
     }
-    .stat-tile .stat-value .of {
-      color: var(--text-muted);
-      font-weight: 400;
-      font-size: 24px;
-      margin-left: 2px;
-    }
     .stat-tile .stat-sub {
       font-family: var(--font-mono);
       font-size: 11px;
@@ -133,7 +125,6 @@
       line-height: 1.5;
     }
 
-    /* Path cards */
     .paths-section { padding-bottom: var(--space-10); }
     .paths-grid {
       display: grid;
@@ -195,6 +186,8 @@
     .path-card .status.ready   { color: hsl(142 60% 30%); }
     .path-card .status.partial .dot { background: hsl(40 95% 50%); }
     .path-card .status.partial { color: hsl(40 95% 30%); }
+    .path-card .status.blocked .dot { background: hsl(0 75% 55%); }
+    .path-card .status.blocked { color: hsl(0 65% 40%); }
     .path-card .status.planned .dot { background: hsl(220 10% 60%); }
 
     .path-card h3 {
@@ -269,63 +262,62 @@
   <main class="container">
     <div class="hero-row">
       <div class="hero-lead">
-        <span class="label">The Signal Dispatch Blueprint</span>
-        <h1>One front door,<br/>five paths in.</h1>
+        <span class="label">Signal Dispatch v2 Blueprint · greenfield re-conception</span>
+        <h1>A new publication,<br/>built against v1's reality.</h1>
       </div>
       <div class="audience-pills" role="tablist" aria-label="Reorder paths by audience">
         <button class="is-active" data-audience="reviewer" role="tab" aria-selected="true">
           <svg class="pill-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
           Reviewer
         </button>
-        <button data-audience="engineer" role="tab" aria-selected="false">
+        <button data-audience="builder" role="tab" aria-selected="false">
           <svg class="pill-icon" viewBox="0 0 24 24"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>
-          Engineer
+          Builder
         </button>
-        <button data-audience="operator" role="tab" aria-selected="false">
+        <button data-audience="decider" role="tab" aria-selected="false">
           <svg class="pill-icon" viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h14M18 18h2"/></svg>
-          Operator
+          Decider
         </button>
       </div>
     </div>
 
     <p class="hero-lede">
-      Synthetic design study against the personas, market, and operational reality of the product.
-      Prototype walk-through, system docs, phased roadmap, active validation queue, and methodology — every surface on one shelf.
+      Signal Dispatch v2 is a re-conception of the publication currently at ninochavez.co/blog — new name, new voice, new identity, against a 276-item v1 corpus that survives as reference, not constraint. This portal carries the greenfield Stage 1-6 artifacts: research synthesis, design principles, prototype plan with eight surfaces, the decisions packet that gates Stage 3 page builds, and v1-baseline reference for what came before. The v2 name + thesis decisions land here as they're made; the prototype pages ship as the decisions unblock them.
     </p>
 
     <section class="stat-row">
       <div class="stat-tile">
-        <div class="stat-label">Prototype</div>
+        <div class="stat-label">v2 surfaces</div>
         <div class="stat-value" id="stat-pages">…</div>
-        <div class="stat-sub">pages across <span id="stat-slices">…</span> slices</div>
+        <div class="stat-sub">in <code>_meta/</code>; page HTML lands as decisions unblock</div>
       </div>
       <div class="stat-tile">
-        <div class="stat-label">Docs</div>
+        <div class="stat-label">Stage artifacts</div>
         <div class="stat-value" id="stat-docs">…</div>
-        <div class="stat-sub">Strategic artifacts + working documents</div>
+        <div class="stat-sub">Stages 1-6 + decisions packet + v1-baseline</div>
       </div>
       <div class="stat-tile">
-        <div class="stat-label">Findings</div>
-        <div class="stat-value" id="stat-findings">…</div>
-        <div class="stat-sub">From research synthesis · synthetic until validated</div>
+        <div class="stat-label">Decisions pending</div>
+        <div class="stat-value" id="stat-decisions">9</div>
+        <div class="stat-sub">D1+D2+D7 are the critical-path triple</div>
       </div>
       <div class="stat-tile">
-        <div class="stat-label">Hypotheses</div>
-        <div class="stat-value" id="stat-hypotheses">…</div>
-        <div class="stat-sub">Kill + tune + taste claims · validation queue</div>
+        <div class="stat-label">v1 inventory</div>
+        <div class="stat-value">276</div>
+        <div class="stat-sub">items across 8 collections in v1 corpus</div>
       </div>
     </section>
 
     <section class="paths-section">
       <div class="paths-grid" id="paths-grid"></div>
       <div class="audience-note">
-        <strong>The three pills above reorder the cards for whoever's looking.</strong>
-        Reviewer (default) leads with Try + Discover. Engineer leads with Inspect + Operate. Operator leads with Roadmap + Discover. Selection persists in this session.
+        <strong>The three pills above reorder the cards.</strong>
+        Reviewer (default) leads with Read + Reason. Builder leads with Operate + Compare. Decider leads with Decide + Reason. Selection persists in this session.
       </div>
     </section>
 
     <footer class="footer-note">
-      <span>signal-dispatch-blueprint · brownfield redesign review · diagnose + prescribe against the live blog at ninochavez.co/blog</span>
+      <span>signal-dispatch-v2-blueprint · greenfield re-conception · v1 reference at <a href="https://ninochavez.co/blog" target="_blank" rel="noopener">ninochavez.co/blog</a></span>
       <a href="https://github.com/nino-chavez/blog" target="_blank" rel="noopener">github ↗</a>
     </footer>
   </main>
@@ -333,39 +325,39 @@
   <script>
     const PATHS = [
       {
-        id: 'try', title: 'Try', status: 'ready',
+        id: 'read', title: 'Read', status: 'partial',
         icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>',
-        description: 'Walk the prototype pages with strategy + current-state drawers, proposed-vs-shipped toggle, and multi-page flows. The interactive study.',
-        links: 'Catalog: <a href="/prototype/">/prototype/</a> · Sample: <a href="/pages/tournament">tournament</a>, <a href="/pages/operator-game-day">operator game-day</a>',
-        priority: { reviewer: 1, engineer: 3, operator: 4 }
+        description: 'The eight v2 surfaces — home, post, whitepaper, series, counterpoint, library, about, subscribe — with per-surface strategy panels explaining the v1 → v2 decision. _meta stubs render now; HTML pages land as D1+D2+D7 unblock them.',
+        links: 'Manifest: <a href="/_meta/index.json">_meta/index.json</a> · Sample surfaces: <a href="/_meta/home.json">home</a>, <a href="/_meta/post-detail.json">post-detail</a>, <a href="/_meta/whitepaper-detail.json">whitepaper-detail</a>',
+        priority: { reviewer: 1, builder: 3, decider: 4 }
       },
       {
-        id: 'discover', title: 'Discover', status: 'ready',
+        id: 'reason', title: 'Reason', status: 'ready',
         icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M16 8l-3 5-5 3 3-5 5-3z" fill="currentColor" stroke="none"/></svg>',
-        description: 'Why the blueprint makes its decisions. CX strategy plus the four system docs — business model, monetization, tournament lifecycle, adaptive chrome.',
-        links: '<a href="/docs/?doc=cx-strategy">CX Strategy</a> · <a href="/docs/?doc=business-model">Business model</a> · <a href="/docs/?doc=research-synthesis">Research synthesis</a>',
-        priority: { reviewer: 2, engineer: 5, operator: 2 }
+        description: 'Why v2 looks like this. Stage 1 research synthesizes salvaged v1 inputs (personas, competitive, funnel) and surfaces the A-vs-B thesis tension. Stage 2 codifies five rules adapted for a publication. Stage 3 lists the surfaces and build order.',
+        links: '<a href="/docs/?doc=01-research">Stage 1 — Research</a> · <a href="/docs/?doc=02-design-principles">Stage 2 — Design principles</a> · <a href="/docs/?doc=03-prototype-plan">Stage 3 — Prototype plan</a>',
+        priority: { reviewer: 2, builder: 5, decider: 2 }
       },
       {
-        id: 'roadmap', title: 'Roadmap', status: 'ready',
+        id: 'decide', title: 'Decide', status: 'blocked',
         icon: '<svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M6 8.5v7M8.5 6h7M8.5 18h7"/></svg>',
-        description: 'Phased plan: Phase 1 (~17 hrs) free-mode launch keystones. Phase 2 (~30 hrs) identity + retention. Phase 3 primary-research gates before structural commits.',
-        links: '<a href="/docs/?doc=roadmap">Roadmap</a> · <a href="/docs/?doc=gaps">Per-page gaps</a>',
-        priority: { reviewer: 3, engineer: 4, operator: 1 }
+        description: 'Nine decisions block downstream work. D1 (thesis), D2 (editorial single-sentence), and D7 (v2 name) are the critical-path triple — together they unblock the home-page build. The rest sharpen as those land.',
+        links: '<a href="/docs/?doc=DECISIONS-NEEDED">Decisions packet</a>',
+        priority: { reviewer: 3, builder: 4, decider: 1 }
+      },
+      {
+        id: 'compare', title: 'Compare', status: 'ready',
+        icon: '<svg viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h14M18 18h2"/><circle cx="16" cy="6" r="2" fill="currentColor" stroke="none"/><circle cx="8" cy="12" r="2" fill="currentColor" stroke="none"/><circle cx="16" cy="18" r="2" fill="currentColor" stroke="none"/></svg>',
+        description: 'v1 baseline reference. The brownfield audit artifacts (diagnose, prescribe, design-brief) salvaged as v1 reference material — what v1 looks like today, what its measured funnel gaps are, and what v2 explicitly carries forward vs replaces.',
+        links: '<a href="/docs/?doc=v1-baseline%2FREADME">v1-baseline overview</a> · <a href="/docs/?doc=v1-baseline%2F01-diagnose">v1 audit findings</a>',
+        priority: { reviewer: 4, builder: 2, decider: 3 }
       },
       {
         id: 'operate', title: 'Operate', status: 'ready',
-        icon: '<svg viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h14M18 18h2"/><circle cx="16" cy="6" r="2" fill="currentColor" stroke="none"/><circle cx="8" cy="12" r="2" fill="currentColor" stroke="none"/><circle cx="16" cy="18" r="2" fill="currentColor" stroke="none"/></svg>',
-        description: 'Conventions for building on top of this blueprint. Design principles, production-UI sanctity rule, page-creation contract, per-tool OWNER-SPECs.',
-        links: '<a href="/docs/?doc=design-principles">Design principles</a> · <a href="/docs/?doc=feasibility">Feasibility</a> · CONVENTIONS.md in repo',
-        priority: { reviewer: 5, engineer: 1, operator: 3 }
-      },
-      {
-        id: 'validate', title: 'Validate', status: 'partial',
         icon: '<svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="M14.5 14.5l5 5"/></svg>',
-        description: 'Active validation queue. 19 hypotheses tiered by load. JTBD dry run pressure-tested the conversation guides; real interviews next. The honest fork between hypothesis and evidence.',
-        links: '<a href="/docs/?doc=validation-plan">Validation plan</a> · <a href="/docs/?doc=validation-jtbd-dry-run">JTBD dry run</a>',
-        priority: { reviewer: 4, engineer: 2, operator: 5 }
+        description: 'Conventions for building on this blueprint. Portal page-writing contract, engineering rules (test baseline, sensor profile), prototype DESIGN.md, the per-tool OWNER-SPECs for the proto-nav, chat-widget, and annotation modules.',
+        links: '<a href="/docs/?doc=CONVENTIONS">CONVENTIONS.md</a> · <a href="/docs/?doc=prototype%2FDESIGN">prototype/DESIGN.md</a>',
+        priority: { reviewer: 5, builder: 1, decider: 5 }
       }
     ];
 
@@ -406,7 +398,7 @@
 
     try {
       const saved = sessionStorage.getItem('sd-bp-audience');
-      if (saved && ['reviewer', 'engineer', 'operator'].includes(saved)) {
+      if (saved && ['reviewer', 'builder', 'decider'].includes(saved)) {
         currentAudience = saved;
         document.querySelectorAll('.audience-pills button').forEach(b => {
           const on = b.dataset.audience === saved;
@@ -423,24 +415,23 @@
         const r = await fetch('/_meta/index.json');
         const m = await r.json();
         document.getElementById('stat-pages').textContent = (m.pages || []).length;
-        const slicesEl = document.getElementById('stat-slices');
-        if (slicesEl) slicesEl.textContent = (m.slices || []).length;
+        // Stage artifacts count: 6 stages + DECISIONS-NEEDED + v1-baseline/README + prototype/DESIGN = 9
+        document.getElementById('stat-docs').textContent = '9';
       } catch {
         document.getElementById('stat-pages').textContent = '—';
-        const slicesEl = document.getElementById('stat-slices');
-        if (slicesEl) slicesEl.textContent = '—';
+        document.getElementById('stat-docs').textContent = '—';
       }
     })();
   </script>
 
   <script>
-    window.PORTAL_SHELL_CONFIG = { productName: 'Signal Dispatch' };
+    window.PORTAL_SHELL_CONFIG = { productName: 'Signal Dispatch v2' };
     window.PROTO_PAGE = { id: 'index', title: 'Front Door' };
     window.PROTO_CHAT_DISABLED = false;
   </script>
-  <script src="/_portal-shell.js?v=20260524-1400"></script>
-  <script src="/proto-nav.js?v=20260524-1400"></script>
+  <script src="/_portal-shell.js?v=20260525-1700"></script>
+  <script src="/proto-nav.js?v=20260525-1700"></script>
   <script src="/chat-widget.js" defer></script>
-  <script src="/proto-annotate.js?v=20260524-1400" defer></script>
+  <script src="/proto-annotate.js?v=20260525-1700" defer></script>
 </body>
 </html>
