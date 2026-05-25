@@ -1,16 +1,27 @@
-# Signal Dispatch — Blueprint configuration.
+# Signal Dispatch v2 — Blueprint configuration.
 #
 # Canonical config schema: ~/Workspace/dev/wip/blueprint/template/blueprint.yml
-# Pattern-match reasoning: this is a live product (ninochavez.co/blog, 275 posts,
-# RSS subscribers) under audit + redesign. Per docs/variant-selection.md Q1=yes /
-# Q2=no / Q3=yes → brownfield. Per docs/portal-and-tier-ladder.md decision tree
-# (brownfield audit/redesign with current-state vs proposed comparison) →
-# Pattern B. Per the Variant × Tier matrix → Tier 1 (default for redesign-review).
+#
+# Variant: greenfield. Corrected 2026-05-25 after the prior pattern-match call
+# ("v1 exists → brownfield") was identified as a misclassification. Per
+# docs/variant-selection.md, the variant is determined by the WORK, not the
+# product's existence. The work here is a re-conception of the publication —
+# new name, new voice, new identity. v1 (ninochavez.co/blog, 275 posts) is a
+# content reference and competitive baseline, not the constraint.
+#
+# Brownfield artifacts produced before the correction are preserved under
+# blueprint/v1-baseline/ as v1 reference material (audit findings, funnel
+# evidence, personas) — usable as INPUTS to greenfield Stages 1-2, not as
+# active artifacts.
+#
+# Tier 1 / Pattern B retained: stakeholder-facing portal with current-state
+# vs proposed comparison is still the right shape — what changes is that
+# "proposed" is v2 (a new publication) instead of "v1 with fixes."
 
-variant: brownfield
+variant: greenfield
 tier: 1
 portal_pattern: B
 
 project:
-  name: "signal-dispatch"
-  description: "Brownfield redesign review for the Signal Dispatch blog — diagnose current state, prescribe changes, prototype proposed state alongside the live product."
+  name: "signal-dispatch-v2"
+  description: "Greenfield re-conception of Signal Dispatch as a new publication — new name, voice, identity, IA, and surface set. v1 (ninochavez.co/blog) is content reference and baseline metrics, not the v2 product constraint."
