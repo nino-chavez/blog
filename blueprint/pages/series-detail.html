@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>From Prompt to Pattern (series) — [v2-name] Blueprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared.css?v=20260525-1700">
+  <style>
+    /* series-detail page-specific styles. Tokens via shared.css.
+       Inherits v1's gold-standard numbered-card pattern (F7-positive)
+       unchanged. v2 additions are limited to format badge + cross-series
+       footer + read-state markers from localStorage. */
+
+    .pub-header {
+      border-bottom: 1px solid var(--card-border);
+      background: var(--card);
+    }
+    .pub-header-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: var(--space-3) var(--space-4);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+    }
+    .pub-mark {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+    }
+    .pub-mark .pub-mark-placeholder { color: var(--text-muted); font-weight: 500; }
+    .pub-nav {
+      display: flex;
+      gap: var(--space-4);
+      font-size: var(--text-sm);
+    }
+    .pub-nav a {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .pub-nav a:hover { color: var(--text-primary); }
+    .pub-nav a.active { color: var(--text-primary); font-weight: 600; }
+
+    /* Series header — title + description, format badge, count, progress. */
+    .series-shell {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: var(--space-12) var(--space-4);
+    }
+
+    .series-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+      flex-wrap: wrap;
+    }
+    .format-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px 4px;
+      border-radius: var(--radius-sm);
+      background: hsl(35 60% 95%);
+      color: hsl(35 80% 30%);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .format-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    .series-meta .byline {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+    }
+    .series-meta .byline strong { color: var(--text-primary); font-weight: 600; }
+    .series-meta .stat {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .series-meta .dot { color: var(--text-muted); }
+
+    .series-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 1.5rem + 2vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: var(--space-3);
+      text-transform: none;  /* override shared.css h1 uppercase (Rally HQ residual) */
+    }
+    .series-description {
+      font-size: var(--text-lg);
+      color: var(--text-secondary);
+      line-height: 1.4;
+      margin-bottom: var(--space-6);
+      font-weight: 400;
+      max-width: 64ch;
+    }
+
+    /* Progress strip — visual read-progress across the series. */
+    .series-progress {
+      margin-bottom: var(--space-10);
+      padding: var(--space-3) var(--space-4);
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+    .series-progress-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .series-progress-value {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .series-progress-bar {
+      flex: 1;
+      min-width: 140px;
+      height: 4px;
+      background: var(--card-border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .series-progress-fill {
+      height: 100%;
+      background: hsl(142 50% 45%);
+      transition: width var(--transition-base);
+    }
+    .series-progress button {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      padding: 4px 8px;
+      border-radius: var(--radius-sm);
+    }
+    .series-progress button:hover { color: var(--text-primary); background: var(--surface-2); }
+
+    /* Numbered cards — the v1 gold-standard pattern, inherited unchanged.
+       v2 additions: format badges per card, read-state markers, fluid grid. */
+    .series-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    @media (min-width: 720px) {
+      .series-list { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .entry-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      padding: var(--space-5) var(--space-5) var(--space-4);
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 1px 2px rgb(0 0 0 / 0.03);
+      transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+      position: relative;
+      text-decoration: none;
+      color: inherit;
+    }
+    .entry-card:hover {
+      transform: translateY(-2px);
+      border-color: color-mix(in srgb, hsl(35 80% 50%) 35%, var(--card-border));
+      box-shadow: 0 6px 16px -4px rgb(0 0 0 / 0.08), 0 2px 4px rgb(0 0 0 / 0.04);
+    }
+
+    .entry-card[data-read="true"] {
+      background: hsl(35 30% 99%);
+    }
+    .entry-card[data-read="true"] .entry-title { color: var(--text-secondary); }
+
+    .entry-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+    .entry-number {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: hsl(35 80% 35%);
+      letter-spacing: 0.04em;
+    }
+    .entry-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+    .entry-status .check {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      border: 1.5px solid var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: transparent;
+    }
+    .entry-card[data-read="true"] .entry-status .check {
+      background: hsl(142 50% 45%);
+      border-color: hsl(142 50% 45%);
+      color: white;
+    }
+    .entry-card[data-read="true"] .entry-status .check::before { content: '✓'; }
+    .entry-card[data-read="true"] .entry-status { color: hsl(142 40% 35%); }
+
+    .entry-title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
+      color: var(--text-primary);
+      margin: 0;
+    }
+    .entry-excerpt {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin: 0;
+      flex: 1;
+    }
+    .entry-footer {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      padding-top: var(--space-2);
+      border-top: 1px dashed var(--card-border);
+    }
+    .entry-footer .entry-format {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      background: hsl(220 80% 96%);
+      color: hsl(220 70% 35%);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .entry-footer .entry-format.post { background: hsl(150 60% 95%); color: hsl(150 60% 28%); }
+    .entry-footer .entry-format.whitepaper { background: hsl(220 80% 96%); color: hsl(220 70% 35%); }
+    .entry-footer .entry-format.counterpoint { background: hsl(0 60% 96%); color: hsl(0 55% 35%); }
+    .entry-footer .entry-date { margin-left: auto; }
+
+    /* Cross-series footer — promotes other series, ties series-detail
+       into the larger Library surface. */
+    .cross-series {
+      margin: var(--space-16) 0 0;
+      padding: var(--space-6) 0;
+      border-top: 1px solid var(--card-border);
+    }
+    .cross-series-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: var(--space-3);
+    }
+    .cross-series-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+    @media (min-width: 720px) {
+      .cross-series-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .cross-series-card {
+      padding: var(--space-4);
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color var(--transition-fast);
+    }
+    .cross-series-card:hover { border-color: hsl(35 80% 50%); }
+    .cross-series-card .cs-count {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .cross-series-card .cs-title {
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .pub-footer {
+      max-width: 920px;
+      margin: var(--space-12) auto 0;
+      padding: var(--space-6) var(--space-4);
+      border-top: 1px solid var(--card-border);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+    .pub-footer a {
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    /* Shipped-view mock — v1 series-detail surface (the gold-standard
+       pattern that v2 inherits). The shipped view is intentionally
+       similar — the design call is "preserve, don't change." */
+    .shipped-view .v1-mock {
+      max-width: 920px;
+      margin: var(--space-8) auto;
+      padding: var(--space-6) var(--space-4);
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+    }
+    .shipped-view .v1-mock h1 {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      margin-bottom: var(--space-3);
+    }
+    .shipped-view .v1-mock .v1-note {
+      margin-top: var(--space-4);
+      padding: var(--space-3);
+      background: hsl(0 0% 97%);
+      border-left: 3px solid var(--text-muted);
+      font-size: var(--text-xs);
+      font-family: var(--font-mono);
+      color: var(--text-secondary);
+    }
+    .shipped-view .v1-mock .v1-diff-list {
+      margin-top: var(--space-3);
+      padding-left: var(--space-5);
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+    }
+    .shipped-view .v1-mock .v1-diff-list li { margin-bottom: 6px; }
+  </style>
+</head>
+<body data-compare-root data-view="proposed">
+
+  <!-- PROPOSED: v2 series-detail surface. Inherits v1 numbered-card
+       pattern (F7-positive) unchanged; adds format badges, read-state
+       markers, cross-series footer. -->
+  <section class="proposed-view">
+
+    <header class="pub-header">
+      <div class="pub-header-inner">
+        <div class="pub-mark">[v2-name] <span class="pub-mark-placeholder">· name pending D7</span></div>
+        <nav class="pub-nav">
+          <a href="/pages/library.html" class="active">Library</a>
+          <a href="/pages/about-colophon.html">About</a>
+          <a href="/pages/subscribe-follow.html">Follow</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="series-shell">
+
+      <div class="series-meta">
+        <span class="format-badge">Series</span>
+        <span class="byline">curated by <strong>Nino Chavez</strong></span>
+        <span class="dot">·</span>
+        <span class="stat" id="entry-count">8 entries</span>
+        <span class="dot">·</span>
+        <span class="stat">~3 hr total</span>
+      </div>
+
+      <h1 class="series-title">From Prompt to Pattern</h1>
+      <p class="series-description">A working architect's notes on moving from one-off prompts to durable, reusable patterns for agent-assisted production work. Each entry stands alone; the series reads as one argument in order.</p>
+
+      <div class="series-progress" aria-label="Series read progress">
+        <span class="series-progress-label">Progress</span>
+        <span class="series-progress-value"><span id="read-count">0</span> of <span id="total-count">8</span></span>
+        <div class="series-progress-bar"><div class="series-progress-fill" id="progress-fill" style="width: 0%"></div></div>
+        <button id="reset-progress" type="button">Reset progress</button>
+      </div>
+
+      <ol class="series-list" id="series-list">
+
+        <a href="/pages/post-detail.html" class="entry-card" data-entry-id="ptp-01">
+          <div class="entry-header">
+            <span class="entry-number">01</span>
+            <span class="entry-status"><span class="check"></span><span class="entry-status-label">Unread</span></span>
+          </div>
+          <h2 class="entry-title">The contract is the work</h2>
+          <p class="entry-excerpt">Why agent-assisted work without a written falsifier is unanchored. What the contract carries that the prompt can't.</p>
+          <div class="entry-footer">
+            <span class="entry-format post">Post</span>
+            <span class="entry-read-time">8 min</span>
+            <span class="entry-date">Feb 14, 2026</span>
+          </div>
+        </a>
+
+        <a href="/pages/post-detail.html" class="entry-card" data-entry-id="ptp-02">
+          <div class="entry-header">
+            <span class="entry-number">02</span>
+            <span class="entry-status"><span class="check"></span><span class="entry-status-label">Unread</span></span>
+          </div>
+          <h2 class="entry-title">Validators amortize verification</h2>
+          <p class="entry-excerpt">The leverage isn't in prompts; it's in the encoded check that runs every time. A pattern for moving review work into infrastructure.</p>
+          <div class="entry-footer">
+            <span class="entry-format post">Post</span>
+            <span class="entry-read-time">11 min</span>
+            <span class="entry-date">Feb 28, 2026</span>
+          </div>
+        </a>
+
+        <a href="/pages/whitepaper-detail.html" class="entry-card" data-entry-id="ptp-03">
+          <div class="entry-header">
+            <span class="entry-number">03</span>
+            <span class="entry-status"><span class="check"></span><span class="entry-status-label">Unread</span></span>
+          </div>
+          <h2 class="entry-title">The Cognitive Foundry</h2>
+          <p class="entry-excerpt">A reference architecture for agent-assisted production work. The five-piece chassis and what fails predictably without each piece.</p>
+          <div class="entry-footer">
+            <span class="entry-format whitepaper">Whitepaper</span>
+            <span class="entry-read-time">22 min</span>
+            <span class="entry-date">Apr 11, 2026</span>
+          </div>
+        </a>
+
+        <a href="/pages/post-detail.html" class="entry-card" data-entry-id="ptp-04">
+          <div class="entry-header">
+            <span class="entry-number">04</span>
+            <span class="entry-status"><span class="check"></span><span class="entry-status-label">Unread</span></span>
+          </div>
+          <h2 class="entry-title">Sensors over inference</h2>
+          <p class="entry-excerpt">Any time the agent says "probably" about runtime state, a sensor was missing. A taxonomy of the sensors that close common loops.</p>
+          <div class="entry-footer">
+            <span class="entry-format post">Post</span>
+            <span class="entry-read-time">9 min</span>
+            <span class="entry-date">Apr 25, 2026</span>
+          </div>
+        </a>
+
+        <a href="/pages/counterpoint-detail.html" class="entry-card" data-entry-id="ptp-05">
+          <div class="entry-header">
+            <span class="entry-number">05</span>
+            <span class="entry-status"><span class="check"></span><span class="entry-status-label">Unread</span></span>
+          </div>
+          <h2 class="entry-title">"The chassis is over-engineering" — a counterpoint</h2>
+          <p class="entry-excerpt">A stress-test of the Cognitive Foundry argument. Where the chassis is right; where it's load-bearing scaffolding that can be removed.</p>
+          <div class="entry-footer">
+            <span class="entry-format counterpoint">Counterpoint</span>
+            <span class="entry-read-time">7 min</span>
+            <span class="entry-date">May 02, 2026</span>
+          </div>
+        </a>
+
+        <a href="/pages/post-detail.html" class="entry-card" data-entry-id="ptp-06">
+          <div class="entry-header">
+            <span class="entry-number">06</span>
+            <span class="entry-status"><span class="check"></span><span class="entry-status-label">Unread</span></span>
+          </div>
+          <h2 class="entry-title">Reviewers are not the same agent</h2>
+          <p class="entry-excerpt">Why a second agent finds what the first agent missed. The structural reason same-agent self-review fails predictably, and the cheap fix.</p>
+          <div class="entry-footer">
+            <span class="entry-format post">Post</span>
+            <span class="entry-read-time">10 min</span>
+            <span class="entry-date">May 09, 2026</span>
+          </div>
+        </a>
+
+        <a href="/pages/post-detail.html" class="entry-card" data-entry-id="ptp-07">
+          <div class="entry-header">
+            <span class="entry-number">07</span>
+            <span class="entry-status"><span class="check"></span><span class="entry-status-label">Unread</span></span>
+          </div>
+          <h2 class="entry-title">Encodings, not prompts</h2>
+          <p class="entry-excerpt">Where compounding leverage actually lives. Why prompt fixes don't accrete and what does.</p>
+          <div class="entry-footer">
+            <span class="entry-format post">Post</span>
+            <span class="entry-read-time">8 min</span>
+            <span class="entry-date">May 16, 2026</span>
+          </div>
+        </a>
+
+        <a href="/pages/whitepaper-detail.html" class="entry-card" data-entry-id="ptp-08">
+          <div class="entry-header">
+            <span class="entry-number">08</span>
+            <span class="entry-status"><span class="check"></span><span class="entry-status-label">Unread</span></span>
+          </div>
+          <h2 class="entry-title">The Big Blueprint Methodology</h2>
+          <p class="entry-excerpt">How the chassis becomes a methodology. The seven-stage pipeline, the variant taxonomy, and what compounds across initiatives.</p>
+          <div class="entry-footer">
+            <span class="entry-format whitepaper">Whitepaper</span>
+            <span class="entry-read-time">28 min</span>
+            <span class="entry-date">May 23, 2026</span>
+          </div>
+        </a>
+
+      </ol>
+
+      <div class="cross-series">
+        <div class="cross-series-label">More series</div>
+        <div class="cross-series-grid">
+          <a href="#" class="cross-series-card">
+            <div class="cs-count">12 entries</div>
+            <h3 class="cs-title">Agentic Workflows in Practice</h3>
+          </a>
+          <a href="#" class="cross-series-card">
+            <div class="cs-count">7 entries</div>
+            <h3 class="cs-title">The Storefront</h3>
+          </a>
+          <a href="#" class="cross-series-card">
+            <div class="cs-count">5 entries</div>
+            <h3 class="cs-title">The Loom</h3>
+          </a>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="pub-footer">
+      <span>by Nino Chavez · architect-who-directs-agents</span>
+      <a href="/blog/rss.xml" target="_blank" rel="noopener">RSS</a>
+      <a href="/blog/full-content-rss.xml" target="_blank" rel="noopener">RSS (full content)</a>
+    </footer>
+
+  </section>
+
+  <!-- SHIPPED: v1 series-detail surface. The design call here is
+       "preserve, don't change" — so the shipped view documents what
+       v1 already does well and what minor additions v2 layers on. -->
+  <section class="shipped-view">
+    <div class="v1-mock">
+      <h1>v1 series-detail — gold-standard IA pattern</h1>
+      <p style="font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.55;">
+        v1's series-detail surface is the strongest IA pattern on the site per the v1-baseline diagnose (F7-positive). It already has numbered ordered cards, clean type-scale, and series-name persistence. v2 inherits the pattern unchanged.
+      </p>
+      <p style="font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.55; margin-top: var(--space-3);">
+        Real production surface: <a href="https://ninochavez.co/blog/series/from-prompt-to-pattern" target="_blank" rel="noopener">ninochavez.co/blog/series/from-prompt-to-pattern</a>
+      </p>
+      <div class="v1-note">
+        Per Stage 3 plan, this surface is intentionally first-in-build precisely because it's decision-unblocked — there's nothing to redesign, only to extend.
+      </div>
+      <p style="font-size: var(--text-xs); font-family: var(--font-mono); color: var(--text-muted); margin-top: var(--space-4); text-transform: uppercase; letter-spacing: 0.06em;">v2 additions only:</p>
+      <ul class="v1-diff-list">
+        <li><strong>Format badges per card</strong> (Post / Whitepaper / Counterpoint) — cross-format consistency with post-detail and whitepaper-detail surfaces.</li>
+        <li><strong>Read-state markers</strong> (checkmark + visual de-emphasis) — localStorage-backed, no server state, no tracking.</li>
+        <li><strong>Series-level progress bar</strong> — "X of Y read" with reset button.</li>
+        <li><strong>Cross-series footer</strong> — promotes other series; ties series-detail into the Library surface.</li>
+      </ul>
+    </div>
+  </section>
+
+  <script>
+    window.PROTO_PAGE = { id: 'series-detail' };
+
+    // Read-state markers. Persisted in localStorage. The proto-annotate
+    // module also uses localStorage so we namespace to avoid collision.
+    // Real production would back this with server state or skip it
+    // entirely depending on D-no-marketing-tells stance.
+    (function () {
+      const SERIES_ID = 'from-prompt-to-pattern';
+      const STORAGE_KEY = `sd-v2-read:${SERIES_ID}`;
+      const cards = Array.from(document.querySelectorAll('.entry-card'));
+      const readCountEl = document.getElementById('read-count');
+      const totalCountEl = document.getElementById('total-count');
+      const fillEl = document.getElementById('progress-fill');
+      const resetBtn = document.getElementById('reset-progress');
+
+      totalCountEl.textContent = cards.length;
+
+      function loadRead() {
+        try {
+          return new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'));
+        } catch { return new Set(); }
+      }
+      function saveRead(set) {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify([...set])); } catch {}
+      }
+      function render(set) {
+        cards.forEach((card) => {
+          const id = card.dataset.entryId;
+          const isRead = set.has(id);
+          card.dataset.read = isRead ? 'true' : 'false';
+          const label = card.querySelector('.entry-status-label');
+          if (label) label.textContent = isRead ? 'Read' : 'Unread';
+        });
+        const readCount = [...set].filter((id) => cards.some((c) => c.dataset.entryId === id)).length;
+        readCountEl.textContent = readCount;
+        fillEl.style.width = ((readCount / cards.length) * 100) + '%';
+      }
+
+      const read = loadRead();
+      render(read);
+
+      // Toggle read-state on card click. Don't navigate — the prototype
+      // demonstrates the marker behavior. (Production would mark-read on
+      // navigation via beforeunload or a sentinel link param.)
+      cards.forEach((card) => {
+        card.addEventListener('click', (e) => {
+          e.preventDefault();
+          const id = card.dataset.entryId;
+          if (read.has(id)) read.delete(id);
+          else read.add(id);
+          saveRead(read);
+          render(read);
+        });
+      });
+
+      resetBtn.addEventListener('click', () => {
+        read.clear();
+        saveRead(read);
+        render(read);
+      });
+    })();
+  </script>
+
+  <script src="/_portal-shell.js?v=20260525-1700"></script>
+  <script src="/proto-nav.js?v=20260525-1700"></script>
+  <script src="/chat-widget.js" defer></script>
+  <script src="/proto-annotate.js?v=20260525-1700" defer></script>
+</body>
+</html>

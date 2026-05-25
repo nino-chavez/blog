@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>The Cognitive Foundry — [v2-name] Blueprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared.css?v=20260525-1700">
+  <style>
+    /* whitepaper-detail page-specific styles only. Tokens via shared.css.
+       Per Rule 5 (progressive disclosure): exec summary self-contained,
+       TOC clickable, section-progress sticky, plain markdown + tables. */
+
+    /* Publication header (the v2 publication's own header, NOT the
+       harness chrome which proto-nav.js injects above). */
+    .pub-header {
+      border-bottom: 1px solid var(--card-border);
+      background: var(--card);
+    }
+    .pub-header-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: var(--space-3) var(--space-4);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+    }
+    .pub-mark {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+    }
+    .pub-mark .pub-mark-placeholder {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .pub-nav {
+      display: flex;
+      gap: var(--space-4);
+      font-size: var(--text-sm);
+    }
+    .pub-nav a {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .pub-nav a:hover { color: var(--text-primary); }
+
+    /* Article frame — narrow reading column, byline + format badge above
+       the fold per Rule 3 (work-first, author-second, brand-third). */
+    .article {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: var(--space-12) var(--space-4) var(--space-16);
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+      flex-wrap: wrap;
+    }
+    .format-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px 4px;
+      border-radius: var(--radius-sm);
+      background: hsl(220 80% 96%);
+      color: hsl(220 70% 35%);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .format-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    .article-meta .byline {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+    }
+    .article-meta .byline strong { color: var(--text-primary); font-weight: 600; }
+    .article-meta time,
+    .article-meta .read-time {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .article-meta .dot { color: var(--text-muted); }
+
+    .article-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 1.5rem + 2vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: var(--space-3);
+      text-transform: none;  /* override shared.css h1 uppercase (Rally HQ residual) */
+    }
+    .article-subtitle {
+      font-size: var(--text-lg);
+      color: var(--text-secondary);
+      line-height: 1.4;
+      margin-bottom: var(--space-8);
+      font-weight: 400;
+    }
+
+    /* Companion-to-post link — companionOf binding surfaced visibly. */
+    .companion-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: var(--space-8);
+      padding: 10px 14px;
+      background: hsl(35 30% 96%);
+      border: 1px solid hsl(35 30% 88%);
+      border-radius: var(--radius-md);
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+    }
+    .companion-link strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .companion-link a { color: var(--text-primary); border-bottom: 1px solid var(--text-muted); }
+
+    /* Executive Summary — Rule 5: self-contained, complete artifact.
+       Visually distinct so a reader who only reads this has gotten
+       the argument. */
+    .exec-summary {
+      margin: 0 0 var(--space-12);
+      padding: var(--space-6) var(--space-6);
+      background: hsl(220 25% 99%);
+      border: 1px solid hsl(220 15% 88%);
+      border-left: 3px solid hsl(220 60% 50%);
+      border-radius: var(--radius-md);
+    }
+    .exec-summary .exec-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: hsl(220 60% 40%);
+      margin-bottom: var(--space-3);
+    }
+    .exec-summary p {
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--text-primary);
+      margin: 0 0 var(--space-3);
+    }
+    .exec-summary p:last-child { margin-bottom: 0; }
+    .exec-summary strong { color: var(--text-primary); font-weight: 600; }
+
+    /* TOC — clickable section list, sits between exec summary and body. */
+    .toc {
+      margin: 0 0 var(--space-10);
+      padding: var(--space-4) var(--space-5);
+      border: 1px dashed var(--card-border);
+      border-radius: var(--radius-md);
+    }
+    .toc-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: var(--space-2);
+    }
+    .toc ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .toc li {
+      counter-increment: toc-counter;
+      padding: 4px 0;
+      display: flex;
+      gap: var(--space-3);
+      align-items: baseline;
+      font-size: var(--text-sm);
+    }
+    .toc ol { counter-reset: toc-counter; }
+    .toc li::before {
+      content: counter(toc-counter, decimal-leading-zero);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      min-width: 22px;
+    }
+    .toc li a {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+    .toc li a:hover { color: hsl(220 60% 40%); }
+
+    /* Section progress — sticky on scroll, shows "Section X of Y".
+       Demonstrated as fixed on viewport right; reveals on scroll past
+       exec summary. */
+    .section-progress {
+      position: fixed;
+      top: 100px;
+      right: var(--space-4);
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      box-shadow: var(--shadow-sm);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+      z-index: 50;
+      display: none;
+      opacity: 0;
+      transition: opacity var(--transition-base);
+    }
+    @media (min-width: 1200px) {
+      .section-progress.visible { display: block; opacity: 1; }
+    }
+    .section-progress .progress-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .section-progress .progress-value {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .section-progress .progress-bar {
+      width: 80px;
+      height: 3px;
+      background: var(--card-border);
+      border-radius: 2px;
+      margin-top: 6px;
+      overflow: hidden;
+    }
+    .section-progress .progress-fill {
+      height: 100%;
+      background: hsl(220 60% 50%);
+      width: 0%;
+      transition: width var(--transition-base);
+    }
+
+    /* Body sections — plain markdown shape, table-heavy. */
+    .article-body {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.65;
+      color: var(--text-primary);
+    }
+    .article-body section { margin-bottom: var(--space-12); scroll-margin-top: 80px; }
+    .article-body h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      margin: 0 0 var(--space-4);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-3);
+    }
+    .article-body h2::before {
+      content: '§ ' counter(section-counter);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+    .article-body { counter-reset: section-counter; }
+    .article-body section { counter-increment: section-counter; }
+    .article-body h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      font-weight: 700;
+      margin: var(--space-6) 0 var(--space-3);
+      color: var(--text-primary);
+    }
+    .article-body p { margin: 0 0 var(--space-4); }
+    .article-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--space-4) 0 var(--space-6);
+      font-size: var(--text-sm);
+    }
+    .article-body th,
+    .article-body td {
+      padding: var(--space-2) var(--space-3);
+      border: 1px solid var(--card-border);
+      text-align: left;
+      vertical-align: top;
+    }
+    .article-body th {
+      background: hsl(220 15% 97%);
+      font-weight: 600;
+      font-family: var(--font-display);
+    }
+    .article-body td.mono { font-family: var(--font-mono); font-size: 12px; }
+    .article-body ul, .article-body ol {
+      margin: 0 0 var(--space-4);
+      padding-left: var(--space-6);
+    }
+    .article-body li { margin-bottom: var(--space-2); }
+    .article-body code {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      background: hsl(220 15% 96%);
+      padding: 1px 5px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* End-of-article — single next-step affordance per Rule 4. */
+    .article-end {
+      margin: var(--space-12) 0 0;
+      padding: var(--space-6) 0;
+      border-top: 1px solid var(--card-border);
+    }
+    .next-step {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-4) var(--space-5);
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+    }
+    .next-step .next-step-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .next-step .next-step-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: var(--text-base);
+    }
+    .next-step .next-step-arrow {
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      font-size: 18px;
+    }
+
+    .pub-footer {
+      max-width: 720px;
+      margin: var(--space-12) auto 0;
+      padding: var(--space-6) var(--space-4);
+      border-top: 1px solid var(--card-border);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+    .pub-footer a {
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    /* Shipped-view mock — represents the v1 whitepaper surface for
+       side-by-side comparison via proto-nav.js toggle. */
+    .shipped-view .v1-mock {
+      max-width: 720px;
+      margin: var(--space-8) auto;
+      padding: var(--space-6) var(--space-4);
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+    }
+    .shipped-view .v1-mock h1 {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      margin-bottom: var(--space-3);
+    }
+    .shipped-view .v1-mock .v1-meta {
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      margin-bottom: var(--space-4);
+    }
+    .shipped-view .v1-mock .v1-body {
+      font-size: var(--text-sm);
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+    .shipped-view .v1-mock .v1-note {
+      margin-top: var(--space-4);
+      padding: var(--space-3);
+      background: hsl(0 0% 97%);
+      border-left: 3px solid var(--text-muted);
+      font-size: var(--text-xs);
+      font-family: var(--font-mono);
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body data-compare-root data-view="proposed">
+
+  <!-- PROPOSED: v2 whitepaper surface. -->
+  <section class="proposed-view">
+
+    <header class="pub-header">
+      <div class="pub-header-inner">
+        <div class="pub-mark">[v2-name] <span class="pub-mark-placeholder">· name pending D7</span></div>
+        <nav class="pub-nav">
+          <a href="/pages/library.html">Library</a>
+          <a href="/pages/about-colophon.html">About</a>
+          <a href="/pages/subscribe-follow.html">Follow</a>
+        </nav>
+      </div>
+    </header>
+
+    <article class="article">
+
+      <!-- Section progress — appears on scroll past exec summary. -->
+      <aside class="section-progress" aria-hidden="true">
+        <div class="progress-label">Section</div>
+        <div class="progress-value"><span id="progress-current">1</span> of <span id="progress-total">5</span></div>
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      </aside>
+
+      <div class="article-meta">
+        <span class="format-badge">Whitepaper</span>
+        <span class="byline">by <strong>Nino Chavez</strong></span>
+        <span class="dot">·</span>
+        <time datetime="2026-04">April 2026</time>
+        <span class="dot">·</span>
+        <span class="read-time">22 min read</span>
+      </div>
+
+      <h1 class="article-title">The Cognitive Foundry</h1>
+      <p class="article-subtitle">A reference architecture for agent-assisted production work — what's required to make the chassis hold, what's optional, and what fails predictably without each piece.</p>
+
+      <div class="companion-link">
+        <span>↳</span>
+        <span><strong>Companion to:</strong> <a href="/pages/post-detail.html">The Cognitive Foundry (post)</a> — the reflection. This is the technical companion.</span>
+      </div>
+
+      <!-- Rule 5: Executive Summary as self-contained complete artifact.
+           A reader who stops here has gotten the argument. -->
+      <div class="exec-summary">
+        <div class="exec-label">Executive summary</div>
+        <p>Agent-assisted production work fails predictably in five places: the contract drifts, the validator skips, the reviewer is the same agent, the runtime can't see what the agent saw, and the failure leaves no encoded capability behind. <strong>The chassis below addresses each.</strong></p>
+        <p>The five-piece chassis — contracts, validators, reviewers, sensors, and encodings — is not a methodology. It's the minimum infrastructure for a non-toy agent loop. Each piece exists because removing it produced a specific failure documented in the appendix.</p>
+        <p>Three things are intentionally out of scope: prompt engineering (the failure mode is structural, not prompt-shaped), model selection (chassis is model-agnostic), and orchestration frameworks (the chassis is the orchestration). Reach for those after the chassis holds.</p>
+      </div>
+
+      <!-- Clickable TOC with anchor links. -->
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-label">Contents</div>
+        <ol>
+          <li><a href="#contracts">The contract — what the agent agreed to do</a></li>
+          <li><a href="#validators">Validators — proof the contract held</a></li>
+          <li><a href="#reviewers">Reviewers — a different agent's eyes</a></li>
+          <li><a href="#sensors">Sensors — what the agent could see</a></li>
+          <li><a href="#encodings">Encodings — what the failure left behind</a></li>
+        </ol>
+      </nav>
+
+      <div class="article-body">
+
+        <section id="contracts">
+          <h2>The contract — what the agent agreed to do</h2>
+          <p>A contract is a written claim about what the agent will produce and what would falsify the claim. Without one, the agent ships whatever it converged on and the human evaluates after the fact. The evaluation is unanchored — there's no prior commitment to check against.</p>
+          <p>Contracts in the production chassis carry three fields: the deliverable shape (file path, schema, length budget), the acceptance condition (the test that returns pass/fail), and the falsifier (the specific output that would mean the agent did the wrong thing). The falsifier is the one most often missing in practice; without it, "looks good to me" passes for verification.</p>
+
+          <h3>Contract shapes by task class</h3>
+          <table>
+            <thead>
+              <tr><th>Task class</th><th>Deliverable shape</th><th>Acceptance</th><th>Falsifier</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Code change</td><td>Diff against named files</td><td>Tests pass; lint clean</td><td>Tests pass but the change addresses a different bug than stated</td></tr>
+              <tr><td>Research synthesis</td><td>Markdown doc with cited evidence</td><td>Each claim has a source link</td><td>Sources exist but don't support the claim made</td></tr>
+              <tr><td>Migration script</td><td>Idempotent shell or SQL</td><td>Re-run produces no change</td><td>First run succeeds; second run errors or duplicates</td></tr>
+              <tr><td>API endpoint</td><td>Route handler + OpenAPI entry</td><td>Schema matches contract</td><td>Endpoint exists but returns shape that doesn't match its own docs</td></tr>
+            </tbody>
+          </table>
+
+          <p>Where contracts are missing, the failure is usually scope drift — the agent solved an adjacent problem and the human only noticed in review. The fix isn't "better prompts"; it's a written falsifier that the agent reads before starting.</p>
+        </section>
+
+        <section id="validators">
+          <h2>Validators — proof the contract held</h2>
+          <p>A validator runs the contract's acceptance condition. The validator is independent code — it doesn't ask the agent whether the work is done; it checks the artifact against the contract. The chassis treats agent self-attestation ("done!") as a hypothesis, not a result.</p>
+
+          <h3>Validator implementations by deliverable type</h3>
+          <ul>
+            <li><strong>Code</strong> — test suite, type-check, lint, dead-code scan</li>
+            <li><strong>Docs</strong> — link-checker, broken-citation finder, frontmatter schema validation</li>
+            <li><strong>Data</strong> — schema validation, row-count sanity, idempotency probe</li>
+            <li><strong>UI</strong> — visual regression, accessibility audit, contract-shape match</li>
+          </ul>
+
+          <p>The validator runs in the chassis loop, not as a post-hoc review step. When it fails, the agent reads the failure and continues; the human is not in the loop for the validator's verdict. This is the leverage — validators amortize the human's verification work into encoded checks.</p>
+        </section>
+
+        <section id="reviewers">
+          <h2>Reviewers — a different agent's eyes</h2>
+          <p>A reviewer is a second agent whose only job is to find what the first agent missed. The reviewer doesn't share context with the author agent — it reads the artifact cold and reports what it sees. Same-agent self-review fails predictably: the agent that wrote the artifact has already convinced itself the artifact is correct.</p>
+
+          <h3>What the reviewer checks that the validator can't</h3>
+          <table>
+            <thead><tr><th>Check</th><th>Why a validator can't do it</th></tr></thead>
+            <tbody>
+              <tr><td>The contract was the right contract</td><td>Validators check the contract; reviewers check whether the contract addressed the actual underlying problem</td></tr>
+              <tr><td>The diff makes sense as code (not just compiles)</td><td>Lint sees syntax; reviewer sees idiom and intent</td></tr>
+              <tr><td>The fix won't break tomorrow's adjacent change</td><td>Tests cover today's invariants; reviewer reasons about coupling</td></tr>
+              <tr><td>The artifact is honest about what it doesn't know</td><td>Validators check what's there; reviewers check what's missing</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="sensors">
+          <h2>Sensors — what the agent could see</h2>
+          <p>A sensor is the agent's grounding in the running system. Without sensors, the agent reasons about a model of the system it built from documentation — which drifts. Sensors close the loop: the agent inspects, doesn't infer.</p>
+
+          <p>Common sensor categories: browser drivers (DOM access, console capture), filesystem probes (recursive file listings, content reads), database introspection (live schema, sample rows), and network capture (HTTP responses, header inspection). Each one answers a question the agent would otherwise guess at.</p>
+
+          <p>The chassis principle: <code>any time the agent says "probably" about runtime state, a sensor was missing</code>. The fix is to add the sensor, not to ask the agent to be more careful.</p>
+        </section>
+
+        <section id="encodings">
+          <h2>Encodings — what the failure left behind</h2>
+          <p>The chassis's compounding leverage comes from encoding each failure as durable infrastructure — a lint rule, a reviewer agent, a sensor primitive, a contract field. The encoding survives the session that produced it. The next initiative inherits the capability for free.</p>
+
+          <p>The alternative — patching prompts session-by-session — produces zero compounding. Three years of session-by-session prompt fixes is the same capability surface as one week. Encoding each failure as repo-level infrastructure compounds linearly with use.</p>
+
+          <p>The chassis is, in the end, an argument about where to put the work: into prompts that decay or into encodings that accrete. The architecture follows from the argument.</p>
+        </section>
+
+      </div>
+
+      <!-- Single next-step per Rule 4. -->
+      <div class="article-end">
+        <a href="/pages/counterpoint-detail.html" class="next-step">
+          <div style="flex: 1;">
+            <div class="next-step-label">The case against this</div>
+            <div class="next-step-title">"The chassis is over-engineering" — a counterpoint</div>
+          </div>
+          <span class="next-step-arrow">→</span>
+        </a>
+      </div>
+
+    </article>
+
+    <footer class="pub-footer">
+      <span>by Nino Chavez · architect-who-directs-agents</span>
+      <a href="/blog/rss.xml" target="_blank" rel="noopener">RSS</a>
+      <a href="/blog/full-content-rss.xml" target="_blank" rel="noopener">RSS (full content)</a>
+    </footer>
+
+  </section>
+
+  <!-- SHIPPED: mock of how v1 renders the same whitepaper. -->
+  <section class="shipped-view">
+    <div class="v1-mock">
+      <h1>The Cognitive Foundry</h1>
+      <div class="v1-meta">Posted in: whitepapers · April 2026 · tags: architecture, agentic-systems, ai-development</div>
+      <div class="v1-body">
+        <p><em>[v1 renders the whitepaper as continuous plain markdown — no Executive Summary block, no clickable TOC, no section-progress indicator. Body runs ~20,000 px tall at 1440 width per v1-baseline diagnose F4. Sections are h2-prefixed but lack within-page navigation.]</em></p>
+        <p><em>[Real production surface: <a href="https://ninochavez.co/blog/whitepapers/the-cognitive-foundry" target="_blank" rel="noopener">ninochavez.co/blog/whitepapers/the-cognitive-foundry</a>]</em></p>
+      </div>
+      <div class="v1-note">
+        v1 reading experience itself is intact (per F8-positive) — narrow column, callout components, table support all work. The navigability layer is what F4 flags as missing. v2 adds the Executive Summary + TOC + section progress without changing the underlying content structure.
+      </div>
+    </div>
+  </section>
+
+  <script>
+    window.PROTO_PAGE = { id: 'whitepaper-detail' };
+
+    // Section progress — sticky right-rail counter, reveals after exec
+    // summary scrolls out of view. Updates as sections enter viewport.
+    (function () {
+      const sections = document.querySelectorAll('.article-body section');
+      const total = sections.length;
+      const progressEl = document.querySelector('.section-progress');
+      const currentEl = document.getElementById('progress-current');
+      const totalEl = document.getElementById('progress-total');
+      const fillEl = document.getElementById('progress-fill');
+      const execSummary = document.querySelector('.exec-summary');
+
+      if (!sections.length || !progressEl) return;
+
+      totalEl.textContent = total;
+
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Array.from(sections).indexOf(entry.target) + 1;
+            currentEl.textContent = idx;
+            fillEl.style.width = ((idx / total) * 100) + '%';
+          }
+        });
+      }, { rootMargin: '-30% 0px -60% 0px' });
+
+      sections.forEach((s) => obs.observe(s));
+
+      // Reveal section-progress after exec summary leaves viewport.
+      const execObs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          progressEl.classList.toggle('visible', !entry.isIntersecting);
+        });
+      });
+      execObs.observe(execSummary);
+    })();
+  </script>
+
+  <script src="/_portal-shell.js?v=20260525-1700"></script>
+  <script src="/proto-nav.js?v=20260525-1700"></script>
+  <script src="/chat-widget.js" defer></script>
+  <script src="/proto-annotate.js?v=20260525-1700" defer></script>
+</body>
+</html>
