@@ -1,0 +1,23 @@
+{
+  "name": "Signal Dispatch Blueprint",
+  "tagline": "Brownfield redesign review for Signal Dispatch — current-state audit + proposed-state prototype with strategy rationale, comparison toggle, and AI chat grounded in the project corpus.",
+  "slices": [
+    "example-slice"
+  ],
+  "groups": [
+    { "id": "reading",   "label": "Reading",     "color": "brand" },
+    { "id": "discovery", "label": "Discovery",   "color": "accent" },
+    { "id": "operator",  "label": "Operator",    "color": "neutral" }
+  ],
+  "pages": [
+    "example"
+  ],
+  "flows": [
+    {
+      "id": "main-journey",
+      "label": "Main journey",
+      "summary": "Replace with the primary reader's end-to-end flow — landing on a post, scanning related posts, subscribing.",
+      "pages": ["example"]
+    }
+  ]
+}

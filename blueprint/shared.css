@@ -1,0 +1,1107 @@
+/* Blueprint Portal — Shared CSS
+ *
+ * Static-HTML portal shell (per CONVENTIONS.md). Replace the token values
+ * below with your project's brand colors + type. The rest of this file
+ * (layout primitives, components, brand bar, slice header, slice sidebar,
+ * compare toggle, drawers, flow breadcrumb, annotation overlay) is
+ * project-agnostic.
+ *
+ * Default tokens are from Rally HQ's Midnight & Copper system as a
+ * reference. Override in :root for your project.
+ */
+
+/* ─────────────── tokens ─────────────── */
+
+:root {
+  /* Brand — Electric Indigo */
+  --brand-50:  hsl(235, 95%, 97%);
+  --brand-100: hsl(235, 95%, 92%);
+  --brand-300: hsl(235, 95%, 75%);
+  --brand-500: hsl(235, 80%, 60%);
+  --brand-600: hsl(235, 75%, 50%);
+  --brand-700: hsl(235, 80%, 40%);
+  --brand-900: hsl(235, 90%, 20%);
+
+  /* Arena — Navy-based neutral */
+  --arena-50:  hsl(220, 25%, 98%);
+  --arena-100: hsl(220, 20%, 96%);
+  --arena-200: hsl(220, 18%, 90%);
+  --arena-300: hsl(220, 15%, 81%);
+  --arena-400: hsl(220, 12%, 69%);
+  --arena-500: hsl(220, 10%, 54%);
+  --arena-600: hsl(220, 15%, 40%);
+  --arena-700: hsl(220, 20%, 27%);
+  --arena-800: hsl(220, 25%, 18%);
+  --arena-900: hsl(220, 30%, 12%);
+  --arena-950: hsl(220, 30%, 6%);
+
+  /* Victory — Gold */
+  --victory-300: hsl(45, 85%, 65%);
+  --victory-500: hsl(45, 85%, 45%);
+  --victory-600: hsl(45, 85%, 35%);
+
+  /* Live — Coral */
+  --live-500: hsl(12, 85%, 52%);
+  --live-600: hsl(12, 85%, 45%);
+
+  /* Semantic */
+  --success-500: hsl(142, 60%, 50%);
+  --error-500:   hsl(0, 85%, 55%);
+
+  /* Surfaces — Midnight & Copper (warm light + navy dark) */
+  --bg:        hsl(35, 25%, 98%);
+  --surface-1: hsl(35, 20%, 99%);
+  --surface-2: hsl(35, 15%, 96%);
+  --card:      #ffffff;
+  --card-border: var(--arena-200);
+  --cta-bg:    hsl(220, 30%, 12%);
+  --header-bg: hsl(220, 30%, 8%);
+
+  /* Text */
+  --text-primary: var(--arena-900);
+  --text-secondary: hsl(220, 15%, 45%);
+  --text-muted: hsl(220, 10%, 55%);
+  --text-on-dark: hsl(0, 0%, 98%);
+  --text-on-dark-muted: hsl(0, 0%, 70%);
+
+  /* PROPOSED — per-tournament accent (R4) */
+  --tournament-accent: var(--brand-600);
+  --tournament-accent-soft: var(--brand-100);
+
+  /* Type — Athletic identity (2026-05-23)
+     - --font-hero: Anton (condensed uppercase). Tournament names, hero
+       headlines only. Anton at small sizes is unreadable.
+     - --font-display: Inter — general headings (lean on 700/800 weights).
+     - --font-body: Inter — body copy.
+     - --font-mono: JetBrains Mono — data atoms (scores, courts, times). */
+  --font-hero:    'Anton', 'Impact', 'Oswald', 'Arial Narrow', sans-serif;
+  --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-body:    'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+
+  /* Fluid scale */
+  --text-xs:   clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-sm:   clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+  --text-base: clamp(1rem, 0.925rem + 0.375vw, 1.125rem);
+  --text-lg:   clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
+  --text-xl:   clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+  --text-2xl:  clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+  --text-3xl:  clamp(1.875rem, 1.5rem + 1.875vw, 2.5rem);
+  --text-4xl:  clamp(2.25rem, 1.75rem + 2.5vw, 3rem);
+  --text-5xl:  clamp(3rem, 2.25rem + 3.75vw, 4rem);
+
+  /* Spacing — 4pt grid */
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+  --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem;
+  --space-12: 3rem; --space-16: 4rem; --space-20: 5rem; --space-24: 6rem;
+
+  /* Radius */
+  --radius-sm: 0.25rem; --radius-md: 0.5rem; --radius-lg: 0.75rem;
+  --radius-xl: 1rem; --radius-2xl: 1.5rem; --radius-full: 9999px;
+
+  /* Elevation */
+  --shadow-sm: 0 2px 6px rgb(10 14 20 / 0.06);
+  --shadow-md: 0 6px 16px rgb(10 14 20 / 0.08);
+  --shadow-lg: 0 12px 30px rgb(10 14 20 / 0.12);
+  --shadow-focus: 0 0 0 4px hsl(235 80% 60% / 0.25);
+
+  /* Motion */
+  --transition-fast:  150ms cubic-bezier(0, 0, 0.2, 1);
+  --transition-base:  200ms cubic-bezier(0, 0, 0.2, 1);
+  --transition-slow:  300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─────────────── reset & base ─────────────── */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  color: var(--text-primary);
+  background: var(--bg);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+img { max-width: 100%; display: block; }
+
+h1, h2, h3, h4 {
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+h1 {
+  font-family: var(--font-hero);
+  font-size: var(--text-5xl);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+}
+h2 { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 700; line-height: 1.2; }
+h3 { font-family: var(--font-display); font-size: var(--text-xl);  font-weight: 600; line-height: 1.2; }
+h4 { font-family: var(--font-display); font-size: var(--text-lg);  font-weight: 600; line-height: 1.3; }
+
+p { color: var(--text-secondary); }
+
+/* Mono for data atoms */
+.mono, time, .court, .seed, .score {
+  font-family: var(--font-mono);
+  font-feature-settings: 'tnum' 1;
+}
+
+/* ─────────────── layout primitives ─────────────── */
+
+.container { max-width: 1200px; margin-inline: auto; padding-inline: var(--space-4); }
+@media (min-width: 768px) { .container { padding-inline: var(--space-6); } }
+
+.stack > * + * { margin-top: var(--space-4); }
+.row { display: flex; gap: var(--space-3); align-items: center; }
+.row-between { display: flex; gap: var(--space-3); align-items: center; justify-content: space-between; }
+
+/* ─────────────── components ─────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  transition: background var(--transition-fast), transform var(--transition-fast);
+  min-height: 44px;  /* a11y touch target */
+}
+.btn-primary { background: var(--brand-600); color: white; }
+.btn-primary:hover { background: var(--brand-700); }
+.btn-secondary { background: var(--card); color: var(--text-primary); border: 1px solid var(--card-border); }
+.btn-secondary:hover { background: var(--surface-2); }
+.btn-ghost { color: var(--text-secondary); padding: var(--space-2) var(--space-3); }
+.btn-ghost:hover { color: var(--text-primary); background: var(--surface-2); }
+.btn-lg { padding: var(--space-4) var(--space-6); font-size: var(--text-base); }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  background: var(--arena-100);
+  color: var(--arena-700);
+}
+.badge-brand { background: var(--brand-100); color: var(--brand-700); }
+.badge-victory { background: hsl(45 85% 95%); color: var(--victory-600); }
+.badge-live {
+  background: var(--live-500);
+  color: white;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+}
+.badge-accent {
+  background: color-mix(in srgb, var(--tournament-accent) 12%, transparent);
+  color: var(--tournament-accent);
+}
+
+/* PROPOSED — LIVE pulse */
+.live-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--live-500);
+  margin-right: var(--space-2);
+  animation: live-pulse 1.4s ease-in-out infinite;
+}
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.4); }
+}
+
+/* PROPOSED — proposed-vs-shipped tag */
+.proposed-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: var(--victory-500);
+  color: var(--arena-900);
+  border-radius: var(--radius-sm);
+  vertical-align: middle;
+}
+
+/* ─────────────── portal shell (Front Door / Prototype / Docs) ───────────────
+   Canonical meta-page shell. Single source of truth for the three blueprint
+   meta-pages so they can't drift visually. Injected by _portal-shell.js.
+   Origin: Rally HQ 2026-05-24 polish pass. Promoted to template as the
+   canonical going-forward shell. */
+.portal-shell {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--card-border);
+  padding: 0 var(--space-4);
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+.portal-shell-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.portal-shell .brand-mark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  line-height: 1;
+  text-decoration: none;
+}
+.portal-shell .brand-mark-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.portal-shell-nav {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.portal-shell-nav a {
+  position: relative;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 0;
+  line-height: 1;
+  transition: color var(--transition-fast, 150ms ease-out);
+  text-decoration: none;
+}
+.portal-shell-nav a::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0;
+  transform: scaleX(0.6);
+  transform-origin: left center;
+  transition: opacity var(--transition-fast, 150ms ease-out), transform var(--transition-fast, 150ms ease-out);
+}
+.portal-shell-nav a:hover { color: var(--text-primary); }
+.portal-shell-nav a.active { color: var(--text-primary); }
+.portal-shell-nav a:hover::after,
+.portal-shell-nav a.active::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* ─────────────── header (shared across pages) ─────────────── */
+
+.header {
+  background: var(--header-bg);
+  color: var(--text-on-dark);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid hsl(220 30% 15%);
+}
+.header .container { display: flex; align-items: center; justify-content: space-between; }
+.header .logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.header .logo-accent { color: var(--brand-300); }
+.header nav { display: flex; gap: var(--space-5); }
+.header nav a { color: var(--text-on-dark-muted); font-size: var(--text-sm); }
+.header nav a:hover, .header nav a.active { color: var(--text-on-dark); }
+
+/* ─────────────── proto-nav (footer) + panel triggers ─────────────── */
+
+/* Legacy v1 footer nav — kept in DOM for keyboard shortcuts but visually
+ * hidden because top brand bar + slice header + sidebar do the same job
+ * with better positioning. Removable in a future cleanup. */
+.proto-footer-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--arena-900);
+  color: var(--text-on-dark);
+  border-top: 1px solid hsl(220 30% 20%);
+  padding: var(--space-3) var(--space-4);
+  display: none; /* HIDDEN — replaced by top brand bar + slice header */
+  align-items: center;
+  justify-content: space-between;
+  z-index: 40;
+  font-size: var(--text-sm);
+}
+.proto-footer-nav .nav-pages select {
+  background: hsl(220 30% 18%);
+  color: var(--text-on-dark);
+  border: 1px solid hsl(220 30% 25%);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  font: inherit;
+}
+.proto-footer-nav .nav-actions { display: flex; gap: var(--space-2); }
+.proto-footer-nav button {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--text-on-dark-muted);
+  border: 1px solid hsl(220 30% 20%);
+}
+.proto-footer-nav button:hover, .proto-footer-nav button.active {
+  background: hsl(220 30% 18%);
+  color: var(--text-on-dark);
+}
+
+/* Bottom reserve no longer needed — footer nav is hidden */
+/* body { padding-bottom: 80px; } */
+
+/* ─────────────── strategy panel (right drawer) ─────────────── */
+
+.strategy-panel, .current-state-panel {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: min(420px, 100%);
+  background: var(--card);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-6);
+  overflow-y: auto;
+  transition: transform var(--transition-slow);
+  z-index: 50;
+}
+.strategy-panel { right: 0; transform: translateX(100%); border-left: 1px solid var(--card-border); }
+.current-state-panel { left: 0; transform: translateX(-100%); border-right: 1px solid var(--card-border); }
+.strategy-panel.open, .current-state-panel.open { transform: translateX(0); }
+
+.panel-close {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  font-size: var(--text-2xl);
+  color: var(--text-muted);
+}
+.current-state-panel .panel-close { right: auto; left: var(--space-3); }
+
+.panel-section { margin-top: var(--space-5); }
+.panel-section h4 {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-2);
+}
+.panel-section p { font-size: var(--text-sm); }
+.panel-section code, .panel-section pre {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  background: var(--surface-2);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+
+/* ─────────────── side-by-side comparison toggle ─────────────── */
+
+.compare-toggle {
+  display: inline-flex;
+  background: var(--surface-2);
+  border-radius: var(--radius-md);
+  padding: 2px;
+  border: 1px solid var(--card-border);
+  flex-shrink: 0;
+}
+.compare-toggle button {
+  padding: 4px 10px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  white-space: nowrap;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  min-height: 0;
+}
+.compare-toggle button:hover {
+  color: var(--text-secondary);
+}
+.compare-toggle button.active {
+  background: var(--card);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* When inside the slice header bar, no extra wrapping */
+.proto-slice-header .compare-toggle {
+  margin-right: var(--space-2);
+}
+
+/* Fallback: floating top-right pill when no slice header is present */
+.compare-toggle-floating {
+  position: fixed;
+  top: var(--space-3);
+  right: var(--space-3);
+  z-index: 35;
+  background: var(--card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.proposed-view, .shipped-view {
+  transition: opacity var(--transition-base);
+}
+[data-view="proposed"] .shipped-view { display: none; }
+[data-view="shipped"] .proposed-view  { display: none; }
+[data-view="split"] {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+[data-view="split"] .proposed-view, [data-view="split"] .shipped-view {
+  display: block;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  position: relative;
+}
+[data-view="split"] .proposed-view::before {
+  content: "PROPOSED";
+  position: absolute;
+  top: -10px; left: var(--space-4);
+  background: var(--victory-500);
+  color: var(--arena-900);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+[data-view="split"] .shipped-view::before {
+  content: "SHIPPED";
+  position: absolute;
+  top: -10px; left: var(--space-4);
+  background: var(--arena-700);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+/* ─────────────── tournament-page specifics ─────────────── */
+
+.tournament-hero {
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--tournament-accent) 18%, var(--cta-bg)) 0%,
+    var(--cta-bg) 100%);
+  color: var(--text-on-dark);
+  padding: var(--space-12) 0 var(--space-10);
+}
+.tournament-hero h1 {
+  color: var(--text-on-dark);
+  font-size: var(--text-5xl);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+.tournament-hero .subtitle { color: var(--text-on-dark-muted); margin-top: var(--space-2); }
+
+.match-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+}
+.match-card.live { border-color: var(--live-500); box-shadow: 0 0 0 1px var(--live-500); }
+.match-card .court {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.match-card .teams { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-2); }
+.match-card .team { display: flex; justify-content: space-between; align-items: center; padding: var(--space-2) 0; }
+.match-card .team.winner { font-weight: 700; }
+.match-card .team .score { font-size: var(--text-xl); color: var(--text-primary); }
+
+/* Action-overlay primitive (PROPOSED) */
+.action-overlay {
+  position: sticky;
+  bottom: var(--space-4);
+  display: flex;
+  gap: var(--space-2);
+  background: color-mix(in srgb, var(--cta-bg) 85%, transparent);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius-xl);
+  padding: var(--space-3);
+  margin-top: var(--space-6);
+  box-shadow: var(--shadow-lg);
+  z-index: 30;
+}
+.action-overlay .btn { color: var(--text-on-dark); border-color: hsl(220 30% 25%); }
+
+/* ─────────────── utility ─────────────── */
+
+.muted { color: var(--text-muted); }
+.small { font-size: var(--text-sm); }
+.tiny  { font-size: var(--text-xs); }
+.hidden { display: none; }
+.mt-4 { margin-top: var(--space-4); }
+.mt-6 { margin-top: var(--space-6); }
+.mt-8 { margin-top: var(--space-8); }
+
+/* ─────────────── flow breadcrumb (proto-nav.js) ─────────────── */
+
+.proto-flow-breadcrumb {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 41;
+  background: color-mix(in srgb, var(--cta-bg) 95%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid hsl(220 30% 22%);
+  color: var(--text-on-dark);
+  padding: var(--space-2) var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  font-size: var(--text-sm);
+}
+
+.proto-flow-breadcrumb .flow-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+.proto-flow-breadcrumb .flow-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-on-dark-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.proto-flow-breadcrumb .flow-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.proto-flow-breadcrumb .flow-step {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-on-dark-muted);
+  padding: 2px 8px;
+  background: hsl(220 30% 18%);
+  border-radius: var(--radius-full);
+}
+
+.proto-flow-breadcrumb .flow-actions {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+.proto-flow-breadcrumb .flow-nav-btn {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--text-on-dark-muted);
+  border-radius: var(--radius-md);
+  border: 1px solid hsl(220 30% 22%);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+.proto-flow-breadcrumb .flow-nav-btn:hover {
+  background: hsl(220 30% 18%);
+  color: var(--text-on-dark);
+}
+.proto-flow-breadcrumb .flow-nav-btn.primary {
+  background: var(--brand-600);
+  color: white;
+  border-color: var(--brand-600);
+}
+.proto-flow-breadcrumb .flow-nav-btn.primary:hover {
+  background: var(--brand-700);
+}
+.proto-flow-breadcrumb .flow-nav-btn.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+.proto-flow-breadcrumb .flow-page-name {
+  display: inline-block;
+  max-width: 12ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* Reserve top space when flow is active (proto-nav.js injects this) */
+body:has(.proto-flow-breadcrumb) { padding-top: 44px; }
+
+/* ─────────────── annotation overlay (proto-annotate.js) ─────────────── */
+
+.anno-fab {
+  position: fixed;
+  bottom: 90px;
+  left: 16px;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  background: var(--victory-500);
+  color: var(--arena-900);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  z-index: 45;
+  cursor: pointer;
+  transition: transform 200ms;
+}
+.anno-fab:hover { transform: scale(1.05); }
+.anno-fab .badge-count {
+  position: absolute;
+  top: -4px; right: -4px;
+  background: var(--live-500);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.anno-mode-active * {
+  cursor: crosshair !important;
+}
+.anno-mode-active .proto-footer-nav,
+.anno-mode-active .strategy-panel,
+.anno-mode-active .current-state-panel,
+.anno-mode-active .chat-window,
+.anno-mode-active .chat-fab,
+.anno-mode-active .anno-fab,
+.anno-mode-active .anno-popover,
+.anno-mode-active .anno-marker {
+  cursor: default !important;
+}
+
+.anno-marker {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  background: var(--victory-500);
+  color: var(--arena-900);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  border: 2px solid var(--card);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  z-index: 38;
+  cursor: pointer;
+  font-family: var(--font-mono);
+}
+.anno-marker.resolved {
+  background: var(--success-500);
+  color: white;
+  opacity: 0.65;
+}
+
+.anno-popover {
+  position: fixed;
+  width: min(360px, calc(100vw - 32px));
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-4);
+  z-index: 46;
+  font-size: var(--text-sm);
+}
+.anno-popover h4 {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-2);
+}
+.anno-popover textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: var(--space-2);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  font: inherit;
+  font-size: var(--text-sm);
+  resize: vertical;
+  margin-bottom: var(--space-3);
+  background: var(--surface-1);
+}
+.anno-popover .anno-actions {
+  display: flex;
+  gap: var(--space-2);
+  justify-content: flex-end;
+}
+.anno-popover .anno-actions button {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+}
+.anno-popover .btn-primary {
+  background: var(--brand-600);
+  color: white;
+}
+.anno-popover .btn-secondary {
+  background: var(--surface-2);
+  color: var(--text-secondary);
+}
+.anno-popover .anno-meta {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-bottom: var(--space-2);
+}
+.anno-popover .anno-body {
+  margin-bottom: var(--space-3);
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+.anno-list-panel {
+  position: fixed;
+  bottom: 90px;
+  left: 16px;
+  width: min(380px, calc(100vw - 32px));
+  max-height: 70vh;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: 45;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+.anno-list-panel.open { display: flex; }
+.anno-list-panel .anno-list-header {
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.anno-list-panel .anno-list-header h3 {
+  font-size: var(--text-base);
+  margin: 0;
+}
+.anno-list-panel .anno-list-body {
+  overflow-y: auto;
+  padding: var(--space-2);
+  flex: 1;
+}
+.anno-list-panel .anno-list-empty {
+  padding: var(--space-6);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+.anno-list-panel .anno-item {
+  padding: var(--space-3);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-2);
+  cursor: pointer;
+  font-size: var(--text-sm);
+}
+.anno-list-panel .anno-item:hover {
+  background: var(--surface-2);
+}
+.anno-list-panel .anno-item .anno-item-meta {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-bottom: var(--space-1);
+  display: flex;
+  justify-content: space-between;
+}
+.anno-list-panel .anno-item .anno-item-body {
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+/* ─────────────── top brand bar (proto-nav.js, on every prototype page) ─────────────── */
+
+.proto-brand-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 35;
+  background: var(--arena-900);
+  color: var(--text-on-dark);
+  height: 36px;
+  border-bottom: 1px solid hsl(220 30% 18%);
+}
+.proto-brand-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 var(--space-4);
+  font-size: var(--text-xs);
+}
+.proto-brand-bar .brand-mark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-on-dark);
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+.proto-brand-bar .brand-mark-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: hsl(220 10% 60%);
+  font-weight: 500;
+}
+.proto-brand-bar nav { display: flex; gap: var(--space-4); align-items: center; }
+.proto-brand-bar nav a {
+  color: hsl(220 10% 70%);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  padding: 2px 0;
+}
+.proto-brand-bar nav a:hover { color: var(--text-on-dark); }
+.proto-brand-bar nav a.active { color: var(--text-on-dark); }
+
+/* When brand bar is present, reserve space above everything */
+body:has(.proto-brand-bar) { padding-top: 36px; }
+
+/* ─────────────── slice header bar (proto-nav.js, per-slice page) ─────────────── */
+
+.proto-slice-header {
+  position: fixed;
+  top: 36px; /* sits below the brand bar */
+  left: 0;
+  right: 0;
+  z-index: 30;
+  background: var(--card);
+  border-bottom: 1px solid var(--card-border);
+  padding: var(--space-2) var(--space-5);
+  min-height: 44px;
+}
+/* When BOTH brand bar AND slice header are present, reserve combined space */
+body:has(.proto-brand-bar):has(.proto-slice-header) { padding-top: 80px; }
+/* When ONLY slice header is present (legacy), reserve just its space */
+body:has(.proto-slice-header):not(:has(.proto-brand-bar)) { padding-top: 44px; }
+.slice-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+.slice-header-meta { min-width: 0; }
+.slice-header-crumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+.slice-header-crumb a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+.slice-header-crumb a:hover {
+  color: var(--text-primary);
+}
+.slice-header-crumb .sep {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+.slice-header-crumb .slice-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.slice-header-crumb .page-label {
+  color: var(--text-secondary);
+}
+.slice-header-surface {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.slice-header-actions {
+  display: flex;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+}
+.badge-trace {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--brand-100);
+  color: var(--brand-700);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+.badge-trace-rule {
+  background: hsl(45 85% 92%);
+  color: var(--victory-700);
+}
+
+/* ─────────────── slice sidebar (proto-nav.js, persistent left rail) ─────────────── */
+
+.proto-slice-sidebar {
+  position: fixed;
+  top: 80px; /* below brand bar + slice header */
+  left: 0;
+  bottom: 0;
+  width: 240px;
+  background: var(--surface-1);
+  border-right: 1px solid var(--card-border);
+  overflow-y: auto;
+  padding: var(--space-4) var(--space-3);
+  z-index: 20;
+  display: none;
+}
+@media (min-width: 1080px) {
+  .proto-slice-sidebar { display: block; }
+  body.proto-has-sidebar { padding-left: 240px; }
+}
+.slice-sidebar-section { margin-bottom: var(--space-5); }
+.slice-sidebar-section h4 {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-1);
+}
+.slice-sidebar-section h5 {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-2);
+  font-weight: 600;
+}
+.slice-sidebar-summary {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+.slice-sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 2px;
+}
+.slice-sidebar-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: 1.3;
+  text-decoration: none;
+}
+.slice-sidebar-list a:hover {
+  background: var(--card);
+  color: var(--text-primary);
+}
+.slice-sidebar-list a.active {
+  background: var(--card);
+  color: var(--text-primary);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+.slice-sidebar-list a.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 3px;
+  height: 24px;
+  background: var(--brand-600);
+  border-radius: 0 2px 2px 0;
+}
+.slice-sidebar-list .page-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.slice-sidebar-list .page-phase,
+.slice-sidebar-list .flow-pages {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  padding: 2px 5px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+.slice-sidebar-list .page-phase {
+  background: var(--surface-2);
+  color: var(--text-muted);
+}
+.slice-sidebar-list .flow-pages {
+  background: var(--brand-100);
+  color: var(--brand-700);
+}
+.slice-sidebar-flows .flow-title {
+  font-weight: 600;
+  color: var(--text-primary);
+}

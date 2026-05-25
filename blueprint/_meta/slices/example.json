@@ -1,0 +1,13 @@
+{
+  "id": "example-slice",
+  "label": "Example slice",
+  "color": "brand",
+  "summary": "One-paragraph description of what this slice covers. Read by proto-nav.js to populate the slice header + sidebar. Keep under 200 chars for the sidebar layout.",
+  "production_surface": "src/path/to/the-shipped-code.* — comma- or path-list of the production files this slice maps to",
+  "primary_persona": "P1 Persona Name (S<n> Stage Name)",
+  "findings_cited": ["Finding #1", "Finding #2"],
+  "principles_cited": ["R1", "R2"],
+  "phase": "MVP",
+  "pages": ["page-id-1", "page-id-2"],
+  "flows_touching_this_slice": ["flow-id"]
+}

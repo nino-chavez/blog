@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Blueprint Docs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared.css?v=20260524-1400">
+  <style>
+    body { padding-bottom: 80px; }
+
+    .doc-shell { display: grid; grid-template-columns: 240px 1fr; gap: var(--space-8); max-width: 1200px; margin: var(--space-6) auto; padding: 0 var(--space-4); }
+    @media (max-width: 768px) { .doc-shell { grid-template-columns: 1fr; } }
+
+    .doc-nav {
+      position: sticky;
+      top: var(--space-4);
+      align-self: start;
+      max-height: calc(100vh - var(--space-8));
+      overflow-y: auto;
+      padding-right: var(--space-3);
+    }
+    /* Two-tier sidebar — Strategic artifacts vs Working documents.
+       The tier labels carry stronger weight than the old h4 mono headers
+       because the distinction is editorial, not just organizational. */
+    .doc-nav .tier-label {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -0.005em;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .doc-nav .tier-blurb {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: var(--space-3);
+      padding-right: var(--space-2);
+    }
+    .doc-nav .tier-blurb em {
+      color: var(--text-secondary);
+      font-style: normal;
+      font-weight: 600;
+    }
+    .doc-nav a {
+      display: block;
+      padding: 6px 10px;
+      margin-bottom: 1px;
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      position: relative;
+    }
+    .doc-nav a[data-tier="strategic"]::before {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 12px;
+      background: var(--brand-500);
+      border-radius: 1px;
+      opacity: 0.45;
+    }
+    .doc-nav a[data-tier="strategic"] { padding-left: 14px; }
+    .doc-nav a[data-tier="strategic"]:hover::before,
+    .doc-nav a[data-tier="strategic"].active::before { opacity: 1; }
+    .doc-nav a:hover { background: var(--surface-2); color: var(--text-primary); }
+    .doc-nav a.active { background: var(--brand-100); color: var(--brand-700); font-weight: 600; }
+
+    /* Doc content frame — lighter than before so it reads as content,
+       not as a heavy island. Matches the rhythm of the Front Door's
+       card-grid + Prototype Studio's slice cards: hairline border,
+       subtle radius, generous-but-not-cavernous padding. */
+    .doc-content {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8) var(--space-8);
+      min-height: 60vh;
+    }
+    .doc-meta {
+      padding: var(--space-3) var(--space-4);
+      background: var(--surface-1);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-6);
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .doc-meta .badge {
+      background: color-mix(in srgb, var(--brand-500) 12%, transparent);
+      color: var(--brand-700);
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .doc-meta .source {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    /* Markdown render styles — calibrated to match the Front Door and
+       Prototype Studio rhythm. Was: doc-island styling (uppercase H1
+       inherited from global, heavy h2 border, chunky inline code). Now:
+       same Inter 700 sentence-case headlines as other meta-pages. */
+    .doc-body { line-height: 1.7; color: var(--text-primary); max-width: 75ch; font-size: var(--text-base); }
+
+    /* Reset the global h1 uppercase (set in shared.css for prototype heroes)
+       — doc H1s are sentence case to match Front Door + Prototype Studio. */
+    .doc-body h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      text-transform: none;
+      line-height: 1.1;
+      margin-bottom: var(--space-5);
+      color: var(--text-primary);
+    }
+    .doc-body h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      margin-top: var(--space-10);
+      margin-bottom: var(--space-3);
+      color: var(--text-primary);
+      /* No heavy border — section break is created by margin + smaller h3s below */
+    }
+    .doc-body h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-top: var(--space-8);
+      margin-bottom: var(--space-3);
+      color: var(--text-primary);
+    }
+    .doc-body h4 {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-top: var(--space-6);
+      margin-bottom: var(--space-2);
+    }
+    .doc-body p {
+      margin-bottom: var(--space-4);
+      color: var(--text-secondary);
+      font-size: var(--text-base);
+      line-height: 1.7;
+    }
+    .doc-body strong { color: var(--text-primary); font-weight: 700; }
+    .doc-body em { color: var(--text-primary); }
+
+    /* Inline code — matches the rest of the blueprint's hairline-pill rhythm
+       (subtle background, no chunky padding). */
+    .doc-body code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      background: var(--surface-1);
+      border: 1px solid var(--card-border);
+      padding: 1px 5px;
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+    }
+    .doc-body pre {
+      background: var(--arena-900);
+      color: var(--text-on-dark);
+      padding: var(--space-4);
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+      margin: var(--space-4) 0;
+      font-size: var(--text-sm);
+      line-height: 1.55;
+    }
+    .doc-body pre code {
+      background: transparent;
+      border: none;
+      color: inherit;
+      padding: 0;
+      font-size: inherit;
+    }
+    .doc-body ul, .doc-body ol {
+      margin: var(--space-3) 0 var(--space-4);
+      padding-left: var(--space-6);
+      color: var(--text-secondary);
+    }
+    .doc-body li { margin-bottom: var(--space-2); }
+    .doc-body li > p { margin-bottom: var(--space-2); }
+    .doc-body blockquote {
+      border-left: 3px solid var(--brand-500);
+      padding: 2px var(--space-4);
+      margin: var(--space-4) 0;
+      color: var(--text-secondary);
+      font-style: normal;
+    }
+    .doc-body hr { border: none; border-top: 1px solid var(--card-border); margin: var(--space-8) 0; }
+    .doc-body a {
+      color: var(--brand-600);
+      text-decoration: underline;
+      text-decoration-color: color-mix(in srgb, var(--brand-500) 35%, transparent);
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+    }
+    .doc-body a:hover {
+      color: var(--brand-700);
+      text-decoration-color: var(--brand-600);
+    }
+    .doc-body table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: var(--space-4) 0;
+      font-size: var(--text-sm);
+    }
+    .doc-body th, .doc-body td {
+      padding: var(--space-2) var(--space-3);
+      border-bottom: 1px solid var(--card-border);
+      text-align: left;
+      vertical-align: top;
+    }
+    .doc-body th {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--text-muted);
+    }
+    .doc-body td code { font-size: 0.85em; }
+    .doc-body img { max-width: 100%; border-radius: var(--radius-md); }
+    .doc-body :first-child { margin-top: 0; }
+
+    /* .doc-meta rules moved up next to .doc-content for cohesion */
+
+    .doc-empty { padding: var(--space-12); text-align: center; color: var(--text-muted); }
+    .doc-error { padding: var(--space-6); background: hsl(0 85% 97%); border: 1px solid hsl(0 85% 80%); border-radius: var(--radius-md); color: hsl(0 70% 30%); }
+
+    /* ─────────────── strategic doc treatment ───────────────
+       Applied when .doc-body has .doc-body-strategic class.
+       Lifts the hero, structures callouts, brands proto-refs. */
+
+    .doc-hero {
+      margin: 0 0 var(--space-8);
+      padding-bottom: var(--space-5);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .doc-hero h1 {
+      margin: 0 0 var(--space-4) 0;
+    }
+    .doc-hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+    }
+    .doc-hero-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px 4px 4px;
+      background: var(--surface-1);
+      border: 1px solid var(--card-border);
+      border-radius: 999px;
+      font-size: 11px;
+      line-height: 1;
+    }
+    .doc-hero-chip .chip-label {
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: var(--card);
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+    }
+    .doc-hero-chip .chip-value {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+    .doc-hero-chip .chip-value code {
+      background: transparent;
+      border: none;
+      padding: 0;
+      font-size: 11px;
+      color: var(--text-primary);
+    }
+    /* Status-specific chip color */
+    .doc-hero-chip-status { background: color-mix(in srgb, var(--brand-500) 8%, var(--surface-1)); border-color: color-mix(in srgb, var(--brand-500) 25%, var(--card-border)); }
+    .doc-hero-chip-status .chip-label { color: var(--brand-700); }
+
+    /* Callouts — designed pattern for "Decision: X" / "Why: X" / "Evidence: X"
+       inline conventions that appear repeatedly in strategic docs. Each one
+       gets a structured component instead of being inline-bold prose. */
+    .doc-callout {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: var(--space-4);
+      padding: var(--space-3) var(--space-4);
+      margin: var(--space-3) 0;
+      background: var(--surface-1);
+      border-left: 3px solid var(--card-border);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
+    @media (max-width: 720px) {
+      .doc-callout { grid-template-columns: 1fr; gap: var(--space-1); }
+    }
+    .doc-callout-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .doc-callout-body {
+      color: var(--text-primary);
+      font-size: var(--text-base);
+      line-height: 1.65;
+    }
+    .doc-callout-body code {
+      font-size: 0.88em;
+      background: var(--card);
+    }
+
+    /* Per-kind accents */
+    .doc-callout-decision { border-left-color: var(--brand-500); background: color-mix(in srgb, var(--brand-500) 5%, var(--surface-1)); }
+    .doc-callout-decision .doc-callout-label { color: var(--brand-700); }
+
+    .doc-callout-why { border-left-color: hsl(220 30% 50%); }
+    .doc-callout-why .doc-callout-label { color: hsl(220 30% 40%); }
+
+    .doc-callout-evidence { border-left-color: hsl(142 50% 45%); background: color-mix(in srgb, hsl(142 50% 45%) 4%, var(--surface-1)); }
+    .doc-callout-evidence .doc-callout-label { color: hsl(142 50% 30%); }
+
+    .doc-callout-audience { border-left-color: hsl(265 50% 55%); }
+    .doc-callout-audience .doc-callout-label { color: hsl(265 50% 40%); }
+
+    .doc-callout-status { border-left-color: hsl(40 95% 50%); }
+    .doc-callout-status .doc-callout-label { color: hsl(40 95% 30%); }
+
+    .doc-callout-action { border-left-color: var(--brand-700); }
+    .doc-callout-action .doc-callout-label { color: var(--brand-700); }
+
+    /* Prototype-page reference — inline <code> for prototype/pages/X.html
+       gets a brand-tinted treatment so it reads as a deliberate evidence
+       link, not a generic file path. */
+    code.doc-proto-ref {
+      background: color-mix(in srgb, var(--brand-500) 8%, transparent);
+      border-color: color-mix(in srgb, var(--brand-500) 25%, var(--card-border));
+      color: var(--brand-700);
+      font-weight: 500;
+    }
+
+    /* When the strategic class is on, the .doc-meta header chips are redundant
+       — the hero already shows the title + status. Hide it. */
+    .doc-body-strategic ~ #doc-meta,
+    .doc-content:has(.doc-body-strategic) #doc-meta {
+      display: none;
+    }
+  </style>
+</head>
+<body data-compare-root>
+
+  <header data-portal-shell="docs"></header>
+
+  <div class="doc-shell">
+    <aside class="doc-nav">
+      <!-- TEMPLATE NOTE: consuming projects replace these placeholder entries
+           with their own doc list. The two-tier pattern (Strategic + Working)
+           is canonical; what goes inside each tier is project-specific.
+
+           Strategic-tier docs get the designed treatment (hero + callouts +
+           proto-refs) via postProcessStrategic() — see the STRATEGIC_DOCS Set
+           in the script below. Adding a doc to the Strategic tier in the
+           sidebar AND to STRATEGIC_DOCS in the script enables the treatment.
+
+           Working-tier docs render as plain markdown. Useful for operational
+           scaffolds (validation plans, recruitment scripts, instrumentation
+           specs, quant queries, walkthrough findings, session retros, audits). -->
+
+      <div class="tier-label">Strategic artifacts</div>
+      <p class="tier-blurb">Positional briefs — the thinking that justifies the prototype. Read these to understand <em>why</em>.</p>
+      <a href="./?doc=cx-strategy" data-doc="cx-strategy" data-tier="strategic">CX Strategy</a>
+      <a href="./?doc=research-synthesis" data-doc="research-synthesis" data-tier="strategic">Research synthesis</a>
+      <a href="./?doc=design-principles" data-doc="design-principles" data-tier="strategic">Design principles</a>
+      <a href="./?doc=business-model" data-doc="business-model" data-tier="strategic">Business model</a>
+      <a href="./?doc=monetization-narrative" data-doc="monetization-narrative" data-tier="strategic">Monetization narrative</a>
+      <a href="./?doc=roadmap" data-doc="roadmap" data-tier="strategic">Roadmap</a>
+
+      <div class="tier-label" style="margin-top: var(--space-6)">Working documents</div>
+      <p class="tier-blurb">Operational scaffolds — tracked, edited, queried. Read these to understand <em>how the work happens</em>.</p>
+      <a href="./?doc=validation-plan" data-doc="validation-plan" data-tier="working">Validation plan</a>
+      <a href="./?doc=recruitment-scripts" data-doc="recruitment-scripts" data-tier="working">Recruitment scripts</a>
+      <a href="./?doc=instrumentation-spec" data-doc="instrumentation-spec" data-tier="working">Instrumentation spec</a>
+      <a href="./?doc=competitive-teardown" data-doc="competitive-teardown" data-tier="working">Competitive teardown</a>
+      <a href="./?doc=gaps" data-doc="gaps" data-tier="working">Gaps</a>
+      <a href="./?doc=feasibility" data-doc="feasibility" data-tier="working">Feasibility</a>
+
+      <div class="tier-label" style="margin-top: var(--space-6)">Audits</div>
+      <a href="./?doc=personas-cx-audit" data-doc="personas-cx-audit" data-tier="working">Personas × stages</a>
+    </aside>
+
+    <main class="doc-content">
+      <div id="doc-meta" class="doc-meta hidden">
+        <span class="badge"></span>
+        <span class="source"></span>
+      </div>
+      <article id="doc-body" class="doc-body">
+        <div class="doc-empty">Pick a document from the sidebar →</div>
+      </article>
+    </main>
+  </div>
+
+  <!-- Marked for markdown rendering (client-side, CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@14.1.3/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
+  <script>
+    const TITLES = {
+      // Project consumers extend this map with their own docs. The key is
+      // the slug (matches the data-doc attribute in the sidebar + the .md
+      // filename in _docs/), the value is the human title used in the page
+      // title bar and the .doc-meta badge.
+      'research-synthesis': 'Research Synthesis',
+      'design-principles': 'Design Principles',
+      'cx-strategy': 'CX Strategy',
+      'roadmap': 'Roadmap',
+      'gaps': 'Gaps',
+      'feasibility': 'Feasibility',
+      'business-model': 'Business Model',
+      'monetization-narrative': 'Monetization Narrative',
+      'validation-plan': 'Validation Plan',
+      'recruitment-scripts': 'Recruitment Scripts',
+      'instrumentation-spec': 'Instrumentation Spec',
+      'competitive-teardown': 'Competitive Teardown',
+      'personas-cx-audit': 'Personas × Stage CX Audit'
+    };
+
+    function getDocId() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('doc');
+    }
+
+    function setActive(docId) {
+      document.querySelectorAll('.doc-nav a[data-doc]').forEach(a => {
+        a.classList.toggle('active', a.dataset.doc === docId);
+      });
+    }
+
+    // Strategic-tier docs get a designed treatment via postProcessStrategic().
+    // Working-tier docs render as plain markdown (operational scaffolds).
+    // Project consumers extend this Set with their own strategic-tier doc
+    // slugs. Membership here turns on the designed-treatment post-processor
+    // (hero + callouts + proto-refs). Non-members render as plain markdown.
+    const STRATEGIC_DOCS = new Set([
+      'cx-strategy', 'research-synthesis', 'design-principles',
+      'business-model', 'monetization-narrative', 'roadmap'
+    ]);
+
+    // Convention recognized in strategic docs. The label opens a paragraph
+    // and is followed by content — the post-processor lifts these into
+    // structured callout components. Project consumers extend this map
+    // with their own domain-specific vocabulary (e.g., 'Pricing shape
+    // rationale' for monetization docs; 'Persona' for business-model docs).
+    // Map values are the callout-kind CSS classes: decision / why /
+    // evidence / audience / status / action / falsification / method / source.
+    const CALLOUT_LABELS = {
+      // Decision-shaped (the chosen approach)
+      'Decision': 'decision',
+      'Strategic decision': 'decision',
+      'Sales motion': 'decision',
+      // Why / rationale-shaped
+      'Why': 'why',
+      'Job-to-be-done': 'why',
+      // Evidence-shaped (concrete artifact references)
+      'Evidence': 'evidence',
+      'Prototype evidence': 'evidence',
+      'Surface served': 'evidence',
+      // Audience-shaped
+      'Audience served': 'audience',
+      'Persona': 'audience',
+      // Status-shaped (state of affairs)
+      'Status': 'status',
+      'Outcome': 'status',
+      'Volume': 'status',
+      // Action-shaped (what to do)
+      'Action': 'action',
+      // Method / source-shaped (validation-plan vocabulary)
+      'Falsification signal': 'falsification',
+      'Method': 'method',
+      'Source': 'source'
+    };
+
+    function postProcessStrategic(html, docId, title) {
+      const root = document.createElement('div');
+      root.innerHTML = html;
+
+      // 1. Hero — detect the first paragraph that opens with **Date:** / Status / Inputs
+      //    and lift it next to the H1 into a designed hero block.
+      const firstH1 = root.querySelector('h1');
+      const heroMeta = findHeroMetaParagraph(root);
+      if (firstH1) {
+        const hero = document.createElement('div');
+        hero.className = 'doc-hero';
+        const titleClone = firstH1.cloneNode(true);
+        hero.appendChild(titleClone);
+        if (heroMeta) {
+          const chipRow = buildHeroChips(heroMeta);
+          if (chipRow) hero.appendChild(chipRow);
+          heroMeta.remove();
+        }
+        firstH1.replaceWith(hero);
+      }
+
+      // 2. Callouts — paragraphs whose first <strong> is a recognized label
+      [...root.querySelectorAll('p > strong:first-child')].forEach((strong) => {
+        const raw = strong.textContent.replace(/:$/, '').trim();
+        const kind = CALLOUT_LABELS[raw];
+        if (!kind) return;
+        const p = strong.parentElement;
+        // Body = everything in <p> after the <strong> + trailing colon/space
+        const callout = document.createElement('div');
+        callout.className = `doc-callout doc-callout-${kind}`;
+        const labelEl = document.createElement('div');
+        labelEl.className = 'doc-callout-label';
+        labelEl.textContent = raw;
+        const bodyEl = document.createElement('div');
+        bodyEl.className = 'doc-callout-body';
+        // Move the rest of the paragraph contents (skip the leading <strong>
+        // and any immediate ": " text node) into the body container.
+        let node = strong.nextSibling;
+        if (node && node.nodeType === Node.TEXT_NODE) {
+          node.textContent = node.textContent.replace(/^\s*:\s*/, '');
+          if (!node.textContent.trim()) node = node.nextSibling;
+        }
+        while (node) {
+          const next = node.nextSibling;
+          bodyEl.appendChild(node);
+          node = next;
+        }
+        callout.appendChild(labelEl);
+        callout.appendChild(bodyEl);
+        p.replaceWith(callout);
+      });
+
+      // 3. Prototype-page references — inline <code>prototype/pages/X.html</code>
+      //    gets a brand-tinted treatment that reads as a link to the artifact.
+      [...root.querySelectorAll('code')].forEach((c) => {
+        const txt = c.textContent;
+        if (/^prototype\/pages\//.test(txt)) {
+          c.classList.add('doc-proto-ref');
+        }
+      });
+
+      return root.innerHTML;
+    }
+
+    function findHeroMetaParagraph(root) {
+      const ps = root.querySelectorAll('p');
+      for (const p of ps) {
+        const html = p.innerHTML;
+        if (/^<strong>(Date|Status|Inputs|Method|Source):<\/strong>/i.test(html.trim())) {
+          return p;
+        }
+      }
+      return null;
+    }
+
+    function buildHeroChips(metaPara) {
+      // Walk children: each <strong>LABEL:</strong> opens a new segment;
+      // everything between strong tags is the previous segment's value.
+      const segments = [];
+      let currentLabel = null;
+      let currentValueNodes = [];
+      const flush = () => {
+        if (currentLabel) {
+          const wrapNode = document.createElement('span');
+          currentValueNodes.forEach((n) => wrapNode.appendChild(n.cloneNode(true)));
+          const valueHtml = wrapNode.innerHTML.trim().replace(/^[,;\s.]+|[,;\s.]+$/g, '');
+          if (valueHtml) segments.push({ label: currentLabel, valueHtml });
+        }
+      };
+      [...metaPara.childNodes].forEach((child) => {
+        if (child.nodeName === 'STRONG') {
+          flush();
+          currentLabel = child.textContent.replace(/:$/, '').trim();
+          currentValueNodes = [];
+        } else {
+          currentValueNodes.push(child);
+        }
+      });
+      flush();
+      if (!segments.length) return null;
+      const wrap = document.createElement('div');
+      wrap.className = 'doc-hero-chips';
+      segments.forEach((s) => {
+        const chip = document.createElement('div');
+        chip.className = `doc-hero-chip doc-hero-chip-${s.label.toLowerCase().replace(/\s+/g, '-')}`;
+        chip.innerHTML = `<span class="chip-label">${s.label}</span><span class="chip-value">${s.valueHtml}</span>`;
+        wrap.appendChild(chip);
+      });
+      return wrap;
+    }
+
+    async function loadDoc(docId) {
+      if (!docId) return;
+      const body = document.getElementById('doc-body');
+      const meta = document.getElementById('doc-meta');
+      const title = TITLES[docId] || docId;
+
+      body.innerHTML = '<div class="doc-empty">Loading…</div>';
+      meta.classList.add('hidden');
+
+      try {
+        const res = await fetch(`/_docs/${docId}.md`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const md = await res.text();
+
+        // Configure marked: GFM, breaks off, smartypants off
+        marked.setOptions({ gfm: true, breaks: false, headerIds: false, mangle: false });
+        const rendered = marked.parse(md);
+        const sanitized = DOMPurify.sanitize(rendered);
+
+        // Strategic docs get designed treatment; working docs pass through.
+        const finalHtml = STRATEGIC_DOCS.has(docId)
+          ? postProcessStrategic(sanitized, docId, title)
+          : sanitized;
+
+        body.classList.toggle('doc-body-strategic', STRATEGIC_DOCS.has(docId));
+        body.innerHTML = finalHtml;
+        meta.classList.remove('hidden');
+        meta.querySelector('.badge').textContent = title;
+        meta.querySelector('.source').textContent = `_docs/${docId}.md`;
+        document.title = `${title} — Blueprint`;
+      } catch (err) {
+        body.innerHTML = `<div class="doc-error"><strong>Couldn't load that doc.</strong><br/>${err.message}</div>`;
+      }
+    }
+
+    function init() {
+      const docId = getDocId() || 'cx-strategy';
+      // Default to CX Strategy when no ?doc param given
+      if (!getDocId()) {
+        // Update URL without reload
+        const url = new URL(window.location.href);
+        url.searchParams.set('doc', docId);
+        window.history.replaceState({}, '', url);
+      }
+      setActive(docId);
+      loadDoc(docId);
+    }
+
+    // Navigation: clicking sidebar links uses query param routing without full reload
+    document.querySelectorAll('.doc-nav a[data-doc]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const docId = a.dataset.doc;
+        const url = new URL(window.location.href);
+        url.searchParams.set('doc', docId);
+        window.history.pushState({}, '', url);
+        setActive(docId);
+        loadDoc(docId);
+        window.scrollTo(0, 0);
+      });
+    });
+    window.addEventListener('popstate', () => init());
+
+    init();
+  </script>
+
+  <script>
+    window.PORTAL_SHELL_CONFIG = { productName: 'Rally HQ' };
+    window.PROTO_PAGE = { id: 'docs', title: 'Blueprint Docs' };
+    window.PROTO_CHAT_DISABLED = false;
+  </script>
+  <script src="../_portal-shell.js?v=20260524-1400"></script>
+  <script src="../proto-nav.js?v=20260524-1400"></script>
+  <script src="../chat-widget.js" defer></script>
+  <script src="../proto-annotate.js?v=20260524-1400" defer></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+/*
+  X-Robots-Tag: noindex, nofollow
+  X-Content-Type-Options: nosniff
+
+# Force short cache so deploys propagate quickly during active iteration.
+# Browser still uses 304s via ETag — this just keeps the freshness window tight.
+/shared.css
+  Cache-Control: public, max-age=60, must-revalidate
+
+/proto-nav.js
+  Cache-Control: public, max-age=60, must-revalidate
+
+/proto-annotate.js
+  Cache-Control: public, max-age=60, must-revalidate
+
+/chat-widget.js
+  Cache-Control: public, max-age=60, must-revalidate
+
+/_meta/*
+  Cache-Control: public, max-age=60, must-revalidate
+
+/_docs/*
+  Content-Type: text/markdown; charset=utf-8
+  Cache-Control: public, max-age=300

@@ -1,24 +1,32 @@
 # SEO, AEO, and GEO Strategy Implementation
 
+> **STATUS — canonical URL inverted (2026-05-25).** The redirect direction documented
+> below has flipped. The canonical URL is now `https://ninochavez.co/blog`, and
+> `blog.ninochavez.co` redirects TO it (not the other way around). Cloudflare rules +
+> worker routers handle the polyrepo routing. The "subdomain authority" reasoning
+> in this doc is therefore stale: canonical authority sits on the main domain. The
+> robots.txt and AI-crawler policy mechanics below still apply, but read every
+> "subdomain is canonical" claim as inverted. A full rewrite is deferred to a
+> Stage-1 finding under the Blueprint brownfield pipeline.
+
 ## Overview
 
 This document outlines the strategic implementation of Search Engine Optimization (SEO), Answer Engine Optimization (AEO), and Generative Engine Optimization (GEO) controls for the Signal Dispatch blog, with a focus on data sovereignty in the age of AI.
 
 ## Architecture: Subdomain Strategy
 
-**CRITICAL**: This blog is served from the subdomain `https://blog.ninochavez.co` as a standalone site. The main site (`https://ninochavez.co`) redirects `/blog` traffic to this subdomain via 301 redirect.
+**CRITICAL** *(see status banner above — the direction described here is INVERTED in production)*: The original implementation served the blog from the subdomain `https://blog.ninochavez.co` with `/blog` 301-redirecting to the subdomain. Production is now the inverse: `ninochavez.co/blog` is canonical, and the subdomain redirects to it via Cloudflare workers.
 
-### Domain Architecture
+### Domain Architecture (HISTORICAL — see banner)
 
 ```
 ninochavez.co (Main Portfolio Site)
 ├── / (main site - nino-chavez-website project)
-├── /blog/* (301 redirect → blog.ninochavez.co)
+├── /blog/* (CANONICAL — served via Cloudflare worker routing to the blog project)
 └── /gallery/* (may use subdomain or rewrite in future)
 
-blog.ninochavez.co (Blog Subdomain)
-├── / (blog index)
-└── /:slug (individual blog posts)
+blog.ninochavez.co (Legacy subdomain)
+└── /* → 301 redirect → ninochavez.co/blog/* (handled by Cloudflare rules)
 ```
 
 ### Why This Matters for SEO

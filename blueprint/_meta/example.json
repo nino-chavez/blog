@@ -1,0 +1,23 @@
+{
+  "id": "example",
+  "title": "Example Page",
+  "group": "marketing",
+  "slice": "example-slice",
+  "surface": "TBD — what production surface does this map to?",
+  "phase": "Phase 1",
+  "route": "/pages/example.html",
+  "summary": "One-sentence description used on the portal index card.",
+  "strategy": {
+    "decision": "What design choice does this page make? (1 sentence)",
+    "why": "Which finding from research/synthesis.md does it implement? Cite by finding # or rule #. Inline markdown allowed.",
+    "shipped": "How does the shipped product render this surface today? Cite source files. (1-2 sentences)",
+    "gap": "Proposed vs shipped in one row.",
+    "question": "What needs primary-research validation? (1 question)"
+  },
+  "currentState": {
+    "route": "/path/in/shipped/app",
+    "summary": "What exists today in the shipped product.",
+    "sourceFiles": ["src/routes/.../+page.svelte"],
+    "annotation": "How does the proposed differ from what's there now?"
+  }
+}

@@ -1,0 +1,5 @@
+# Map stale /pages/index.html (and bare /pages/) to the front door
+# Avoids the Cloudflare Pages fallback that serves root index with broken relative paths
+/pages/         /               302
+/pages/index    /               302
+/pages/index.html  /            302

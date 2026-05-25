@@ -1,0 +1,16 @@
+# Signal Dispatch — Blueprint configuration.
+#
+# Canonical config schema: ~/Workspace/dev/wip/blueprint/template/blueprint.yml
+# Pattern-match reasoning: this is a live product (ninochavez.co/blog, 275 posts,
+# RSS subscribers) under audit + redesign. Per docs/variant-selection.md Q1=yes /
+# Q2=no / Q3=yes → brownfield. Per docs/portal-and-tier-ladder.md decision tree
+# (brownfield audit/redesign with current-state vs proposed comparison) →
+# Pattern B. Per the Variant × Tier matrix → Tier 1 (default for redesign-review).
+
+variant: brownfield
+tier: 1
+portal_pattern: B
+
+project:
+  name: "signal-dispatch"
+  description: "Brownfield redesign review for the Signal Dispatch blog — diagnose current state, prescribe changes, prototype proposed state alongside the live product."

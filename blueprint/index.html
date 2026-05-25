@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Signal Dispatch Blueprint — Front Door</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared.css?v=20260524-1400">
+  <style>
+    body { background: var(--bg); }
+    main.container { padding-top: var(--space-12); padding-bottom: var(--space-12); }
+
+    /* Hero — paired with audience pills on the right */
+    .hero-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--space-8);
+      padding: var(--space-16) 0 var(--space-4);
+      flex-wrap: wrap;
+    }
+    .hero-lead .label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-lead .label::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--brand-500);
+    }
+    .hero-lead h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 1.5rem + 3vw, 3.75rem);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      font-weight: 700;
+      text-transform: none;
+      margin-top: var(--space-4);
+      max-width: 16ch;
+      color: var(--text-primary);
+    }
+
+    .audience-pills {
+      display: inline-flex;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 3px;
+      box-shadow: var(--shadow-sm);
+    }
+    .audience-pills button {
+      padding: 7px 14px;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background var(--transition-fast), color var(--transition-fast);
+    }
+    .audience-pills button:hover { color: var(--text-secondary); }
+    .audience-pills button.is-active {
+      background: var(--surface-2);
+      color: var(--text-primary);
+    }
+    .audience-pills button .pill-icon {
+      width: 12px; height: 12px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.75;
+    }
+
+    .hero-lede {
+      max-width: 64ch;
+      margin-bottom: var(--space-12);
+      color: var(--text-secondary);
+      font-size: var(--text-base);
+      line-height: 1.65;
+    }
+
+    /* Stats — richer breakdowns */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-3);
+      margin: 0 0 var(--space-12);
+    }
+    .stat-tile {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5) var(--space-5);
+      box-shadow: 0 1px 2px rgb(0 0 0 / 0.03);
+    }
+    .stat-tile .stat-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .stat-tile .stat-value {
+      font-family: var(--font-mono);
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-top: 4px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .stat-tile .stat-value .of {
+      color: var(--text-muted);
+      font-weight: 400;
+      font-size: 24px;
+      margin-left: 2px;
+    }
+    .stat-tile .stat-sub {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: var(--space-3);
+      line-height: 1.5;
+    }
+
+    /* Path cards */
+    .paths-section { padding-bottom: var(--space-10); }
+    .paths-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-4);
+    }
+    .path-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5) var(--space-5) var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      box-shadow: 0 1px 2px rgb(0 0 0 / 0.03);
+      transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .path-card:hover {
+      transform: translateY(-2px);
+      border-color: color-mix(in srgb, var(--brand-500) 35%, var(--card-border));
+      box-shadow: 0 6px 16px -4px rgb(0 0 0 / 0.08), 0 2px 4px rgb(0 0 0 / 0.04);
+    }
+    .path-card .icon-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .path-card .icon {
+      width: 40px; height: 40px;
+      border-radius: var(--radius-md);
+      background: color-mix(in srgb, var(--brand-500) 10%, transparent);
+      color: var(--brand-700);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .path-card .icon svg {
+      width: 22px; height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .path-card .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .path-card .status .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+    }
+    .path-card .status.ready   .dot { background: hsl(142 60% 45%); }
+    .path-card .status.ready   { color: hsl(142 60% 30%); }
+    .path-card .status.partial .dot { background: hsl(40 95% 50%); }
+    .path-card .status.partial { color: hsl(40 95% 30%); }
+    .path-card .status.planned .dot { background: hsl(220 10% 60%); }
+
+    .path-card h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: -0.015em;
+      color: var(--text-primary);
+    }
+    .path-card p {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin: 0;
+      flex: 1;
+    }
+    .path-card .links {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      line-height: 1.6;
+      padding-top: var(--space-3);
+      border-top: 1px dashed var(--card-border);
+    }
+    .path-card .links a {
+      color: var(--brand-600);
+      text-decoration: none;
+      border-bottom: 1px solid color-mix(in srgb, var(--brand-500) 30%, transparent);
+    }
+    .path-card .links a:hover {
+      color: var(--brand-700);
+      border-bottom-color: var(--brand-600);
+    }
+
+    .audience-note {
+      max-width: 720px;
+      margin: var(--space-8) auto var(--space-6);
+      padding: var(--space-4) var(--space-5);
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.55;
+      text-align: center;
+    }
+    .audience-note strong { color: var(--text-primary); font-weight: 600; }
+
+    .footer-note {
+      padding: var(--space-5) 0;
+      margin-top: var(--space-8);
+      border-top: 1px solid var(--card-border);
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      font-family: var(--font-mono);
+    }
+    .footer-note a {
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .footer-note a:hover { color: var(--text-primary); border-bottom-color: var(--text-secondary); }
+  </style>
+</head>
+<body>
+  <header data-portal-shell="index"></header>
+
+  <main class="container">
+    <div class="hero-row">
+      <div class="hero-lead">
+        <span class="label">The Signal Dispatch Blueprint</span>
+        <h1>One front door,<br/>five paths in.</h1>
+      </div>
+      <div class="audience-pills" role="tablist" aria-label="Reorder paths by audience">
+        <button class="is-active" data-audience="reviewer" role="tab" aria-selected="true">
+          <svg class="pill-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
+          Reviewer
+        </button>
+        <button data-audience="engineer" role="tab" aria-selected="false">
+          <svg class="pill-icon" viewBox="0 0 24 24"><path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/></svg>
+          Engineer
+        </button>
+        <button data-audience="operator" role="tab" aria-selected="false">
+          <svg class="pill-icon" viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h14M18 18h2"/></svg>
+          Operator
+        </button>
+      </div>
+    </div>
+
+    <p class="hero-lede">
+      Synthetic design study against the personas, market, and operational reality of the product.
+      Prototype walk-through, system docs, phased roadmap, active validation queue, and methodology — every surface on one shelf.
+    </p>
+
+    <section class="stat-row">
+      <div class="stat-tile">
+        <div class="stat-label">Prototype</div>
+        <div class="stat-value" id="stat-pages">…</div>
+        <div class="stat-sub">pages across <span id="stat-slices">…</span> slices</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-label">Docs</div>
+        <div class="stat-value" id="stat-docs">…</div>
+        <div class="stat-sub">Strategic artifacts + working documents</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-label">Findings</div>
+        <div class="stat-value" id="stat-findings">…</div>
+        <div class="stat-sub">From research synthesis · synthetic until validated</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-label">Hypotheses</div>
+        <div class="stat-value" id="stat-hypotheses">…</div>
+        <div class="stat-sub">Kill + tune + taste claims · validation queue</div>
+      </div>
+    </section>
+
+    <section class="paths-section">
+      <div class="paths-grid" id="paths-grid"></div>
+      <div class="audience-note">
+        <strong>The three pills above reorder the cards for whoever's looking.</strong>
+        Reviewer (default) leads with Try + Discover. Engineer leads with Inspect + Operate. Operator leads with Roadmap + Discover. Selection persists in this session.
+      </div>
+    </section>
+
+    <footer class="footer-note">
+      <span>signal-dispatch-blueprint · brownfield redesign review · diagnose + prescribe against the live blog at ninochavez.co/blog</span>
+      <a href="https://github.com/nino-chavez/blog" target="_blank" rel="noopener">github ↗</a>
+    </footer>
+  </main>
+
+  <script>
+    const PATHS = [
+      {
+        id: 'try', title: 'Try', status: 'ready',
+        icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>',
+        description: 'Walk the prototype pages with strategy + current-state drawers, proposed-vs-shipped toggle, and multi-page flows. The interactive study.',
+        links: 'Catalog: <a href="/prototype/">/prototype/</a> · Sample: <a href="/pages/tournament">tournament</a>, <a href="/pages/operator-game-day">operator game-day</a>',
+        priority: { reviewer: 1, engineer: 3, operator: 4 }
+      },
+      {
+        id: 'discover', title: 'Discover', status: 'ready',
+        icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M16 8l-3 5-5 3 3-5 5-3z" fill="currentColor" stroke="none"/></svg>',
+        description: 'Why the blueprint makes its decisions. CX strategy plus the four system docs — business model, monetization, tournament lifecycle, adaptive chrome.',
+        links: '<a href="/docs/?doc=cx-strategy">CX Strategy</a> · <a href="/docs/?doc=business-model">Business model</a> · <a href="/docs/?doc=research-synthesis">Research synthesis</a>',
+        priority: { reviewer: 2, engineer: 5, operator: 2 }
+      },
+      {
+        id: 'roadmap', title: 'Roadmap', status: 'ready',
+        icon: '<svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M6 8.5v7M8.5 6h7M8.5 18h7"/></svg>',
+        description: 'Phased plan: Phase 1 (~17 hrs) free-mode launch keystones. Phase 2 (~30 hrs) identity + retention. Phase 3 primary-research gates before structural commits.',
+        links: '<a href="/docs/?doc=roadmap">Roadmap</a> · <a href="/docs/?doc=gaps">Per-page gaps</a>',
+        priority: { reviewer: 3, engineer: 4, operator: 1 }
+      },
+      {
+        id: 'operate', title: 'Operate', status: 'ready',
+        icon: '<svg viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h14M18 18h2"/><circle cx="16" cy="6" r="2" fill="currentColor" stroke="none"/><circle cx="8" cy="12" r="2" fill="currentColor" stroke="none"/><circle cx="16" cy="18" r="2" fill="currentColor" stroke="none"/></svg>',
+        description: 'Conventions for building on top of this blueprint. Design principles, production-UI sanctity rule, page-creation contract, per-tool OWNER-SPECs.',
+        links: '<a href="/docs/?doc=design-principles">Design principles</a> · <a href="/docs/?doc=feasibility">Feasibility</a> · CONVENTIONS.md in repo',
+        priority: { reviewer: 5, engineer: 1, operator: 3 }
+      },
+      {
+        id: 'validate', title: 'Validate', status: 'partial',
+        icon: '<svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="M14.5 14.5l5 5"/></svg>',
+        description: 'Active validation queue. 19 hypotheses tiered by load. JTBD dry run pressure-tested the conversation guides; real interviews next. The honest fork between hypothesis and evidence.',
+        links: '<a href="/docs/?doc=validation-plan">Validation plan</a> · <a href="/docs/?doc=validation-jtbd-dry-run">JTBD dry run</a>',
+        priority: { reviewer: 4, engineer: 2, operator: 5 }
+      }
+    ];
+
+    let currentAudience = 'reviewer';
+
+    function renderPaths() {
+      const grid = document.getElementById('paths-grid');
+      grid.innerHTML = '';
+      const sorted = [...PATHS].sort((a, b) => a.priority[currentAudience] - b.priority[currentAudience]);
+      sorted.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'path-card';
+        card.innerHTML = `
+          <div class="icon-row">
+            <div class="icon">${p.icon}</div>
+            <span class="status ${p.status}"><span class="dot"></span>${p.status}</span>
+          </div>
+          <h3>${p.title}</h3>
+          <p>${p.description}</p>
+          <div class="links">${p.links}</div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    document.querySelectorAll('.audience-pills button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentAudience = btn.dataset.audience;
+        document.querySelectorAll('.audience-pills button').forEach(b => {
+          const on = b === btn;
+          b.classList.toggle('is-active', on);
+          b.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        try { sessionStorage.setItem('sd-bp-audience', currentAudience); } catch {}
+        renderPaths();
+      });
+    });
+
+    try {
+      const saved = sessionStorage.getItem('sd-bp-audience');
+      if (saved && ['reviewer', 'engineer', 'operator'].includes(saved)) {
+        currentAudience = saved;
+        document.querySelectorAll('.audience-pills button').forEach(b => {
+          const on = b.dataset.audience === saved;
+          b.classList.toggle('is-active', on);
+          b.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+      }
+    } catch {}
+
+    renderPaths();
+
+    (async function () {
+      try {
+        const r = await fetch('/_meta/index.json');
+        const m = await r.json();
+        document.getElementById('stat-pages').textContent = (m.pages || []).length;
+        const slicesEl = document.getElementById('stat-slices');
+        if (slicesEl) slicesEl.textContent = (m.slices || []).length;
+      } catch {
+        document.getElementById('stat-pages').textContent = '—';
+        const slicesEl = document.getElementById('stat-slices');
+        if (slicesEl) slicesEl.textContent = '—';
+      }
+    })();
+  </script>
+
+  <script>
+    window.PORTAL_SHELL_CONFIG = { productName: 'Signal Dispatch' };
+    window.PROTO_PAGE = { id: 'index', title: 'Front Door' };
+    window.PROTO_CHAT_DISABLED = false;
+  </script>
+  <script src="/_portal-shell.js?v=20260524-1400"></script>
+  <script src="/proto-nav.js?v=20260524-1400"></script>
+  <script src="/chat-widget.js" defer></script>
+  <script src="/proto-annotate.js?v=20260524-1400" defer></script>
+</body>
+</html>
