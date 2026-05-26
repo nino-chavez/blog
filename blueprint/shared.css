@@ -674,6 +674,95 @@ p { color: var(--text-secondary); }
 /* Reserve top space when flow is active (proto-nav.js injects this) */
 body:has(.proto-flow-breadcrumb) { padding-top: 44px; }
 
+/* ─────────────── proto-top-bar (single-bar harness chrome — current proto-nav.js) ───────────────
+   proto-nav.js evolved from the original two-bar .proto-brand-bar + .proto-slice-header
+   architecture into a single combined .proto-top-bar. The two-bar CSS above still
+   exists for legacy callers; these rules style the current combined shape. */
+
+.proto-top-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 40;
+  background: var(--header-bg); color: var(--text-on-dark);
+  border-bottom: 1px solid hsl(220 25% 18%);
+  min-height: 56px; display: flex; align-items: center;
+  padding: 0 var(--space-5);
+}
+body:has(.proto-flow-breadcrumb) .proto-top-bar { top: 44px; }
+
+.proto-top-bar-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--space-6); width: 100%; max-width: 1400px; margin: 0 auto;
+}
+
+.proto-top-bar .top-bar-lead {
+  display: flex; align-items: center; gap: var(--space-5); min-width: 0;
+}
+
+.proto-top-bar .brand-mark {
+  font-family: var(--font-display); font-weight: 700; font-size: 14px;
+  letter-spacing: -0.01em; color: var(--text-on-dark);
+  display: inline-flex; align-items: baseline; gap: 8px;
+  text-decoration: none;
+}
+.proto-top-bar .brand-mark-tag {
+  font-family: var(--font-mono); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; color: hsl(220 10% 60%);
+}
+
+.proto-top-bar .top-bar-crumb {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: 11px; color: hsl(220 10% 70%);
+}
+.proto-top-bar .top-bar-crumb .sep { color: hsl(220 10% 40%); }
+.proto-top-bar .top-bar-crumb .slice-label,
+.proto-top-bar .top-bar-crumb .page-label {
+  color: var(--text-on-dark); font-weight: 500;
+}
+
+.proto-top-bar .top-bar-actions {
+  display: flex; align-items: center; gap: var(--space-3);
+}
+
+.proto-top-bar .top-bar-nav {
+  display: flex; align-items: center; gap: var(--space-4);
+}
+.proto-top-bar .top-bar-nav a {
+  color: hsl(220 10% 70%); font-size: 12px; font-weight: 500;
+  padding: 4px 0; position: relative; text-decoration: none;
+}
+.proto-top-bar .top-bar-nav a:hover { color: var(--text-on-dark); }
+.proto-top-bar .top-bar-nav a.is-active { color: var(--text-on-dark); }
+.proto-top-bar .top-bar-nav a.is-active::after {
+  content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+  height: 2px; background: var(--brand-500, hsl(220 60% 50%));
+}
+
+/* Compare toggle inside dark top bar — override defaults for legibility */
+.proto-top-bar .compare-toggle {
+  background: hsl(220 25% 15%); border-color: hsl(220 25% 25%);
+}
+.proto-top-bar .compare-toggle button { color: hsl(220 10% 70%); }
+.proto-top-bar .compare-toggle button:hover { color: var(--text-on-dark); background: hsl(220 25% 20%); }
+.proto-top-bar .compare-toggle button.active {
+  background: hsl(220 25% 22%); color: var(--text-on-dark);
+}
+
+.proto-top-bar .chrome-toggle {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; background: hsl(220 25% 15%);
+  border: 1px solid hsl(220 25% 25%); border-radius: var(--radius-sm);
+  font-family: var(--font-mono); font-size: 10px;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: hsl(220 10% 70%); cursor: pointer;
+}
+.proto-top-bar .chrome-toggle .toggle-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: hsl(220 10% 50%);
+}
+.proto-top-bar .chrome-toggle:hover { color: var(--text-on-dark); }
+
+/* Body padding so fixed chrome doesn't overlap page content */
+body:has(.proto-top-bar) { padding-top: 56px; }
+body:has(.proto-flow-breadcrumb):has(.proto-top-bar) { padding-top: 100px; }
+
 /* ─────────────── annotation overlay (proto-annotate.js) ─────────────── */
 
 .anno-fab {

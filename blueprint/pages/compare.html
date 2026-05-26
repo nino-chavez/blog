@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Compare — v2 vs Stitch — [v2-name] Blueprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared.css?v=20260525-1900">
+  <style>
+    /* compare.html — split-pane v2 prototype vs Stitch alternate. Two
+       iframes side-by-side; surface picker at top; orientation toggle
+       (side-by-side vs stacked); honest about which surfaces have a
+       real Stitch counterpart vs which are v2-only. */
+
+    body { background: var(--bg); margin: 0; }
+
+    .compare-shell {
+      display: flex; flex-direction: column;
+      height: calc(100vh - 56px);
+      min-height: 400px;
+    }
+    body:has(.proto-flow-breadcrumb) .compare-shell { height: calc(100vh - 100px); }
+
+    .picker-bar {
+      background: var(--card); border-bottom: 1px solid var(--card-border);
+      padding: var(--space-3) var(--space-5);
+      display: flex; align-items: center; gap: var(--space-5);
+      flex-wrap: wrap;
+    }
+    .picker-label {
+      font-family: var(--font-mono); font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted);
+    }
+    .surface-picker {
+      display: flex; gap: var(--space-2); flex-wrap: wrap;
+    }
+    .surface-picker button {
+      padding: 6px 12px; border-radius: var(--radius-full);
+      background: hsl(220 15% 96%); color: var(--text-secondary);
+      font-size: 12px; font-weight: 500; cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .surface-picker button:hover { background: hsl(220 15% 92%); color: var(--text-primary); }
+    .surface-picker button.active {
+      background: var(--text-primary); color: var(--card);
+    }
+    .surface-picker button[disabled] {
+      opacity: 0.4; cursor: not-allowed;
+      background: transparent; color: var(--text-muted);
+      border-color: var(--card-border);
+    }
+
+    .orientation-toggle {
+      margin-left: auto; display: flex; gap: 1px;
+      background: hsl(220 15% 92%); padding: 2px; border-radius: var(--radius-sm);
+    }
+    .orientation-toggle button {
+      padding: 4px 10px; border-radius: 2px;
+      font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--text-secondary); background: transparent; cursor: pointer;
+    }
+    .orientation-toggle button.active {
+      background: var(--card); color: var(--text-primary); box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+    }
+
+    .panes {
+      flex: 1; display: grid; gap: 1px;
+      background: var(--card-border);
+      min-height: 0;
+    }
+    .panes[data-orient="side"] { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr; }
+    .panes[data-orient="stack"] { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+
+    .pane { display: flex; flex-direction: column; background: var(--bg); min-width: 0; min-height: 0; }
+    .pane-header {
+      padding: var(--space-2) var(--space-4);
+      background: var(--card); border-bottom: 1px solid var(--card-border);
+      display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+    }
+    .pane-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+      color: var(--text-primary);
+    }
+    .pane-label::before {
+      content: ''; width: 8px; height: 8px; border-radius: 50%;
+    }
+    .pane-label.v2::before { background: hsl(220 60% 50%); }
+    .pane-label.stitch::before { background: hsl(35 80% 50%); }
+    .pane-link {
+      font-family: var(--font-mono); font-size: 10px;
+      color: var(--text-secondary); text-decoration: none;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 1px;
+    }
+    .pane-link:hover { color: var(--text-primary); border-bottom-color: var(--text-secondary); }
+
+    .pane iframe {
+      flex: 1; border: 0; background: var(--bg);
+      width: 100%; height: 100%;
+    }
+
+    .pane-empty {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: var(--space-8); text-align: center;
+    }
+    .pane-empty-body {
+      max-width: 400px;
+      font-family: var(--font-display);
+      color: var(--text-muted);
+    }
+    .pane-empty-body strong { color: var(--text-secondary); }
+
+    @media (max-width: 720px) {
+      .panes[data-orient="side"] { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+      .orientation-toggle { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="compare-shell">
+
+    <div class="picker-bar">
+      <span class="picker-label">Surface</span>
+      <div class="surface-picker" id="surface-picker">
+        <button class="active" data-surface="whitepaper">Whitepaper</button>
+        <button data-surface="series">Series</button>
+        <button data-surface="home">Home</button>
+        <button data-surface="article">Article / Post</button>
+        <button data-surface="library" disabled title="No Stitch counterpart — v2 only">Library</button>
+        <button data-surface="about-colophon" disabled title="No Stitch counterpart — v2 only">About</button>
+        <button data-surface="counterpoint-detail" disabled title="No Stitch counterpart — v2 only">Counterpoint</button>
+        <button data-surface="subscribe-follow" disabled title="No Stitch counterpart — v2 only">Subscribe</button>
+      </div>
+      <div class="orientation-toggle">
+        <button class="active" data-orient="side">Side</button>
+        <button data-orient="stack">Stack</button>
+      </div>
+    </div>
+
+    <div class="panes" id="panes" data-orient="side">
+      <div class="pane">
+        <div class="pane-header">
+          <span class="pane-label v2">v2 prototype</span>
+          <a class="pane-link" id="v2-link" href="#" target="_blank" rel="noopener">open standalone ↗</a>
+        </div>
+        <iframe id="v2-frame" src="/pages/whitepaper-detail.html"></iframe>
+      </div>
+      <div class="pane">
+        <div class="pane-header">
+          <span class="pane-label stitch">Stitch alternate</span>
+          <a class="pane-link" id="stitch-link" href="#" target="_blank" rel="noopener">open standalone ↗</a>
+        </div>
+        <iframe id="stitch-frame" src="/pages/stitch/whitepapers.html"></iframe>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    window.PORTAL_SHELL_CONFIG = { productName: 'Signal Dispatch v2' };
+    window.PROTO_PAGE = { id: 'compare' };
+    window.PROTO_CHAT_DISABLED = true;
+
+    // Surface mapping: which v2 page pairs with which Stitch alternate.
+    // null = no counterpart (v2 surface only; button is disabled above).
+    const SURFACE_MAP = {
+      'whitepaper':         { v2: '/pages/whitepaper-detail.html',  stitch: '/pages/stitch/whitepapers.html' },
+      'series':             { v2: '/pages/series-detail.html',      stitch: '/pages/stitch/series.html' },
+      'home':               { v2: '/pages/home.html',               stitch: '/pages/stitch/home.html' },
+      'article':            { v2: '/pages/post-detail.html',        stitch: '/pages/stitch/article.html' },
+      'library':            { v2: '/pages/library.html',            stitch: null },
+      'about-colophon':     { v2: '/pages/about-colophon.html',     stitch: null },
+      'counterpoint-detail':{ v2: '/pages/counterpoint-detail.html',stitch: null },
+      'subscribe-follow':   { v2: '/pages/subscribe-follow.html',   stitch: null }
+    };
+
+    const v2Frame = document.getElementById('v2-frame');
+    const stitchFrame = document.getElementById('stitch-frame');
+    const v2Link = document.getElementById('v2-link');
+    const stitchLink = document.getElementById('stitch-link');
+    const panes = document.getElementById('panes');
+
+    function setSurface(surface) {
+      const m = SURFACE_MAP[surface];
+      if (!m) return;
+      v2Frame.src = m.v2;
+      v2Link.href = m.v2;
+      if (m.stitch) {
+        stitchFrame.src = m.stitch;
+        stitchFrame.style.display = '';
+        stitchLink.href = m.stitch;
+        stitchLink.style.display = '';
+      } else {
+        stitchFrame.style.display = 'none';
+        stitchLink.style.display = 'none';
+      }
+      // URL sync so this view is shareable
+      const url = new URL(window.location.href);
+      url.searchParams.set('surface', surface);
+      window.history.replaceState({}, '', url);
+    }
+
+    document.querySelectorAll('.surface-picker button[data-surface]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (btn.disabled) return;
+        document.querySelectorAll('.surface-picker button').forEach((b) => b.classList.toggle('active', b === btn));
+        setSurface(btn.dataset.surface);
+      });
+    });
+
+    document.querySelectorAll('.orientation-toggle button[data-orient]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.orientation-toggle button').forEach((b) => b.classList.toggle('active', b === btn));
+        panes.dataset.orient = btn.dataset.orient;
+      });
+    });
+
+    // Pick up ?surface= URL param on load
+    const params = new URLSearchParams(window.location.search);
+    const initial = params.get('surface');
+    if (initial && SURFACE_MAP[initial]) {
+      document.querySelectorAll('.surface-picker button').forEach((b) => {
+        b.classList.toggle('active', b.dataset.surface === initial);
+      });
+      setSurface(initial);
+    } else {
+      // Default: whitepaper is already set up in HTML; just sync the link
+      v2Link.href = SURFACE_MAP.whitepaper.v2;
+      stitchLink.href = SURFACE_MAP.whitepaper.stitch;
+    }
+  </script>
+  <script src="/_portal-shell.js?v=20260525-1900"></script>
+  <script src="/proto-nav.js?v=20260525-1900"></script>
+</body>
+</html>
