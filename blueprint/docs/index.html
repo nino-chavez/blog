@@ -686,6 +686,16 @@
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const md = await res.text();
 
+        // Cloudflare Pages SPA-fallback returns the root index.html with
+        // 200 when a static asset is missing — we'd then parse the home
+        // HTML as markdown and render gibberish. Sentinel: real markdown
+        // never starts with a doctype/html tag. Treat HTML-shaped bodies
+        // as "not found."
+        const looksLikeHtml = /^\s*<(!doctype|html|head|body)/i.test(md);
+        if (looksLikeHtml || md.trim().length === 0) {
+          throw new Error(`No such document: ${docId}`);
+        }
+
         // Configure marked: GFM, breaks off, smartypants off
         marked.setOptions({ gfm: true, breaks: false, headerIds: false, mangle: false });
         const rendered = marked.parse(md);
@@ -708,8 +718,8 @@
     }
 
     function init() {
-      const docId = getDocId() || 'cx-strategy';
-      // Default to CX Strategy when no ?doc param given
+      const docId = getDocId() || '01-research';
+      // Default to Stage 1 — Research when no ?doc param given
       if (!getDocId()) {
         // Update URL without reload
         const url = new URL(window.location.href);

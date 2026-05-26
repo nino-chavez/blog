@@ -31,7 +31,7 @@
 
   const DEFAULT_CONFIG = {
     productName: 'Project',
-    docsLandingHref: '/docs/?doc=cx-strategy'
+    docsLandingHref: '/docs/?doc=01-research'
   }
 
   const config = Object.assign({}, DEFAULT_CONFIG, window.PORTAL_SHELL_CONFIG || {})

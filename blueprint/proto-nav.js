@@ -340,7 +340,7 @@
     const navItems = [
       { label: 'Front door', href: '/', active: isFrontDoor },
       { label: 'Prototype',  href: '/prototype/', active: isPrototype },
-      { label: 'Docs',       href: '/docs/?doc=cx-strategy', active: isDocs },
+      { label: 'Docs',       href: '/docs/?doc=01-research', active: isDocs },
     ];
     const navHtml = navItems.map(n =>
       `<a href="${n.href}"${n.active ? ' class="is-active" aria-current="page"' : ''}>${n.label}</a>`
@@ -448,8 +448,11 @@
     if (meta.chrome) {
       const adapts = (meta.chrome_adapts || []).join(', ');
       const adaptsLine = adapts ? ` <span class="tiny muted">(adapts to ${escapeHtml(adapts)})</span>` : '';
-      const chromeLink = `<a href="/docs/?doc=chrome-system" class="panel-systems-link" title="Read the chrome-system doc">${escapeHtml(meta.chrome)}</a>`;
-      systemsParts.push(`<div style="margin-top: 4px;"><span class="tiny mono muted" style="text-transform: uppercase; letter-spacing: 0.06em;">Chrome</span> <strong>${chromeLink}</strong>${adaptsLine}</div>`);
+      // Was a link to /docs/?doc=chrome-system (template default that
+       // doesn't exist in this initiative); rendered as plain text instead.
+       // Restore as link if/when a chrome-system doc lands in _docs/.
+       const chromeText = `<strong>${escapeHtml(meta.chrome)}</strong>`;
+       systemsParts.push(`<div style="margin-top: 4px;"><span class="tiny mono muted" style="text-transform: uppercase; letter-spacing: 0.06em;">Chrome</span> ${chromeText}${adaptsLine}</div>`);
     }
 
     const panel = el('aside', { class: 'strategy-panel', id: 'strategy-panel' },
