@@ -1,0 +1,66 @@
+{
+  "id": "signal-dispatch-v2",
+  "name": "Signal Dispatch",
+  "description": "Working notes from an architect who directs agents to ship commerce.",
+  "dimensions": {
+    "width": 13.33,
+    "height": 7.5
+  },
+  "colors": {
+    "primary": "e86c5d",
+    "secondary": "00ced1",
+    "dark": "0a0a0b",
+    "light": "1a1a1d",
+    "highlight": "e86c5d",
+    "textPrimary": "ffffff",
+    "textSecondary": "ffffff",
+    "textBody": "ffffff",
+    "textMuted": "9ca3af",
+    "textInverse": "0a0a0b",
+    "backgroundWhite": "f9fafb",
+    "backgroundLight": "f3f4f6",
+    "backgroundAccent": "e86c5d",
+    "backgroundDark": "0a0a0b",
+    "tableHeaderBg": "e86c5d",
+    "tableHeaderText": "0a0a0b",
+    "tableStripeBg": "f3f4f6",
+    "tableBorderColor": "374151",
+    "success": "22c55e",
+    "warning": "f59e0b",
+    "error": "ef4444"
+  },
+  "typography": {
+    "fontPrimary": "Rival Sans",
+    "fontSecondary": "Inter",
+    "fontBold": "Inter Bold",
+    "sizes": {
+      "hero": 44,
+      "slideTitle": 28,
+      "sectionTitle": 36,
+      "subtitle": 18,
+      "body": 14,
+      "small": 11,
+      "footer": 8
+    }
+  },
+  "spacing": {
+    "marginLeft": 0.75,
+    "marginRight": 0.75,
+    "marginTop": 0.75,
+    "marginBottom": 0.5,
+    "contentWidth": 11.83,
+    "contentGap": 0.25,
+    "columnGutter": 0.4
+  },
+  "shapes": {
+    "showAccentLine": true,
+    "accentLineHeight": 0.04,
+    "showTitleDivider": false,
+    "titleDividerHeight": 0.02,
+    "pillRadius": 0.1
+  },
+  "footer": {
+    "template": "Signal Dispatch | Confidential",
+    "showSlideNumbers": true
+  }
+}

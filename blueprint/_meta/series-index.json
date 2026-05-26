@@ -1,0 +1,25 @@
+{
+  "id": "series-index",
+  "title": "Series Index",
+  "group": "discovery",
+  "surface": "v2 series-index — catalog of all multi-part syllabi",
+  "phase": "Stage 3 (added 2026-05-26 from Stitch SeriesIndex)",
+  "route": "/pages/series-index.html",
+  "summary": "List of ALL series, lifted from v1's tag-only treatment to a primary nav-level surface. Three series-card variants: flat parts-list (compact), chapter-grid (visually rich), progress-bar (in-progress series).",
+  "strategy": {
+    "decision": "Promote series from buried-tag to primary nav surface. Each series gets a card with category + part-count + total-time + syllabus quote + parts list (or chapter grid or progress bar, depending on variant).",
+    "why": "Publication archetype Lesson 4: 'Series and counterpoints are architectural, not chrome. v1 publications under-use these two formats because they're invisible in the IA.' Stitch's SeriesIndex.tsx reveals series as one of the primary surfaces — building this is consistent with that elevation.",
+    "shipped": "v1 has no equivalent. Series is just a tag in v1's tag system; readers can't see a series catalog or progress through one.",
+    "gap": "v2 adds a dedicated /series-index route with three card variants. Three series included: Inference Era (flat parts-list), Senior IC Track (chapter grid), Distributed Consensus (progress bar).",
+    "question": "What's the right syllabus copy register for each series? Stitch's were academic-flavored; voice-guide drift risk. The placeholder syllabus quotes need voice-scoring."
+  },
+  "inheritsFromV1": ["all 8 of v1's content collections are still available"],
+  "breaksFromV1": ["Series elevated from tag to primary nav-level surface", "Per-series progress + status indicators added", "Three series-card layout variants (flat / chapter-grid / progress)"],
+  "decisionDependencies": ["D3 (format mix — confirms series stays as primary surface)"],
+  "currentState": {
+    "route": "https://ninochavez.co/blog/tag/series",
+    "summary": "v1 series is a tag-filtered list with no progress, no card variants, no parts list.",
+    "sourceFiles": ["astro-build/src/pages/blog/tag/[tag].astro"],
+    "annotation": "v2 promotes series from tag to dedicated route + adds card variants per Stitch SeriesIndex pattern."
+  }
+}

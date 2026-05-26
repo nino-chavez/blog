@@ -1,0 +1,510 @@
+# Signal Dispatch v2 — Stage 2.5 Prescription
+#
+# Date:    2026-05-25
+# Variant: greenfield (per blueprint.yml)
+# Status:  late-session artifact added after methodology audit surfaced
+#          the missing prescription layer between Stage 2 (principles) and
+#          Stage 3 (prototype/forge inputs). Cf. STITCH-GAP-AUDIT.md and
+#          the meta-agent's wave-7 JTBD-discontinuity diagnosis.
+#
+# Purpose: encode every prescription item as a JTBD-derived requirement
+# with measurable acceptance criteria and a falsification test, so
+# Stage 3 (prototype) and the forge pipeline (brand kit + copy + media)
+# have something to design AGAINST instead of a vague brief. Provisional
+# commitments for open D-decisions are logged here with what would
+# falsify them, so the prototype can ship and the bet can be tested.
+#
+# Reading order:
+#   1. jtbds          — persona × stage × surface entries derived from
+#                       research/personas/*.md + research/funnel/stages.md
+#   2. prescription   — design + IA + content items, each tracing to
+#                       one or more JTBDs
+#   3. provisional    — Nino-owned D-decisions where JTBDs compel a
+#                       default; each carries falsification criteria
+#   4. forge_inputs   — what the forge pipeline consumes from this file
+#                       (brand-kit input + signal-forge constraints +
+#                       gen-images surface manifest)
+#
+# Inputs:
+inputs:
+  research:
+    - blueprint/research/personas/peer-architect.md      # P1
+    - blueprint/research/personas/hiring-evaluator.md    # P2
+    - blueprint/research/personas/ai-curious-ic.md       # P3
+    - blueprint/research/funnel/stages.md
+    - blueprint/research/funnel/evidence.md
+  principles: blueprint/02-design-principles.md          # Rules 1-5 + voice
+  surfaces:   blueprint/03-prototype-plan.md             # 8-surface set
+  open_decisions: blueprint/DECISIONS-NEEDED.md
+
+variant: greenfield
+
+# =====================================================================
+# JTBDs — persona × funnel-stage × surface, with acceptance criteria
+# =====================================================================
+#
+# Format per entry:
+#   id: P{persona-num}-{stage-short}-{surface-short}
+#   persona, stage, surface
+#   goal: one sentence in the persona's voice ("I came here to ___")
+#   acceptance_criteria: list of measurable conditions (the JTBD is met)
+#   falsifies_if: one sentence — the test that proves the design FAILS
+#                 this JTBD. Must be observable, not a vibe.
+
+jtbds:
+
+  # ── PEER ARCHITECT (P1) ──────────────────────────────────────────────
+
+  - id: P1-disc-search
+    persona: peer-architect
+    stage: discovery
+    surface: post-detail
+    goal: "I searched for 'agent workflow patterns' and clicked an SERP result"
+    acceptance_criteria:
+      - "Page renders title + excerpt + read-time + format badge in first viewport (desktop 1440)"
+      - "OG/Twitter card metadata is present so the SERP snippet matches the page"
+      - "URL is canonical (no redirect chain); slug is human-readable"
+    falsifies_if: "P1 sees a generic SERP snippet that doesn't match the post topic"
+
+  - id: P1-firstread-postdetail
+    persona: peer-architect
+    stage: first-read
+    surface: post-detail
+    goal: "I want to skim TL;DR and commit to the body only if the framing earns it"
+    acceptance_criteria:
+      - "Reading column max-width 720px (per voice-guide convention)"
+      - "First-paragraph hook visible above the fold at 1440 viewport"
+      - "Excerpt or subtitle visible before requiring scroll past hero"
+    falsifies_if: "P1 has to scroll past a hero image / pullquote / metadata stack before reaching the first paragraph"
+
+  - id: P1-firstread-whitepaper
+    persona: peer-architect
+    stage: first-read
+    surface: whitepaper-detail
+    goal: "I want to open this in a tab and return later — but I'll bail if I can't navigate it"
+    acceptance_criteria:
+      - "Executive Summary block at top, readable as standalone artifact (5-8 sentences)"
+      - "Persistent left-rail TOC visible on desktop; sticky on scroll"
+      - "Each h2 has a stable anchor URL (deep-linkable + shareable)"
+      - "Section progress indicator visible (mono small text 'Section N of M')"
+    falsifies_if: "P1 opens the whitepaper, sees a 20k-px scroll with no nav, closes the tab (Finding F4)"
+
+  - id: P1-secondlook-series
+    persona: peer-architect
+    stage: second-look
+    surface: series-detail
+    goal: "I read part 3, want to read part 4 next without searching"
+    acceptance_criteria:
+      - "Next-in-series link is the primary footer affordance on post-detail when post.series is set"
+      - "Series-detail surface shows ordered parts list with current-part highlighted"
+      - "Read-state markers indicate which parts the reader has and hasn't seen"
+    falsifies_if: "P1 finishes a series-part and has no obvious next-step — has to search for the series name"
+
+  - id: P1-secondlook-library
+    persona: peer-architect
+    stage: second-look
+    surface: library
+    goal: "I want to cite a piece by topic in my own internal argument"
+    acceptance_criteria:
+      - "Library surface supports format filter (POST / WHITEPAPER / SERIES / COUNTERPOINT) as primary secondary axis"
+      - "Tag filter exists but is subordinate (NOT primary discovery axis — F1 regression)"
+      - "Citation URL on each list row is stable + copyable; works in plaintext"
+    falsifies_if: "P1 lands on library, can't filter to whitepapers in one click, gives up"
+
+  - id: P1-return-rss
+    persona: peer-architect
+    stage: return
+    surface: rss-feed
+    goal: "I subscribed to RSS, new post pushes to my reader, I click through"
+    acceptance_criteria:
+      - "Full-content RSS variant exists alongside summary variant"
+      - "RSS items contain title, link, guid, pubDate, category, author (validates against W3C feed validator)"
+      - "Linked URL from RSS resolves to canonical post URL (no redirects)"
+    falsifies_if: "RSS subscriber count stops growing because feed quality regressed"
+
+  # ── HIRING EVALUATOR (P2) ────────────────────────────────────────────
+
+  - id: P2-disc-linkedin
+    persona: hiring-evaluator
+    stage: discovery
+    surface: post-detail
+    goal: "I clicked a LinkedIn post link; I'm here to evaluate whether the work backs up the positioning"
+    acceptance_criteria:
+      - "Page loads cleanly with NO marketing-tell chrome (no subscribe modal, no email gate, no popup, no exit-intent)"
+      - "Author identity visible above the fold via byline ('by Nino Chavez · architect-who-directs-agents')"
+      - "Page chrome reads as publication, not personal-brand funnel"
+    falsifies_if: "P2 closes within first scroll due to a modal / popup / 'Join 12,000 readers' / aggressive CTA"
+
+  - id: P2-firstread-postdetail
+    persona: hiring-evaluator
+    stage: first-read
+    surface: post-detail
+    goal: "I'm reading top-to-bottom — this post IS the interview"
+    acceptance_criteria:
+      - "Voice attributes from kit (self-interrogating, technically-deep, conversational, provisional) detectable in body"
+      - "No anti-patterns from kit (corporate-jargon, academic-distance, humble-bragging, prescriptive-authority)"
+      - "Body shows concrete artifacts (named files, decisions, evidence) — voice-guide 'show your work' rule"
+    falsifies_if: "P2 reads the post and pattern-matches it as ghostwritten or thought-leader cliché"
+
+  - id: P2-secondlook-sampling
+    persona: hiring-evaluator
+    stage: second-look
+    surface: library
+    goal: "I want to sample 2-3 more posts to verify voice consistency isn't a one-piece fluke"
+    acceptance_criteria:
+      - "Library default sort = chronological (newest first) so recent voice is visible without filtering"
+      - "List rows show enough excerpt (1-line) for voice-fingerprint comparison without click-through"
+      - "No 'featured' or 'editor's pick' interference with the flat chronological browse"
+    falsifies_if: "P2 samples 2 posts, voice is inconsistent across them, closes tab"
+
+  - id: P2-secondlook-counterpoint
+    persona: hiring-evaluator
+    stage: second-look
+    surface: counterpoint-detail
+    goal: "I want to test intellectual honesty by reading a counterpoint to the post I just read"
+    acceptance_criteria:
+      - "Counterpoint surface clearly names parent post in a banner at top ('Counterpoint to: [title]')"
+      - "Single navigation affordance: '↩ Return to original argument'"
+      - "Voice in counterpoint matches voice in parent post (consistency check passes)"
+    falsifies_if: "P2 lands on counterpoint, can't tell what's being challenged within 5 seconds"
+
+  - id: P2-secondlook-about
+    persona: hiring-evaluator
+    stage: second-look
+    surface: about-colophon
+    goal: "I want to check the About page to confirm the positioning frame I saw in the posts"
+    acceptance_criteria:
+      - "Editorial single-sentence (D2) at top in publication voice, NOT first-person bio voice"
+      - "Author block below editorial sentence — work first, author second (Rule 3)"
+      - "Positioning frame ('architect-who-directs-agents') reads as practice, not personal brand"
+    falsifies_if: "P2 reads About and walks away with 'this is a personal brand' as their summary"
+
+  - id: P2-return
+    persona: hiring-evaluator
+    stage: return
+    surface: rss-feed-or-linkedin
+    goal: "I won't return organically — but I'll see Nino's next LinkedIn post and may click through again"
+    acceptance_criteria:
+      - "RSS surface exists for the rare P2 who subscribes"
+      - "LinkedIn follow link present on subscribe page but NOT pushed in modal/popup"
+      - "No email capture (would violate the no-marketing-tells rule that earned P2 in the first place)"
+    falsifies_if: "Page adds email capture or follow-modal and P2's next visit confirms 'this turned into a funnel'"
+
+  # ── AI-CURIOUS STAFF IC (P3) ─────────────────────────────────────────
+
+  - id: P3-disc-search
+    persona: ai-curious-ic
+    stage: discovery
+    surface: post-detail
+    goal: "I searched something specific; landed on one post; reading on mobile"
+    acceptance_criteria:
+      - "Post is self-contained — references to prior posts re-anchor with a one-line context phrase"
+      - "Mobile reading experience matches desktop quality (post-detail at 375 px reflows cleanly per F8-positive)"
+      - "Page weight is small enough to load on mobile data without delay (< 200 KB total)"
+    falsifies_if: "P3 lands on a post that assumes context, doesn't get re-anchored, bounces"
+
+  - id: P3-firstread-mobile
+    persona: ai-curious-ic
+    stage: first-read
+    surface: post-detail
+    goal: "I'm reading on mobile, single visit, want the value of this one post"
+    acceptance_criteria:
+      - "Mobile reading column reflows to comfortable line-length (~45-65 chars)"
+      - "No horizontal scroll at any viewport ≥ 375 px"
+      - "Hero / images optimize for mobile (responsive srcset)"
+      - "Callouts and pullquotes render readably at 375 px (no overflow)"
+    falsifies_if: "P3 hits horizontal scroll or unreadable callout, bounces"
+
+  - id: P3-end-of-post-RSS
+    persona: ai-curious-ic
+    stage: end-of-first-read
+    surface: post-detail
+    goal: "I finished a post that genuinely earned my attention. How do I follow without giving up my email?"
+    acceptance_criteria:
+      - "End-of-post passive footer carries RSS link (NOT a subscribe modal)"
+      - "Subscribe-follow surface accessible via single click and explains RSS clearly (no email field)"
+      - "LinkedIn follow link visible as alternative for non-RSS-users"
+    falsifies_if: "P3 finishes a great post but has no obvious follow path that doesn't require email"
+
+  - id: P3-no-second-look
+    persona: ai-curious-ic
+    stage: second-look
+    surface: none-expected
+    goal: "By design, P3 typically doesn't browse further — but related-posts at footer captures the minority who do"
+    acceptance_criteria:
+      - "Post-detail footer shows 1-3 related posts (NOT featured/promoted — just topically adjacent)"
+      - "No friction added to the post-detail surface for the majority who don't second-look"
+    falsifies_if: "P3 conversion to second-look stops working — funnel evidence shows post-detail → other-post click rate drops"
+
+# =====================================================================
+# Prescription items — each traces to ≥1 JTBD
+# =====================================================================
+#
+# preserved_patterns: working in v1, must carry into v2 unchanged
+# revised_patterns:   v1 pattern present but failed; v2 fix needed
+# new_patterns:       not present in v1, needed in v2
+
+prescription:
+
+  preserved:
+
+    - id: PR-01
+      pattern: "Reading column max-width 720px on post-detail / whitepaper / series-part / counterpoint"
+      serves_jtbds: [P1-firstread-postdetail, P2-firstread-postdetail, P3-firstread-mobile]
+      evidence_cite: "F8-positive (post-detail reflows cleanly); 02-design-principles Rule 5; voice-guide convention"
+      status: preserved-from-v1
+
+    - id: PR-02
+      pattern: "No email capture on any surface — RSS-and-LinkedIn-only follow path"
+      serves_jtbds: [P2-disc-linkedin, P2-return, P3-end-of-post-RSS]
+      evidence_cite: "P2 persona drop-reason: marketing-y formatting; 01-research voice posture"
+      status: preserved-from-v1
+
+    - id: PR-03
+      pattern: "RSS full-content + summary variants both present"
+      serves_jtbds: [P1-return-rss, P3-end-of-post-RSS]
+      evidence_cite: "evidence.md shows both feeds working in v1; preserve"
+      status: preserved-from-v1
+
+    - id: PR-04
+      pattern: "Related-posts component at post-detail footer (1-3 items, topically adjacent)"
+      serves_jtbds: [P3-no-second-look]
+      evidence_cite: "F8-positive — related-posts working in v1"
+      status: preserved-from-v1
+
+    - id: PR-05
+      pattern: "Series-detail ordered parts list with read-state — F7-positive carried forward"
+      serves_jtbds: [P1-secondlook-series]
+      evidence_cite: "F7-positive (strongest IA on the site)"
+      status: preserved-from-v1
+
+    - id: PR-06
+      pattern: "Counterpoint binding via challengesPost frontmatter — F6-positive carried forward"
+      serves_jtbds: [P2-secondlook-counterpoint]
+      evidence_cite: "F6-positive (cleanest secondary surface)"
+      status: preserved-from-v1
+
+    - id: PR-07
+      pattern: "Voice register inherits from v1 voice-guide unless explicitly delta'd via D5"
+      serves_jtbds: [P2-firstread-postdetail, P2-secondlook-sampling]
+      evidence_cite: "156-post voice empirical analysis; D5 reserved for explicit delta"
+      status: preserved-from-v1
+
+  revised:
+
+    - id: PR-08
+      pattern: "Whitepaper persistent left-rail TOC + section progress + anchor links"
+      serves_jtbds: [P1-firstread-whitepaper]
+      evidence_cite: "F4 (whitepapers run 20k px with no TOC); 02-design-principles Rule 5 (progressive disclosure)"
+      status: revised-from-v1
+      v1_state: "no TOC; ~20k pixel scroll"
+      v2_state: "executive summary block + persistent leftrail TOC + active section highlight + click-anchor jump"
+
+    - id: PR-09
+      pattern: "Single next-step affordance at post-detail footer (NOT three competing)"
+      serves_jtbds: [P1-secondlook-series, P2-secondlook-counterpoint, P3-no-second-look]
+      evidence_cite: "02-design-principles Rule 4 (one thing per surface)"
+      status: revised-from-v1
+      v1_state: "three competing affordances at footer (related + tags + author)"
+      v2_state: "ONE next-step — next-in-series OR counterpoint OR related, in that priority order"
+
+    - id: PR-10
+      pattern: "Format badges (POST / WHITEPAPER / COUNTERPOINT / SERIES) on every reading surface + library row"
+      serves_jtbds: [P1-secondlook-library, P2-secondlook-sampling]
+      evidence_cite: "F-INVESTIGATE (formality varies by format); cross-format consistency needed for P1 citation use"
+      status: revised-from-v1
+      v1_state: "format implied by URL path, not visible on page"
+      v2_state: "explicit mono format badge in metadata strip, color-coded per format"
+
+    - id: PR-11
+      pattern: "Library surface — chronological primary, format-filter secondary, tag-filter tertiary"
+      serves_jtbds: [P1-secondlook-library, P2-secondlook-sampling]
+      evidence_cite: "F1 (tag-detail hostile at scale, 44k px scroll); Rule 4 (one primary axis)"
+      status: revised-from-v1
+      v1_state: "tag-detail was the primary topical-discovery surface; broke at scale"
+      v2_state: "library = chronological feed + format chips + tag filter as opt-in"
+
+    - id: PR-12
+      pattern: "Sitemap + llms.txt + robots.txt fixed (Cloudflare reverse-proxy routing bug)"
+      serves_jtbds: [P1-disc-search, P3-disc-search]
+      evidence_cite: "evidence.md sitemap landscape; F10 + F11 in 01-diagnose"
+      status: revised-from-v1
+      v1_state: "sitemap leaked to root path; /blog/sitemap.xml 404; /llms.txt 404"
+      v2_state: "canonical /blog/sitemap.xml + /blog/sitemap-index.xml; /llms.txt resolves; robots.txt cross-references"
+
+  new:
+
+    - id: PR-13
+      pattern: "About / Colophon — editorial sentence (D2) at top, author block below per Rule 3"
+      serves_jtbds: [P2-secondlook-about]
+      evidence_cite: "Rule 3 (work-first, author-second, brand-third); P2 needs positioning proof"
+      status: new-in-v2
+      depends_on: [D2, D7]
+
+    - id: PR-14
+      pattern: "Subscribe-follow as dedicated minimal surface (RSS instructions + LinkedIn link, no email)"
+      serves_jtbds: [P3-end-of-post-RSS, P2-return]
+      evidence_cite: "PR-02 (no email capture); explicit affordance for P3 RSS conversion"
+      status: new-in-v2
+
+    - id: PR-15
+      pattern: "Visual design system derived via forge-brand from research artifacts (NOT picked from designer-tool default)"
+      serves_jtbds: [P2-firstread-postdetail, P2-secondlook-about, P1-firstread-postdetail]
+      evidence_cite: "STITCH-GAP-AUDIT.md methodology-bypass acknowledgment; meta-agent wave-7 forge-provenance gate"
+      status: new-in-v2
+      forge_pipeline_required: true
+
+    - id: PR-16
+      pattern: "Copy generated via forge-signal voice-scored against brand kit (NOT hand-written)"
+      serves_jtbds: [P2-firstread-postdetail, P2-secondlook-sampling]
+      evidence_cite: "Voice consistency is a hiring-evaluator hard gate; manual copy fails-open"
+      status: new-in-v2
+      forge_pipeline_required: true
+
+    - id: PR-17
+      pattern: "Hero / OG / social card images generated via gen-images per brand-kit style (NOT stock or LLM-default)"
+      serves_jtbds: [P2-firstread-postdetail, P1-firstread-postdetail]
+      evidence_cite: "Image consistency is a brand-register signal; stock breaks Rule 1"
+      status: new-in-v2
+      forge_pipeline_required: true
+
+# =====================================================================
+# Provisional commitments — Nino-owned D-decisions
+# =====================================================================
+#
+# Each entry: provisional_value (the Stage 3 bet), why_this_default
+# (cites the JTBD or rule that compels it), falsifies_if (what makes
+# Stage 4 review reject the bet).
+#
+# These ship in the prototype VISIBLY MARKED PROVISIONAL so reviewers
+# can falsify the bet directly. Empty placeholders ([D2]) are removed.
+
+provisional:
+
+  - decision: D1
+    name: "Thesis A vs Thesis B"
+    provisional_value: "Thesis A (positioning realignment) — v2 keeps v1 corpus, refreshes name + IA + brand"
+    why_this_default: |
+      Thesis B (different publication, Dispatch #N framing) requires cadence commitment (D4) and corpus
+      re-curation. Thesis A unblocks the most surfaces with the fewest dependencies. P1 (peer architect)
+      and P3 (AI-curious IC) are served either way; P2 (hiring evaluator) sees positioning proof more
+      cleanly under A (the existing corpus IS the proof). Defaulting A means dispatch-current.html stays
+      archived; home page = featured-piece-first.
+    falsifies_if: "Stage 4 review confirms the existing corpus shape can't carry the architect-who-directs-agents reframe — too much legacy general-engineering content"
+    blocks_unblocked: ["home page can build", "library page can build", "about-colophon can build"]
+
+  - decision: D2
+    name: "Editorial single-sentence (12 words or less)"
+    provisional_value: "Working notes from an architect who directs agents to ship commerce."
+    why_this_default: |
+      Combines Rule 3 (work-first opening: 'Working notes') with the positioning reframe ('architect who
+      directs agents'). 12 words exactly. Avoids first-person verb (would violate Rule 3 — see Stitch's
+      'I direct agents' which the audit stripped). Tests against P2 falsification: does it read as
+      practice (✓) or personal brand (potential miss — 'an architect' is generic).
+    falsifies_if: "P2 reads the sentence and walks away with 'personal brand' as summary, or alternative candidate emerges in Stage 4 review"
+    blocks_unblocked: ["home page editorial opener", "about-colophon editorial opener"]
+
+  - decision: D5
+    name: "Voice register delta from v1"
+    provisional_value: "No delta — v1 voice carries forward unchanged (per Thesis A default in D1)"
+    why_this_default: |
+      Under Thesis A, the existing 156-post voice is the asset. P2 cross-post sampling requires
+      voice consistency; introducing a delta breaks that consistency intentionally. If D1 flips to
+      Thesis B, this re-opens (Dispatch shape may want tighter register).
+    falsifies_if: "D1 flips to Thesis B, OR P2 review surfaces specific voice-attribute drift v1 corpus carries that v2 shouldn't"
+    blocks_unblocked: ["post-detail body copy", "forge-signal copy generation"]
+
+  - decision: D7
+    name: "v2 publication name"
+    provisional_value: "Signal Dispatch (carries from v1 — same name as before)"
+    why_this_default: |
+      Under Thesis A default, v1 corpus carries forward; v1 name carries forward with it. v1 brand has
+      measured awareness (RSS subscribers, LinkedIn cross-posts). Renaming pre-D1 creates name-drift
+      risk. Survives the Rule-1 brand-register criteria. If D1 flips to Thesis B, this re-opens.
+    falsifies_if: "Stage 4 review confirms 'Signal Dispatch' doesn't carry the architect-who-directs-agents positioning, or D1 flips to B"
+    blocks_unblocked: ["all surfaces (wordmark + header), brand-kit identity field"]
+
+  - decision: D8
+    name: "Reader-facing label terminology (Counterpoint, etc.)"
+    provisional_value: "Use methodology terms as default (Counterpoint, Whitepaper, Series, Post)"
+    why_this_default: |
+      All four labels are reader-known (Stratechery, lethain, charity.wtf use the same vocabulary).
+      P2 finds these labels comprehensible without explanation. Avoids inventing 'the case against
+      this' / 'stress-test' / etc. which would require label-introduction copy on every counterpoint.
+    falsifies_if: "Stage 4 review with P2 reads any label as jargon or unclear"
+    blocks_unblocked: ["counterpoint-detail badge", "library format-filter chip labels"]
+
+  - decision: D3
+    name: "Format mix — fiction collection disposition"
+    provisional_value: "Keep fiction collection in v2 as 5th first-class format"
+    why_this_default: |
+      Per Thesis A default (D1), v1 corpus shape carries forward; fiction is part of v1 corpus. Removing
+      it breaks Thesis A premise. If D1 flips to B, fiction disposition re-opens (likely spin-off site).
+    falsifies_if: "D1 flips to Thesis B; OR Stage 4 review surfaces that fiction violates architect-positioning-frame"
+    blocks_unblocked: ["library format chip set", "content collection schema"]
+
+  - decision: D4
+    name: "Cadence promise"
+    provisional_value: "None (inherit v1 'published when ready' posture)"
+    why_this_default: |
+      Under Thesis A default, no cadence change. Subscribe-follow surface says 'publishes when it
+      publishes' — preserves the no-marketing-tells posture P2 requires.
+    falsifies_if: "D1 flips to Thesis B; OR Nino commits to weekly/monthly cadence independently"
+    blocks_unblocked: ["subscribe-follow copy"]
+
+# =====================================================================
+# Forge pipeline inputs — what each tool consumes from this file
+# =====================================================================
+
+forge_inputs:
+
+  forge-brand:
+    consumes:
+      - jtbds (constrains palette/voice/identity proposals)
+      - prescription.new (PR-15 mandates forge-brand pipeline + provenance)
+      - provisional (D7 name, D2 editorial sentence, D1 thesis become identity inputs)
+    produces:
+      - v2-brand-kit.json
+      - tokens.css + tokens.tailwind.json
+      - signal-forge bridge (voice attributes + anti-patterns derived from JTBDs)
+      - image-gen bridge (visual style derived from brand personality)
+
+  forge-signal:
+    consumes:
+      - forge-brand signal-forge bridge
+      - jtbds (each surface's acceptance criteria becomes copy-scoring constraint)
+      - prescription items (each PR with a copy implication)
+    produces:
+      - per-surface copy passed through voice-scorer with minimum score 75/100
+      - copy fails-loud if anti-pattern detected (no silent ship)
+
+  gen-images:
+    consumes:
+      - forge-brand image-gen bridge
+      - jtbds (each surface's visual needs — hero, OG card, inline illustration)
+    produces:
+      - per-surface OG cards (1200x630)
+      - per-surface heroes (1600x900)
+      - inline illustrations as needed
+
+  forge-site:
+    consumes:
+      - forge-site/archetypes/publication.md (the playbook I wrote)
+      - forge-site/templates/publication.yml (the surface manifest)
+      - this prescription.yml (the JTBD-traced requirements)
+    produces:
+      - composed prototype surfaces consuming brand-kit + copy + images deterministically
+
+# =====================================================================
+# Falsification register — what would invalidate this entire prescription
+# =====================================================================
+
+falsifies_prescription_if:
+  - "Stage 4 review with P1/P2/P3 confirms a JTBD here is wrong-shape (persona doesn't actually have that goal at that stage)"
+  - "Funnel measurement (when gaps G1-G4 close) reveals persona priority is wrong (e.g., P3 is actually a larger cohort than assumed)"
+  - "D1 flips from Thesis A default to Thesis B — triggers cascade re-eval of D2/D3/D5/D7"
+  - "Forge-brand kit output fails Rule 1 (brand register inconsistent with audience) and can't be regenerated"
+
+next_step: |
+  Run forge-brand init --from-exploration on blueprint/ to generate v2 brand-kit.json
+  with this prescription as the brief. Flag before kicking off — first durable artifact.

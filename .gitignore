@@ -57,3 +57,9 @@ Thumbs.db
 /AGENTS.md
 /package-lock.json
 .wrangler
+
+# Git worktrees nested under the repo per project convention
+/.worktree/
+
+# Blueprint smoke-test screenshots — dev artifacts, regenerable
+/blueprint/_design/smoke-tests/

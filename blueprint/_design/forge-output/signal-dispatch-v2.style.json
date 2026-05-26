@@ -1,0 +1,29 @@
+{
+  "name": "signal-dispatch-v2",
+  "description": "Signal Dispatch brand style — Working notes from an architect who directs agents to ship commerce.",
+  "basePrompt": "BRAND: Signal Dispatch — a publication of working notes from an architect who directs agents to ship commerce. Editorial, not personal-brand. Practice, not promotion. Reads as professional studio output, not as marketing.\nAESTHETIC: Dark, deliberate, technical. Minimalist with editorial gravity. Editorial-publication register, not SaaS-startup register, not personal-brand register.\n\nVISUAL LANGUAGE:\n- Signal waveforms, circuit-like patterns, geometric nodes — but as editorial illustration, not infographics\n- Abstract data visualization, flowing lines, technical artifacts\n- Architectural diagrams, drafted-by-hand feel, blueprint-adjacent\n- Near-black backgrounds with coral/cyan accent highlights\n- Clean lines, no ornamental flourishes, no startup-y gradients",
+  "styles": {},
+  "default": {
+    "background": "Dark background (#0a0a0b)",
+    "lineColor": "Signal Coral (#e86c5d) with Signal Cyan (#00ced1) accents",
+    "style": "self-interrogating, technically-deep, provocative, conversational, provisional aesthetic",
+    "elements": "dark, minimal, technical, geometric, signal, architectural, drafted, editorial",
+    "personality": "self-interrogating, technically-deep, provocative, conversational, provisional"
+  },
+  "conceptMap": {
+    "signal": "abstract signal waveform, frequency pattern, data stream",
+    "network": "network topology nodes and edges, connected systems",
+    "circuit": "circuit board patterns, technical traces, PCB aesthetic",
+    "data": "data visualization, flowing lines, abstract charts",
+    "grid": "subtle background grid, technical graph paper",
+    "agent": "geometric figure directing a swarm of smaller geometric figures — author-as-director metaphor",
+    "harness": "structural scaffolding, contracts, validators — the safety frame around autonomous action",
+    "architecture": "blueprint-style line drawings, isometric structural diagrams"
+  },
+  "formatModifiers": {
+    "web": "Standard web resolution. 1200x675px. Landscape format.",
+    "banner": "Newsletter banner. 1200x200px. Horizontal strip.",
+    "og-card": "Open Graph card. 1200x630px. Single dominant illustration, room for overlaid title.",
+    "hero": "Post hero image. 1600x900px. Editorial illustration register."
+  }
+}

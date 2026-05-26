@@ -1,6 +1,6 @@
 {
   "name": "Signal Dispatch v2 Blueprint",
-  "tagline": "Greenfield re-conception of Signal Dispatch — proposed-state prototype rebuilt 2026-05-26 from Stitch (blog-stitch-v2) content layout with rejected-pattern list applied. 10 surfaces, dark publication register, RSS-only follow posture.",
+  "tagline": "Greenfield re-conception of Signal Dispatch — proposed-state prototype for a new publication, with current-state comparison against v1 (ninochavez.co/blog), strategy rationale per surface, and AI chat grounded in the v2 design corpus.",
   "groups": [
     { "id": "reading",    "label": "Reading",    "color": "brand" },
     { "id": "discovery",  "label": "Discovery",  "color": "accent" },
@@ -13,8 +13,6 @@
     "series-detail",
     "counterpoint-detail",
     "library",
-    "series-index",
-    "whitepapers-list",
     "about-colophon",
     "subscribe-follow"
   ],
@@ -36,18 +34,6 @@
       "label": "Warm return — RSS subscriber",
       "summary": "RSS pushes a new piece, return for the read, optionally check Library for context on the broader argument.",
       "pages": ["post-detail", "library"]
-    },
-    {
-      "id": "discovery-series",
-      "label": "Discovery — series-first reader",
-      "summary": "Curious about deep-dives. Lands on Series Index, picks a series, reads the syllabus + parts list, dives into Part 01.",
-      "pages": ["series-index", "series-detail", "post-detail"]
-    },
-    {
-      "id": "discovery-whitepapers",
-      "label": "Discovery — whitepaper hunter",
-      "summary": "Academic / consulting researcher looking for reference material. Lands on Whitepapers List, filters by type, downloads + cites.",
-      "pages": ["whitepapers-list", "whitepaper-detail"]
     }
   ]
 }

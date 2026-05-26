@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Signal Dispatch | Practitioner Speaking Page</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&amp;family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@400;600;700;900&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .receipt-edge {
+            background-image: radial-gradient(circle at 10px -5px, transparent 12px, #273032 13px);
+            background-size: 20px 20px;
+        }
+        /* Custom scrollbar for dense right rail */
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #008B94; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#001f23",
+                      "primary-fixed-dim": "#a4cbe8",
+                      "on-tertiary-container": "#8f989a",
+                      "surface-container-low": "#f5f4e8",
+                      "on-primary-container": "#749bb6",
+                      "on-primary-fixed": "#001e2e",
+                      "primary-fixed": "#c7e7ff",
+                      "on-surface-variant": "#42474c",
+                      "inverse-surface": "#303129",
+                      "inverse-on-surface": "#f2f1e5",
+                      "secondary-fixed": "#8cf2ff",
+                      "on-surface": "#1b1c15",
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed-variant": "#004f56",
+                      "aged-paper": "#FDFCF0",
+                      "on-tertiary-fixed": "#141d1f",
+                      "blueprint-cyan": "#008B94",
+                      "on-secondary-container": "#006b75",
+                      "outline-variant": "#c2c7cd",
+                      "architectural-ink": "#001B29",
+                      "on-error": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "surface-variant": "#e4e3d7",
+                      "on-background": "#1b1c15",
+                      "tertiary-fixed-dim": "#bfc8ca",
+                      "surface-container": "#efeee3",
+                      "primary-container": "#003249",
+                      "surface-bright": "#fbfaee",
+                      "tertiary": "#131b1d",
+                      "secondary-fixed-dim": "#5ad7e6",
+                      "primary": "#001c2b",
+                      "outline": "#72787d",
+                      "surface-container-lowest": "#ffffff",
+                      "carbon-trace": "#111827",
+                      "background": "#fbfaee",
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed": "#dbe4e6",
+                      "secondary-container": "#73eefd",
+                      "surface-tint": "#3c637c",
+                      "on-tertiary": "#ffffff",
+                      "inverse-primary": "#a4cbe8",
+                      "on-primary-fixed-variant": "#224b63",
+                      "error": "#ba1a1a",
+                      "tertiary-container": "#273032",
+                      "surface-container-highest": "#e4e3d7",
+                      "surface": "#fbfaee",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed-variant": "#3f484a",
+                      "surface-container-high": "#e9e9dd",
+                      "secondary": "#006972",
+                      "surface-dim": "#dbdbcf"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "rail-width": "320px",
+                      "gutter": "16px",
+                      "margin": "32px",
+                      "dense-gap": "8px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Bree Serif"],
+                      "status-code": ["JetBrains Mono"],
+                      "body-dense": ["Crimson Pro"],
+                      "body-prose": ["Crimson Pro"],
+                      "display-lg": ["Bree Serif"],
+                      "label-ui": ["Inter"],
+                      "data-receipt": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "headline-md": ["24px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                      "status-code": ["11px", {"lineHeight": "1", "fontWeight": "700"}],
+                      "body-dense": ["16px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                      "body-prose": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-ui": ["13px", {"lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "data-receipt": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-architectural-ink font-body-prose selection:bg-blueprint-cyan selection:text-aged-paper overflow-x-hidden">
+<!-- TopAppBar Shell -->
+<header class="fixed top-0 w-full z-50 bg-background flex justify-between items-center px-margin py-4 border-b-2 border-architectural-ink">
+<div class="font-headline-md text-headline-md font-bold text-architectural-ink uppercase tracking-tighter">Signal Dispatch</div>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-architectural-ink px-2 py-1 font-label-ui text-label-ui hover:bg-blueprint-cyan hover:text-aged-paper transition-colors" href="#">Index</a>
+<a class="text-architectural-ink px-2 py-1 font-label-ui text-label-ui hover:bg-blueprint-cyan hover:text-aged-paper transition-colors" href="#">Drafts</a>
+<a class="text-architectural-ink px-2 py-1 font-label-ui text-label-ui hover:bg-blueprint-cyan hover:text-aged-paper transition-colors" href="#">Archive</a>
+<a class="bg-blueprint-cyan text-aged-paper px-2 py-1 font-label-ui text-label-ui" href="#">Theory</a>
+<a class="ml-4 bg-architectural-ink text-aged-paper px-4 py-2 font-label-ui text-label-ui uppercase tracking-widest hover:bg-blueprint-cyan transition-colors" href="mailto:architect@signaldispatch.com?subject=Speaking Inquiry">Access Corpus</a>
+</nav>
+</header>
+<!-- SideNavBar (Right Rail Anchor) -->
+<aside class="fixed right-0 top-0 h-full w-[320px] bg-aged-paper border-l-2 border-architectural-ink z-40 hidden lg:flex flex-col pt-24 pb-8 overflow-y-auto custom-scrollbar">
+<div class="px-6 mb-12">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-16 h-16 bg-architectural-ink flex items-center justify-center text-aged-paper">
+<span class="material-symbols-outlined text-4xl" data-icon="architecture">architecture</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md leading-none">Global Rail</h2>
+<p class="font-status-code text-status-code text-blueprint-cyan">System State: Active</p>
+</div>
+</div>
+<!-- Contact Card -->
+<div class="border border-architectural-ink p-4 space-y-4">
+<h3 class="font-label-ui text-label-ui uppercase border-b border-architectural-ink pb-2">Direct Terminal</h3>
+<a class="flex items-center gap-2 font-data-receipt text-data-receipt text-architectural-ink hover:text-blueprint-cyan transition-colors" href="mailto:architect@signaldispatch.com">
+<span class="material-symbols-outlined" data-icon="alternate_email">alternate_email</span> architect@signaldispatch.com
+                </a>
+<a class="flex items-center gap-2 font-data-receipt text-data-receipt text-architectural-ink hover:text-blueprint-cyan transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="lan">lan</span> LinkedIn/SignalArchitect
+                </a>
+<a class="flex items-center gap-2 font-data-receipt text-data-receipt text-architectural-ink hover:text-blueprint-cyan transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span> GitHub/DispatchLabs
+                </a>
+</div>
+<!-- Receipt Block -->
+<div class="mt-8 bg-tertiary-container text-aged-paper p-4 border-y border-dashed border-outline-variant">
+<p class="font-status-code text-status-code mb-2 opacity-60">ENGAGEMENT_METRICS</p>
+<div class="space-y-1">
+<div class="flex justify-between font-data-receipt text-data-receipt">
+<span>LIFETIME_TALKS</span>
+<span class="text-blueprint-cyan">42</span>
+</div>
+<div class="flex justify-between font-data-receipt text-data-receipt">
+<span>AVG_INTENSITY</span>
+<span class="text-blueprint-cyan">HIGH</span>
+</div>
+<div class="flex justify-between font-data-receipt text-data-receipt">
+<span>LATENCY_MS</span>
+<span class="text-blueprint-cyan">24.01</span>
+</div>
+</div>
+</div>
+</div>
+<nav class="mt-auto space-y-1">
+<a class="flex items-center gap-3 p-4 font-label-ui text-label-ui text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span> Live Signal
+            </a>
+<a class="flex items-center gap-3 p-4 font-label-ui text-label-ui text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="architecture">architecture</span> Drafting
+            </a>
+<a class="bg-blueprint-cyan text-aged-paper font-bold flex items-center gap-3 p-4 w-full" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping" style="font-variation-settings: 'FILL' 1;">local_shipping</span> Ship Log
+            </a>
+<a class="flex items-center gap-3 p-4 font-label-ui text-label-ui text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings_suggest">settings_suggest</span> Parameters
+            </a>
+</nav>
+</aside>
+<!-- Main Canvas -->
+<main class="lg:mr-[320px] pt-32 pb-20 px-margin max-w-5xl mx-auto">
+<!-- Hero Section -->
+<section class="mb-24">
+<span class="font-status-code text-status-code text-blueprint-cyan uppercase tracking-widest border border-blueprint-cyan px-2 py-1 mb-6 inline-block">Module 07: Speaking &amp; Keynotes</span>
+<h1 class="font-display-lg text-display-lg text-architectural-ink mb-6 max-w-3xl">The Practitioner on Stage: Directives for a High-Fidelity Commerce Era.</h1>
+<p class="font-body-prose text-body-prose text-on-surface-variant max-w-2xl mb-8">
+                Rejecting the standard industry "visionary" tropes for a methodology-first approach. I speak on the structural realities of engineering, the methodology of AI agency, and the architectural shifts defining the next decade of infrastructure.
+            </p>
+<a class="inline-block bg-architectural-ink text-aged-paper px-8 py-4 font-label-ui text-label-ui uppercase tracking-tighter hover:bg-blueprint-cyan transition-colors" href="mailto:architect@signaldispatch.com?subject=Booking inquiry">Deploy Speaker to Venue</a>
+</section>
+<!-- Toolkit: Bio Variants -->
+<section class="mb-24 space-y-12">
+<div class="border-b-2 border-architectural-ink pb-2">
+<h2 class="font-headline-md text-headline-md uppercase tracking-tight">Toolkit for Organizers</h2>
+<p class="font-status-code text-status-code text-outline uppercase mt-1">Resource Allocation / Copy-Ready Bio Strings</p>
+</div>
+<div class="grid gap-8">
+<!-- 50 Word Bio -->
+<div class="group border border-architectural-ink p-6 relative bg-surface-container-low transition-all hover:bg-white">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-label-ui text-label-ui text-blueprint-cyan">01 / MICRO BIO (50 WORDS)</h3>
+<button class="font-status-code text-status-code bg-architectural-ink text-aged-paper px-2 py-1 hover:bg-blueprint-cyan transition-colors" onclick="copyBio('bio50')">EXECUTE_COPY</button>
+</div>
+<p class="font-body-dense text-body-dense text-architectural-ink italic" id="bio50">
+                        The Architect is the lead strategist at Signal Dispatch, specializing in the intersection of high-scale engineering and autonomous agent methodology. With a focus on structural drafting and commerce-era infrastructure, they bridge the gap between abstract architectural theory and pragmatic shipping realities for global practitioner studios.
+                    </p>
+</div>
+<!-- 100 Word Bio -->
+<div class="group border border-architectural-ink p-6 relative bg-surface-container-low transition-all hover:bg-white">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-label-ui text-label-ui text-blueprint-cyan">02 / STANDARD BIO (100 WORDS)</h3>
+<button class="font-status-code text-status-code bg-architectural-ink text-aged-paper px-2 py-1 hover:bg-blueprint-cyan transition-colors" onclick="copyBio('bio100')">EXECUTE_COPY</button>
+</div>
+<p class="font-body-dense text-body-dense text-architectural-ink leading-relaxed" id="bio100">
+                        Operating at the vanguard of modern systems design, the Architect leads Signal Dispatch’s efforts in establishing blueprint methodologies for the next generation of software production. Their work centers on "The Practitioner Studio" model—a rejection of bloated SaaS layers in favor of dense, high-fidelity developer environments. With over two decades of experience in harness engineering and buy-vs-build strategy, they have guided Fortune 100 firms through the transition to AI-native workflows. They are a frequent contributor to architectural journals and a vocal advocate for "Information over Decoration" in technical interface design.
+                    </p>
+</div>
+<!-- 250 Word Bio -->
+<div class="group border border-architectural-ink p-6 relative bg-surface-container-low transition-all hover:bg-white">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-label-ui text-label-ui text-blueprint-cyan">03 / EXTENDED PROSE (250 WORDS)</h3>
+<button class="font-status-code text-status-code bg-architectural-ink text-aged-paper px-2 py-1 hover:bg-blueprint-cyan transition-colors" onclick="copyBio('bio250')">EXECUTE_COPY</button>
+</div>
+<div class="font-body-dense text-body-dense text-architectural-ink space-y-4" id="bio250">
+<p>The Architect represents a new breed of technical leadership—the practitioner-philosopher. As the founder of Signal Dispatch, they have dedicated their career to the precision of system architecture, arguing that the modern software stack has become dangerously detached from its mechanical roots. Their speaking engagements are noted for their "Saturated Editorial" style: a rejection of the optimistic, low-friction narratives common in Silicon Valley in favor of a rigorous, blue-collar approach to high-scale engineering.</p>
+<p>At the core of their methodology is the "Blueprint Effect," a structural approach to building that prioritizes vertical stacks and architectural outlines over superficial aesthetics. This philosophy extends into their advocacy for the Commerce Era, where autonomous agents function as direct extensions of the architect's intent rather than separate black-boxed tools. They challenge audiences to rethink the "Buy-vs-Build" dichotomy, offering a third path focused on custom-fit "harnesses" that empower teams to maintain total sovereignty over their technical destiny.</p>
+<p>Previously, the Architect served as Lead Engineer for several global infrastructure projects, where they pioneered the "Receipt Block" logging standard—a methodology for documenting AI actions in human-readable, immutable streams. When not on stage, they are actively drafting at their studio, refining the very tools and theories they present. Their work has been described as "architectural ink for the digital age," demanding a level of focus and density that rewards the serious practitioner.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Headshot Library -->
+<section class="mb-24">
+<div class="border-b-2 border-architectural-ink pb-2 mb-12">
+<h2 class="font-headline-md text-headline-md uppercase tracking-tight">Visual Identity / Headshots</h2>
+<p class="font-status-code text-status-code text-outline uppercase mt-1">Approved Assets for Print and Digital Publication</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<!-- Square -->
+<div class="space-y-4">
+<div class="aspect-square border-2 border-architectural-ink overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover grayscale contrast-125 mix-blend-multiply opacity-90" data-alt="A professional portrait of a tech architect in a high-density, architectural drafting studio. The lighting is dramatic, high-contrast, mimicking a blueprint or cyanotype aesthetic with deep blue shadows and ivory highlights. The subject wears a structured charcoal blazer, looking directly at the camera with a focused, serious expression. The background features technical drawings and blueprint overlays." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcukYWt_aHRcIHFPloNIFJemGbQ6IDseC2YZwzze7MfttN8LmGBD7_i94PHMFPe_OaXZbCVoPP5_f4Nuj2DK16c7PfHjG9vFI4rNGS8nQBcilfpTl4_UUJwemRkNfKXkpWe4Ai68GBRN0nYcrzH2P_TJ_nYtUXkpnjewgVIZo9y8bG0rrSvIugS0JwDIMXjd-ESnRsfcoK1efhAbDSTywDMECCAUdiaE25eL7aC08S6YvRoTKyYBWhfHcCh8KUgJcsxw3PUMOnIQ"/>
+</div>
+<div class="flex justify-between items-end border-t border-architectural-ink pt-2">
+<div>
+<p class="font-label-ui text-label-ui">Standard Portrait (1:1)</p>
+<p class="font-status-code text-status-code text-outline">Credit: Signal Dispatch Media</p>
+</div>
+<a class="font-status-code text-status-code text-blueprint-cyan hover:underline" href="#">DOWNLOAD_HQ</a>
+</div>
+</div>
+<!-- Wide -->
+<div class="space-y-4">
+<div class="aspect-[16/9] border-2 border-architectural-ink overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover grayscale contrast-125 mix-blend-multiply opacity-90" data-alt="A wide-angle cinematic shot of a technology practitioner standing in a modern, industrial workspace filled with large-scale architectural blueprints and server racks. The mood is atmospheric and dense, with a saturated blue color palette reminiscent of a technical drawing. The subject is seen from the side, gesturing toward a large wall of code-receipts and diagrams. Minimalist lighting emphasizes sharp lines and architectural structures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrThdoqGb3DVBggSLYZ2xMdCPqrl-ubkryvGGvFhQ660OgCWRm7l4zaMNOMVRcnfVPKMzuoZXeNr25StUc2bSeCI5_DUZCvelKtxz3mc8zcKJAVOZ3g4M7VBexvbRJeZk59WE4l_dl2wDCitu1nvdNsT5t8TeU5pICtbewU9gEKFC2JQi6gh-IX6BBQYgaatFdMUUPcOHVlTy6M7qVyAAvmxfFECb2mBHwFf7JUbAY0UX609EcIqQ0KiOVX42zGsAI4mu0p_ikpQ"/>
+</div>
+<div class="flex justify-between items-end border-t border-architectural-ink pt-2">
+<div>
+<p class="font-label-ui text-label-ui">Environment Shot (16:9)</p>
+<p class="font-status-code text-status-code text-outline">Credit: Signal Dispatch Media</p>
+</div>
+<a class="font-status-code text-status-code text-blueprint-cyan hover:underline" href="#">DOWNLOAD_HQ</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Speaking Topics -->
+<section class="mb-24">
+<div class="border-b-2 border-architectural-ink pb-2 mb-12">
+<h2 class="font-headline-md text-headline-md uppercase tracking-tight">Active Lecture Modules</h2>
+<p class="font-status-code text-status-code text-outline uppercase mt-1">Available Topics for Q3-Q4 Cycle</p>
+</div>
+<div class="space-y-4">
+<!-- Topic 1 -->
+<div class="group border-b border-outline-variant py-6 flex flex-col md:flex-row gap-6 items-start transition-all hover:bg-surface-container-low px-4 -mx-4">
+<div class="w-12 h-12 bg-architectural-ink shrink-0 flex items-center justify-center text-aged-paper">01</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-headline-md mb-2">Harness Engineering: Building for Sovereignty</h3>
+<p class="text-on-surface-variant max-w-2xl font-body-dense">A deep dive into why enterprise middleware is failing and how to build custom execution harnesses that keep technical debt in a permanent state of managed containment.</p>
+</div>
+<div class="font-status-code text-status-code text-blueprint-cyan border border-blueprint-cyan px-3 py-1 mt-2 md:mt-0 uppercase">Keynote / 45m</div>
+</div>
+<!-- Topic 2 -->
+<div class="group border-b border-outline-variant py-6 flex flex-col md:flex-row gap-6 items-start transition-all hover:bg-surface-container-low px-4 -mx-4">
+<div class="w-12 h-12 bg-architectural-ink shrink-0 flex items-center justify-center text-aged-paper">02</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-headline-md mb-2">Architect Directs Agents</h3>
+<p class="text-on-surface-variant max-w-2xl font-body-dense">Moving beyond "chat" as an interface. How to lead fleets of autonomous agents using structural drafting and high-density state management.</p>
+</div>
+<div class="font-status-code text-status-code text-blueprint-cyan border border-blueprint-cyan px-3 py-1 mt-2 md:mt-0 uppercase">Workshop / 90m</div>
+</div>
+<!-- Topic 3 -->
+<div class="group border-b border-outline-variant py-6 flex flex-col md:flex-row gap-6 items-start transition-all hover:bg-surface-container-low px-4 -mx-4">
+<div class="w-12 h-12 bg-architectural-ink shrink-0 flex items-center justify-center text-aged-paper">03</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-headline-md mb-2">The New Buy-vs-Build Calculus</h3>
+<p class="text-on-surface-variant max-w-2xl font-body-dense">In the era of rapid AI generation, the traditional math for purchasing software is dead. We explore the architectural imperative for building core IP in-house.</p>
+</div>
+<div class="font-status-code text-status-code text-blueprint-cyan border border-blueprint-cyan px-3 py-1 mt-2 md:mt-0 uppercase">Fireside / 30m</div>
+</div>
+<!-- Topic 4 -->
+<div class="group border-b border-outline-variant py-6 flex flex-col md:flex-row gap-6 items-start transition-all hover:bg-surface-container-low px-4 -mx-4">
+<div class="w-12 h-12 bg-architectural-ink shrink-0 flex items-center justify-center text-aged-paper">04</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-headline-md mb-2">Methodology as Infrastructure</h3>
+<p class="text-on-surface-variant max-w-2xl font-body-dense">Process is not paperwork; it is the substrate upon which engineering quality is built. A manifesto for "saturated editorial" project management.</p>
+</div>
+<div class="font-status-code text-status-code text-blueprint-cyan border border-blueprint-cyan px-3 py-1 mt-2 md:mt-0 uppercase">Lecture / 60m</div>
+</div>
+<!-- Topic 5 -->
+<div class="group border-b border-outline-variant py-6 flex flex-col md:flex-row gap-6 items-start transition-all hover:bg-surface-container-low px-4 -mx-4">
+<div class="w-12 h-12 bg-architectural-ink shrink-0 flex items-center justify-center text-aged-paper">05</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-headline-md mb-2">Commerce Era: The Post-SaaS Landscape</h3>
+<p class="text-on-surface-variant max-w-2xl font-body-dense">Predicting the shift from monthly subscriptions to transaction-first micro-infrastructure and what it means for global digital trade.</p>
+</div>
+<div class="font-status-code text-status-code text-blueprint-cyan border border-blueprint-cyan px-3 py-1 mt-2 md:mt-0 uppercase">Keynote / 45m</div>
+</div>
+</div>
+</section>
+<!-- On the Record (Writing First Focus) -->
+<section class="mb-24">
+<div class="border-b-2 border-architectural-ink pb-2 mb-12 flex justify-between items-end">
+<div>
+<h2 class="font-headline-md text-headline-md uppercase tracking-tight">On the Record</h2>
+<p class="font-status-code text-status-code text-outline uppercase mt-1">Past Transmissions and Editorial Logs</p>
+</div>
+<a class="font-label-ui text-label-ui text-blueprint-cyan hover:underline" href="#">VIEW ALL ARCHIVES</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+<!-- Log Entry 1 -->
+<article class="space-y-4">
+<div class="bg-tertiary-container text-aged-paper p-4 receipt-edge">
+<p class="font-status-code text-status-code mb-1">08.12.2023 | TOKYO_ENGINEERING_SUMMIT</p>
+<h4 class="font-label-ui text-label-ui uppercase tracking-wide">The Architectural Ink Manifesto</h4>
+</div>
+<p class="font-body-dense text-body-dense text-on-surface-variant italic leading-relaxed">
+                        "We treat our interfaces like disposable toys, yet we wonder why our systems feel fragile. To build high-scale engineering is to commit to the density of a blueprint."
+                    </p>
+<a class="inline-flex items-center gap-2 font-label-ui text-label-ui text-blueprint-cyan hover:gap-4 transition-all" href="#">
+                        READ FULL TRANSCRIPT <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</article>
+<!-- Log Entry 2 -->
+<article class="space-y-4">
+<div class="bg-tertiary-container text-aged-paper p-4 receipt-edge">
+<p class="font-status-code text-status-code mb-1">05.24.2023 | DISPATCH_INTERNAL_LOG</p>
+<h4 class="font-label-ui text-label-ui uppercase tracking-wide">Agentic State Management</h4>
+</div>
+<p class="font-body-dense text-body-dense text-on-surface-variant italic leading-relaxed">
+                        "An agent without a harness is just expensive noise. The practitioner's job is not to prompt, but to engineer the constraints that make autonomy possible."
+                    </p>
+<a class="inline-flex items-center gap-2 font-label-ui text-label-ui text-blueprint-cyan hover:gap-4 transition-all" href="#">
+                        READ RESEARCH PAPER <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</article>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="border-4 border-architectural-ink p-12 text-center bg-surface-container-high relative overflow-hidden">
+<div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: repeating-linear-gradient(45deg, #001B29 0, #001B29 1px, transparent 0, transparent 50%); background-size: 10px 10px;"></div>
+<h2 class="font-display-lg text-display-lg mb-4">Request Deployment</h2>
+<p class="font-body-prose text-body-prose max-w-xl mx-auto mb-10">
+                For conference keynotes, private practitioner workshops, or architectural strategy sessions, initialize communication via the secure terminal below.
+            </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<a class="bg-architectural-ink text-aged-paper px-10 py-5 font-label-ui text-label-ui uppercase tracking-widest hover:bg-blueprint-cyan transition-all transform active:scale-95 shadow-[8px_8px_0px_0px_rgba(0,139,148,1)]" href="mailto:architect@signaldispatch.com?subject=Inquiry">
+                    architect@signaldispatch.com
+                </a>
+<a class="bg-white border-2 border-architectural-ink text-architectural-ink px-10 py-5 font-label-ui text-label-ui uppercase tracking-widest hover:bg-blueprint-cyan hover:text-aged-paper transition-all transform active:scale-95" href="#">
+                    View Technical Spec
+                </a>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="lg:mr-[320px] bg-background border-t border-architectural-ink py-margin px-margin flex flex-col md:flex-row justify-between items-center text-architectural-ink">
+<div class="mb-4 md:mb-0">
+<p class="font-label-ui text-label-ui font-black uppercase tracking-tighter">Signal Dispatch</p>
+<p class="font-data-receipt text-data-receipt opacity-70">Built with Blueprint methodology. © 2024 Signal Dispatch.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-body-prose text-body-prose hover:text-blueprint-cyan transition-all" href="#">Methodology</a>
+<a class="font-body-prose text-body-prose hover:text-blueprint-cyan transition-all" href="#">Manifesto</a>
+<a class="font-body-prose text-body-prose hover:text-blueprint-cyan transition-all" href="#">Technical Spec</a>
+</div>
+</footer>
+<!-- Bottom Nav for Mobile -->
+<nav class="fixed bottom-0 left-0 w-full bg-aged-paper border-t-2 border-architectural-ink flex md:hidden z-50">
+<a class="flex-1 py-4 flex flex-col items-center gap-1 text-architectural-ink" href="#">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+<span class="font-status-code text-[10px]">LIVE</span>
+</a>
+<a class="flex-1 py-4 flex flex-col items-center gap-1 text-architectural-ink" href="#">
+<span class="material-symbols-outlined" data-icon="architecture">architecture</span>
+<span class="font-status-code text-[10px]">DRAFT</span>
+</a>
+<a class="flex-1 py-4 flex flex-col items-center gap-1 bg-blueprint-cyan text-aged-paper" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+<span class="font-status-code text-[10px]">SHIP</span>
+</a>
+<a class="flex-1 py-4 flex flex-col items-center gap-1 text-architectural-ink" href="#">
+<span class="material-symbols-outlined" data-icon="settings_suggest">settings_suggest</span>
+<span class="font-status-code text-[10px]">PARAM</span>
+</a>
+</nav>
+<script>
+        function copyBio(id) {
+            const bioText = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(bioText).then(() => {
+                const btn = event.target;
+                const original = btn.innerText;
+                btn.innerText = 'COPIED_SUCCESS';
+                btn.classList.add('bg-blueprint-cyan');
+                setTimeout(() => {
+                    btn.innerText = original;
+                    btn.classList.remove('bg-blueprint-cyan');
+                }, 2000);
+            });
+        }
+
+        // Active Nav Highlight logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPath = window.location.pathname;
+            // For demo purposes, we manually highlight "Theory" as the parent of "Speaking"
+        });
+    </script>
+<script>window.BLUEPRINT_PAGE = { id: "speaking", title: "Speaking" };</script>
+<script src="/_blueprint-banner.js?v=20260525-2100"></script>
+<script src="/chat-widget.js?v=20260525-2100" defer></script>
+</body></html>

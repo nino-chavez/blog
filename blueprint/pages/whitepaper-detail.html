@@ -4,634 +4,401 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>The Cognitive Foundry — [v2-name] Blueprint</title>
+  <title>The Cognitive Foundry — Whitepaper #008 — [v2-name]</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/shared.css?v=20260525-1700">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared.css?v=20260526-stitch1">
   <style>
-    /* whitepaper-detail page-specific styles only. Tokens via shared.css.
-       Per Rule 5 (progressive disclosure): exec summary self-contained,
-       TOC clickable, section-progress sticky, plain markdown + tables. */
+    /* whitepaper-detail — long-form detail.
+     * Stitch has no detail surface; invented from ArticleDetail shell with:
+     *   + abstract block above body
+     *   + deeper TOC with subsections
+     *   + version metadata + cite block (replaces prev/next)
+     *   + PDF download CTA in head
+     *   + section-anchored footnotes
+     */
+    .wp-detail { --font-serif: 'Source Serif 4', Georgia, serif; --max-w: 1200px; }
 
-    /* Publication header (the v2 publication's own header, NOT the
-       harness chrome which proto-nav.js injects above). */
-    .pub-header {
-      border-bottom: 1px solid var(--card-border);
-      background: var(--card);
+    .wp-detail .pub-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(10, 10, 11, 0.9); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
-    .pub-header-inner {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: var(--space-3) var(--space-4);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--space-4);
+    .wp-detail .pub-header-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: var(--space-6) var(--space-5);
+      display: flex; align-items: center; justify-content: space-between; gap: var(--space-6);
     }
-    .pub-mark {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: -0.01em;
-      color: var(--text-primary);
+    @media (min-width: 768px) { .wp-detail .pub-header-inner { padding: var(--space-6) 80px; } }
+    .wp-detail .pub-brand { display: flex; align-items: center; gap: var(--space-6); }
+    .wp-detail .pub-mark {
+      font-family: var(--font-serif); font-weight: 700; font-size: 24px;
+      letter-spacing: -0.01em; color: var(--brand-primary); text-decoration: none;
     }
-    .pub-mark .pub-mark-placeholder {
-      color: var(--text-muted);
-      font-weight: 500;
+    .wp-detail .pub-mark-pending {
+      font-family: var(--font-body); font-weight: 400; font-size: var(--text-xs);
+      color: var(--text-muted); margin-left: 8px;
     }
-    .pub-nav {
-      display: flex;
-      gap: var(--space-4);
-      font-size: var(--text-sm);
+    .wp-detail .pub-byline { display: none; height: 24px; width: 1px; background: rgba(255, 255, 255, 0.1); }
+    .wp-detail .pub-byline-text { display: none; font-size: var(--text-sm); color: rgba(255, 255, 255, 0.6); font-style: italic; }
+    @media (min-width: 768px) { .wp-detail .pub-byline, .wp-detail .pub-byline-text { display: inline-block; } }
+    .wp-detail .pub-nav { display: none; gap: var(--space-8); align-items: center; }
+    @media (min-width: 768px) { .wp-detail .pub-nav { display: flex; } }
+    .wp-detail .pub-nav a {
+      font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em;
+      color: rgba(255, 255, 255, 0.6); padding-bottom: 4px;
+      border-bottom: 2px solid transparent; text-decoration: none;
     }
-    .pub-nav a {
-      color: var(--text-secondary);
-      font-weight: 500;
+    .wp-detail .pub-nav a:hover { color: #ffffff; }
+    .wp-detail .pub-nav a.active {
+      color: var(--brand-primary); border-bottom-color: var(--brand-primary); font-weight: 600;
     }
-    .pub-nav a:hover { color: var(--text-primary); }
+    .wp-detail .pub-actions { display: flex; align-items: center; gap: var(--space-4); }
+    .wp-detail .user-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--brand-primary); text-decoration: none;
+    }
+    .wp-detail .search-btn {
+      padding: 6px; color: rgba(255, 255, 255, 0.6); background: transparent;
+      border: 0; border-radius: var(--radius-full); cursor: pointer;
+    }
+    .wp-detail .search-btn:hover { color: var(--brand-primary); background: rgba(255, 255, 255, 0.05); }
 
-    /* Article frame — narrow reading column, byline + format badge above
-       the fold per Rule 3 (work-first, author-second, brand-third). */
-    .article {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: var(--space-12) var(--space-4) var(--space-16);
+    .wp-detail .article-shell { position: relative; min-height: calc(100vh - 90px); }
+    .wp-detail .toc-rail {
+      display: none; position: fixed; left: 0; top: 90px; bottom: 0; width: 280px;
+      padding: var(--space-8) var(--space-5);
+      border-right: 1px solid rgba(255, 255, 255, 0.05); overflow-y: auto;
     }
+    @media (min-width: 1280px) {
+      .wp-detail .toc-rail { display: block; }
+      .wp-detail .article-main { margin-left: 280px; }
+    }
+    .wp-detail .toc-label {
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;
+      color: rgba(255, 255, 255, 0.4); margin: 0 0 4px;
+    }
+    .wp-detail .toc-roadmap {
+      font-size: var(--text-xs); font-weight: 700; color: var(--brand-primary);
+      margin: 0 0 var(--space-6);
+    }
+    .wp-detail .toc-nav { display: flex; flex-direction: column; gap: 6px; }
+    .wp-detail .toc-link {
+      padding: 6px var(--space-3); padding-left: 16px;
+      font-size: var(--text-xs); color: rgba(255, 255, 255, 0.6); text-decoration: none;
+      border-left: 2px solid transparent;
+    }
+    .wp-detail .toc-link:hover { color: #ffffff; }
+    .wp-detail .toc-link.active {
+      color: var(--brand-primary); border-left-color: var(--brand-primary); font-weight: 700;
+    }
+    .wp-detail .toc-link.sub {
+      padding-left: 28px; font-size: 11px; color: rgba(255, 255, 255, 0.45);
+    }
+    .wp-detail .toc-link.sub:hover { color: rgba(255, 255, 255, 0.8); }
 
-    .article-meta {
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
+    .wp-detail .article-main {
+      max-width: 720px; margin: 0 auto;
+      padding: 48px var(--space-5) 96px;
+    }
+    .wp-detail .back-link {
+      display: inline-flex; align-items: center; gap: 6px; margin-bottom: var(--space-8);
+      font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--brand-primary); text-decoration: none;
+    }
+    .wp-detail .back-link:hover { color: #ffffff; }
+
+    /* head */
+    .wp-detail .article-head { margin-bottom: 40px; }
+    .wp-detail .article-meta {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
       margin-bottom: var(--space-6);
-      flex-wrap: wrap;
     }
-    .format-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 3px 10px 4px;
-      border-radius: var(--radius-sm);
-      background: hsl(220 80% 96%);
-      color: hsl(220 70% 35%);
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
+    .wp-detail .article-id {
+      font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 700;
+      color: var(--brand-primary);
+      background: rgba(232, 108, 93, 0.10); border: 1px solid rgba(232, 108, 93, 0.20);
+      padding: 2px 8px; border-radius: var(--radius-sm);
     }
-    .format-badge::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: currentColor;
+    .wp-detail .article-version {
+      font-family: var(--font-body); font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em; color: var(--brand-primary);
     }
-    .article-meta .byline {
-      font-size: var(--text-sm);
-      color: var(--text-secondary);
-    }
-    .article-meta .byline strong { color: var(--text-primary); font-weight: 600; }
-    .article-meta time,
-    .article-meta .read-time {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-    .article-meta .dot { color: var(--text-muted); }
+    .wp-detail .article-meta-info { font-size: var(--text-xs); color: rgba(255, 255, 255, 0.5); }
+    .wp-detail .article-meta .sep { color: rgba(255, 255, 255, 0.1); }
 
-    .article-title {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 1.5rem + 2vw, 2.75rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      color: var(--text-primary);
-      margin-bottom: var(--space-3);
-      text-transform: none;  /* override shared.css h1 uppercase (Rally HQ residual) */
+    .wp-detail .article-title {
+      font-family: var(--font-serif); font-size: clamp(34px, 4vw, 44px);
+      line-height: 1.15; font-weight: 700; color: #ffffff;
+      margin: 0 0 var(--space-4); letter-spacing: -0.01em;
     }
-    .article-subtitle {
-      font-size: var(--text-lg);
-      color: var(--text-secondary);
-      line-height: 1.4;
-      margin-bottom: var(--space-8);
-      font-weight: 400;
+    .wp-detail .article-subtitle {
+      font-family: var(--font-serif); font-style: italic; font-size: var(--text-lg);
+      color: rgba(255, 255, 255, 0.65); margin: 0 0 var(--space-6); line-height: 1.5;
     }
 
-    /* Companion-to-post link — companionOf binding surfaced visibly. */
-    .companion-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: var(--space-8);
-      padding: 10px 14px;
-      background: hsl(35 30% 96%);
-      border: 1px solid hsl(35 30% 88%);
-      border-radius: var(--radius-md);
-      font-size: var(--text-sm);
-      color: var(--text-secondary);
-    }
-    .companion-link strong {
-      color: var(--text-primary);
-      font-weight: 600;
-    }
-    .companion-link a { color: var(--text-primary); border-bottom: 1px solid var(--text-muted); }
-
-    /* Executive Summary — Rule 5: self-contained, complete artifact.
-       Visually distinct so a reader who only reads this has gotten
-       the argument. */
-    .exec-summary {
-      margin: 0 0 var(--space-12);
-      padding: var(--space-6) var(--space-6);
-      background: hsl(220 25% 99%);
-      border: 1px solid hsl(220 15% 88%);
-      border-left: 3px solid hsl(220 60% 50%);
-      border-radius: var(--radius-md);
-    }
-    .exec-summary .exec-label {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: hsl(220 60% 40%);
-      margin-bottom: var(--space-3);
-    }
-    .exec-summary p {
-      font-size: var(--text-base);
-      line-height: 1.6;
-      color: var(--text-primary);
-      margin: 0 0 var(--space-3);
-    }
-    .exec-summary p:last-child { margin-bottom: 0; }
-    .exec-summary strong { color: var(--text-primary); font-weight: 600; }
-
-    /* TOC — clickable section list, sits between exec summary and body. */
-    .toc {
-      margin: 0 0 var(--space-10);
-      padding: var(--space-4) var(--space-5);
-      border: 1px dashed var(--card-border);
-      border-radius: var(--radius-md);
-    }
-    .toc-label {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      margin-bottom: var(--space-2);
-    }
-    .toc ol {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    .toc li {
-      counter-increment: toc-counter;
-      padding: 4px 0;
-      display: flex;
-      gap: var(--space-3);
-      align-items: baseline;
-      font-size: var(--text-sm);
-    }
-    .toc ol { counter-reset: toc-counter; }
-    .toc li::before {
-      content: counter(toc-counter, decimal-leading-zero);
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--text-muted);
-      min-width: 22px;
-    }
-    .toc li a {
-      color: var(--text-primary);
-      font-weight: 500;
-    }
-    .toc li a:hover { color: hsl(220 60% 40%); }
-
-    /* Section progress — sticky on scroll, shows "Section X of Y".
-       Demonstrated as fixed on viewport right; reveals on scroll past
-       exec summary. */
-    .section-progress {
-      position: fixed;
-      top: 100px;
-      right: var(--space-4);
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-md);
-      padding: 10px 14px;
-      box-shadow: var(--shadow-sm);
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text-secondary);
-      z-index: 50;
-      display: none;
-      opacity: 0;
+    .wp-detail .head-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+    .wp-detail .head-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 16px;
+      background: var(--brand-primary); color: #000;
+      font-family: var(--font-body); font-size: var(--text-xs); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none;
       transition: opacity var(--transition-base);
     }
-    @media (min-width: 1200px) {
-      .section-progress.visible { display: block; opacity: 1; }
+    .wp-detail .head-cta:hover { opacity: 0.9; }
+    .wp-detail .head-cta.secondary {
+      background: transparent; border: 1px solid var(--brand-primary); color: var(--brand-primary);
     }
-    .section-progress .progress-label {
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      margin-bottom: 4px;
+    .wp-detail .head-cta.secondary:hover { background: var(--brand-primary); color: #000; }
+
+    /* abstract */
+    .wp-detail .abstract {
+      margin: 48px 0;
+      padding: var(--space-6) var(--space-8);
+      background: var(--brand-card); border: 1px solid rgba(255, 255, 255, 0.05);
+      border-left: 4px solid var(--brand-primary); border-radius: var(--radius-sm);
     }
-    .section-progress .progress-value {
-      color: var(--text-primary);
-      font-weight: 600;
+    .wp-detail .abstract-label {
+      font-family: var(--font-body); font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.15em;
+      color: var(--brand-primary); margin: 0 0 var(--space-3);
     }
-    .section-progress .progress-bar {
-      width: 80px;
-      height: 3px;
-      background: var(--card-border);
-      border-radius: 2px;
-      margin-top: 6px;
-      overflow: hidden;
-    }
-    .section-progress .progress-fill {
-      height: 100%;
-      background: hsl(220 60% 50%);
-      width: 0%;
-      transition: width var(--transition-base);
+    .wp-detail .abstract p {
+      font-family: var(--font-serif); font-size: var(--text-base); font-style: italic;
+      color: rgba(255, 255, 255, 0.85); line-height: 1.65; margin: 0;
     }
 
-    /* Body sections — plain markdown shape, table-heavy. */
-    .article-body {
-      font-family: var(--font-body);
-      font-size: var(--text-base);
-      line-height: 1.65;
-      color: var(--text-primary);
+    /* body */
+    .wp-detail .article-body {
+      font-family: var(--font-serif); font-size: clamp(16px, 1.1vw, 18px);
+      color: rgba(255, 255, 255, 0.8); line-height: 1.75;
     }
-    .article-body section { margin-bottom: var(--space-12); scroll-margin-top: 80px; }
-    .article-body h2 {
-      font-family: var(--font-display);
-      font-size: var(--text-xl);
-      font-weight: 700;
-      letter-spacing: -0.015em;
-      margin: 0 0 var(--space-4);
-      padding-bottom: var(--space-2);
-      border-bottom: 1px solid var(--card-border);
-      display: flex;
-      align-items: baseline;
-      gap: var(--space-3);
+    .wp-detail .article-body > * + * { margin-top: var(--space-6); }
+    .wp-detail .article-body p { margin: 0; }
+    .wp-detail .article-body h2 {
+      font-family: var(--font-serif); font-size: 26px; font-weight: 700;
+      color: #ffffff; margin-top: 64px; margin-bottom: var(--space-6); scroll-margin-top: 96px;
     }
-    .article-body h2::before {
-      content: '§ ' counter(section-counter);
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 500;
-      letter-spacing: 0.05em;
+    .wp-detail .article-body h3 {
+      font-family: var(--font-serif); font-size: 20px; font-weight: 700;
+      color: #ffffff; margin-top: 48px; margin-bottom: var(--space-4); scroll-margin-top: 96px;
     }
-    .article-body { counter-reset: section-counter; }
-    .article-body section { counter-increment: section-counter; }
-    .article-body h3 {
-      font-family: var(--font-display);
-      font-size: var(--text-base);
-      font-weight: 700;
-      margin: var(--space-6) 0 var(--space-3);
-      color: var(--text-primary);
-    }
-    .article-body p { margin: 0 0 var(--space-4); }
-    .article-body table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: var(--space-4) 0 var(--space-6);
-      font-size: var(--text-sm);
-    }
-    .article-body th,
-    .article-body td {
-      padding: var(--space-2) var(--space-3);
-      border: 1px solid var(--card-border);
-      text-align: left;
-      vertical-align: top;
-    }
-    .article-body th {
-      background: hsl(220 15% 97%);
-      font-weight: 600;
-      font-family: var(--font-display);
-    }
-    .article-body td.mono { font-family: var(--font-mono); font-size: 12px; }
-    .article-body ul, .article-body ol {
-      margin: 0 0 var(--space-4);
+    .wp-detail .article-body ul, .wp-detail .article-body ol {
       padding-left: var(--space-6);
     }
-    .article-body li { margin-bottom: var(--space-2); }
-    .article-body code {
-      font-family: var(--font-mono);
-      font-size: 0.9em;
-      background: hsl(220 15% 96%);
-      padding: 1px 5px;
+    .wp-detail .article-body li + li { margin-top: 6px; }
+
+    .wp-detail .footnote {
+      vertical-align: super; font-size: 0.75em; color: var(--brand-primary);
+      font-family: var(--font-mono); padding: 0 2px;
+    }
+
+    .wp-detail .footnotes-section {
+      margin-top: 80px; padding-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-family: var(--font-body); font-size: var(--text-xs);
+      color: rgba(255, 255, 255, 0.6); line-height: 1.6;
+    }
+    .wp-detail .footnotes-section h3 {
+      font-family: var(--font-body); font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.15em;
+      color: var(--brand-primary); margin: 0 0 var(--space-4);
+    }
+    .wp-detail .footnotes-section ol { padding-left: var(--space-5); }
+    .wp-detail .footnotes-section li + li { margin-top: var(--space-3); }
+
+    /* cite block */
+    .wp-detail .cite-block {
+      margin-top: 64px; padding: var(--space-6);
+      background: var(--brand-card); border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: var(--radius-sm);
     }
-
-    /* End-of-article — single next-step affordance per Rule 4. */
-    .article-end {
-      margin: var(--space-12) 0 0;
-      padding: var(--space-6) 0;
-      border-top: 1px solid var(--card-border);
+    .wp-detail .cite-label {
+      font-family: var(--font-body); font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.15em;
+      color: var(--brand-primary); margin: 0 0 var(--space-3);
     }
-    .next-step {
-      display: flex;
-      align-items: center;
-      gap: var(--space-4);
-      padding: var(--space-4) var(--space-5);
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-md);
+    .wp-detail .cite-text {
+      font-family: var(--font-mono); font-size: 12px;
+      color: rgba(255, 255, 255, 0.85); line-height: 1.6;
+      background: var(--brand-background); padding: var(--space-4); border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      white-space: pre-wrap; word-break: break-word; margin: 0;
     }
-    .next-step .next-step-label {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-    .next-step .next-step-title {
-      font-family: var(--font-display);
-      font-weight: 600;
-      color: var(--text-primary);
-      font-size: var(--text-base);
-    }
-    .next-step .next-step-arrow {
-      font-family: var(--font-mono);
-      color: var(--text-muted);
-      font-size: 18px;
+    .wp-detail .cite-meta {
+      font-family: var(--font-body); font-size: var(--text-xs); color: rgba(255, 255, 255, 0.5);
+      margin: var(--space-3) 0 0; line-height: 1.55;
     }
 
-    .pub-footer {
-      max-width: 720px;
-      margin: var(--space-12) auto 0;
-      padding: var(--space-6) var(--space-4);
-      border-top: 1px solid var(--card-border);
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text-muted);
-      display: flex;
-      gap: var(--space-4);
-      flex-wrap: wrap;
-    }
-    .pub-footer a {
-      color: var(--text-secondary);
-      border-bottom: 1px solid var(--card-border);
-    }
-
-    /* Shipped-view mock — represents the v1 whitepaper surface for
-       side-by-side comparison via proto-nav.js toggle. */
+    /* shipped-view */
     .shipped-view .v1-mock {
-      max-width: 720px;
-      margin: var(--space-8) auto;
-      padding: var(--space-6) var(--space-4);
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-md);
+      max-width: 920px; margin: var(--space-8) auto; padding: var(--space-6) var(--space-4);
+      background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius-md);
     }
-    .shipped-view .v1-mock h1 {
-      font-family: var(--font-display);
-      font-size: var(--text-xl);
-      margin-bottom: var(--space-3);
-    }
-    .shipped-view .v1-mock .v1-meta {
-      font-size: var(--text-xs);
-      color: var(--text-muted);
-      margin-bottom: var(--space-4);
-    }
-    .shipped-view .v1-mock .v1-body {
-      font-size: var(--text-sm);
-      line-height: 1.6;
-      color: var(--text-secondary);
-    }
-    .shipped-view .v1-mock .v1-note {
-      margin-top: var(--space-4);
-      padding: var(--space-3);
-      background: hsl(0 0% 97%);
-      border-left: 3px solid var(--text-muted);
-      font-size: var(--text-xs);
-      font-family: var(--font-mono);
-      color: var(--text-secondary);
-    }
+    .shipped-view .v1-mock h1 { font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-3); }
+    .shipped-view .v1-mock .v1-body { font-size: var(--text-sm); line-height: 1.6; color: var(--text-secondary); }
+    .shipped-view .v1-mock .v1-diff-list { margin-top: var(--space-3); padding-left: var(--space-5); font-size: var(--text-sm); color: var(--text-secondary); }
+    .shipped-view .v1-mock .v1-diff-list li { margin-bottom: 6px; }
   </style>
 </head>
 <body data-compare-root data-view="proposed">
 
-  <!-- PROPOSED: v2 whitepaper surface. -->
-  <section class="proposed-view">
+  <section class="proposed-view wp-detail">
 
     <header class="pub-header">
       <div class="pub-header-inner">
-        <div class="pub-mark">[v2-name] <span class="pub-mark-placeholder">· name pending D7</span></div>
+        <div class="pub-brand">
+          <a class="pub-mark" href="/pages/home.html">[v2-name]<span class="pub-mark-pending">· pending D7</span></a>
+          <span class="pub-byline"></span>
+          <span class="pub-byline-text">by Nino Chavez</span>
+        </div>
         <nav class="pub-nav">
+          <a href="/pages/home.html">Dispatches</a>
+          <a href="/pages/series-index.html">Series</a>
+          <a href="/pages/whitepapers-list.html" class="active">Whitepapers</a>
           <a href="/pages/library.html">Library</a>
           <a href="/pages/about-colophon.html">About</a>
-          <a href="/pages/subscribe-follow.html">Follow</a>
         </nav>
+        <div class="pub-actions">
+          <a class="user-btn" href="/pages/about-colophon.html">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>Nino Chavez</span>
+          </a>
+          <button class="search-btn" type="button" aria-label="Search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </div>
       </div>
     </header>
 
-    <article class="article">
+    <div class="article-shell">
 
-      <!-- Section progress — appears on scroll past exec summary. -->
-      <aside class="section-progress" aria-hidden="true">
-        <div class="progress-label">Section</div>
-        <div class="progress-value"><span id="progress-current">1</span> of <span id="progress-total">5</span></div>
-        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <aside class="toc-rail">
+        <p class="toc-label">Whitepaper #008</p>
+        <p class="toc-roadmap">The Cognitive Foundry</p>
+        <nav class="toc-nav">
+          <a class="toc-link active" href="#abstract">Abstract</a>
+          <a class="toc-link" href="#premise">1. Premise</a>
+          <a class="toc-link sub" href="#premise-state">— State of the art</a>
+          <a class="toc-link sub" href="#premise-gap">— The gap</a>
+          <a class="toc-link" href="#chassis">2. The chassis</a>
+          <a class="toc-link sub" href="#chassis-substrates">— Four substrates</a>
+          <a class="toc-link sub" href="#chassis-contracts">— Contract design</a>
+          <a class="toc-link sub" href="#chassis-validators">— Validator placement</a>
+          <a class="toc-link" href="#receipts">3. Production receipts</a>
+          <a class="toc-link" href="#limits">4. Limits &amp; failure modes</a>
+          <a class="toc-link" href="#footnotes">Footnotes</a>
+          <a class="toc-link" href="#cite">Cite this</a>
+        </nav>
       </aside>
 
-      <div class="article-meta">
-        <span class="format-badge">Whitepaper</span>
-        <span class="byline">by <strong>Nino Chavez</strong></span>
-        <span class="dot">·</span>
-        <time datetime="2026-04">April 2026</time>
-        <span class="dot">·</span>
-        <span class="read-time">22 min read</span>
-      </div>
+      <main class="article-main">
 
-      <h1 class="article-title">The Cognitive Foundry</h1>
-      <p class="article-subtitle">A reference architecture for agent-assisted production work — what's required to make the chassis hold, what's optional, and what fails predictably without each piece.</p>
+        <a class="back-link" href="/pages/whitepapers-list.html"><span>←</span> Back to Whitepapers</a>
 
-      <div class="companion-link">
-        <span>↳</span>
-        <span><strong>Companion to:</strong> <a href="/pages/post-detail.html">The Cognitive Foundry (post)</a> — the reflection. This is the technical companion.</span>
-      </div>
+        <header class="article-head">
+          <div class="article-meta">
+            <span class="article-id">Whitepaper #008</span>
+            <span class="article-version">v1.0 — Published</span>
+            <span class="sep">·</span>
+            <span class="article-meta-info">22 min · May 23, 2026</span>
+          </div>
+          <h1 class="article-title">The Cognitive Foundry</h1>
+          <p class="article-subtitle">A reference architecture for agent-assisted production work — what's required to make the chassis hold, what's optional, and what fails predictably without each piece.</p>
+          <div class="head-actions">
+            <a class="head-cta" href="#"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download PDF</a>
+            <a class="head-cta secondary" href="#cite">Cite this</a>
+          </div>
+        </header>
 
-      <!-- Rule 5: Executive Summary as self-contained complete artifact.
-           A reader who stops here has gotten the argument. -->
-      <div class="exec-summary">
-        <div class="exec-label">Executive summary</div>
-        <p>Agent-assisted production work fails predictably in five places: the contract drifts, the validator skips, the reviewer is the same agent, the runtime can't see what the agent saw, and the failure leaves no encoded capability behind. <strong>The chassis below addresses each.</strong></p>
-        <p>The five-piece chassis — contracts, validators, reviewers, sensors, and encodings — is not a methodology. It's the minimum infrastructure for a non-toy agent loop. Each piece exists because removing it produced a specific failure documented in the appendix.</p>
-        <p>Three things are intentionally out of scope: prompt engineering (the failure mode is structural, not prompt-shaped), model selection (chassis is model-agnostic), and orchestration frameworks (the chassis is the orchestration). Reach for those after the chassis holds.</p>
-      </div>
-
-      <!-- Clickable TOC with anchor links. -->
-      <nav class="toc" aria-label="Table of contents">
-        <div class="toc-label">Contents</div>
-        <ol>
-          <li><a href="#contracts">The contract — what the agent agreed to do</a></li>
-          <li><a href="#validators">Validators — proof the contract held</a></li>
-          <li><a href="#reviewers">Reviewers — a different agent's eyes</a></li>
-          <li><a href="#sensors">Sensors — what the agent could see</a></li>
-          <li><a href="#encodings">Encodings — what the failure left behind</a></li>
-        </ol>
-      </nav>
-
-      <div class="article-body">
-
-        <section id="contracts">
-          <h2>The contract — what the agent agreed to do</h2>
-          <p>A contract is a written claim about what the agent will produce and what would falsify the claim. Without one, the agent ships whatever it converged on and the human evaluates after the fact. The evaluation is unanchored — there's no prior commitment to check against.</p>
-          <p>Contracts in the production chassis carry three fields: the deliverable shape (file path, schema, length budget), the acceptance condition (the test that returns pass/fail), and the falsifier (the specific output that would mean the agent did the wrong thing). The falsifier is the one most often missing in practice; without it, "looks good to me" passes for verification.</p>
-
-          <h3>Contract shapes by task class</h3>
-          <table>
-            <thead>
-              <tr><th>Task class</th><th>Deliverable shape</th><th>Acceptance</th><th>Falsifier</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Code change</td><td>Diff against named files</td><td>Tests pass; lint clean</td><td>Tests pass but the change addresses a different bug than stated</td></tr>
-              <tr><td>Research synthesis</td><td>Markdown doc with cited evidence</td><td>Each claim has a source link</td><td>Sources exist but don't support the claim made</td></tr>
-              <tr><td>Migration script</td><td>Idempotent shell or SQL</td><td>Re-run produces no change</td><td>First run succeeds; second run errors or duplicates</td></tr>
-              <tr><td>API endpoint</td><td>Route handler + OpenAPI entry</td><td>Schema matches contract</td><td>Endpoint exists but returns shape that doesn't match its own docs</td></tr>
-            </tbody>
-          </table>
-
-          <p>Where contracts are missing, the failure is usually scope drift — the agent solved an adjacent problem and the human only noticed in review. The fix isn't "better prompts"; it's a written falsifier that the agent reads before starting.</p>
+        <section class="abstract" id="abstract">
+          <p class="abstract-label">Abstract</p>
+          <p>"Production-grade agent-assisted work depends on four substrates — contract, validator, sensor, corpus — that compound across iterations. This paper specifies each, proves the compounding through three production receipts, and names two failure modes where the chassis can't help."</p>
         </section>
 
-        <section id="validators">
-          <h2>Validators — proof the contract held</h2>
-          <p>A validator runs the contract's acceptance condition. The validator is independent code — it doesn't ask the agent whether the work is done; it checks the artifact against the contract. The chassis treats agent self-attestation ("done!") as a hypothesis, not a result.</p>
+        <div class="article-body">
 
-          <h3>Validator implementations by deliverable type</h3>
+          <h2 id="premise">1. Premise</h2>
+
+          <h3 id="premise-state">1.1 State of the art</h3>
+          <p>Most production teams shipping with agent assistance are running prompt libraries — versioned strings, sometimes parameterized, sometimes A/B tested. The leverage stops at the prompt. When the team's understanding shifts, the prompt is rewritten; the rewrite carries no memory of the prior version's wins<span class="footnote">1</span>.</p>
+
+          <h3 id="premise-gap">1.2 The gap</h3>
+          <p>What's missing isn't a better prompt. It's a substrate — something the agent reads as input but that survives prompt rewrites, accumulates through review cycles, and compounds in version control. This paper names four such substrates and the relationships between them.</p>
+
+          <h2 id="chassis">2. The chassis</h2>
+
+          <h3 id="chassis-substrates">2.1 Four substrates</h3>
+          <p>The chassis consists of four orthogonal artifacts:</p>
           <ul>
-            <li><strong>Code</strong> — test suite, type-check, lint, dead-code scan</li>
-            <li><strong>Docs</strong> — link-checker, broken-citation finder, frontmatter schema validation</li>
-            <li><strong>Data</strong> — schema validation, row-count sanity, idempotency probe</li>
-            <li><strong>UI</strong> — visual regression, accessibility audit, contract-shape match</li>
+            <li><strong>Contract</strong> — typed shape of agent input and output, plus invariants the output must satisfy.</li>
+            <li><strong>Validator</strong> — post-condition test that runs after generation; failure surfaces as a test failure, not as runtime drift.</li>
+            <li><strong>Sensor</strong> — structured reading of runtime state, replacing "the agent thinks X is happening" with "X is happening."</li>
+            <li><strong>Corpus</strong> — body of prior examples retrievable at generation time; one example raises the floor for all future generations.</li>
           </ul>
 
-          <p>The validator runs in the chassis loop, not as a post-hoc review step. When it fails, the agent reads the failure and continues; the human is not in the loop for the validator's verdict. This is the leverage — validators amortize the human's verification work into encoded checks.</p>
+          <h3 id="chassis-contracts">2.2 Contract design</h3>
+          <p>Contracts are the load-bearing artifact. A contract specifies the shape the agent must produce — fields, types, constraints — and the invariants that must hold across the shape. The contract is the substrate against which the agent's behavior is measured; the prompt is one of several inputs that shape generation, but the contract is what gates output.</p>
+
+          <h3 id="chassis-validators">2.3 Validator placement</h3>
+          <p>Validators run after the agent produces output but before the output is committed. The placement matters: validators in the prompt are heuristic; validators in the pipeline are deterministic. A failed validator should reject the generation, not adjust it<span class="footnote">2</span>.</p>
+
+          <h2 id="receipts">3. Production receipts</h2>
+          <p>Three production deployments — commerce.com's recommendations pipeline, a 630 Volleyball brand-asset generator, and the blueprint methodology itself — each demonstrate the compounding pattern across at least two iteration cycles. Details in §3.1–3.3.</p>
+
+          <h2 id="limits">4. Limits &amp; failure modes</h2>
+          <p>The chassis doesn't help when (a) the contract can't be specified — i.e., the work is genuinely exploratory and the shape of the answer isn't known up front — or (b) the corpus is too small for retrieval to add signal. In both cases, fall back to prompt-driven iteration with explicit version notes.</p>
+
+        </div>
+
+        <section class="footnotes-section" id="footnotes">
+          <h3>Footnotes</h3>
+          <ol>
+            <li>This is the central argument of Dispatch #007 "Encodings, not prompts." This paper extends it from a position essay into a reference architecture.</li>
+            <li>Validators-that-adjust are the "self-correcting prompt" pattern; they conflate generation with validation and lose the separation that makes the chassis work.</li>
+          </ol>
         </section>
 
-        <section id="reviewers">
-          <h2>Reviewers — a different agent's eyes</h2>
-          <p>A reviewer is a second agent whose only job is to find what the first agent missed. The reviewer doesn't share context with the author agent — it reads the artifact cold and reports what it sees. Same-agent self-review fails predictably: the agent that wrote the artifact has already convinced itself the artifact is correct.</p>
-
-          <h3>What the reviewer checks that the validator can't</h3>
-          <table>
-            <thead><tr><th>Check</th><th>Why a validator can't do it</th></tr></thead>
-            <tbody>
-              <tr><td>The contract was the right contract</td><td>Validators check the contract; reviewers check whether the contract addressed the actual underlying problem</td></tr>
-              <tr><td>The diff makes sense as code (not just compiles)</td><td>Lint sees syntax; reviewer sees idiom and intent</td></tr>
-              <tr><td>The fix won't break tomorrow's adjacent change</td><td>Tests cover today's invariants; reviewer reasons about coupling</td></tr>
-              <tr><td>The artifact is honest about what it doesn't know</td><td>Validators check what's there; reviewers check what's missing</td></tr>
-            </tbody>
-          </table>
+        <section class="cite-block" id="cite">
+          <p class="cite-label">Cite this whitepaper</p>
+          <pre class="cite-text">Chavez, N. (2026). The Cognitive Foundry: A reference architecture for agent-assisted production work (Whitepaper No. 008, v1.0). Signal Dispatch v2. https://ninochavez.co/blog/whitepaper/cognitive-foundry</pre>
+          <p class="cite-meta">Permanent URL · Stable across version revisions. Cite this version (v1.0). Older drafts remain reachable by URL but are not recommended for citation.</p>
         </section>
 
-        <section id="sensors">
-          <h2>Sensors — what the agent could see</h2>
-          <p>A sensor is the agent's grounding in the running system. Without sensors, the agent reasons about a model of the system it built from documentation — which drifts. Sensors close the loop: the agent inspects, doesn't infer.</p>
+      </main>
 
-          <p>Common sensor categories: browser drivers (DOM access, console capture), filesystem probes (recursive file listings, content reads), database introspection (live schema, sample rows), and network capture (HTTP responses, header inspection). Each one answers a question the agent would otherwise guess at.</p>
-
-          <p>The chassis principle: <code>any time the agent says "probably" about runtime state, a sensor was missing</code>. The fix is to add the sensor, not to ask the agent to be more careful.</p>
-        </section>
-
-        <section id="encodings">
-          <h2>Encodings — what the failure left behind</h2>
-          <p>The chassis's compounding leverage comes from encoding each failure as durable infrastructure — a lint rule, a reviewer agent, a sensor primitive, a contract field. The encoding survives the session that produced it. The next initiative inherits the capability for free.</p>
-
-          <p>The alternative — patching prompts session-by-session — produces zero compounding. Three years of session-by-session prompt fixes is the same capability surface as one week. Encoding each failure as repo-level infrastructure compounds linearly with use.</p>
-
-          <p>The chassis is, in the end, an argument about where to put the work: into prompts that decay or into encodings that accrete. The architecture follows from the argument.</p>
-        </section>
-
-      </div>
-
-      <!-- Single next-step per Rule 4. -->
-      <div class="article-end">
-        <a href="/pages/counterpoint-detail.html" class="next-step">
-          <div style="flex: 1;">
-            <div class="next-step-label">The case against this</div>
-            <div class="next-step-title">"The chassis is over-engineering" — a counterpoint</div>
-          </div>
-          <span class="next-step-arrow">→</span>
-        </a>
-      </div>
-
-    </article>
-
-    <footer class="pub-footer">
-      <span>by Nino Chavez · architect-who-directs-agents</span>
-      <a href="/blog/rss.xml" target="_blank" rel="noopener">RSS</a>
-      <a href="/blog/full-content-rss.xml" target="_blank" rel="noopener">RSS (full content)</a>
-    </footer>
+    </div>
 
   </section>
 
-  <!-- SHIPPED: mock of how v1 renders the same whitepaper. -->
   <section class="shipped-view">
     <div class="v1-mock">
-      <h1>The Cognitive Foundry</h1>
-      <div class="v1-meta">Posted in: whitepapers · April 2026 · tags: architecture, agentic-systems, ai-development</div>
+      <h1>v1 — whitepapers are posts with a "whitepaper" tag</h1>
       <div class="v1-body">
-        <p><em>[v1 renders the whitepaper as continuous plain markdown — no Executive Summary block, no clickable TOC, no section-progress indicator. Body runs ~20,000 px tall at 1440 width per v1-baseline diagnose F4. Sections are h2-prefixed but lack within-page navigation.]</em></p>
-        <p><em>[Real production surface: <a href="https://ninochavez.co/blog/whitepapers/the-cognitive-foundry" target="_blank" rel="noopener">ninochavez.co/blog/whitepapers/the-cognitive-foundry</a>]</em></p>
+        <p>v1 doesn't distinguish whitepapers from posts beyond a tag. No abstract block, no deeper TOC, no cite format, no version metadata, no PDF download. The "whitepaper" is just a long post.</p>
       </div>
-      <div class="v1-note">
-        v1 reading experience itself is intact (per F8-positive) — narrow column, callout components, table support all work. The navigability layer is what F4 flags as missing. v2 adds the Executive Summary + TOC + section progress without changing the underlying content structure.
-      </div>
+      <p style="font-size: var(--text-xs); font-family: var(--font-mono); color: var(--text-muted); margin-top: var(--space-4); text-transform: uppercase; letter-spacing: 0.06em;">v2 additions (no Stitch source — invented from ArticleDetail shell):</p>
+      <ul class="v1-diff-list">
+        <li><strong>Abstract block</strong> above body with coral 4px border — load-bearing summary.</li>
+        <li><strong>Deeper TOC with subsections</strong> (numbered §1.1 / §1.2…) per long-form requirement.</li>
+        <li><strong>Version metadata</strong> in head (Whitepaper #008 · v1.0 — Published).</li>
+        <li><strong>Footnote system</strong> with section anchors.</li>
+        <li><strong>Cite block</strong> at bottom with permanent URL — replaces the dispatch end-marker.</li>
+        <li><strong>Download PDF + Cite this</strong> CTA pair in head.</li>
+      </ul>
     </div>
   </section>
 
   <script>
     window.PORTAL_SHELL_CONFIG = { productName: 'Signal Dispatch v2' };
     window.PROTO_PAGE = { id: 'whitepaper-detail' };
-
-    // Section progress — sticky right-rail counter, reveals after exec
-    // summary scrolls out of view. Updates as sections enter viewport.
-    (function () {
-      const sections = document.querySelectorAll('.article-body section');
-      const total = sections.length;
-      const progressEl = document.querySelector('.section-progress');
-      const currentEl = document.getElementById('progress-current');
-      const totalEl = document.getElementById('progress-total');
-      const fillEl = document.getElementById('progress-fill');
-      const execSummary = document.querySelector('.exec-summary');
-
-      if (!sections.length || !progressEl) return;
-
-      totalEl.textContent = total;
-
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const idx = Array.from(sections).indexOf(entry.target) + 1;
-            currentEl.textContent = idx;
-            fillEl.style.width = ((idx / total) * 100) + '%';
-          }
-        });
-      }, { rootMargin: '-30% 0px -60% 0px' });
-
-      sections.forEach((s) => obs.observe(s));
-
-      // Reveal section-progress after exec summary leaves viewport.
-      const execObs = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          progressEl.classList.toggle('visible', !entry.isIntersecting);
-        });
-      });
-      execObs.observe(execSummary);
-    })();
   </script>
-
-  <script src="/_portal-shell.js?v=20260525-1700"></script>
-  <script src="/proto-nav.js?v=20260525-1700"></script>
+  <script src="/_portal-shell.js?v=20260526-stitch1"></script>
+  <script src="/proto-nav.js?v=20260526-stitch1"></script>
   <script src="/chat-widget.js" defer></script>
-  <script src="/proto-annotate.js?v=20260525-1700" defer></script>
+  <script src="/proto-annotate.js?v=20260526-stitch1" defer></script>
 </body>
 </html>

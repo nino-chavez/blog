@@ -39,11 +39,11 @@
     }
     .surface-picker button {
       padding: 6px 12px; border-radius: var(--radius-full);
-      background: var(--surface-1); color: var(--text-secondary);
+      background: hsl(220 15% 96%); color: var(--text-secondary);
       font-size: 12px; font-weight: 500; cursor: pointer;
       border: 1px solid transparent;
     }
-    .surface-picker button:hover { background: var(--brand-border); color: var(--text-primary); }
+    .surface-picker button:hover { background: hsl(220 15% 92%); color: var(--text-primary); }
     .surface-picker button.active {
       background: var(--text-primary); color: var(--card);
     }
@@ -55,7 +55,7 @@
 
     .orientation-toggle {
       margin-left: auto; display: flex; gap: 1px;
-      background: var(--brand-border); padding: 2px; border-radius: var(--radius-sm);
+      background: hsl(220 15% 92%); padding: 2px; border-radius: var(--radius-sm);
     }
     .orientation-toggle button {
       padding: 4px 10px; border-radius: 2px;
@@ -89,8 +89,8 @@
     .pane-label::before {
       content: ''; width: 8px; height: 8px; border-radius: 50%;
     }
-    .pane-label.v2::before { background: var(--brand-primary); }
-    .pane-label.stitch::before { background: #c5a059; } /* Stitch gold — lane indicator only */
+    .pane-label.v2::before { background: hsl(220 60% 50%); }
+    .pane-label.stitch::before { background: hsl(35 80% 50%); }
     .pane-link {
       font-family: var(--font-mono); font-size: 10px;
       color: var(--text-secondary); text-decoration: none;

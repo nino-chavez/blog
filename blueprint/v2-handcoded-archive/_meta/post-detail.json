@@ -1,0 +1,25 @@
+{
+  "id": "post-detail",
+  "title": "Post detail",
+  "group": "reading",
+  "surface": "Single-post read with v2 voice register",
+  "phase": "Stage 3",
+  "route": "/pages/post-detail.html",
+  "summary": "v1's reading experience carries forward (per brownfield diagnose: post-detail reflows cleanly, narrow column reads well). v2 changes: voice register delta (D5), end-of-post next-step affordance, footer signature.",
+  "strategy": {
+    "decision": "Preserve v1's reading column, callouts, and pullquote behavior. Change the post's frame: byline + format-badge + read-time + (optional Dispatch number per D1) lead the post; footer carries one next-step (related, series-next, or counterpoint).",
+    "why": "The brownfield diagnose found post-detail to be the most intact surface in v1. Per Rule 1 (match the intended brand register), the reading experience itself is one of v1's strongest assets — preserving it is correct. What changes is the framing around the read (byline placement, format badge, end-of-post next-step), not the read itself.",
+    "shipped": "v1 post detail surfaces title + date + tags at top, MDX body with callouts and pullquotes, related-posts component at footer. Working well per current-state captures.",
+    "gap": "v2 post detail adds: (a) format badge (Post / Whitepaper / Counterpoint) for cross-format consistency; (b) optional Dispatch # if Thesis B; (c) one next-step at footer (not three competing choices); (d) author block above the fold per home-page consistency.",
+    "question": "Does the voice register evolve from the v1 guide (Thesis B, with documented delta) or carry forward unchanged (Thesis A)? D5 blocks this page's voice/copy pass but not the structural changes."
+  },
+  "inheritsFromV1": ["narrow column reading column", "MDX callout components", "pullquote behavior", "related-posts at footer (one, not three)", "no mid-post CTAs"],
+  "breaksFromV1": ["format badge (new)", "Dispatch # (Thesis B only)", "author block above the fold consistency", "single next-step at footer (not three competing)"],
+  "decisionDependencies": ["D5"],
+  "currentState": {
+    "route": "https://ninochavez.co/blog/[any-slug]",
+    "summary": "v1 post detail: title + date + tags + hero + MDX body + related-posts. Reflows cleanly on mobile.",
+    "sourceFiles": ["astro-build/src/pages/blog/[slug].astro", "astro-build/src/components/mdx/Callout.astro", "astro-build/src/components/mdx/PullQuote.astro"],
+    "annotation": "v2 preserves the reading experience and adds cross-format framing (badge, byline, single next-step) for consistency across post / whitepaper / counterpoint surfaces."
+  }
+}

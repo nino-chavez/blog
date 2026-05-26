@@ -1,0 +1,308 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "generator": "brand-forge",
+    "brandName": "Signal Dispatch",
+    "brandVersion": "2.0.0-candidate",
+    "generated": "2026-05-25T21:00:00.000Z"
+  },
+  "variables": [
+    {
+      "name": "brand/color/primary",
+      "type": "COLOR",
+      "value": "#e86c5d",
+      "description": "Signal Coral"
+    },
+    {
+      "name": "brand/color/secondary",
+      "type": "COLOR",
+      "value": "#00ced1",
+      "description": "Signal Cyan"
+    },
+    {
+      "name": "brand/color/accent",
+      "type": "COLOR",
+      "value": "#e86c5d",
+      "description": "Signal Coral"
+    },
+    {
+      "name": "brand/color/neutral/50",
+      "type": "COLOR",
+      "value": "#f9fafb"
+    },
+    {
+      "name": "brand/color/neutral/100",
+      "type": "COLOR",
+      "value": "#f3f4f6"
+    },
+    {
+      "name": "brand/color/neutral/200",
+      "type": "COLOR",
+      "value": "#e5e7eb"
+    },
+    {
+      "name": "brand/color/neutral/300",
+      "type": "COLOR",
+      "value": "#d1d5db"
+    },
+    {
+      "name": "brand/color/neutral/400",
+      "type": "COLOR",
+      "value": "#9ca3af"
+    },
+    {
+      "name": "brand/color/neutral/500",
+      "type": "COLOR",
+      "value": "#6b7280"
+    },
+    {
+      "name": "brand/color/neutral/600",
+      "type": "COLOR",
+      "value": "#4b5563"
+    },
+    {
+      "name": "brand/color/neutral/700",
+      "type": "COLOR",
+      "value": "#374151"
+    },
+    {
+      "name": "brand/color/neutral/800",
+      "type": "COLOR",
+      "value": "#1f2937"
+    },
+    {
+      "name": "brand/color/neutral/900",
+      "type": "COLOR",
+      "value": "#121214"
+    },
+    {
+      "name": "brand/color/neutral/950",
+      "type": "COLOR",
+      "value": "#0a0a0b"
+    },
+    {
+      "name": "brand/color/semantic/success",
+      "type": "COLOR",
+      "value": "#22c55e",
+      "description": "Green"
+    },
+    {
+      "name": "brand/color/semantic/warning",
+      "type": "COLOR",
+      "value": "#f59e0b",
+      "description": "Amber"
+    },
+    {
+      "name": "brand/color/semantic/error",
+      "type": "COLOR",
+      "value": "#ef4444",
+      "description": "Red"
+    },
+    {
+      "name": "brand/color/semantic/info",
+      "type": "COLOR",
+      "value": "#00ced1",
+      "description": "Cyan"
+    },
+    {
+      "name": "brand/color/surface/background",
+      "type": "COLOR",
+      "value": "#0a0a0b"
+    },
+    {
+      "name": "brand/color/surface/foreground",
+      "type": "COLOR",
+      "value": "#ffffff"
+    },
+    {
+      "name": "brand/color/surface/card",
+      "type": "COLOR",
+      "value": "#1a1a1d"
+    },
+    {
+      "name": "brand/color/surface/card-foreground",
+      "type": "COLOR",
+      "value": "#ffffff"
+    },
+    {
+      "name": "brand/color/surface/muted",
+      "type": "COLOR",
+      "value": "#121214"
+    },
+    {
+      "name": "brand/color/surface/muted-foreground",
+      "type": "COLOR",
+      "value": "#9ca3af"
+    },
+    {
+      "name": "brand/color/surface/border",
+      "type": "COLOR",
+      "value": "#374151"
+    },
+    {
+      "name": "brand/font/display",
+      "type": "STRING",
+      "value": "Rival Sans"
+    },
+    {
+      "name": "brand/font/body",
+      "type": "STRING",
+      "value": "Inter"
+    },
+    {
+      "name": "brand/font/mono",
+      "type": "STRING",
+      "value": "JetBrains Mono"
+    },
+    {
+      "name": "brand/font-size/hero",
+      "type": "FLOAT",
+      "value": 56
+    },
+    {
+      "name": "brand/line-height/hero",
+      "type": "FLOAT",
+      "value": 1.1
+    },
+    {
+      "name": "brand/font-size/h2",
+      "type": "FLOAT",
+      "value": 36
+    },
+    {
+      "name": "brand/line-height/h2",
+      "type": "FLOAT",
+      "value": 1.2
+    },
+    {
+      "name": "brand/font-size/h3",
+      "type": "FLOAT",
+      "value": 24
+    },
+    {
+      "name": "brand/line-height/h3",
+      "type": "FLOAT",
+      "value": 1.3
+    },
+    {
+      "name": "brand/font-size/body-lg",
+      "type": "FLOAT",
+      "value": 18
+    },
+    {
+      "name": "brand/line-height/body-lg",
+      "type": "FLOAT",
+      "value": 1.7
+    },
+    {
+      "name": "brand/font-size/body",
+      "type": "FLOAT",
+      "value": 16
+    },
+    {
+      "name": "brand/line-height/body",
+      "type": "FLOAT",
+      "value": 1.6
+    },
+    {
+      "name": "brand/font-size/caption",
+      "type": "FLOAT",
+      "value": 14
+    },
+    {
+      "name": "brand/line-height/caption",
+      "type": "FLOAT",
+      "value": 1.5
+    },
+    {
+      "name": "brand/font-size/code",
+      "type": "FLOAT",
+      "value": 14
+    },
+    {
+      "name": "brand/line-height/code",
+      "type": "FLOAT",
+      "value": 1.6
+    },
+    {
+      "name": "brand/spacing/1",
+      "type": "FLOAT",
+      "value": 4
+    },
+    {
+      "name": "brand/spacing/2",
+      "type": "FLOAT",
+      "value": 8
+    },
+    {
+      "name": "brand/spacing/3",
+      "type": "FLOAT",
+      "value": 12
+    },
+    {
+      "name": "brand/spacing/4",
+      "type": "FLOAT",
+      "value": 16
+    },
+    {
+      "name": "brand/spacing/6",
+      "type": "FLOAT",
+      "value": 24
+    },
+    {
+      "name": "brand/spacing/8",
+      "type": "FLOAT",
+      "value": 32
+    },
+    {
+      "name": "brand/spacing/12",
+      "type": "FLOAT",
+      "value": 48
+    },
+    {
+      "name": "brand/spacing/16",
+      "type": "FLOAT",
+      "value": 64
+    },
+    {
+      "name": "brand/spacing/24",
+      "type": "FLOAT",
+      "value": 96
+    },
+    {
+      "name": "brand/radius/none",
+      "type": "FLOAT",
+      "value": 0
+    },
+    {
+      "name": "brand/radius/sm",
+      "type": "FLOAT",
+      "value": 2
+    },
+    {
+      "name": "brand/radius/md",
+      "type": "FLOAT",
+      "value": 6
+    },
+    {
+      "name": "brand/radius/lg",
+      "type": "FLOAT",
+      "value": 8
+    },
+    {
+      "name": "brand/radius/xl",
+      "type": "FLOAT",
+      "value": 12
+    },
+    {
+      "name": "brand/radius/2xl",
+      "type": "FLOAT",
+      "value": 16
+    },
+    {
+      "name": "brand/radius/full",
+      "type": "FLOAT",
+      "value": 9999
+    }
+  ]
+}

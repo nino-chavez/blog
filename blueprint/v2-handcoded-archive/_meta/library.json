@@ -1,0 +1,25 @@
+{
+  "id": "library",
+  "title": "Library",
+  "group": "discovery",
+  "surface": "Archive + topical navigation, depends on thesis",
+  "phase": "Stage 3",
+  "route": "/pages/library.html",
+  "summary": "v2's secondary discovery surface. Thesis A: replaces v1's broken tag-detail + archive-tags. Thesis B: also subordinates the topical taxonomy to chronological Dispatches.",
+  "strategy": {
+    "decision": "One axis primary, others secondary per Rule 4. Thesis A: topical (tag-grouped, with v1 tag-detail F1 fix via series-style chunking). Thesis B: chronological (Dispatch #N descending) with topical + format filters as secondary. In both theses, tag-detail-as-primary-discovery is rejected per v1 F1 (44k px scrolls).",
+    "why": "v1 has two competing archive surfaces — tag-detail (broken at scale) and archive-tags index (working but underused). Rule 4 collapses to one. Per competitive synthesis: Simon Willison's 30/page pagination + related-tags sidebar is the closest peer pattern; Stratechery's topic-taxonomy and Pragmatic Engineer's no-tags-just-newsletter are the divergent options. v2 picks per D1.",
+    "shipped": "v1: /blog (chronological feed), /blog/tags (alphabetical tag index), /blog/tags/[tag] (broken at scale per F1), /blog/whitepapers and /blog/series as separate routes. Three or four competing archive surfaces.",
+    "gap": "v2 Library is one surface with one primary axis. Tag-as-filter survives as secondary navigation; tag-as-detail-page is replaced by the chunking pattern from series-detail (numbered-card group, paginated if >30 items).",
+    "question": "D1 picks primary axis. D3 (format-mix specifics) determines whether presentations, fiction, tutorials surface here or are pruned. D8 may rename tags to reader-facing label."
+  },
+  "inheritsFromV1": ["tags.ts canonical-tag list (single source of truth)", "RSS feed URLs", "the underlying content collections"],
+  "breaksFromV1": ["one Library surface replacing tag-detail + archive-tags + /blog feed split", "broken-at-scale tag-detail pattern replaced with series-style chunking", "format filter as secondary affordance", "format badges per card"],
+  "decisionDependencies": ["D1", "D3"],
+  "currentState": {
+    "route": "https://ninochavez.co/blog/tags (and /blog/tags/[tag])",
+    "summary": "v1 tag-detail: alphabetical tag index works; per-tag pages break at scale (44k px for /tags/architecture with 44 posts). Three or four competing archive surfaces.",
+    "sourceFiles": ["astro-build/src/pages/blog/tags/index.astro", "astro-build/src/pages/blog/tags/[tag].astro", "astro-build/src/pages/blog/index.astro", "astro-build/src/config/tags.ts"],
+    "annotation": "v2 collapses to one Library surface. v1 F1 (broken tag-detail) is resolved by replacing the unbroken-list pattern with the series-style numbered-card chunking that's already working in v1."
+  }
+}

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>About — [v2-name] Blueprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared.css?v=20260525-1700">
+  <style>
+    /* about-colophon page-specific styles. Hiring-evaluator's
+       positioning-proof surface — reads in the publication's own voice
+       per Rule 1 + Rule 3 (work-first, author-second, brand-third). */
+    .pub-header { border-bottom: 1px solid var(--card-border); background: var(--card); }
+    .pub-header-inner {
+      max-width: 720px; margin: 0 auto; padding: var(--space-3) var(--space-4);
+      display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+    }
+    .pub-mark { font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: -0.01em; color: var(--text-primary); }
+    .pub-mark .pub-mark-placeholder { color: var(--text-muted); font-weight: 500; }
+    .pub-nav { display: flex; gap: var(--space-4); font-size: var(--text-sm); }
+    .pub-nav a { color: var(--text-secondary); font-weight: 500; }
+    .pub-nav a.active { color: var(--text-primary); font-weight: 600; }
+    .pub-nav a:hover { color: var(--text-primary); }
+
+    .shell { max-width: 720px; margin: 0 auto; padding: var(--space-12) var(--space-4) var(--space-16); }
+
+    .meta-strip { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-6); flex-wrap: wrap; }
+    .format-badge {
+      display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px 4px;
+      border-radius: var(--radius-sm); background: hsl(200 40% 95%); color: hsl(200 50% 30%);
+      font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .format-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+    /* D2 editorial sentence — load-bearing position at top */
+    .editorial-sentence {
+      font-family: var(--font-display); font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
+      font-weight: 700; letter-spacing: -0.015em; line-height: 1.25;
+      color: var(--text-primary); margin: 0 0 var(--space-8);
+      text-transform: none;
+    }
+    .editorial-sentence .placeholder {
+      background: hsl(60 80% 88%); padding: 2px 8px; border-radius: var(--radius-sm);
+      font-size: 0.85em; color: hsl(45 50% 25%); font-family: var(--font-mono); font-weight: 600;
+    }
+
+    /* Author identity block — below editorial sentence per Rule 3 */
+    .author-block { padding: var(--space-6) 0; border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); margin-bottom: var(--space-8); }
+    .author-name { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin: 0 0 var(--space-2); color: var(--text-primary); }
+    .author-positioning { font-size: var(--text-base); color: var(--text-secondary); line-height: 1.55; margin: 0 0 var(--space-3); }
+    .author-positioning strong { color: var(--text-primary); font-weight: 600; }
+    .author-links { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
+    .author-links a { color: var(--text-secondary); border-bottom: 1px solid var(--card-border); margin-right: var(--space-3); }
+    .author-links a:hover { color: var(--text-primary); border-bottom-color: var(--text-secondary); }
+
+    /* Colophon */
+    .colophon-section { margin-bottom: var(--space-8); }
+    .colophon-label {
+      font-family: var(--font-mono); font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: var(--space-3);
+    }
+    .colophon-body { font-size: var(--text-base); color: var(--text-primary); line-height: 1.65; }
+    .colophon-body p { margin: 0 0 var(--space-3); }
+    .colophon-body strong { font-weight: 600; }
+    .colophon-body .placeholder {
+      background: hsl(60 80% 88%); padding: 1px 6px; border-radius: var(--radius-sm);
+      font-family: var(--font-mono); font-size: 0.85em; color: hsl(45 50% 25%);
+    }
+
+    .colophon-table { width: 100%; border-collapse: collapse; margin: var(--space-4) 0; font-size: var(--text-sm); }
+    .colophon-table th, .colophon-table td {
+      padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--card-border);
+      text-align: left; vertical-align: top;
+    }
+    .colophon-table th { font-weight: 600; color: var(--text-primary); width: 30%; }
+    .colophon-table td { color: var(--text-secondary); }
+    .colophon-table td code { font-family: var(--font-mono); font-size: 12px; background: hsl(220 15% 96%); padding: 1px 5px; border-radius: var(--radius-sm); color: var(--text-primary); }
+
+    .pub-footer {
+      max-width: 720px; margin: var(--space-12) auto 0;
+      padding: var(--space-6) var(--space-4); border-top: 1px solid var(--card-border);
+      font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);
+      display: flex; gap: var(--space-4); flex-wrap: wrap;
+    }
+    .pub-footer a { color: var(--text-secondary); border-bottom: 1px solid var(--card-border); }
+
+    .shipped-view .v1-mock {
+      max-width: 720px; margin: var(--space-8) auto; padding: var(--space-6) var(--space-4);
+      background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius-md);
+    }
+    .shipped-view .v1-mock h1 { font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-3); }
+    .shipped-view .v1-mock .v1-body { font-size: var(--text-sm); line-height: 1.6; color: var(--text-secondary); }
+    .shipped-view .v1-mock .v1-note { margin-top: var(--space-4); padding: var(--space-3); background: hsl(0 0% 97%); border-left: 3px solid var(--text-muted); font-size: var(--text-xs); font-family: var(--font-mono); color: var(--text-secondary); }
+  </style>
+</head>
+<body data-compare-root data-view="proposed">
+
+  <section class="proposed-view">
+    <header class="pub-header">
+      <div class="pub-header-inner">
+        <div class="pub-mark">[v2-name] <span class="pub-mark-placeholder">· name pending D7</span></div>
+        <nav class="pub-nav">
+          <a href="/pages/library.html">Library</a>
+          <a href="/pages/about-colophon.html" class="active">About</a>
+          <a href="/pages/subscribe-follow.html">Follow</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="shell">
+      <div class="meta-strip">
+        <span class="format-badge">About</span>
+      </div>
+
+      <p class="editorial-sentence">
+        <span class="placeholder">[D2 placeholder]</span> &mdash; editorial single-sentence pending Nino's call. ≤12 words. Per criteria in <a href="/docs/?doc=02-design-principles">02-design-principles</a> D2.
+      </p>
+
+      <div class="author-block">
+        <h2 class="author-name">Nino Chavez</h2>
+        <p class="author-positioning"><strong>Architect who directs agents</strong>, not an engineer who types code. Director-tier work, executed through a team budget of zero. Peer group: architects, principal consultants, fractional CTOs, directors of AI engineering.</p>
+        <div class="author-links">
+          <a href="https://ninochavez.co/about" target="_blank" rel="noopener">portfolio /about ↗</a>
+          <a href="https://www.linkedin.com/in/ninochavez/" target="_blank" rel="noopener">linkedin ↗</a>
+          <a href="https://github.com/nino-chavez" target="_blank" rel="noopener">github ↗</a>
+        </div>
+      </div>
+
+      <div class="colophon-section">
+        <div class="colophon-label">What this publication is</div>
+        <div class="colophon-body">
+          <p>A working architect's notes on AI-era engineering, agentic systems, governance, and the practice of the craft. Long-form essays as the flagship surface; companion whitepapers when an idea earns the technical treatment; counterpoints when a position needs stress-testing; series when an argument runs across multiple pieces.</p>
+          <p>It is a publication, not a personal-brand newsletter. There is no email capture, no subscriber-count display, no "Now reading" widget. <a href="/pages/subscribe-follow.html">Follow via RSS or LinkedIn</a> if it's earned the slot in your reading life.</p>
+        </div>
+      </div>
+
+      <div class="colophon-section">
+        <div class="colophon-label">Cadence</div>
+        <div class="colophon-body">
+          <p><span class="placeholder">[D4 placeholder]</span> &mdash; cadence promise pending Nino's call. Options under consideration include published-when-ready (inherit v1) or a deliberate cadence ("monthly," "Dispatch #N drops when it drops"). See <a href="/docs/?doc=DECISIONS-NEEDED">D4 in the decisions packet</a>.</p>
+        </div>
+      </div>
+
+      <div class="colophon-section">
+        <div class="colophon-label">Format conventions</div>
+        <table class="colophon-table">
+          <tbody>
+            <tr><th>Posts</th><td>Long-form essays in MDX. Reading column capped at 720px. Callouts and pullquotes used sparingly. Show-the-work voice.</td></tr>
+            <tr><th>Whitepapers</th><td>Formal companions to specific posts. Plain markdown. Table-heavy. Executive Summary self-contained. <code>companionOf</code> binding to parent.</td></tr>
+            <tr><th>Series</th><td>Numbered ordered sequences. Reads as one argument across multiple parts. Read-state tracked client-side (localStorage; no server tracking).</td></tr>
+            <tr><th>Counterpoints</th><td>Self-red-team or external-critic responses to specific posts. <code>challengesPost</code> binding renders auto-link banner on the parent. <span class="placeholder">[D8 label]</span> for reader-facing terminology.</td></tr>
+            <tr><th>Voice</th><td><span class="placeholder">[D5 delta]</span> &mdash; inherits the v1 voice guide; delta pending the thesis pick (D1).</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="colophon-section">
+        <div class="colophon-label">Colophon</div>
+        <div class="colophon-body">
+          <p>Built on Astro 5 with MDX. Deployed via Cloudflare Pages. Tags canonicalized in <code>astro-build/src/config/tags.ts</code>. Sitemap and RSS regenerated per build. No analytics tracker; no third-party cookies. Source: <a href="https://github.com/nino-chavez/blog" target="_blank" rel="noopener">github.com/nino-chavez/blog</a>.</p>
+          <p>v2 design rationale and decision-blocked work live at <a href="/">the blueprint portal</a> (this prototype). For broader context on the v1 → v2 re-conception, see the <a href="/docs/?doc=01-research">Stage 1 research synthesis</a>.</p>
+        </div>
+      </div>
+    </main>
+
+    <footer class="pub-footer">
+      <span>by Nino Chavez · architect-who-directs-agents</span>
+      <a href="https://ninochavez.co/blog/rss.xml" target="_blank" rel="noopener">RSS</a>
+      <a href="https://ninochavez.co/blog/full-content-rss.xml" target="_blank" rel="noopener">RSS (full content)</a>
+    </footer>
+  </section>
+
+  <section class="shipped-view">
+    <div class="v1-mock">
+      <h1>v1 has no dedicated About inside the publication</h1>
+      <div class="v1-body">
+        <p>v1 author identity surfaces only in post bylines and the global /about portfolio route at ninochavez.co/about. The blog home right-rail ("Currently Surfacing," "Recent Series," "Also Here") does partial framing-work but inconsistently across surfaces.</p>
+        <p>Real production surfaces: <a href="https://ninochavez.co/about" target="_blank" rel="noopener">ninochavez.co/about</a> (global portfolio) and the blog home rail at <a href="https://ninochavez.co/blog" target="_blank" rel="noopener">ninochavez.co/blog</a>.</p>
+      </div>
+      <div class="v1-note">
+        v2 adds a publication-scoped About that reads in the publication's own voice (Rule 1 + Rule 3). The hiring-evaluator persona's primary positioning-proof surface. Links to the global portfolio About for deeper author context rather than duplicating it.
+      </div>
+    </div>
+  </section>
+
+  <script>
+    window.PORTAL_SHELL_CONFIG = { productName: 'Signal Dispatch v2' };
+    window.PROTO_PAGE = { id: 'about-colophon' };
+  </script>
+  <script src="/_portal-shell.js?v=20260525-1700"></script>
+  <script src="/proto-nav.js?v=20260525-1700"></script>
+  <script src="/chat-widget.js" defer></script>
+  <script src="/proto-annotate.js?v=20260525-1700" defer></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "id": "whitepapers-list",
+  "title": "Whitepapers List",
+  "group": "discovery",
+  "surface": "v2 whitepapers-list — long-form & presentation archive",
+  "phase": "Stage 3 (added 2026-05-26 from Stitch WhitepapersList)",
+  "route": "/pages/whitepapers-list.html",
+  "summary": "Filter-tabbed archive of whitepapers + presentations. Each item: Type#DocNum coral badge, honest version status (no fabricated peer-review chrome), download CTA. Right rail explains status labels + offers per-format RSS + citation block. REJECTS Stitch's email 'Request Hardcopy Drafts' form.",
+  "strategy": {
+    "decision": "Filter-tabbed list (All / Whitepapers / Presentations) with search input. Per-item: doc# badge, date, version status, size metric, download CTA. Right sidebar provides status taxonomy + cite format + per-format RSS feeds.",
+    "why": "Publication archetype Lesson 4 again — multi-format pieces are first-class citizens, not tag-filtered. Stitch's WhitepapersList gives the filter+search pattern; we reject the email contact form and replace with citation affordance (more useful for the hiring-evaluator persona).",
+    "shipped": "v1 doesn't distinguish whitepapers from posts. They're posts with a tag.",
+    "gap": "v2 adds /whitepapers-list with format filter, per-format RSS feeds, and a citation block. Honest version status (Published vN.M / Draft / Presented) — no fabricated 'peer-reviewed' label.",
+    "question": "How aggressive should the version-status taxonomy be? Stitch fabricated 'Peer-Reviewed' which we explicitly rejected. The provisional taxonomy (Published / Draft / Presented) might still be too much status chrome — could collapse to just 'date · author'."
+  },
+  "inheritsFromV1": ["whitepaper content type", "presentation content type"],
+  "breaksFromV1": ["Dedicated /whitepapers-list route (was tag-filter only)", "Format filter tabs", "Per-format RSS feeds", "Citation block with permanent URL", "REJECT Stitch's email 'Request Hardcopy Drafts' form per anti-rule"],
+  "decisionDependencies": ["D3 (format mix)", "D6 (citation format)"],
+  "currentState": {
+    "route": "https://ninochavez.co/blog/tag/whitepaper",
+    "summary": "v1 whitepapers are tag-filtered posts. No filter UI, no per-format RSS, no citation format.",
+    "sourceFiles": ["astro-build/src/pages/blog/tag/[tag].astro"],
+    "annotation": "v2 promotes whitepapers + presentations from tag-list to dedicated archive surface with filter, search, status taxonomy, and citation affordance."
+  }
+}

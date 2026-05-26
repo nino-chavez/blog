@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>[v2-name] — Working Architect's notes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared.css?v=20260525-1700">
+  <style>
+    /* home — v2 discovery. Rule 3: lead with the work, author second,
+       brand third. Rule 4: one primary discovery affordance above the
+       fold, recent stream subordinated below. Current layout is
+       thesis-agnostic (featured-piece-first works for both A and B);
+       Dispatch #N marker appears on items only if D1 lands as Thesis B. */
+    .pub-header { border-bottom: 1px solid var(--card-border); background: var(--card); }
+    .pub-header-inner {
+      max-width: 920px; margin: 0 auto; padding: var(--space-3) var(--space-4);
+      display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+    }
+    .pub-mark { font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: -0.01em; color: var(--text-primary); }
+    .pub-mark .pub-mark-placeholder { color: var(--text-muted); font-weight: 500; }
+    .pub-nav { display: flex; gap: var(--space-4); font-size: var(--text-sm); }
+    .pub-nav a { color: var(--text-secondary); font-weight: 500; }
+    .pub-nav a:hover { color: var(--text-primary); }
+
+    .shell { max-width: 920px; margin: 0 auto; padding: var(--space-8) var(--space-4) var(--space-16); }
+
+    /* Above-the-fold structure — work-first ordering */
+    .above-fold {
+      display: grid; grid-template-columns: 1fr; gap: var(--space-8);
+      padding: var(--space-8) 0 var(--space-10); margin-bottom: var(--space-10);
+      border-bottom: 1px solid var(--card-border);
+    }
+    @media (min-width: 720px) {
+      .above-fold {
+        grid-template-columns: 2fr 1fr; gap: var(--space-12);
+      }
+    }
+
+    /* Editorial sentence — D2 placeholder, large + load-bearing */
+    .editorial-sentence {
+      font-family: var(--font-display); font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+      font-weight: 700; letter-spacing: -0.02em; line-height: 1.2;
+      color: var(--text-primary); margin: 0 0 var(--space-3);
+      text-transform: none;
+    }
+    .editorial-sentence .placeholder {
+      background: hsl(60 80% 88%); padding: 2px 8px; border-radius: var(--radius-sm);
+      font-size: 0.7em; color: hsl(45 50% 25%); font-family: var(--font-mono); font-weight: 600;
+      vertical-align: middle;
+    }
+
+    .author-line {
+      font-size: var(--text-sm); color: var(--text-secondary); margin: 0 0 var(--space-6);
+    }
+    .author-line strong { color: var(--text-primary); font-weight: 600; }
+    .author-line a { color: var(--text-secondary); border-bottom: 1px solid var(--card-border); }
+
+    /* Featured piece — Rule 4: single primary discovery affordance */
+    .featured-piece {
+      display: flex; flex-direction: column; gap: var(--space-3);
+      padding: var(--space-5); background: var(--card);
+      border: 1px solid var(--card-border); border-radius: var(--radius-lg);
+      text-decoration: none; color: inherit;
+      transition: border-color var(--transition-fast), transform var(--transition-fast);
+    }
+    .featured-piece:hover { border-color: var(--text-primary); transform: translateY(-2px); }
+    .featured-label {
+      font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--text-muted);
+    }
+    .featured-meta { display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap; }
+    .featured-format {
+      display: inline-flex; padding: 3px 10px 4px; border-radius: var(--radius-sm);
+      font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      background: hsl(220 80% 96%); color: hsl(220 70% 35%);
+    }
+    .featured-date, .featured-read { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+    .featured-title {
+      font-family: var(--font-display); font-size: clamp(1.5rem, 1.2rem + 1vw, 1.75rem);
+      font-weight: 700; letter-spacing: -0.015em; line-height: 1.2;
+      color: var(--text-primary); margin: var(--space-2) 0; text-transform: none;
+    }
+    .featured-excerpt { font-size: var(--text-base); color: var(--text-secondary); line-height: 1.55; margin: 0; }
+
+    /* Sidebar — author identity + position (Rule 3 second-priority) */
+    .author-card {
+      padding: var(--space-5); background: hsl(220 15% 98%);
+      border: 1px solid var(--card-border); border-radius: var(--radius-lg);
+    }
+    .author-card-label {
+      font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: var(--space-2);
+    }
+    .author-card-name { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 700; color: var(--text-primary); margin: 0 0 var(--space-2); }
+    .author-card-pos { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.5; margin: 0 0 var(--space-3); }
+    .author-card-pos strong { color: var(--text-primary); font-weight: 600; }
+    .author-card-links { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); display: flex; flex-direction: column; gap: 4px; }
+    .author-card-links a { color: var(--text-secondary); }
+    .author-card-links a:hover { color: var(--text-primary); }
+
+    /* Recent stream — subordinate to featured, single-axis chronology */
+    .stream-section { margin-bottom: var(--space-10); }
+    .stream-header {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: var(--space-3); margin-bottom: var(--space-5);
+    }
+    .stream-label {
+      font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700;
+      color: var(--text-primary); letter-spacing: -0.015em;
+    }
+    .stream-link {
+      font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .stream-list { display: flex; flex-direction: column; gap: var(--space-3); }
+    .stream-item {
+      display: flex; gap: var(--space-4); align-items: flex-start;
+      padding: var(--space-3) var(--space-4); border-radius: var(--radius-md);
+      text-decoration: none; color: inherit;
+      transition: background var(--transition-fast);
+    }
+    .stream-item:hover { background: hsl(220 15% 98%); }
+    .stream-item-meta {
+      flex-shrink: 0; min-width: 120px; display: flex; flex-direction: column; gap: 4px;
+    }
+    .stream-item-date { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+    .stream-item-format {
+      display: inline-flex; align-self: flex-start; padding: 2px 8px;
+      border-radius: var(--radius-sm); font-family: var(--font-mono);
+      font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .stream-item-format.post { background: hsl(150 60% 95%); color: hsl(150 60% 28%); }
+    .stream-item-format.whitepaper { background: hsl(220 80% 96%); color: hsl(220 70% 35%); }
+    .stream-item-format.counterpoint { background: hsl(0 60% 96%); color: hsl(0 55% 35%); }
+    .stream-item-body { flex: 1; }
+    .stream-item-title {
+      font-family: var(--font-display); font-size: var(--text-base); font-weight: 600;
+      color: var(--text-primary); margin: 0 0 4px; line-height: 1.35;
+    }
+    .stream-item-excerpt { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.5; margin: 0; }
+
+    .dispatch-marker {
+      font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); font-weight: 600;
+    }
+    .dispatch-marker.suppressed { display: none; }
+
+    .thesis-note {
+      margin-bottom: var(--space-8); padding: var(--space-3) var(--space-4);
+      background: hsl(60 80% 96%); border: 1px dashed hsl(45 70% 60%); border-radius: var(--radius-md);
+      font-family: var(--font-mono); font-size: 11px; line-height: 1.55; color: hsl(45 50% 25%);
+    }
+    .thesis-note strong { font-weight: 700; }
+    .thesis-note a { color: hsl(45 50% 25%); text-decoration: underline; }
+
+    .pub-footer {
+      max-width: 920px; margin: var(--space-12) auto 0;
+      padding: var(--space-6) var(--space-4); border-top: 1px solid var(--card-border);
+      font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);
+      display: flex; gap: var(--space-4); flex-wrap: wrap;
+    }
+    .pub-footer a { color: var(--text-secondary); border-bottom: 1px solid var(--card-border); }
+
+    .shipped-view .v1-mock {
+      max-width: 920px; margin: var(--space-8) auto; padding: var(--space-6) var(--space-4);
+      background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius-md);
+    }
+    .shipped-view .v1-mock h1 { font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-3); }
+    .shipped-view .v1-mock .v1-body { font-size: var(--text-sm); line-height: 1.6; color: var(--text-secondary); }
+    .shipped-view .v1-mock .v1-note { margin-top: var(--space-4); padding: var(--space-3); background: hsl(0 0% 97%); border-left: 3px solid var(--text-muted); font-size: var(--text-xs); font-family: var(--font-mono); color: var(--text-secondary); }
+    .shipped-view .v1-mock .v1-diff-list { margin-top: var(--space-3); padding-left: var(--space-5); font-size: var(--text-sm); color: var(--text-secondary); }
+    .shipped-view .v1-mock .v1-diff-list li { margin-bottom: 6px; }
+  </style>
+</head>
+<body data-compare-root data-view="proposed">
+
+  <section class="proposed-view">
+    <header class="pub-header">
+      <div class="pub-header-inner">
+        <div class="pub-mark">[v2-name] <span class="pub-mark-placeholder">· name pending D7</span></div>
+        <nav class="pub-nav">
+          <a href="/pages/library.html">Library</a>
+          <a href="/pages/about-colophon.html">About</a>
+          <a href="/pages/subscribe-follow.html">Follow</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="shell">
+      <div class="thesis-note">
+        <strong>[D1 + D2 + D7 placeholders]</strong> &mdash; home structure is thesis-agnostic (featured-piece-first works for both A and B). Visible decision-blockers: name (D7) shown as <code>[v2-name]</code>; editorial sentence (D2) shown as placeholder below; Dispatch #N marker on stream items (Thesis B only) currently suppressed. See <a href="/docs/?doc=DECISIONS-NEEDED">critical-path triple in the decisions packet</a>.
+      </div>
+
+      <div class="above-fold">
+        <div>
+          <h1 class="editorial-sentence">
+            <span class="placeholder">[D2 placeholder]</span><br/>
+            ≤12-word editorial single-sentence sits here.
+          </h1>
+          <p class="author-line">by <strong>Nino Chavez</strong> — architect-who-directs-agents · <a href="/pages/about-colophon.html">about this publication</a></p>
+
+          <a href="/pages/whitepaper-detail.html" class="featured-piece">
+            <span class="featured-label">Featured · latest substantive piece</span>
+            <div class="featured-meta">
+              <span class="featured-format">Whitepaper</span>
+              <span class="featured-date">April 11, 2026</span>
+              <span class="featured-read">· 22 min read</span>
+            </div>
+            <h2 class="featured-title">The Cognitive Foundry</h2>
+            <p class="featured-excerpt">A reference architecture for agent-assisted production work — what's required to make the chassis hold, what's optional, and what fails predictably without each piece.</p>
+          </a>
+        </div>
+
+        <aside class="author-card">
+          <div class="author-card-label">The author</div>
+          <h3 class="author-card-name">Nino Chavez</h3>
+          <p class="author-card-pos"><strong>Architect who directs agents</strong>, not an engineer who types code. Director-tier work with a team budget of zero. Peer group: architects, principal consultants, fractional CTOs, directors of AI engineering.</p>
+          <div class="author-card-links">
+            <a href="/pages/about-colophon.html">→ about this publication</a>
+            <a href="https://ninochavez.co/about" target="_blank" rel="noopener">→ portfolio /about ↗</a>
+            <a href="https://www.linkedin.com/in/ninochavez/" target="_blank" rel="noopener">→ linkedin ↗</a>
+          </div>
+        </aside>
+      </div>
+
+      <section class="stream-section">
+        <div class="stream-header">
+          <h2 class="stream-label">Recent</h2>
+          <a class="stream-link" href="/pages/library.html">all 276 items in Library →</a>
+        </div>
+
+        <div class="stream-list">
+          <a href="/pages/whitepaper-detail.html" class="stream-item">
+            <div class="stream-item-meta">
+              <span class="stream-item-date">May 23, 2026</span>
+              <span class="stream-item-format whitepaper">Whitepaper</span>
+              <span class="dispatch-marker suppressed">Dispatch #008</span>
+            </div>
+            <div class="stream-item-body">
+              <h3 class="stream-item-title">The Big Blueprint Methodology</h3>
+              <p class="stream-item-excerpt">How the chassis becomes a methodology. The seven-stage pipeline, the variant taxonomy, and what compounds across initiatives.</p>
+            </div>
+          </a>
+
+          <a href="/pages/post-detail.html" class="stream-item">
+            <div class="stream-item-meta">
+              <span class="stream-item-date">May 16, 2026</span>
+              <span class="stream-item-format post">Post</span>
+              <span class="dispatch-marker suppressed">Dispatch #007</span>
+            </div>
+            <div class="stream-item-body">
+              <h3 class="stream-item-title">Encodings, not prompts</h3>
+              <p class="stream-item-excerpt">Where compounding leverage actually lives. Why prompt fixes don't accrete and what does.</p>
+            </div>
+          </a>
+
+          <a href="/pages/post-detail.html" class="stream-item">
+            <div class="stream-item-meta">
+              <span class="stream-item-date">May 09, 2026</span>
+              <span class="stream-item-format post">Post</span>
+              <span class="dispatch-marker suppressed">Dispatch #006</span>
+            </div>
+            <div class="stream-item-body">
+              <h3 class="stream-item-title">Reviewers are not the same agent</h3>
+              <p class="stream-item-excerpt">Why a second agent finds what the first agent missed. The structural reason same-agent self-review fails predictably, and the cheap fix.</p>
+            </div>
+          </a>
+
+          <a href="/pages/counterpoint-detail.html" class="stream-item">
+            <div class="stream-item-meta">
+              <span class="stream-item-date">May 02, 2026</span>
+              <span class="stream-item-format counterpoint">Counterpoint</span>
+              <span class="dispatch-marker suppressed">Dispatch #005</span>
+            </div>
+            <div class="stream-item-body">
+              <h3 class="stream-item-title">"The chassis is over-engineering" — a counterpoint</h3>
+              <p class="stream-item-excerpt">A stress-test of the Cognitive Foundry argument. Where the chassis is right; where it's load-bearing scaffolding that can be removed.</p>
+            </div>
+          </a>
+
+          <a href="/pages/post-detail.html" class="stream-item">
+            <div class="stream-item-meta">
+              <span class="stream-item-date">Apr 25, 2026</span>
+              <span class="stream-item-format post">Post</span>
+              <span class="dispatch-marker suppressed">Dispatch #004</span>
+            </div>
+            <div class="stream-item-body">
+              <h3 class="stream-item-title">Sensors over inference</h3>
+              <p class="stream-item-excerpt">Any time the agent says "probably" about runtime state, a sensor was missing. A taxonomy of the sensors that close common loops.</p>
+            </div>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="pub-footer">
+      <span>by Nino Chavez · architect-who-directs-agents</span>
+      <a href="https://ninochavez.co/blog/rss.xml" target="_blank" rel="noopener">RSS</a>
+      <a href="https://ninochavez.co/blog/full-content-rss.xml" target="_blank" rel="noopener">RSS (full content)</a>
+    </footer>
+  </section>
+
+  <section class="shipped-view">
+    <div class="v1-mock">
+      <h1>v1 home — brand-first lead, three-panel right rail competing for attention</h1>
+      <div class="v1-body">
+        <p>v1 home: brand bar "Signal Dispatch" at top, featured hero card, post grid below, three right-rail panels ("Currently Surfacing," "Recent Series," "Also Here") competing for attention above the fold. At least 5 discovery affordances competing on first view.</p>
+        <p>Real production surface: <a href="https://ninochavez.co/blog" target="_blank" rel="noopener">ninochavez.co/blog</a></p>
+      </div>
+      <p style="font-size: var(--text-xs); font-family: var(--font-mono); color: var(--text-muted); margin-top: var(--space-4); text-transform: uppercase; letter-spacing: 0.06em;">v2 changes from v1:</p>
+      <ul class="v1-diff-list">
+        <li><strong>Primary nav reduced</strong> from 5+ items to 3 (Library / About / Follow) per Rule 4.</li>
+        <li><strong>Editorial sentence above the fold</strong> (D2 placeholder) — currently v1 has no equivalent.</li>
+        <li><strong>Author identity surfaced visibly</strong> (sidebar card right of fold) per Rule 3.</li>
+        <li><strong>One featured piece</strong> as the single primary discovery affordance, not competing with right-rail panels.</li>
+        <li><strong>Subordinated recent stream</strong> below the fold with format badges per card.</li>
+        <li><strong>Right-rail panels removed</strong>; their content moves to About and Library.</li>
+        <li>D1 picks whether stream items carry the Dispatch #N marker; currently suppressed.</li>
+      </ul>
+    </div>
+  </section>
+
+  <script>
+    window.PORTAL_SHELL_CONFIG = { productName: 'Signal Dispatch v2' };
+    window.PROTO_PAGE = { id: 'home' };
+  </script>
+  <script src="/_portal-shell.js?v=20260525-1700"></script>
+  <script src="/proto-nav.js?v=20260525-1700"></script>
+  <script src="/chat-widget.js" defer></script>
+  <script src="/proto-annotate.js?v=20260525-1700" defer></script>
+</body>
+</html>

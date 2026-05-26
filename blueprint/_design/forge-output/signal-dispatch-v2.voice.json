@@ -1,0 +1,56 @@
+{
+  "openingPatterns": {
+    "questionFirst": true,
+    "uncomfortableTruth": true,
+    "avoidAcademic": [
+      "In this essay",
+      "This paper examines",
+      "The author contends",
+      "It can be observed that",
+      "Research indicates"
+    ],
+    "avoidCasual": []
+  },
+  "structuralPatterns": {
+    "evolution": true,
+    "compareContrast": true,
+    "provisional": true,
+    "boldHeaders": true
+  },
+  "tonalElements": {
+    "selfInterrogation": true,
+    "culturalTouchstones": true,
+    "technicalDepth": true,
+    "conversational": true
+  },
+  "avoid": {
+    "corporateJargon": [
+      "leverage",
+      "synergy",
+      "holistic approach",
+      "paradigm shift",
+      "circle back",
+      "deep dive",
+      "unpack",
+      "drive value"
+    ],
+    "academicDistance": [
+      "In this essay",
+      "This paper examines",
+      "The author contends",
+      "It can be observed that",
+      "Research indicates"
+    ],
+    "humbleBragging": [
+      "I was fortunate to",
+      "I had the privilege of",
+      "humble opinion"
+    ],
+    "prescriptiveAuthority": [
+      "you must",
+      "you should always",
+      "the right way",
+      "best practice is"
+    ]
+  }
+}

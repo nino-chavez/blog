@@ -282,7 +282,7 @@
     </div>
 
     <p class="hero-lede">
-      Signal Dispatch v2 is a re-conception of the publication currently at ninochavez.co/blog — new name, new voice, new identity, against a 276-item v1 corpus that survives as reference, not constraint. This portal carries the greenfield Stage 1-6 artifacts: research synthesis, design principles, prototype plan with eight surfaces, the decisions packet that gates Stage 3 page builds, and v1-baseline reference for what came before. The v2 name + thesis decisions land here as they're made; the prototype pages ship as the decisions unblock them.
+      Signal Dispatch v2 is a re-conception of the publication currently at ninochavez.co/blog — new name, new voice, new identity, against a 276-item v1 corpus that survives as reference, not constraint. This portal carries the greenfield Stage 1-6 artifacts: research synthesis, design principles, prototype plan with ten surfaces (rebuilt 2026-05-26 from Stitch DispatchesFeed / ArticleDetail / SeriesIndex / WhitepapersList / AboutView content layouts, with publication-archetype anti-rules applied — no email capture, no fabricated credentials, no SPA tab nav), the decisions packet that gates downstream work, and v1-baseline reference for what came before.
     </p>
 
     <section class="stat-row">
@@ -327,8 +327,8 @@
       {
         id: 'read', title: 'Read', status: 'partial',
         icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></svg>',
-        description: 'The eight v2 surfaces — home, post, whitepaper, series, counterpoint, library, about, subscribe — with per-surface strategy panels explaining the v1 → v2 decision. _meta stubs render now; HTML pages land as D1+D2+D7 unblock them.',
-        links: 'Manifest: <a href="/_meta/index.json">_meta/index.json</a> · Sample surfaces: <a href="/_meta/home.json">home</a>, <a href="/_meta/post-detail.json">post-detail</a>, <a href="/_meta/whitepaper-detail.json">whitepaper-detail</a>',
+        description: 'Ten v2 surfaces — home, post, whitepaper, series, counterpoint, library, series-index, whitepapers-list, about, subscribe — rebuilt 2026-05-26 from Stitch (blog-stitch-v2) content layout grammar. Per-surface strategy panels explain the v1 → v2 decision; reject-list applied (no email capture, no fabricated credentials, no SPA tab nav).',
+        links: 'Manifest: <a href="/_meta/index.json">_meta/index.json</a> · Surfaces: <a href="/pages/home.html">home</a>, <a href="/pages/post-detail.html">post</a>, <a href="/pages/library.html">library</a>, <a href="/pages/series-index.html">series-index</a>, <a href="/pages/whitepapers-list.html">whitepapers-list</a>',
         priority: { reviewer: 1, builder: 3, decider: 4 }
       },
       {
@@ -424,7 +424,7 @@
         document.getElementById('stat-pages').textContent = (m.pages || []).length;
         // Stage artifacts: 6 stages + DECISIONS + v1-baseline/README + prototype/DESIGN
         // + 04-fact-check-log + stitch-DESIGN = 11
-        document.getElementById('stat-docs').textContent = '11';
+        document.getElementById('stat-docs').textContent = '13';
       } catch {
         document.getElementById('stat-pages').textContent = '—';
         document.getElementById('stat-docs').textContent = '—';

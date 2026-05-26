@@ -1,0 +1,25 @@
+{
+  "id": "series-detail",
+  "title": "Series detail",
+  "group": "reading",
+  "surface": "Threaded reading — v1 gold-standard, promoted in v2",
+  "phase": "Stage 3",
+  "route": "/pages/series-detail.html",
+  "summary": "v1's series-detail surface is the strongest IA on the site (per brownfield diagnose F7-positive). v2 preserves the surface and promotes it to primary nav.",
+  "strategy": {
+    "decision": "Inherit v1 series-detail pattern unchanged (numbered, ordered cards with read-state). Promote to primary nav under Library or Reading group depending on D1. Apply the same numbered-card pattern to tag-detail and counterpoint-thread surfaces to extend its win.",
+    "why": "Brownfield F7-positive identified series-detail as v1's strongest IA pattern — numbered reading-order cards that scale, with clear thread continuity. Per Rule 1, preserve what works. Per Rule 4 (one thing per surface), the series numbered-card pattern is exactly the right primary affordance for ordered content.",
+    "shipped": "v1 series: numbered ordered cards, read-state markers, series-name persistence in nav. Working well per current-state captures.",
+    "gap": "v2 keeps the surface as-is structurally; changes are limited to header framing (format badge for cross-surface consistency) and promotion in primary nav.",
+    "question": "None blocking. Optional: extend the numbered-card pattern to tag-detail (currently broken at scale per F1) as part of D3 format-mix decisions."
+  },
+  "inheritsFromV1": ["numbered ordered cards", "read-state markers", "series-name persistence", "card layout, spacing, type-scale", "binding via series.config.ts or equivalent"],
+  "breaksFromV1": ["header format badge for cross-surface consistency", "promotion in primary nav (vs being hidden behind v1's 'More' menu)"],
+  "decisionDependencies": [],
+  "currentState": {
+    "route": "https://ninochavez.co/blog/series/[any-slug]",
+    "summary": "v1 series-detail: numbered ordered cards, clean type-scale, read-state markers. Strongest IA pattern on the site.",
+    "sourceFiles": ["astro-build/src/pages/blog/series/[slug].astro", "astro-build/src/content/series/*.mdx"],
+    "annotation": "v2 preserves the pattern and promotes it. The series-card shape may also become the v2 tag-detail-page chunking pattern (D3)."
+  }
+}

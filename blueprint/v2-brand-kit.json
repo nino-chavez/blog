@@ -1,0 +1,252 @@
+{
+  "meta": {
+    "schemaVersion": 1,
+    "id": "signal-dispatch-v2",
+    "created": "2024-01-01T00:00:00.000Z",
+    "updated": "2026-05-25T21:00:00.000Z",
+    "author": "Nino Chavez",
+    "version": "2.0.0-candidate",
+    "notes": "v2 candidate forked from v1 preset under provisional D1=Thesis A (per blueprint/prescription.yml). Identity updated to reflect architect-who-directs-agents reframe + D2 candidate tagline + research-derived audience. Palette / typography / voice carry from v1 under D5=no-delta default."
+  },
+  "identity": {
+    "name": "Signal Dispatch",
+    "tagline": "Working notes from an architect who directs agents to ship commerce.",
+    "mission": "Make agent-assisted production work — chassis, contracts, validators, and the hiring-evaluator-safe artifacts that prove the work is real — legible to peer architects and the directors who hire them.",
+    "audience": [
+      "peer architects (P1) — looking for working patterns + peer reads on industry arguments + reference architectures to cite",
+      "hiring evaluators (P2) — directors and principals testing whether the architect-who-directs-agents positioning is backed by receipts",
+      "AI-curious staff ICs (P3) — search-arriving practitioners trying to figure out how AI fits their own work"
+    ],
+    "personality": ["self-interrogating", "technically-deep", "provocative", "conversational", "provisional"],
+    "positioning": "A working architect's notes on directing agents in high-stakes production work — practice, not personal brand",
+    "domain": "agent-assisted software architecture",
+    "links": {
+      "blog": "https://ninochavez.co/blog",
+      "substack": "https://signaldispatch.substack.com",
+      "linkedin": "https://www.linkedin.com/in/ninochavez/"
+    }
+  },
+  "colors": {
+    "primary": {
+      "hex": "#e86c5d",
+      "name": "Signal Coral",
+      "usage": "Primary accent, links, emphasis"
+    },
+    "secondary": {
+      "hex": "#00ced1",
+      "name": "Signal Cyan",
+      "usage": "Secondary accent, highlights, data viz"
+    },
+    "accent": {
+      "hex": "#e86c5d",
+      "name": "Signal Coral",
+      "usage": "Same as primary — single-accent brand"
+    },
+    "neutral": {
+      "50": "#f9fafb",
+      "100": "#f3f4f6",
+      "200": "#e5e7eb",
+      "300": "#d1d5db",
+      "400": "#9ca3af",
+      "500": "#6b7280",
+      "600": "#4b5563",
+      "700": "#374151",
+      "800": "#1f2937",
+      "900": "#121214",
+      "950": "#0a0a0b"
+    },
+    "semantic": {
+      "success": { "hex": "#22c55e", "name": "Green", "usage": "Positive signals" },
+      "warning": { "hex": "#f59e0b", "name": "Amber", "usage": "Caution signals" },
+      "error": { "hex": "#ef4444", "name": "Red", "usage": "Critical signals" },
+      "info": { "hex": "#00ced1", "name": "Cyan", "usage": "Informational — matches secondary" }
+    },
+    "surfaces": {
+      "background": "#0a0a0b",
+      "foreground": "#ffffff",
+      "card": "#1a1a1d",
+      "cardForeground": "#ffffff",
+      "muted": "#121214",
+      "mutedForeground": "#9ca3af",
+      "border": "#374151"
+    }
+  },
+  "typography": {
+    "display": {
+      "family": "Rival Sans",
+      "fallbacks": ["system-ui", "sans-serif"],
+      "classification": "sans-serif",
+      "weights": [400, 500, 700],
+      "variable": false,
+      "typekitId": "tjp7ihm",
+      "localPath": "fonts/RivalSans-Regular.ttf",
+      "cssVariable": "--font-display",
+      "textTransform": "none",
+      "letterSpacing": -0.02
+    },
+    "body": {
+      "family": "Inter",
+      "fallbacks": ["system-ui", "sans-serif"],
+      "classification": "sans-serif",
+      "weights": [400, 500, 600, 700],
+      "variable": true,
+      "googleFonts": "Inter:wght@400;500;600;700",
+      "cssVariable": "--font-body",
+      "textTransform": "none",
+      "letterSpacing": 0
+    },
+    "mono": {
+      "family": "JetBrains Mono",
+      "fallbacks": ["Menlo", "monospace"],
+      "classification": "monospace",
+      "weights": [400, 500, 700],
+      "variable": true,
+      "googleFonts": "JetBrains+Mono:wght@400;500;700",
+      "cssVariable": "--font-mono",
+      "textTransform": "none",
+      "letterSpacing": 0
+    },
+    "scale": {
+      "baseSizePx": 16,
+      "ratio": "major-third",
+      "steps": [
+        { "name": "hero", "sizeRem": 3.5, "sizeMobileRem": 2.5, "lineHeight": 1.1, "weight": 700, "font": "display" },
+        { "name": "h2", "sizeRem": 2.25, "sizeMobileRem": 1.75, "lineHeight": 1.2, "weight": 700, "font": "display" },
+        { "name": "h3", "sizeRem": 1.5, "sizeMobileRem": 1.25, "lineHeight": 1.3, "weight": 500, "font": "display" },
+        { "name": "body-lg", "sizeRem": 1.125, "lineHeight": 1.7, "weight": 400, "font": "body" },
+        { "name": "body", "sizeRem": 1, "lineHeight": 1.6, "weight": 400, "font": "body" },
+        { "name": "caption", "sizeRem": 0.875, "lineHeight": 1.5, "weight": 400, "font": "body" },
+        { "name": "code", "sizeRem": 0.875, "lineHeight": 1.6, "weight": 400, "font": "mono" }
+      ]
+    }
+  },
+  "spacing": {
+    "1": 0.25,
+    "2": 0.5,
+    "3": 0.75,
+    "4": 1,
+    "6": 1.5,
+    "8": 2,
+    "12": 3,
+    "16": 4,
+    "24": 6
+  },
+  "radius": {
+    "none": 0,
+    "sm": 0.125,
+    "md": 0.375,
+    "lg": 0.5,
+    "xl": 0.75,
+    "2xl": 1,
+    "full": 9999
+  },
+  "layout": {
+    "maxContentWidth": 48,
+    "breakpoints": {
+      "sm": 640,
+      "md": 768,
+      "lg": 1024,
+      "xl": 1280,
+      "2xl": 1536
+    },
+    "sectionPadding": "16",
+    "containerPadding": "6"
+  },
+  "voice": {
+    "attributes": [
+      { "trait": "self-interrogating", "description": "Questions its own assumptions mid-argument", "example": "But wait — is that actually true, or is it just what we've been told?" },
+      { "trait": "technically-deep", "description": "Goes beyond surface-level analysis", "example": "The cache invalidation problem isn't technical — it's organizational." },
+      { "trait": "provocative", "description": "Opens with uncomfortable truths or counterintuitive claims", "example": "Most platform teams exist to justify headcount, not serve developers." },
+      { "trait": "conversational", "description": "Reads like talking to a smart colleague at a bar", "example": "Look, I've built three of these. The third one was worse than the first." },
+      { "trait": "provisional", "description": "Holds ideas tentatively, signals epistemic humility", "example": "This might be wrong, but the pattern I keep seeing is..." }
+    ],
+    "antiPatterns": [
+      {
+        "category": "corporate-jargon",
+        "patterns": ["leverage", "synergy", "holistic approach", "paradigm shift", "circle back", "deep dive", "unpack", "drive value"],
+        "severity": "error",
+        "suggestion": "Say the actual thing. 'Use' not 'leverage'. 'Examine' not 'deep dive'."
+      },
+      {
+        "category": "academic-distance",
+        "patterns": ["In this essay", "This paper examines", "The author contends", "It can be observed that", "Research indicates"],
+        "severity": "error",
+        "suggestion": "Write in first person. 'I think' not 'It can be observed'."
+      },
+      {
+        "category": "humble-bragging",
+        "patterns": ["I was fortunate to", "I had the privilege of", "humble opinion"],
+        "severity": "warning",
+        "suggestion": "Just state the experience directly."
+      },
+      {
+        "category": "prescriptive-authority",
+        "patterns": ["you must", "you should always", "the right way", "best practice is"],
+        "severity": "warning",
+        "suggestion": "Offer perspective, not prescriptions. 'What's worked for me' not 'you must'."
+      }
+    ],
+    "structuralPatterns": [
+      { "name": "question-first-opening", "description": "Open with a question that frames the tension", "required": false, "example": "What happens when the tool you built to save time starts costing more than it saves?" },
+      { "name": "evolution-not-revolution", "description": "Track how thinking changed over time, not just the endpoint", "required": false },
+      { "name": "compare-contrast", "description": "Place two approaches side by side and examine tradeoffs", "required": false },
+      { "name": "provisional-thinking", "description": "Signal when ideas are tentative vs confident", "required": false }
+    ],
+    "examples": [
+      {
+        "intent": "Introduce a technical topic",
+        "good": "I keep seeing teams build internal developer platforms that nobody uses. The pattern is always the same: someone reads a Gartner report, gets budget, hires 12 people, and ships a portal that developers route around.",
+        "bad": "In this comprehensive analysis, we will examine the emerging paradigm of internal developer platforms and their transformative impact on engineering velocity."
+      },
+      {
+        "intent": "Share a recommendation",
+        "good": "Start with a Makefile. Seriously. Before you build a platform, put your common commands in a Makefile and see if that's enough. It usually is.",
+        "bad": "Organizations should holistically evaluate their developer experience maturity before leveraging platform engineering as a strategic capability."
+      }
+    ],
+    "minimumScore": 75
+  },
+  "media": {
+    "logos": {
+      "clearSpace": 0.25,
+      "minSizePx": 24,
+      "variations": []
+    },
+    "templates": [
+      {
+        "id": "social-card",
+        "name": "Blog Social Card",
+        "description": "OG image for blog posts",
+        "sizes": [{ "width": 1200, "height": 675, "dpi": 72, "label": "OG Image" }],
+        "format": "png",
+        "dataFields": [
+          { "name": "title", "type": "string", "required": true },
+          { "name": "category", "type": "string", "required": false }
+        ]
+      }
+    ],
+    "creative": {
+      "basePrompt": "BRAND: Signal Dispatch — a publication of working notes from an architect who directs agents to ship commerce. Editorial, not personal-brand. Practice, not promotion. Reads as professional studio output, not as marketing.\nAESTHETIC: Dark, deliberate, technical. Minimalist with editorial gravity. Editorial-publication register, not SaaS-startup register, not personal-brand register.\n\nVISUAL LANGUAGE:\n- Signal waveforms, circuit-like patterns, geometric nodes — but as editorial illustration, not infographics\n- Abstract data visualization, flowing lines, technical artifacts\n- Architectural diagrams, drafted-by-hand feel, blueprint-adjacent\n- Near-black backgrounds with coral/cyan accent highlights\n- Clean lines, no ornamental flourishes, no startup-y gradients",
+      "conceptMap": {
+        "signal": "abstract signal waveform, frequency pattern, data stream",
+        "network": "network topology nodes and edges, connected systems",
+        "circuit": "circuit board patterns, technical traces, PCB aesthetic",
+        "data": "data visualization, flowing lines, abstract charts",
+        "grid": "subtle background grid, technical graph paper",
+        "agent": "geometric figure directing a swarm of smaller geometric figures — author-as-director metaphor",
+        "harness": "structural scaffolding, contracts, validators — the safety frame around autonomous action",
+        "architecture": "blueprint-style line drawings, isometric structural diagrams"
+      },
+      "formatModifiers": {
+        "web": "Standard web resolution. 1200x675px. Landscape format.",
+        "banner": "Newsletter banner. 1200x200px. Horizontal strip.",
+        "og-card": "Open Graph card. 1200x630px. Single dominant illustration, room for overlaid title.",
+        "hero": "Post hero image. 1600x900px. Editorial illustration register."
+      },
+      "visualKeywords": ["dark", "minimal", "technical", "geometric", "signal", "architectural", "drafted", "editorial"],
+      "avoid": ["text in AI-generated images", "stock photo aesthetics", "bright/cheerful colors", "corporate clip art", "gratuitous gradients", "personal-brand framing", "startup-y energy", "lifestyle imagery"]
+    },
+    "assets": []
+  },
+  "defaultMode": "dark"
+}

@@ -4,186 +4,390 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>About — [v2-name] Blueprint</title>
+  <title>About — [v2-name]</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/shared.css?v=20260525-1700">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared.css?v=20260526-stitch1">
   <style>
-    /* about-colophon page-specific styles. Hiring-evaluator's
-       positioning-proof surface — reads in the publication's own voice
-       per Rule 1 + Rule 3 (work-first, author-second, brand-third). */
-    .pub-header { border-bottom: 1px solid var(--card-border); background: var(--card); }
-    .pub-header-inner {
-      max-width: 720px; margin: 0 auto; padding: var(--space-3) var(--space-4);
-      display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+    /* about-colophon — from Stitch AboutView, reject contact form + fabricated bio.
+     * Adds methodology stack section (Rule 3 third priority).
+     */
+    .about-v2 { --font-serif: 'Source Serif 4', Georgia, serif; --max-w: 1200px; }
+
+    .about-v2 .pub-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(10, 10, 11, 0.9); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
-    .pub-mark { font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: -0.01em; color: var(--text-primary); }
-    .pub-mark .pub-mark-placeholder { color: var(--text-muted); font-weight: 500; }
-    .pub-nav { display: flex; gap: var(--space-4); font-size: var(--text-sm); }
-    .pub-nav a { color: var(--text-secondary); font-weight: 500; }
-    .pub-nav a.active { color: var(--text-primary); font-weight: 600; }
-    .pub-nav a:hover { color: var(--text-primary); }
+    .about-v2 .pub-header-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: var(--space-6) var(--space-5);
+      display: flex; align-items: center; justify-content: space-between; gap: var(--space-6);
+    }
+    @media (min-width: 768px) { .about-v2 .pub-header-inner { padding: var(--space-6) 80px; } }
+    .about-v2 .pub-brand { display: flex; align-items: center; gap: var(--space-6); }
+    .about-v2 .pub-mark {
+      font-family: var(--font-serif); font-weight: 700; font-size: 24px;
+      letter-spacing: -0.01em; color: var(--brand-primary); text-decoration: none;
+    }
+    .about-v2 .pub-mark-pending {
+      font-family: var(--font-body); font-weight: 400; font-size: var(--text-xs);
+      color: var(--text-muted); margin-left: 8px;
+    }
+    .about-v2 .pub-byline { display: none; height: 24px; width: 1px; background: rgba(255, 255, 255, 0.1); }
+    .about-v2 .pub-byline-text { display: none; font-size: var(--text-sm); color: rgba(255, 255, 255, 0.6); font-style: italic; }
+    @media (min-width: 768px) { .about-v2 .pub-byline, .about-v2 .pub-byline-text { display: inline-block; } }
+    .about-v2 .pub-nav { display: none; gap: var(--space-8); align-items: center; }
+    @media (min-width: 768px) { .about-v2 .pub-nav { display: flex; } }
+    .about-v2 .pub-nav a {
+      font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em;
+      color: rgba(255, 255, 255, 0.6); padding-bottom: 4px;
+      border-bottom: 2px solid transparent; text-decoration: none;
+    }
+    .about-v2 .pub-nav a:hover { color: #ffffff; }
+    .about-v2 .pub-nav a.active {
+      color: var(--brand-primary); border-bottom-color: var(--brand-primary); font-weight: 600;
+    }
+    .about-v2 .pub-actions { display: flex; align-items: center; gap: var(--space-4); }
+    .about-v2 .user-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--brand-primary); text-decoration: none;
+    }
+    .about-v2 .search-btn {
+      padding: 6px; color: rgba(255, 255, 255, 0.6); background: transparent;
+      border: 0; border-radius: var(--radius-full); cursor: pointer;
+    }
+    .about-v2 .search-btn:hover { color: var(--brand-primary); background: rgba(255, 255, 255, 0.05); }
 
-    .shell { max-width: 720px; margin: 0 auto; padding: var(--space-12) var(--space-4) var(--space-16); }
+    .about-v2 .main {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 48px var(--space-5) 96px;
+    }
+    @media (min-width: 768px) { .about-v2 .main { padding: 48px 80px 96px; } }
 
-    .meta-strip { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-6); flex-wrap: wrap; }
-    .format-badge {
-      display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px 4px;
-      border-radius: var(--radius-sm); background: hsl(200 40% 95%); color: hsl(200 50% 30%);
+    .about-v2 .page-head { margin-bottom: 48px; }
+    .about-v2 .page-eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      text-transform: uppercase; letter-spacing: 0.15em;
+      color: var(--brand-primary); font-weight: 600;
+      margin: 0 0 var(--space-4); display: block;
+    }
+    .about-v2 .page-title {
+      font-family: var(--font-serif); font-size: clamp(34px, 4vw, 38px);
+      line-height: 1.18; font-weight: 700; color: #ffffff; margin: 0 0 var(--space-4);
+    }
+    .about-v2 .page-lead {
+      font-family: var(--font-serif); font-size: var(--text-lg);
+      color: rgba(255, 255, 255, 0.7); line-height: 1.55; margin: 0; max-width: 640px;
+    }
+
+    .about-v2 .grid {
+      display: grid; grid-template-columns: 1fr; gap: 48px;
+    }
+    @media (min-width: 1024px) { .about-v2 .grid { grid-template-columns: 1fr 2fr; gap: 64px; } }
+
+    .about-v2 .id-card {
+      background: var(--brand-card); padding: var(--space-5);
+      border: 1px solid rgba(255, 255, 255, 0.05); border-radius: var(--radius-sm);
+    }
+    .about-v2 .id-avatar {
+      width: 100%; aspect-ratio: 1; margin-bottom: var(--space-4);
+      background: linear-gradient(135deg, rgba(232, 108, 93, 0.20), rgba(0, 206, 209, 0.15));
+      border: 1px solid rgba(255, 255, 255, 0.05); border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif); font-weight: 700; font-size: 96px;
+      color: #ffffff; line-height: 1;
+    }
+    .about-v2 .id-section { margin-top: var(--space-5); }
+    .about-v2 .id-key {
+      font-family: var(--font-body); font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em; color: var(--brand-primary);
+      margin: 0 0 6px; display: block;
+    }
+    .about-v2 .id-val {
+      font-family: var(--font-body); font-size: var(--text-xs); font-weight: 600;
+      color: #ffffff; line-height: 1.5; margin: 0;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .about-v2 .id-val svg { width: 14px; height: 14px; color: var(--brand-primary); flex-shrink: 0; }
+    .about-v2 .id-list {
+      list-style: disc; padding-left: var(--space-5); margin: 0;
+      font-family: var(--font-body); font-size: var(--text-xs); font-weight: 500;
+      color: rgba(255, 255, 255, 0.9); line-height: 1.7;
+    }
+
+    .about-v2 .statement {
+      font-family: var(--font-serif); font-size: 17px;
+      color: rgba(255, 255, 255, 0.7); line-height: 1.7;
+    }
+    .about-v2 .statement > * + * { margin-top: var(--space-8); }
+    .about-v2 .statement p { margin: 0; }
+    .about-v2 .statement strong { color: var(--brand-primary); font-weight: 600; }
+
+    .about-v2 .section {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 40px; margin-top: 40px;
+    }
+    .about-v2 .section-eyebrow {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      text-transform: uppercase; letter-spacing: 0.12em; color: var(--brand-primary);
+      font-weight: 600; margin: 0 0 var(--space-3); display: block;
+    }
+    .about-v2 .section-title {
+      font-family: var(--font-serif); font-size: 24px; font-weight: 700;
+      color: #ffffff; margin: 0 0 var(--space-4);
+    }
+    .about-v2 .section-lead {
+      font-family: var(--font-body); font-size: var(--text-xs);
+      color: rgba(255, 255, 255, 0.5); line-height: 1.6; margin: 0 0 var(--space-6);
+    }
+
+    .about-v2 .chips { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-6); }
+    .about-v2 .chip {
+      padding: 6px 12px;
+      background: rgba(232, 108, 93, 0.10);
+      border: 1px solid rgba(232, 108, 93, 0.20);
+      border-radius: var(--radius-sm);
       font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.05em; color: var(--brand-primary);
+    }
+
+    .about-v2 .stack-list { display: flex; flex-direction: column; }
+    .about-v2 .stack-item {
+      display: grid; grid-template-columns: 120px 1fr; gap: var(--space-4);
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .about-v2 .stack-key {
+      font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 600;
+      color: var(--brand-primary); align-self: start;
+    }
+    .about-v2 .stack-desc {
+      font-family: var(--font-body); font-size: var(--text-xs);
+      color: rgba(255, 255, 255, 0.7); line-height: 1.55;
+    }
+
+    .about-v2 .connect-grid {
+      display: grid; grid-template-columns: 1fr; gap: var(--space-3);
+    }
+    @media (min-width: 480px) { .about-v2 .connect-grid { grid-template-columns: 1fr 1fr; } }
+    .about-v2 .connect-link {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: var(--space-4); gap: var(--space-3);
+      background: transparent; border: 1px solid rgba(255, 255, 255, 0.10);
+      font-family: var(--font-mono); font-size: var(--text-xs);
       text-transform: uppercase; letter-spacing: 0.06em;
+      color: rgba(255, 255, 255, 0.7); text-decoration: none;
     }
-    .format-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .about-v2 .connect-link:hover { border-color: var(--brand-primary); color: #ffffff; }
+    .about-v2 .connect-link .label-row { display: flex; align-items: center; gap: 8px; }
+    .about-v2 .connect-link svg { width: 16px; height: 16px; color: var(--brand-primary); }
+    .about-v2 .connect-link .arrow { color: rgba(255, 255, 255, 0.4); }
 
-    /* D2 editorial sentence — load-bearing position at top */
-    .editorial-sentence {
-      font-family: var(--font-display); font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
-      font-weight: 700; letter-spacing: -0.015em; line-height: 1.25;
-      color: var(--text-primary); margin: 0 0 var(--space-8);
-      text-transform: none;
-    }
-    .editorial-sentence .placeholder {
-      background: hsl(60 80% 88%); padding: 2px 8px; border-radius: var(--radius-sm);
-      font-size: 0.85em; color: hsl(45 50% 25%); font-family: var(--font-mono); font-weight: 600;
-    }
-
-    /* Author identity block — below editorial sentence per Rule 3 */
-    .author-block { padding: var(--space-6) 0; border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); margin-bottom: var(--space-8); }
-    .author-name { font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700; margin: 0 0 var(--space-2); color: var(--text-primary); }
-    .author-positioning { font-size: var(--text-base); color: var(--text-secondary); line-height: 1.55; margin: 0 0 var(--space-3); }
-    .author-positioning strong { color: var(--text-primary); font-weight: 600; }
-    .author-links { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
-    .author-links a { color: var(--text-secondary); border-bottom: 1px solid var(--card-border); margin-right: var(--space-3); }
-    .author-links a:hover { color: var(--text-primary); border-bottom-color: var(--text-secondary); }
-
-    /* Colophon */
-    .colophon-section { margin-bottom: var(--space-8); }
-    .colophon-label {
-      font-family: var(--font-mono); font-size: 10px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: var(--space-3);
-    }
-    .colophon-body { font-size: var(--text-base); color: var(--text-primary); line-height: 1.65; }
-    .colophon-body p { margin: 0 0 var(--space-3); }
-    .colophon-body strong { font-weight: 600; }
-    .colophon-body .placeholder {
-      background: hsl(60 80% 88%); padding: 1px 6px; border-radius: var(--radius-sm);
-      font-family: var(--font-mono); font-size: 0.85em; color: hsl(45 50% 25%);
+    .about-v2 .no-email-note {
+      font-family: var(--font-body); font-size: 11px; font-style: italic;
+      color: rgba(255, 255, 255, 0.40); line-height: 1.55;
+      margin: var(--space-5) 0 0; padding-top: var(--space-4);
+      border-top: 1px dashed rgba(255, 255, 255, 0.10);
     }
 
-    .colophon-table { width: 100%; border-collapse: collapse; margin: var(--space-4) 0; font-size: var(--text-sm); }
-    .colophon-table th, .colophon-table td {
-      padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--card-border);
-      text-align: left; vertical-align: top;
-    }
-    .colophon-table th { font-weight: 600; color: var(--text-primary); width: 30%; }
-    .colophon-table td { color: var(--text-secondary); }
-    .colophon-table td code { font-family: var(--font-mono); font-size: 12px; background: hsl(220 15% 96%); padding: 1px 5px; border-radius: var(--radius-sm); color: var(--text-primary); }
-
-    .pub-footer {
-      max-width: 720px; margin: var(--space-12) auto 0;
-      padding: var(--space-6) var(--space-4); border-top: 1px solid var(--card-border);
-      font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);
-      display: flex; gap: var(--space-4); flex-wrap: wrap;
-    }
-    .pub-footer a { color: var(--text-secondary); border-bottom: 1px solid var(--card-border); }
-
+    /* shipped-view */
     .shipped-view .v1-mock {
-      max-width: 720px; margin: var(--space-8) auto; padding: var(--space-6) var(--space-4);
+      max-width: 920px; margin: var(--space-8) auto; padding: var(--space-6) var(--space-4);
       background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius-md);
     }
     .shipped-view .v1-mock h1 { font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-3); }
     .shipped-view .v1-mock .v1-body { font-size: var(--text-sm); line-height: 1.6; color: var(--text-secondary); }
-    .shipped-view .v1-mock .v1-note { margin-top: var(--space-4); padding: var(--space-3); background: hsl(0 0% 97%); border-left: 3px solid var(--text-muted); font-size: var(--text-xs); font-family: var(--font-mono); color: var(--text-secondary); }
+    .shipped-view .v1-mock .v1-diff-list { margin-top: var(--space-3); padding-left: var(--space-5); font-size: var(--text-sm); color: var(--text-secondary); }
+    .shipped-view .v1-mock .v1-diff-list li { margin-bottom: 6px; }
   </style>
 </head>
 <body data-compare-root data-view="proposed">
 
-  <section class="proposed-view">
+  <section class="proposed-view about-v2">
+
     <header class="pub-header">
       <div class="pub-header-inner">
-        <div class="pub-mark">[v2-name] <span class="pub-mark-placeholder">· name pending D7</span></div>
+        <div class="pub-brand">
+          <a class="pub-mark" href="/pages/home.html">[v2-name]<span class="pub-mark-pending">· pending D7</span></a>
+          <span class="pub-byline"></span>
+          <span class="pub-byline-text">by Nino Chavez</span>
+        </div>
         <nav class="pub-nav">
+          <a href="/pages/home.html">Dispatches</a>
+          <a href="/pages/series-index.html">Series</a>
+          <a href="/pages/whitepapers-list.html">Whitepapers</a>
           <a href="/pages/library.html">Library</a>
           <a href="/pages/about-colophon.html" class="active">About</a>
-          <a href="/pages/subscribe-follow.html">Follow</a>
         </nav>
+        <div class="pub-actions">
+          <a class="user-btn" href="/pages/about-colophon.html">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>Nino Chavez</span>
+          </a>
+          <button class="search-btn" type="button" aria-label="Search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </div>
       </div>
     </header>
 
-    <main class="shell">
-      <div class="meta-strip">
-        <span class="format-badge">About</span>
-      </div>
+    <main class="main">
 
-      <p class="editorial-sentence">
-        <span class="placeholder">[D2 placeholder]</span> &mdash; editorial single-sentence pending Nino's call. ≤12 words. Per criteria in <a href="/docs/?doc=02-design-principles">02-design-principles</a> D2.
-      </p>
+      <header class="page-head">
+        <span class="page-eyebrow">About the publication</span>
+        <h1 class="page-title">About Nino Chavez &amp; the publication</h1>
+        <p class="page-lead">A working architect's notes on directing agents to ship commerce. Practice, not personal brand. The publication exists because the patterns in the dispatches actually work in production.</p>
+      </header>
 
-      <div class="author-block">
-        <h2 class="author-name">Nino Chavez</h2>
-        <p class="author-positioning"><strong>Architect who directs agents</strong>, not an engineer who types code. Director-tier work, executed through a team budget of zero. Peer group: architects, principal consultants, fractional CTOs, directors of AI engineering.</p>
-        <div class="author-links">
-          <a href="https://ninochavez.co/about" target="_blank" rel="noopener">portfolio /about ↗</a>
-          <a href="https://www.linkedin.com/in/ninochavez/" target="_blank" rel="noopener">linkedin ↗</a>
-          <a href="https://github.com/nino-chavez" target="_blank" rel="noopener">github ↗</a>
+      <div class="grid">
+
+        <aside class="id-card">
+          <div class="id-avatar">NC</div>
+
+          <div class="id-section">
+            <span class="id-key">Current role</span>
+            <p class="id-val">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              Product Architect, commerce.com
+            </p>
+          </div>
+
+          <div class="id-section">
+            <span class="id-key">Peer group</span>
+            <ul class="id-list">
+              <li>Directors / principal architects</li>
+              <li>Fractional CTOs</li>
+              <li>Directors of AI engineering</li>
+            </ul>
+          </div>
+
+          <div class="id-section">
+            <span class="id-key">Practice focus</span>
+            <ul class="id-list">
+              <li>Agent-assisted production work</li>
+              <li>Contracts, sensors, validators</li>
+              <li>Director-tier output, team budget of zero</li>
+            </ul>
+          </div>
+
+          <div class="id-section">
+            <span class="id-key">Side practice</span>
+            <p class="id-val">Photography / media subcontracting for 630 Volleyball</p>
+          </div>
+        </aside>
+
+        <div>
+
+          <div class="statement">
+            <p>Welcome to <strong>[v2-name]</strong>. The publication is a working journal of <strong>agent-assisted production work</strong> — the chassis that lets a small team operate at director-tier output, the contracts that catch what humans miss, the receipts that make the work legible to a peer architect or a hiring evaluator looking for proof.</p>
+            <p>The premise: most discussion of AI in software is either credulous (this changes everything) or dismissive (this changes nothing). Neither matches what's happening on the ground. This publication tracks what changed — and what didn't — using receipts, not arguments from authority.</p>
+            <p>Posts are written through agents, then human-reviewed and human-published. The voice belongs to Nino; the cadence and rigor compound through the same chassis the dispatches describe. That's the point.</p>
+          </div>
+
+          <section class="section">
+            <span class="section-eyebrow">Voice</span>
+            <h3 class="section-title">How this publication writes</h3>
+            <div class="chips">
+              <span class="chip">self-interrogating</span>
+              <span class="chip">technically-deep</span>
+              <span class="chip">provocative</span>
+              <span class="chip">conversational</span>
+              <span class="chip">provisional</span>
+            </div>
+            <p class="section-lead">Five voice attributes scored against every dispatch before it ships. Anti-patterns rejected automatically: corporate-jargon, academic-distance, humble-bragging, prescriptive-authority. The voice guide is the constraint, not a preference.</p>
+          </section>
+
+          <section class="section">
+            <span class="section-eyebrow">Methodology</span>
+            <h3 class="section-title">The stack behind the dispatches</h3>
+            <p class="section-lead">Every surface of this publication was composed deterministically through a forge pipeline. The work isn't decoration — it's the substrate that makes director-tier output legible at a team of one.</p>
+            <div class="stack-list">
+              <div class="stack-item">
+                <span class="stack-key">forge-brand</span>
+                <span class="stack-desc">Brand kit → CSS tokens, voice rules, image-gen style — generated from research, not picked from a designer-tool default.</span>
+              </div>
+              <div class="stack-item">
+                <span class="stack-key">forge-signal</span>
+                <span class="stack-desc">Voice-scored copy generation. Every string passes against the 5 attributes; failures regenerate instead of shipping.</span>
+              </div>
+              <div class="stack-item">
+                <span class="stack-key">gen-images</span>
+                <span class="stack-desc">Per-surface editorial illustration through AI image models, prompted from the brand kit's style.json.</span>
+              </div>
+              <div class="stack-item">
+                <span class="stack-key">forge-site</span>
+                <span class="stack-desc">Publication archetype — composition playbook. Defines the surface set, the anti-modules (no email capture), and the editorial rules.</span>
+              </div>
+              <div class="stack-item">
+                <span class="stack-key">blueprint</span>
+                <span class="stack-desc">Seven-stage pipeline that produced this surface set. Brownfield audit → research → design principles → prescription → prototype → deploy.</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="section">
+            <span class="section-eyebrow">Connect</span>
+            <h3 class="section-title">Where to find the work</h3>
+            <p class="section-lead">No contact form, no email capture. Follow on RSS, read the broader portfolio, or open a thread on LinkedIn. Reader sovereignty is a positioning signal.</p>
+            <div class="connect-grid">
+              <a class="connect-link" href="https://ninochavez.co/blog/rss.xml" target="_blank" rel="noopener">
+                <span class="label-row">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+                  <span>RSS</span>
+                </span>
+                <span class="arrow">↗</span>
+              </a>
+              <a class="connect-link" href="https://www.linkedin.com/in/ninochavez/" target="_blank" rel="noopener">
+                <span class="label-row">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                  <span>LinkedIn</span>
+                </span>
+                <span class="arrow">↗</span>
+              </a>
+              <a class="connect-link" href="https://ninochavez.co" target="_blank" rel="noopener">
+                <span class="label-row">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  <span>ninochavez.co</span>
+                </span>
+                <span class="arrow">↗</span>
+              </a>
+              <a class="connect-link" href="https://github.com/nino-chavez" target="_blank" rel="noopener">
+                <span class="label-row">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                  <span>GitHub</span>
+                </span>
+                <span class="arrow">↗</span>
+              </a>
+            </div>
+            <p class="no-email-note">No email capture. No mailing list. The publication does not chase attention — readers who want to follow can RSS or follow on LinkedIn. This is positioning, not oversight.</p>
+          </section>
+
         </div>
+
       </div>
 
-      <div class="colophon-section">
-        <div class="colophon-label">What this publication is</div>
-        <div class="colophon-body">
-          <p>A working architect's notes on AI-era engineering, agentic systems, governance, and the practice of the craft. Long-form essays as the flagship surface; companion whitepapers when an idea earns the technical treatment; counterpoints when a position needs stress-testing; series when an argument runs across multiple pieces.</p>
-          <p>It is a publication, not a personal-brand newsletter. There is no email capture, no subscriber-count display, no "Now reading" widget. <a href="/pages/subscribe-follow.html">Follow via RSS or LinkedIn</a> if it's earned the slot in your reading life.</p>
-        </div>
-      </div>
-
-      <div class="colophon-section">
-        <div class="colophon-label">Cadence</div>
-        <div class="colophon-body">
-          <p><span class="placeholder">[D4 placeholder]</span> &mdash; cadence promise pending Nino's call. Options under consideration include published-when-ready (inherit v1) or a deliberate cadence ("monthly," "Dispatch #N drops when it drops"). See <a href="/docs/?doc=DECISIONS-NEEDED">D4 in the decisions packet</a>.</p>
-        </div>
-      </div>
-
-      <div class="colophon-section">
-        <div class="colophon-label">Format conventions</div>
-        <table class="colophon-table">
-          <tbody>
-            <tr><th>Posts</th><td>Long-form essays in MDX. Reading column capped at 720px. Callouts and pullquotes used sparingly. Show-the-work voice.</td></tr>
-            <tr><th>Whitepapers</th><td>Formal companions to specific posts. Plain markdown. Table-heavy. Executive Summary self-contained. <code>companionOf</code> binding to parent.</td></tr>
-            <tr><th>Series</th><td>Numbered ordered sequences. Reads as one argument across multiple parts. Read-state tracked client-side (localStorage; no server tracking).</td></tr>
-            <tr><th>Counterpoints</th><td>Self-red-team or external-critic responses to specific posts. <code>challengesPost</code> binding renders auto-link banner on the parent. <span class="placeholder">[D8 label]</span> for reader-facing terminology.</td></tr>
-            <tr><th>Voice</th><td><span class="placeholder">[D5 delta]</span> &mdash; inherits the v1 voice guide; delta pending the thesis pick (D1).</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="colophon-section">
-        <div class="colophon-label">Colophon</div>
-        <div class="colophon-body">
-          <p>Built on Astro 5 with MDX. Deployed via Cloudflare Pages. Tags canonicalized in <code>astro-build/src/config/tags.ts</code>. Sitemap and RSS regenerated per build. No analytics tracker; no third-party cookies. Source: <a href="https://github.com/nino-chavez/blog" target="_blank" rel="noopener">github.com/nino-chavez/blog</a>.</p>
-          <p>v2 design rationale and decision-blocked work live at <a href="/">the blueprint portal</a> (this prototype). For broader context on the v1 → v2 re-conception, see the <a href="/docs/?doc=01-research">Stage 1 research synthesis</a>.</p>
-        </div>
-      </div>
     </main>
 
-    <footer class="pub-footer">
-      <span>by Nino Chavez · architect-who-directs-agents</span>
-      <a href="https://ninochavez.co/blog/rss.xml" target="_blank" rel="noopener">RSS</a>
-      <a href="https://ninochavez.co/blog/full-content-rss.xml" target="_blank" rel="noopener">RSS (full content)</a>
-    </footer>
   </section>
 
   <section class="shipped-view">
     <div class="v1-mock">
-      <h1>v1 has no dedicated About inside the publication</h1>
+      <h1>v1 — combined About with general blog bio on portfolio site</h1>
       <div class="v1-body">
-        <p>v1 author identity surfaces only in post bylines and the global /about portfolio route at ninochavez.co/about. The blog home right-rail ("Currently Surfacing," "Recent Series," "Also Here") does partial framing-work but inconsistently across surfaces.</p>
-        <p>Real production surfaces: <a href="https://ninochavez.co/about" target="_blank" rel="noopener">ninochavez.co/about</a> (global portfolio) and the blog home rail at <a href="https://ninochavez.co/blog" target="_blank" rel="noopener">ninochavez.co/blog</a>.</p>
+        <p>v1's About is on the main ninochavez.co portfolio site, not within the blog. The blog has no dedicated about/colophon surface; readers click through to portfolio /about.</p>
+        <p>Real production surface: <a href="https://ninochavez.co/about" target="_blank" rel="noopener">ninochavez.co/about</a></p>
       </div>
-      <div class="v1-note">
-        v2 adds a publication-scoped About that reads in the publication's own voice (Rule 1 + Rule 3). The hiring-evaluator persona's primary positioning-proof surface. Links to the global portfolio About for deeper author context rather than duplicating it.
-      </div>
+      <p style="font-size: var(--text-xs); font-family: var(--font-mono); color: var(--text-muted); margin-top: var(--space-4); text-transform: uppercase; letter-spacing: 0.06em;">v2 changes (built from Stitch AboutView):</p>
+      <ul class="v1-diff-list">
+        <li><strong>Three-section structure</strong> per Rule 3: identity, voice attributes, methodology stack.</li>
+        <li><strong>Identity card (left)</strong> with real role / peer group / focus / side practice — no fabricated job titles.</li>
+        <li><strong>Voice attribute chips</strong> visible to the reader — the craft constraint, not a hidden style guide.</li>
+        <li><strong>Methodology stack list</strong> (forge-brand / forge-signal / gen-images / forge-site / blueprint).</li>
+        <li><strong>Reject Stitch's contact form</strong>; connect block has RSS + LinkedIn + portfolio + GitHub only.</li>
+      </ul>
     </div>
   </section>
 
@@ -191,9 +395,9 @@
     window.PORTAL_SHELL_CONFIG = { productName: 'Signal Dispatch v2' };
     window.PROTO_PAGE = { id: 'about-colophon' };
   </script>
-  <script src="/_portal-shell.js?v=20260525-1700"></script>
-  <script src="/proto-nav.js?v=20260525-1700"></script>
+  <script src="/_portal-shell.js?v=20260526-stitch1"></script>
+  <script src="/proto-nav.js?v=20260526-stitch1"></script>
   <script src="/chat-widget.js" defer></script>
-  <script src="/proto-annotate.js?v=20260525-1700" defer></script>
+  <script src="/proto-annotate.js?v=20260526-stitch1" defer></script>
 </body>
 </html>

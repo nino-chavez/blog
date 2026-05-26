@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#c4c7c7",
+                    "surface-tint": "#5f5e5e",
+                    "on-error": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#c8c6c5",
+                    "secondary-fixed": "#d1e4fb",
+                    "surface-container-low": "#f5f3f3",
+                    "secondary": "#4e6073",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#cac6c4",
+                    "primary-fixed": "#e5e2e1",
+                    "on-primary-fixed-variant": "#474746",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed": "#e6e2df",
+                    "secondary-fixed-dim": "#b5c8df",
+                    "on-secondary-fixed": "#091d2e",
+                    "primary-container": "#1c1b1b",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#36485b",
+                    "surface-container-highest": "#e4e2e2",
+                    "background": "#fbf9f9",
+                    "on-surface-variant": "#444748",
+                    "surface-variant": "#e4e2e2",
+                    "on-background": "#1b1c1c",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f2f0f0",
+                    "primary-fixed-dim": "#c8c6c5",
+                    "surface-container": "#efeded",
+                    "surface-dim": "#dbdad9",
+                    "on-primary-container": "#858383",
+                    "inverse-surface": "#303031",
+                    "on-tertiary-container": "#868382",
+                    "on-secondary-container": "#526478",
+                    "tertiary-container": "#1c1b1a",
+                    "surface-bright": "#fbf9f9",
+                    "tertiary": "#000000",
+                    "secondary-container": "#cfe2f9",
+                    "primary": "#000000",
+                    "outline": "#747878",
+                    "on-tertiary-fixed": "#1c1b1a",
+                    "surface": "#fbf9f9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "margin-desktop": "80px",
+                    "max-width-content": "720px",
+                    "gutter": "32px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Source Serif 4"],
+                    "metadata": ["Inter"],
+                    "technical-callout": ["JetBrains Mono"],
+                    "display-lg-mobile": ["Source Serif 4"],
+                    "label-caps": ["Inter"],
+                    "display-lg": ["Source Serif 4"],
+                    "body-md": ["Source Serif 4"],
+                    "headline-md": ["Source Serif 4"]
+            },
+            "fontSize": {
+                    "body-lg": ["20px", {"lineHeight": "32px", "fontWeight": "400"}],
+                    "metadata": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "technical-callout": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["30px", {"lineHeight": "38px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #fbf9f9;
+        }
+        .file-row:hover .file-action {
+            opacity: 1;
+        }
+        .file-action {
+            opacity: 0;
+            transition: opacity 200ms ease;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- Stitch alternate disclaimer + back-link to v2 portal — injected by integration round, not part of Stitch's original output. -->
+<aside style="background:#fbeb96;border-bottom:1px solid #b8941b;padding:8px 16px;font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#5a4a0e;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;line-height:1.4;">
+  <span><strong>Stitch alternate design</strong> &middot; Generated by Google Stitch &middot; <a href="/docs/?doc=research/design-alternates/stitch-DESIGN" style="color:inherit;text-decoration:underline;">design system</a> &middot; D1/D2/D7 not adopted from this output; email-signup conflicts with no-marketing-tells rule</span>
+  <a href="/" style="color:#5a4a0e;text-decoration:underline;font-weight:600;white-space:nowrap;">&larr; back to v2 portal</a>
+</aside>
+
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-background border-b border-on-surface/10 dark:border-on-surface-variant/10 flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-6 max-w-full mx-auto sticky top-0 z-50">
+<div class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface tracking-tight">Signal Dispatch v2</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Dispatches</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Series</a>
+<a class="font-label-caps text-label-caps text-secondary border-b-2 border-secondary pb-1" href="#">Whitepapers</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Presentations</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">About</a>
+</nav>
+<div class="font-label-caps text-label-caps text-secondary">Nino Chavez</div>
+</header>
+<div class="flex max-w-full">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-24 px-6 py-8 flex flex-col gap-y-4 bg-transparent border-r border-on-surface/10 dark:border-on-surface-variant/10 h-full w-64 hidden lg:block">
+<div class="mb-6">
+<h3 class="font-label-caps text-label-caps text-primary mb-1">Table of Contents</h3>
+<p class="font-metadata text-metadata text-on-surface-variant">Technical Roadmap</p>
+</div>
+<nav class="flex flex-col gap-y-6">
+<a class="font-metadata text-metadata text-secondary font-bold border-l-2 border-secondary pl-4 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined text-[18px]">segment</span> Introduction
+                </a>
+<a class="font-metadata text-metadata text-on-surface-variant pl-4 hover:text-primary transition-colors flex items-center gap-3" href="#">
+<span class="material-symbols-outlined text-[18px]">architecture</span> Architectural Constraints
+                </a>
+<a class="font-metadata text-metadata text-on-surface-variant pl-4 hover:text-primary transition-colors flex items-center gap-3" href="#">
+<span class="material-symbols-outlined text-[18px]">code</span> Implementation
+                </a>
+<a class="font-metadata text-metadata text-on-surface-variant pl-4 hover:text-primary transition-colors flex items-center gap-3" href="#">
+<span class="material-symbols-outlined text-[18px]">verified</span> Review
+                </a>
+<a class="font-metadata text-metadata text-on-surface-variant pl-4 hover:text-primary transition-colors flex items-center gap-3" href="#">
+<span class="material-symbols-outlined text-[18px]">description</span> Conclusion
+                </a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 lg:ml-64 px-margin-mobile md:px-margin-desktop py-12">
+<div class="max-w-[720px] mx-auto">
+<!-- Section Header -->
+<header class="mb-12">
+<div class="font-label-caps text-label-caps text-secondary mb-2">Technical Repository</div>
+<h1 class="font-display-lg text-display-lg mb-4">Whitepapers &amp; Presentations</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">A curated archive of formal architectural documentation, research papers, and technical keynotes developed for Signal Dispatch v2.</p>
+</header>
+<!-- Search & Filters (Directory Functional Aesthetic) -->
+<div class="flex flex-col md:flex-row gap-4 mb-8 pb-4 border-b border-on-surface/10">
+<div class="flex-1 relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border-none focus:ring-1 focus:ring-secondary py-2 pl-10 pr-4 font-metadata text-metadata" placeholder="Search archive..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="bg-surface-container-low px-4 py-2 font-label-caps text-label-caps flex items-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[16px]">filter_list</span> Filter
+                        </button>
+<button class="bg-surface-container-low px-4 py-2 font-label-caps text-label-caps flex items-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[16px]">sort</span> Date
+                        </button>
+</div>
+</div>
+<!-- Archive Table -->
+<div class="w-full">
+<!-- Table Header -->
+<div class="grid grid-cols-12 gap-4 py-3 px-4 bg-surface-container-low font-label-caps text-label-caps text-on-surface-variant border-b border-on-surface/20">
+<div class="col-span-6 md:col-span-7">Document Name</div>
+<div class="hidden md:block col-span-2 text-center">Status</div>
+<div class="hidden md:block col-span-1 text-right">Size</div>
+<div class="col-span-6 md:col-span-2 text-right">Action</div>
+</div>
+<!-- Repository Rows -->
+<div class="divide-y divide-on-surface/10">
+<!-- Dispatch 042 -->
+<div class="grid grid-cols-12 gap-4 py-5 px-4 file-row items-center transition-colors hover:bg-surface-container-low/50">
+<div class="col-span-6 md:col-span-7">
+<div class="font-technical-callout text-technical-callout text-secondary mb-1">Dispatch #042</div>
+<div class="font-headline-md text-[18px] font-bold">Distributed Consensus in High-Latency Mesh Networks</div>
+<div class="font-metadata text-metadata text-on-surface-variant mt-1">Published: Oct 24, 2023</div>
+</div>
+<div class="hidden md:block col-span-2 text-center">
+<span class="px-2 py-0.5 bg-secondary/10 text-secondary font-label-caps text-[10px] tracking-widest uppercase">Peer-Reviewed</span>
+</div>
+<div class="hidden md:block col-span-1 text-right font-technical-callout text-[12px] text-on-surface-variant">
+                                4.2 MB
+                            </div>
+<div class="col-span-6 md:col-span-2 text-right">
+<div class="flex justify-end gap-3 file-action">
+<button class="text-on-surface-variant hover:text-primary transition-colors" title="View Document">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors" title="Download PDF">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Dispatch 039 -->
+<div class="grid grid-cols-12 gap-4 py-5 px-4 file-row items-center transition-colors hover:bg-surface-container-low/50">
+<div class="col-span-6 md:col-span-7">
+<div class="font-technical-callout text-technical-callout text-secondary mb-1">Dispatch #039</div>
+<div class="font-headline-md text-[18px] font-bold">Zero-Knowledge Proof Integration for Signal v2</div>
+<div class="font-metadata text-metadata text-on-surface-variant mt-1">Published: Aug 12, 2023</div>
+</div>
+<div class="hidden md:block col-span-2 text-center">
+<span class="px-2 py-0.5 bg-outline-variant/30 text-on-surface-variant font-label-caps text-[10px] tracking-widest uppercase">Draft v1.4</span>
+</div>
+<div class="hidden md:block col-span-1 text-right font-technical-callout text-[12px] text-on-surface-variant">
+                                1.8 MB
+                            </div>
+<div class="col-span-6 md:col-span-2 text-right">
+<div class="flex justify-end gap-3 file-action">
+<button class="text-on-surface-variant hover:text-primary transition-colors" title="View Document">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors" title="Download PDF">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Presentation 004 -->
+<div class="grid grid-cols-12 gap-4 py-5 px-4 file-row items-center transition-colors hover:bg-surface-container-low/50">
+<div class="col-span-6 md:col-span-7">
+<div class="font-technical-callout text-technical-callout text-secondary mb-1">Presentation #004</div>
+<div class="font-headline-md text-[18px] font-bold">Keynote: Future of Sovereign Identity Structures</div>
+<div class="font-metadata text-metadata text-on-surface-variant mt-1">Delivered: June 02, 2023</div>
+</div>
+<div class="hidden md:block col-span-2 text-center">
+<span class="px-2 py-0.5 bg-secondary/10 text-secondary font-label-caps text-[10px] tracking-widest uppercase">Presented</span>
+</div>
+<div class="hidden md:block col-span-1 text-right font-technical-callout text-[12px] text-on-surface-variant">
+                                12.5 MB
+                            </div>
+<div class="col-span-6 md:col-span-2 text-right">
+<div class="flex justify-end gap-3 file-action">
+<button class="text-on-surface-variant hover:text-primary transition-colors" title="Play Slides">
+<span class="material-symbols-outlined">play_circle</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors" title="Download PDF">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Dispatch 031 -->
+<div class="grid grid-cols-12 gap-4 py-5 px-4 file-row items-center transition-colors hover:bg-surface-container-low/50">
+<div class="col-span-6 md:col-span-7">
+<div class="font-technical-callout text-technical-callout text-secondary mb-1">Dispatch #031</div>
+<div class="font-headline-md text-[18px] font-bold">Scalability Bottlenecks in Layer 1 Protocols</div>
+<div class="font-metadata text-metadata text-on-surface-variant mt-1">Published: Jan 15, 2023</div>
+</div>
+<div class="hidden md:block col-span-2 text-center">
+<span class="px-2 py-0.5 bg-secondary/10 text-secondary font-label-caps text-[10px] tracking-widest uppercase">Peer-Reviewed</span>
+</div>
+<div class="hidden md:block col-span-1 text-right font-technical-callout text-[12px] text-on-surface-variant">
+                                2.1 MB
+                            </div>
+<div class="col-span-6 md:col-span-2 text-right">
+<div class="flex justify-end gap-3 file-action">
+<button class="text-on-surface-variant hover:text-primary transition-colors" title="View Document">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors" title="Download PDF">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Featured Technical Visual -->
+<section class="mt-16 py-12 border-y border-on-surface/10">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+<div class="aspect-square bg-surface-container flex items-center justify-center p-4">
+<img alt="Technical abstract representation" class="w-full h-full object-cover grayscale opacity-80 mix-blend-multiply" data-alt="A highly detailed, minimalist photographic composition of server components and circuitry captured in stark black and white. The lighting is harsh and directional, creating deep shadows that emphasize the geometric complexity of the hardware. The aesthetic is industrial and clinical, evoking the cold precision of a data center or a high-end research facility. The overall mood is serious, technical, and authoritative, aligning with a premium engineering brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3moRNml5dQhrPmZRxd57F-xTPsaEJM3FJ1kDSRn3Z-JcU6gfQiFC0JPR4on4x0DQJvTg6Pr36njV9ifYOGFQJWfPlpum-4VNd5gtV5OC8SXfce_ZwevUMn6yZhXpxxk_wapAxEqAgvd99QuEOnayDSH-wmvrWsSt9MzDfsZKWcAGAczZBqSF9lcbeIyuZfVOZ4SI7TkNM4rjTNCkU58btoTfY20v80OT40Grzm5pr8SsL-BwMW-73BJkn3qlZLNATN-VMYDysq_U"/>
+</div>
+<div>
+<div class="font-technical-callout text-technical-callout text-secondary mb-2">Visualizing Complexity</div>
+<h2 class="font-headline-md text-headline-md mb-4">The Signal Framework</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Our documentation is not merely descriptive; it is foundational. We provide the mathematical proofs and architectural diagrams necessary to validate the performance claims of Dispatch v2.</p>
+<button class="border border-primary px-6 py-3 font-label-caps text-label-caps hover:bg-primary hover:text-on-primary transition-all duration-300">
+                                Request Archive Access
+                            </button>
+</div>
+</div>
+</section>
+<!-- Author Identity Card -->
+<footer class="mt-20 pt-12 border-t border-on-surface/10 flex flex-col md:flex-row items-center gap-6">
+<div class="w-24 h-24 bg-surface-container-high shrink-0 overflow-hidden">
+<img alt="Nino Chavez" class="w-full h-full object-cover grayscale" data-alt="A professional, greyscale close-up portrait of a senior software architect with a thoughtful expression. The background is a plain, light grey wall, creating a clean and focused editorial look. The lighting is soft and even, highlighting the subject's features without dramatic shadows. The style is minimalist and high-end, characteristic of executive profiles in technical journals or prestigious academic publications." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZfBVECX_Mr3hyQyQ14Yc0MdX3RyrRoY8_3e_DrPuCxdfip318NBHhFJD8ylOMIC8LmF8ReIWrOab7IGNx-3r3c5NOCF_D6nugkIaZ5zQ-jj2V763hn52aSEE_48LfKxUS99ZB--eU-eAs3ETg5aLMGKGBjKp5sHEFLc2lqFn12yGKm7VVRliMQIVWHN-WMdOdzdive1LK38jkk7tChhR-K5hCzvn4W5qeiykWsIQ-gxTkGoRb4p9jkBSoIvHsAMGUyD46OqV6EOw"/>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-primary mb-1">Author / Architect</div>
+<h4 class="font-headline-md text-[20px] font-bold mb-2">Nino Chavez</h4>
+<p class="font-metadata text-metadata text-on-surface-variant max-w-lg">Nino Chavez is a systems architect specializing in high-concurrency distributed networks. Through Signal Dispatch, he explores the intersection of sovereign infrastructure and emergent communication protocols.</p>
+</div>
+</footer>
+</div>
+</main>
+</div>
+<!-- Global Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-lowest w-full py-12 px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-start md:items-center max-w-full border-t border-on-surface/10 dark:border-on-surface-variant/10 mt-20">
+<div class="font-headline-md text-headline-md text-on-surface mb-6 md:mb-0">Signal Dispatch v2</div>
+<div class="flex flex-col md:items-end gap-4">
+<nav class="flex gap-6 mb-2">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline transition-all" href="#">RSS Feed</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline transition-all" href="#">Archive</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline transition-all" href="#">Technical Notes</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline transition-all" href="#">Privacy</a>
+</nav>
+<p class="font-metadata text-metadata text-on-surface-variant">© Signal Dispatch v2 by Nino Chavez. All rights reserved.</p>
+</div>
+</footer>
+<script>
+        // Simple interactivity for the file directory
+        document.querySelectorAll('.file-row').forEach(row => {
+            row.addEventListener('click', () => {
+                // Potential logic for row selection or navigation
+                console.log('Row clicked');
+            });
+        });
+    </script>
+<script>window.BLUEPRINT_PAGE = { id: "whitepaper-detail", title: "Whitepaper detail" };</script>
+<script src="/_blueprint-banner.js?v=20260525-2100"></script>
+<script src="/chat-widget.js?v=20260525-2100" defer></script>
+</body></html>

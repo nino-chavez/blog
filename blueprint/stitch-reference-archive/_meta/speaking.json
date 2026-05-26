@@ -1,0 +1,19 @@
+{
+  "id": "speaking",
+  "title": "Speaking",
+  "group": "identity",
+  "surface": "Speaker bio + active lecture modules + headshots + request-deployment CTA — a high-fidelity speaker kit",
+  "phase": "Stage 3",
+  "route": "/pages/speaking.html",
+  "summary": "Stitch-generated surface that is not in the v2 plan at all. Not a publication surface — a professional booking page. Disposition pending: keep in scope as identity-cluster sub-page, spin off to separate site, or archive.",
+  "source": "stitch:speaking_booking_assets",
+  "designSystem": "cyanotype-studio",
+  "strategy": {
+    "decision": "Stand up as a Stitch-sourced candidate; flag as scope expansion in audit.",
+    "why": "Stitch surfaced this on its own (without being in 03-prototype-plan.md). It represents a possible identity-cluster expansion (publication + speaker presence + colophon) that the brownfield diagnose didn't surface.",
+    "shipped": "No equivalent in v1 — v1 has no speaking page.",
+    "gap": "v2 plan defines 8 surfaces; this is a 9th that's not a publication surface. Probably belongs on a separate site (ninochavez.co main, not the publication subdomain).",
+    "question": "Is the publication v2's only scope, or is the identity cluster (Speaking, About, Colophon) part of v2's surface set?"
+  },
+  "decisionDependencies": ["scope/identity-cluster"]
+}

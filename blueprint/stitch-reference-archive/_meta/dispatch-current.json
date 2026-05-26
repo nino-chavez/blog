@@ -1,0 +1,19 @@
+{
+  "id": "dispatch-current",
+  "title": "Now — current Dispatch",
+  "group": "reading",
+  "surface": "Stratechery-style 'this week' index — the current dispatch with in-flight initiatives, writing/reading, and a right-rail system log",
+  "phase": "Stage 3",
+  "route": "/pages/dispatch-current.html",
+  "summary": "Stitch-generated surface that has no v2 plan equivalent. Maps closest to Thesis B home — if D1 lands on Thesis B, this likely replaces or fuses with home. If D1 lands on Thesis A, this surface is out-of-scope and should be archived or repurposed as About sub-page.",
+  "source": "stitch:now_weekly_state",
+  "designSystem": "cyanotype-studio",
+  "strategy": {
+    "decision": "Stand up as a Stitch-sourced candidate; pin disposition to D1.",
+    "why": "Stitch produced a Thesis-B-aligned 'current Dispatch' surface that the v2 plan only sketched. Bringing it in lets us A/B test the Dispatch concept visually before D1 lands.",
+    "shipped": "No equivalent in v1 — v1 home is a chronological post list.",
+    "gap": "If D1=B, this surface is canonical and home.html becomes a 'static landing' OR is removed; if D1=A, this is out of scope.",
+    "question": "Does D1 land on Thesis B (Dispatch as a publication), making this the primary surface?"
+  },
+  "decisionDependencies": ["D1", "D2", "D7"]
+}

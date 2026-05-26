@@ -1,0 +1,25 @@
+{
+  "id": "home",
+  "title": "Home",
+  "group": "discovery",
+  "surface": "v2 home — work-first discovery",
+  "phase": "Stage 3",
+  "route": "/pages/home.html",
+  "summary": "Single primary discovery affordance, author identity secondary, brand identity tertiary. Differs by thesis (Thesis A = featured-piece-first; Thesis B = current-Dispatch-first).",
+  "strategy": {
+    "decision": "Work-first ordering (Rule 3): the latest substantive piece or the current Dispatch sits above the fold. Author identity is second; brand mark is third. Reverses v1's brand-first lead and rejects the peer-set's author-first default.",
+    "why": "Rule 3 (Stage 2). Competitive synthesis showed 5/5 peer publications lead with author identity; v1 leads with publication name; both miss what the hiring-evaluator persona is looking for. Hiring evaluators arrive to test whether the work is real, not to admire the byline or the brand. Work-first is the only ordering that serves that arrival.",
+    "shipped": "Current state at ninochavez.co/blog leads with publication name + brand bar, then hero/featured post, with three right-rail panels ('Currently Surfacing', 'Recent Series', 'Also Here') competing for attention. See v1-baseline/01-diagnose.md F5.",
+    "gap": "v2 cuts the home page to one primary discovery surface above the fold (featured or current Dispatch), with format-badged recent items below. Right-rail panels removed; their content moves to Library and About surfaces.",
+    "question": "Thesis A (positioning realignment) or Thesis B (different publication)? Determines whether 'the work' is 'the latest substantive piece' or 'the current Dispatch #N.' Logged as D1 — blocks this page's build."
+  },
+  "inheritsFromV1": ["voice register (per D5)", "no email-capture posture", "RSS as primary follow path"],
+  "breaksFromV1": ["primary nav reduced from 5+ items to 3 (Rule 4)", "right-rail panels removed", "author identity surfaced above the fold (new affordance)", "brand mark subordinated"],
+  "decisionDependencies": ["D1", "D2", "D7"],
+  "currentState": {
+    "route": "https://ninochavez.co/blog",
+    "summary": "v1 home: brand bar, featured hero, post grid, 3-panel right rail. Multiple competing affordances above the fold.",
+    "sourceFiles": ["astro-build/src/pages/blog/index.astro", "astro-build/src/components/RightRail.astro"],
+    "annotation": "v2 collapses to one primary discovery affordance, surfaces author identity above the fold, demotes brand mark."
+  }
+}

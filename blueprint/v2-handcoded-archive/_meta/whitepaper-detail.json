@@ -1,0 +1,25 @@
+{
+  "id": "whitepaper-detail",
+  "title": "Whitepaper detail",
+  "group": "reading",
+  "surface": "Long-form with progressive disclosure",
+  "phase": "Stage 3",
+  "route": "/pages/whitepaper-detail.html",
+  "summary": "Long-form whitepapers run 20k+ pixels in v1 with no TOC. v2 adds Executive Summary as self-contained artifact, in-page TOC with anchor links, section progress affordance.",
+  "strategy": {
+    "decision": "Rule 5 (progressive disclosure): every whitepaper opens with a self-contained Executive Summary that reads as a complete artifact. The TOC + anchor links + section progress are progressive disclosure — readers can stop at the Exec Summary and have gotten the argument, or dive into specific sections.",
+    "why": "v1-baseline/01-diagnose.md F4: whitepaper-detail at 1440 runs ~20k px tall with no within-page nav. Peer-architect persona's primary drop-pattern is bailing rather than scroll-hunting. Competitive support: Stratechery section headers, Pragmatic Engineer deep-dive TOCs, charity.wtf anchor-link headers all do this. v1 is the outlier in the peer set.",
+    "shipped": "v1 whitepapers: plain markdown rendered top-to-bottom, no TOC, no section anchors, table-heavy formatting. Voice + framing are strong per diagnose; the navigability layer is missing.",
+    "gap": "v2 whitepaper detail adds: (a) self-contained Executive Summary, (b) clickable TOC at top with anchor links, (c) section-progress indicator (e.g., '3 of 8' sticky on scroll), (d) preserves v1's table-heavy formatting and plain-markdown discipline.",
+    "question": "Funnel gap G3 (engagement depth measurement) is open — if readers turn out to bounce at the Exec Summary, the rest-of-doc affordances are lower priority. Doesn't block build; affects post-launch instrumentation."
+  },
+  "inheritsFromV1": ["plain markdown (no MDX in whitepapers — convention)", "table-heavy formatting", "formal voice register", "<table>-based dense content", "companionOf binding to a parent post"],
+  "breaksFromV1": ["self-contained Executive Summary", "clickable TOC with anchor links", "section-progress sticky on scroll", "format badge consistent with post-detail"],
+  "decisionDependencies": [],
+  "currentState": {
+    "route": "https://ninochavez.co/blog/whitepapers/[any-slug]",
+    "summary": "v1 whitepaper: plain markdown, ~20k px tall, no TOC, no anchor links, no progress affordance.",
+    "sourceFiles": ["astro-build/src/pages/blog/whitepapers/[slug].astro", "astro-build/src/content/whitepapers/*.mdx"],
+    "annotation": "v2 adds the navigation layer v1 is missing while preserving the formal voice + table-heavy content. Progressive disclosure (Rule 5) is the specific principle this surface tests."
+  }
+}

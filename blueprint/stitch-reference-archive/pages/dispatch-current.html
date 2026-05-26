@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Now | Signal Dispatch</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&amp;family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-secondary-fixed": "#001f23",
+                "primary-fixed-dim": "#a4cbe8",
+                "on-tertiary-container": "#8f989a",
+                "surface-container-low": "#f5f4e8",
+                "on-primary-container": "#749bb6",
+                "on-primary-fixed": "#001e2e",
+                "primary-fixed": "#c7e7ff",
+                "on-surface-variant": "#42474c",
+                "inverse-surface": "#303129",
+                "inverse-on-surface": "#f2f1e5",
+                "secondary-fixed": "#8cf2ff",
+                "on-surface": "#1b1c15",
+                "on-primary": "#ffffff",
+                "on-secondary-fixed-variant": "#004f56",
+                "aged-paper": "#FDFCF0",
+                "on-tertiary-fixed": "#141d1f",
+                "blueprint-cyan": "#008B94",
+                "on-secondary-container": "#006b75",
+                "outline-variant": "#c2c7cd",
+                "architectural-ink": "#001B29",
+                "on-error": "#ffffff",
+                "on-error-container": "#93000a",
+                "surface-variant": "#e4e3d7",
+                "on-background": "#1b1c15",
+                "tertiary-fixed-dim": "#bfc8ca",
+                "surface-container": "#efeee3",
+                "primary-container": "#003249",
+                "surface-bright": "#fbfaee",
+                "tertiary": "#131b1d",
+                "secondary-fixed-dim": "#5ad7e6",
+                "primary": "#001c2b",
+                "outline": "#72787d",
+                "surface-container-lowest": "#ffffff",
+                "carbon-trace": "#111827",
+                "background": "#fbfaee",
+                "on-secondary": "#ffffff",
+                "tertiary-fixed": "#dbe4e6",
+                "secondary-container": "#73eefd",
+                "surface-tint": "#3c637c",
+                "on-tertiary": "#ffffff",
+                "inverse-primary": "#a4cbe8",
+                "on-primary-fixed-variant": "#224b63",
+                "error": "#ba1a1a",
+                "tertiary-container": "#273032",
+                "surface-container-highest": "#e4e3d7",
+                "surface": "#fbfaee",
+                "error-container": "#ffdad6",
+                "on-tertiary-fixed-variant": "#3f484a",
+                "surface-container-high": "#e9e9dd",
+                "secondary": "#006972",
+                "surface-dim": "#dbdbcf"
+            },
+            "fontFamily": {
+                "headline-md": ["Bree Serif"],
+                "status-code": ["JetBrains Mono"],
+                "body-dense": ["Crimson Pro"],
+                "body-prose": ["Crimson Pro"],
+                "display-lg": ["Bree Serif"],
+                "label-ui": ["Inter"],
+                "data-receipt": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                "headline-md": ["24px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                "status-code": ["11px", {"lineHeight": "1", "fontWeight": "700"}],
+                "body-dense": ["16px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                "body-prose": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "label-ui": ["13px", {"lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "data-receipt": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}]
+            },
+            "spacing": {
+                "unit": "4px",
+                "rail-width": "320px",
+                "gutter": "16px",
+                "margin": "32px",
+                "dense-gap": "8px"
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .receipt-border {
+            border-top: 1px dashed #008B94;
+            border-bottom: 1px dashed #008B94;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #FDFCF0; }
+        ::-webkit-scrollbar-thumb { background: #001B29; }
+        .blueprint-grid {
+            background-image: linear-gradient(#008B9411 1px, transparent 1px), linear-gradient(90deg, #008B9411 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="bg-background text-architectural-ink font-body-prose overflow-x-hidden blueprint-grid">
+<!-- TopAppBar -->
+<header class="bg-background border-b-2 border-architectural-ink flex justify-between items-center px-margin py-4 w-full z-50 fixed top-0 h-16">
+<div class="font-headline-md text-headline-md font-bold text-architectural-ink uppercase tracking-tighter">Signal Dispatch</div>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="bg-blueprint-cyan text-aged-paper px-2 py-1 font-label-ui text-label-ui transition-colors duration-75 ease-in-out" href="#">Index</a>
+<a class="text-architectural-ink px-2 py-1 font-label-ui text-label-ui hover:bg-blueprint-cyan hover:text-aged-paper transition-colors duration-75 ease-in-out" href="#">Drafts</a>
+<a class="text-architectural-ink px-2 py-1 font-label-ui text-label-ui hover:bg-blueprint-cyan hover:text-aged-paper transition-colors duration-75 ease-in-out" href="#">Archive</a>
+<a class="text-architectural-ink px-2 py-1 font-label-ui text-label-ui hover:bg-blueprint-cyan hover:text-aged-paper transition-colors duration-75 ease-in-out" href="#">Theory</a>
+<button class="bg-architectural-ink text-aged-paper px-4 py-2 font-label-ui text-label-ui hover:bg-blueprint-cyan transition-all uppercase">Access Corpus</button>
+</nav>
+</header>
+<div class="flex flex-col md:flex-row min-h-screen pt-16">
+<!-- Main Content Canvas -->
+<main class="flex-1 px-margin py-12 max-w-full md:max-w-[calc(100%-320px)] border-r-2 border-architectural-ink">
+<!-- D1-conditional banner — per STITCH-GAP-AUDIT.md §10 -->
+<div class="mb-8 border-2 border-dashed border-blueprint-cyan p-5 bg-surface-container-low">
+<div class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-2">[CONDITIONAL — D1 PENDING]</div>
+<p class="font-body-dense text-body-dense text-architectural-ink/70 italic">This surface is a Thesis-B-aligned "current Dispatch" landing. Provisional pending D1 (thesis decision). If D1 lands on Thesis A (positioning realignment), this surface is out of scope and will be removed. If D1 lands on Thesis B (different publication), this becomes the canonical home and the current home.html is repurposed or removed.</p>
+</div>
+
+<!-- Page Header -->
+<section class="mb-16">
+<div class="flex items-baseline gap-4 mb-2">
+<span class="font-status-code text-status-code text-blueprint-cyan border border-blueprint-cyan px-2">LIVE_SIGNAL::ACTIVE</span>
+<span class="font-data-receipt text-data-receipt text-outline">Ref: 2024.W42.NOW</span>
+</div>
+<h1 class="font-display-lg text-display-lg mb-6 leading-none">Now: What's actually happening this week.</h1>
+<div class="max-w-2xl">
+<p class="font-body-prose text-body-prose mb-4 italic text-on-surface-variant">
+                        This view is a real-time synthesis of the studio's operational state, reading its own metadata from RSS feeds, GitHub commits, and internal drafting signals.
+                    </p>
+</div>
+</section>
+<!-- In Flight Section -->
+<section class="mb-16">
+<h2 class="font-label-ui text-label-ui uppercase tracking-widest border-b border-architectural-ink pb-2 mb-6">In Flight Initiatives</h2>
+<div class="grid grid-cols-1 gap-0">
+<!-- Row 1 -->
+<div class="group flex flex-col md:flex-row justify-between items-start md:items-center py-4 border-b border-architectural-ink/20 hover:bg-blueprint-cyan/5 transition-colors">
+<div>
+<div class="font-headline-md text-headline-md text-architectural-ink">Temporal Engine Core</div>
+<div class="font-status-code text-status-code text-outline uppercase">Infrastructure • High Priority</div>
+</div>
+<div class="flex items-center gap-8 mt-4 md:mt-0">
+<div class="text-right">
+<div class="font-label-ui text-[10px] uppercase text-outline">Stage</div>
+<div class="font-body-dense text-body-dense">Refining</div>
+</div>
+<div class="text-right">
+<div class="font-label-ui text-[10px] uppercase text-outline">Status</div>
+<div class="font-status-code text-status-code text-blueprint-cyan">STABLE</div>
+</div>
+<div class="text-right">
+<div class="font-label-ui text-[10px] uppercase text-outline">Commit</div>
+<div class="font-data-receipt text-data-receipt">8f2a1c9</div>
+</div>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="group flex flex-col md:flex-row justify-between items-start md:items-center py-4 border-b border-architectural-ink/20 hover:bg-blueprint-cyan/5 transition-colors">
+<div>
+<div class="font-headline-md text-headline-md text-architectural-ink">Blueprint UI System</div>
+<div class="font-status-code text-status-code text-outline uppercase">Design Language • Active</div>
+</div>
+<div class="flex items-center gap-8 mt-4 md:mt-0">
+<div class="text-right">
+<div class="font-label-ui text-[10px] uppercase text-outline">Stage</div>
+<div class="font-body-dense text-body-dense">Drafting</div>
+</div>
+<div class="text-right">
+<div class="font-label-ui text-[10px] uppercase text-outline">Status</div>
+<div class="font-status-code text-status-code text-error">PENDING</div>
+</div>
+<div class="text-right">
+<div class="font-label-ui text-[10px] uppercase text-outline">Commit</div>
+<div class="font-data-receipt text-data-receipt">4d9e033</div>
+</div>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="group flex flex-col md:flex-row justify-between items-start md:items-center py-4 border-b border-architectural-ink/20 hover:bg-blueprint-cyan/5 transition-colors">
+<div>
+<div class="font-headline-md text-headline-md text-architectural-ink">Agentic Logic Gates</div>
+<div class="font-status-code text-status-code text-outline uppercase">R&amp;D • Experimental</div>
+</div>
+<div class="flex items-center gap-8 mt-4 md:mt-0">
+<div class="text-right">
+<div class="font-label-ui text-[10px] uppercase text-outline">Stage</div>
+<div class="font-body-dense text-body-dense">Ideation</div>
+</div>
+<div class="text-right">
+<div class="font-label-ui text-[10px] uppercase text-outline">Status</div>
+<div class="font-status-code text-status-code text-blueprint-cyan">STABLE</div>
+</div>
+<div class="text-right">
+<div class="font-label-ui text-[10px] uppercase text-outline">Commit</div>
+<div class="font-data-receipt text-data-receipt">7b66f21</div>
+</div>
+</div>
+</div>
+<!-- Row 4 -->
+<div class="group flex flex-col md:flex-row justify-between items-start md:items-center py-4 border-b border-architectural-ink/20 hover:bg-blueprint-cyan/5 transition-colors">
+<div>
+<div class="font-headline-md text-headline-md text-architectural-ink">Signal Manifest Documentation</div>
+<div class="font-status-code text-status-code text-outline uppercase">Knowledge Base • Onboarding</div>
+</div>
+<div class="flex items-center gap-8 mt-4 md:mt-0">
+<div class="text-right">
+<div class="font-label-ui text-[10px] uppercase text-outline">Stage</div>
+<div class="font-body-dense text-body-dense">Shipment</div>
+</div>
+<div class="text-right">
+<div class="font-label-ui text-[10px] uppercase text-outline">Status</div>
+<div class="font-status-code text-status-code text-blueprint-cyan">DEPLOYED</div>
+</div>
+<div class="text-right">
+<div class="font-label-ui text-[10px] uppercase text-outline">Commit</div>
+<div class="font-data-receipt text-data-receipt">2a9c33e</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Writing and Resources Bento -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+<!-- Writing This Week -->
+<section>
+<h2 class="font-label-ui text-label-ui uppercase tracking-widest border-b border-architectural-ink pb-2 mb-6">Writing This Week</h2>
+<div class="space-y-6">
+<article class="relative pl-6 border-l-2 border-blueprint-cyan">
+<span class="absolute -left-[9px] top-0 w-4 h-4 bg-blueprint-cyan rounded-full border-2 border-aged-paper"></span>
+<div class="font-status-code text-status-code text-blueprint-cyan mb-1">PUBLISHED</div>
+<h3 class="font-headline-md text-headline-md leading-tight mb-1">The Erosion of Precision in Modern Web Frames</h3>
+<p class="font-body-dense text-body-dense text-on-surface-variant">A critique of low-friction design patterns and the return to structural clarity.</p>
+</article>
+<article class="relative pl-6 border-l-2 border-outline">
+<div class="font-status-code text-status-code text-outline mb-1">DRAFT</div>
+<h3 class="font-headline-md text-headline-md leading-tight mb-1">Designing for the Super-Practitioner</h3>
+<p class="font-body-dense text-body-dense text-on-surface-variant">Exploring the information density requirements for specialized AI workflows.</p>
+</article>
+<article class="relative pl-6 border-l-2 border-outline">
+<div class="font-status-code text-status-code text-outline mb-1">DRAFT</div>
+<h3 class="font-headline-md text-headline-md leading-tight mb-1">Signals over Surfaces</h3>
+<p class="font-body-dense text-body-dense text-on-surface-variant">The transition from user interface to operational control centers.</p>
+</article>
+<article class="relative pl-6 border-l-2 border-blueprint-cyan">
+<span class="absolute -left-[9px] top-0 w-4 h-4 bg-blueprint-cyan rounded-full border-2 border-aged-paper"></span>
+<div class="font-status-code text-status-code text-blueprint-cyan mb-1">PUBLISHED</div>
+<h3 class="font-headline-md text-headline-md leading-tight mb-1">Internal Log: Sprint 14 Retrospective</h3>
+<p class="font-body-dense text-body-dense text-on-surface-variant">Technical audit of the Signal Dispatch messaging bus architecture.</p>
+</article>
+</div>
+</section>
+<!-- Reading + Listening -->
+<section>
+<h2 class="font-label-ui text-label-ui uppercase tracking-widest border-b border-architectural-ink pb-2 mb-6">Reading + Listening</h2>
+<div class="space-y-8">
+<div class="flex gap-4">
+<div class="w-24 h-32 bg-surface-container shrink-0 border border-architectural-ink overflow-hidden">
+<img alt="Book cover" class="w-full h-full object-cover grayscale mix-blend-multiply opacity-80" data-alt="A macro photograph of an old architectural textbook with yellowed pages and detailed technical diagrams of Bauhaus-style structures. The lighting is warm and directional, highlighting the tactile texture of the paper and the sharp black ink of the diagrams. The mood is scholarly and focused on historical precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBldaQKthne4Z0LVVVSqIvozGUY4hj0R59T2CuWfwakKSUWRRiXFxN30ZlkBFdvRtESx9IXTBQF5bzAH9WmoQV5SFD1EKyvbDE6O-s9QZnQGeM2zfeF1XVkjiXVVP-w8J9ZhwihnczBEtN9Gjy4yA3Y4NvN0TkVIm7tFdxYOqQf_0RKCqb1V1P7GsFdhmeMetutjayJ0-1yra6s5vAzBozJZ2ADgJvaxWDDwTmK1EBogR5By1TtK1hCGE-6tqdA6fd_v56mkUUsgw"/>
+</div>
+<div>
+<h4 class="font-label-ui text-label-ui text-blueprint-cyan uppercase mb-1">Book</h4>
+<div class="font-headline-md text-headline-md leading-tight">Architecture of Intelligence</div>
+<p class="font-body-dense text-body-dense mt-2">Essential for mapping the spatial relationships of agentic sub-routines in the new dispatch layer.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-24 h-32 bg-surface-container shrink-0 border border-architectural-ink overflow-hidden flex items-center justify-center">
+<span class="material-symbols-outlined text-architectural-ink text-4xl" data-icon="headphones">headphones</span>
+</div>
+<div>
+<h4 class="font-label-ui text-label-ui text-blueprint-cyan uppercase mb-1">Podcast</h4>
+<div class="font-headline-md text-headline-md leading-tight">The Compiler's Voice: Ep 212</div>
+<p class="font-body-dense text-body-dense mt-2">A deep dive into LLM inference latency—informing our current strategy for the Core Temporal Engine.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-24 h-32 bg-surface-container shrink-0 border border-architectural-ink overflow-hidden">
+<img alt="Hardware" class="w-full h-full object-cover grayscale mix-blend-multiply opacity-80" data-alt="A vintage electronics laboratory setting with oscilloscope screens displaying complex green waveforms and analog dials. The scene is shot in a moody, low-key lighting with a blue-teal color cast, reflecting the blueprint aesthetic. The focus is sharp on the knobs and the glowing display, evoking a sense of engineering mastery and technical nostalgia." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqXwRO-dajsXUv01EbwVA6RXn5AUr6eKBY7f1luDvnXDFGOLzXVso4Ibkwl6ZHD9MxTOGc6jMJ8Ee_GGlXUQ5fSiz63TXVUqMZaav2aB16Rv7-YYcjTh5jbOrlat6Kb2qy27l67yuSRFLvtdHaDFpp1mvxASIR-kLyS4LlQKaEuXplzSg07UNURmPcEQKJofIh_53d0xadz57za-3-A1HjwlLMFOIDnfAZlccrotJRsnjDMza0AC5smC6IizUeeQXOYxfq-2xWtg"/>
+</div>
+<div>
+<h4 class="font-label-ui text-label-ui text-blueprint-cyan uppercase mb-1">Paper</h4>
+<div class="font-headline-md text-headline-md leading-tight">Deterministic Signal Routing</div>
+<p class="font-body-dense text-body-dense mt-2">Revisiting 1970s routing logic for modern distributed systems. High relevance for "In-Flight" Initiative #1.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Right Rail Anchor -->
+<aside class="w-full md:w-[320px] bg-aged-paper border-l-2 border-architectural-ink flex flex-col h-auto md:h-screen sticky top-16 overflow-y-auto">
+<div class="p-6 space-y-8">
+<!-- Live Signals Card -->
+<div>
+<h3 class="font-label-ui text-label-ui uppercase tracking-tighter mb-4 flex items-center gap-2">
+<span class="w-2 h-2 bg-blueprint-cyan rounded-full animate-pulse"></span>
+                        Live Signals
+                    </h3>
+<div class="bg-primary text-aged-paper p-4 border border-architectural-ink shadow-[4px_4px_0px_0px_#008B94]">
+<div class="space-y-4">
+<div class="border-b border-aged-paper/20 pb-2">
+<div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-1">09:42:12 UTC</div>
+<div class="font-status-code text-status-code">SHIPPING :: CORE_LIB_v2.1</div>
+<div class="font-label-ui text-[10px] opacity-70">Merging 12 commits into master.</div>
+</div>
+<div class="border-b border-aged-paper/20 pb-2">
+<div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-1">08:15:05 UTC</div>
+<div class="font-status-code text-status-code">WRITING :: JOURNAL_POST</div>
+<div class="font-label-ui text-[10px] opacity-70">3,400 chars committed to "Erosion of Precision".</div>
+</div>
+<div class="border-b border-aged-paper/20 pb-2">
+<div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-1">07:00:00 UTC</div>
+<div class="font-status-code text-status-code">IN_FLIGHT :: TASK_POLL</div>
+<div class="font-label-ui text-[10px] opacity-70">Awaiting status on "Temporal Engine".</div>
+</div>
+</div>
+<button class="w-full mt-4 bg-blueprint-cyan text-aged-paper py-2 font-label-ui text-label-ui hover:bg-aged-paper hover:text-blueprint-cyan transition-colors">
+                            View All Events
+                        </button>
+</div>
+</div>
+<!-- Stage-Status Card -->
+<div>
+<h3 class="font-label-ui text-label-ui uppercase tracking-tighter mb-4">Blueprint State</h3>
+<div class="space-y-3">
+<div class="flex justify-between items-center bg-surface-container p-2 border border-outline/30">
+<span class="font-label-ui text-label-ui uppercase">Studio Load</span>
+<span class="font-status-code text-status-code text-blueprint-cyan">84%</span>
+</div>
+<div class="flex justify-between items-center bg-surface-container p-2 border border-outline/30">
+<span class="font-label-ui text-label-ui uppercase">Signal Clarity</span>
+<span class="font-status-code text-status-code text-blueprint-cyan">OPTIMAL</span>
+</div>
+<div class="flex justify-between items-center bg-surface-container p-2 border border-outline/30">
+<span class="font-label-ui text-label-ui uppercase">Active Threads</span>
+<span class="font-status-code text-status-code text-blueprint-cyan">14</span>
+</div>
+</div>
+</div>
+<!-- Receipt Block -->
+<div class="receipt-border bg-tertiary-fixed p-4">
+<div class="flex justify-between items-center mb-2">
+<span class="font-data-receipt text-data-receipt font-bold">SYSTEM_LOG</span>
+<span class="font-data-receipt text-data-receipt">Oct 24</span>
+</div>
+<div class="font-data-receipt text-data-receipt leading-tight opacity-80">
+                        &gt; Bootstrap complete.<br/>
+                        &gt; Signal path calibrated.<br/>
+                        &gt; Buffer overflow: 0%<br/>
+                        &gt; Integrity check: PASS<br/>
+                        &gt; Studio online.
+                    </div>
+</div>
+</div>
+</aside>
+</div>
+<!-- Footer -->
+<footer class="bg-background border-t border-architectural-ink w-full py-margin z-40">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin max-w-[calc(100%-320px)] mx-auto md:mx-0">
+<div class="mb-4 md:mb-0">
+<span class="font-label-ui text-label-ui font-black uppercase">Signal Dispatch</span>
+<p class="font-data-receipt text-data-receipt mt-2">Built with Blueprint methodology. © 2024 Signal Dispatch.</p>
+</div>
+<nav class="flex gap-8">
+<a class="text-on-surface-variant font-label-ui text-label-ui hover:text-blueprint-cyan transition-all duration-200" href="#">Methodology</a>
+<a class="text-on-surface-variant font-label-ui text-label-ui hover:text-blueprint-cyan transition-all duration-200" href="#">Manifesto</a>
+<a class="text-on-surface-variant font-label-ui text-label-ui hover:text-blueprint-cyan transition-all duration-200" href="#">Technical Spec</a>
+</nav>
+</div>
+</footer>
+<!-- SideNavBar (Mobile Bottom Tab Variant) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-aged-paper border-t-2 border-architectural-ink grid grid-cols-4 z-50">
+<a class="flex flex-col items-center p-3 text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper" href="#">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+<span class="text-[10px] font-label-ui mt-1">Live</span>
+</a>
+<a class="flex flex-col items-center p-3 bg-blueprint-cyan text-aged-paper" href="#">
+<span class="material-symbols-outlined" data-icon="architecture">architecture</span>
+<span class="text-[10px] font-label-ui mt-1">Drafting</span>
+</a>
+<a class="flex flex-col items-center p-3 text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+<span class="text-[10px] font-label-ui mt-1">Ship Log</span>
+</a>
+<a class="flex flex-col items-center p-3 text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper" href="#">
+<span class="material-symbols-outlined" data-icon="settings_suggest">settings_suggest</span>
+<span class="text-[10px] font-label-ui mt-1">Params</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for timestamp updates
+        setInterval(() => {
+            const timeElements = document.querySelectorAll('.font-data-receipt');
+            // Mocking live updates for the UI feel
+            const now = new Date();
+            const timeString = now.toISOString().slice(11, 19) + ' UTC';
+            // Only update specific elements if needed
+        }, 1000);
+
+        // Simple interaction for the primary button
+        document.querySelector('button').addEventListener('mousedown', () => {
+            document.querySelector('button').style.transform = 'translateY(1px)';
+        });
+        document.querySelector('button').addEventListener('mouseup', () => {
+            document.querySelector('button').style.transform = 'translateY(0px)';
+        });
+    </script>
+<script>window.BLUEPRINT_PAGE = { id: "dispatch-current", title: "Now — current Dispatch" };</script>
+<script src="/_blueprint-banner.js?v=20260525-2100"></script>
+<script src="/chat-widget.js?v=20260525-2100" defer></script>
+</body></html>

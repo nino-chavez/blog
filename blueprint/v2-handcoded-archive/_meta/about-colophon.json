@@ -1,0 +1,25 @@
+{
+  "id": "about-colophon",
+  "title": "About / Colophon",
+  "group": "identity",
+  "surface": "Author + publication concept, in the publication's voice",
+  "phase": "Stage 3",
+  "route": "/pages/about-colophon.html",
+  "summary": "An About page that frames 'what this publication is' in the same voice as the posts. Hiring-evaluator persona's primary positioning-proof surface.",
+  "strategy": {
+    "decision": "Write the About page in the publication's voice (D5 register), with the editorial sentence (D2) at the top, author identity below, colophon details below that. No 'Hire me' CTA; no 'Subscribe' CTA in this surface (subscribe-follow is its own surface).",
+    "why": "Hiring-evaluator persona arrives via LinkedIn or portfolio link, reads the first post top-to-bottom, then checks About to test for consistency. If About is marketing copy and the posts are practice, the inconsistency reads as the rigorous post being a fluke. About must read as the same voice as the posts — sample of practice, not pitch.",
+    "shipped": "v1 has no dedicated About page on the blog surface; author identity surfaces in post bylines and the global ninochavez.co /about route handles the portfolio-level positioning. Per hiring-evaluator persona, the v1 right-rail 'Currently Surfacing / Recent Series / Also Here' panels do some of this work but inconsistently.",
+    "gap": "v2 adds a dedicated About surface inside the publication, in the publication's voice, with: D2 editorial sentence at top, author identity + positioning sentence (architect-who-directs-agents, not engineer-who-types-code), colophon (publication start, format conventions, any cadence promise per D4).",
+    "question": "Does About link to ninochavez.co portfolio /about for deeper author context, or is About self-contained? Recommend linking — keeps the publication About focused on the publication, not the person's broader work."
+  },
+  "inheritsFromV1": ["positioning frame (architect-who-directs-agents)", "no marketing-tells rule", "voice register (per D5)"],
+  "breaksFromV1": ["dedicated About surface inside the publication (vs implicit-only via right-rail and global /about)", "editorial sentence at top of page (per D2)", "colophon section with cadence + format conventions (per D4)"],
+  "decisionDependencies": ["D2", "D4", "D5", "D7"],
+  "currentState": {
+    "route": "https://ninochavez.co/about (global portfolio about)",
+    "summary": "v1 publication has no dedicated About surface; global /about handles portfolio-level author identity. Right-rail panels on blog home do partial work.",
+    "sourceFiles": ["astro-build/src/components/RightRail.astro (the 'Also Here' panel)", "ninochavez.co/about (different project)"],
+    "annotation": "v2 adds a publication-scoped About that reads as the publication's voice (Rule 1, Rule 3). Hiring-evaluator persona's primary positioning-proof surface."
+  }
+}
