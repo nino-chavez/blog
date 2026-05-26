@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# .blueprint/hooks/pre-commit
+#
+# Activated by: git config core.hooksPath .blueprint/hooks
+# (or per-worktree: git config --worktree core.hooksPath .blueprint/hooks
+#  after enabling: git config extensions.worktreeConfig true)
+#
+# Bypass for emergency: git commit --no-verify
+# (If you bypass, log why in .blueprint/bypass-<date>.md — that IS pilot data.)
+
+set -e
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+LINT="$REPO_ROOT/.blueprint/lints/prescription-acceptance.lint.mjs"
+
+if [ ! -f "$LINT" ]; then
+  echo "[pre-commit] Lint missing at $LINT — skipping" >&2
+  exit 0
+fi
+
+node "$LINT"
