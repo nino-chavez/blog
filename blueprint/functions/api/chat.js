@@ -21,6 +21,7 @@ const DOCS = [
   // Stage artifacts (v2 greenfield — load-bearing for any v2 question)
   ['01-research',              '/_docs/01-research.md'],
   ['02-design-principles',     '/_docs/02-design-principles.md'],
+  ['02-design-principles-alt-eval', '/_docs/02-design-principles-alt-eval.md'],
   ['03-prototype-plan',        '/_docs/03-prototype-plan.md'],
   ['DECISIONS-NEEDED',         '/_docs/DECISIONS-NEEDED.md'],
   ['04-fact-check-log',        '/_docs/04-fact-check-log.md'],

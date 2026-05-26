@@ -25,6 +25,7 @@ SOURCES=(
   # Stage artifacts (v2 greenfield)
   "01-research.md"
   "02-design-principles.md"
+  "02-design-principles-alt-eval.md"
   "03-prototype-plan.md"
   "04-fact-check.md"
   "04-fact-check-log.md"
