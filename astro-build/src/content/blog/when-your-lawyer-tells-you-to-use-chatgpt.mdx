@@ -1,0 +1,93 @@
+---
+title: "When Your Lawyer Tells You to Use ChatGPT"
+publishedAt: "2026-05-26T18:00:00.000Z"
+author: "Nino Chavez"
+status: "published"
+excerpt: "My lawyer told me to use ChatGPT instead of paying him. A colleague said the same about his accountant. The cleanest signal for which professions get compressed isn't the headcount data — it's when the practitioner himself tells you he's optional."
+category: "AI & Automation"
+featureImage: "/images/generated/when-your-lawyer-tells-you-to-use-chatgpt.webp"
+tags: ["career", "ai-development", "reflection"]
+featured: false
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+A while back, I contacted my lawyer to review terms of service and privacy policies for my LLCs.
+
+He told me to use ChatGPT.
+
+Not as a joke. Not as a hedge. His take, roughly: ChatGPT would do as well or better than he would on something like that. That was the whole consultation.
+
+A colleague had the same shape of conversation with his accountant — he'd ended up knowing more than the accountant did, not because the accountant was bad, but because the work no longer needed him in the loop.
+
+Two professions, two practitioners, both telling clients the same thing without quite saying it: *you don't need me for this.*
+
+That's the leading indicator. Not the Goldman Sachs estimate that more than 40% of legal tasks could be automated. Not the IAG numbers — an Australian insurer reporting that more than half of 1,500 legal matters over six months were at least partially automated. Not the a16z analysis ranking legal AI second only to coding tools in 2026 investment. Those are the trailing prints. The leading print is the practitioner himself telling you he's optional.
+
+---
+
+## The Analogy I Almost Reached For
+
+The first analogy I reached for was autopilot. The pitch was clean: LLMs are doing for law what autopilot is doing for insurance — making most of it unnecessary, because if accidents stop happening, we can't be as litigious anymore.
+
+It's a good-sounding line. It's also wrong in a specific way.
+
+Autopilot reduces *accidents.* Accidents are the substrate of insurance demand — fewer crashes, fewer claims, less need for the whole apparatus. The mechanism is elimination of the underlying event.
+
+LLMs don't do that for law. Contracts still need to exist. People still dispute. Regulators still regulate. The substrate of legal demand is unchanged. What gets reduced is the cost of *producing the artifact* — the contract, the privacy policy, the cease-and-desist, the memo. The lawyer's work, not the conflict that creates work for the lawyer.
+
+The cleaner version:
+
+<PullQuote>The driver goes away, not the accident.</PullQuote>
+
+Autopilot was never about ending crashes — it was about ending drivers as a category of labor. LLMs aren't ending legal disputes; they're ending the lawyer-hour as the unit of cost. Once you see the mechanism that way, the analogy snaps into focus. So does the next question: which professions get the driver removed, and which keep the driver because someone has to be the named human when it goes wrong?
+
+<Callout type="signal" title="The mechanism, not the prediction">
+Substitution of labor is not elimination of demand. Most of what's being called "AI eats X profession" is the first thing. None of it is yet the second.
+</Callout>
+
+---
+
+## Doctrine Is API
+
+Once you stop conflating substrate with surface, you can sort professions cleanly.
+
+Anything where the median work product is *apply codified rules to a fact pattern* is doctrine. Standard contracts. Tax returns. Compliance reports. Audit work papers. Most discovery review. Most personal-injury intake. Most regulatory filings. Diagnostic radiology for the protocols that have been protocol-ized for decades.
+
+Doctrine is the API of a profession — a stable, looked-up, applied-to-context interface that the practitioner learned during training and reuses across clients. And APIs get wrapped. They always do.
+
+Stack Overflow wrapped a generation of senior engineers' answers. ChatGPT wrapped Stack Overflow. Legal-AI tools are now wrapping standard-contract drafting. Accounting tools are wrapping the compliance grind. The pattern doesn't change between professions — it's the same substitution moving through fields at different speeds, gated mostly by how doctrine-heavy versus judgment-heavy the median task is.
+
+When my lawyer told me to use ChatGPT, he wasn't telling me he had nothing to offer. He was telling me *this particular thing I was asking for* was downstream of a wrapped doctrine. The work product wasn't his anymore. It was the model's, with his signature available at the bottom if I wanted the signature.
+
+---
+
+## What Doesn't Get Wrapped
+
+This is where "everything is code" — a line I almost ended a chat thread on — overreaches.
+
+Doctrine plus inference-over-doctrine *is* code. Apply the rules. Reason about which rule applies. Combine rules to produce a coherent artifact. That whole stack compresses, sometimes to 10% of its prior cost.
+
+What doesn't compress as cleanly:
+
+- **Adversarial judgment.** What to argue, what to concede, when to settle, when to push to trial. Game theory under uncertainty against another reasoning party who is also using AI. The optimal play isn't in the doctrine.
+- **Social capital.** "My lawyer knows their lawyer." "My accountant has done my family's taxes for thirty years." That's not retrievable from training data, and it's slower-eroding than people think.
+- **Liability and accountability.** When the privacy policy goes wrong and a regulator opens a file, someone has to be named. Models cannot be named. Someone has to sign.
+- **Novel and edge cases.** Where the doctrine itself is contested or absent. The senior partner earns the partner fee precisely on these.
+
+So the post-wrap shape of these professions isn't *gone.* It's smaller and senior-skewed. The associate layer compresses sharply. The partner layer compresses less. The work that survives is the work that requires being a named, accountable, judgment-bearing human — which is exactly the work nobody was paying junior associates for in the first place. The pyramid loses its base because the base was doctrine-application, and doctrine-application is what got wrapped.
+
+This is the same shape I've watched in engineering and consulting. In engineering, the routing layer between problems and Stack Overflow answers compressed first — and a lot of "developers" were really doing exactly that. In consulting, the apprenticeship rungs that used to teach junior associates by exposure to the grind compressed when the grind got automated. The professions don't disappear. They lose the middle.
+
+---
+
+## The Lawyer Was Right About a Smaller Thing
+
+Here's what I keep returning to: my lawyer didn't say *ChatGPT will replace lawyers.* He said *ChatGPT will do this particular piece as well as I will.*
+
+That's the unit of disruption, and it's smaller than the headlines suggest. Not professions wholesale — particular tasks within professions, tasks where the doctrine has been wrapped and the practitioner has nothing distinctive to add. He wasn't being self-deprecating. He was being precise about which fraction of his job had just stopped needing him.
+
+The professions reshape around the residual. Fewer named humans, doing the part nobody has figured out how to wrap yet — until something does, and then the residual reshapes again.
+
+That's the shape I think we're in, anyway. I'm less sure about the timing than I am about the mechanism. The mechanism is the part where the practitioner himself tells you he's optional. By the time that signal arrives, the wrap has already happened. The headcount data is just catching up.
