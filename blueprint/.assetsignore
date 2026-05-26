@@ -1,0 +1,36 @@
+# Excluded from Cloudflare Pages deploy (wrangler pages deploy).
+# Format: gitignore-style globs. Anything matched here is not uploaded
+# as a Page asset and not served at any URL.
+
+# Local development / capture tooling — shouldn't be served publicly
+scripts/
+.playwright-mcp/
+
+# CI / git noise (defensive — usually not in the deploy dir anyway)
+.git/
+.gitignore
+.gitkeep
+.DS_Store
+
+# OWNER-SPEC docs are dev-facing convention notes, not user content
+*.OWNER-SPEC.md
+
+# Markdown sources in research/ + v1-baseline/ are duplicated into
+# _docs/ by scripts/prep-deploy.sh — only _docs/ needs to be served.
+# (Keep the source dirs in git, but don't double-publish.)
+research/
+v1-baseline/
+
+# Stage docs at portal root are also in _docs/ via prep-deploy.sh
+01-research.md
+02-design-principles.md
+03-prototype-plan.md
+04-fact-check.md
+04-fact-check-log.md
+05-documents.md
+06-deploy.md
+DECISIONS-NEEDED.md
+CONVENTIONS.md
+README.md
+prototype/DESIGN.md
+blueprint.yml
