@@ -691,7 +691,7 @@
       try {
         const res = await fetch(`/_docs/${docId}.md`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const md = await res.text();
+        let md = await res.text();
 
         // Cloudflare Pages SPA-fallback returns the root index.html with
         // 200 when a static asset is missing — we'd then parse the home
@@ -702,6 +702,14 @@
         if (looksLikeHtml || md.trim().length === 0) {
           throw new Error(`No such document: ${docId}`);
         }
+
+        // Strip YAML frontmatter from the top before marked parses.
+        // Many Stage artifacts open with a --- ... --- block; without
+        // stripping, marked treats the delimiters as thematic breaks
+        // and renders the keys as a wall of paragraphs in headline type.
+        // Conservative regex: only strips if the file starts with --- on
+        // its own line and contains a closing --- before any real content.
+        md = md.replace(/^---\s*\n[\s\S]*?\n---\s*\n+/, '');
 
         // Configure marked: GFM, breaks off, smartypants off
         marked.setOptions({ gfm: true, breaks: false, headerIds: false, mangle: false });
