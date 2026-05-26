@@ -294,7 +294,7 @@
       <div class="stat-tile">
         <div class="stat-label">Stage artifacts</div>
         <div class="stat-value" id="stat-docs">…</div>
-        <div class="stat-sub">Stages 1-6 + decisions packet + v1-baseline</div>
+        <div class="stat-sub">Stages 1-6 + decisions + alternates corpus</div>
       </div>
       <div class="stat-tile">
         <div class="stat-label">Decisions pending</div>
@@ -357,7 +357,14 @@
         icon: '<svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="M14.5 14.5l5 5"/></svg>',
         description: 'Conventions for building on this blueprint. Portal page-writing contract, engineering rules (test baseline, sensor profile), prototype DESIGN.md, the per-tool OWNER-SPECs for the proto-nav, chat-widget, and annotation modules.',
         links: '<a href="/docs/?doc=CONVENTIONS">CONVENTIONS.md</a> · <a href="/docs/?doc=prototype%2FDESIGN">prototype/DESIGN.md</a>',
-        priority: { reviewer: 5, builder: 1, decider: 5 }
+        priority: { reviewer: 6, builder: 1, decider: 6 }
+      },
+      {
+        id: 'alternates', title: 'Alternates', status: 'ready',
+        icon: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="18" rx="1"/><rect x="13" y="3" width="8" height="18" rx="1"/></svg>',
+        description: 'Parallel-track design from Google Stitch: 4 high-fidelity surfaces (home, article, series, whitepapers) built against the same Stage 1-2 constraints. D1/D2/D7 not adopted; email-signup conflict with no-marketing-tells rule flagged. Useful as a side-by-side reference when picking direction.',
+        links: '<a href="/pages/stitch/home.html">Home</a> · <a href="/pages/stitch/article.html">Article</a> · <a href="/pages/stitch/series.html">Series</a> · <a href="/pages/stitch/whitepapers.html">Whitepapers</a> · <a href="/docs/?doc=research/design-alternates/stitch-DESIGN">design system</a>',
+        priority: { reviewer: 5, builder: 6, decider: 5 }
       }
     ];
 
@@ -415,8 +422,9 @@
         const r = await fetch('/_meta/index.json');
         const m = await r.json();
         document.getElementById('stat-pages').textContent = (m.pages || []).length;
-        // Stage artifacts count: 6 stages + DECISIONS-NEEDED + v1-baseline/README + prototype/DESIGN = 9
-        document.getElementById('stat-docs').textContent = '9';
+        // Stage artifacts: 6 stages + DECISIONS + v1-baseline/README + prototype/DESIGN
+        // + 04-fact-check-log + stitch-DESIGN = 11
+        document.getElementById('stat-docs').textContent = '11';
       } catch {
         document.getElementById('stat-pages').textContent = '—';
         document.getElementById('stat-docs').textContent = '—';

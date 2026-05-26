@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Signal Dispatch v2 | Nino Chavez</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline-variant": "#c4c7c7",
+                      "surface-tint": "#5f5e5e",
+                      "on-error": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "inverse-primary": "#c8c6c5",
+                      "secondary-fixed": "#d1e4fb",
+                      "surface-container-low": "#f5f3f3",
+                      "secondary": "#4e6073",
+                      "on-primary": "#ffffff",
+                      "tertiary-fixed-dim": "#cac6c4",
+                      "primary-fixed": "#e5e2e1",
+                      "on-primary-fixed-variant": "#474746",
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed": "#e6e2df",
+                      "secondary-fixed-dim": "#b5c8df",
+                      "on-secondary-fixed": "#091d2e",
+                      "primary-container": "#1c1b1b",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed-variant": "#36485b",
+                      "surface-container-highest": "#e4e2e2",
+                      "background": "#fbf9f9",
+                      "on-surface-variant": "#444748",
+                      "surface-container-high": "#e9e8e7",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-fixed": "#1c1b1b",
+                      "on-tertiary-fixed-variant": "#484645",
+                      "on-surface": "#1b1c1c",
+                      "on-tertiary": "#ffffff",
+                      "surface-variant": "#e4e2e2",
+                      "on-background": "#1b1c1c",
+                      "error": "#ba1a1a",
+                      "inverse-on-surface": "#f2f0f0",
+                      "primary-fixed-dim": "#c8c6c5",
+                      "surface-container": "#efeded",
+                      "surface-dim": "#dbdad9",
+                      "on-primary-container": "#858383",
+                      "inverse-surface": "#303031",
+                      "on-tertiary-container": "#868382",
+                      "on-secondary-container": "#526478",
+                      "tertiary-container": "#1c1b1a",
+                      "surface-bright": "#fbf9f9",
+                      "tertiary": "#000000",
+                      "secondary-container": "#cfe2f9",
+                      "primary": "#000000",
+                      "outline": "#747878",
+                      "on-tertiary-fixed": "#1c1b1a",
+                      "surface": "#fbf9f9"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "20px",
+                      "margin-desktop": "80px",
+                      "max-width-content": "720px",
+                      "gutter": "32px",
+                      "unit": "4px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Source Serif 4"],
+                      "metadata": ["Inter"],
+                      "technical-callout": ["JetBrains Mono"],
+                      "display-lg-mobile": ["Source Serif 4"],
+                      "label-caps": ["Inter"],
+                      "display-lg": ["Source Serif 4"],
+                      "body-md": ["Source Serif 4"],
+                      "headline-md": ["Source Serif 4"]
+              },
+              "fontSize": {
+                      "body-lg": ["20px", {"lineHeight": "32px", "fontWeight": "400"}],
+                      "metadata": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "technical-callout": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-md": ["30px", {"lineHeight": "38px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .editorial-container {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        .main-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Stitch alternate disclaimer + back-link to v2 portal — injected by integration round, not part of Stitch's original output. -->
+<aside style="background:#fbeb96;border-bottom:1px solid #b8941b;padding:8px 16px;font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#5a4a0e;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;line-height:1.4;">
+  <span><strong>Stitch alternate design</strong> &middot; Generated by Google Stitch &middot; <a href="/docs/?doc=research/design-alternates/stitch-DESIGN" style="color:inherit;text-decoration:underline;">design system</a> &middot; D1/D2/D7 not adopted from this output; email-signup conflicts with no-marketing-tells rule</span>
+  <a href="/" style="color:#5a4a0e;text-decoration:underline;font-weight:600;white-space:nowrap;">&larr; back to v2 portal</a>
+</aside>
+
+<!-- TopAppBar Section -->
+<header class="bg-background dark:bg-background border-b border-on-surface/10 dark:border-on-surface-variant/10 docked full-width top-0 z-50 sticky">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-6 max-w-full mx-auto">
+<div class="flex items-center gap-6">
+<a class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface tracking-tight" href="#">Signal Dispatch v2</a>
+<span class="hidden md:inline-block h-6 w-[1px] bg-on-surface/10"></span>
+<span class="hidden md:block font-metadata text-metadata text-on-surface-variant italic">by Nino Chavez</span>
+</div>
+<nav class="hidden md:flex gap-x-8 items-center">
+<a class="font-label-caps text-label-caps text-secondary border-b-2 border-secondary pb-1" href="#">Dispatches</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Series</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Whitepapers</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Presentations</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">About</a>
+</nav>
+<div class="flex items-center gap-4">
+<span class="font-label-caps text-label-caps text-on-surface">Nino Chavez</span>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="search">search</button>
+</div>
+</div>
+</header>
+<main class="w-full">
+<!-- Hero Section -->
+<section class="border-b border-on-surface/10 py-24 px-margin-mobile md:px-margin-desktop bg-surface-container-lowest">
+<div class="main-grid">
+<div class="max-w-3xl">
+<p class="font-label-caps text-label-caps text-secondary mb-4 uppercase tracking-widest">Architectural Commentary</p>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-8">
+                        Working Architect's notes on <br class="hidden md:block"/>
+<span class="italic font-normal">AI-era engineering and leadership.</span>
+</h1>
+<div class="flex flex-col md:flex-row gap-8 items-start md:items-center">
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                            A weekly inquiry into the structural integrity of modern systems, the economics of developer velocity, and the future of human agency in an automated stack.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Content Grid -->
+<div class="main-grid px-margin-mobile md:px-margin-desktop py-16">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+<!-- Main Feed (Dispatches) -->
+<div class="lg:col-span-8">
+<div class="flex justify-between items-end border-b border-on-surface pb-4 mb-12">
+<h2 class="font-label-caps text-label-caps text-on-surface uppercase tracking-widest">Latest Dispatches</h2>
+<span class="font-metadata text-metadata text-on-surface-variant">Volume 02 • 2024</span>
+</div>
+<div class="space-y-16">
+<!-- Dispatch #156 -->
+<article class="group">
+<div class="flex gap-x-4 mb-4">
+<span class="font-technical-callout text-technical-callout text-primary bg-surface-container-low px-2 py-1">DISPATCH #156</span>
+<span class="font-metadata text-metadata text-on-surface-variant py-1">August 14, 2024 • 12 min read</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4 group-hover:text-secondary transition-colors cursor-pointer">
+                                The Latency Economics of Sovereign LLM Deployments
+                            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
+                                Why the architectural shift from centralized API endpoints to local inference is not just a privacy concern, but a fundamental restructuring of cost-per-token dynamics for enterprise systems.
+                            </p>
+<div class="flex items-center gap-6">
+<span class="font-label-caps text-label-caps text-on-surface-variant border border-outline-variant px-3 py-1">INFRASTRUCTURE</span>
+<a class="font-label-caps text-label-caps text-primary hover:underline flex items-center gap-2" href="#">
+                                    READ FULL ANALYSIS 
+                                    <span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Dispatch #155 -->
+<article class="group border-t border-on-surface/5 pt-16">
+<div class="flex gap-x-4 mb-4">
+<span class="font-technical-callout text-technical-callout text-primary bg-surface-container-low px-2 py-1">DISPATCH #155</span>
+<span class="font-metadata text-metadata text-on-surface-variant py-1">August 07, 2024 • 08 min read</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4 group-hover:text-secondary transition-colors cursor-pointer">
+                                Engineering Leadership in the Age of Co-Pilot Fatigue
+                            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
+                                Investigating the decline in architectural rigor when code is generated faster than it is understood. How to maintain quality in a 10x output environment.
+                            </p>
+<div class="flex items-center gap-6">
+<span class="font-label-caps text-label-caps text-on-surface-variant border border-outline-variant px-3 py-1">CULTURE</span>
+<a class="font-label-caps text-label-caps text-primary hover:underline flex items-center gap-2" href="#">
+                                    READ FULL ANALYSIS 
+                                    <span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Dispatch #154 -->
+<article class="group border-t border-on-surface/5 pt-16">
+<div class="flex gap-x-4 mb-4">
+<span class="font-technical-callout text-technical-callout text-primary bg-surface-container-low px-2 py-1">DISPATCH #154</span>
+<span class="font-metadata text-metadata text-on-surface-variant py-1">July 31, 2024 • 15 min read</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4 group-hover:text-secondary transition-colors cursor-pointer">
+                                The RAG Paradox: Accuracy vs. Retrieval Context
+                            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
+                                Detailed benchmarks on the diminishing returns of context window expansion versus specialized vector embedding strategies.
+                            </p>
+<div class="flex items-center gap-6">
+<span class="font-label-caps text-label-caps text-on-surface-variant border border-outline-variant px-3 py-1">AI RESEARCH</span>
+<a class="font-label-caps text-label-caps text-primary hover:underline flex items-center gap-2" href="#">
+                                    READ FULL ANALYSIS 
+                                    <span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</article>
+</div>
+</div>
+<!-- Sidebar (Active Series) -->
+<aside class="lg:col-span-4">
+<div class="sticky top-32 space-y-12">
+<!-- Series Card -->
+<section class="bg-surface-container-low p-8 border border-on-surface/5">
+<h4 class="font-label-caps text-label-caps text-on-surface uppercase mb-6 tracking-widest border-b border-on-surface/10 pb-2">Active Series</h4>
+<div class="mb-6">
+<img class="w-full h-48 object-cover mb-4" data-alt="A clean, minimalist 3D rendering of a computational motherboard with glowing traces representing data flow, set against a pristine light grey background in an editorial style. The lighting is soft and professional, emphasizing clean geometric lines and technological complexity without clutter." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNxk0ZLVluwFS-f6tBMAryHOB2S3jEB-wVarVho6vl8QtgrQEuFjryXPoR-dYjgUtPzmDOP-6LgQSTHc_kwLAxX-K58nmx4MkuGRPObVXLpduxod2hKLAurjRPg0YdyIKoM487BLVdOJM_yGZdQ8JR_GeGPzxqPdsUNuq2Vvrd-5WcdegGxJb1fNx7RBu7R0Q2wz5hA8rtgdAkw1h5tRtF0vC38X966AO-YmPrCJ_2PtFYjUGwVDUmd3hobbTZxoTLyo_o3lcsSCU"/>
+<p class="font-technical-callout text-technical-callout text-secondary mb-2">Part 3 of 5</p>
+<h5 class="font-headline-md text-[22px] leading-tight text-on-surface mb-4 hover:underline cursor-pointer">The LLM Infrastructure Roadmap</h5>
+<p class="font-metadata text-metadata text-on-surface-variant mb-6">
+                                    A multi-part deep dive into the physical and logical constraints of scaling intelligence at the edge.
+                                </p>
+<button class="w-full py-4 border border-primary font-label-caps text-label-caps uppercase hover:bg-primary hover:text-on-primary transition-all">
+                                    View Series Roadmap
+                                </button>
+</div>
+</section>
+<!-- Whitepapers Callout -->
+<section class="space-y-6">
+<h4 class="font-label-caps text-label-caps text-on-surface uppercase tracking-widest border-b border-on-surface/10 pb-2">Featured Whitepapers</h4>
+<div class="group cursor-pointer">
+<span class="font-metadata text-metadata text-secondary">PDF • 4.2 MB</span>
+<p class="font-body-md text-body-md font-semibold text-on-surface group-hover:text-secondary transition-colors">Distributed State Management in 2024</p>
+</div>
+<div class="group cursor-pointer">
+<span class="font-metadata text-metadata text-secondary">PDF • 1.8 MB</span>
+<p class="font-body-md text-body-md font-semibold text-on-surface group-hover:text-secondary transition-colors">The Security Implications of AI Agents</p>
+</div>
+</section>
+<!-- Newsletter -->
+<section class="border-t-2 border-primary pt-8">
+<h4 class="font-headline-md text-[24px] text-on-surface mb-4">Signal Direct</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                                Critical updates and architect-level commentary delivered to your terminal every Tuesday.
+                            </p>
+<div class="flex flex-col gap-2">
+<input class="w-full bg-background border-b border-on-surface/20 border-t-0 border-x-0 focus:ring-0 focus:border-secondary transition-colors font-metadata px-0 py-3" placeholder="email@engineering.com" type="email"/>
+<button class="mt-4 bg-primary text-on-primary py-3 font-label-caps text-label-caps uppercase tracking-widest hover:bg-secondary transition-colors">Subscribe</button>
+</div>
+</section>
+</div>
+</aside>
+</div>
+</div>
+<!-- Footer Section -->
+<footer class="bg-surface-container-low dark:bg-surface-container-lowest border-t border-on-surface/10 dark:border-on-surface-variant/10 w-full mt-24">
+<div class="w-full py-12 px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-start md:items-center max-w-full">
+<div class="mb-8 md:mb-0">
+<p class="font-headline-md text-headline-md text-on-surface mb-2">Signal Dispatch v2</p>
+<p class="font-metadata text-metadata text-on-surface-variant">© Signal Dispatch v2 by Nino Chavez. All rights reserved.</p>
+</div>
+<div class="flex flex-wrap gap-x-8 gap-y-4">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline transition-all" href="#">RSS Feed</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline transition-all" href="#">Archive</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline transition-all" href="#">Technical Notes</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline transition-all" href="#">Privacy</a>
+</div>
+</div>
+<div class="editorial-container px-margin-mobile border-t border-on-surface/5 py-12">
+<div class="flex gap-6 items-center">
+<img class="w-16 h-16 grayscale border border-on-surface/10" data-alt="A professional, high-contrast greyscale portrait of Nino Chavez, a man with a focused and intelligent expression. The background is a minimalist studio setting with soft lighting that creates a sophisticated, editorial atmosphere suitable for a prestigious technical publication." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5ftQSa9Cvcshk8vg0B4SL2tR8SEC_dU-X_hKAD1_PkLCF7VZiCgO7g42yjnQSyg_-b0kY-bLoIG6FhdJxqt7jZ0l5Iek2DYH4AqIn0AxV15K10pU8P-MSRRleKiw4IzMRTzLGI521bu-7A7kVfgMgNpeFjFBBrunG-lJTKIZFDXoy2cwsOXy-MiLPPhLVDmRN0pa97YFw9l_GaHcCgCImeSPQ5YejCp1FZfTEtx-Ij7tmmFaXCJEPXEWjah9RffVY811taDAFOcI"/>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface uppercase mb-1">Nino Chavez</p>
+<p class="font-metadata text-metadata text-on-surface-variant">Principal Architect, Strategist, and Writer exploring the intersection of distributed systems and artificial intelligence.</p>
+</div>
+</div>
+</div>
+</footer>
+</main>
+<script>
+        // Simple scroll interaction for header transparency/border
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-sm');
+                header.classList.remove('border-b-transparent');
+            } else {
+                header.classList.remove('shadow-sm');
+            }
+        });
+
+        // Add subtle hover effect to articles
+        document.querySelectorAll('article').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.backgroundColor = 'rgba(28, 27, 26, 0.02)';
+            });
+            item.addEventListener('mouseleave', () => {
+                item.style.backgroundColor = 'transparent';
+            });
+        });
+    </script>
+</body></html>

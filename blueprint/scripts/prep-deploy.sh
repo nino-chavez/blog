@@ -64,6 +64,8 @@ SOURCES=(
   "research/funnel/stages.md"
   "research/funnel/evidence.md"
   "research/funnel/gaps.md"
+  # Design alternates (parallel-track designs evaluated against Stage 2 principles)
+  "research/design-alternates/stitch-DESIGN.md"
 )
 
 count=0

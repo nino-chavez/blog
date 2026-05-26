@@ -32,7 +32,9 @@ const DOCS = [
   ['competitive-synthesis',    '/_docs/research/competitive/synthesis.md'],
   // v1 baseline (so chat can answer questions about what changed v1→v2)
   ['v1-baseline-overview',     '/_docs/v1-baseline/README.md'],
-  ['v1-diagnose',              '/_docs/v1-baseline/01-diagnose.md']
+  ['v1-diagnose',              '/_docs/v1-baseline/01-diagnose.md'],
+  // Design alternates (parallel-track designs for v2)
+  ['stitch-alternate-design',  '/_docs/research/design-alternates/stitch-DESIGN.md']
 ];
 
 let SYSTEM_CONTEXT = null;
