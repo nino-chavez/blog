@@ -384,9 +384,9 @@ provisional:
   - decision: D1
     name: "Thesis A vs Thesis B"
     provisional_value: "Thesis A (positioning realignment) — v2 keeps v1 corpus, refreshes name + IA + brand"
-    status: provisional   # provisional | accepted | rejected | modified
-    decided_by: null
-    decided_date: null
+    status: accepted   # provisional | accepted | rejected | modified
+    decided_by: nino
+    decided_date: 2026-05-25
     why_this_default: |
       Thesis B (different publication, Dispatch #N framing) requires cadence commitment (D4) and corpus
       re-curation. Thesis A unblocks the most surfaces with the fewest dependencies. P1 (peer architect)
@@ -399,9 +399,9 @@ provisional:
   - decision: D2
     name: "Editorial single-sentence (12 words or less)"
     provisional_value: "Working notes from an architect who directs agents to ship commerce."
-    status: provisional
-    decided_by: null
-    decided_date: null
+    status: accepted
+    decided_by: nino
+    decided_date: 2026-05-25
     why_this_default: |
       Combines Rule 3 (work-first opening: 'Working notes') with the positioning reframe ('architect who
       directs agents'). 12 words exactly. Avoids first-person verb (would violate Rule 3 — see Stitch's
@@ -413,9 +413,9 @@ provisional:
   - decision: D5
     name: "Voice register delta from v1"
     provisional_value: "No delta — v1 voice carries forward unchanged (per Thesis A default in D1)"
-    status: provisional
-    decided_by: null
-    decided_date: null
+    status: accepted
+    decided_by: nino
+    decided_date: 2026-05-25
     why_this_default: |
       Under Thesis A, the existing 156-post voice is the asset. P2 cross-post sampling requires
       voice consistency; introducing a delta breaks that consistency intentionally. If D1 flips to
@@ -426,9 +426,9 @@ provisional:
   - decision: D7
     name: "v2 publication name"
     provisional_value: "Signal Dispatch (carries from v1 — same name as before)"
-    status: provisional
-    decided_by: null
-    decided_date: null
+    status: accepted
+    decided_by: nino
+    decided_date: 2026-05-25
     why_this_default: |
       Under Thesis A default, v1 corpus carries forward; v1 name carries forward with it. v1 brand has
       measured awareness (RSS subscribers, LinkedIn cross-posts). Renaming pre-D1 creates name-drift
@@ -439,9 +439,9 @@ provisional:
   - decision: D8
     name: "Reader-facing label terminology (Counterpoint, etc.)"
     provisional_value: "Use methodology terms as default (Counterpoint, Whitepaper, Series, Post)"
-    status: provisional
-    decided_by: null
-    decided_date: null
+    status: accepted
+    decided_by: nino
+    decided_date: 2026-05-25
     why_this_default: |
       All four labels are reader-known (Stratechery, lethain, charity.wtf use the same vocabulary).
       P2 finds these labels comprehensible without explanation. Avoids inventing 'the case against
@@ -452,9 +452,9 @@ provisional:
   - decision: D3
     name: "Format mix — fiction collection disposition"
     provisional_value: "Keep fiction collection in v2 as 5th first-class format"
-    status: provisional
-    decided_by: null
-    decided_date: null
+    status: accepted
+    decided_by: nino
+    decided_date: 2026-05-25
     why_this_default: |
       Per Thesis A default (D1), v1 corpus shape carries forward; fiction is part of v1 corpus. Removing
       it breaks Thesis A premise. If D1 flips to B, fiction disposition re-opens (likely spin-off site).
@@ -464,9 +464,9 @@ provisional:
   - decision: D4
     name: "Cadence promise"
     provisional_value: "None (inherit v1 'published when ready' posture)"
-    status: provisional
-    decided_by: null
-    decided_date: null
+    status: accepted
+    decided_by: nino
+    decided_date: 2026-05-25
     why_this_default: |
       Under Thesis A default, no cadence change. Subscribe-follow surface says 'publishes when it
       publishes' — preserves the no-marketing-tells posture P2 requires.
