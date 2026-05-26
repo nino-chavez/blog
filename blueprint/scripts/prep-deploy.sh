@@ -50,6 +50,11 @@ SOURCES=(
   "research/competitive/pragmaticengineer.md"
   "research/competitive/simonwillison.md"
   "research/competitive/stratechery.md"
+  # v2 cross-industry adjacencies (added 2026-05-25 per D6/D9)
+  "research/competitive/daringfireball.md"
+  "research/competitive/maggieappleton.md"
+  "research/competitive/robinsloan.md"
+  "research/competitive/lennysnewsletter.md"
   "research/personas/README.md"
   "research/personas/peer-architect.md"
   "research/personas/hiring-evaluator.md"

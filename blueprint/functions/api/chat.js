@@ -1,26 +1,38 @@
-// Rally HQ Blueprint — Pages Function: stakeholder chat endpoint
+// Signal Dispatch v2 Blueprint — Pages Function: stakeholder chat endpoint
 //
 // Runs on the Cloudflare Pages Functions runtime. Proxies stakeholder
-// questions through OpenRouter to Claude with the blueprint docs loaded
-// as system context.
+// questions through OpenRouter to a model with the v2 blueprint corpus
+// loaded as system context.
 //
 // Required env var: OPENROUTER_API_KEY (set via `wrangler pages secret put`).
-//   Stored in 1Password as "blueprint-global" (Developer Secrets vault).
+//   Stored in 1Password under "Cloudflare pages-deploy" / OpenRouter key
+//   from astro-build/.env for this project.
 //
-// Why OpenRouter, not Anthropic direct: lets the same "blueprint-global" key
-// fan out to any model — Claude, GPT, etc. — without per-app key management.
+// Why OpenRouter, not Anthropic direct: lets one key fan out to any model
+// (Claude, GPT, etc.) without per-app key management.
 //
-// Docs are copied into prototype/_docs/ at deploy time (see
-// scripts/prep-deploy.sh) so the function can fetch them via the ASSETS
-// binding from /_docs/*.md.
+// Docs are copied into _docs/ at deploy time (see scripts/prep-deploy.sh)
+// so the function can fetch them via the ASSETS binding from /_docs/*.md.
+// Subdirectory paths (e.g., research/competitive/synthesis.md) are
+// preserved — the docs viewer fetches /_docs/<docId>.md where docId can
+// contain slashes.
 
 const DOCS = [
-  ['research-synthesis', '/_docs/research-synthesis.md'],
-  ['design-principles',  '/_docs/design-principles.md'],
-  ['cx-strategy',        '/_docs/cx-strategy.md'],
-  ['roadmap',            '/_docs/roadmap.md'],
-  ['gaps',               '/_docs/gaps.md'],
-  ['feasibility',        '/_docs/feasibility.md']
+  // Stage artifacts (v2 greenfield — load-bearing for any v2 question)
+  ['01-research',              '/_docs/01-research.md'],
+  ['02-design-principles',     '/_docs/02-design-principles.md'],
+  ['03-prototype-plan',        '/_docs/03-prototype-plan.md'],
+  ['DECISIONS-NEEDED',         '/_docs/DECISIONS-NEEDED.md'],
+  ['04-fact-check-log',        '/_docs/04-fact-check-log.md'],
+  // Research inputs — personas + competitive synthesis (cross-industry-extended)
+  ['personas-overview',        '/_docs/research/personas/README.md'],
+  ['persona-peer-architect',   '/_docs/research/personas/peer-architect.md'],
+  ['persona-hiring-evaluator', '/_docs/research/personas/hiring-evaluator.md'],
+  ['persona-ai-curious-ic',    '/_docs/research/personas/ai-curious-ic.md'],
+  ['competitive-synthesis',    '/_docs/research/competitive/synthesis.md'],
+  // v1 baseline (so chat can answer questions about what changed v1→v2)
+  ['v1-baseline-overview',     '/_docs/v1-baseline/README.md'],
+  ['v1-diagnose',              '/_docs/v1-baseline/01-diagnose.md']
 ];
 
 let SYSTEM_CONTEXT = null;
@@ -49,13 +61,18 @@ async function loadContext(env, requestUrl) {
     }
   }
 
-  SYSTEM_CONTEXT = `You are a research/design assistant grounded in the Rally HQ Blueprint — a synthetic design study for the Rally HQ tournament-management product.
+  SYSTEM_CONTEXT = `You are a research/design assistant grounded in the Signal Dispatch v2 Blueprint — a greenfield re-conception of the publication currently at ninochavez.co/blog (276 items across 8 collections in the v1 baseline). The author is Nino Chavez; the prototype lives at blueprint-blog.ninochavez.co.
 
-You have access to the full blueprint corpus below. Answer questions accurately based on what's documented. When the user asks about a decision, cite the specific finding number (e.g., "Finding #3"), design principle (e.g., "R6"), or page that explains it. When the user asks for something not covered, say so honestly — do not fabricate.
+The corpus below is the full Stage 1-3 artifact set plus salvaged v1 research (personas, competitive synthesis with cross-industry extension) and v1-baseline reference. Answer accurately from what's documented. When citing a decision, name it by ID (D1 through D9 from DECISIONS-NEEDED, or Rule 1-5 from 02-design-principles, or persona priority P1/P2/P3). When asked about v1 vs v2 differences, anchor in v1-baseline/01-diagnose findings (F1-F11) for v1 state and the Stage 1-3 artifacts for v2 direction. When asked something the corpus doesn't cover, say so — do not fabricate.
 
-Tone: direct, no cheerleading, no hedging. Match Nino Chavez's voice: short sentences, imperative when giving advice, concrete examples. No emoji.
+Tone: direct, no cheerleading, no hedging. Match Nino Chavez's voice: short sentences, imperative when giving advice, concrete examples grounded in cited evidence. No emoji.
 
-If asked about implementation, reference docs/feasibility.md. If asked about ordering, reference docs/roadmap.md. If asked about specific UI decisions, reference the prototype page and its strategy panel content.
+Some questions worth being precise about:
+- "What's v2 blocked on" → the critical-path triple D1+D2+D7 per DECISIONS-NEEDED
+- "What's the thesis tension" → Thesis A (positioning realignment) vs Thesis B (different publication) per 01-research load-bearing tension section
+- "What carries forward from v1" → personas, competitive baseline, funnel evidence carry forward as inputs per 01-research; voice register inherits the v1 guide per 02-design-principles Voice section
+- "What's wrong with v1" → F1-F11 findings in v1-baseline/01-diagnose
+- "What's the format mix proposal" → 02-design-principles format mix table; D3 captures Nino's open call
 
 --- BLUEPRINT CORPUS ---
 
