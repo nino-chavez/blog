@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Library — [v2-name] Blueprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/shared.css?v=20260525-1700">
+  <style>
+    /* library — archive + topical discovery. One primary axis (Rule 4).
+       Current default: chronological-primary with format + tag as
+       secondary filters. Thesis A natural fit. Thesis B would invert
+       to "current Dispatch + recent + archive" framing — flagged in
+       the [D1 placeholder] note. Replaces v1's broken tag-detail
+       (F1: 44k px scrolls) with series-style chunking. */
+    .pub-header { border-bottom: 1px solid var(--card-border); background: var(--card); }
+    .pub-header-inner {
+      max-width: 920px; margin: 0 auto; padding: var(--space-3) var(--space-4);
+      display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+    }
+    .pub-mark { font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: -0.01em; color: var(--text-primary); }
+    .pub-mark .pub-mark-placeholder { color: var(--text-muted); font-weight: 500; }
+    .pub-nav { display: flex; gap: var(--space-4); font-size: var(--text-sm); }
+    .pub-nav a { color: var(--text-secondary); font-weight: 500; }
+    .pub-nav a.active { color: var(--text-primary); font-weight: 600; }
+    .pub-nav a:hover { color: var(--text-primary); }
+
+    .shell { max-width: 920px; margin: 0 auto; padding: var(--space-12) var(--space-4) var(--space-16); }
+
+    .meta-strip { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-6); flex-wrap: wrap; }
+    .format-badge {
+      display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px 4px;
+      border-radius: var(--radius-sm); background: hsl(190 50% 95%); color: hsl(190 60% 30%);
+      font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .format-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+    .page-title {
+      font-family: var(--font-display); font-size: clamp(2rem, 1.5rem + 2vw, 2.75rem);
+      font-weight: 700; letter-spacing: -0.02em; line-height: 1.1;
+      color: var(--text-primary); margin-bottom: var(--space-3);
+      text-transform: none;
+    }
+    .page-subtitle {
+      font-size: var(--text-lg); color: var(--text-secondary); line-height: 1.4;
+      margin-bottom: var(--space-6); font-weight: 400; max-width: 64ch;
+    }
+
+    .thesis-note {
+      margin-bottom: var(--space-8); padding: var(--space-3) var(--space-4);
+      background: hsl(60 80% 96%); border: 1px dashed hsl(45 70% 60%); border-radius: var(--radius-md);
+      font-family: var(--font-mono); font-size: 11px; line-height: 1.55; color: hsl(45 50% 25%);
+    }
+    .thesis-note strong { font-weight: 700; }
+    .thesis-note a { color: hsl(45 50% 25%); text-decoration: underline; }
+
+    /* Filter strip — format chips + tag chips (subordinated to chronology) */
+    .filter-strip {
+      display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-4);
+      padding: var(--space-4); background: var(--card);
+      border: 1px solid var(--card-border); border-radius: var(--radius-md);
+    }
+    .filter-label {
+      font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--text-muted); margin-right: var(--space-2);
+      align-self: center;
+    }
+    .filter-chip {
+      display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px;
+      border-radius: var(--radius-full); background: hsl(220 15% 96%);
+      font-size: 12px; font-weight: 500; color: var(--text-secondary);
+      cursor: pointer; user-select: none;
+    }
+    .filter-chip.is-active { background: var(--text-primary); color: var(--card); }
+    .filter-chip.is-active.post { background: hsl(150 60% 28%); }
+    .filter-chip.is-active.whitepaper { background: hsl(220 70% 35%); }
+    .filter-chip.is-active.counterpoint { background: hsl(0 55% 35%); }
+    .filter-chip.is-active.series { background: hsl(35 80% 30%); }
+    .filter-chip .count { font-family: var(--font-mono); font-size: 10px; opacity: 0.7; }
+
+    .filter-divider { width: 1px; align-self: stretch; background: var(--card-border); margin: 0 var(--space-2); }
+
+    /* Year-grouped chronological feed — series-style chunking */
+    .year-section { margin: var(--space-10) 0 0; }
+    .year-header {
+      display: flex; align-items: baseline; gap: var(--space-3);
+      margin-bottom: var(--space-4); padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--text-primary);
+    }
+    .year-label {
+      font-family: var(--font-display); font-size: var(--text-xl); font-weight: 700;
+      color: var(--text-primary); letter-spacing: -0.02em;
+    }
+    .year-meta { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+
+    .item-list { display: grid; grid-template-columns: 1fr; gap: var(--space-3); }
+    @media (min-width: 720px) { .item-list { grid-template-columns: repeat(2, 1fr); } }
+
+    .item-card {
+      display: flex; flex-direction: column; gap: var(--space-2);
+      padding: var(--space-4); background: var(--card);
+      border: 1px solid var(--card-border); border-radius: var(--radius-md);
+      text-decoration: none; color: inherit;
+      transition: border-color var(--transition-fast), transform var(--transition-fast);
+    }
+    .item-card:hover { border-color: var(--text-secondary); transform: translateY(-1px); }
+    .item-header { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+    .item-format {
+      display: inline-flex; padding: 2px 8px; border-radius: var(--radius-sm);
+      font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .item-format.post { background: hsl(150 60% 95%); color: hsl(150 60% 28%); }
+    .item-format.whitepaper { background: hsl(220 80% 96%); color: hsl(220 70% 35%); }
+    .item-format.counterpoint { background: hsl(0 60% 96%); color: hsl(0 55% 35%); }
+    .item-format.series { background: hsl(35 60% 95%); color: hsl(35 80% 30%); }
+    .item-date { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); }
+    .item-title {
+      font-family: var(--font-display); font-size: var(--text-base); font-weight: 700;
+      letter-spacing: -0.01em; color: var(--text-primary); margin: 0; line-height: 1.3;
+    }
+    .item-excerpt { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.5; margin: 0; flex: 1; }
+    .item-tags { display: flex; flex-wrap: wrap; gap: 6px; padding-top: var(--space-2); border-top: 1px dashed var(--card-border); }
+    .item-tag { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); padding: 1px 6px; border-radius: var(--radius-sm); background: hsl(220 15% 96%); }
+
+    .pub-footer {
+      max-width: 920px; margin: var(--space-12) auto 0;
+      padding: var(--space-6) var(--space-4); border-top: 1px solid var(--card-border);
+      font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);
+      display: flex; gap: var(--space-4); flex-wrap: wrap;
+    }
+    .pub-footer a { color: var(--text-secondary); border-bottom: 1px solid var(--card-border); }
+
+    .shipped-view .v1-mock {
+      max-width: 920px; margin: var(--space-8) auto; padding: var(--space-6) var(--space-4);
+      background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius-md);
+    }
+    .shipped-view .v1-mock h1 { font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-3); }
+    .shipped-view .v1-mock .v1-body { font-size: var(--text-sm); line-height: 1.6; color: var(--text-secondary); }
+    .shipped-view .v1-mock .v1-note { margin-top: var(--space-4); padding: var(--space-3); background: hsl(0 0% 97%); border-left: 3px solid var(--text-muted); font-size: var(--text-xs); font-family: var(--font-mono); color: var(--text-secondary); }
+    .shipped-view .v1-mock .v1-diff-list { margin-top: var(--space-3); padding-left: var(--space-5); font-size: var(--text-sm); color: var(--text-secondary); }
+    .shipped-view .v1-mock .v1-diff-list li { margin-bottom: 6px; }
+  </style>
+</head>
+<body data-compare-root data-view="proposed">
+
+  <section class="proposed-view">
+    <header class="pub-header">
+      <div class="pub-header-inner">
+        <div class="pub-mark">[v2-name] <span class="pub-mark-placeholder">· name pending D7</span></div>
+        <nav class="pub-nav">
+          <a href="/pages/library.html" class="active">Library</a>
+          <a href="/pages/about-colophon.html">About</a>
+          <a href="/pages/subscribe-follow.html">Follow</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="shell">
+      <div class="meta-strip">
+        <span class="format-badge">Library</span>
+        <span style="font-size: var(--text-sm); color: var(--text-secondary);">276 items across 4 v2 formats · year-grouped chronological</span>
+      </div>
+
+      <h1 class="page-title">Library</h1>
+      <p class="page-subtitle">The full corpus, chronological by year, filterable by format and tag. Replaces v1's broken tag-detail surfaces (F1: 44k px scrolls) with the series-style chunking that works.</p>
+
+      <div class="thesis-note">
+        <strong>[D1 placeholder]</strong> &mdash; Library currently renders with chronological as the primary axis (Thesis A natural fit: continuity with v1's published-when-ready posture). Thesis B would invert to "current Dispatch + recent Dispatches + archive" framing. See <a href="/docs/?doc=DECISIONS-NEEDED">D1 in the decisions packet</a>.
+      </div>
+
+      <div class="filter-strip">
+        <span class="filter-label">Format</span>
+        <span class="filter-chip is-active">All <span class="count">276</span></span>
+        <span class="filter-chip">Posts <span class="count">229</span></span>
+        <span class="filter-chip">Whitepapers <span class="count">12</span></span>
+        <span class="filter-chip">Counterpoints <span class="count">4</span></span>
+        <span class="filter-chip">Series <span class="count">8</span></span>
+        <span class="filter-divider"></span>
+        <span class="filter-label">Tag</span>
+        <span class="filter-chip">ai-development <span class="count">134</span></span>
+        <span class="filter-chip">architecture <span class="count">44</span></span>
+        <span class="filter-chip">reflection <span class="count">40</span></span>
+        <span class="filter-chip">leadership <span class="count">40</span></span>
+        <span class="filter-chip">consulting <span class="count">32</span></span>
+        <span class="filter-chip">agentic-systems <span class="count">28</span></span>
+      </div>
+
+      <section class="year-section">
+        <div class="year-header">
+          <h2 class="year-label">2026</h2>
+          <span class="year-meta">8 items · Feb – May</span>
+        </div>
+        <div class="item-list">
+          <a href="/pages/whitepaper-detail.html" class="item-card">
+            <div class="item-header">
+              <span class="item-format whitepaper">Whitepaper</span>
+              <span class="item-date">May 23, 2026</span>
+            </div>
+            <h3 class="item-title">The Big Blueprint Methodology</h3>
+            <p class="item-excerpt">How the chassis becomes a methodology. The seven-stage pipeline, the variant taxonomy, and what compounds across initiatives.</p>
+            <div class="item-tags"><span class="item-tag">architecture</span><span class="item-tag">ai-development</span><span class="item-tag">consulting</span></div>
+          </a>
+          <a href="/pages/post-detail.html" class="item-card">
+            <div class="item-header">
+              <span class="item-format post">Post</span>
+              <span class="item-date">May 16, 2026</span>
+            </div>
+            <h3 class="item-title">Encodings, not prompts</h3>
+            <p class="item-excerpt">Where compounding leverage actually lives. Why prompt fixes don't accrete and what does.</p>
+            <div class="item-tags"><span class="item-tag">ai-development</span><span class="item-tag">agentic-systems</span></div>
+          </a>
+          <a href="/pages/post-detail.html" class="item-card">
+            <div class="item-header">
+              <span class="item-format post">Post</span>
+              <span class="item-date">May 09, 2026</span>
+            </div>
+            <h3 class="item-title">Reviewers are not the same agent</h3>
+            <p class="item-excerpt">Why a second agent finds what the first agent missed. The structural reason same-agent self-review fails predictably, and the cheap fix.</p>
+            <div class="item-tags"><span class="item-tag">ai-development</span><span class="item-tag">ai-governance</span></div>
+          </a>
+          <a href="/pages/counterpoint-detail.html" class="item-card">
+            <div class="item-header">
+              <span class="item-format counterpoint">Counterpoint</span>
+              <span class="item-date">May 02, 2026</span>
+            </div>
+            <h3 class="item-title">"The chassis is over-engineering" — a counterpoint</h3>
+            <p class="item-excerpt">A stress-test of the Cognitive Foundry argument. Where the chassis is right; where it's load-bearing scaffolding that can be removed.</p>
+            <div class="item-tags"><span class="item-tag">ai-development</span><span class="item-tag">reflection</span></div>
+          </a>
+          <a href="/pages/post-detail.html" class="item-card">
+            <div class="item-header">
+              <span class="item-format post">Post</span>
+              <span class="item-date">Apr 25, 2026</span>
+            </div>
+            <h3 class="item-title">Sensors over inference</h3>
+            <p class="item-excerpt">Any time the agent says "probably" about runtime state, a sensor was missing. A taxonomy of the sensors that close common loops.</p>
+            <div class="item-tags"><span class="item-tag">ai-development</span><span class="item-tag">architecture</span></div>
+          </a>
+          <a href="/pages/whitepaper-detail.html" class="item-card">
+            <div class="item-header">
+              <span class="item-format whitepaper">Whitepaper</span>
+              <span class="item-date">Apr 11, 2026</span>
+            </div>
+            <h3 class="item-title">The Cognitive Foundry</h3>
+            <p class="item-excerpt">A reference architecture for agent-assisted production work. The five-piece chassis and what fails predictably without each piece.</p>
+            <div class="item-tags"><span class="item-tag">architecture</span><span class="item-tag">agentic-systems</span><span class="item-tag">ai-development</span></div>
+          </a>
+          <a href="/pages/post-detail.html" class="item-card">
+            <div class="item-header">
+              <span class="item-format post">Post</span>
+              <span class="item-date">Feb 28, 2026</span>
+            </div>
+            <h3 class="item-title">Validators amortize verification</h3>
+            <p class="item-excerpt">The leverage isn't in prompts; it's in the encoded check that runs every time. A pattern for moving review work into infrastructure.</p>
+            <div class="item-tags"><span class="item-tag">ai-development</span><span class="item-tag">ai-governance</span></div>
+          </a>
+          <a href="/pages/post-detail.html" class="item-card">
+            <div class="item-header">
+              <span class="item-format post">Post</span>
+              <span class="item-date">Feb 14, 2026</span>
+            </div>
+            <h3 class="item-title">The contract is the work</h3>
+            <p class="item-excerpt">Why agent-assisted work without a written falsifier is unanchored. What the contract carries that the prompt can't.</p>
+            <div class="item-tags"><span class="item-tag">ai-development</span><span class="item-tag">architecture</span></div>
+          </a>
+        </div>
+      </section>
+
+      <section class="year-section">
+        <div class="year-header">
+          <h2 class="year-label">2025</h2>
+          <span class="year-meta">~140 items · Jan – Dec · grouped sample shown; real Library paginates</span>
+        </div>
+        <div class="item-list">
+          <a href="#" class="item-card" style="opacity: 0.6;">
+            <div class="item-header">
+              <span class="item-format post">Post</span>
+              <span class="item-date">Dec 18, 2025</span>
+            </div>
+            <h3 class="item-title">i don't write any code</h3>
+            <p class="item-excerpt">The positioning reframe that triggered this whole publication direction. Why "directs agents, output ships" is a different-shaped role than "AI-assisted engineer."</p>
+            <div class="item-tags"><span class="item-tag">reflection</span><span class="item-tag">career</span></div>
+          </a>
+          <a href="#" class="item-card" style="opacity: 0.6;">
+            <div class="item-header">
+              <span class="item-format post">Post</span>
+              <span class="item-date">Oct 04, 2025</span>
+            </div>
+            <h3 class="item-title">[140 more 2025 posts — paginated]</h3>
+            <p class="item-excerpt">Real Library uses series-style chunking (per F1 fix): year-grouped + format-filtered + paginated at 30 per view + tag-as-secondary-filter.</p>
+            <div class="item-tags"><span class="item-tag">…</span></div>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="pub-footer">
+      <span>by Nino Chavez · architect-who-directs-agents</span>
+      <a href="https://ninochavez.co/blog/rss.xml" target="_blank" rel="noopener">RSS</a>
+      <a href="https://ninochavez.co/blog/full-content-rss.xml" target="_blank" rel="noopener">RSS (full content)</a>
+    </footer>
+  </section>
+
+  <section class="shipped-view">
+    <div class="v1-mock">
+      <h1>v1 archive surfaces — broken at scale</h1>
+      <div class="v1-body">
+        <p>v1 has 3-4 competing archive surfaces: <code>/blog</code> (chronological feed), <code>/blog/tags</code> (alphabetical tag index), <code>/blog/tags/[tag]</code> (broken at scale per F1: 44,171 px tall for /tags/architecture with 44 posts), separate routes for <code>/blog/whitepapers</code> and <code>/blog/series</code>.</p>
+        <p>Real production surfaces: <a href="https://ninochavez.co/blog/tags" target="_blank" rel="noopener">tag index</a> and <a href="https://ninochavez.co/blog/tags/architecture" target="_blank" rel="noopener">tag-detail (broken)</a>.</p>
+      </div>
+      <p style="font-size: var(--text-xs); font-family: var(--font-mono); color: var(--text-muted); margin-top: var(--space-4); text-transform: uppercase; letter-spacing: 0.06em;">v2 changes:</p>
+      <ul class="v1-diff-list">
+        <li><strong>One Library surface</strong> replaces 3-4 competing archive routes.</li>
+        <li><strong>Series-style chunking</strong> (year-grouped, paginated) replaces the unscalable A-Z-list tag-detail.</li>
+        <li><strong>Format filter as secondary affordance</strong> (chips) — tag becomes a subordinate filter, not a primary discovery surface.</li>
+        <li><strong>Format badge per card</strong> for cross-surface consistency.</li>
+        <li>D1 picks the primary axis (chronological vs deliberate-publication Dispatch framing); D3 affects which formats survive in the filter strip.</li>
+      </ul>
+    </div>
+  </section>
+
+  <script>
+    window.PORTAL_SHELL_CONFIG = { productName: 'Signal Dispatch v2' };
+    window.PROTO_PAGE = { id: 'library' };
+  </script>
+  <script src="/_portal-shell.js?v=20260525-1700"></script>
+  <script src="/proto-nav.js?v=20260525-1700"></script>
+  <script src="/chat-widget.js" defer></script>
+  <script src="/proto-annotate.js?v=20260525-1700" defer></script>
+</body>
+</html>
