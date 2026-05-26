@@ -58,6 +58,12 @@ function findPrescription() {
 
 function parseScalar(s) {
   s = s.trim();
+  // Strip inline YAML comments (only outside quoted strings).
+  // YAML spec: `#` starts a comment when preceded by whitespace.
+  if (!s.startsWith('"') && !s.startsWith("'")) {
+    const commentIdx = s.indexOf(' #');
+    if (commentIdx >= 0) s = s.slice(0, commentIdx).trim();
+  }
   if (s === '' || s === 'null' || s === '~') return null;
   if ((s.startsWith('"') && s.endsWith('"')) || (s.startsWith("'") && s.endsWith("'"))) {
     return s.slice(1, -1);
