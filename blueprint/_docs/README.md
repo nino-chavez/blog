@@ -72,5 +72,5 @@ The Rally HQ blueprint at `apps/rally-hq/blueprint/portal/` is the worked exampl
 ## See also
 
 - `template/portal/CONVENTIONS.md` — the contract for every page
-- `wip/blueprint/METHODOLOGY.md` — the 7-stage pipeline this fits into
+- `tools/blueprint/METHODOLOGY.md` — the 7-stage pipeline this fits into
 - Rally HQ blueprint commit history under `apps/rally-hq/` for end-to-end examples

@@ -8,7 +8,7 @@
 # =============================================================================
 #
 # Brownfield Stage 2 output. Per the brownfield variant gate
-# (~/Workspace/dev/wip/blueprint/docs/variant-selection.md), this file is YAML
+# (~/Workspace/dev/tools/blueprint/docs/variant-selection.md), this file is YAML
 # with impact-ordered changes and an evidence cite per item. The
 # prescription-evidence-reviewer enforces both.
 #
