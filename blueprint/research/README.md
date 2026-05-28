@@ -1,6 +1,6 @@
 # Research — Brownfield Stage 1
 
-Five required legs per `~/Workspace/dev/wip/blueprint/docs/variant-selection.md`. The `research-completeness-reviewer` gate blocks Stage 2 until all five are populated.
+Five required legs per `~/Workspace/dev/tools/blueprint/docs/variant-selection.md`. The `research-completeness-reviewer` gate blocks Stage 2 until all five are populated.
 
 | Leg | Path | What lives here |
 |---|---|---|

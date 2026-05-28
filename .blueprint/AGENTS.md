@@ -8,7 +8,7 @@ Lopopolo-pattern pilot: knowledge IN this repo, map not manual, invariants enfor
 - **Active bets / prescription items**: `blueprint/prescription.yml` — `prescription:` array (PR-01 to PR-17). Same status convention applies as decisions land.
 - **Stage stopping conditions**: this file, below.
 - **Lints**: `.blueprint/lints/` — run via pre-commit hook OR `node .blueprint/lints/<name>.mjs` manually.
-- **Methodology source (pinned)**: canonical at `~/Workspace/dev/wip/blueprint/`. This pilot does not yet copy methodology into the repo; that's the next pilot phase if this one succeeds.
+- **Methodology source (pinned)**: canonical at `~/Workspace/dev/tools/blueprint/`. This pilot does not yet copy methodology into the repo; that's the next pilot phase if this one succeeds.
 
 ## Stage stopping conditions (signal-dispatch-v2)
 

@@ -28,7 +28,7 @@ with proper naming.
 
 | Artifact | Path | Reuse |
 |---|---|---|
-| Browser-MCP setup notes | `docs/MCP_CHROME_DEVTOOLS_SETUP.md` | Cross-reference when wiring `browse-tool` per `~/Workspace/dev/wip/blueprint/docs/browser-legibility.md`. The default sensor is `browse-tool`, not Chrome DevTools MCP — but the chrome-setup notes may carry profile/auth tips worth porting. |
+| Browser-MCP setup notes | `docs/MCP_CHROME_DEVTOOLS_SETUP.md` | Cross-reference when wiring `browse-tool` per `~/Workspace/dev/tools/blueprint/docs/browser-legibility.md`. The default sensor is `browse-tool`, not Chrome DevTools MCP — but the chrome-setup notes may carry profile/auth tips worth porting. |
 
 ### Stage 1 — Diagnose (current-state evidence)
 
@@ -80,7 +80,7 @@ Reference only if a Stage-1 finding ties back to one of them.
 
 ## Next moves for Stage 1
 
-1. Wire `browse-tool` per `~/Workspace/dev/wip/blueprint/docs/browser-legibility.md` with `--profile-name signal-dispatch-blueprint`.
+1. Wire `browse-tool` per `~/Workspace/dev/tools/blueprint/docs/browser-legibility.md` with `--profile-name signal-dispatch-blueprint`.
 2. Capture fresh current-state baselines against `https://ninochavez.co/blog` into `blueprint/research/current-state/`, by surface and breakpoint (375 / 768 / 1024 / 1440 minimum).
 3. Synthesize `blueprint/01-diagnose.md` from the captures + the existing `TAG_IMPLEMENTATION_REPORT.md` + the corrected SEO/routing posture.
 4. The `research-completeness-reviewer` gate (per variant-selection.md: brownfield requires 5 legs — `current-state/`, `personas/`, `funnel/`, `competitive/`, plus `01-diagnose.md` synthesis) blocks Stage 2 until all five are populated.

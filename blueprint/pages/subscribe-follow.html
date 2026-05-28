@@ -1,212 +1,189 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html class="light" lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Subscribe / Follow — Signal Dispatch</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/shared.css?v=20260525-1700">
-  <style>
-    /* subscribe-follow page-specific styles. RSS + LinkedIn + cadence
-       explainer; no email capture (preserves v1 no-marketing-tells per
-       hiring-evaluator persona). */
-    .pub-header { border-bottom: 1px solid var(--card-border); background: var(--card); }
-    .pub-header-inner {
-      max-width: 720px; margin: 0 auto; padding: var(--space-3) var(--space-4);
-      display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+  <title>Follow | Signal Dispatch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "background": "#fbfaee",
+          "surface": "#fbfaee",
+          "surface-bright": "#fbfaee",
+          "surface-container-lowest": "#ffffff",
+          "surface-container-low": "#f5f4e8",
+          "surface-container": "#efeee3",
+          "surface-container-high": "#e9e9dd",
+          "surface-container-highest": "#e4e3d7",
+          "surface-dim": "#dbdbcf",
+          "surface-variant": "#e4e3d7",
+          "on-surface": "#1b1c15",
+          "on-surface-variant": "#42474c",
+          "on-background": "#1b1c15",
+          "outline": "#72787d",
+          "outline-variant": "#c2c7cd",
+          "primary": "#001c2b",
+          "on-primary": "#ffffff",
+          "secondary": "#006972",
+          "tertiary": "#131b1d",
+          "tertiary-fixed": "#dbe4e6",
+          "architectural-ink": "#001B29",
+          "blueprint-cyan": "#008B94",
+          "aged-paper": "#FDFCF0",
+          "carbon-trace": "#111827",
+          "error": "#ba1a1a"
+        },
+        borderRadius: { "DEFAULT": "0", "lg": "0", "xl": "0", "full": "9999px" },
+        spacing: { "unit": "4px", "rail-width": "320px", "left-rail": "260px", "gutter": "16px", "margin": "32px", "dense-gap": "8px" },
+        fontFamily: {
+          "display-lg":   ["Bree Serif"],
+          "headline-md":  ["Bree Serif"],
+          "body-prose":   ["Crimson Pro"],
+          "body-dense":   ["Crimson Pro"],
+          "label-ui":     ["Inter"],
+          "data-receipt": ["JetBrains Mono"],
+          "status-code":  ["JetBrains Mono"]
+        },
+        fontSize: {
+          "display-lg":   ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+          "headline-md":  ["24px", {"lineHeight": "1.2", "fontWeight": "400"}],
+          "body-prose":   ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+          "body-dense":   ["16px", {"lineHeight": "1.4", "fontWeight": "400"}],
+          "label-ui":     ["13px", {"lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+          "data-receipt": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}],
+          "status-code":  ["11px", {"lineHeight": "1", "fontWeight": "700"}]
+        }
+      }
     }
-    .pub-mark { font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: -0.01em; color: var(--text-primary); }
-    .pub-mark .pub-mark-placeholder { color: var(--text-muted); font-weight: 500; }
-    .pub-nav { display: flex; gap: var(--space-4); font-size: var(--text-sm); }
-    .pub-nav a { color: var(--text-secondary); font-weight: 500; }
-    .pub-nav a.active { color: var(--text-primary); font-weight: 600; }
-    .pub-nav a:hover { color: var(--text-primary); }
-
-    .shell { max-width: 720px; margin: 0 auto; padding: var(--space-12) var(--space-4) var(--space-16); }
-
-    .meta-strip { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-6); flex-wrap: wrap; }
-    .format-badge {
-      display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px 4px;
-      border-radius: var(--radius-sm); background: hsl(280 50% 95%); color: hsl(280 60% 35%);
-      font-family: var(--font-mono); font-size: 11px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.06em;
-    }
-    .format-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-
-    .page-title {
-      font-family: var(--font-display); font-size: clamp(2rem, 1.5rem + 2vw, 2.75rem);
-      font-weight: 700; letter-spacing: -0.02em; line-height: 1.1;
-      color: var(--text-primary); margin-bottom: var(--space-3);
-      text-transform: none;
-    }
-    .page-subtitle {
-      font-size: var(--text-lg); color: var(--text-secondary); line-height: 1.4;
-      margin-bottom: var(--space-8); font-weight: 400;
-    }
-
-    .follow-list { display: flex; flex-direction: column; gap: var(--space-4); margin-bottom: var(--space-10); }
-    .follow-card {
-      padding: var(--space-5); background: var(--card);
-      border: 1px solid var(--card-border); border-radius: var(--radius-md);
-      display: flex; gap: var(--space-4); align-items: flex-start;
-    }
-    .follow-card-icon {
-      width: 40px; height: 40px; flex-shrink: 0; border-radius: var(--radius-sm);
-      background: hsl(220 15% 95%); display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--text-primary);
-    }
-    .follow-card-body { flex: 1; }
-    .follow-card-title {
-      font-family: var(--font-display); font-size: var(--text-base); font-weight: 600;
-      color: var(--text-primary); margin: 0 0 4px;
-    }
-    .follow-card-desc { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.55; margin: 0 0 var(--space-3); }
-    .follow-card code, .follow-card a.url {
-      display: inline-block; font-family: var(--font-mono); font-size: 12px;
-      padding: 4px 8px; background: hsl(220 15% 96%); border-radius: var(--radius-sm);
-      color: var(--text-primary); text-decoration: none; word-break: break-all;
-    }
-    .follow-card a.url:hover { background: hsl(220 30% 92%); }
-
-    .cadence-block {
-      padding: var(--space-5); margin-bottom: var(--space-10);
-      background: hsl(35 30% 96%); border: 1px solid hsl(35 30% 88%);
-      border-left: 3px solid hsl(35 60% 50%); border-radius: var(--radius-md);
-    }
-    .cadence-label {
-      font-family: var(--font-mono); font-size: 10px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.1em; color: hsl(35 60% 35%); margin-bottom: var(--space-2);
-    }
-    .cadence-text { font-size: var(--text-base); line-height: 1.6; color: var(--text-primary); margin: 0; }
-    .cadence-text .placeholder {
-      background: hsl(60 80% 88%); padding: 1px 6px; border-radius: var(--radius-sm);
-      font-family: var(--font-mono); font-size: 0.85em; color: hsl(45 50% 25%);
-    }
-
-    .anti-section { padding-top: var(--space-6); border-top: 1px solid var(--card-border); }
-    .anti-label {
-      font-family: var(--font-mono); font-size: 10px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: var(--space-3);
-    }
-    .anti-text { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.6; margin: 0; }
-
-    .pub-footer {
-      max-width: 720px; margin: var(--space-12) auto 0;
-      padding: var(--space-6) var(--space-4); border-top: 1px solid var(--card-border);
-      font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);
-      display: flex; gap: var(--space-4); flex-wrap: wrap;
-    }
-    .pub-footer a { color: var(--text-secondary); border-bottom: 1px solid var(--card-border); }
-
-    .shipped-view .v1-mock {
-      max-width: 720px; margin: var(--space-8) auto;
-      padding: var(--space-6) var(--space-4); background: var(--card);
-      border: 1px solid var(--card-border); border-radius: var(--radius-md);
-    }
-    .shipped-view .v1-mock h1 { font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-3); }
-    .shipped-view .v1-mock .v1-body { font-size: var(--text-sm); line-height: 1.6; color: var(--text-secondary); }
-    .shipped-view .v1-mock .v1-note {
-      margin-top: var(--space-4); padding: var(--space-3); background: hsl(0 0% 97%);
-      border-left: 3px solid var(--text-muted); font-size: var(--text-xs);
-      font-family: var(--font-mono); color: var(--text-secondary);
-    }
-  </style>
+  }
+</script>
+<style>
+  .receipt-block {
+    background-image: radial-gradient(circle, #008B9405 1px, transparent 1px);
+    background-size: 8px 8px;
+  }
+  .border-dashed-v {
+    border-top: 1px dashed #001B29;
+    border-bottom: 1px dashed #001B29;
+  }
+  /* Sharp corners (Cyanotype is 0-radius) */
+  * { border-radius: 0 !important; }
+  *.rounded-full { border-radius: 9999px !important; }
+</style>
 </head>
-<body data-compare-root data-view="proposed">
+<body class="bg-background text-architectural-ink font-body-prose selection:bg-blueprint-cyan selection:text-aged-paper overflow-x-hidden">
+<div class="flex min-h-screen">
+  <aside class="hidden md:flex flex-col w-[260px] flex-shrink-0 bg-background border-r-2 border-architectural-ink sticky top-0 h-screen overflow-y-auto">
+  <!-- Wordmark -->
+  <div class="px-margin py-6 border-b-2 border-architectural-ink">
+    <a class="block font-headline-md text-headline-md font-bold uppercase tracking-tighter leading-none" href="/pages/home.html">Signal<br/>Dispatch</a>
+    <div class="font-data-receipt text-data-receipt text-blueprint-cyan mt-1">v2 PROTOTYPE</div>
+  </div>
 
-  <section class="proposed-view">
-    <header class="pub-header">
-      <div class="pub-header-inner">
-        <div class="pub-mark">Signal Dispatch</div>
-        <nav class="pub-nav">
-          <a href="/pages/library.html">Library</a>
-          <a href="/pages/about-colophon.html">About</a>
-          <a href="/pages/subscribe-follow.html" class="active">Follow</a>
-        </nav>
+  <!-- Primary nav -->
+  <nav class="px-3 py-6 border-b border-architectural-ink/20">
+    <div class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-3 px-3">Navigate</div>
+    <a class="flex items-center justify-between px-3 py-2 text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper font-label-ui text-label-ui transition-colors duration-75" href="/pages/home.html">
+      <span>Index</span>
+      <span class="font-data-receipt text-data-receipt opacity-50">→</span>
+    </a>
+      <a class="flex items-center justify-between px-3 py-2 text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper font-label-ui text-label-ui transition-colors duration-75" href="/pages/library.html">
+      <span>Library</span>
+      <span class="font-data-receipt text-data-receipt opacity-50">→</span>
+    </a>
+      <a class="flex items-center justify-between px-3 py-2 text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper font-label-ui text-label-ui transition-colors duration-75" href="/pages/about-colophon.html">
+      <span>About</span>
+      <span class="font-data-receipt text-data-receipt opacity-50">→</span>
+    </a>
+      <a class="flex items-center justify-between px-3 py-2 bg-blueprint-cyan text-aged-paper font-label-ui text-label-ui" href="/pages/subscribe-follow.html">
+      <span>Follow</span>
+      <span class="font-data-receipt text-data-receipt opacity-50">→</span>
+    </a>
+  </nav>
+
+  
+  <!-- Live signal -->
+  <div class="px-margin py-6 border-b border-architectural-ink/20 bg-architectural-ink text-aged-paper">
+    <div class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-2">Live Signal</div>
+    <div class="font-data-receipt text-data-receipt opacity-60 mb-1">MAY 25, 2026 · COUNTERPOINT</div>
+    <a class="block font-body-dense text-body-dense font-bold hover:text-blueprint-cyan transition-colors" href="/pages/counterpoint-detail.html">Five Months Later, the Evidence Showed Up</a>
+  </div>
+
+  
+  <!-- Currently serializing -->
+  <div class="receipt-block border-dashed-v px-margin py-6">
+    <div class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-3">Recent Dispatches</div>
+    <div class="divide-y divide-architectural-ink/10">
+      <div class="py-2">
+        <div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-1">MAY 25, 2026</div>
+        <a class="font-body-dense text-body-dense font-bold hover:text-blueprint-cyan transition-colors block leading-snug" href="/pages/counterpoint-detail.html">Five Months Later, the Evidence Showed Up</a>
       </div>
-    </header>
-
-    <main class="shell">
-      <div class="meta-strip">
-        <span class="format-badge">Follow</span>
-        <span style="font-size: var(--text-sm); color: var(--text-secondary);">No email capture · RSS-first · LinkedIn cross-published</span>
+      <div class="py-2">
+        <div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-1">MAY 24, 2026</div>
+        <a class="font-body-dense text-body-dense font-bold hover:text-blueprint-cyan transition-colors block leading-snug" href="/pages/counterpoint-detail.html">Process Beats Inspection: Why the Chassis Doesn't Just Shift the Review Burden</a>
       </div>
-
-      <h1 class="page-title">Follow new Dispatches</h1>
-      <p class="page-subtitle">Three ways to know when something lands. None require an email address — by design.</p>
-
-      <div class="follow-list">
-        <div class="follow-card">
-          <div class="follow-card-icon">RSS</div>
-          <div class="follow-card-body">
-            <h2 class="follow-card-title">RSS feed (titles + excerpts)</h2>
-            <p class="follow-card-desc">Standard feed. New Dispatches surface in your reader as they publish. Compatible with NetNewsWire, Reeder, Feedly, Inoreader, anything that speaks RSS 2.0.</p>
-            <a class="url" href="https://ninochavez.co/blog/rss.xml">https://ninochavez.co/blog/rss.xml</a>
-          </div>
-        </div>
-
-        <div class="follow-card">
-          <div class="follow-card-icon">RSS+</div>
-          <div class="follow-card-body">
-            <h2 class="follow-card-title">RSS feed (full content)</h2>
-            <p class="follow-card-desc">Same feed; full article body inline. For readers who prefer to consume offline or in-app without round-tripping through the site. Capped at 50 most-recent items.</p>
-            <a class="url" href="https://ninochavez.co/blog/full-content-rss.xml">https://ninochavez.co/blog/full-content-rss.xml</a>
-          </div>
-        </div>
-
-        <div class="follow-card">
-          <div class="follow-card-icon">in</div>
-          <div class="follow-card-body">
-            <h2 class="follow-card-title">LinkedIn (cross-publication)</h2>
-            <p class="follow-card-desc">New Dispatches get a companion LinkedIn post on publication. The full piece is here; the post is the "this exists" signal. Follow there if LinkedIn is already in your daily flow.</p>
-            <a class="url" href="https://www.linkedin.com/in/ninochavez/">linkedin.com/in/ninochavez</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="cadence-block">
-        <div class="cadence-label">Cadence</div>
-        <p class="cadence-text">
-          Published when ready. No promised cadence (per D4, accepted under Thesis A). The publication ships when a piece earns its place; preserves the no-marketing-tells posture the hiring-evaluator persona requires.
-        </p>
-      </div>
-
-      <div class="anti-section">
-        <div class="anti-label">What this surface intentionally does NOT do</div>
-        <p class="anti-text">No email capture. No modal popup. No "Subscribe!" CTA mid-article. No "Now reading" widget. No subscriber-count display. The hiring-evaluator persona (per <a href="/docs/?doc=research/personas/hiring-evaluator">P2 in the personas overview</a>) reads marketing affordances as personal-brand performance and bounces. v2 preserves v1's intentional restraint here.</p>
-      </div>
-    </main>
-
-    <footer class="pub-footer">
-      <span>by Nino Chavez · architect-who-directs-agents</span>
-      <a href="https://ninochavez.co/blog/rss.xml" target="_blank" rel="noopener">RSS</a>
-      <a href="https://ninochavez.co/blog/full-content-rss.xml" target="_blank" rel="noopener">RSS (full content)</a>
-    </footer>
-  </section>
-
-  <section class="shipped-view">
-    <div class="v1-mock">
-      <h1>v1 subscribe affordances — footer-link-only</h1>
-      <div class="v1-body">
-        <p>v1 doesn't have a dedicated Subscribe / Follow surface. RSS URLs live in the global footer + are referenced in the "More" nav menu. There's no on-site explanation of cadence, format split, or the no-email-capture rationale.</p>
-        <p>Real production surface: <a href="https://ninochavez.co/blog" target="_blank" rel="noopener">ninochavez.co/blog (footer)</a></p>
-      </div>
-      <div class="v1-note">
-        v2 adds a Subscribe page that makes the existing affordances discoverable as a destination, with a cadence explainer (per D4) and an explicit "what this surface does not do" anti-section. Preserves no-email-capture rule.
+      <div class="py-2">
+        <div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-1">MAY 24, 2026</div>
+        <a class="font-body-dense text-body-dense font-bold hover:text-blueprint-cyan transition-colors block leading-snug" href="/pages/whitepaper-detail.html">Big Blueprint: A Production Line for Agent-Assisted Product Work</a>
       </div>
     </div>
-  </section>
+  </div>
 
-  <script>
-    window.PORTAL_SHELL_CONFIG = { productName: 'Signal Dispatch v2' };
-    window.PROTO_PAGE = { id: 'subscribe-follow' };
-  </script>
-  <script src="/_portal-shell.js?v=20260525-1700"></script>
-  <script src="/proto-nav.js?v=20260525-1700"></script>
-  <script src="/chat-widget.js" defer></script>
-  <script src="/proto-annotate.js?v=20260525-1700" defer></script>
-</body>
-</html>
+  <!-- Footer in left rail -->
+  <div class="mt-auto px-margin py-4 border-t-2 border-architectural-ink">
+    <div class="font-data-receipt text-data-receipt opacity-60 mb-2">EXTERNAL</div>
+    <ul class="font-label-ui text-label-ui space-y-1">
+      <li><a class="hover:text-blueprint-cyan transition-colors" href="https://ninochavez.co/blog">Live site →</a></li>
+      <li><a class="hover:text-blueprint-cyan transition-colors" href="https://www.linkedin.com/in/ninochavez/">LinkedIn →</a></li>
+      <li><a class="hover:text-blueprint-cyan transition-colors" href="https://ninochavez.co/blog/rss.xml">RSS →</a></li>
+    </ul>
+  </div>
+</aside>
+  <main class="flex-1 px-margin py-margin min-w-0 max-w-full">
+
+    <header class="mb-12 max-w-3xl">
+      <span class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan border border-blueprint-cyan px-2 py-1 inline-block mb-4">Follow Path</span>
+      <h1 class="font-display-lg text-display-lg leading-tight mb-4">Follow Signal Dispatch</h1>
+      <p class="font-body-prose text-body-prose italic opacity-80 border-l-2 border-blueprint-cyan pl-4">RSS or LinkedIn. No email capture, no newsletter funnel, no popup.</p>
+    </header>
+
+    <div class="space-y-6 max-w-3xl mb-12">
+      <a class="block border-2 border-architectural-ink p-6 hover:bg-architectural-ink hover:text-aged-paper transition-colors group" href="https://ninochavez.co/blog/full-content-rss.xml">
+        <div class="flex items-baseline gap-3 mb-3">
+          <span class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan">RSS // FULL CONTENT</span>
+        </div>
+        <div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-3">ninochavez.co/blog/full-content-rss.xml</div>
+        <p class="font-body-prose text-body-prose opacity-80">Full article body in your reader. Paste into NetNewsWire, Feedbin, Reeder, or any standard RSS client.</p>
+      </a>
+
+      <a class="block border-2 border-architectural-ink p-6 hover:bg-architectural-ink hover:text-aged-paper transition-colors group" href="https://ninochavez.co/blog/rss.xml">
+        <div class="flex items-baseline gap-3 mb-3">
+          <span class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan">RSS // SUMMARIES</span>
+        </div>
+        <div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-3">ninochavez.co/blog/rss.xml</div>
+        <p class="font-body-prose text-body-prose opacity-80">Title + excerpt only. Lighter feed for inbox-style scanning.</p>
+      </a>
+
+      <a class="block border-2 border-architectural-ink p-6 hover:bg-architectural-ink hover:text-aged-paper transition-colors group" href="https://www.linkedin.com/in/ninochavez/">
+        <div class="flex items-baseline gap-3 mb-3">
+          <span class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan">LINKEDIN</span>
+        </div>
+        <div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-3">linkedin.com/in/ninochavez</div>
+        <p class="font-body-prose text-body-prose opacity-80">Cross-posts of new pieces appear on Nino's LinkedIn feed. Follow there if RSS isn't your stack.</p>
+      </a>
+    </div>
+
+    <section class="receipt-block border-dashed-v p-6 max-w-3xl">
+      <h2 class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-4">Why no email signup?</h2>
+      <p class="font-body-prose text-body-prose opacity-80">The hiring-evaluator persona drops at marketing-y formatting and aggressive capture flows. RSS-and-LinkedIn-only is a deliberate constraint: it costs subscriber growth and pays positioning trust. See <a class="border-b-2 border-blueprint-cyan hover:text-blueprint-cyan transition-colors" href="/pages/about-colophon.html">About</a>.</p>
+    </section>
+  
+</main>
+</div>
+</body></html>

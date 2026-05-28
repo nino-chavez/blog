@@ -5,7 +5,7 @@ This repo has two concerns. They share a directory and otherwise do not overlap.
 | Concern | Lives at | Source of truth |
 |---|---|---|
 | **Blog content authoring** (writing posts, whitepapers, presentations against the live blog at ninochavez.co/blog) | `astro-build/` | This file, below |
-| **Blueprint methodology** (brownfield redesign review: diagnose → prescribe → prototype proposed state) | `blueprint/` + `blueprint.yml` at repo root | `~/Workspace/dev/wip/blueprint/template/CLAUDE.md` (canonical map) — do not inline its rules here; load on demand |
+| **Blueprint methodology** (brownfield redesign review: diagnose → prescribe → prototype proposed state) | `blueprint/` + `blueprint.yml` at repo root | `~/Workspace/dev/tools/blueprint/template/CLAUDE.md` (canonical map) — do not inline its rules here; load on demand |
 
 When the task is content authoring (a new post, a voice review, a whitepaper edit), the rules below apply. When the task is shaping the redesign (audit current state, write a prescription, build a portal page, run a reviewer agent), `blueprint.yml` declares the variant / tier / pattern, and the canonical Blueprint repo is the source of truth — including the SessionStart hook that injects `METHODOLOGY.md` + `docs/variant-selection.md` + `docs/portal-and-tier-ladder.md` at the top of every Blueprint session.
 

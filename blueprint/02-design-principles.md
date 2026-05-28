@@ -165,3 +165,54 @@ This stage surfaces decisions but does not answer them where they require Nino's
 - **D7** (from Stage 1) — v2 name. **Blocks Stage 3 home, About, and prototype shell copy.**
 - **D8** (new) — Reader-facing label terminology (e.g., "counterpoint" vs reader-label). Per Rule 2.
 - **D9** (new) — Whether to extend `research/competitive/` with cross-industry captures (per Stage 1 D6 split into a do/don't call).
+
+---
+
+## JTBD traceability (added 2026-05-25, wave-7 methodology amendment)
+
+> Per the meta-agent's JTBD-discontinuity diagnosis: every principle below must trace to a measurable JTBD it serves. Principles that don't trace are "positioning directives without functional anchor" and should be promoted (find the JTBD), demoted (move to commentary), or dropped. JTBD IDs reference `blueprint/prescription.yml § jtbds`.
+
+### Rules → JTBDs served
+
+| Rule | Serves JTBDs | Status |
+|---|---|---|
+| Rule 1 — match brand register | P2-firstread-postdetail, P2-secondlook-about, P2-secondlook-sampling, P1-firstread-postdetail | TRACED — hiring-evaluator persona is the load-bearing reader for brand-register consistency |
+| Rule 2 — reader's terminology | P2-secondlook-counterpoint, P1-secondlook-library | TRACED via D8 (label terminology) — both personas need labels that don't require explanation |
+| Rule 3 — work first, author second, brand third | P2-disc-linkedin, P2-firstread-postdetail, P2-secondlook-about | TRACED — explicitly calibrated against P2's drop-condition for personal-brand framing |
+| Rule 4 — one thing per surface | P1-firstread-postdetail (clean first paragraph), P1-secondlook-library (one primary axis), P3-no-second-look (no friction added) | TRACED — each surface that violates this has a measurable JTBD failure mode |
+| Rule 5 — progressive disclosure on long-form | P1-firstread-whitepaper | TRACED — F4 finding (whitepapers 20k px no TOC) is the literal P1 drop-condition |
+
+### Voice principles → JTBDs served
+
+| Voice principle | Serves JTBDs |
+|---|---|
+| Open with tension | P2-firstread-postdetail (engages within first fold) |
+| Show the work | P2-firstread-postdetail, P1-firstread-postdetail (concrete artifacts signal practice) |
+| Self-interrogate | P2-firstread-postdetail (signals intellectual honesty) |
+| End provisionally | P2-firstread-postdetail (avoids prescriptive-authority anti-pattern) |
+| No fabricated interior state | P2-firstread-postdetail (any single fabrication detected = whole-tab close) |
+
+### Format-mix decisions → JTBDs served
+
+| Format keep/archive decision | Serves JTBDs |
+|---|---|
+| Keep blog (229) — primary | All P1/P2/P3 first-read JTBDs |
+| Keep whitepapers (12) — secondary primary | P1-firstread-whitepaper, P1-secondlook-library (citation use) |
+| Keep series (8) — promote to primary nav | P1-secondlook-series (the F7-positive pattern) |
+| Keep counterpoints (4) — under-used | P2-secondlook-counterpoint (intellectual-honesty signal — most P2-load-bearing format) |
+| Archive presentations (dormant) | NONE — TRACE-MISSING, dormant collection serves no current JTBD |
+| Decide fiction (10) | NONE — TRACE-MISSING, depends on D1 + audience-priority decision |
+| Archive tutorials (3), research-notes (1) | NONE — dormant, no current JTBD |
+
+### Principles that DO NOT trace to a JTBD (flag for next-stage review)
+
+| Principle | Why it doesn't trace | Suggested disposition |
+|---|---|---|
+| Tag-detail decision: "not in v2 set" | Traces to F1 (broken at scale) but not to a positive JTBD any persona has at the library surface | Promote: P1/P2 may want tag-as-navigation if topical-discovery JTBD exists. Funnel measurement (G3) would resolve. |
+| Open competitive question: dispatch-numbering | Positioning decision (D1-dependent) — no persona has a JTBD for "see the dispatch number" | Demote to D1-conditional commentary; not a load-bearing principle until D1 lands |
+
+---
+
+## Methodology note
+
+This JTBD-traceability section is the consumer-side fix for the wave-7 methodology gap surfaced 2026-05-25. The canonical fix (per the meta-agent) is a `prescription-jtbd-traceability-reviewer` that runs as a Stage 2 → 3 gate and flags principles without JTBD trace. Until that reviewer lands in wave 7, the trace is maintained by hand here. After the reviewer lands, this section becomes the reviewer's input.

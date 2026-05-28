@@ -1,6 +1,6 @@
 # Signal Dispatch v2 — Blueprint configuration.
 #
-# Canonical config schema: ~/Workspace/dev/wip/blueprint/template/blueprint.yml
+# Canonical config schema: ~/Workspace/dev/tools/blueprint/template/blueprint.yml
 #
 # Variant: greenfield. Corrected 2026-05-25 after the prior pattern-match call
 # ("v1 exists → brownfield") was identified as a misclassification. Per

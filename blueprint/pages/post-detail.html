@@ -1,348 +1,269 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Signal Dispatch v2 | The Governance of Non-Deterministic Systems</title>
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;display=swap" rel="stylesheet"/>
-<!-- Material Symbols -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<!-- Theme Config -->
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "outline-variant": "#c4c7c7",
-                        "surface-tint": "#5f5e5e",
-                        "on-error": "#ffffff",
-                        "on-error-container": "#93000a",
-                        "inverse-primary": "#c8c6c5",
-                        "secondary-fixed": "#d1e4fb",
-                        "surface-container-low": "#f5f3f3",
-                        "secondary": "#4e6073",
-                        "on-primary": "#ffffff",
-                        "tertiary-fixed-dim": "#cac6c4",
-                        "primary-fixed": "#e5e2e1",
-                        "on-primary-fixed-variant": "#474746",
-                        "on-secondary": "#ffffff",
-                        "tertiary-fixed": "#e6e2df",
-                        "secondary-fixed-dim": "#b5c8df",
-                        "on-secondary-fixed": "#091d2e",
-                        "primary-container": "#1c1b1b",
-                        "error-container": "#ffdad6",
-                        "on-secondary-fixed-variant": "#36485b",
-                        "surface-container-highest": "#e4e2e2",
-                        "background": "#fbf9f9",
-                        "on-surface-variant": "#444748",
-                        "surface-container-high": "#e9e8e7",
-                        "surface-container-lowest": "#ffffff",
-                        "on-primary-fixed": "#1c1b1b",
-                        "on-tertiary-fixed-variant": "#484645",
-                        "on-surface": "#1b1c1c",
-                        "on-tertiary": "#ffffff",
-                        "surface-variant": "#e4e2e2",
-                        "on-background": "#1b1c1c",
-                        "error": "#ba1a1a",
-                        "inverse-on-surface": "#f2f0f0",
-                        "primary-fixed-dim": "#c8c6c5",
-                        "surface-container": "#efeded",
-                        "surface-dim": "#dbdad9",
-                        "on-primary-container": "#858383",
-                        "inverse-surface": "#303031",
-                        "on-tertiary-container": "#868382",
-                        "on-secondary-container": "#526478",
-                        "tertiary-container": "#1c1b1a",
-                        "surface-bright": "#fbf9f9",
-                        "tertiary": "#000000",
-                        "secondary-container": "#cfe2f9",
-                        "primary": "#000000",
-                        "outline": "#747878",
-                        "on-tertiary-fixed": "#1c1b1a",
-                        "surface": "#fbf9f9"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "margin-mobile": "20px",
-                        "margin-desktop": "80px",
-                        "max-width-content": "720px",
-                        "gutter": "32px",
-                        "unit": "4px"
-                    },
-                    "fontFamily": {
-                        "body-lg": ["Source Serif 4"],
-                        "metadata": ["Inter"],
-                        "technical-callout": ["JetBrains Mono"],
-                        "display-lg-mobile": ["Source Serif 4"],
-                        "label-caps": ["Inter"],
-                        "display-lg": ["Source Serif 4"],
-                        "body-md": ["Source Serif 4"],
-                        "headline-md": ["Source Serif 4"]
-                    },
-                    "fontSize": {
-                        "body-lg": ["20px", {"lineHeight": "32px", "fontWeight": "400"}],
-                        "metadata": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
-                        "technical-callout": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
-                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "600"}],
-                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                        "body-md": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                        "headline-md": ["30px", {"lineHeight": "38px", "fontWeight": "600"}]
-                    }
-                },
-            },
-        }
-    </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            display: inline-block;
-            vertical-align: middle;
-            line-height: 1;
-        }
-        /* Custom scroll behavior for deep links */
-        html { scroll-behavior: smooth; }
-        ::selection { background: #cfe2f9; color: #000; }
-    </style>
-</head>
-<body class="bg-background text-on-background min-h-screen">
-<!-- Stitch alternate disclaimer + back-link to v2 portal — injected by integration round, not part of Stitch's original output. -->
-<aside style="background:#fbeb96;border-bottom:1px solid #b8941b;padding:8px 16px;font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#5a4a0e;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;line-height:1.4;">
-  <span><strong>Stitch alternate design</strong> &middot; Generated by Google Stitch &middot; <a href="/docs/?doc=research/design-alternates/stitch-DESIGN" style="color:inherit;text-decoration:underline;">design system</a> &middot; D1/D2/D7 not adopted from this output; email-signup conflicts with no-marketing-tells rule</span>
-  <a href="/" style="color:#5a4a0e;text-decoration:underline;font-weight:600;white-space:nowrap;">&larr; back to v2 portal</a>
-</aside>
-
-<!-- TopAppBar -->
-<header class="fixed top-0 left-0 right-0 z-50 bg-background border-b border-on-surface/10">
-<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-6 max-w-full mx-auto">
-<div class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">
-                Signal Dispatch v2
-            </div>
-<nav class="hidden md:flex gap-x-8 items-center">
-<a class="font-label-caps text-label-caps text-secondary border-b-2 border-secondary pb-1" href="#">Dispatches</a>
-<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Series</a>
-<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Whitepapers</a>
-<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Presentations</a>
-<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">About</a>
-</nav>
-<div class="font-label-caps text-label-caps text-on-surface-variant border border-on-surface/20 px-4 py-2 hover:bg-surface-container transition-colors cursor-pointer">
-                Nino Chavez
-            </div>
-</div>
-</header>
-<div class="flex max-w-screen-2xl mx-auto pt-32 px-margin-mobile md:px-margin-desktop">
-<!-- SideNavBar (Persistent Table of Contents) -->
-<aside class="fixed left-0 top-24 px-8 py-8 flex flex-col gap-y-4 w-72 hidden xl:block border-r border-on-surface/5 h-[calc(100vh-6rem)]">
-<div class="mb-6">
-<p class="font-label-caps text-label-caps text-on-surface opacity-50 uppercase tracking-widest mb-1">Table of Contents</p>
-<p class="font-metadata text-metadata font-bold text-primary">Technical Roadmap</p>
-</div>
-<nav class="flex flex-col gap-y-4">
-<a class="group flex items-center gap-3 text-secondary font-bold border-l-2 border-secondary pl-4 py-1 transition-all" href="#introduction">
-<span class="material-symbols-outlined text-[18px]">segment</span>
-<span class="font-metadata text-metadata">Introduction</span>
-</a>
-<a class="group flex items-center gap-3 text-on-surface-variant pl-4 py-1 hover:text-primary transition-all" href="#constraints">
-<span class="material-symbols-outlined text-[18px]">architecture</span>
-<span class="font-metadata text-metadata">Architectural Constraints</span>
-</a>
-<a class="group flex items-center gap-3 text-on-surface-variant pl-4 py-1 hover:text-primary transition-all" href="#implementation">
-<span class="material-symbols-outlined text-[18px]">code</span>
-<span class="font-metadata text-metadata">Implementation</span>
-</a>
-<a class="group flex items-center gap-3 text-on-surface-variant pl-4 py-1 hover:text-primary transition-all" href="#review">
-<span class="material-symbols-outlined text-[18px]">verified</span>
-<span class="font-metadata text-metadata">Review</span>
-</a>
-<a class="group flex items-center gap-3 text-on-surface-variant pl-4 py-1 hover:text-primary transition-all" href="#conclusion">
-<span class="material-symbols-outlined text-[18px]">description</span>
-<span class="font-metadata text-metadata">Conclusion</span>
-</a>
-</nav>
-<div class="mt-auto pt-10">
-<div class="p-6 bg-surface-container-low border border-on-surface/5">
-<p class="font-label-caps text-[10px] text-on-surface-variant uppercase mb-2">Current Serial</p>
-<p class="font-body-md text-body-md font-bold italic leading-tight">The Governance of Non-Deterministic Systems</p>
-</div>
-</div>
-</aside>
-<!-- Main Content Column -->
-<main class="flex-1 w-full max-w-[720px] mx-auto xl:ml-[320px] pb-24">
-<!-- Article Header -->
-<header class="mb-16">
-<div class="mb-8 flex items-center gap-2">
-<span class="font-technical-callout text-technical-callout bg-primary text-on-primary px-2 py-0.5">DISPATCH #158</span>
-<span class="text-on-surface-variant opacity-40">—</span>
-<span class="font-metadata text-metadata text-on-surface-variant">12 Min Read • Architectural Governance</span>
-</div>
-<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-6 leading-tight">
-                    The Governance of Non-Deterministic Systems
-                </h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant italic border-l-4 border-secondary pl-6 py-2">
-                    As we shift from imperative logic to probabilistic inference, the traditional frameworks of software governance must evolve or face obsolescence.
-                </p>
-</header>
-<!-- Lead Image -->
-<div class="mb-16 w-full aspect-[16/9] overflow-hidden grayscale contrast-125">
-<img alt="Abstract Circuitry" class="w-full h-full object-cover" data-alt="A highly detailed close-up of a complex industrial circuit board rendered in high-contrast black and white. The lighting is dramatic and directional, casting deep shadows across the silicon architecture. The aesthetic is clean, technical, and editorial, reflecting a mood of advanced engineering and intellectual precision. There are no colors, only varying tones of charcoal and bright silver light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-LvdqAhJ1V9isiUppQaAiZLjGd-GvnHTrgdDq9jLV0g8Dr9Tag-WHQQEQ2d1kO_b7whaJzCNTnzHkSKgYlQY7kwTBNuhv_Y9_SXDtW5nvY1_u7AFaIKo9uCf-zQwdRuSdA3Tn8VUBYgzH1iqmnDyo5WiplMadEonYYIBsVznN0KpUXqBTVVoAGn_-tcbrUtOfk64SKcTaPufn5fUngWW5uUpqfqC0MQ2NcpiADoy59uAPaWRIIvug9biNpoHJ1EOrdYCdzZz_4A0"/>
-</div>
-<!-- Content Sections -->
-<section class="mb-12" id="introduction">
-<p class="font-body-lg text-body-lg text-on-surface mb-8">
-                    In the previous era of software architecture, state was a known quantity. We built systems on the bedrock of if-then-else statements, ensuring that for every input, there was a predictable, immutable output. Today, that bedrock is shifting. The rise of large-scale neural networks and autonomous agents has introduced non-determinism into the very core of our production environments.
-                </p>
-<p class="font-body-lg text-body-lg text-on-surface mb-8">
-                    Governance is no longer about preventing errors through static analysis; it is about managing probability distributions. We are transitioning from "quality assurance" to "statistical trust." This dispatch explores the architectural constraints required to maintain stability in a system that can, by design, change its mind.
-                </p>
-</section>
-<!-- Counterpoint Section -->
-<aside class="my-16 p-10 bg-surface-container-low border-l-8 border-secondary">
-<p class="font-label-caps text-label-caps text-secondary mb-4">COUNTERPOINT: THE DETERMINISTIC DELUSION</p>
-<p class="font-body-md text-body-md text-on-surface italic">
-                    "Some argue that we should simply wrap non-deterministic cores in deterministic shells. This is a fallacy. A shell that masks the fundamental nature of its engine creates a 'Black Box Paradox'—where failures are not only unpredictable but also untraceable. True governance requires embracing the uncertainty, not hiding it."
-                </p>
-</aside>
-<section class="mb-12" id="constraints">
-<h2 class="font-headline-md text-headline-md text-on-surface mb-6">Architectural Constraints</h2>
-<p class="font-body-lg text-body-lg text-on-surface mb-8">
-                    To govern a system that evolves, we must implement rigid boundaries. These constraints are not meant to stifle the agent's utility but to define the "Safety Envelope" within which it operates.
-                </p>
-<!-- Technical Table -->
-<div class="my-12 overflow-x-auto">
-<table class="w-full text-left border-collapse">
-<thead>
-<tr class="bg-surface-container-high border-y border-on-surface/10">
-<th class="p-4 font-label-caps text-label-caps">RISK CATEGORY</th>
-<th class="p-4 font-label-caps text-label-caps">NON-DETERMINISTIC DRIFT</th>
-<th class="p-4 font-label-caps text-label-caps">GOVERNANCE MECHANISM</th>
-</tr>
-</thead>
-<tbody class="font-metadata text-metadata">
-<tr class="border-b border-on-surface/5">
-<td class="p-4 font-bold">Latency Variance</td>
-<td class="p-4">Probabilistic token generation speeds</td>
-<td class="p-4">Dynamic queue throttling</td>
-</tr>
-<tr class="border-b border-on-surface/5">
-<td class="p-4 font-bold">Logic Hallucination</td>
-<td class="p-4">Syntactic correctness with semantic failure</td>
-<td class="p-4">Dual-pass validation (Rules engine)</td>
-</tr>
-<tr class="border-b border-on-surface/5">
-<td class="p-4 font-bold">Resource Exhaustion</td>
-<td class="p-4">Infinite recursive loops in agents</td>
-<td class="p-4">Deterministic TTL &amp; Hard Kill-switches</td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<!-- End of Dispatch Marker -->
-<div class="mt-24 pt-12 border-t border-on-surface/10 flex flex-col items-center">
-<div class="w-12 h-1 bg-primary mb-8"></div>
-<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.3em] mb-12">End of Dispatch #158</p>
-<div class="flex justify-between w-full items-center">
-<div class="flex flex-col items-start gap-1">
-<span class="font-label-caps text-[10px] text-on-surface-variant">PREVIOUS</span>
-<a class="font-body-md text-body-md font-bold text-primary hover:text-secondary transition-colors" href="#">#157 The Rust Migration</a>
-</div>
-<div class="flex flex-col items-end gap-1">
-<span class="font-label-caps text-[10px] text-on-surface-variant">NEXT</span>
-<a class="font-body-md text-body-md font-bold text-primary hover:text-secondary transition-colors" href="#">#159 Edge Intelligence →</a>
-</div>
-</div>
-</div>
-<!-- Author Card -->
-<footer class="mt-24 p-8 bg-surface-container border border-on-surface/10 flex gap-6 items-center">
-<div class="w-20 h-20 bg-primary flex-shrink-0 grayscale">
-<img alt="Nino Chavez" class="w-full h-full object-cover border border-on-surface/10" data-alt="A professional, greyscale headshot of a man in his late 40s with a thoughtful expression. He is wearing a simple dark turtleneck. The lighting is soft and directional, typical of an editorial portrait in a business magazine. The background is a flat, neutral grey, maintaining the minimalist and authoritative aesthetic of the Signal Dispatch brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoIqrCSviiDkNCEdCoaW_Lu_6ZdT-oibjtUXtGs-OiyHIf_Umf3SgaGmqX_TPOAAB-ykGGkUrOfmWsClRUXriWATASM5iHKQOsxA7JzDAeJvgL3HlCg5-aF3kFk3RNG1hoxrQLkI4pVunUTMIOqnlt6FZe53LFjdtkF8l_VSWt7ihmQ-31Xbyy41Rg8wj9WNVI797Nii8bN2qRe2xm8mHRvvSkQJxhxq6oLfdKdKM3mmWUVHguFO8uIRoKG1rfuwswtNY9dpchOd4"/>
-</div>
-<div>
-<p class="font-label-caps text-label-caps text-on-surface mb-1">Nino Chavez</p>
-<p class="font-metadata text-metadata text-on-surface-variant leading-relaxed">
-                        Nino is the Principal Architect at Signal Foundry, specializing in the intersection of legacy infrastructure and emergent AI systems. He advocates for structural transparency and rigorous engineering standards in the age of probabilistic computing.
-                    </p>
-</div>
-</footer>
-</main>
-</div>
-<!-- Footer Shell -->
-<footer class="bg-surface-container-low dark:bg-surface-container-lowest border-t border-on-surface/10 mt-24">
-<div class="w-full py-12 px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-start md:items-center max-w-full">
-<div class="mb-8 md:mb-0">
-<p class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight mb-2">Signal Dispatch v2</p>
-<p class="font-metadata text-metadata text-on-surface-variant max-w-sm">
-                    © Signal Dispatch v2 by Nino Chavez. All rights reserved.
-                </p>
-</div>
-<div class="flex flex-wrap gap-x-10 gap-y-4">
-<div class="flex flex-col gap-2">
-<p class="font-label-caps text-label-caps text-on-surface opacity-40 uppercase">Resources</p>
-<a class="font-metadata text-metadata text-on-surface-variant hover:text-secondary underline transition-all" href="#">RSS Feed</a>
-<a class="font-metadata text-metadata text-on-surface-variant hover:text-secondary underline transition-all" href="#">Archive</a>
-</div>
-<div class="flex flex-col gap-2">
-<p class="font-label-caps text-label-caps text-on-surface opacity-40 uppercase">Legals</p>
-<a class="font-metadata text-metadata text-on-surface-variant hover:text-secondary underline transition-all" href="#">Technical Notes</a>
-<a class="font-metadata text-metadata text-on-surface-variant hover:text-secondary underline transition-all" href="#">Privacy</a>
-</div>
-</div>
-</div>
-</footer>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>The A/B Test That Built the Lathe | Signal Dispatch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script>
-        // Simple Interaction for TOC Highlight
-        document.querySelectorAll('aside nav a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                document.querySelectorAll('aside nav a').forEach(l => {
-                    l.classList.remove('text-secondary', 'font-bold', 'border-l-2', 'border-secondary');
-                    l.classList.add('text-on-surface-variant');
-                });
-                this.classList.remove('text-on-surface-variant');
-                this.classList.add('text-secondary', 'font-bold', 'border-l-2', 'border-secondary');
-            });
-        });
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "background": "#fbfaee",
+          "surface": "#fbfaee",
+          "surface-bright": "#fbfaee",
+          "surface-container-lowest": "#ffffff",
+          "surface-container-low": "#f5f4e8",
+          "surface-container": "#efeee3",
+          "surface-container-high": "#e9e9dd",
+          "surface-container-highest": "#e4e3d7",
+          "surface-dim": "#dbdbcf",
+          "surface-variant": "#e4e3d7",
+          "on-surface": "#1b1c15",
+          "on-surface-variant": "#42474c",
+          "on-background": "#1b1c15",
+          "outline": "#72787d",
+          "outline-variant": "#c2c7cd",
+          "primary": "#001c2b",
+          "on-primary": "#ffffff",
+          "secondary": "#006972",
+          "tertiary": "#131b1d",
+          "tertiary-fixed": "#dbe4e6",
+          "architectural-ink": "#001B29",
+          "blueprint-cyan": "#008B94",
+          "aged-paper": "#FDFCF0",
+          "carbon-trace": "#111827",
+          "error": "#ba1a1a"
+        },
+        borderRadius: { "DEFAULT": "0", "lg": "0", "xl": "0", "full": "9999px" },
+        spacing: { "unit": "4px", "rail-width": "320px", "left-rail": "260px", "gutter": "16px", "margin": "32px", "dense-gap": "8px" },
+        fontFamily: {
+          "display-lg":   ["Bree Serif"],
+          "headline-md":  ["Bree Serif"],
+          "body-prose":   ["Crimson Pro"],
+          "body-dense":   ["Crimson Pro"],
+          "label-ui":     ["Inter"],
+          "data-receipt": ["JetBrains Mono"],
+          "status-code":  ["JetBrains Mono"]
+        },
+        fontSize: {
+          "display-lg":   ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+          "headline-md":  ["24px", {"lineHeight": "1.2", "fontWeight": "400"}],
+          "body-prose":   ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+          "body-dense":   ["16px", {"lineHeight": "1.4", "fontWeight": "400"}],
+          "label-ui":     ["13px", {"lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+          "data-receipt": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}],
+          "status-code":  ["11px", {"lineHeight": "1", "fontWeight": "700"}]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .receipt-block {
+    background-image: radial-gradient(circle, #008B9405 1px, transparent 1px);
+    background-size: 8px 8px;
+  }
+  .border-dashed-v {
+    border-top: 1px dashed #001B29;
+    border-bottom: 1px dashed #001B29;
+  }
+  /* Sharp corners (Cyanotype is 0-radius) */
+  * { border-radius: 0 !important; }
+  *.rounded-full { border-radius: 9999px !important; }
+</style>
+</head>
+<body class="bg-background text-architectural-ink font-body-prose selection:bg-blueprint-cyan selection:text-aged-paper overflow-x-hidden">
+<div class="flex min-h-screen">
+  <aside class="hidden md:flex flex-col w-[260px] flex-shrink-0 bg-background border-r-2 border-architectural-ink sticky top-0 h-screen overflow-y-auto">
+  <!-- Wordmark -->
+  <div class="px-margin py-6 border-b-2 border-architectural-ink">
+    <a class="block font-headline-md text-headline-md font-bold uppercase tracking-tighter leading-none" href="/pages/home.html">Signal<br/>Dispatch</a>
+    <div class="font-data-receipt text-data-receipt text-blueprint-cyan mt-1">v2 PROTOTYPE</div>
+  </div>
 
-        // Intersection Observer for highlighting current section in TOC
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.5
-        };
+  <!-- Primary nav -->
+  <nav class="px-3 py-6 border-b border-architectural-ink/20">
+    <div class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-3 px-3">Navigate</div>
+    <a class="flex items-center justify-between px-3 py-2 text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper font-label-ui text-label-ui transition-colors duration-75" href="/pages/home.html">
+      <span>Index</span>
+      <span class="font-data-receipt text-data-receipt opacity-50">→</span>
+    </a>
+      <a class="flex items-center justify-between px-3 py-2 bg-blueprint-cyan text-aged-paper font-label-ui text-label-ui" href="/pages/library.html">
+      <span>Library</span>
+      <span class="font-data-receipt text-data-receipt opacity-50">→</span>
+    </a>
+      <a class="flex items-center justify-between px-3 py-2 text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper font-label-ui text-label-ui transition-colors duration-75" href="/pages/about-colophon.html">
+      <span>About</span>
+      <span class="font-data-receipt text-data-receipt opacity-50">→</span>
+    </a>
+      <a class="flex items-center justify-between px-3 py-2 text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper font-label-ui text-label-ui transition-colors duration-75" href="/pages/subscribe-follow.html">
+      <span>Follow</span>
+      <span class="font-data-receipt text-data-receipt opacity-50">→</span>
+    </a>
+  </nav>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    const activeLink = document.querySelector(`aside nav a[href="#${id}"]`);
-                    if (activeLink) {
-                        document.querySelectorAll('aside nav a').forEach(l => {
-                            l.classList.remove('text-secondary', 'font-bold', 'border-l-2', 'border-secondary');
-                            l.classList.add('text-on-surface-variant');
-                        });
-                        activeLink.classList.remove('text-on-surface-variant');
-                        activeLink.classList.add('text-secondary', 'font-bold', 'border-l-2', 'border-secondary');
-                    }
-                }
-            });
-        }, observerOptions);
+  
+  <!-- Live signal -->
+  <div class="px-margin py-6 border-b border-architectural-ink/20 bg-architectural-ink text-aged-paper">
+    <div class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-2">Live Signal</div>
+    <div class="font-data-receipt text-data-receipt opacity-60 mb-1">MAY 25, 2026 · COUNTERPOINT</div>
+    <a class="block font-body-dense text-body-dense font-bold hover:text-blueprint-cyan transition-colors" href="/pages/counterpoint-detail.html">Five Months Later, the Evidence Showed Up</a>
+  </div>
 
-        document.querySelectorAll('section[id]').forEach(section => {
-            observer.observe(section);
-        });
-    </script>
-<script>window.BLUEPRINT_PAGE = { id: "post-detail", title: "Post detail" };</script>
-<script src="/_blueprint-banner.js?v=20260525-2100"></script>
-<script src="/chat-widget.js?v=20260525-2100" defer></script>
+  
+  <!-- Currently serializing -->
+  <div class="receipt-block border-dashed-v px-margin py-6">
+    <div class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-3">Recent Dispatches</div>
+    <div class="divide-y divide-architectural-ink/10">
+      <div class="py-2">
+        <div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-1">MAY 25, 2026</div>
+        <a class="font-body-dense text-body-dense font-bold hover:text-blueprint-cyan transition-colors block leading-snug" href="/pages/counterpoint-detail.html">Five Months Later, the Evidence Showed Up</a>
+      </div>
+      <div class="py-2">
+        <div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-1">MAY 24, 2026</div>
+        <a class="font-body-dense text-body-dense font-bold hover:text-blueprint-cyan transition-colors block leading-snug" href="/pages/counterpoint-detail.html">Process Beats Inspection: Why the Chassis Doesn't Just Shift the Review Burden</a>
+      </div>
+      <div class="py-2">
+        <div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-1">MAY 24, 2026</div>
+        <a class="font-body-dense text-body-dense font-bold hover:text-blueprint-cyan transition-colors block leading-snug" href="/pages/whitepaper-detail.html">Big Blueprint: A Production Line for Agent-Assisted Product Work</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer in left rail -->
+  <div class="mt-auto px-margin py-4 border-t-2 border-architectural-ink">
+    <div class="font-data-receipt text-data-receipt opacity-60 mb-2">EXTERNAL</div>
+    <ul class="font-label-ui text-label-ui space-y-1">
+      <li><a class="hover:text-blueprint-cyan transition-colors" href="https://ninochavez.co/blog">Live site →</a></li>
+      <li><a class="hover:text-blueprint-cyan transition-colors" href="https://www.linkedin.com/in/ninochavez/">LinkedIn →</a></li>
+      <li><a class="hover:text-blueprint-cyan transition-colors" href="https://ninochavez.co/blog/rss.xml">RSS →</a></li>
+    </ul>
+  </div>
+</aside>
+  <main class="flex-1 px-margin py-margin min-w-0 max-w-full">
+
+    <article class="max-w-3xl">
+      <header class="mb-12 border-b-2 border-architectural-ink pb-8">
+        <div class="flex flex-wrap items-baseline gap-4 mb-4">
+          <span class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan border border-blueprint-cyan px-2 py-1">POST</span>
+          <span class="font-status-code text-status-code uppercase tracking-widest opacity-60">Reflection</span>
+        </div>
+        <h1 class="font-display-lg text-display-lg leading-tight mb-4">The A/B Test That Built the Lathe</h1>
+        <p class="font-body-prose text-body-prose italic opacity-80 border-l-2 border-blueprint-cyan pl-4 mb-6">I pasted a two-paragraph plan into a terminal and walked away for two days. The strategy package that came back was good. Then I asked Claude to do it again from a template, without me in the feedback loop. The template version landed at 70-80% of the quality in 10-15x less time. The gap — and the loop that closed it — has a name from another century.</p>
+        <div class="flex flex-wrap gap-4 font-data-receipt text-data-receipt opacity-70">
+          <span>MAY 24, 2026</span>
+          <span>· 7 MIN READ</span>
+          <span>· BY NINO CHAVEZ</span>
+        </div>
+      </header>
+
+      <div class="article-body max-w-prose">
+<p class="font-body-prose text-body-prose mb-6">On March 13 I pasted a two-paragraph plan into a terminal. The plan said: build the strategy package for a pricing-and-packaging initiative — leadership documents and an agentic billing-support prototype. Then I walked away.</p>
+<p class="font-body-prose text-body-prose mb-6">Two days later there was a deployed prototype with eleven pages, four strategy documents validated against the production codebase, cross-industry research covering fourteen platforms with thirty-plus cited sources, and a design system extracted from screenshots of the existing product. I hadn't written a line of code or a word of doc copy. Every artifact was the agent, steered by feedback.</p>
+<p class="font-body-prose text-body-prose mb-6">The interesting part wasn't what got built. It was the question I asked at hour eighteen: <em class="italic">can this happen again, for a different initiative, without me in the feedback loop?</em></p>
+<p class="font-body-prose text-body-prose mb-6">What I did to answer that question — and what came out of it — is the thing the post is actually about.</p>
+<hr class="border-architectural-ink/20 my-8"/>
+<h3 class="font-headline-md text-headline-md text-architectural-ink mt-8 mb-3">What got built in those two days</h3>
+<p class="font-body-prose text-body-prose mb-6">Most of the first eighteen hours wasn't generation — it was correction. The agent got the voice wrong (defaulted to external consultant, not internal team). It invented UI components that didn't exist in the actual product. It used words that created merchant anxiety ("surcharge," "non-preferred," "BLOCKED") — a hundred-plus replacements across sixteen files. It made claims that didn't survive a check against the production codebase. Every one of these was caught by a single human reading the output and asking <em class="italic">is this right?</em></p>
+<p class="font-body-prose text-body-prose mb-6">What the agent could not do alone was the part where the work earned the right to be taken seriously — the research spikes I added on instinct ("would it help to look at utility billing? what about Comcast and AT&T?"), the design references I dropped in by uploading forty-two screenshots from my own SaaS bills, the credibility check that asked the agent to validate its own claims against actual screenshots and source code. Call that the twenty-five to thirty percent of quality that comes from the human noticing something the agent wouldn't have noticed on its own.</p>
+<p class="font-body-prose text-body-prose mb-6">Everything else — the eleven prototype pages, the four documents, the cited sources, the extracted design system — was the agent, executing prompts, refining against feedback. The production line above it already existed: <code class="font-data-receipt text-data-receipt bg-surface-container-low px-1 py-0.5">specchain</code> converts intent into a spec and a task list. <code class="font-data-receipt text-data-receipt bg-surface-container-low px-1 py-0.5">forge-brand</code> emits a typed design system. <code class="font-data-receipt text-data-receipt bg-surface-container-low px-1 py-0.5">forge-signal</code> writes the prose. <code class="font-data-receipt text-data-receipt bg-surface-container-low px-1 py-0.5">gen-images</code> renders the visuals. Each tool consumes the previous tool's output as input.</p>
+<p class="font-body-prose text-body-prose mb-6">At hour eighteen the work was effectively done. That's when I asked whether it could happen again from a template.</p>
+<hr class="border-architectural-ink/20 my-8"/>
+<h3 class="font-headline-md text-headline-md text-architectural-ink mt-8 mb-3">The extraction</h3>
+<p class="font-body-prose text-body-prose mb-6"><code class="font-data-receipt text-data-receipt bg-surface-container-low px-1 py-0.5">big-blueprint</code> came out of those eighteen hours by asking the agent to extract the methodology into a reusable jig. A template directory. Five skills for the pipeline stages. Four agent definitions (researcher, prototype-builder, doc-writer, validator). A configuration file with execution depth, voice modes, and research scope. Composable with <code class="font-data-receipt text-data-receipt bg-surface-container-low px-1 py-0.5">specchain</code> and <code class="font-data-receipt text-data-receipt bg-surface-container-low px-1 py-0.5">forge-signal</code>.</p>
+<p class="font-body-prose text-body-prose mb-6">The extraction wasn't the test. The test was: start a new project from this template, point it at the same kind of input, give it none of my feedback, and see what comes out.</p>
+<p class="font-body-prose text-body-prose mb-6">| Deliverable | Produced by | Solo version | |---|---|---| | Strategy documents | <code class="font-data-receipt text-data-receipt bg-surface-container-low px-1 py-0.5">forge-signal</code> after voice fix | Weeks of analyst drafting | | Cross-industry research with citations | Research spikes + the agent's web tools | Weeks of analyst time | | Design system extracted from screenshots | Extraction prompt against existing product | Design audit + manual tokenization | | The chassis (<code class="font-data-receipt text-data-receipt bg-surface-container-low px-1 py-0.5">big-blueprint</code> itself) | Extracted from the run while it was running | Would not have been built |</p>
+<p class="font-body-prose text-body-prose mb-6">The last row is the one that matters. Every other row scales linearly with effort. The last row scales because the methodology that just shipped the work was now a starting point for the next initiative, not something to reinvent.</p>
+<p class="font-body-prose text-body-prose mb-6">!<a class="border-b-2 border-blueprint-cyan hover:text-blueprint-cyan transition-colors" href="/images/generated/billing-1-pipeline.png">Generated billing pipeline diagram — produced later by the same production line the post is about, not drawn</a></p>
+<p class="font-body-prose text-body-prose mb-6">That diagram is from a different initiative — a subscriptions prototype that came after the first run. I show it because it is the same chain, demonstrably reused. The fact that I can show it here as evidence is the evidence.</p>
+<h3 class="font-headline-md text-headline-md text-architectural-ink mt-8 mb-3">The A/B test</h3>
+<p class="font-body-prose text-body-prose mb-6">The template version ran with no feedback from me. The first pass came back at <strong class="text-architectural-ink font-bold">70-80% of the quality, in 10-15x less time.</strong></p>
+<p class="font-body-prose text-body-prose mb-6">The 70-80% mattered more than the 10-15x. The shortfall was specific and itemizable. The agent used the placeholder terminology from the template instead of the actual product's terms ("deflectable" instead of "resolvable without support"). It didn't flag a methodology gap the original run had caught. It cited research sources by name but not by URL. None of those were generation failures. They were template gaps — places where the original run had inputs the template didn't carry forward.</p>
+<p class="font-body-prose text-body-prose mb-6">Six fixes went into the template:</p>
+<ol class="font-body-prose text-body-prose mb-6 space-y-2 list-decimal pl-6"><li>A populated terminology table, so the next run wouldn't substitute placeholder vocabulary</li><li>A citation-URL requirement, so sources had to resolve</li><li>A methodology-questioning step in the quality audit</li><li>A skeleton index page so the doc pipeline didn't block on a missing file</li><li><code class="font-data-receipt text-data-receipt bg-surface-container-low px-1 py-0.5">.gitkeep</code> files for empty directories the agent kept tripping over</li><li>A <code class="font-data-receipt text-data-receipt bg-surface-container-low px-1 py-0.5">docs/package.json</code> that had been silently breaking the doc build</li></ol>
+<p class="font-body-prose text-body-prose mb-6">The re-test passed all six checks. The agent used correct terminology on the first draft, flagged the methodology contradiction the first test missed, cited nineteen URLs, and spontaneously self-reviewed against the banned-words list.</p>
+<p class="font-body-prose text-body-prose mb-6">The lathe didn't get sharper because the agent got smarter. It got sharper because the <em class="italic">artifacts the agent reads</em> got more precise.</p>
+<hr class="border-architectural-ink/20 my-8"/>
+<h3 class="font-headline-md text-headline-md text-architectural-ink mt-8 mb-3">Then it kept running</h3>
+<p class="font-body-prose text-body-prose mb-6">On May 1 — forty-nine days after the A/B test — I caught a drift. A subscriptions prototype I was building against a commerce platform had evolved a working harness inside its own repo. The <code class="font-data-receipt text-data-receipt bg-surface-container-low px-1 py-0.5">big-blueprint</code> template upstream of it had not. The two were diverging.</p>
+<p class="font-body-prose text-body-prose mb-6">The obvious move was to backport: pull the working pieces back into the template. I didn't do that. After walking through the options I approved a different path — ship the slice shape as a real <code class="font-data-receipt text-data-receipt bg-surface-container-low px-1 py-0.5">prototypes/_template/</code> directory and have the agent clone it with <code class="font-data-receipt text-data-receipt bg-surface-container-low px-1 py-0.5">cp -r</code> for every new slice, instead of regenerating the shape from a prose description. Same concept as the first A/B test. The artifact is the spec; a mechanical copy can't drift the way generation does.</p>
+<p class="font-body-prose text-body-prose mb-6">Then <code class="font-data-receipt text-data-receipt bg-surface-container-low px-1 py-0.5">big-blueprint</code> ran against rally-hq — a volleyball tournament platform, a different domain. The pattern held. Where it didn't, the gaps got named, and the template absorbed the fix.</p>
+<p class="font-body-prose text-body-prose mb-6">Then it ran against ninochavez.co — a personal site, a totally different reason for existing. Same outcome.</p>
+<p class="font-body-prose text-body-prose mb-6">Each application improved the lathe. The version of <code class="font-data-receipt text-data-receipt bg-surface-container-low px-1 py-0.5">big-blueprint</code> that now sits in front of the next prototype is not the version that came out of the March extraction. It's been polished by passes against projects it wasn't originally designed for, which is exactly the friction that makes a chassis generic enough to be worth keeping.</p>
+<p class="font-body-prose text-body-prose mb-6">That feedback cycle is the part most "AI productivity" stories skip. They tell the story of how the tool worked the first time. The harder question is what happens the third time and the fourth, when the tool is being used by the version of you that has already been changed by using it.</p>
+<hr class="border-architectural-ink/20 my-8"/>
+<h3 class="font-headline-md text-headline-md text-architectural-ink mt-8 mb-3">The lathe, not the engine</h3>
+<p class="font-body-prose text-body-prose mb-6">The Industrial Revolution gets remembered as steam. That's the wrong inflection. The actual inflection was Maudslay's screw-cutting lathe — a machine that produced precise, identical, interchangeable parts that other machines could be built from. Whitney, Roberts, Nasmyth, Whitworth: they did not invent better goods. They invented the tools that made the goods possible.</p>
+<p class="font-body-prose text-body-prose mb-6">Steam was the power source. The lathe was the multiplier.</p>
+<p class="font-body-prose text-body-prose mb-6">The LLM is the steam engine of this moment. It is genuinely new power. But power doesn't compound on its own. Code generation alone produces more code, faster, the same way more steam produced more spindles spinning faster — and produced piles of yarn that no downstream loom could weave because the yarn wasn't standardized.</p>
+<p class="font-body-prose text-body-prose mb-6">The chassis is the lathe. The template directory. The spec format. The brand bridge. The contract that says <em class="italic">every prototype slice exposes the same shape, so the next thing built on top can assume it.</em> These are the boring infrastructure pieces that turn raw generative output into something the next layer can consume without rewriting. They work the way Whitworth's slip gauges worked: not as written tolerances a worker has to interpret, but as physical objects that either fit or don't. The artifact is the standard.</p>
+<p class="font-body-prose text-body-prose mb-6">The March A/B test was me building the lathe. The May 1 backport-that-wasn't was me noticing the lathe needed updating. Not the goods. Not even the recipe. The lathe.</p>
+<hr class="border-architectural-ink/20 my-8"/>
+<h3 class="font-headline-md text-headline-md text-architectural-ink mt-8 mb-3">What's about to get confused</h3>
+<p class="font-body-prose text-body-prose mb-6">The conflation I expect to see — and that I think most of the industry is already making — is treating the LLM as the inflection point and skipping the chassis work.</p>
+<p class="font-body-prose text-body-prose mb-6">It looks like this in practice — and the mechanism here is the one Adam Bender names in <a class="border-b-2 border-blueprint-cyan hover:text-blueprint-cyan transition-colors" href="https://www.youtube.com/watch?v=2n41YjR5QfU">his recent Google I/O talk</a>. A team gets agents producing code at 10x. They ship faster. The dependency graph quietly grows quadratically. The internal APIs drift. Code review becomes the bottleneck. The team adds more agents to do the review, which produces more drift. Six months later they have a codebase no human can hold in their head and no agent can refactor without breaking, and they conclude the agents didn't work.</p>
+<p class="font-body-prose text-body-prose mb-6">The agents worked. The chassis didn't exist.</p>
+<p class="font-body-prose text-body-prose mb-6">The work that compounds, right now, is not prompt engineering and it is not even building agents. It is building the lathes — the templates, schemas, contracts, validators, archetypes — that let the next generation of agent output be structurally sound by default, instead of being carefully reviewed into soundness one PR at a time.</p>
+<p class="font-body-prose text-body-prose mb-6">A whitepaper version of the production line, with the actual contracts and both case studies — the pricing-and-packaging initiative that hatched the tool and the subscriptions prototype that exercised it — is coming. This post is the why. That one will be the how.</p>
+<hr class="border-architectural-ink/20 my-8"/>
+<p class="font-body-prose text-body-prose mb-6">The pattern has now survived contact with four projects — a pricing-and-packaging initiative, a subscriptions prototype, a tournament app, and a personal site — with the tool itself getting sharper at every pass. Each project surfaced something the prior project missed. What I don't know yet is whether the cycle survives contact with a team — whether the lathe holds its shape when other people are also turning the crank. But the shape of the bet is clear enough to name: the engineers who win the next cycle are the ones who notice they're being asked to do lathe work and accept the assignment.</p>
+
+      </div>
+
+      <!-- End-of-piece receipt -->
+      <div class="receipt-block border-dashed-v p-6 mt-12">
+        <div class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-2">End of Dispatch</div>
+        <div class="font-data-receipt text-data-receipt opacity-80 grid grid-cols-1 md:grid-cols-2 gap-2">
+          <div>SLUG: the-backport-i-didnt-make</div>
+          <div>PUBLISHED: MAY 24, 2026</div>
+          <div>FORMAT: POST</div>
+          <div>WORDS: ~1798</div>
+        </div>
+      </div>
+
+      <div class="mt-8 flex justify-between border-t-2 border-architectural-ink pt-6">
+        <a class="font-label-ui text-label-ui hover:text-blueprint-cyan transition-colors" href="/pages/home.html">← INDEX</a>
+        <a class="font-label-ui text-label-ui hover:text-blueprint-cyan transition-colors" href="/pages/library.html">LIBRARY →</a>
+      </div>
+    </article>
+  
+</main>
+  <aside class="hidden lg:flex flex-col w-[320px] flex-shrink-0 bg-background border-l-2 border-architectural-ink/20 sticky top-0 h-screen overflow-y-auto">
+  <div class="px-margin py-6 border-b border-architectural-ink/20 bg-architectural-ink text-aged-paper">
+      <div class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-3">This Piece</div>
+      <div class="font-data-receipt text-data-receipt space-y-1 opacity-90">
+        <div>FORMAT: POST</div>
+        <div>DATE: MAY 24, 2026</div>
+        <div>READ: 7 MIN</div>
+        <div>CATEGORY: REFLECTION</div>
+      </div>
+    </div>
+  <div class="px-margin py-6">
+      <div class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-3 border-b border-blueprint-cyan pb-1">More POSTs</div>
+      <div class="divide-y divide-architectural-ink/10">
+        <div class="py-3">
+          <div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-1">MAY 24, 2026</div>
+          <a class="font-body-dense text-body-dense font-bold hover:text-blueprint-cyan transition-colors block leading-snug" href="/pages/post-detail.html">The Scaffolding the Agent Doesn't Build</a>
+        </div>
+        <div class="py-3">
+          <div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-1">APR 23, 2026</div>
+          <a class="font-body-dense text-body-dense font-bold hover:text-blueprint-cyan transition-colors block leading-snug" href="/pages/post-detail.html">The Muscle Memory of Expensive Things</a>
+        </div>
+        <div class="py-3">
+          <div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-1">APR 21, 2026</div>
+          <a class="font-body-dense text-body-dense font-bold hover:text-blueprint-cyan transition-colors block leading-snug" href="/pages/post-detail.html">I Don't Write Any Code</a>
+        </div>
+        <div class="py-3">
+          <div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-1">APR 21, 2026</div>
+          <a class="font-body-dense text-body-dense font-bold hover:text-blueprint-cyan transition-colors block leading-snug" href="/pages/post-detail.html">The Question That Isn't a Question</a>
+        </div>
+      </div>
+    </div>
+</aside>
+</div>
 </body></html>

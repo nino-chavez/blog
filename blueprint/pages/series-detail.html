@@ -1,359 +1,227 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Series Index | Signal Dispatch v2</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "outline-variant": "#c4c7c7",
-                    "surface-tint": "#5f5e5e",
-                    "on-error": "#ffffff",
-                    "on-error-container": "#93000a",
-                    "inverse-primary": "#c8c6c5",
-                    "secondary-fixed": "#d1e4fb",
-                    "surface-container-low": "#f5f3f3",
-                    "secondary": "#4e6073",
-                    "on-primary": "#ffffff",
-                    "tertiary-fixed-dim": "#cac6c4",
-                    "primary-fixed": "#e5e2e1",
-                    "on-primary-fixed-variant": "#474746",
-                    "on-secondary": "#ffffff",
-                    "tertiary-fixed": "#e6e2df",
-                    "secondary-fixed-dim": "#b5c8df",
-                    "on-secondary-fixed": "#091d2e",
-                    "primary-container": "#1c1b1b",
-                    "error-container": "#ffdad6",
-                    "on-secondary-fixed-variant": "#36485b",
-                    "surface-container-highest": "#e4e2e2",
-                    "background": "#fbf9f9",
-                    "on-surface-variant": "#444748",
-                    "surface-container-high": "#e9e8e7",
-                    "surface-container-lowest": "#ffffff",
-                    "on-primary-fixed": "#1c1b1b",
-                    "on-tertiary-fixed-variant": "#484645",
-                    "on-surface": "#1b1c1c",
-                    "on-tertiary": "#ffffff",
-                    "surface-variant": "#e4e2e2",
-                    "on-background": "#1b1c1c",
-                    "error": "#ba1a1a",
-                    "inverse-on-surface": "#f2f0f0",
-                    "primary-fixed-dim": "#c8c6c5",
-                    "surface-container": "#efeded",
-                    "surface-dim": "#dbdad9",
-                    "on-primary-container": "#858383",
-                    "inverse-surface": "#303031",
-                    "on-tertiary-container": "#868382",
-                    "on-secondary-container": "#526478",
-                    "tertiary-container": "#1c1b1a",
-                    "surface-bright": "#fbf9f9",
-                    "tertiary": "#000000",
-                    "secondary-container": "#cfe2f9",
-                    "primary": "#000000",
-                    "outline": "#747878",
-                    "on-tertiary-fixed": "#1c1b1a",
-                    "surface": "#fbf9f9"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "margin-mobile": "20px",
-                    "margin-desktop": "80px",
-                    "max-width-content": "720px",
-                    "gutter": "32px",
-                    "unit": "4px"
-            },
-            "fontFamily": {
-                    "body-lg": ["Source Serif 4"],
-                    "metadata": ["Inter"],
-                    "technical-callout": ["JetBrains Mono"],
-                    "display-lg-mobile": ["Source Serif 4"],
-                    "label-caps": ["Inter"],
-                    "display-lg": ["Source Serif 4"],
-                    "body-md": ["Source Serif 4"],
-                    "headline-md": ["Source Serif 4"]
-            },
-            "fontSize": {
-                    "body-lg": ["20px", {"lineHeight": "32px", "fontWeight": "400"}],
-                    "metadata": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
-                    "technical-callout": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
-                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "600"}],
-                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "body-md": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                    "headline-md": ["30px", {"lineHeight": "38px", "fontWeight": "600"}]
-            }
-          },
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>The Taste Test | Signal Dispatch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "background": "#fbfaee",
+          "surface": "#fbfaee",
+          "surface-bright": "#fbfaee",
+          "surface-container-lowest": "#ffffff",
+          "surface-container-low": "#f5f4e8",
+          "surface-container": "#efeee3",
+          "surface-container-high": "#e9e9dd",
+          "surface-container-highest": "#e4e3d7",
+          "surface-dim": "#dbdbcf",
+          "surface-variant": "#e4e3d7",
+          "on-surface": "#1b1c15",
+          "on-surface-variant": "#42474c",
+          "on-background": "#1b1c15",
+          "outline": "#72787d",
+          "outline-variant": "#c2c7cd",
+          "primary": "#001c2b",
+          "on-primary": "#ffffff",
+          "secondary": "#006972",
+          "tertiary": "#131b1d",
+          "tertiary-fixed": "#dbe4e6",
+          "architectural-ink": "#001B29",
+          "blueprint-cyan": "#008B94",
+          "aged-paper": "#FDFCF0",
+          "carbon-trace": "#111827",
+          "error": "#ba1a1a"
         },
+        borderRadius: { "DEFAULT": "0", "lg": "0", "xl": "0", "full": "9999px" },
+        spacing: { "unit": "4px", "rail-width": "320px", "left-rail": "260px", "gutter": "16px", "margin": "32px", "dense-gap": "8px" },
+        fontFamily: {
+          "display-lg":   ["Bree Serif"],
+          "headline-md":  ["Bree Serif"],
+          "body-prose":   ["Crimson Pro"],
+          "body-dense":   ["Crimson Pro"],
+          "label-ui":     ["Inter"],
+          "data-receipt": ["JetBrains Mono"],
+          "status-code":  ["JetBrains Mono"]
+        },
+        fontSize: {
+          "display-lg":   ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+          "headline-md":  ["24px", {"lineHeight": "1.2", "fontWeight": "400"}],
+          "body-prose":   ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+          "body-dense":   ["16px", {"lineHeight": "1.4", "fontWeight": "400"}],
+          "label-ui":     ["13px", {"lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+          "data-receipt": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}],
+          "status-code":  ["11px", {"lineHeight": "1", "fontWeight": "700"}]
+        }
       }
-    </script>
+    }
+  }
+</script>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            vertical-align: middle;
-        }
-        body {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        .editorial-container {
-            max-width: theme('spacing.max-width-content');
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .rule-line {
-            height: 1px;
-            background-color: rgba(27, 28, 28, 0.1);
-        }
-    </style>
+  .receipt-block {
+    background-image: radial-gradient(circle, #008B9405 1px, transparent 1px);
+    background-size: 8px 8px;
+  }
+  .border-dashed-v {
+    border-top: 1px dashed #001B29;
+    border-bottom: 1px dashed #001B29;
+  }
+  /* Sharp corners (Cyanotype is 0-radius) */
+  * { border-radius: 0 !important; }
+  *.rounded-full { border-radius: 9999px !important; }
+</style>
 </head>
-<body class="bg-background text-on-surface font-body-md transition-colors duration-300">
-<!-- Stitch alternate disclaimer + back-link to v2 portal — injected by integration round, not part of Stitch's original output. -->
-<aside style="background:#fbeb96;border-bottom:1px solid #b8941b;padding:8px 16px;font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#5a4a0e;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;line-height:1.4;">
-  <span><strong>Stitch alternate design</strong> &middot; Generated by Google Stitch &middot; <a href="/docs/?doc=research/design-alternates/stitch-DESIGN" style="color:inherit;text-decoration:underline;">design system</a> &middot; D1/D2/D7 not adopted from this output; email-signup conflicts with no-marketing-tells rule</span>
-  <a href="/" style="color:#5a4a0e;text-decoration:underline;font-weight:600;white-space:nowrap;">&larr; back to v2 portal</a>
-</aside>
+<body class="bg-background text-architectural-ink font-body-prose selection:bg-blueprint-cyan selection:text-aged-paper overflow-x-hidden">
+<div class="flex min-h-screen">
+  <aside class="hidden md:flex flex-col w-[260px] flex-shrink-0 bg-background border-r-2 border-architectural-ink sticky top-0 h-screen overflow-y-auto">
+  <!-- Wordmark -->
+  <div class="px-margin py-6 border-b-2 border-architectural-ink">
+    <a class="block font-headline-md text-headline-md font-bold uppercase tracking-tighter leading-none" href="/pages/home.html">Signal<br/>Dispatch</a>
+    <div class="font-data-receipt text-data-receipt text-blueprint-cyan mt-1">v2 PROTOTYPE</div>
+  </div>
 
-<!-- TopAppBar -->
-<nav class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-6 max-w-full mx-auto bg-background border-b border-on-surface/10 sticky top-0 z-50">
-<div class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">Signal Dispatch v2</div>
-<div class="hidden md:flex items-center gap-8">
-<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Dispatches</a>
-<a class="font-label-caps text-label-caps text-secondary border-b-2 border-secondary pb-1" href="#">Series</a>
-<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Whitepapers</a>
-<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Presentations</a>
-<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">About</a>
-</div>
-<div class="font-label-caps text-label-caps text-primary cursor-pointer hover:text-secondary transition-colors duration-200">Nino Chavez</div>
-</nav>
-<div class="flex">
-<!-- SideNavBar -->
-<aside class="fixed left-0 top-24 px-6 py-8 flex flex-col gap-y-4 h-full w-64 hidden lg:block border-r border-on-surface/10 bg-transparent">
-<div class="mb-6">
-<h3 class="font-label-caps text-label-caps text-primary mb-1">Table of Contents</h3>
-<p class="font-metadata text-metadata text-on-surface-variant opacity-60">Technical Roadmap</p>
-</div>
-<nav class="flex flex-col gap-y-4">
-<a class="flex items-center gap-3 text-secondary font-bold border-l-2 border-secondary pl-4 font-metadata text-metadata transition-colors" href="#intro">
-<span class="material-symbols-outlined text-sm">segment</span>
-                    Introduction
-                </a>
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary pl-4 font-metadata text-metadata transition-colors" href="#architecture">
-<span class="material-symbols-outlined text-sm">architecture</span>
-                    Architectural Constraints
-                </a>
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary pl-4 font-metadata text-metadata transition-colors" href="#implementation">
-<span class="material-symbols-outlined text-sm">code</span>
-                    Implementation
-                </a>
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary pl-4 font-metadata text-metadata transition-colors" href="#review">
-<span class="material-symbols-outlined text-sm">verified</span>
-                    Review
-                </a>
-<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary pl-4 font-metadata text-metadata transition-colors" href="#conclusion">
-<span class="material-symbols-outlined text-sm">description</span>
-                    Conclusion
-                </a>
-</nav>
+  <!-- Primary nav -->
+  <nav class="px-3 py-6 border-b border-architectural-ink/20">
+    <div class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-3 px-3">Navigate</div>
+    <a class="flex items-center justify-between px-3 py-2 text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper font-label-ui text-label-ui transition-colors duration-75" href="/pages/home.html">
+      <span>Index</span>
+      <span class="font-data-receipt text-data-receipt opacity-50">→</span>
+    </a>
+      <a class="flex items-center justify-between px-3 py-2 bg-blueprint-cyan text-aged-paper font-label-ui text-label-ui" href="/pages/library.html">
+      <span>Library</span>
+      <span class="font-data-receipt text-data-receipt opacity-50">→</span>
+    </a>
+      <a class="flex items-center justify-between px-3 py-2 text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper font-label-ui text-label-ui transition-colors duration-75" href="/pages/about-colophon.html">
+      <span>About</span>
+      <span class="font-data-receipt text-data-receipt opacity-50">→</span>
+    </a>
+      <a class="flex items-center justify-between px-3 py-2 text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper font-label-ui text-label-ui transition-colors duration-75" href="/pages/subscribe-follow.html">
+      <span>Follow</span>
+      <span class="font-data-receipt text-data-receipt opacity-50">→</span>
+    </a>
+  </nav>
+
+  
+  <!-- Live signal -->
+  <div class="px-margin py-6 border-b border-architectural-ink/20 bg-architectural-ink text-aged-paper">
+    <div class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-2">Live Signal</div>
+    <div class="font-data-receipt text-data-receipt opacity-60 mb-1">MAR 05, 2026 · SERIES</div>
+    <a class="block font-body-dense text-body-dense font-bold hover:text-blueprint-cyan transition-colors" href="/pages/series-detail.html">The Taste Test</a>
+  </div>
+
+  
+  <!-- Currently serializing -->
+  <div class="receipt-block border-dashed-v px-margin py-6">
+    <div class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-3">Recent Dispatches</div>
+    <div class="divide-y divide-architectural-ink/10">
+      <div class="py-2">
+        <div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-1">MAR 05, 2026</div>
+        <a class="font-body-dense text-body-dense font-bold hover:text-blueprint-cyan transition-colors block leading-snug" href="/pages/series-detail.html">The Taste Test</a>
+      </div>
+      <div class="py-2">
+        <div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-1">JAN 17, 2026</div>
+        <a class="font-body-dense text-body-dense font-bold hover:text-blueprint-cyan transition-colors block leading-snug" href="/pages/series-detail.html">The Talent Engine</a>
+      </div>
+      <div class="py-2">
+        <div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-1">JAN 16, 2026</div>
+        <a class="font-body-dense text-body-dense font-bold hover:text-blueprint-cyan transition-colors block leading-snug" href="/pages/series-detail.html">Agentic Workflows in Practice</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer in left rail -->
+  <div class="mt-auto px-margin py-4 border-t-2 border-architectural-ink">
+    <div class="font-data-receipt text-data-receipt opacity-60 mb-2">EXTERNAL</div>
+    <ul class="font-label-ui text-label-ui space-y-1">
+      <li><a class="hover:text-blueprint-cyan transition-colors" href="https://ninochavez.co/blog">Live site →</a></li>
+      <li><a class="hover:text-blueprint-cyan transition-colors" href="https://www.linkedin.com/in/ninochavez/">LinkedIn →</a></li>
+      <li><a class="hover:text-blueprint-cyan transition-colors" href="https://ninochavez.co/blog/rss.xml">RSS →</a></li>
+    </ul>
+  </div>
 </aside>
-<!-- Main Content -->
-<main class="flex-1 px-margin-mobile md:px-margin-desktop lg:ml-64 py-16">
-<header class="editorial-container mb-16" id="intro">
-<span class="font-technical-callout text-technical-callout text-secondary mb-4 block uppercase tracking-widest">Library Catalog</span>
-<h1 class="font-display-lg text-display-lg md:text-display-lg mb-6">Series Index</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-                    A curated collection of multi-part technical investigations. These series are designed to be consumed chronologically, providing a comprehensive architectural deep-dive into the systems powering modern software infrastructure.
-                </p>
-<div class="rule-line mt-12"></div>
-</header>
-<!-- Series Grid Section -->
-<section class="editorial-container flex flex-col gap-12">
-<!-- Series Block 01 -->
-<article class="group">
-<div class="flex justify-between items-start mb-6">
-<div>
-<span class="font-technical-callout text-technical-callout text-on-surface-variant mb-2 block">Series #001 — Infrastructure</span>
-<h2 class="font-headline-md text-headline-md group-hover:text-secondary transition-colors cursor-pointer">Architecting for the Inference Era</h2>
-</div>
-<div class="text-right">
-<span class="font-label-caps text-label-caps bg-surface-container-low px-3 py-1 border border-outline-variant">7 PARTS</span>
-<p class="font-metadata text-metadata text-on-surface-variant mt-2">124 min total</p>
-</div>
-</div>
-<div class="bg-surface-container-low p-6 border-l-4 border-secondary mb-6">
-<p class="font-body-md text-body-md italic text-on-surface-variant">
-                            "A comprehensive syllabus covering the transition from deterministic compute to probabilistic inference systems."
-                        </p>
-</div>
-<div class="space-y-4">
-<div class="flex items-center gap-4 py-3 border-b border-on-surface/5">
-<span class="font-technical-callout text-technical-callout w-8 opacity-50">01</span>
-<div class="flex-1">
-<h4 class="font-body-md font-bold text-on-surface">The Death of the Static Cache</h4>
-<p class="font-metadata text-metadata text-on-surface-variant">Defining the volatility of inference-ready data layers.</p>
-</div>
-<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">verified</span>
-</div>
-<div class="flex items-center gap-4 py-3 border-b border-on-surface/5">
-<span class="font-technical-callout text-technical-callout w-8 opacity-50">02</span>
-<div class="flex-1">
-<h4 class="font-body-md font-bold text-on-surface">Token-based Throughput Models</h4>
-<p class="font-metadata text-metadata text-on-surface-variant">Scaling infrastructure when the unit of compute is a token.</p>
-</div>
-<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">verified</span>
-</div>
-<div class="flex items-center gap-4 py-3 border-b border-on-surface/5 opacity-60">
-<span class="font-technical-callout text-technical-callout w-8 opacity-50">03</span>
-<div class="flex-1">
-<h4 class="font-body-md font-bold text-on-surface">Vector Databases as System RAM</h4>
-<p class="font-metadata text-metadata text-on-surface-variant">Retrieval Augmented Generation at the architectural edge.</p>
-</div>
-<span class="material-symbols-outlined">pending</span>
-</div>
-</div>
-<div class="mt-8 flex gap-4">
-<button class="bg-primary text-on-primary font-label-caps text-label-caps px-6 py-3 hover:bg-secondary transition-all">RESUME READING</button>
-<button class="border border-primary text-primary font-label-caps text-label-caps px-6 py-3 hover:bg-primary hover:text-on-primary transition-all">DOWNLOAD PDF</button>
-</div>
-</article>
-<div class="rule-line"></div>
-<!-- Series Block 02 -->
-<article class="group">
-<div class="flex justify-between items-start mb-6">
-<div>
-<span class="font-technical-callout text-technical-callout text-on-surface-variant mb-2 block">Series #002 — Organizational Design</span>
-<h2 class="font-headline-md text-headline-md group-hover:text-secondary transition-colors cursor-pointer">The Senior IC Track: Beyond Code</h2>
-</div>
-<div class="text-right">
-<span class="font-label-caps text-label-caps bg-surface-container-low px-3 py-1 border border-outline-variant">4 PARTS</span>
-<p class="font-metadata text-metadata text-on-surface-variant mt-2">45 min total</p>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-<div class="border border-on-surface/10 p-4 hover:bg-surface-container-low transition-colors cursor-pointer">
-<span class="font-label-caps text-label-caps text-secondary">CHAPTER I</span>
-<h4 class="font-body-md font-bold mt-2">Architectural Influence</h4>
-<p class="font-metadata text-metadata text-on-surface-variant">Leading without management authority in complex organizations.</p>
-</div>
-<div class="border border-on-surface/10 p-4 hover:bg-surface-container-low transition-colors cursor-pointer">
-<span class="font-label-caps text-label-caps text-secondary">CHAPTER II</span>
-<h4 class="font-body-md font-bold mt-2">The Design Doc as Product</h4>
-<p class="font-metadata text-metadata text-on-surface-variant">Writing for clarity, consensus, and longevity.</p>
-</div>
-<div class="border border-on-surface/10 p-4 hover:bg-surface-container-low transition-colors cursor-pointer">
-<span class="font-label-caps text-label-caps text-secondary">CHAPTER III</span>
-<h4 class="font-body-md font-bold mt-2">Pragmatic Radicalism</h4>
-<p class="font-metadata text-metadata text-on-surface-variant">When to pivot and when to preserve legacy stability.</p>
-</div>
-<div class="border border-on-surface/10 p-4 hover:bg-surface-container-low transition-colors cursor-pointer">
-<span class="font-label-caps text-label-caps text-secondary">CHAPTER IV</span>
-<h4 class="font-body-md font-bold mt-2">Systemic Literacy</h4>
-<p class="font-metadata text-metadata text-on-surface-variant">Understanding the business unit as a software module.</p>
-</div>
-</div>
-<div class="mt-8">
-<button class="bg-primary text-on-primary font-label-caps text-label-caps px-6 py-3 hover:bg-secondary transition-all">START SERIES</button>
-</div>
-</article>
-<div class="rule-line"></div>
-<!-- Series Block 03 -->
-<article class="group">
-<div class="flex justify-between items-start mb-6">
-<div>
-<span class="font-technical-callout text-technical-callout text-on-surface-variant mb-2 block">Series #003 — Protocol Engineering</span>
-<h2 class="font-headline-md text-headline-md group-hover:text-secondary transition-colors cursor-pointer">Distributed Consensus at Scale</h2>
-</div>
-<div class="text-right">
-<span class="font-label-caps text-label-caps bg-surface-container-low px-3 py-1 border border-outline-variant">9 PARTS</span>
-<p class="font-metadata text-metadata text-on-surface-variant mt-2">180 min total</p>
-</div>
-</div>
-<div class="relative h-2 w-full bg-surface-container-highest mb-4">
-<div class="absolute left-0 top-0 h-full bg-secondary w-1/3"></div>
-</div>
-<p class="font-metadata text-metadata text-secondary mb-6">33% Completed — Currently reading: Paxos vs Raft (Part 3)</p>
-<div class="mt-4">
-<button class="bg-primary text-on-primary font-label-caps text-label-caps px-6 py-3 hover:bg-secondary transition-all w-full md:w-auto text-center">CONTINUE EXPLORATION</button>
-</div>
-</article>
-</section>
-<!-- Author Card -->
-<section class="editorial-container mt-24 pt-12 border-t border-on-surface/10">
-<div class="flex flex-col md:flex-row gap-8 items-start">
-<img alt="Nino Chavez" class="w-24 h-24 bg-surface-container grayscale filter contrast-125" data-alt="A high-contrast, black and white professional headshot of a middle-aged man with sharp features and a focused gaze. The lighting is dramatic, coming from the side to emphasize texture and depth, fitting a minimalist editorial style. The background is a flat, neutral grey, maintaining the high-end technical design aesthetic of a professional whitepaper or journal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmOtJceJhb0HAT0fLNWROmTAKDL069V-q6IlLmiZ0YFSRvMGErInLxY9vKJdHbdpAb-Uw5vIV7w8Do85kHrXMiQLFMBR_P0inX-97gfFyP50-Zue6Rw37sjwuGL43qfPKY1wLH9LfKBwYJntI0S_Pe36GKbZ91uoqm5evT_VNfCbd4E-VcSDhUlHg9V4twSO5KdVqnVqrqxbJDLhlwjCmGZShJ9tgYMkZYju3R28QcQLtENyM8m5OfYLwNryWJgWHo7qjUdXCQ4ac"/>
-<div class="flex-1">
-<h4 class="font-label-caps text-label-caps text-primary mb-2">WRITTEN BY NINO CHAVEZ</h4>
-<p class="font-metadata text-metadata text-on-surface-variant leading-relaxed">
-                            Nino is a Senior Infrastructure Architect specializing in distributed systems and the intersection of LLMs with traditional compute pipelines. Signal Dispatch v2 is his repository for technical synthesis and architectural critiques.
-                        </p>
-</div>
-</div>
-</section>
+  <main class="flex-1 px-margin py-margin min-w-0 max-w-full">
+
+    <header class="mb-12 border-b-2 border-architectural-ink pb-8 max-w-3xl">
+      <div class="flex items-baseline gap-4 mb-4">
+        <span class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan border border-blueprint-cyan px-2 py-1">SERIES INDEX</span>
+        <span class="font-status-code text-status-code uppercase tracking-widest opacity-60">8 PARTS</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg leading-tight mb-4">The Taste Test</h1>
+      
+    </header>
+
+    <section class="mb-16 max-w-4xl">
+      <h2 class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-6 border-b border-blueprint-cyan pb-2 inline-block">All Series</h2>
+      <div class="space-y-0 border-t border-architectural-ink">
+        <a class="block py-4 border-b border-architectural-ink grid grid-cols-12 items-center group hover:bg-blueprint-cyan/5 transition-colors" href="/pages/series-detail.html">
+          <div class="col-span-1 font-status-code text-status-code text-blueprint-cyan">01</div>
+          <div class="col-span-5 font-headline-md text-headline-md group-hover:text-blueprint-cyan transition-colors">The Taste Test</div>
+          <div class="col-span-4 font-body-dense text-body-dense opacity-80"></div>
+          <div class="col-span-2 text-right font-data-receipt text-data-receipt opacity-70">MAR 05, 2026</div>
+        </a>
+        <a class="block py-4 border-b border-architectural-ink grid grid-cols-12 items-center group hover:bg-blueprint-cyan/5 transition-colors" href="/pages/series-detail.html">
+          <div class="col-span-1 font-status-code text-status-code text-blueprint-cyan">02</div>
+          <div class="col-span-5 font-headline-md text-headline-md group-hover:text-blueprint-cyan transition-colors">The Talent Engine</div>
+          <div class="col-span-4 font-body-dense text-body-dense opacity-80"></div>
+          <div class="col-span-2 text-right font-data-receipt text-data-receipt opacity-70">JAN 17, 2026</div>
+        </a>
+        <a class="block py-4 border-b border-architectural-ink grid grid-cols-12 items-center group hover:bg-blueprint-cyan/5 transition-colors" href="/pages/series-detail.html">
+          <div class="col-span-1 font-status-code text-status-code text-blueprint-cyan">03</div>
+          <div class="col-span-5 font-headline-md text-headline-md group-hover:text-blueprint-cyan transition-colors">Agentic Workflows in Practice</div>
+          <div class="col-span-4 font-body-dense text-body-dense opacity-80"></div>
+          <div class="col-span-2 text-right font-data-receipt text-data-receipt opacity-70">JAN 16, 2026</div>
+        </a>
+        <a class="block py-4 border-b border-architectural-ink grid grid-cols-12 items-center group hover:bg-blueprint-cyan/5 transition-colors" href="/pages/series-detail.html">
+          <div class="col-span-1 font-status-code text-status-code text-blueprint-cyan">04</div>
+          <div class="col-span-5 font-headline-md text-headline-md group-hover:text-blueprint-cyan transition-colors">From Prompt to Pattern</div>
+          <div class="col-span-4 font-body-dense text-body-dense opacity-80"></div>
+          <div class="col-span-2 text-right font-data-receipt text-data-receipt opacity-70">JUL 01, 2025</div>
+        </a>
+        <a class="block py-4 border-b border-architectural-ink grid grid-cols-12 items-center group hover:bg-blueprint-cyan/5 transition-colors" href="/pages/series-detail.html">
+          <div class="col-span-1 font-status-code text-status-code text-blueprint-cyan">05</div>
+          <div class="col-span-5 font-headline-md text-headline-md group-hover:text-blueprint-cyan transition-colors">The Loom</div>
+          <div class="col-span-4 font-body-dense text-body-dense opacity-80"></div>
+          <div class="col-span-2 text-right font-data-receipt text-data-receipt opacity-70">JUN 13, 2025</div>
+        </a>
+        <a class="block py-4 border-b border-architectural-ink grid grid-cols-12 items-center group hover:bg-blueprint-cyan/5 transition-colors" href="/pages/series-detail.html">
+          <div class="col-span-1 font-status-code text-status-code text-blueprint-cyan">06</div>
+          <div class="col-span-5 font-headline-md text-headline-md group-hover:text-blueprint-cyan transition-colors">Grid-Level Thinking</div>
+          <div class="col-span-4 font-body-dense text-body-dense opacity-80"></div>
+          <div class="col-span-2 text-right font-data-receipt text-data-receipt opacity-70">JUN 03, 2025</div>
+        </a>
+        <a class="block py-4 border-b border-architectural-ink grid grid-cols-12 items-center group hover:bg-blueprint-cyan/5 transition-colors" href="/pages/series-detail.html">
+          <div class="col-span-1 font-status-code text-status-code text-blueprint-cyan">07</div>
+          <div class="col-span-5 font-headline-md text-headline-md group-hover:text-blueprint-cyan transition-colors">The Storefront</div>
+          <div class="col-span-4 font-body-dense text-body-dense opacity-80"></div>
+          <div class="col-span-2 text-right font-data-receipt text-data-receipt opacity-70">JUN 02, 2025</div>
+        </a>
+        <a class="block py-4 border-b border-architectural-ink grid grid-cols-12 items-center group hover:bg-blueprint-cyan/5 transition-colors" href="/pages/series-detail.html">
+          <div class="col-span-1 font-status-code text-status-code text-blueprint-cyan">08</div>
+          <div class="col-span-5 font-headline-md text-headline-md group-hover:text-blueprint-cyan transition-colors">Signal Reflex: The Origin</div>
+          <div class="col-span-4 font-body-dense text-body-dense opacity-80"></div>
+          <div class="col-span-2 text-right font-data-receipt text-data-receipt opacity-70">JUN 02, 2025</div>
+        </a>
+      </div>
+    </section>
+
+    <div class="max-w-3xl">
+      <h2 class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-6 border-b border-blueprint-cyan pb-2 inline-block">About This Series</h2>
+      <div class="article-body">
+<p class="font-body-prose text-body-prose mb-6">If AI lacks taste buds, what does that make us? Chefs? Critics? Something else entirely?</p>
+<p class="font-body-prose text-body-prose mb-6">This series started with a feeling most people in tech won't say out loud: the weird vertigo of watching a machine do your job in four seconds. Not badly. Not brilliantly. Just... competently enough to make you question what your competence was worth.</p>
+<p class="font-body-prose text-body-prose mb-6"><strong class="text-architectural-ink font-bold">The Arc:</strong></p>
+<ol class="font-body-prose text-body-prose mb-6 space-y-2 list-decimal pl-6"><li><strong class="text-architectural-ink font-bold">The Identity Crisis of the Prompter</strong> — We keep reaching for craft metaphors because "person who types instructions" doesn't feel like enough. This post sits in that discomfort.</li><li><strong class="text-architectural-ink font-bold">The Taste Gap</strong> — If the crisis points anywhere, it points here. The bottleneck isn't generation anymore — it's judgment. And most of us aren't developing ours.</li><li><strong class="text-architectural-ink font-bold">The Sommelier Argument</strong> — A provisional answer. Maybe the highest-value skill isn't making or judging. It's matching — knowing what's right for this moment, this context, this person.</li></ol>
+<p class="font-body-prose text-body-prose mb-6">Each post challenges the one before it. The identity crisis asks <em class="italic">what am I now?</em> The taste gap answers <em class="italic">the one who knows what's good.</em> The sommelier argument pushes back: <em class="italic">knowing what's good isn't enough — you have to know what's good for whom.</em></p>
+
+      </div>
+    </div>
+  
 </main>
 </div>
-<!-- Footer -->
-<footer class="w-full py-12 px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-start md:items-center max-w-full bg-surface-container-low border-t border-on-surface/10">
-<div>
-<div class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight mb-2">Signal Dispatch v2</div>
-<p class="font-metadata text-metadata text-on-surface-variant">© Signal Dispatch v2 by Nino Chavez. All rights reserved.</p>
-</div>
-<div class="flex flex-wrap gap-x-8 gap-y-4 mt-8 md:mt-0">
-<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline transition-all" href="#">RSS Feed</a>
-<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline transition-all" href="#">Archive</a>
-<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline transition-all" href="#">Technical Notes</a>
-<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary underline transition-all" href="#">Privacy</a>
-</div>
-</footer>
-<script>
-        // Smooth scroll for anchors
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Intersection Observer for SideNav Active State
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.5
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    const navLinks = document.querySelectorAll('aside nav a');
-                    navLinks.forEach(link => {
-                        link.classList.remove('text-secondary', 'font-bold', 'border-l-2', 'border-secondary');
-                        link.classList.add('text-on-surface-variant');
-                        if (link.getAttribute('href') === `#${id}`) {
-                            link.classList.add('text-secondary', 'font-bold', 'border-l-2', 'border-secondary');
-                            link.classList.remove('text-on-surface-variant');
-                        }
-                    });
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('header[id], section[id]').forEach((el) => observer.observe(el));
-    </script>
-<script>window.BLUEPRINT_PAGE = { id: "series-detail", title: "Series detail" };</script>
-<script src="/_blueprint-banner.js?v=20260525-2100"></script>
-<script src="/chat-widget.js?v=20260525-2100" defer></script>
 </body></html>

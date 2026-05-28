@@ -146,3 +146,62 @@ What DOES ship:
 - `_meta/index.json` updated to greenfield framing
 - 8 `_meta/<page>.json` stubs so the portal index renders v2's intended shape
 - Open decisions surfaced in [[DECISIONS-NEEDED.md]]
+
+---
+
+## JTBD coverage matrix (added 2026-05-25, wave-7 methodology amendment)
+
+> Per the meta-agent's JTBD-discontinuity diagnosis: every surface must serve ≥1 measurable JTBD. Surfaces with no JTBD = out of scope. JTBDs with no surface = gap. JTBD IDs reference `blueprint/prescription.yml § jtbds`.
+
+### Surface → JTBDs served
+
+| v2 Surface | JTBDs served | Status |
+|---|---|---|
+| `home` | P1-disc-search (entry), P2-disc-linkedin (entry — landing), P3-disc-search (entry) | COVERED — primary entry surface for all three personas |
+| `post-detail` | P1-firstread-postdetail, P2-disc-linkedin, P2-firstread-postdetail, P3-disc-search, P3-firstread-mobile, P3-end-of-post-RSS, P3-no-second-look | COVERED — the most-load-bearing surface; serves 7 JTBDs |
+| `whitepaper-detail` | P1-firstread-whitepaper | COVERED — single high-value JTBD (P1 only) |
+| `series-detail` | P1-secondlook-series | COVERED — single high-value JTBD (P1 only); F7-positive |
+| `counterpoint-detail` | P2-secondlook-counterpoint | COVERED — single high-value JTBD (P2 only); intellectual-honesty signal |
+| `library` | P1-secondlook-library, P2-secondlook-sampling | COVERED — both P1 and P2 secondary-discovery needs |
+| `about-colophon` | P2-secondlook-about | COVERED — single P2 JTBD; positioning-proof surface |
+| `subscribe-follow` | P3-end-of-post-RSS, P2-return | COVERED — preserves the no-marketing-tells posture |
+
+### Build sequencing — re-derived from JTBD load
+
+Original sequencing in `03-prototype-plan.md` was "whitepaper + series first because least decision-blocked." Re-derive from JTBD load (how many JTBDs the surface serves, weighted by persona priority):
+
+| Surface | JTBD load | Persona priority weight | Effective load | New build order |
+|---|---|---|---|---|
+| `post-detail` | 7 | P1+P2+P3 = highest | 21 | 1st |
+| `library` | 2 | P1+P2 = high | 6 | 2nd |
+| `home` | 3 | P1+P2+P3 = highest | 9 | 3rd (but blocked on D1+D2+D7) |
+| `whitepaper-detail` | 1 | P1 only | 3 | 4th |
+| `series-detail` | 1 | P1 only | 3 | 5th |
+| `about-colophon` | 1 | P2 only | 2 | 6th (but blocked on D2+D7) |
+| `counterpoint-detail` | 1 | P2 only | 2 | 7th (blocked on D8) |
+| `subscribe-follow` | 2 | P2+P3 minor | 2 | 8th |
+
+**Build-order rule revised**: build by JTBD load (highest first), break ties by least-decision-blocked. The original ordering accidentally optimized for decision-availability instead of value-delivery.
+
+### JTBDs with no surface (gaps)
+
+None. All 17 JTBDs in `prescription.yml` have at least one surface covering them.
+
+### Surfaces with no JTBD (out of scope candidates)
+
+The two Stitch-added surfaces from the previous (now-archived) prototype run:
+
+| Surface | JTBDs served | Disposition |
+|---|---|---|
+| `dispatch-current` (Stitch) | None — only valid if D1 = Thesis B; under Thesis A default, this surface has no JTBD | ARCHIVED in `stitch-reference-archive/`. Re-evaluate if D1 flips. |
+| `speaking` (Stitch) | None — not a publication surface; belongs on identity site, not publication subdomain | ARCHIVED in `stitch-reference-archive/`. Out of scope. |
+
+### Strategy panel contract → JTBD trace
+
+Per the original `03-prototype-plan.md`, each `_meta/<id>.json` carries `decision / why / inheritsFromV1 / breaksFromV1 / decisionDependencies / currentState`. The wave-7 amendment adds a required field: `serves_jtbds`. Every `_meta/<id>.json` MUST list the JTBD IDs the surface serves. Surfaces with no `serves_jtbds` are out of scope by definition.
+
+---
+
+## Methodology note
+
+This JTBD-coverage section + the build-order revision are the consumer-side fix for the wave-7 methodology gap surfaced 2026-05-25. The canonical fix is `prototype-forge-provenance-reviewer` that runs as Stage 3 completion gate and checks both forge-pipeline evidence AND JTBD-coverage per surface. Until that reviewer lands, the coverage is maintained by hand here.

@@ -1,362 +1,271 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>The Cyanotype: System Colophon | Signal Dispatch</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&amp;family=Crimson+Pro:wght@400;600;700&amp;family=Inter:wght@400;600;900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "on-secondary-fixed": "#001f23",
-                    "primary-fixed-dim": "#a4cbe8",
-                    "on-tertiary-container": "#8f989a",
-                    "surface-container-low": "#f5f4e8",
-                    "on-primary-container": "#749bb6",
-                    "on-primary-fixed": "#001e2e",
-                    "primary-fixed": "#c7e7ff",
-                    "on-surface-variant": "#42474c",
-                    "inverse-surface": "#303129",
-                    "inverse-on-surface": "#f2f1e5",
-                    "secondary-fixed": "#8cf2ff",
-                    "on-surface": "#1b1c15",
-                    "on-primary": "#ffffff",
-                    "on-secondary-fixed-variant": "#004f56",
-                    "aged-paper": "#FDFCF0",
-                    "on-tertiary-fixed": "#141d1f",
-                    "blueprint-cyan": "#008B94",
-                    "on-secondary-container": "#006b75",
-                    "outline-variant": "#c2c7cd",
-                    "architectural-ink": "#001B29",
-                    "on-error": "#ffffff",
-                    "on-error-container": "#93000a",
-                    "surface-variant": "#e4e3d7",
-                    "on-background": "#1b1c15",
-                    "tertiary-fixed-dim": "#bfc8ca",
-                    "surface-container": "#efeee3",
-                    "primary-container": "#003249",
-                    "surface-bright": "#fbfaee",
-                    "tertiary": "#131b1d",
-                    "secondary-fixed-dim": "#5ad7e6",
-                    "primary": "#001c2b",
-                    "outline": "#72787d",
-                    "surface-container-lowest": "#ffffff",
-                    "carbon-trace": "#111827",
-                    "background": "#fbfaee",
-                    "on-secondary": "#ffffff",
-                    "tertiary-fixed": "#dbe4e6",
-                    "secondary-container": "#73eefd",
-                    "surface-tint": "#3c637c",
-                    "on-tertiary": "#ffffff",
-                    "inverse-primary": "#a4cbe8",
-                    "on-primary-fixed-variant": "#224b63",
-                    "error": "#ba1a1a",
-                    "tertiary-container": "#273032",
-                    "surface-container-highest": "#e4e3d7",
-                    "surface": "#fbfaee",
-                    "error-container": "#ffdad6",
-                    "on-tertiary-fixed-variant": "#3f484a",
-                    "surface-container-high": "#e9e9dd",
-                    "secondary": "#006972",
-                    "surface-dim": "#dbdbcf"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "unit": "4px",
-                    "rail-width": "320px",
-                    "gutter": "16px",
-                    "margin": "32px",
-                    "dense-gap": "8px"
-            },
-            "fontFamily": {
-                    "headline-md": ["Bree Serif"],
-                    "status-code": ["JetBrains Mono"],
-                    "body-dense": ["Crimson Pro"],
-                    "body-prose": ["Crimson Pro"],
-                    "display-lg": ["Bree Serif"],
-                    "label-ui": ["Inter"],
-                    "data-receipt": ["JetBrains Mono"]
-            },
-            "fontSize": {
-                    "headline-md": ["24px", {"lineHeight": "1.2", "fontWeight": "400"}],
-                    "status-code": ["11px", {"lineHeight": "1", "fontWeight": "700"}],
-                    "body-dense": ["16px", {"lineHeight": "1.4", "fontWeight": "400"}],
-                    "body-prose": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "label-ui": ["13px", {"lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-                    "data-receipt": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}]
-            }
-          },
-        },
-      }
-    </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .receipt-tear {
-            background-image: repeating-linear-gradient(90deg, transparent, transparent 10px, #001B29 10px, #001B29 20px);
-            background-size: 20px 1px;
-            background-repeat: repeat-x;
-        }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    </style>
-</head>
-<body class="bg-background text-architectural-ink font-body-prose selection:bg-blueprint-cyan selection:text-aged-paper">
-<!-- TopAppBar Component -->
-<nav class="bg-background text-architectural-ink border-b-2 border-architectural-ink dark:border-outline docked full-width top-0 flex justify-between items-center px-margin py-4 w-full z-50 sticky">
-<div class="font-headline-md text-headline-md font-bold text-architectural-ink uppercase tracking-tighter">Signal Dispatch</div>
-<div class="hidden md:flex gap-6 items-center">
-<a class="text-architectural-ink px-2 py-1 hover:bg-blueprint-cyan hover:text-aged-paper transition-colors duration-75" href="#">Index</a>
-<a class="text-architectural-ink px-2 py-1 hover:bg-blueprint-cyan hover:text-aged-paper transition-colors duration-75" href="#">Drafts</a>
-<a class="text-architectural-ink px-2 py-1 hover:bg-blueprint-cyan hover:text-aged-paper transition-colors duration-75" href="#">Archive</a>
-<a class="bg-blueprint-cyan text-aged-paper px-2 py-1 transition-colors duration-75" href="#">Theory</a>
-</div>
-<button class="bg-architectural-ink text-white font-label-ui text-label-ui px-4 py-2 hover:bg-blueprint-cyan transition-all uppercase tracking-widest">Access Corpus</button>
-</nav>
-<main class="flex min-h-screen">
-<!-- Main Canvas -->
-<div class="flex-1 px-margin py-12 md:max-w-[calc(100%-320px)] border-r-2 border-architectural-ink/10">
-<!-- Header Section -->
-<header class="mb-16">
-<div class="mb-2">
-<span class="font-status-code text-status-code border border-architectural-ink px-2 py-0.5 uppercase">System: Colophon</span>
-</div>
-<h1 class="font-display-lg text-display-lg mb-6 leading-none">The Cyanotype: <br/><span class="text-blueprint-cyan">How this site was built.</span></h1>
-<!-- Meta Receipt Framing -->
-<div class="bg-tertiary-fixed p-6 border-y border-dashed border-architectural-ink/30 relative">
-<div class="absolute -top-1 left-0 w-full h-[2px] receipt-tear"></div>
-<div class="font-data-receipt text-data-receipt grid grid-cols-1 md:grid-cols-2 gap-4">
-<div>
-<p class="uppercase text-blueprint-cyan font-bold mb-1">Audit Trace #882-C</p>
-<p>OBJECT: Practitioner Studio v3.4</p>
-<p>LOC: Infrastructure/Architectural-Ink</p>
-<p>TS: 2024-05-22:04:12:00Z</p>
-</div>
-<div>
-<p class="uppercase text-blueprint-cyan font-bold mb-1">State Claims</p>
-<p>METHOD: Blueprint methodology (Audit-Driven)</p>
-<p>DENSITY: High-Fidelity Practitioner</p>
-<p>INTEGRITY: Validated by 12-stage automated check</p>
-</div>
-</div>
-<div class="absolute -bottom-1 left-0 w-full h-[2px] receipt-tear"></div>
-</div>
-</header>
-<!-- The Methodology -->
-<section class="mb-20">
-<div class="flex items-center gap-4 mb-8">
-<h2 class="font-headline-md text-headline-md border-b-2 border-blueprint-cyan pr-8">The Methodology</h2>
-<span class="font-status-code text-status-code text-blueprint-cyan">v3.0_SPEC</span>
-</div>
-<p class="max-w-2xl mb-8">The development process rejects the "move fast" ethos in favor of <strong class="font-bold">Structural Drafting</strong>. Every component is the result of an audit-driven cycle that prioritizes documentation as highly as execution.</p>
-<div class="space-y-0 border-t border-architectural-ink">
-<!-- Stage 1 -->
-<div class="grid grid-cols-12 py-4 border-b border-architectural-ink items-center group hover:bg-blueprint-cyan/5 transition-colors">
-<div class="col-span-1 font-status-code text-status-code text-blueprint-cyan">01</div>
-<div class="col-span-4 font-headline-md text-headline-md">Diagnose</div>
-<div class="col-span-5 font-body-dense text-body-dense text-outline">Identification of friction in v2 architecture patterns.</div>
-<div class="col-span-2 text-right font-data-receipt text-data-receipt">audit_log.md <br/> 1,240 lines</div>
-</div>
-<!-- Stage 2 -->
-<div class="grid grid-cols-12 py-4 border-b border-architectural-ink items-center group hover:bg-blueprint-cyan/5 transition-colors">
-<div class="col-span-1 font-status-code text-status-code text-blueprint-cyan">02</div>
-<div class="col-span-4 font-headline-md text-headline-md">Blueprint</div>
-<div class="col-span-5 font-body-dense text-body-dense text-outline">Mapping semantic tokens to architectural ink constraints.</div>
-<div class="col-span-2 text-right font-data-receipt text-data-receipt">design_tokens.json <br/> 4,500 lines</div>
-</div>
-<!-- Stage 3 -->
-<div class="grid grid-cols-12 py-4 border-b border-architectural-ink items-center group hover:bg-blueprint-cyan/5 transition-colors">
-<div class="col-span-1 font-status-code text-status-code text-blueprint-cyan">03</div>
-<div class="col-span-4 font-headline-md text-headline-md">Structural Framing</div>
-<div class="col-span-5 font-body-dense text-body-dense text-outline">Initial layout commit using 12-column grid and right-rail logic.</div>
-<div class="col-span-2 text-right font-data-receipt text-data-receipt">app.layout.svelte <br/> 890 lines</div>
-</div>
-<!-- Stage 4 -->
-<div class="grid grid-cols-12 py-4 border-b border-architectural-ink items-center group hover:bg-blueprint-cyan/5 transition-colors">
-<div class="col-span-1 font-status-code text-status-code text-blueprint-cyan">04</div>
-<div class="col-span-4 font-headline-md text-headline-md">Signal Injection</div>
-<div class="col-span-5 font-body-dense text-body-dense text-outline">Automated gathering of research artifacts into the corpus.</div>
-<div class="col-span-2 text-right font-data-receipt text-data-receipt">signal_pipe.ts <br/> 2,100 lines</div>
-</div>
-<!-- Stage 5 -->
-<div class="grid grid-cols-12 py-4 border-b border-architectural-ink items-center group hover:bg-blueprint-cyan/5 transition-colors">
-<div class="col-span-1 font-status-code text-status-code text-blueprint-cyan">05</div>
-<div class="col-span-4 font-headline-md text-headline-md">Ink Hardening</div>
-<div class="col-span-5 font-body-dense text-body-dense text-outline">CSS hardening and elimination of all soft shadows.</div>
-<div class="col-span-2 text-right font-data-receipt text-data-receipt">tailwind.config.js <br/> 640 lines</div>
-</div>
-<!-- Stage 6 -->
-<div class="grid grid-cols-12 py-4 border-b border-architectural-ink items-center group hover:bg-blueprint-cyan/5 transition-colors">
-<div class="col-span-1 font-status-code text-status-code text-blueprint-cyan">06</div>
-<div class="col-span-4 font-headline-md text-headline-md">Audit Validation</div>
-<div class="col-span-5 font-body-dense text-body-dense text-outline">Comparison of build output against original methodology goals.</div>
-<div class="col-span-2 text-right font-data-receipt text-data-receipt">report_v3.pdf <br/> 12 pages</div>
-</div>
-<!-- Stage 7 -->
-<div class="grid grid-cols-12 py-4 border-b border-architectural-ink items-center group hover:bg-blueprint-cyan/5 transition-colors">
-<div class="col-span-1 font-status-code text-status-code text-blueprint-cyan">07</div>
-<div class="col-span-4 font-headline-md text-headline-md">Iterate</div>
-<div class="col-span-5 font-body-dense text-body-dense text-outline">Live system adjustments based on practitioner usage patterns.</div>
-<div class="col-span-2 text-right font-data-receipt text-data-receipt">active_branch <br/> HEAD</div>
-</div>
-</div>
-</section>
-<!-- The Stack -->
-<section class="mb-20">
-<h2 class="font-headline-md text-headline-md mb-8 flex items-center gap-2">
-<span class="material-symbols-outlined text-blueprint-cyan">layers</span>
-                    The Stack
-                </h2>
-<div class="grid grid-cols-2 md:grid-cols-3 gap-px bg-architectural-ink border border-architectural-ink">
-<div class="bg-background p-6">
-<p class="font-label-ui text-label-ui text-outline uppercase mb-2">Framework</p>
-<p class="font-headline-md text-headline-md">SvelteKit</p>
-</div>
-<div class="bg-background p-6">
-<p class="font-label-ui text-label-ui text-outline uppercase mb-2">Edge Hosting</p>
-<p class="font-headline-md text-headline-md">Cloudflare</p>
-</div>
-<div class="bg-background p-6">
-<p class="font-label-ui text-label-ui text-outline uppercase mb-2">Primary Serif</p>
-<p class="font-headline-md text-headline-md">Bree Serif</p>
-</div>
-<div class="bg-background p-6">
-<p class="font-label-ui text-label-ui text-outline uppercase mb-2">Body Prose</p>
-<p class="font-headline-md text-headline-md">Crimson Pro</p>
-</div>
-<div class="bg-background p-6">
-<p class="font-label-ui text-label-ui text-outline uppercase mb-2">System UI</p>
-<p class="font-headline-md text-headline-md">Inter UI</p>
-</div>
-<div class="bg-background p-6">
-<p class="font-label-ui text-label-ui text-outline uppercase mb-2">Data Receipt</p>
-<p class="font-headline-md text-headline-md">JetBrains Mono</p>
-</div>
-</div>
-</section>
-<!-- Predecessors — REMOVED, fabricated attributions per STITCH-GAP-AUDIT.md §9 -->
-<section class="mb-20 p-8 border-2 border-dashed border-architectural-ink/40 bg-surface-container-low">
-<div class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-3">[STRIPPED — AUDIT FINDING §9]</div>
-<h2 class="font-headline-md text-headline-md mb-4 uppercase tracking-widest text-architectural-ink/60">Predecessors / Influences</h2>
-<p class="font-body-dense text-body-dense italic text-architectural-ink/70">Original Stitch output listed four practitioners as "Predecessors" who shaped this design (Lovin, Lopopolo, Litt, Larson). Those attributions were not grounded in any decision Nino has made and have been stripped per the no-fabrication rule. If an Influences section ships, it gets populated from actual citations or removed.</p>
-</section>
-<!-- What changed from v2 — REMOVED, presents open D-decisions as already-made per STITCH-GAP-AUDIT.md §9 -->
-<section class="mb-20 p-8 border-2 border-dashed border-architectural-ink/40 bg-surface-container-low">
-<div class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-3">[STRIPPED — AUDIT FINDING §9]</div>
-<h2 class="font-headline-md text-headline-md mb-4 text-architectural-ink/60">What changed v1 → v2</h2>
-<p class="font-body-dense text-body-dense italic text-architectural-ink/70">Original Stitch output included a v2-legacy-to-current change table (Identity: Neutral SaaS → Saturated Editorial, +REBRAND, 800% receipt density, etc.). Those entries presented D1/D2/D7-blocked decisions as completed. The table will populate once D1 (thesis), D2 (editorial sentence), and D7 (v2 name) land — see DECISIONS-NEEDED.md.</p>
-</section>
-<!-- What's next — REMOVED, fabricated roadmap items per STITCH-GAP-AUDIT.md §9 -->
-<section class="mb-20">
-<div class="bg-surface-container-low border-2 border-dashed border-architectural-ink/40 p-8">
-<div class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-3">[STRIPPED — AUDIT FINDING §9]</div>
-<h2 class="font-headline-md text-headline-md mb-4 text-architectural-ink/60">What's next</h2>
-<p class="font-body-dense text-body-dense italic text-architectural-ink/70">Original Stitch output listed an Omnisearch Overlay, Vector Identity Layers, and a Drafting Workspace as the roadmap. These are fabricated product names from the generator. The actual v2 roadmap lives in DECISIONS-NEEDED.md as the open D-decision list.</p>
-</div>
-</section>
-</div>
-<!-- Right Rail Anchor -->
-<aside class="hidden md:flex flex-col bg-aged-paper border-l-2 border-architectural-ink fixed right-0 top-0 h-full w-[320px] z-40 overflow-y-auto no-scrollbar">
-<!-- SideNavBar Header -->
-<div class="p-6 border-b border-architectural-ink">
-<div class="flex items-center gap-3 mb-4">
-<img alt="Architect" class="w-10 h-10 rounded-none border border-architectural-ink" data-alt="A macro photograph of a professional software architect in a minimalist workspace. The lighting is cold and clinical, focused on the sharp lines of their professional attire and a high-resolution display reflecting architectural diagrams. The mood is one of extreme focus and high-stakes technical work within a modern, architectural-ink and aged-paper color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCr8ICiqKtv7UdhDqNCdAgvkUKPVnbtbvwrqTkQWYrITT278IUDU7moyCHZWXVrMI0ZUIJohBtWiL6G091V9D6P1HiHN9KMOMGSFobgpzu7KmMv6pSuasGPrchtlWMMy3aBrJMv4Yvlvo6I_-TBSIaYFLBjKIAqiwtJVLUDKDI6jt6IWIxzVgJr7pNTwPTz2UlAWqbDAloV5A8O50Y2CJ0OUxAlSA4TKBsdKBUIfzXBvon2QqE2qsqTIlot8WX1VLwo3L5BvRnMsw"/>
-<div>
-<div class="font-headline-md text-[18px] text-architectural-ink">Global Rail</div>
-<div class="font-status-code text-status-code text-blueprint-cyan">System State: Active</div>
-</div>
-</div>
-<button class="w-full py-2 bg-architectural-ink text-white font-label-ui text-label-ui uppercase hover:bg-blueprint-cyan transition-colors">View Metrics</button>
-</div>
-<!-- Research Artifacts Card -->
-<div class="p-6 flex-1">
-<div class="mb-6">
-<h3 class="font-label-ui text-label-ui uppercase tracking-widest text-outline mb-4">Research Artifacts</h3>
-<div class="space-y-3">
-<div class="bg-surface-container p-3 border border-architectural-ink/20">
-<div class="font-status-code text-[10px] text-blueprint-cyan mb-1">LOG://CORE_AUDIT</div>
-<div class="font-bold text-label-ui">Architecture_Spec_V3</div>
-<div class="font-data-receipt text-[11px] mt-2">18,442 Lines</div>
-</div>
-<div class="bg-surface-container p-3 border border-architectural-ink/20">
-<div class="font-status-code text-[10px] text-blueprint-cyan mb-1">LOG://THEME_TOKENS</div>
-<div class="font-bold text-label-ui">Cyanotype_Variables</div>
-<div class="font-data-receipt text-[11px] mt-2">4,110 Lines</div>
-</div>
-<div class="bg-surface-container p-3 border border-architectural-ink/20">
-<div class="font-status-code text-[10px] text-blueprint-cyan mb-1">LOG://CORPUS_MAP</div>
-<div class="font-bold text-label-ui">Semantic_Index_Master</div>
-<div class="font-data-receipt text-[11px] mt-2">92,031 Lines</div>
-</div>
-</div>
-</div>
-<!-- Parameters Nav -->
-<nav class="space-y-1">
-<a class="flex items-center gap-3 p-3 bg-blueprint-cyan text-aged-paper font-bold" href="#">
-<span class="material-symbols-outlined">sensors</span>
-<span class="font-label-ui text-label-ui">Live Signal</span>
-</a>
-<a class="flex items-center gap-3 p-3 text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper" href="#">
-<span class="material-symbols-outlined">architecture</span>
-<span class="font-label-ui text-label-ui">Drafting</span>
-</a>
-<a class="flex items-center gap-3 p-3 text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper" href="#">
-<span class="material-symbols-outlined">local_shipping</span>
-<span class="font-label-ui text-label-ui">Ship Log</span>
-</a>
-<a class="flex items-center gap-3 p-3 text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper" href="#">
-<span class="material-symbols-outlined">settings_suggest</span>
-<span class="font-label-ui text-label-ui">Parameters</span>
-</a>
-</nav>
-</div>
-<!-- SideNavBar Footer -->
-<div class="p-6 border-t border-architectural-ink bg-white/50">
-<div class="flex flex-col gap-2">
-<a class="flex items-center gap-2 font-label-ui text-label-ui hover:text-blueprint-cyan transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">menu_book</span> Documentation
-                    </a>
-<a class="flex items-center gap-2 font-label-ui text-label-ui hover:text-blueprint-cyan transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">contact_support</span> Support
-                    </a>
-</div>
-</div>
-</aside>
-</main>
-<!-- Footer Component -->
-<footer class="bg-background text-architectural-ink border-t border-architectural-ink dark:border-outline-variant w-full py-margin flex flex-col md:flex-row justify-between items-center px-margin md:max-w-[calc(100%-320px)] z-50">
-<div class="font-label-ui text-label-ui font-black mb-4 md:mb-0">Built with Blueprint methodology. © 2024 Signal Dispatch.</div>
-<div class="flex gap-8">
-<a class="font-body-prose text-body-prose text-on-surface-variant hover:text-blueprint-cyan transition-all" href="#">Methodology</a>
-<a class="font-body-prose text-body-prose text-on-surface-variant hover:text-blueprint-cyan transition-all" href="#">Manifesto</a>
-<a class="font-body-prose text-body-prose text-blueprint-cyan underline transition-all" href="#">Technical Spec</a>
-</div>
-</footer>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>About | Signal Dispatch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script>
-        // Micro-interaction: Smooth hover states for stages
-        document.querySelectorAll('.grid.items-center.group').forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                item.querySelector('.text-blueprint-cyan').classList.add('scale-110');
-            });
-            item.addEventListener('mouseleave', () => {
-                item.querySelector('.text-blueprint-cyan').classList.remove('scale-110');
-            });
-        });
-    </script>
-<script>window.BLUEPRINT_PAGE = { id: "about-colophon", title: "About / Colophon" };</script>
-<script src="/_blueprint-banner.js?v=20260525-2100"></script>
-<script src="/chat-widget.js?v=20260525-2100" defer></script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "background": "#fbfaee",
+          "surface": "#fbfaee",
+          "surface-bright": "#fbfaee",
+          "surface-container-lowest": "#ffffff",
+          "surface-container-low": "#f5f4e8",
+          "surface-container": "#efeee3",
+          "surface-container-high": "#e9e9dd",
+          "surface-container-highest": "#e4e3d7",
+          "surface-dim": "#dbdbcf",
+          "surface-variant": "#e4e3d7",
+          "on-surface": "#1b1c15",
+          "on-surface-variant": "#42474c",
+          "on-background": "#1b1c15",
+          "outline": "#72787d",
+          "outline-variant": "#c2c7cd",
+          "primary": "#001c2b",
+          "on-primary": "#ffffff",
+          "secondary": "#006972",
+          "tertiary": "#131b1d",
+          "tertiary-fixed": "#dbe4e6",
+          "architectural-ink": "#001B29",
+          "blueprint-cyan": "#008B94",
+          "aged-paper": "#FDFCF0",
+          "carbon-trace": "#111827",
+          "error": "#ba1a1a"
+        },
+        borderRadius: { "DEFAULT": "0", "lg": "0", "xl": "0", "full": "9999px" },
+        spacing: { "unit": "4px", "rail-width": "320px", "left-rail": "260px", "gutter": "16px", "margin": "32px", "dense-gap": "8px" },
+        fontFamily: {
+          "display-lg":   ["Bree Serif"],
+          "headline-md":  ["Bree Serif"],
+          "body-prose":   ["Crimson Pro"],
+          "body-dense":   ["Crimson Pro"],
+          "label-ui":     ["Inter"],
+          "data-receipt": ["JetBrains Mono"],
+          "status-code":  ["JetBrains Mono"]
+        },
+        fontSize: {
+          "display-lg":   ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+          "headline-md":  ["24px", {"lineHeight": "1.2", "fontWeight": "400"}],
+          "body-prose":   ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+          "body-dense":   ["16px", {"lineHeight": "1.4", "fontWeight": "400"}],
+          "label-ui":     ["13px", {"lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+          "data-receipt": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}],
+          "status-code":  ["11px", {"lineHeight": "1", "fontWeight": "700"}]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .receipt-block {
+    background-image: radial-gradient(circle, #008B9405 1px, transparent 1px);
+    background-size: 8px 8px;
+  }
+  .border-dashed-v {
+    border-top: 1px dashed #001B29;
+    border-bottom: 1px dashed #001B29;
+  }
+  /* Sharp corners (Cyanotype is 0-radius) */
+  * { border-radius: 0 !important; }
+  *.rounded-full { border-radius: 9999px !important; }
+</style>
+</head>
+<body class="bg-background text-architectural-ink font-body-prose selection:bg-blueprint-cyan selection:text-aged-paper overflow-x-hidden">
+<div class="flex min-h-screen">
+  <aside class="hidden md:flex flex-col w-[260px] flex-shrink-0 bg-background border-r-2 border-architectural-ink sticky top-0 h-screen overflow-y-auto">
+  <!-- Wordmark -->
+  <div class="px-margin py-6 border-b-2 border-architectural-ink">
+    <a class="block font-headline-md text-headline-md font-bold uppercase tracking-tighter leading-none" href="/pages/home.html">Signal<br/>Dispatch</a>
+    <div class="font-data-receipt text-data-receipt text-blueprint-cyan mt-1">v2 PROTOTYPE</div>
+  </div>
+
+  <!-- Primary nav -->
+  <nav class="px-3 py-6 border-b border-architectural-ink/20">
+    <div class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-3 px-3">Navigate</div>
+    <a class="flex items-center justify-between px-3 py-2 text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper font-label-ui text-label-ui transition-colors duration-75" href="/pages/home.html">
+      <span>Index</span>
+      <span class="font-data-receipt text-data-receipt opacity-50">→</span>
+    </a>
+      <a class="flex items-center justify-between px-3 py-2 text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper font-label-ui text-label-ui transition-colors duration-75" href="/pages/library.html">
+      <span>Library</span>
+      <span class="font-data-receipt text-data-receipt opacity-50">→</span>
+    </a>
+      <a class="flex items-center justify-between px-3 py-2 bg-blueprint-cyan text-aged-paper font-label-ui text-label-ui" href="/pages/about-colophon.html">
+      <span>About</span>
+      <span class="font-data-receipt text-data-receipt opacity-50">→</span>
+    </a>
+      <a class="flex items-center justify-between px-3 py-2 text-architectural-ink hover:bg-blueprint-cyan hover:text-aged-paper font-label-ui text-label-ui transition-colors duration-75" href="/pages/subscribe-follow.html">
+      <span>Follow</span>
+      <span class="font-data-receipt text-data-receipt opacity-50">→</span>
+    </a>
+  </nav>
+
+  
+  <!-- Live signal -->
+  <div class="px-margin py-6 border-b border-architectural-ink/20 bg-architectural-ink text-aged-paper">
+    <div class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-2">Live Signal</div>
+    <div class="font-data-receipt text-data-receipt opacity-60 mb-1">MAY 25, 2026 · COUNTERPOINT</div>
+    <a class="block font-body-dense text-body-dense font-bold hover:text-blueprint-cyan transition-colors" href="/pages/counterpoint-detail.html">Five Months Later, the Evidence Showed Up</a>
+  </div>
+
+  
+  <!-- Currently serializing -->
+  <div class="receipt-block border-dashed-v px-margin py-6">
+    <div class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan mb-3">Recent Dispatches</div>
+    <div class="divide-y divide-architectural-ink/10">
+      <div class="py-2">
+        <div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-1">MAY 25, 2026</div>
+        <a class="font-body-dense text-body-dense font-bold hover:text-blueprint-cyan transition-colors block leading-snug" href="/pages/counterpoint-detail.html">Five Months Later, the Evidence Showed Up</a>
+      </div>
+      <div class="py-2">
+        <div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-1">MAY 24, 2026</div>
+        <a class="font-body-dense text-body-dense font-bold hover:text-blueprint-cyan transition-colors block leading-snug" href="/pages/counterpoint-detail.html">Process Beats Inspection: Why the Chassis Doesn't Just Shift the Review Burden</a>
+      </div>
+      <div class="py-2">
+        <div class="font-data-receipt text-data-receipt text-blueprint-cyan mb-1">MAY 24, 2026</div>
+        <a class="font-body-dense text-body-dense font-bold hover:text-blueprint-cyan transition-colors block leading-snug" href="/pages/whitepaper-detail.html">Big Blueprint: A Production Line for Agent-Assisted Product Work</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer in left rail -->
+  <div class="mt-auto px-margin py-4 border-t-2 border-architectural-ink">
+    <div class="font-data-receipt text-data-receipt opacity-60 mb-2">EXTERNAL</div>
+    <ul class="font-label-ui text-label-ui space-y-1">
+      <li><a class="hover:text-blueprint-cyan transition-colors" href="https://ninochavez.co/blog">Live site →</a></li>
+      <li><a class="hover:text-blueprint-cyan transition-colors" href="https://www.linkedin.com/in/ninochavez/">LinkedIn →</a></li>
+      <li><a class="hover:text-blueprint-cyan transition-colors" href="https://ninochavez.co/blog/rss.xml">RSS →</a></li>
+    </ul>
+  </div>
+</aside>
+  <main class="flex-1 px-margin py-margin min-w-0 max-w-full">
+
+    <header class="mb-12 max-w-4xl">
+      <span class="font-status-code text-status-code uppercase tracking-widest text-blueprint-cyan border border-blueprint-cyan px-2 py-1 inline-block mb-4">System // Colophon</span>
+      <h1 class="font-display-lg text-display-lg leading-tight mb-4">
+        Working notes from an architect who directs <span class="text-blueprint-cyan italic">agents</span> to ship commerce.
+      </h1>
+    </header>
+
+    <!-- Meta receipt framing -->
+    <div class="receipt-block border-dashed-v p-6 mb-12 max-w-4xl">
+      <div class="font-data-receipt text-data-receipt opacity-80 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <p class="uppercase text-blueprint-cyan font-bold mb-1">Audit Trace #001-A</p>
+          <p>OBJECT: Signal Dispatch v2 (Prototype)</p>
+          <p>METHOD: Big Blueprint methodology</p>
+          <p>STATE: V2 PROTOTYPE · LIVE</p>
+        </div>
+        <div>
+          <p class="uppercase text-blueprint-cyan font-bold mb-1">State Claims</p>
+          <p>DENSITY: High-Fidelity Practitioner</p>
+          <p>VOICE: v1 inherited unchanged (per D5)</p>
+          <p>FOLLOW: RSS / LinkedIn (no email)</p>
+        </div>
+      </div>
+    </div>
+
+    <section class="mb-12 max-w-3xl">
+      <h2 class="font-headline-md text-headline-md font-bold uppercase italic border-b-2 border-architectural-ink pb-2 mb-6">What this publication is</h2>
+      <div class="space-y-4 font-body-prose text-body-prose">
+        <p>A working architect's notes on AI-era engineering, agentic systems, governance, and the practice of the craft. Long-form essays as the flagship surface; companion whitepapers when an idea earns the technical treatment; counterpoints when a position needs stress-testing; series when an argument runs across multiple pieces.</p>
+        <p>It is a publication, not a personal-brand newsletter. There is no email capture, no subscriber-count display, no "Now reading" widget. <a class="border-b-2 border-blueprint-cyan hover:text-blueprint-cyan transition-colors" href="/pages/subscribe-follow.html">Follow via RSS or LinkedIn</a> if it has earned the slot in your reading life.</p>
+      </div>
+    </section>
+
+    <section class="mb-12 max-w-3xl">
+      <h2 class="font-headline-md text-headline-md font-bold uppercase italic border-b-2 border-architectural-ink pb-2 mb-6">Author</h2>
+      <div class="space-y-4 font-body-prose text-body-prose">
+        <p><strong class="text-architectural-ink font-bold">Nino Chavez</strong> — Architect who directs agents, not an engineer who types code. Director-tier work, executed through a team budget of zero. Peer group: architects, principal consultants, fractional CTOs, directors of AI engineering.</p>
+        <p class="font-label-ui text-label-ui">
+          <a class="hover:text-blueprint-cyan transition-colors mr-6" href="https://ninochavez.co/about">PORTFOLIO →</a>
+          <a class="hover:text-blueprint-cyan transition-colors mr-6" href="https://www.linkedin.com/in/ninochavez/">LINKEDIN →</a>
+          <a class="hover:text-blueprint-cyan transition-colors" href="https://github.com/nino-chavez">GITHUB →</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="mb-12 max-w-4xl">
+      <h2 class="font-headline-md text-headline-md font-bold uppercase italic border-b-2 border-architectural-ink pb-2 mb-6">Format Conventions</h2>
+      <div class="space-y-0 border-t border-architectural-ink">
+        <div class="grid grid-cols-12 py-4 border-b border-architectural-ink items-baseline group hover:bg-blueprint-cyan/5 transition-colors">
+          <div class="col-span-1 font-status-code text-status-code text-blueprint-cyan">01</div>
+          <div class="col-span-3 font-headline-md text-headline-md">Posts</div>
+          <div class="col-span-6 font-body-dense text-body-dense opacity-80">Long-form essays in MDX. Reading column capped at 720px. Callouts and pullquotes used sparingly. Show-the-work voice.</div>
+          <div class="col-span-2 text-right font-data-receipt text-data-receipt opacity-70">229 pieces</div>
+        </div>
+        <div class="grid grid-cols-12 py-4 border-b border-architectural-ink items-baseline group hover:bg-blueprint-cyan/5 transition-colors">
+          <div class="col-span-1 font-status-code text-status-code text-blueprint-cyan">02</div>
+          <div class="col-span-3 font-headline-md text-headline-md">Whitepapers</div>
+          <div class="col-span-6 font-body-dense text-body-dense opacity-80">Formal companions to specific posts. Plain markdown. Table-heavy. Executive Summary self-contained. <code class="font-data-receipt text-data-receipt bg-surface-container-low px-1">companionOf</code> binding to parent.</div>
+          <div class="col-span-2 text-right font-data-receipt text-data-receipt opacity-70">12 pieces</div>
+        </div>
+        <div class="grid grid-cols-12 py-4 border-b border-architectural-ink items-baseline group hover:bg-blueprint-cyan/5 transition-colors">
+          <div class="col-span-1 font-status-code text-status-code text-blueprint-cyan">03</div>
+          <div class="col-span-3 font-headline-md text-headline-md">Series</div>
+          <div class="col-span-6 font-body-dense text-body-dense opacity-80">Numbered ordered sequences. Reads as one argument across multiple parts. Read-state tracked client-side.</div>
+          <div class="col-span-2 text-right font-data-receipt text-data-receipt opacity-70">8 pieces</div>
+        </div>
+        <div class="grid grid-cols-12 py-4 border-b border-architectural-ink items-baseline group hover:bg-blueprint-cyan/5 transition-colors">
+          <div class="col-span-1 font-status-code text-status-code text-blueprint-cyan">04</div>
+          <div class="col-span-3 font-headline-md text-headline-md">Counterpoints</div>
+          <div class="col-span-6 font-body-dense text-body-dense opacity-80">Self-red-team or external-critic responses to specific posts. <code class="font-data-receipt text-data-receipt bg-surface-container-low px-1">challengesPost</code> binding renders auto-link banner on the parent.</div>
+          <div class="col-span-2 text-right font-data-receipt text-data-receipt opacity-70">4 pieces</div>
+        </div>
+        <div class="grid grid-cols-12 py-4 border-b border-architectural-ink items-baseline group hover:bg-blueprint-cyan/5 transition-colors">
+          <div class="col-span-1 font-status-code text-status-code text-blueprint-cyan">05</div>
+          <div class="col-span-3 font-headline-md text-headline-md">Fiction</div>
+          <div class="col-span-6 font-body-dense text-body-dense opacity-80">Narrative serials and standalones. Distinct content lane; narrative-prose-tuned typography.</div>
+          <div class="col-span-2 text-right font-data-receipt text-data-receipt opacity-70">10 pieces</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12 max-w-3xl">
+      <h2 class="font-headline-md text-headline-md font-bold uppercase italic border-b-2 border-architectural-ink pb-2 mb-6">The Stack</h2>
+      <div class="receipt-block border-dashed-v p-4 grid grid-cols-2 md:grid-cols-4 gap-4 font-data-receipt text-data-receipt">
+        <div>
+          <div class="font-label-ui text-label-ui font-black uppercase opacity-50 mb-1">FRAMEWORK</div>
+          <div class="text-blueprint-cyan">Astro 5 + MDX</div>
+        </div>
+        <div>
+          <div class="font-label-ui text-label-ui font-black uppercase opacity-50 mb-1">HOSTING</div>
+          <div class="text-blueprint-cyan">Cloudflare Pages</div>
+        </div>
+        <div>
+          <div class="font-label-ui text-label-ui font-black uppercase opacity-50 mb-1">DISPLAY</div>
+          <div class="text-blueprint-cyan">Bree Serif</div>
+        </div>
+        <div>
+          <div class="font-label-ui text-label-ui font-black uppercase opacity-50 mb-1">BODY</div>
+          <div class="text-blueprint-cyan">Crimson Pro</div>
+        </div>
+        <div>
+          <div class="font-label-ui text-label-ui font-black uppercase opacity-50 mb-1">UI</div>
+          <div class="text-blueprint-cyan">Inter</div>
+        </div>
+        <div>
+          <div class="font-label-ui text-label-ui font-black uppercase opacity-50 mb-1">DATA</div>
+          <div class="text-blueprint-cyan">JetBrains Mono</div>
+        </div>
+        <div>
+          <div class="font-label-ui text-label-ui font-black uppercase opacity-50 mb-1">ANALYTICS</div>
+          <div class="text-blueprint-cyan">None</div>
+        </div>
+        <div>
+          <div class="font-label-ui text-label-ui font-black uppercase opacity-50 mb-1">COOKIES</div>
+          <div class="text-blueprint-cyan">None</div>
+        </div>
+      </div>
+    </section>
+  
+</main>
+</div>
 </body></html>
