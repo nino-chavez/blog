@@ -1,0 +1,124 @@
+---
+title: "The Only Thing in My Codebase That Can't Lie"
+publishedAt: "2026-05-30T17:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "I asked an agent a simple product question and watched it spend three thousand words rediscovering things it had no way to trust. The fix wasn't a better map. It was noticing which artifacts in a codebase can lie to you — and which one can't."
+category: "Engineering"
+featureImage: "/images/generated/the-only-thing-that-cant-lie.webp"
+tags: ["ai-development", "engineering", "ai-governance"]
+featured: false
+status: "published"
+---
+
+import { PullQuote } from '@/components/mdx/PullQuote';
+import { Callout } from '@/components/mdx/Callout';
+
+The failing tests said *mobile*. A handful of red checks, all tagged to the phone viewport, all complaining that some element wasn't on the page.
+
+So I had the agent run them on desktop too. They failed there as well.
+
+That single fact changed the question. These weren't mobile bugs. The element the tests were looking for — a pricing label, a testimonial block — wasn't missing because the layout broke on a small screen. It was missing because someone had redesigned the page, and the tests still expected the old one.
+
+Which means the real question was never "how do I make this green." It was: *did the test drift away from a product that deliberately changed, or did the product actually break?*
+
+You cannot answer that by reading the code. Both look identical from the code's side — an assertion that no longer matches what's rendered. To know which one is wrong, you have to know what someone *meant*. Whether the testimonial was deleted on purpose.
+
+That's the one thing you can't grep for.
+
+---
+
+## Two Sources of Truth
+
+I want to name the thing that test was sitting on top of, because it turned out to be everywhere.
+
+A codebase carries two different kinds of truth.
+
+There's what the code *does* — recoverable any time. You can read it, run it, grep it. It's never out of date with itself.
+
+And there's what you *meant* — the intent, the why, the deliberate choice behind the shape. That one isn't in the code. It lives in a person's head, or in some artifact a person wrote down once and then walked away from.
+
+These two drift apart continuously, and nothing forces them back together. The drifted test was just the first place I watched the gap show.
+
+It was not the last.
+
+---
+
+## The Same Gap, Four More Times
+
+A few hours into the same session, the unit-test suite was passing. Nine hundred and seventy tests, all green, build clean. And every authenticated page in the app crashed on load — a component caught in an infinite update loop, shipped *because* it had passed the gate.
+
+The green checkmark was telling the truth about what it measured. What it measured just wasn't whether the product worked.
+
+Then the database. Its change history was a list of files, each one marked "applied." Several contained instructions that could never have run as written — they described changes to tables that weren't there. The record said the schema was one thing. The running database was another. That record had been confidently wrong for who knows how long, and nothing had noticed, because nothing re-checked.
+
+Then the brand. Four separate documents described the product's design language — a context file, a design doc, a style guide, the guide's own labels. Each had frozen at a different era of a rebrand the product had been through more than once. Exactly one artifact tracked what the product actually looked like: the stylesheet, because the stylesheet is the thing that renders.
+
+When I asked the agent for a design recommendation, it reached for the most authoritative-looking document and proposed bringing back a color we'd abandoned two rebrands ago. It wasn't wrong about what the document said. The document was wrong.
+
+And then the one that should have been the safeguard. A visual audit — the tool whose entire job is to catch exactly this kind of drift — came back green. It had only ever looked at one page, a component gallery, and never walked the actual product. Zero of the admin screens appeared in its report.
+
+The instrument built to detect lying artifacts was itself a lying artifact.
+
+Four artifacts. Four different corners of one system. One disease.
+
+Each was a frozen assertion — true at the moment it was written, trusted long after, re-checked by nothing.
+
+---
+
+## The Membrane
+
+There was one artifact in the whole session that didn't have this disease. The test that started it.
+
+A test is the only thing in a codebase that states what you *meant* and then proves it against what the code *does* — every single time it runs. A document asserts once and freezes. A test asserts and keeps proving.
+
+<PullQuote>A document states the truth once and freezes. A test states it and keeps proving it. That's the difference between a record and a membrane.</PullQuote>
+
+That's why the drifted test felt different from the lying brand doc, even though both were technically "out of date." The test announced its disagreement the instant it appeared. It failed loudly.
+
+The brand doc, the migration record, the green audit — they kept their disagreement to themselves and let me go on trusting them.
+
+A document that lies silently is worse than no document at all — because you act on it.
+
+---
+
+## So Build a Better Map?
+
+The obvious response, after an agent spends three thousand words re-deriving how an app fits together, is to build it a map. An atlas of the system it can read instead of rediscovering every session.
+
+I argued the agent out of it.
+
+A structural map is the wrong thing to maintain. The agent is already good at structure — it can grep, it can trace, it can reconstruct where things live in seconds, and that reconstruction is never stale. A hand-maintained map of the same territory is strictly worse, because the moment it drifts it doesn't just go useless. It becomes trusted *and* wrong.
+
+The most dangerous artifact in a codebase isn't the one that's missing. It's the one that's confidently out of date and looks authoritative.
+
+What grep can't surface is the other category — the landmines. The column that's written but never read. The guard that has to run in a specific order or everything breaks silently. The behavior that's true only because someone already stepped on it once. Those don't live in the structure. They live in whoever stepped on them first — and wrote nothing down.
+
+The checks that block bad output. The joins that show where independent systems disagree. The traces that tie code back to the intent it was supposed to serve — the apparatus I've called [scaffolding before](/blog/the-scaffolding-the-agent-doesnt-build). What I didn't have a clean way to say then is *why* it's the work: those are the artifacts that can't lie. Everything else in the repo is a claim. These carry their own proof.
+
+<Callout type="insight">
+The bug we found that session — a column written at creation and never read again — became an enforced check. The thing that nearly fooled the agent became the thing that prevents its own recurrence. That's the whole move: a claim that re-proves itself.
+</Callout>
+
+---
+
+## Where It Stops Being Clean
+
+So the move looks obvious: make every claim carry a verifier. A fact about what the code does, with no test proving it, isn't a record — it's a liability. Promote it to a test, or stop trusting it.
+
+Except it doesn't close all the way, and I want to be honest about where it frays.
+
+Not everything *can* be verified against the code. *Why* we chose a three-way setting instead of a simple on/off — that isn't a fact about what the code does. It's a fact about a decision someone made on a particular day. You can't write a test that proves a rationale. There's no assertion for "we meant it this way." That kind of truth can only be dated and appended to, never re-checked, because its source isn't the code. It's history. And you don't re-run history.
+
+And the registry that came out of that session — a list of the landmines — doesn't fully obey its own rule yet. Some entries are tests that can't lie. Others are still prose pointing at other prose, inheriting the exact drift they were built to kill. I found the pattern. The tooling is still catching up to it.
+
+There's a larger version of this I keep circling and haven't landed.
+
+If the real source of intent isn't any of these artifacts but the *conversations* that produced them — the sessions where I tell an agent what I mean and it generates the code, the tests, the docs in response — then the whole chain hangs off something that was never written down to begin with. Every artifact downstream is a generated assertion about an intent that lives only in a transcript nobody re-reads.
+
+I don't know yet whether that chain can be kept honest, or whether the un-verifiable part — the *why* — just rots no matter how carefully you date it.
+
+What I'm sure of is the smaller claim. Most of what a codebase tells you about itself is a frozen assertion, decaying from the moment it was written. Find the few artifacts that re-prove themselves on every run. Trust those. Treat the rest as exactly what they are.
+
+The green checkmark was never the problem.
+
+Believing it was.

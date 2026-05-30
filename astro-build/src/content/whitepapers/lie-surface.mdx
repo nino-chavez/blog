@@ -1,0 +1,151 @@
+---
+title: "Lie-Surface: Ranking What an Agent Can Trust in Your Codebase"
+publishedAt: "2026-05-30T17:30:00.000Z"
+author: "Nino Chavez"
+excerpt: "A codebase carries two sources of truth — what the code does and what you meant — and the artifacts that bridge them rot at wildly different rates. This is a framework for ranking those artifacts by how badly they can lie, and a design rule for building the few that can't."
+category: "Engineering"
+featureImage: "/images/generated/lie-surface.webp"
+tags: ["ai-development", "engineering", "ai-governance"]
+companionOf:
+  type: "post"
+  slug: "the-only-thing-that-cant-lie"
+---
+
+# Executive Summary
+
+This document is the technical companion to [The Only Thing in My Codebase That Can't Lie](/blog/the-only-thing-that-cant-lie). The post tells the story of a single agent session in which five different trusted artifacts — a test, a green test suite, a migration history, a set of brand documents, and a visual audit — each turned out to be asserting something that was no longer true, and only one of them said so out loud. This document specifies the model underneath that story.
+
+The core claim: a codebase holds two independent sources of truth — what the code **does** and what you **meant** — and they drift apart continuously. Every artifact you keep to bridge them is a frozen assertion whose trust decays from the instant it is written. They differ only in one property, which this document names **lie-surface**: the degree to which an artifact can be wrong without anything signaling that it is wrong.
+
+**Key findings:**
+
+- The problem is not "too many docs," "too few docs," or "the wrong docs." Doc count is a symptom. The root cause is that there is no substrate binding each claim to continuous verification against its source of truth.
+- Artifacts can be ranked by lie-surface, and the ranking is actionable. A passing test has near-zero lie-surface (it fails loudly the moment it drifts). Hand-written prose has maximum lie-surface (it rots silently and stays trusted).
+- The source of truth is not single. It is forced by **knowledge type**. Behavior is verifiable against code, continuously. Rationale ("why") is not verifiable against anything — its source is history, and history is appended to, not re-checked.
+- A test is the membrane between the two sources: intent (the assertion) checked against code (the run), every run. It is the only common artifact that re-proves itself.
+- The durable design is **verifier-first**, not doc-first: the unit of knowledge is a claim plus its verifier. A code-fact with no passing verifier is a liability, not a record.
+- One layer resists all of this: the un-verifiable "why." It can only be dated and appended to. Whether the full chain from intent to artifact can be kept honest is an open problem, stated in Part VI.
+
+This document is descriptive of a pattern that is still being built, not a finished system. Where the pattern frays, it says so.
+
+---
+
+# Part I: Two Sources of Truth
+
+Every project quietly maintains two truths that are never the same artifact.
+
+| Source of truth | What it is | Where it lives | Drifts? |
+|---|---|---|---|
+| The code | What the system actually does | The running source | Never out of date with itself |
+| The intent | What you meant, and why | A person's head, or a frozen artifact | Continuously, invisibly |
+
+The code cannot lie about what it does — you can always run it. But the code also cannot tell you what it was *supposed* to do. A column written and never read looks identical, from the code's side, to a column that is load-bearing. A test that fails because the product changed on purpose looks identical to a test that fails because the product broke.
+
+To tell those apart, you need the intent. And the intent is the side that rots, because nothing forces it to stay reconciled with the code.
+
+Every document, comment, migration record, dashboard, and memory note is an attempt to bridge the two. Each one is a snapshot of the relationship between code and intent, taken once, and then trusted indefinitely.
+
+---
+
+# Part II: The Lie-Surface Ranking
+
+**Lie-surface** is the degree to which an artifact can be wrong without anything signaling that it is wrong. It is the property that matters, because a wrong-and-loud artifact costs you minutes; a wrong-and-silent artifact costs you a decision made on a false premise.
+
+Rank the common artifacts by it:
+
+| Artifact | What it asserts | How it drifts | Lie-surface | Verdict |
+|---|---|---|---|---|
+| Enforced test / type / schema check | "The code does X" | Fails the build the moment it stops being true | Near zero | The asset. Build these. |
+| Generated structural index | "X lives here" | Regenerated on demand; cannot go stale | Near zero, but low semantic value | Skip — grep already does this |
+| Append-only dated decision record | "On this date we chose X because Y" | Cannot drift — it is a fact about the past | Zero for the past, silent on the present | Keep, for the un-verifiable why |
+| Curated gotcha note (prose) | "Watch out for X" | Rots silently, but small and high-value | Medium | Keep thin, only for the unenforceable |
+| Prose architecture / design doc | "The system is shaped like X" | Rots silently and invisibly while staying trusted | Maximum | Avoid — this is the trap |
+
+The ranking inverts the usual instinct. The artifact that feels most authoritative — a polished architecture document — has the highest lie-surface. The artifact that feels like overhead — a test asserting something "obvious" — has the lowest. Authority and trustworthiness are not the same axis. Lie-surface is the axis that predicts how badly an artifact will eventually mislead you.
+
+The design rule that falls out of this: **an artifact's value is inversely proportional to its lie-surface.** A document that cannot lie is worth maintaining. A document that lies silently is net-negative, because you act on it.
+
+---
+
+# Part III: The Knowledge-Type Taxonomy
+
+There is no single source of truth, and pretending otherwise is what makes "where should this live?" feel slippery. The right home for a claim is forced by what kind of truth it is.
+
+| Knowledge type | The claim is about... | Truth source | Re-verifiable? | Right artifact |
+|---|---|---|---|---|
+| Behavior | What the code does | The code | Yes, continuously | A test |
+| Topology | Where something lives | The code | Yes (grep / trace) | None — derive on demand |
+| Invariant | A gotcha grep cannot surface | Partial / nobody's head | High cost to rediscover | Enforced check; thin note if unenforceable |
+| Convention | How we do things here | Partial | Medium | Thin prose, enforced where possible |
+| Decision (why) | A past choice and its rationale | History | No — it just was | Append-only, dated, supersede don't edit |
+| State | What is in flight right now | Nobody durable | Not applicable | Handoff note, deliberately ephemeral |
+
+Two things fall out of this table.
+
+First, "knowledge registry" is not one artifact. It is a family, one member per row, sharing a single design discipline. Most teams that try to build "an atlas" build the wrong member — topology — which grep already solves and which goes net-negative the moment it drifts.
+
+Second, the highest-cost gap is usually **decisions**. Source code shows what; it never shows why. Once the rationale is unwritten, it is gone — and no test can recover it, because rationale is not a property of the code.
+
+---
+
+# Part IV: The Verifier-First Inversion
+
+The instinct is to build a document and keep it updated. That is doc-first, and it re-introduces, at the meta level, the exact drift it was meant to kill: now you have a doc *about* what is enforced, and nothing enforces *that*.
+
+The durable shape inverts the primacy. The unit of knowledge is not a doc entry. It is a **claim plus its verifier.**
+
+1. **Every claim declares its truth source.** Code-source claims must carry an executable verifier — a test, a type, a schema constraint, a lint rule. Intent-source claims (the why) carry a date instead, because they cannot be verified, only recorded.
+2. **A code-fact with no passing verifier is a violation, not an entry.** This is the rule that makes the substrate trustworthy instead of aspirational. An unverified claim about behavior is not weak documentation; it is a liability wearing documentation's clothes.
+3. **The human-readable registry is generated from the verifiers, not hand-written beside them.** The test file is the source of truth for "what is enforced." The readable index is a projection of it — so it cannot lie about enforcement, because it is derived from the thing that enforces.
+4. **Intent lives in a separate, append-only log** where freshness is not a meaningful concept. You do not edit a decision to keep it current. You supersede it with a newer dated decision and leave the old one standing.
+
+The difference this makes is categorical, not incremental. Doc-first gets you "a curated document that drifts more slowly." Verifier-first gets you "a substrate where untrustworthiness is structurally impossible for the enforceable subset." The first is a better habit. The second is a different guarantee.
+
+---
+
+# Part V: The Un-Verifiable Remainder
+
+Verifier-first has a hard boundary, and honesty about it is what keeps the framework from over-claiming.
+
+Not everything can be verified against the code. The clearest example is rationale. You cannot write a test that proves "we chose a three-way mode over a boolean because an invitation state is a real product axis distinct from a closed state." There is no assertion for a reason. The truth source for that claim is a historical decision, and historical decisions are not re-runnable.
+
+This is why decision records are immutable and dated. Freshness is meaningless for a decision — it was true at that moment, full stop. The discipline is not "keep it current." It is "never silently edit it; append a superseding decision and preserve the lineage."
+
+The failure mode to watch for: a code-fact parked on a "last verified on this date" stamp instead of a test. A date stamp is the correct tool *only* for genuinely un-verifiable claims. The moment a verifiable claim is sitting on a date instead of a verifier, you have chosen the weaker artifact for a claim that deserved the stronger one — drift, deferred.
+
+| Claim type | Correct artifact | Wrong artifact (drift, deferred) |
+|---|---|---|
+| Verifiable behavior | A test that runs | A prose note, or a "verified on" date stamp |
+| Un-verifiable rationale | An append-only dated record | A test you cannot actually write, or silent edits |
+
+---
+
+# Part VI: The Provenance Chain (Open Problem)
+
+The framework above treats artifacts as the units that drift. There is a level beneath that, and it is not solved.
+
+If the real source of intent is not any artifact but the **conversations** that produce them — the sessions in which a human states what they mean and an agent generates the code, the tests, and the docs in response — then every downstream artifact is a generated assertion about an intent that was never itself written down. The transcript holds the intent. Nobody re-reads the transcript. The code, the tests, the docs are all projections of a source that has no verifier of its own.
+
+This reframes the whole problem as a **provenance chain**: intent gives rise to generated artifacts, and nothing currently preserves the link or enforces freshness across it. A test verifies that code still matches a remembered assertion. Nothing verifies that the assertion still matches what was actually meant in the session that produced it.
+
+Two questions remain open, and this document does not resolve them:
+
+- Can the link from a session's intent to its generated artifacts be preserved in a form that itself resists drift — or does the provenance chain inherit the same lie-surface as everything else?
+- Does the un-verifiable layer — the why — rot no matter how carefully it is dated, simply because its only source is a memory that fades?
+
+The defensible conclusion is the smaller one. Most of what a codebase asserts about itself is a frozen claim decaying from the moment it was written. A small subset re-proves itself on every run. Identify that subset, build more of it where the claim is about behavior, date the rest where the claim is about intent — and treat every artifact in between as exactly what it is: a snapshot, trusted at your own risk.
+
+---
+
+# Appendix: Field Evidence
+
+Each row is a real moment from the session described in the companion post. The pattern is identical across all of them: a trusted artifact asserting something the running reality had already left behind.
+
+| Trusted artifact | What it claimed | The reality | Lie-surface class |
+|---|---|---|---|
+| Drifted test | "This element should be on the page" | The page was redesigned on purpose | Low — it failed loudly |
+| Green unit suite | "970 of 970 passing, build clean" | Every authenticated page crashed on load | High — the gate measured the wrong surface |
+| Migration history | "These changes were applied" | Several described tables that did not exist | Maximum — silent, confidently wrong |
+| Brand documents | "The design language is X" | Four docs, four eras; only the stylesheet was current | Maximum — most authoritative doc was most wrong |
+| Visual audit | "Design verified, all green" | It only ever inspected one gallery page, never the product | Maximum — the drift-detector had drifted |
+| Enforced check (the fix) | "This column is written but never read" | Continuously re-proven on every run | Near zero — the membrane |
