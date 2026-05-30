@@ -101,6 +101,32 @@ The bug we found that session — a column written at creation and never read ag
 
 ---
 
+## I Sold the Wrong Number
+
+I built the registry. Then I made the mistake of testing my own claim.
+
+I'd predicted what it would buy: a fresh session reads two entries, skips the rediscovery, reaches the same answer in a fraction of the work. So I opened a clean session, gave it nothing but the original question, and watched.
+
+Three things happened. Only two were what I'd sold.
+
+The wiring fired. The cold session read the registry first, unprompted, before it touched the code.
+
+The answer got better. Its core argument came back as a direct citation of a registry entry — tighter and more sure of itself than the one I'd reasoned my way to the first time, and it arrived in a single turn.
+
+And it cost exactly as many tokens as before. About a hundred and twelve thousand, either way. After reading the registry, the agent went and verified the whole subsystem against the source anyway.
+
+I'd sold the wrong number. The registry's win was never speed.
+
+The reason it wasn't is the entire point of everything above. An agent that reads a document and trusts it *instead* of checking is the exact failure this post is about. The re-verification I'd filed in my head as waste — the rediscovery tax I wanted to eliminate — was the agent refusing to do the one thing that makes documents dangerous.
+
+You don't want it to skip the check.
+
+You want to make the check *cheap*. Confirm the handful of artifacts a claim points at, instead of re-deriving the whole system from scratch. That's a real efficiency lever. "Trust the doc, skip the verification" is not. That's the bug wearing a feature's clothes.
+
+So the honest version of the claim is narrower than the one I started with: a better answer, reached with more confidence, in one turn. Not fewer tokens. I've measured the quality. The cost-collapse version — verification made genuinely cheap — I haven't earned yet.
+
+---
+
 ## Where It Stops Being Clean
 
 So the move looks obvious: make every claim carry a verifier. A fact about what the code does, with no test proving it, isn't a record — it's a liability. Promote it to a test, or stop trusting it.
@@ -118,6 +144,8 @@ If the real source of intent isn't any of these artifacts but the *conversations
 I don't know yet whether that chain can be kept honest, or whether the un-verifiable part — the *why* — just rots no matter how carefully you date it.
 
 What I'm sure of is the smaller claim. Most of what a codebase tells you about itself is a frozen assertion, decaying from the moment it was written. Find the few artifacts that re-prove themselves on every run. Trust those. Treat the rest as exactly what they are.
+
+The part that loops back on itself: this session — the bug, the registry, the number I got wrong — is the raw material. And what it produced is a system for catching exactly this kind of knowledge before the conversation ends and it's gone. The post makes its own case. The durable artifact was never the code. It's the landmines and the why — what a smarter model still can't recover once the transcript scrolls away.
 
 The green checkmark was never the problem.
 

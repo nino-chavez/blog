@@ -24,7 +24,9 @@ The core claim: a codebase holds two independent sources of truth — what the c
 - The source of truth is not single. It is forced by **knowledge type**. Behavior is verifiable against code, continuously. Rationale ("why") is not verifiable against anything — its source is history, and history is appended to, not re-checked.
 - A test is the membrane between the two sources: intent (the assertion) checked against code (the run), every run. It is the only common artifact that re-proves itself.
 - The durable design is **verifier-first**, not doc-first: the unit of knowledge is a claim plus its verifier. A code-fact with no passing verifier is a liability, not a record.
-- One layer resists all of this: the un-verifiable "why." It can only be dated and appended to. Whether the full chain from intent to artifact can be kept honest is an open problem, stated in Part VI.
+- The membrane is assert-shaped only for deterministic behavior. Probabilistic, model-driven behavior is verified by statistical **evals**, not pass/fail tests — a weaker membrane, but still continuous re-verification.
+- Tested cold, the substrate improved answer quality and confidence in a single turn but did **not** reduce tokens: the agent read the registry and verified against source anyway. Verification is the feature, not the cost. The efficiency lever is cheap verification, not skipped verification (Part VI).
+- One layer resists all of this: the un-verifiable "why." It can only be dated and appended to. Whether the full chain from intent to artifact can be kept honest is an open problem, stated in Part VII.
 
 This document is descriptive of a pattern that is still being built, not a finished system. Where the pattern frays, it says so.
 
@@ -101,6 +103,21 @@ The durable shape inverts the primacy. The unit of knowledge is not a doc entry.
 
 The difference this makes is categorical, not incremental. Doc-first gets you "a curated document that drifts more slowly." Verifier-first gets you "a substrate where untrustworthiness is structurally impossible for the enforceable subset." The first is a better habit. The second is a different guarantee.
 
+## The boundary: not all behavior is assert-shaped
+
+Verifier-first assumes the verifier is a pass/fail check. That holds for deterministic behavior — a gate either rejects a public sign-up to an invitation-only event or it does not, and a test settles it. It breaks for the probabilistic, model-driven parts of an AI-assisted system.
+
+You cannot unit-test whether a model's output is *good*. A pass/fail assertion on a non-deterministic surface is either flaky or vacuous. The right instrument there is statistical evaluation — an eval suite that scores a distribution of outputs against a rubric — not a single green-or-red assert.
+
+This sets which claims can even have a membrane:
+
+| Behavior is... | Truth source | Verifier | Membrane strength |
+|---|---|---|---|
+| Deterministic | The code | A test (assert) | Strong — re-proves on every run |
+| Probabilistic (model-driven) | A rubric over many runs | An eval (statistical) | Partial — re-scores, never proves |
+
+An eval is a weaker membrane than a test: it bounds drift rather than catching it the instant it happens. But it is still continuous re-verification, which is the property that matters. The failure mode to avoid is forcing an assert onto a probabilistic surface to manufacture a green checkmark, then trusting the checkmark — the false-green from the companion post, produced on purpose.
+
 ---
 
 # Part V: The Un-Verifiable Remainder
@@ -120,7 +137,27 @@ The failure mode to watch for: a code-fact parked on a "last verified on this da
 
 ---
 
-# Part VI: The Provenance Chain (Open Problem)
+# Part VI: What the Substrate Is Worth — and What It Isn't
+
+It is tempting to justify a knowledge substrate on efficiency: if an agent reads a registry, it can skip the rediscovery and answer in a fraction of the tokens. That justification was tested cold — a fresh session given only a product question, with the registry wired to load at session start — and it is wrong in an instructive way.
+
+| Prediction | Result |
+|---|---|
+| The session loads the registry | Confirmed — read first, unprompted, before any code |
+| The answer improves | Confirmed — the load-bearing argument became a direct citation of an invariant; tighter and more confident, in one turn |
+| The token cost drops | False — having read the registry, the agent verified the subsystem against source anyway; roughly the same context as before |
+
+The correction is the important part. An agent that reads a claim and trusts it *instead* of verifying is the precise failure this framework exists to prevent. Verification is not waste to be eliminated; it is the behavior that makes the substrate safe to rely on. The legitimate efficiency lever is not "skip the check" — it is "make the check cheap": confirm the few artifacts a claim cites, rather than re-deriving the whole subsystem.
+
+So the defensible value of a low-lie-surface substrate is **trust and answer quality reached in fewer turns** — not fewer tokens. Selling it as a token-reduction play optimizes for exactly the behavior the lie-surface model exists to distrust: credulous reliance on a possibly-stale document.
+
+This rhymes with a broader caution from practitioners building agent systems: treat model errors as inputs to be handled rather than failures to suppress; evaluate probabilistic behavior statistically rather than asserting on it; and resist piling on scaffolding that suppresses a model's healthy instinct to verify. A registry that made an agent stop checking would be a regression dressed as progress.
+
+One dimension is measured and one remains open. Answer quality improved. Whether verification can be made cheap enough — cited-artifact confirmation in place of full re-derivation — to recover a real token win is untested.
+
+---
+
+# Part VII: The Provenance Chain (Open Problem)
 
 The framework above treats artifacts as the units that drift. There is a level beneath that, and it is not solved.
 
