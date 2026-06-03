@@ -19,6 +19,14 @@ if (!existsSync(routesPath)) {
 
 const data = JSON.parse(readFileSync(routesPath, "utf8"));
 
+// Pagefind writes its index + UI bundle to dist/pagefind/ AFTER astro build,
+// so the adapter never sees those files when it generates _routes.json. Left
+// alone they route to the SSR worker (which 404s them). Exclude the whole
+// directory so the static layer serves the search assets.
+if (Array.isArray(data.exclude) && !data.exclude.includes("/pagefind/*")) {
+  data.exclude.push("/pagefind/*");
+}
+
 function coveredByWildcard(rule, wildcards, allowSelf = false) {
   for (const wc of wildcards) {
     if (!allowSelf && rule === wc) continue;

@@ -1,0 +1,180 @@
+---
+// Full-text search modal powered by Pagefind.
+// Pagefind's index + UI bundle are generated into /pagefind/ at build time
+// (see package.json build script). The UI assets are lazy-loaded the first
+// time the modal opens, so dev — where /pagefind/ does not exist — degrades
+// to an inline notice instead of a console error.
+//
+// Open it from anywhere by rendering an element with `data-search-trigger`,
+// or with Cmd/Ctrl-K. Close with Escape, the X, or a backdrop click.
+---
+
+<div
+  id="search-modal"
+  class="hidden fixed inset-0 z-[60]"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Search"
+>
+  <div id="search-backdrop" class="absolute inset-0 bg-zinc-950/80 backdrop-blur-sm"></div>
+
+  <div class="relative mx-auto mt-[12vh] w-[92%] max-w-2xl">
+    <div class="rounded-2xl border border-zinc-800 bg-zinc-900/95 shadow-2xl shadow-black/60 overflow-hidden">
+      <div class="flex items-center justify-between px-4 py-3 border-b border-zinc-800/60">
+        <span class="text-xs font-semibold uppercase tracking-wider text-zinc-500">Search</span>
+        <button
+          id="search-close"
+          type="button"
+          class="flex items-center justify-center w-7 h-7 rounded-md text-zinc-400 hover:text-white hover:bg-zinc-800/60 transition-colors"
+          aria-label="Close search"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="p-4 max-h-[70vh] overflow-y-auto">
+        <div id="pagefind-search"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  /* Theme the Pagefind default UI to match the dark Signal Dispatch palette */
+  #pagefind-search {
+    --pagefind-ui-scale: 0.9;
+    --pagefind-ui-primary: #7c3aed;
+    --pagefind-ui-text: #e4e4e7;
+    --pagefind-ui-background: #18181b;
+    --pagefind-ui-border: #3f3f46;
+    --pagefind-ui-tag: #27272a;
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 12px;
+    --pagefind-ui-font: inherit;
+  }
+  #pagefind-search .pagefind-ui__result-title a {
+    color: #fafafa;
+  }
+  #pagefind-search .pagefind-ui__result-title a:hover {
+    color: #ea580c;
+  }
+  #pagefind-search .pagefind-ui__result-excerpt {
+    color: #a1a1aa;
+  }
+  #pagefind-search mark {
+    background: rgba(124, 58, 237, 0.25);
+    color: #fff;
+  }
+  /* Dev/empty-index fallback notice */
+  #pagefind-search .search-unavailable {
+    color: #a1a1aa;
+    font-size: 0.875rem;
+    padding: 0.5rem 0.25rem;
+  }
+</style>
+
+<script>
+  const modal = document.getElementById("search-modal");
+  const backdrop = document.getElementById("search-backdrop");
+  const closeBtn = document.getElementById("search-close");
+  const container = document.getElementById("pagefind-search");
+
+  let initialized = false;
+
+  function loadPagefindUI(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      // CSS
+      if (!document.querySelector('link[data-pagefind-ui]')) {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "/pagefind/pagefind-ui.css";
+        link.setAttribute("data-pagefind-ui", "");
+        document.head.appendChild(link);
+      }
+      // JS
+      if ((window as any).PagefindUI) {
+        resolve();
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = "/pagefind/pagefind-ui.js";
+      script.onload = () => resolve();
+      script.onerror = () => reject(new Error("pagefind-ui.js failed to load"));
+      document.head.appendChild(script);
+    });
+  }
+
+  async function initSearch() {
+    if (initialized) return;
+    try {
+      await loadPagefindUI();
+      // eslint-disable-next-line no-new
+      new (window as any).PagefindUI({
+        element: "#pagefind-search",
+        showSubResults: true,
+        showImages: false,
+        excerptLength: 25,
+        resetStyles: false,
+        // The site uses extensionless URLs (trailingSlash: never, build
+        // format: "file"). Pagefind indexes the on-disk "*.html" paths, so
+        // strip the extension to match the canonical URLs.
+        processResult: (result: any) => {
+          if (result?.url) result.url = result.url.replace(/\.html$/, "");
+          for (const sub of result?.sub_results ?? []) {
+            if (sub.url) sub.url = sub.url.replace(/\.html(#|$)/, "$1");
+          }
+          return result;
+        },
+      });
+      initialized = true;
+    } catch {
+      if (container) {
+        container.innerHTML =
+          '<p class="search-unavailable">Search index unavailable. It is generated at build time — run a production build (or preview) to use search locally.</p>';
+      }
+      initialized = true;
+    }
+  }
+
+  function openModal() {
+    if (!modal) return;
+    modal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+    initSearch().then(() => {
+      const input = modal.querySelector<HTMLInputElement>(".pagefind-ui__search-input");
+      input?.focus();
+    });
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+
+  // Any element with [data-search-trigger] opens the modal
+  document.addEventListener("click", (e) => {
+    const trigger = (e.target as HTMLElement)?.closest("[data-search-trigger]");
+    if (trigger) {
+      e.preventDefault();
+      openModal();
+    }
+  });
+
+  backdrop?.addEventListener("click", closeModal);
+  closeBtn?.addEventListener("click", closeModal);
+
+  document.addEventListener("keydown", (e) => {
+    // Cmd/Ctrl-K opens search
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+      e.preventDefault();
+      openModal();
+      return;
+    }
+    // Escape closes it (only when open, and let Pagefind keep its own input)
+    if (e.key === "Escape" && modal && !modal.classList.contains("hidden")) {
+      closeModal();
+    }
+  });
+</script>

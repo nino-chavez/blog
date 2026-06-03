@@ -99,7 +99,7 @@ const challengingCounterpoint = counterpoints.find(
         Back to all essays
       </a>
 
-      <article class="space-y-6">
+      <article class="space-y-6" data-pagefind-body>
         <!-- Featured Image -->
         {post.data.featureImage && (() => {
           const src = post.data.featureImage;
@@ -168,7 +168,7 @@ const challengingCounterpoint = counterpoints.find(
           )}
 
           <!-- Author Info -->
-          <div class="flex items-center gap-4 pt-6 mt-2 border-t border-zinc-800/30">
+          <div class="flex items-center gap-4 pt-6 mt-2 border-t border-zinc-800/30" data-pagefind-ignore>
             <div class="w-12 h-12 rounded-full bg-gradient-to-br from-athletic-brand-violet to-athletic-court-orange flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-athletic-brand-violet/20">
               NC
             </div>
@@ -221,7 +221,7 @@ const challengingCounterpoint = counterpoints.find(
         </div>
 
         <!-- Social Sharing -->
-        <div class="pt-8 pb-8 border-t border-zinc-800/50 no-print">
+        <div class="pt-8 pb-8 border-t border-zinc-800/50 no-print" data-pagefind-ignore>
           <div class="flex items-center gap-4">
             <span class="text-zinc-500 text-sm font-medium">Share:</span>
             <a

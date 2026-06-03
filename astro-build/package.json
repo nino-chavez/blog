@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node scripts/optimize-routes.mjs",
+    "build": "astro build && npx pagefind --site dist && node scripts/optimize-routes.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -38,6 +38,7 @@
     "yaml": "^2.8.2"
   },
   "devDependencies": {
-    "@astrojs/cloudflare": "^12.6.13"
+    "@astrojs/cloudflare": "^12.6.13",
+    "pagefind": "^1.5.2"
   }
 }
