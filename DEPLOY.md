@@ -6,6 +6,7 @@ Verified 2026-06-11 by observing a live deploy (post pushed to main, served in p
 - **Platform**: Cloudflare Pages — project `ninochavez-blog` (`wrangler.toml`, build output `astro-build/dist`)
 - **Production URL**: `https://ninochavez.co/blog/...` (responses show `server: cloudflare` + `cf-ray`, no Vercel headers)
 - **`blog.ninochavez.co`**: 301s into `ninochavez.co/blog/...`
+- **Apex routing**: `ninochavez.co` is the `ninochavez-router` Worker (`~/Workspace/dev/apps/router/`) proxying a hardcoded prefix list (`/blog`, `/_astro`, `/pagefind`, ...) to `ninochavez-blog.pages.dev`. A new top-level path in `dist/` 404s on the apex until added to `blogPrefixes` + manual `npm run deploy` there — blog deploys alone can't fix apex 404s (this is how production search broke 2026-06-03 → 2026-06-11).
 - **`vercel.json`**: legacy/redirect duty only (root → `ninochavez.co/blog`). NOT the canonical host. Safe to ignore for deploys.
 
 ## Deploy trigger
