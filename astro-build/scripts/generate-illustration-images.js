@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Generate custom blog feature images using OpenRouter (Flux/DALL-E)
- * NEW STYLE: Hand-drawn illustration aesthetic with distinctive visual identity
+ * Generate custom blog feature images using OpenRouter (GPT-5 Image)
+ * Hand-drawn illustration aesthetic with distinctive visual identity
  *
  * Style Philosophy:
  * - Line-drawn illustrations with personality
@@ -9,7 +9,13 @@
  * - Each image tells a micro-story
  * - Distinctive and recognizable brand aesthetic
  *
- * Output: Optimized WebP images at 1200x675 (16:9), targeting 30-80KB
+ * Pipeline: concept (gemini-2.5-flash) → render (gpt-5-image, retried)
+ *           → sharp 1200x675 WebP → QA gate (mechanical + vision judge)
+ *           → frontmatter update
+ *
+ * State: a post is "done" when public/images/generated/<slug>.webp exists.
+ * No side-state file. Explicitly named files always regenerate; --force
+ * regenerates everything.
  */
 
 import OpenAI from 'openai';
@@ -38,7 +44,6 @@ if (!['blog', 'whitepapers', 'presentations', 'tutorials', 'counterpoints'].incl
 const BASE_DIR = process.cwd(); // Works both locally and in GitHub Actions
 const CONTENT_DIR = `${BASE_DIR}/src/content/${CONTENT_TYPE}`;
 const OUTPUT_DIR = `${BASE_DIR}/public/images/generated`;
-const PROGRESS_FILE = `./illustration-generation-progress-${CONTENT_TYPE}.json`;
 
 // Target dimensions for blog feature images (16:9 aspect ratio)
 const TARGET_WIDTH = 1200;
@@ -376,91 +381,141 @@ async function optimizeImage(inputBuffer, outputPath) {
   }
 }
 
-// Generate image using OpenRouter (GPT-5 Image) via chat completions
-async function generateImage(prompt, filename) {
+// Pull the base64 image payload out of an OpenRouter chat response, wherever it hides
+function extractImageBase64(message) {
+  // OpenRouter format: images[].image_url.url
+  if (message?.images && Array.isArray(message.images) && message.images.length > 0) {
+    const imageData = message.images[0];
+    if (imageData?.image_url?.url) return imageData.image_url.url.replace(/^data:image\/\w+;base64,/, '');
+    if (typeof imageData === 'string') return imageData.replace(/^data:image\/\w+;base64,/, '');
+    if (imageData?.url) return imageData.url.replace(/^data:image\/\w+;base64,/, '');
+    if (imageData?.b64_json) return imageData.b64_json;
+    throw new Error(`Unknown image format: ${JSON.stringify(imageData).substring(0, 100)}`);
+  }
+  // Content-array format (image_url parts or Gemini-style inline_data)
+  if (message?.content && Array.isArray(message.content)) {
+    for (const part of message.content) {
+      if (part.type === 'image_url' && part.image_url?.url) {
+        return part.image_url.url.replace(/^data:image\/\w+;base64,/, '');
+      }
+      if (part.inline_data?.data) {
+        return part.inline_data.data;
+      }
+    }
+  }
+  throw new Error(`No image found in response. Keys: ${Object.keys(message || {}).join(', ')}`);
+}
+
+// One render call. Throws on transport errors, empty responses, or missing image.
+async function fetchImageBuffer(prompt) {
+  const response = await openrouter.chat.completions.create({
+    model: 'openai/gpt-5-image',
+    modalities: ['text', 'image'],
+    messages: [{ role: 'user', content: prompt }]
+  });
+
+  const base64Data = extractImageBase64(response.choices?.[0]?.message);
+  const buffer = Buffer.from(base64Data, 'base64');
+  if (buffer.length < 10 * 1024) {
+    throw new Error(`Image payload suspiciously small (${buffer.length} bytes)`);
+  }
+  return buffer;
+}
+
+const MIN_OUTPUT_KB = 20;
+
+// QA gate. Mechanical checks are free and run first; the vision judge
+// (~$0.001/check) only confirms what a script can't. A judge that errors
+// fails OPEN — flaky QA must not block generation.
+async function qaImage(outputPath, visualConcept) {
+  const stat = fs.statSync(outputPath);
+  if (stat.size < MIN_OUTPUT_KB * 1024) {
+    return { pass: false, reason: `output only ${Math.round(stat.size / 1024)}KB — likely blank or corrupt` };
+  }
+  const meta = await sharp(outputPath).metadata();
+  if (meta.width !== TARGET_WIDTH || meta.height !== TARGET_HEIGHT) {
+    return { pass: false, reason: `dimensions ${meta.width}x${meta.height}, expected ${TARGET_WIDTH}x${TARGET_HEIGHT}` };
+  }
+
   try {
-    // Use chat completions with image modality
+    const b64 = fs.readFileSync(outputPath).toString('base64');
     const response = await openrouter.chat.completions.create({
-      model: 'openai/gpt-5-image',
-      modalities: ['text', 'image'],
-      messages: [
-        {
-          role: 'user',
-          content: prompt
-        }
-      ]
+      model: 'google/gemini-2.5-flash',
+      max_tokens: 150,
+      temperature: 0,
+      messages: [{
+        role: 'user',
+        content: [
+          { type: 'image_url', image_url: { url: `data:image/webp;base64,${b64}` } },
+          {
+            type: 'text',
+            text: `You are QA for blog header illustrations. The intended scene: "${visualConcept}".
+
+Check the image against these rules:
+1. No text, letters, words, or typography anywhere
+2. Hand-drawn illustration style, not photorealistic
+3. Not blank, garbled, or visually corrupted
+4. Subject plausibly matches the intended scene
+5. One clear focal point, not cluttered
+
+Respond with ONLY JSON: {"pass": true} or {"pass": false, "reason": "<which rule failed and why, briefly>"}`
+          }
+        ]
+      }]
     });
 
-    // Extract image from response
-    const message = response.choices?.[0]?.message;
+    const text = response.choices?.[0]?.message?.content?.trim() || '';
+    const jsonMatch = text.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('judge returned no JSON');
+    const verdict = JSON.parse(jsonMatch[0]);
+    return { pass: verdict.pass !== false, reason: verdict.reason };
+  } catch (e) {
+    console.log(`              ⚠️  Vision QA unavailable (${e.message.substring(0, 60)}) — passing image through`);
+    return { pass: true, reason: 'judge unavailable' };
+  }
+}
 
-    // Check for images array (OpenRouter format: images[].image_url.url)
-    if (message?.images && Array.isArray(message.images) && message.images.length > 0) {
-      const imageData = message.images[0];
-      let base64Data;
+const MAX_ATTEMPTS = 3;
 
-      // OpenRouter returns: { type: 'image_url', image_url: { url: 'data:image/png;base64,...' } }
-      if (imageData?.image_url?.url) {
-        base64Data = imageData.image_url.url.replace(/^data:image\/\w+;base64,/, '');
-      } else if (typeof imageData === 'string') {
-        base64Data = imageData.replace(/^data:image\/\w+;base64,/, '');
-      } else if (imageData?.url) {
-        base64Data = imageData.url.replace(/^data:image\/\w+;base64,/, '');
-      } else if (imageData?.b64_json) {
-        base64Data = imageData.b64_json;
-      } else {
-        throw new Error(`Unknown image format: ${JSON.stringify(imageData).substring(0, 100)}`);
+// Generate → optimize → QA, retrying on transient API failures and QA rejections
+async function generateImage(prompt, filename, visualConcept) {
+  const outputPath = path.join(OUTPUT_DIR, `${filename}.webp`);
+  let lastError = null;
+
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    try {
+      if (attempt > 1) {
+        const backoffMs = attempt * 4000;
+        console.log(`              🔁 Attempt ${attempt}/${MAX_ATTEMPTS} (waiting ${backoffMs / 1000}s)...`);
+        await new Promise(r => setTimeout(r, backoffMs));
       }
 
-      const imageBuffer = Buffer.from(base64Data, 'base64');
-      const outputPath = path.join(OUTPUT_DIR, `${filename}.webp`);
-      const optimizeResult = await optimizeImage(imageBuffer, outputPath);
-      const fileSizeKB = Math.round(optimizeResult.size / 1024);
+      const buffer = await fetchImageBuffer(prompt);
+      const optimizeResult = await optimizeImage(buffer, outputPath);
+
+      const qa = await qaImage(outputPath, visualConcept);
+      if (!qa.pass) {
+        lastError = new Error(`QA rejected: ${qa.reason}`);
+        console.log(`              🚫 QA rejected (attempt ${attempt}): ${qa.reason}`);
+        continue;
+      }
+      console.log(`              🔍 QA passed${qa.reason === 'judge unavailable' ? ' (mechanical checks only)' : ''}`);
 
       return {
         path: `/images/generated/${filename}.webp`,
         fullPath: outputPath,
-        size: fileSizeKB
+        size: Math.round(optimizeResult.size / 1024)
       };
+    } catch (e) {
+      lastError = e;
+      console.log(`              ⚠️  Attempt ${attempt} failed: ${(e.message || String(e)).substring(0, 80)}`);
     }
-
-    // Check for content array with image parts
-    if (message?.content && Array.isArray(message.content)) {
-      for (const part of message.content) {
-        if (part.type === 'image_url' && part.image_url?.url) {
-          const base64Data = part.image_url.url.replace(/^data:image\/\w+;base64,/, '');
-          const imageBuffer = Buffer.from(base64Data, 'base64');
-          const outputPath = path.join(OUTPUT_DIR, `${filename}.webp`);
-          const optimizeResult = await optimizeImage(imageBuffer, outputPath);
-          const fileSizeKB = Math.round(optimizeResult.size / 1024);
-
-          return {
-            path: `/images/generated/${filename}.webp`,
-            fullPath: outputPath,
-            size: fileSizeKB
-          };
-        }
-        // Also check for inline_data format (Gemini style)
-        if (part.inline_data?.data) {
-          const imageBuffer = Buffer.from(part.inline_data.data, 'base64');
-          const outputPath = path.join(OUTPUT_DIR, `${filename}.webp`);
-          const optimizeResult = await optimizeImage(imageBuffer, outputPath);
-          const fileSizeKB = Math.round(optimizeResult.size / 1024);
-
-          return {
-            path: `/images/generated/${filename}.webp`,
-            fullPath: outputPath,
-            size: fileSizeKB
-          };
-        }
-      }
-    }
-
-    // Debug: log the actual response structure
-    throw new Error(`No image found in response. Keys: ${Object.keys(message || {}).join(', ')}. Images type: ${typeof message?.images}`);
-  } catch (e) {
-    throw e;
   }
+
+  // A rejected/partial image left on disk would read as "done" to the
+  // filesystem-derived state — remove it so the failure stays visible.
+  if (fs.existsSync(outputPath)) fs.unlinkSync(outputPath);
+  throw lastError || new Error('Image generation failed after retries');
 }
 
 // Update MDX file with new image
@@ -552,18 +607,6 @@ function updateMdxFile(filepath, newImagePath) {
   }
 }
 
-// Load/save progress
-function loadProgress() {
-  if (fs.existsSync(PROGRESS_FILE)) {
-    return JSON.parse(fs.readFileSync(PROGRESS_FILE, 'utf-8'));
-  }
-  return { completed: [], failed: [], skipped: [] };
-}
-
-function saveProgress(progress) {
-  fs.writeFileSync(PROGRESS_FILE, JSON.stringify(progress, null, 2));
-}
-
 // Main function
 async function main() {
   const args = process.argv.slice(2);
@@ -575,7 +618,6 @@ async function main() {
     fs.mkdirSync(OUTPUT_DIR, { recursive: true });
   }
 
-  const progress = forceRegenerate ? { completed: [], failed: [], skipped: [] } : loadProgress();
   let files = fs.readdirSync(CONTENT_DIR).filter(f => f.endsWith('.mdx'));
 
   // If specific file requested
@@ -583,26 +625,28 @@ async function main() {
     files = files.filter(f => f === specificFile || f.includes(specificFile));
   }
 
-  // Filter out already completed
-  const remaining = files.filter(f =>
-    !progress.completed.includes(f) &&
-    !progress.skipped.includes(f)
-  );
+  // State is the filesystem: a post is done when its generated webp exists.
+  // Explicitly named files always regenerate; --force regenerates everything.
+  const hasImage = (f) => fs.existsSync(path.join(OUTPUT_DIR, `${f.replace('.mdx', '')}.webp`));
+  const remaining = files.filter(f => forceRegenerate || specificFile || !hasImage(f));
 
   console.log('');
-  console.log('🎨 Signal Dispatch Illustration Generator v4.0');
-  console.log('   OpenRouter + GPT-5 Image');
+  console.log('🎨 Signal Dispatch Illustration Generator v5.0');
+  console.log('   OpenRouter + GPT-5 Image + QA gate');
   console.log('   Hand-drawn illustration style + Sharp WebP Optimization\n');
   console.log(`📂 Content type: ${CONTENT_TYPE}`);
   console.log(`📐 Output: ${TARGET_WIDTH}x${TARGET_HEIGHT} WebP @ quality ${WEBP_QUALITY}`);
   console.log(`📊 Status:`);
   console.log(`   Total ${CONTENT_TYPE}: ${files.length}`);
-  console.log(`   Completed: ${progress.completed.length}`);
-  console.log(`   Failed: ${progress.failed.length}`);
-  console.log(`   Remaining: ${remaining.length}`);
+  console.log(`   Already have images: ${files.filter(hasImage).length}`);
+  console.log(`   To generate: ${remaining.length}`);
   if (forceRegenerate) console.log('   ⚠️  Force regenerate mode - all images will be regenerated');
   console.log('');
   console.log('='.repeat(60) + '\n');
+
+  const succeeded = [];
+  const failed = [];
+  const skipped = [];
 
   let count = 0;
   let totalSize = 0;
@@ -616,8 +660,7 @@ async function main() {
 
     if (!frontmatter || !frontmatter.title) {
       console.log(`[${count}/${remaining.length}] ⚠️  Skipping: ${filename} (no frontmatter)`);
-      progress.skipped.push(filename);
-      saveProgress(progress);
+      skipped.push(filename);
       continue;
     }
 
@@ -646,59 +689,42 @@ async function main() {
       );
 
       const slug = filename.replace('.mdx', '');
-      const result = await generateImage(prompt, slug);
+      const result = await generateImage(prompt, slug, visualConcept);
 
-      if (result) {
-        const mdxUpdated = updateMdxFile(filepath, result.path);
-        totalSize += result.size;
-        generatedCount++;
-        if (mdxUpdated) {
-          console.log(`              ✅ Generated: ${result.size}KB (image + MDX updated)`);
-          progress.completed.push(filename);
-          progress.failed = progress.failed.filter(f => f !== filename);
-        } else {
-          console.log(`              ⚠️  Generated: ${result.size}KB (image only - MDX update failed)`);
-          // Still mark as needing attention
-          if (!progress.failed.includes(filename)) {
-            progress.failed.push(filename);
-          }
-        }
+      const mdxUpdated = updateMdxFile(filepath, result.path);
+      totalSize += result.size;
+      generatedCount++;
+      if (mdxUpdated) {
+        console.log(`              ✅ Generated: ${result.size}KB (image + MDX updated)`);
+        succeeded.push(filename);
       } else {
-        console.log(`              ❌ No image returned`);
-        if (!progress.failed.includes(filename)) {
-          progress.failed.push(filename);
-        }
+        console.log(`              ⚠️  Generated: ${result.size}KB (image only - MDX update failed)`);
+        failed.push(filename);
       }
     } catch (e) {
       const errorMsg = e.message || String(e);
-      console.log(`              ❌ Error: ${errorMsg.substring(0, 50)}`);
-      if (!progress.failed.includes(filename)) {
-        progress.failed.push(filename);
-      }
+      console.log(`              ❌ Error: ${errorMsg.substring(0, 80)}`);
+      failed.push(filename);
     }
-
-    saveProgress(progress);
 
     // Rate limit - 2 seconds between requests (OpenRouter is more generous)
     await new Promise(r => setTimeout(r, 2000));
   }
 
   console.log('\n' + '='.repeat(60));
-  console.log('📊 Final Summary:');
-  console.log(`   ✅ Completed: ${progress.completed.length}`);
-  console.log(`   ❌ Failed: ${progress.failed.length}`);
-  console.log(`   ⏭️  Skipped: ${progress.skipped.length}`);
+  console.log('📊 Run Summary:');
+  console.log(`   ✅ Generated: ${succeeded.length}`);
+  console.log(`   ❌ Failed: ${failed.length}`);
+  console.log(`   ⏭️  Skipped: ${skipped.length}`);
   if (generatedCount > 0) {
     console.log(`   📦 Total size this run: ${Math.round(totalSize / 1024)}MB`);
     console.log(`   📏 Avg size per image: ${Math.round(totalSize / generatedCount)}KB`);
   }
 
-  if (progress.failed.length > 0) {
-    console.log('\n❌ Failed files (can retry):');
-    progress.failed.slice(0, 10).forEach(f => console.log(`   - ${f}`));
-    if (progress.failed.length > 10) {
-      console.log(`   ... and ${progress.failed.length - 10} more`);
-    }
+  if (failed.length > 0) {
+    console.log('\n❌ Failed this run (re-run to retry — no image on disk means it stays in the queue):');
+    failed.forEach(f => console.log(`   - ${f}`));
+    process.exitCode = 1;
   }
 
   console.log('\n✨ Done!');

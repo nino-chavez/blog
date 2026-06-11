@@ -53,11 +53,7 @@ const colors = categoryColors[post.data.category || ''] || categoryColors.defaul
   type="article"
 >
   <!-- Draft Banner -->
-  <DraftBanner
-    slug={post.id}
-    title={post.data.title}
-    hasFeatureImage={!!post.data.featureImage}
-  />
+  <DraftBanner title={post.data.title} />
 
   <!-- Reading Progress Bar -->
   <ReadingProgress client:idle />
