@@ -4,31 +4,10 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import SiteHeader from '../../../components/SiteHeader.astro';
 import SiteFooter from '../../../components/SiteFooter.astro';
 
-const expectedToken = import.meta.env.DRAFT_PREVIEW_TOKEN;
-
-// Check for token in cookie
-let isAuthenticated = false;
-let configError = false;
-
-// Token must be configured
-if (!expectedToken) {
-  configError = true;
-} else {
-  // Check existing cookie
-  const cookieToken = Astro.cookies.get('draft_token')?.value;
-  if (cookieToken && cookieToken === expectedToken) {
-    isAuthenticated = true;
-  }
-}
-
-// Get draft posts if authenticated
-let draftPosts: any[] = [];
-if (isAuthenticated) {
-  const allPosts = await getCollection('blog');
-  draftPosts = allPosts
-    .filter((post) => post.data.status === 'draft')
-    .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
-}
+const allPosts = await getCollection('blog');
+const draftPosts = allPosts
+  .filter((post) => post.data.status === 'draft')
+  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
 ---
 
 <BaseLayout
@@ -42,200 +21,90 @@ if (isAuthenticated) {
       <h1 class="text-3xl font-bold text-white mb-2">Draft Posts</h1>
       <p class="text-zinc-400 mb-8">Preview and manage unpublished content</p>
 
-      {configError ? (
-        <div class="max-w-md mx-auto mt-16">
-          <div class="bg-red-900/20 border border-red-500/30 rounded-xl p-8 text-center">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-500/10 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      <div class="space-y-4">
+        {draftPosts.length === 0 ? (
+          <div class="text-center py-16">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-zinc-800 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
             </div>
-            <h2 class="text-xl font-semibold text-red-400">Configuration Error</h2>
-            <p class="text-zinc-400 text-sm mt-2">
-              DRAFT_PREVIEW_TOKEN environment variable is not set.
-            </p>
-            <p class="text-zinc-500 text-xs mt-4">
-              Add it to Vercel Environment Variables or your local .env file.
-            </p>
+            <p class="text-zinc-400 text-lg">No draft posts</p>
+            <p class="text-zinc-600 text-sm mt-1">All posts are published or no drafts exist</p>
           </div>
-        </div>
-      ) : !isAuthenticated ? (
-        <div class="max-w-md mx-auto mt-16">
-          <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-8">
-            <div class="text-center mb-6">
-              <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-zinc-800 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-              </div>
-              <h2 class="text-xl font-semibold text-white">Enter Preview Token</h2>
-              <p class="text-zinc-500 text-sm mt-1">Access restricted to authorized users</p>
-            </div>
+        ) : (
+          draftPosts.map((post) => {
+            const publishedDate = new Date(post.data.publishedAt);
+            const formattedDate = publishedDate.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            });
 
-
-            <form id="auth-form" class="space-y-4">
-              <div>
-                <label for="token" class="sr-only">Preview Token</label>
-                <input
-                  type="password"
-                  id="token"
-                  name="token"
-                  placeholder="Enter your preview token"
-                  required
-                  class="w-full px-4 py-3 rounded-lg bg-zinc-800 border border-zinc-700 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-athletic-brand-violet focus:border-transparent"
-                />
-              </div>
-              <div id="form-error" class="hidden p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm"></div>
-              <button
-                type="submit"
-                id="submit-btn"
-                class="w-full px-4 py-3 rounded-lg bg-athletic-brand-violet hover:bg-athletic-brand-violet/90 text-white font-semibold transition-colors"
+            return (
+              <a
+                href={`/blog/draft/${post.id}`}
+                class="block group"
               >
-                Access Drafts
-              </button>
-            </form>
-
-            <script>
-              document.getElementById('auth-form')?.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const form = e.target as HTMLFormElement;
-                const token = (form.querySelector('#token') as HTMLInputElement)?.value;
-                const errorEl = document.getElementById('form-error');
-                const submitBtn = document.getElementById('submit-btn');
-
-                if (!token || !errorEl || !submitBtn) return;
-
-                // Disable button and show loading
-                submitBtn.textContent = 'Authenticating...';
-                (submitBtn as HTMLButtonElement).disabled = true;
-                errorEl.classList.add('hidden');
-
-                try {
-                  const res = await fetch('/blog/api/drafts-auth', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ token }),
-                  });
-
-                  const data = await res.json();
-
-                  if (res.ok && data.success) {
-                    window.location.reload();
-                  } else {
-                    errorEl.textContent = data.error || 'Invalid token. Please try again.';
-                    errorEl.classList.remove('hidden');
-                    submitBtn.textContent = 'Access Drafts';
-                    (submitBtn as HTMLButtonElement).disabled = false;
-                  }
-                } catch (err) {
-                  errorEl.textContent = 'An error occurred. Please try again.';
-                  errorEl.classList.remove('hidden');
-                  submitBtn.textContent = 'Access Drafts';
-                  (submitBtn as HTMLButtonElement).disabled = false;
-                }
-              });
-            </script>
-
-            <p class="text-zinc-600 text-xs text-center mt-6">
-              Token is stored securely in an HTTP-only cookie
-            </p>
-          </div>
-        </div>
-      ) : (
-        <div class="space-y-4">
-          {draftPosts.length === 0 ? (
-            <div class="text-center py-16">
-              <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-zinc-800 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              </div>
-              <p class="text-zinc-400 text-lg">No draft posts</p>
-              <p class="text-zinc-600 text-sm mt-1">All posts are published or no drafts exist</p>
-            </div>
-          ) : (
-            draftPosts.map((post) => {
-              const publishedDate = new Date(post.data.publishedAt);
-              const formattedDate = publishedDate.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-              });
-
-              return (
-                <a
-                  href={`/blog/draft/${post.id}`}
-                  class="block group"
-                >
-                  <article class="flex gap-6 p-4 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900 transition-all">
-                    {post.data.featureImage ? (
-                      <div class="w-32 h-24 flex-shrink-0 rounded-lg overflow-hidden bg-zinc-800">
-                        <img
-                          src={post.data.featureImage}
-                          alt=""
-                          class="w-full h-full object-cover"
-                        />
-                      </div>
-                    ) : (
-                      <div class="w-32 h-24 flex-shrink-0 rounded-lg bg-zinc-800 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-zinc-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                      </div>
-                    )}
-
-                    <div class="flex-1 min-w-0">
-                      <div class="flex items-center gap-2 mb-1">
-                        <span class="px-2 py-0.5 text-xs font-medium rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30">
-                          DRAFT
-                        </span>
-                        <span class="text-zinc-500 text-sm">{formattedDate}</span>
-                      </div>
-
-                      <h2 class="text-lg font-semibold text-white group-hover:text-athletic-court-orange transition-colors truncate">
-                        {post.data.title}
-                      </h2>
-
-                      {post.data.excerpt && (
-                        <p class="text-zinc-400 text-sm mt-1 line-clamp-2">
-                          {post.data.excerpt}
-                        </p>
-                      )}
-
-                      <div class="flex items-center gap-3 mt-2 text-xs text-zinc-500">
-                        {post.data.category && (
-                          <span>{post.data.category}</span>
-                        )}
-                        {post.data.tags && post.data.tags.length > 0 && (
-                          <>
-                            <span>•</span>
-                            <span>{post.data.tags.slice(0, 3).join(', ')}</span>
-                          </>
-                        )}
-                      </div>
+                <article class="flex gap-6 p-4 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900 transition-all">
+                  {post.data.featureImage ? (
+                    <div class="w-32 h-24 flex-shrink-0 rounded-lg overflow-hidden bg-zinc-800">
+                      <img
+                        src={post.data.featureImage}
+                        alt=""
+                        class="w-full h-full object-cover"
+                      />
                     </div>
-
-                    <div class="flex-shrink-0 self-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-zinc-500 group-hover:text-athletic-court-orange transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                  ) : (
+                    <div class="w-32 h-24 flex-shrink-0 rounded-lg bg-zinc-800 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-zinc-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                       </svg>
                     </div>
-                  </article>
-                </a>
-              );
-            })
-          )}
+                  )}
 
-          <div class="pt-8 border-t border-zinc-800 mt-8">
-            <a
-              href="/blog/drafts/logout"
-              class="text-sm text-zinc-500 hover:text-zinc-300 transition-colors"
-            >
-              Clear session and log out
-            </a>
-          </div>
-        </div>
-      )}
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-2 mb-1">
+                      <span class="px-2 py-0.5 text-xs font-medium rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30">
+                        DRAFT
+                      </span>
+                      <span class="text-zinc-500 text-sm">{formattedDate}</span>
+                    </div>
+
+                    <h2 class="text-lg font-semibold text-white group-hover:text-athletic-court-orange transition-colors truncate">
+                      {post.data.title}
+                    </h2>
+
+                    {post.data.excerpt && (
+                      <p class="text-zinc-400 text-sm mt-1 line-clamp-2">
+                        {post.data.excerpt}
+                      </p>
+                    )}
+
+                    <div class="flex items-center gap-3 mt-2 text-xs text-zinc-500">
+                      {post.data.category && (
+                        <span>{post.data.category}</span>
+                      )}
+                      {post.data.tags && post.data.tags.length > 0 && (
+                        <>
+                          <span>•</span>
+                          <span>{post.data.tags.slice(0, 3).join(', ')}</span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+
+                  <div class="flex-shrink-0 self-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-zinc-500 group-hover:text-athletic-court-orange transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </article>
+              </a>
+            );
+          })
+        )}
+      </div>
     </div>
 
     <SiteFooter />

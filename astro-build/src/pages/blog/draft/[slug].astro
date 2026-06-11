@@ -8,14 +8,6 @@ import SeriesNav from '../../../components/SeriesNav.astro';
 import TableOfContents from '../../../components/TableOfContents.astro';
 import DraftBanner from '../../../components/DraftBanner.astro';
 
-// Token-gated draft preview via cookie
-const expectedToken = import.meta.env.DRAFT_PREVIEW_TOKEN;
-const cookieToken = Astro.cookies.get('draft_token')?.value;
-
-if (!cookieToken || cookieToken !== expectedToken) {
-  return Astro.redirect('/blog/drafts');
-}
-
 // In SSR mode, get the draft post from the slug parameter
 const { slug } = Astro.params;
 const posts = await getCollection('blog');
