@@ -13,7 +13,7 @@ When the task is content authoring (a new post, a voice review, a whitepaper edi
 
 ## Blog content authoring (astro-build/)
 
-Astro-based blog with three content types: blog posts (MDX), whitepapers (plain markdown), presentations (MDX with `<Slide>` components).
+Astro-based blog with **eight content collections** (defined in `astro-build/src/content.config.ts` — that file is the source of truth, not this list). The three most common: blog posts (MDX), whitepapers (plain markdown), presentations (MDX with `<Slide>` components). The other five are easy to miss and have caused mis-filing — see Content Locations below. Before authoring a tutorial, fiction piece, counterpoint, series entry, or research note, read its schema in `content.config.ts` and match the existing pattern; do **not** approximate one collection with another (e.g. a tutorial is not a blog post with a `tutorial` tag).
 
 **All commands run from `astro-build/` directory.**
 
@@ -27,9 +27,19 @@ Astro-based blog with three content types: blog posts (MDX), whitepapers (plain 
 
 ## Content Locations
 
-- Blog: `astro-build/src/content/blog/*.mdx`
-- Whitepapers: `astro-build/src/content/whitepapers/*.mdx`
-- Presentations: `astro-build/src/content/presentations/*.mdx`
+All collections live under `astro-build/src/content/<collection>/*.mdx`. Schemas + the registered collection list are in `astro-build/src/content.config.ts`.
+
+| Collection | Path | Route | Distinguishing frontmatter / notes |
+|---|---|---|---|
+| `blog` | `content/blog/` | `/blog/{slug}` | The default. `status` (published/draft/unlisted), `series`, `featured`. MDX components: Callout, PullQuote, Figure, Mermaid. |
+| `whitepapers` | `content/whitepapers/` | `/blog/whitepapers/{slug}` | Plain markdown, NO MDX components. `companionOf`. |
+| `presentations` | `content/presentations/` | `/blog/presentations/{slug}` | `<Slide>` components. `duration`, `audience`, `mode`, `companionOf`. Export via `export-presentation-html.js`. |
+| `tutorials` | `content/tutorials/` | `/blog/tutorials/{slug}` | Hands-on **workshop** format, not a runbook. `duration`, `difficulty`, `prerequisites[]`, `objectives[]`, `companionOf`. Imports `<Exercise>`/`<Template>`/`<Checkpoint>` from `@/components/tutorials/`; rhythm is `# H1` → numbered Exercises (`## Why this matters → ## The structure → ## Your turn → <Checkpoint>`) → `## What Comes Next`. |
+| `fiction` | `content/fiction/` | `/blog/fiction/{slug}` | `status`, `form` (flash/short-story/novelette/novella), `genre[]`, `series`. Load fiction-voice memories first. |
+| `counterpoints` | `content/counterpoints/` | `/blog/counterpoints/{slug}` | Self-red-team of a post. `challengesPost` + source `type`. Banner auto-renders on the parent post. |
+| `series` | `content/series/` | `/blog/series/{slug}` | Registry, one per series: `title`, `description`, `status`. Posts join via `series.slug` + `position`. A series with no registry entry silently renders no nav. |
+| `research-notes` | `content/research-notes/` | `/research/{slug}` | Supporting working docs. `noteType`, `origin`. Linked from content via `supportedBy`. |
+
 - Generated images: `astro-build/public/images/generated/`
 
 ## Frontmatter Template (All Types)
