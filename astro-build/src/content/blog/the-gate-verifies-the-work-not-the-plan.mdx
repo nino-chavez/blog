@@ -41,9 +41,7 @@ Two features shipped in one stretch: recalculating tax at renewal, and recalcula
 
 The first one, the system caught.
 
-To make a schema change, I had to rebuild a table. My rebuild copied the table's columns from an old definition—and silently dropped two columns a later migration had added. Silent data loss. The worst kind, because nothing nearby complains.
-
-What complained was a rule: when you change a table, run every test that *reads* that table, not just the ones you're working on. Those other tests went red. Honestly red—the good kind. The bug surfaced as a loud failure instead of a quiet corruption. Fixed, re-run, green.
+A schema change forced me to rebuild a table, and the rebuild silently dropped two columns—the quiet kind of data loss where nothing nearby complains. What caught it was a rule: when you change a table, run every test that *reads* it, not just the ones you're working on. Those tests went red—honestly red, the good kind—and the bug surfaced as a loud failure instead of a quiet corruption. ([That rebuild is a whole story on its own](/blog/the-migration-that-ate-two-columns).)
 
 The second bug, the system could not catch.
 
