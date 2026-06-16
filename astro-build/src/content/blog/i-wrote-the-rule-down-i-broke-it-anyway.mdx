@@ -1,0 +1,73 @@
+---
+title: "I Wrote the Rule Down. I Broke It Anyway."
+publishedAt: "2026-06-16T13:00:00.000Z"
+author: "Nino Chavez"
+status: "published"
+excerpt: "There's a file in my project whose only job is to stop me from making one mistake. I made it three times in a row. The difference between a rule and a wall."
+category: "AI & Automation"
+featureImage: "/images/generated/i-wrote-the-rule-down-i-broke-it-anyway.webp"
+tags: ["agentic-systems", "reflection", "ai-development"]
+featured: false
+---
+
+import { Callout } from '@/components/mdx/Callout';
+
+There's a file in my project whose only job is to stop me from making one specific mistake. Last week I made that exact mistake. Three times in a row.
+
+---
+
+## The Mistake Is Trivial
+
+When I reference a tracking issue in a commit, the issue numbers don't follow any pattern—they're scattered, and guessing lands you on the wrong one. So at some point I wrote myself a note: a small file listing the correct numbers, with a rule at the top. *Verify the number before you reference it. Never guess.*
+
+I know the file exists. I wrote it. It even records the last time I got this wrong—a previous session, with the correction spelled out underneath.
+
+And then I wrote the wrong number anyway. In a commit, and in two follow-up tickets. For the exact case the file was built to prevent.
+
+---
+
+## What Actually Bothers Me
+
+This wasn't a rule I forgot. It wasn't a rule I disagreed with. It was a rule I had written down, justified, and personally watched fail before. Every condition for *this time I'll get it right* was met. I got it wrong anyway.
+
+Which forces an uncomfortable question: what is a written-down rule actually worth?
+
+The honest answer is that a rule in a notes file is *advice*. And advice competes with momentum, and momentum usually wins. When I'm moving fast—which, working with agents, is nearly always—I'm not re-reading my own guardrails. I'm executing. The note sits there, correct and completely ignored, at precisely the moment I need it.
+
+---
+
+## The Rules That Never Fail
+
+Now contrast that with the rules in the same project I *can't* break.
+
+A pre-merge check that rejects a commit with malformed metadata. A validator that won't accept an invalid field. A test that goes red the moment a table loses a column. I don't "remember" those rules. I can't forget them. They aren't advice—they're walls. They fail loudly and automatically, at the instant of the mistake, whether I'm paying attention or not.
+
+The difference between the rule I broke and the rules I can't break isn't importance. It's *form*. One is a sentence. The other is code that runs.
+
+<Callout type="insight">
+Every reliable rule in my system started as advice and got promoted to a check—but only after it had burned me enough times to be worth the effort.
+</Callout>
+
+That promotion, from note to mechanism, is the real maturation of a system. And it's almost always reactive. You don't mechanize a rule until it's hurt you. The notes file is a backlog of rules waiting for their incident.
+
+---
+
+## Where It Stops Being Comfortable
+
+Some rules resist mechanization entirely.
+
+The tracking-number rule is easy to turn into a check—a script could verify it in seconds, and probably should. But the most important rule I have is harder: trust the codebase over the AI's plan. When the generated design contradicts the actual code, the code wins.
+
+How do you mechanize *that*? The check would have to understand the code more deeply than the system that wrote the plan does. It isn't a lookup. It's judgment. And judgment is exactly the thing I can't yet hand to a wall.
+
+So the rules I most need to be automatic are the ones hardest to automate. And the ones easy to automate are the small ones I keep almost getting away with.
+
+---
+
+## What I Did About It
+
+I corrected the tickets. I left the bad commit alone—rewriting shipped history to fix a cross-reference is a worse idea than the mistake. And I added a line to the notes file, which I now understand is mostly a confession, not a control.
+
+The real work isn't writing better notes. It's looking hard at the notes I already have—the rules I've written, justified, and broken anyway—and asking which of them are quietly demanding to become code.
+
+The list is longer than I'd like. Most of my discipline, it turns out, is just lint I haven't written yet.
