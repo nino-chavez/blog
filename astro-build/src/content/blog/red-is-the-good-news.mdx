@@ -1,0 +1,66 @@
+---
+title: "Red Is the Good News"
+publishedAt: "2026-06-16T14:00:00.000Z"
+author: "Nino Chavez"
+status: "draft"
+excerpt: "Three bugs that would have shipped clean. None of them threw an error. The only thing that caught them was a test written to fail first, against the real thing."
+category: "AI & Automation"
+featureImage: "/images/generated/red-is-the-good-news.webp"
+tags: ["agentic-systems", "testing", "ai-development"]
+featured: false
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+A red test is supposed to be bad news. Something broke. Go fix it.
+
+On a recent build run, red was the only honest thing in the room. Three times, a test went red and told me about a bug that would otherwise have shipped completely clean — passed every check, deployed, and quietly returned the wrong answer to a real customer. None of those bugs threw an error. That's exactly why they were dangerous.
+
+---
+
+## How I Was Working
+
+The rule I'd set for myself: write the test before the fix, and run it against the real database. Not a mock. Not a simplified stand-in I built to be easy to test. The actual schema, the actual constraints.
+
+That changes what red means. When a test fails against a model you built, it usually means your model is wrong. When it fails against the real system, it usually means *the system* is wrong — or was never right to begin with. Red stops being "I broke something" and becomes "here's something that was already broken."
+
+Then it kept finding things.
+
+---
+
+## The Three That Didn't Throw
+
+**A time window that never opened.** A feature was supposed to fire an alert when something crossed a threshold inside a rolling window. The query compared a stored timestamp against a computed cutoff. Both were "timestamps." But one was stored in one text format and the other was computed in another — and compared as plain strings, one format always sorts before the other, regardless of the actual time. The window was always empty. The alert would never fire. Not sometimes. Never. And nothing errored — the query ran fine and returned zero rows, which looks exactly like "nothing crossed the threshold."
+
+**A retry queue that stranded its own work.** A delivery system retried failed sends on a backoff. The query that found work to do looked for items marked *pending*. But a failed item gets marked *failed*, with a scheduled retry time. So the moment anything failed once, it dropped out of the queue the retry system used to find it — and sat there forever, retry permanently scheduled, never picked up. The happy path worked perfectly. The retry path was a quiet graveyard.
+
+**A fixture that collapsed in silence.** A shared test helper seeded a customer with a hardcoded ID, under a uniqueness constraint, using an insert-or-ignore. Seed one customer: fine. Seed a second: the insert is silently ignored, and now two "different" customers in your test are the same row. Every multi-customer test built on that helper was quietly testing a scenario that couldn't physically exist.
+
+<Callout type="signal" title="The shared shape">
+None of these threw. They returned wrong-or-empty. A wrong answer that arrives calmly, with a 200 and no stack trace, is the kind of bug that lives in production for months.
+</Callout>
+
+---
+
+## Why Normal Tests Miss These
+
+Every one of these bugs lives on a *seam* — the place where two things that are supposed to fit actually don't.
+
+Two timestamp formats meeting in a comparison. A state machine whose "find work" query knows about some of its states but not all of them. A fixture meeting a constraint it wasn't written to respect. A test that exercises the feature straight down the middle never touches the seam. It runs the happy path, gets a green, and the seam stays invisible — until production runs the case you didn't.
+
+<PullQuote>
+The bugs that ship don't throw. They return the wrong answer, calmly, and pass every test that didn't think to cross the seam.
+</PullQuote>
+
+The only reason I found these is that I wasn't writing tests to confirm the feature worked. I was writing them to find where it didn't — first, before the fix, against the real schema. That reframes the whole exercise. The test suite stops being a net you check at the end and becomes a flashlight you point at the dark corners on the way in.
+
+---
+
+## What Red Actually Means
+
+I've started treating a red test, on the first run, against real infrastructure, as the most valuable signal I get all day. It's a bug introducing itself to me by name, on my schedule, before it introduces itself to a customer on theirs.
+
+The reflex to make red green as fast as possible is the thing to resist. Red is not the problem. Red is the bug being honest about where it lives. The green you rush to is the one that lies.
+
+So now when a test goes red the first time I run it, I don't sigh. I lean in. That's the bug telling me where it is — which is the one moment it ever will.

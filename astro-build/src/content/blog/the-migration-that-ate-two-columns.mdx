@@ -1,0 +1,76 @@
+---
+title: "The Migration That Ate Two Columns"
+publishedAt: "2026-06-16T15:00:00.000Z"
+author: "Nino Chavez"
+status: "draft"
+excerpt: "I rebuilt a database table and it silently deleted two columns I needed. No error. Every test for the thing I was changing passed. Here's what actually caught it."
+category: "AI & Automation"
+featureImage: "/images/generated/the-migration-that-ate-two-columns.webp"
+tags: ["agentic-systems", "architecture", "ai-development"]
+featured: false
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+I rebuilt a database table and it silently deleted two columns I needed. No error. The migration ran clean. Every test for the feature I was working on passed.
+
+The two columns were just... gone.
+
+---
+
+## Why I Was Rebuilding a Table
+
+I needed to drop an old constraint on a table. On the database I was using, you can't just alter a constraint away — you rebuild the table. Create the new shape, copy the data across, swap it in. Standard, if tedious.
+
+So I wrote the rebuild. And to get the table's shape, I did the obvious thing: I looked at the migration that had originally created it, and copied that.
+
+That was the mistake, and it took me a while to see why.
+
+---
+
+## The Table Wasn't Its Original Shape Anymore
+
+Months earlier — long before I touched it — another migration had added two columns to that table. A dispute identifier and an evidence-due date, for handling chargebacks. By the time I came along, the live table had those columns. The *original* migration didn't mention them, because they didn't exist yet when it was written.
+
+My rebuild copied the original shape. So it recreated the table without the two columns, copied the data into the smaller shape, and dropped the rest. Cleanly. Silently. The migration's job is to reshape the table, and it did exactly that — it just reshaped it back to a version of reality that was a year out of date.
+
+<Callout type="warning" title="The quiet part">
+The tests for my feature all passed — because my feature didn't read those two columns. The damage was entirely outside my blast radius, in code I wasn't looking at and wasn't testing.
+</Callout>
+
+---
+
+## What Caught It
+
+Not me. Not my feature's tests.
+
+What caught it was a rule I almost skipped: when you change a table, run every test that *reads* that table — not just the ones for the thing you're building. So I ran the chargeback flows and the dispute flows, code I hadn't touched and had no reason to think about. They went red. The columns they depended on weren't there.
+
+That's the whole save. The bug was invisible from where I was working and obvious from where the data was consumed. The only way to see it was to look from the consumer's side.
+
+<PullQuote>
+A destructive change's blast radius isn't what you're editing. It's everything that reads what you're editing.
+</PullQuote>
+
+---
+
+## The Door That Only Opened One Way
+
+There's a second half to this, and it's worse.
+
+The constraint I was trying to remove? On that database, it couldn't be removed at all. Changing a constraint on a table that other tables point to requires temporarily turning off a safety the platform won't let you turn off. The rebuild I was attempting was the *only* path, and it was the path that ate the columns.
+
+Which means the real bug was upstream of me. That constraint should never have been added in the first place — it was a one-way door someone walked through a year earlier, and I inherited the room with no exit. The project even had a written rule against adding that kind of constraint. The rule existed *because* of a previous version of this exact scar.
+
+---
+
+## What I Took From It
+
+Two things, and they're the same thing wearing different clothes.
+
+First: a destructive change has to be built from the system as it is *right now*, not as it started. The original migration was a map. The live table was the territory. I trusted the map, and the map was a year stale.
+
+Second: "done" for a migration is not "my feature's tests pass." It's "everything downstream still works." The thing you're changing is never the thing at risk — the things reading it are.
+
+I keep relearning the same lesson in new disguises. The artifact that describes the system is not the system. The schema-as-written drifts from the schema-as-running. The rule-as-remembered drifts from the rule-as-enforced. The only way through is to keep checking against the thing that's actually true, not the thing that was true when someone wrote it down — including when the someone was me, last year, in a migration I'd long since forgotten.
