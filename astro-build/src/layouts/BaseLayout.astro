@@ -7,6 +7,8 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  /** og:image override (e.g. a generated per-post share card). Falls back to `image`. */
+  ogImage?: string;
   type?: 'website' | 'article';
   publishedTime?: string;
   modifiedTime?: string;
@@ -21,6 +23,7 @@ const {
   title,
   description = 'Architecture, commerce, and the signals that matter. Exploring AI workflows, systems thinking, and leadership through practical experience.',
   image = '/og_image.webp',
+  ogImage,
   type = 'website',
   publishedTime,
   modifiedTime,
@@ -34,6 +37,9 @@ const {
 const siteUrl = 'https://ninochavez.co';
 const blogPath = '/blog';
 const fullImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
+// og:image prefers the share-card override; the in-page hero/LCP keeps `image`.
+const ogSource = ogImage ?? image;
+const fullOgImage = ogSource.startsWith('http') ? ogSource : `${siteUrl}${ogSource}`;
 const canonical = canonicalUrl || `${siteUrl}${Astro.url.pathname}`.replace(/\/$/, '');
 const pageTitle = title === 'Signal Dispatch' ? title : `${title} - Signal Dispatch`;
 
@@ -76,7 +82,7 @@ const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={fullImage} />
+    <meta property="og:image" content={fullOgImage} />
     <meta property="og:site_name" content="Signal Dispatch" />
     <meta property="og:locale" content="en_US" />
 
@@ -99,7 +105,7 @@ const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <meta name="twitter:url" content={canonical} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={fullImage} />
+    <meta name="twitter:image" content={fullOgImage} />
 
     <!-- Robots / LLM Crawler Signals -->
     {noIndex ? (
