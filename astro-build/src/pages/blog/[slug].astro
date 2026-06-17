@@ -74,6 +74,7 @@ const challengingCounterpoint = counterpoints.find(
   title={post.data.title}
   description={post.data.excerpt}
   image={post.data.featureImage}
+  ogImage={`/og/${post.id}.png`}
   type="article"
   publishedTime={publishedDate.toISOString()}
   modifiedTime={post.data.updatedAt ? new Date(post.data.updatedAt).toISOString() : undefined}

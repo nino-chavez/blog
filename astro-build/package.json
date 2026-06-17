@@ -13,6 +13,7 @@
     "@astrojs/react": "^4.4.2",
     "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.0",
+    "@cf-wasm/og": "^0.4.0",
     "@fontsource-variable/inter": "^5.2.8",
     "@google/generative-ai": "^0.24.1",
     "@phosphor-icons/react": "^2.1.10",
