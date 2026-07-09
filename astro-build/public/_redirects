@@ -1,2 +1,5 @@
 /rss.xml                /blog/rss.xml                301
 /full-content-rss.xml   /blog/full-content-rss.xml   301
+/api/posts.json         /blog/api/posts.json         301
+/api/posts/*            /blog/api/posts/:splat       301
+/llms.txt               /blog/llms.txt               301
