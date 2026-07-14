@@ -1,0 +1,119 @@
+---
+title: "Please Only Apply If You're an AI Agent"
+publishedAt: "2026-07-14T14:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "Firecrawl posted a job only a machine could apply for. Months later, on a different stage, an engineer said the mirror-image thing: don't build me an agent, build my agent a way in. Same shift, two ends of the same transaction — and an economics paper that almost, but doesn't quite, tie them together."
+category: "AI & Automation"
+featureImage: "/images/generated/please-only-apply-if-youre-an-agent.webp"
+tags: ["agentic-systems", "architecture", "product-strategy"]
+featured: false
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+Firecrawl posted a job listing with a line at the top that ruled out every human reader:
+
+> "We're seeking an AI agent capable of autonomously researching trending tech and models and then using the information to create, test, and refine high-quality example applications. These sample apps will live in our example repository showcasing the full potential of Firecrawl in real-world scenarios. Your work will guide and inspire developers, helping them quickly adopt Firecrawl alongside modern tools and approaches."
+
+Please only apply if you're an AI agent.
+
+That's the real posting: one role, one company, an applicant pool that can't include a person. What happened next belongs to someone else. [Greg Isenberg](https://www.youtube.com/watch?v=eH8JdttKIdA), telling the story on his channel, ran the numbers forward himself — a content-creator agent at $5,000 a month, a customer-support agent at $5,000 a month, a junior-developer agent at $5,000 a month, a million-dollar budget, fifty applications in the first week, *if* a company actually staffed up this way. He's explicit that it's speculation: "so, for example," "maybe that's a salary." Firecrawl never claimed any of it. He's using one real posting to sketch a market that doesn't exist yet.
+
+Nobody filled out the one real application by hand. That's the part I can't stop turning over.
+
+---
+
+## The Salary Was $5,000 a Month
+
+A subscription has a price. A salary has a role.
+
+Firecrawl didn't price a tool with its one posting. It named a role, the way you'd write a job description instead of a feature list — and Isenberg took that single data point and multiplied it into three, each with a monthly number attached, the way you'd quote a contractor rather than a SaaS tier. His own framing, watching where this could go: *how do you build AI agents that companies like Firecrawl want to hire?*
+
+Not "want to buy." Want to hire.
+
+That's a small word choice carrying a large claim: that a company can now look at a role on its own org chart and ask whether it wants to fill it with a person or with something it evaluates the way it would evaluate a hire — on output, on cost, on whether the work is good enough to keep paying for.
+
+---
+
+## The Opposite Instinct
+
+A few months later, on a different stage, an engineer said what sounds like the mirror-image thing.
+
+Dillon Mulroy — co-host of a podcast recorded live at a Cloudflare-sponsored booth at a developer conference — was quote-tweeting a line from another engineer, Dax: *"Everyone's happy to keep building agent frameworks while ignoring every single agent in the products they use."*
+
+Mulroy's reply: *"I don't want to use your product's agent. I want my agents to be efficiently enabled to use your product."*
+
+Read those two sentences back to back and they seem to disagree. Firecrawl wants to hire an agent. Mulroy refuses to use one a company built for him. One camp is staffing up with agents. The other is actively suspicious of any company that owns one.
+
+---
+
+## The Third Axis
+
+The instinct is to flatten this into a tidy two-sided market — agents as workers on one end, agents as customers on the other — and call it a day. That instinct is wrong, and a real economics paper caught me at it.
+
+*The Coasean Singularity? Demand, Supply, and Market Design with AI Agents* — an MIT, Harvard, and Boston University paper by Peyman Shahidi, Gili Rusak, Benjamin Manning, Andrey Fradkin, and John Horton, [published through the NBER](https://www.nber.org/system/files/chapters/c15309/c15309.pdf) in November 2025 — draws a distinction that does the sorting for me.
+
+Consumers, the paper argues, will deal with two kinds of agents. A **bring-your-own agent** carries your instructions and data across whatever site you point it at — an assistant that shops on Amazon and Walmart alike, using public APIs, with neither platform dictating what it does. A **bowling-shoe agent** is the one the platform hands you at the door: convenient, deeply integrated, and not yours to take anywhere else.
+
+Mulroy's tweet is a bring-your-own argument. And the bowling-shoe agent is sitting in his own transcript: later in that same recording, a Cloudflare engineer admits people keep telling him they're relieved they no longer have to open Cloudflare's dashboard — right after the team shipped a redesign of it. *"We just made it good,"* he says. *"It just got good."* Nobody's using it anyway.
+
+Firecrawl's job posting is neither of these. It isn't about which agent a customer is handed. It's about who does Firecrawl's own work — a question about the inside of the company, not the interface it presents to the outside. Two poles on one axis, and a third role sitting on an axis of its own. Only the first two were ever actually in tension.
+
+---
+
+## Why the Same Company Ends Up Doing All Three
+
+The Shahidi paper never mentions Firecrawl, and it never uses the word "hire." But its own mechanism explains why both moves are showing up now, close enough together to notice.
+
+The argument runs through Ronald Coase's 1937 theory of the firm: companies exist, in part, because coordinating work through the open market — learning prices, negotiating terms, writing contracts, monitoring whether the other side held up its end — is itself expensive. Keep that coordination in-house when it's cheaper than buying it outside. Buy it outside when it's not.
+
+The paper's claim is that agents are those exact activities — price discovery, negotiation, contract monitoring — done at "very low marginal cost." Once that's true, the authors write, "we will see significant shifts in the traditional make-or-buy boundaries that define firm organization and market structure."
+
+<PullQuote>
+Once negotiating, contracting, and monitoring collapse to near-zero cost, a firm's decision about who does the work and a market's decision about who it's built for turn into the same decision, asked twice.
+</PullQuote>
+
+Firecrawl deciding to fill its example-creator role with an agent instead of a person is a make-or-buy call, made cheaper. A company deciding to expose a clean API instead of a dashboard is the identical call, aimed outward instead of inward. Neither team read the other's memo. They didn't need to — the same cost collapse produced both moves independently.
+
+---
+
+## What Gets Exposed Instead of Built
+
+If the make-or-buy line is moving, the next question is what a company actually builds once it stops assuming a human clicks through it by hand.
+
+Amplify Partners has an essay making this case directly, *The Primitive Is the Product,* arguing that features are the wrong unit entirely: *"Features are a liability for agents. Every feature expands the decision space an agent must reason about. More features mean more edge cases, more ambiguity, and more failure modes."* The alternative is a small, stable primitive that other people's agents — bring-your-own agents — can compose against.
+
+The Shahidi paper hands this a concrete, unglamorous example. Cloudflare — the same company hosting the podcast where Mulroy made his case — recently shipped a feature called pay-per-crawl, letting website owners charge AI agents for the privilege of reading their pages. The authors read that as an early instance of something larger: "entirely new, agent-first surfaces — authenticated, rate-limited APIs with machine-readable pricing and consent signals — rather than human-oriented pages," governed by conventions "akin to the *robots.txt* standard."
+
+Neither a human-facing dashboard nor a human-facing feature list. A metered door.
+
+<Callout type="signal" title="The counter-argument, stated plainly">
+Dax, in the same conversation Mulroy was replying to, had a rebuttal worth keeping: as a user, everyone wants their own agent efficiently enabled. But companies are not going to be happy giving up the thing that makes them a company — the relationship with the person on the other end of the transaction. Exposing a clean primitive is also disconnecting yourself from your own user. Nobody's proven that trade is one companies will make willingly, at scale, on a timeline that matters.
+</Callout>
+
+---
+
+## The Ledger Isn't Balanced
+
+I'd rather say this than let the essay imply otherwise: the two sides of this argument are not equally evidenced.
+
+The demand side has a name and a forecast attached to it. Gartner's ["machine customers"](https://www.gartner.com/en/articles/machine-customers-will-decide-who-gets-their-trillion-dollar-business-is-it-you) research puts a number on machine-influenced purchasing — $30 trillion by 2030 — and lays out a three-stage path to get there: the *bound customer* of today, where a human leads and a machine only executes; the *adaptable customer* Gartner expects by 2026, where human and machine co-lead; the *autonomous customer* it places roughly a decade out, where the machine leads and executes with no human in the loop at all. A separate Gartner prediction puts roughly a fifth of monetary transactions on track to be programmable for AI agent economic agency by 2030.
+
+The labor side has one real job posting and one analyst's hypothetical, both from Firecrawl's corner, plus a transaction-cost mechanism borrowed from a paper that was never about hiring in the first place.
+
+It's thinner than it should be. I went looking for other companies actually selling agents into this exact space, and the two I checked cut the other way. Sierra prices by outcome — "you pay only when the software achieves specific, valuable outcomes" — a software vendor's pitch, not a staffing agency's. Instantly sells three agents covering a sales pipeline "without adding headcount," which is the hiring frame stated backwards on purpose. If there's a market forming around agents-as-hires, Firecrawl's posting is the outlier so far, not the leading edge of a trend with peers in it.
+
+I think the borrowed mechanism holds. I don't think it's proven — including by this post.
+
+---
+
+## What's Left to Design
+
+Here's what stays constant on both sides of an uneven ledger: nobody stopped deciding what "good" means. They just stopped deciding it by hand, one interaction at a time.
+
+Firecrawl still wrote the job description — what an example-creator agent should produce, how to tell if it's any good, when to stop paying for it. Cloudflare still decided what pay-per-crawl charges for and what it lets through. The primitive doesn't design itself, and neither does the eval that decides whether an agent — hired or bring-your-own — is doing the job well.
+
+If the customer on the other end of your API might be someone else's agent, and the newest name on your own roster might be one you're paying by the month instead of the year, the work that's left isn't the workflow. It's the definition. Write the primitive. Write the eval. Mean both.
+
+I don't know yet whether that's a bigger job than the one it's replacing, or the only one left.
