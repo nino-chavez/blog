@@ -4,7 +4,7 @@
 
 ---
 
-A rival model reviewed my agent's work last week, and the review was better than the work.
+A rival model reviewed my agent's work, and the review was better than the work.
 
 Not better researched — my agent had spent the morning walking thirteen repositories, dispatching three research subagents, carrying honest caveats about which evidence was simulated and which was observed. The rival saw none of that effort. It just read the output and landed two punches my agent hadn't thrown at itself: *you drafted one design when you should have compared three*, and *you're about to rewrite a shared contract on evidence that justifies retiring the old one, not selecting its replacement.*
 
@@ -62,7 +62,7 @@ There's an asymmetry hiding in the original comparison, too. The rival model sat
 
 ## What changed
 
-Every finding got promoted out of the conversation the same afternoon, because a lesson that lives in a chat summary is gone by the next session.
+Every finding got promoted out of the conversation within the hour, because a lesson that lives in a chat summary is gone by the next session. The whole arc — the rival's review, the transcript read, the twelve runs, the config commits — fit inside one morning.
 
 The validated candidate rule went into the canonical preferences file, word for word as tested. A second rule went in beside it: before executing a fleet-wide rewrite I've asked for, check whether the repository's own rules offer a smaller sanctioned mechanism — recommending restraint over my stated instinct, grounded in those rules, is action, not timidity. The hesitation hook learned an exemption for questions that deserve to be asked, and the injected priors now carry a warning label about being keyword-matched rather than situation-matched.
 
