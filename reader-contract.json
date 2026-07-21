@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "project": "Signal Dispatch",
+  "defaults": {
+    "reader": "a technically curious product, engineering, or business leader",
+    "job": "understand the argument, see the evidence, and leave with a usable idea",
+    "assumedKnowledge": [
+      "general software and AI concepts",
+      "the domain named by the article"
+    ],
+    "plainness": "practitioner",
+    "precisionLocks": [
+      "the Signal Dispatch voice",
+      "technical names, code, and commands",
+      "quantified and sourced claims",
+      "intentional metaphors and punchlines"
+    ]
+  },
+  "surfaces": [
+    {
+      "name": "published essays, tutorials, and series",
+      "renderedRoots": [
+        "astro-build/dist/blog"
+      ],
+      "sourceRoots": [
+        "astro-build/src/content"
+      ],
+      "excludeRoots": [
+        "astro-build/dist/blog/api",
+        "astro-build/dist/blog/fiction"
+      ],
+      "allowTerms": [
+        "AI",
+        "API",
+        "ADR",
+        "LLM",
+        "MDX",
+        "SvelteKit",
+        "Astro"
+      ],
+      "denyTerms": [],
+      "maxWordsPerText": 140
+    },
+    {
+      "name": "fiction",
+      "renderedRoots": [
+        "astro-build/dist/blog/fiction"
+      ],
+      "sourceRoots": [
+        "astro-build/src/content/fiction"
+      ],
+      "reader": "a reader entering a literary or speculative scene",
+      "job": "follow the scene, voice, and emotional turn without explanatory scaffolding",
+      "assumedKnowledge": [],
+      "plainness": "lay",
+      "precisionLocks": [
+        "the narrator's voice",
+        "sentence rhythm and deliberate repetition",
+        "ambiguity that belongs to the story"
+      ],
+      "allowTerms": [],
+      "denyTerms": [],
+      "maxWordsPerText": 180
+    },
+    {
+      "name": "research notes",
+      "renderedRoots": [
+        "astro-build/dist/research"
+      ],
+      "sourceRoots": [
+        "astro-build/src/content/research-notes"
+      ],
+      "reader": "a specialist checking evidence, sources, and implications",
+      "job": "inspect the research record without losing technical precision",
+      "assumedKnowledge": [
+        "the technical domain named by the note",
+        "how to assess sources and uncertainty"
+      ],
+      "plainness": "specialist",
+      "precisionLocks": [
+        "source titles and links",
+        "measurements and dates",
+        "uncertainty and confidence language"
+      ],
+      "allowTerms": [],
+      "denyTerms": []
+    }
+  ]
+}

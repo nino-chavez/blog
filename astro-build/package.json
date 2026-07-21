@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && npx pagefind --site dist && node scripts/optimize-routes.mjs",
+    "build": "astro build && npx pagefind --site dist && node scripts/optimize-routes.mjs && npm run reader:check",
+    "reader:check": "node ../tools/lib/encounter-audit.mjs --root=.. --strict",
     "preview": "astro preview",
     "astro": "astro"
   },

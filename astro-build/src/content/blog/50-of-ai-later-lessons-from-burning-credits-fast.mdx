@@ -92,9 +92,9 @@ After stepping back from the prototype rubble, I drafted a **green‑field schem
 | courts | Parsed court names linked to tournaments |
 | divisions | Division names/codes per tournament |
 | clubs | Club catalog per tournament |
-| teams | Child of clubs; cached full_name for search |
-| work_teams | Officiating teams (replaces officials) |
-| matches | Foreign‑key hub with sort_key for fast ordering |
+| teams | Child of clubs; cached `full_name` for search |
+| `work_teams` | Officiating teams (replaces officials) |
+| matches | Foreign‑key hub with `sort_key` for fast ordering |
 
 *Key benefits:* venue complexity dropped, work‑team search enabled, club filters become single JOINs.
 
