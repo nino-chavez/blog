@@ -18,28 +18,32 @@ export function Callout({ children, type = 'signal', title }: CalloutProps) {
     signal: {
       icon: Broadcast,
       weight: 'duotone' as IconWeight,
-      border: 'border-athletic-court-orange',
-      bg: 'bg-gradient-to-r from-athletic-court-orange/10 to-transparent',
-      iconColor: 'text-athletic-court-orange',
-      titleColor: 'text-athletic-court-orange',
+      border: 'border-signal-coral',
+      bg: 'bg-gradient-to-r from-signal-coral/10 to-transparent',
+      iconColor: 'text-signal-coral',
+      titleColor: 'text-signal-coral',
       defaultTitle: 'Signal',
     },
+    // Three types, three treatments — the accent migration must not flatten them.
+    // Coral is the signal itself; context is deliberately quiet; insight uses the
+    // declared secondary. Losing the distinction would argue the opposite of what
+    // this publication is for.
     noise: {
       icon: WaveSquare,
       weight: 'regular' as IconWeight,
-      border: 'border-athletic-brand-violet',
-      bg: 'bg-gradient-to-r from-athletic-brand-violet/10 to-transparent',
-      iconColor: 'text-athletic-brand-violet',
-      titleColor: 'text-athletic-brand-violet',
+      border: 'border-zinc-700',
+      bg: 'bg-gradient-to-r from-zinc-800/40 to-transparent',
+      iconColor: 'text-zinc-400',
+      titleColor: 'text-zinc-400',
       defaultTitle: 'Context',
     },
     insight: {
       icon: Lightbulb,
       weight: 'duotone' as IconWeight,
-      border: 'border-gradient-to-b from-athletic-brand-violet to-athletic-court-orange',
-      bg: 'bg-gradient-to-r from-athletic-brand-violet/10 via-athletic-court-orange/5 to-transparent',
-      iconColor: 'text-athletic-brand-violet',
-      titleColor: 'text-transparent bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange bg-clip-text',
+      border: 'border-signal-cyan',
+      bg: 'bg-gradient-to-r from-signal-cyan/10 to-transparent',
+      iconColor: 'text-signal-cyan',
+      titleColor: 'text-signal-cyan',
       defaultTitle: 'Insight',
     },
     warning: {

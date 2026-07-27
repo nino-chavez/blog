@@ -36,7 +36,7 @@ export default function ReadingProgress() {
       style={{ contain: 'layout style paint', willChange: 'contents' }}
     >
       <div
-        className="h-full bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange"
+        className="h-full bg-signal-coral"
         style={{
           width: `${progress}%`,
           transform: 'translateZ(0)',

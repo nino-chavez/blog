@@ -90,7 +90,7 @@ const categoryColors: Record<string, { bg: string; border: string; text: string 
   'Meta': { bg: 'bg-zinc-500/10', border: 'border-zinc-500/30', text: 'text-zinc-400' },
   'Field Notes': { bg: 'bg-green-500/10', border: 'border-green-500/30', text: 'text-green-400' },
   'Consulting Practice': { bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', text: 'text-cyan-400' },
-  default: { bg: 'bg-athletic-brand-violet/10', border: 'border-athletic-brand-violet/30', text: 'text-athletic-brand-violet' },
+  default: { bg: 'bg-signal-coral/10', border: 'border-signal-coral/30', text: 'text-signal-coral' },
 };
 
 function catColors(category?: string) {
@@ -161,7 +161,7 @@ const personSchema = generatePersonSchema();
                         {formatDate(featuredEssay.data.publishedAt)}
                       </time>
                     </div>
-                    <h3 class="font-bold text-2xl md:text-3xl text-white group-hover:text-athletic-court-orange transition-colors leading-tight">
+                    <h3 class="font-bold text-2xl md:text-3xl text-white group-hover:text-signal-coral transition-colors leading-tight">
                       {featuredEssay.data.title}
                     </h3>
                     {featuredEssay.data.excerpt && (
@@ -183,7 +183,7 @@ const personSchema = generatePersonSchema();
               </h2>
               <a
                 href="/blog/archive"
-                class="text-xs text-zinc-600 hover:text-athletic-court-orange transition-colors"
+                class="text-xs text-zinc-600 hover:text-signal-coral transition-colors"
               >
                 All {totalPosts} →
               </a>
@@ -214,7 +214,7 @@ const personSchema = generatePersonSchema();
                             </span>
                           )}
                         </div>
-                        <h3 class="font-bold text-base text-white group-hover:text-athletic-court-orange transition-colors leading-tight">
+                        <h3 class="font-bold text-base text-white group-hover:text-signal-coral transition-colors leading-tight">
                           {post.data.title}
                         </h3>
                       </div>
@@ -227,7 +227,7 @@ const personSchema = generatePersonSchema();
             <div class="mt-8 text-center md:text-left">
               <a
                 href="/blog/archive"
-                class="inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-athletic-court-orange transition-colors"
+                class="inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-signal-coral transition-colors"
               >
                 See all {totalPosts} essays
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -252,7 +252,7 @@ const personSchema = generatePersonSchema();
                 <div class="text-xs uppercase tracking-wider text-zinc-600 mb-2">
                   Novella &middot; {activeFictionSerial.chapters.length} of {activeFictionSerial.totalChapters || activeFictionSerial.chapters.length} chapters
                 </div>
-                <h3 class="font-serif text-2xl text-white group-hover:text-athletic-court-orange transition-colors leading-tight mb-3">
+                <h3 class="font-serif text-2xl text-white group-hover:text-signal-coral transition-colors leading-tight mb-3">
                   {activeFictionSerial.title}
                 </h3>
                 {activeFictionSerial.chapters[0].data.excerpt && (
@@ -260,7 +260,7 @@ const personSchema = generatePersonSchema();
                     {activeFictionSerial.chapters[0].data.excerpt}
                   </p>
                 )}
-                <span class="inline-flex items-center gap-1.5 text-xs font-medium text-athletic-court-orange group-hover:text-white transition-colors">
+                <span class="inline-flex items-center gap-1.5 text-xs font-medium text-signal-coral group-hover:text-white transition-colors">
                   Start from the beginning
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -279,7 +279,7 @@ const personSchema = generatePersonSchema();
                 </h2>
                 <a
                   href="/blog/series"
-                  class="text-xs text-zinc-600 hover:text-athletic-court-orange transition-colors"
+                  class="text-xs text-zinc-600 hover:text-signal-coral transition-colors"
                 >
                   All →
                 </a>
@@ -291,7 +291,7 @@ const personSchema = generatePersonSchema();
                       href={`/blog/series/${series.id}`}
                       class="group block"
                     >
-                      <h3 class="text-sm font-semibold text-zinc-300 group-hover:text-athletic-court-orange transition-colors leading-snug">
+                      <h3 class="text-sm font-semibold text-zinc-300 group-hover:text-signal-coral transition-colors leading-snug">
                         {series.data.title}
                       </h3>
                     </a>
@@ -311,7 +311,7 @@ const personSchema = generatePersonSchema();
                 <li>
                   <a href="/blog/whitepapers" class="group block">
                     <div class="text-xs uppercase tracking-wider text-zinc-600 mb-0.5">Whitepapers</div>
-                    <div class="text-zinc-400 group-hover:text-athletic-court-orange transition-colors line-clamp-1">
+                    <div class="text-zinc-400 group-hover:text-signal-coral transition-colors line-clamp-1">
                       Latest: {latestWhitepaper.data.title}
                     </div>
                   </a>
@@ -321,7 +321,7 @@ const personSchema = generatePersonSchema();
                 <li>
                   <a href="/blog/tutorials" class="group block">
                     <div class="text-xs uppercase tracking-wider text-zinc-600 mb-0.5">Tutorials</div>
-                    <div class="text-zinc-400 group-hover:text-athletic-court-orange transition-colors line-clamp-1">
+                    <div class="text-zinc-400 group-hover:text-signal-coral transition-colors line-clamp-1">
                       Latest: {latestTutorial.data.title}
                     </div>
                   </a>
@@ -331,7 +331,7 @@ const personSchema = generatePersonSchema();
                 <li>
                   <a href="/blog/presentations" class="group block">
                     <div class="text-xs uppercase tracking-wider text-zinc-600 mb-0.5">Presentations</div>
-                    <div class="text-zinc-400 group-hover:text-athletic-court-orange transition-colors line-clamp-1">
+                    <div class="text-zinc-400 group-hover:text-signal-coral transition-colors line-clamp-1">
                       Latest: {latestPresentation.data.title}
                     </div>
                   </a>
@@ -341,7 +341,7 @@ const personSchema = generatePersonSchema();
                 <li>
                   <a href="/blog/counterpoints" class="group block">
                     <div class="text-xs uppercase tracking-wider text-zinc-600 mb-0.5">Counterpoints</div>
-                    <div class="text-zinc-400 group-hover:text-athletic-court-orange transition-colors line-clamp-1">
+                    <div class="text-zinc-400 group-hover:text-signal-coral transition-colors line-clamp-1">
                       Latest: {latestCounterpoint.data.title}
                     </div>
                   </a>
@@ -350,7 +350,7 @@ const personSchema = generatePersonSchema();
               <li>
                 <a href="/research" class="group block">
                   <div class="text-xs uppercase tracking-wider text-zinc-600 mb-0.5">Research Notes</div>
-                  <div class="text-zinc-400 group-hover:text-athletic-court-orange transition-colors line-clamp-1">
+                  <div class="text-zinc-400 group-hover:text-signal-coral transition-colors line-clamp-1">
                     Working documents and methodology
                   </div>
                 </a>

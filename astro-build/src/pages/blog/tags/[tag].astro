@@ -71,7 +71,7 @@ const collectionSchema = generateCollectionSchema(
     <!-- Page Header -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div class="space-y-3">
-        <a href="/blog/tags" class="group inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-athletic-court-orange transition-colors">
+        <a href="/blog/tags" class="group inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-signal-coral transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
@@ -79,7 +79,7 @@ const collectionSchema = generateCollectionSchema(
         </a>
         <div class="flex items-center gap-4 flex-wrap">
           <div class="flex items-center gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-athletic-brand-violet" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-signal-coral" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
             </svg>
             <h1 class="text-3xl md:text-4xl font-black text-white">{tag}</h1>
@@ -109,10 +109,10 @@ const collectionSchema = generateCollectionSchema(
 
           return (
             <a href={`/blog/${post.id}`} class="group block">
-              <article class={`relative overflow-hidden rounded-2xl border transition-all duration-300 hover:shadow-xl hover:shadow-athletic-brand-violet/10 ${
+              <article class={`relative overflow-hidden rounded-2xl border transition-all duration-300 hover:shadow-xl hover:shadow-signal-coral/10 ${
                 index === 0
-                  ? 'border-athletic-brand-violet/40 bg-gradient-to-br from-zinc-900/80 via-zinc-900/50 to-zinc-950'
-                  : 'border-zinc-800 bg-zinc-900/30 hover:border-athletic-brand-violet/50'
+                  ? 'border-signal-coral/40 bg-gradient-to-br from-zinc-900/80 via-zinc-900/50 to-zinc-950'
+                  : 'border-zinc-800 bg-zinc-900/30 hover:border-signal-coral/50'
               }`}>
                 <div class="flex flex-col md:flex-row">
                   {post.data.featureImage && (
@@ -134,7 +134,7 @@ const collectionSchema = generateCollectionSchema(
                   <div class="p-6 flex-1">
                     <div class="flex items-center gap-3 text-xs mb-3 flex-wrap">
                       {post.data.category && (
-                        <span class="font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-athletic-court-orange/10 border border-athletic-court-orange/30 text-athletic-court-orange">
+                        <span class="font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-signal-coral/10 border border-signal-coral/30 text-signal-coral">
                           {post.data.category}
                         </span>
                       )}
@@ -143,7 +143,7 @@ const collectionSchema = generateCollectionSchema(
                       <span class="text-zinc-500">{readingTime} min read</span>
                     </div>
 
-                    <h2 class={`font-bold text-white group-hover:text-athletic-court-orange transition-colors mb-2 ${
+                    <h2 class={`font-bold text-white group-hover:text-signal-coral transition-colors mb-2 ${
                       index === 0 ? 'text-xl md:text-2xl' : 'text-lg md:text-xl'
                     }`}>
                       {post.data.title}
@@ -153,7 +153,7 @@ const collectionSchema = generateCollectionSchema(
                       {post.data.excerpt}
                     </p>
 
-                    <div class="mt-4 flex items-center gap-2 text-athletic-brand-violet group-hover:text-athletic-court-orange transition-colors font-medium text-sm">
+                    <div class="mt-4 flex items-center gap-2 text-signal-coral group-hover:text-signal-coral transition-colors font-medium text-sm">
                       <span>Read post</span>
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />

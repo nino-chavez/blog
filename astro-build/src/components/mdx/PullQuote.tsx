@@ -20,13 +20,13 @@ export function PullQuote({ children, author, source }: PullQuoteProps) {
         <Quotes
           size={48}
           weight="fill"
-          className="text-athletic-brand-violet/20"
+          className="text-signal-coral/20"
         />
       </div>
 
       <blockquote className="relative pl-8 md:pl-16 pr-4 md:pr-8">
         {/* Gradient accent line */}
-        <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-athletic-brand-violet to-athletic-court-orange rounded-full" />
+        <div className="absolute left-0 top-0 bottom-0 w-1 bg-signal-coral rounded-full" />
 
         <div className="text-2xl md:text-3xl font-light text-zinc-200 italic leading-relaxed">
           {children}

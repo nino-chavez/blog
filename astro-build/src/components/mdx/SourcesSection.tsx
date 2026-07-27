@@ -49,7 +49,7 @@ export function SourcesSection({ sources, children }: SourcesSectionProps) {
   return (
     <section className="mt-16 pt-8 border-t border-zinc-700/50">
       <div className="flex items-center gap-3 mb-6">
-        <Notebook size={24} className="text-athletic-brand-violet" weight="duotone" />
+        <Notebook size={24} className="text-signal-coral" weight="duotone" />
         <h2 className="text-lg font-bold text-zinc-200">Sources & Supporting Material</h2>
       </div>
 
@@ -65,7 +65,7 @@ export function SourcesSection({ sources, children }: SourcesSectionProps) {
 
           return (
             <li key={source.num} className="flex items-start gap-4">
-              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-athletic-brand-violet/20 text-athletic-brand-violet flex items-center justify-center text-xs font-bold">
+              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-signal-coral/20 text-signal-coral flex items-center justify-center text-xs font-bold">
                 {source.num}
               </span>
               <div className="flex-1">
@@ -79,7 +79,7 @@ export function SourcesSection({ sources, children }: SourcesSectionProps) {
                     {href ? (
                       <a
                         href={href}
-                        className="text-zinc-200 hover:text-athletic-court-orange transition-colors no-underline font-medium"
+                        className="text-zinc-200 hover:text-signal-coral transition-colors no-underline font-medium"
                         {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                       >
                         {source.title}
