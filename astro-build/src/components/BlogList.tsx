@@ -19,21 +19,66 @@ interface BlogListProps {
   posts: Post[];
 }
 
-// Category pill treatment.
+// Category colors.
 //
-// One treatment for every category, deliberately. This map previously assigned
-// eight hues -- violet, orange, blue, emerald, amber, pink, cyan, indigo -- none
-// of them declared anywhere, on a publication whose kit declares a single accent.
-// Eight undeclared colors is not a taxonomy; it is a palette that accumulated.
-//
-// The taxonomy is not lost by removing them: every pill is labelled, and the
-// label is the distinction. Color here now encodes *selection state*, which is
-// the one thing color was actually doing that the label could not.
-const getCategoryColors = (_category?: string) => ({
-  bg: "bg-zinc-800/50",
-  border: "border-zinc-700/50",
-  text: "text-zinc-400",
-});
+// UNDECIDED, deliberately left in place. Eight categories, eight hues, none of
+// them declared in DESIGN.md — which declares a single accent. That is a real
+// tension and it has two honest resolutions: declare a category ramp in the
+// forge-brand preset so these become on-system, or drop to label-only and let
+// the pill text carry the taxonomy. Both are consistent with the thesis, and
+// DIRECTION.md records the choice as belonging to a person. It has not been
+// made, so nothing here changes. See DIRECTION.md ledger, `category-palette`.
+const getCategoryColors = (category: string) => {
+  const colors: Record<string, { bg: string; border: string; text: string }> = {
+    "AI & Automation": {
+      bg: "bg-violet-500/10",
+      border: "border-violet-500/30",
+      text: "text-violet-400",
+    },
+    Commerce: {
+      bg: "bg-orange-500/10",
+      border: "border-orange-500/30",
+      text: "text-orange-400",
+    },
+    Leadership: {
+      bg: "bg-blue-500/10",
+      border: "border-blue-500/30",
+      text: "text-blue-400",
+    },
+    "Consulting Practice": {
+      bg: "bg-emerald-500/10",
+      border: "border-emerald-500/30",
+      text: "text-emerald-400",
+    },
+    "Field Notes": {
+      bg: "bg-amber-500/10",
+      border: "border-amber-500/30",
+      text: "text-amber-400",
+    },
+    Meta: {
+      bg: "bg-pink-500/10",
+      border: "border-pink-500/30",
+      text: "text-pink-400",
+    },
+    Reflections: {
+      bg: "bg-cyan-500/10",
+      border: "border-cyan-500/30",
+      text: "text-cyan-400",
+    },
+    "Systems Thinking": {
+      bg: "bg-indigo-500/10",
+      border: "border-indigo-500/30",
+      text: "text-indigo-400",
+    },
+  };
+  return (
+    colors[category] || {
+      bg: "bg-zinc-800/50",
+      border: "border-zinc-700/50",
+      text: "text-zinc-400",
+    }
+  );
+};
 
 // Category to image slug mapping
 const getCategorySlug = (category: string): string => {

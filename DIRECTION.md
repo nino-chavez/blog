@@ -32,15 +32,20 @@ can be said for it.
 | `essay-grid` | authorized | Recent essays as a two-column grid of borderless cards — feature image, category pill, title — where the title is the card's last element (`pages/blog/index.astro:192-222`) | It is the live table of contents the thesis names. A periodical's contents page lists what is in the issue; it does not write an excerpt for each entry | `heading-rhythm` |
 | `coral-accent` | authorized | `--color-signal-coral` `#e86c5d` as the single accent — links, hovers, focus, code, blockquote rule, category selection, card borders (265 references) | The kit has declared coral as this publication's accent since it was generated, and `lib/og-card.ts` already used it for share cards. Implementing it retires a violet→orange pair inherited from the volleyball portfolio — a palette that not only was never chosen for this publication but is the most recognizable generated-UI signature there is, which no page arguing for pattern recognition can afford to wear | `ai-color-palette` |
 | `insight-cyan` | authorized | `--color-signal-cyan` `#00ced1` on the `insight` callout and the presentations surface only | The kit declares cyan as secondary for "highlights, data viz." Three callout types need three treatments; collapsing them to one accent would discard a distinction the reader uses | — |
-| `category-palette` | removed | Eight categories, eight undeclared hues — violet, orange, blue, emerald, amber, pink, cyan, indigo (`BlogList.tsx:23`) | **Could not cite it.** Eight colors no declared system contains is not a taxonomy, it is accumulation; and it cannot coexist with a single-accent kit. Removing the hues does not hide the taxonomy — every pill is labelled, and the label is the distinction. Color now encodes selection state, the one job the label could not do | `ai-color-palette` |
+| `category-palette` | undecided | Eight categories, eight hues — violet, orange, blue, emerald, amber, pink, cyan, indigo (`BlogList.tsx:23`), none of them in `DESIGN.md` | The *device* cites the thesis directly: pattern recognition is this publication's stated core value, and showing the taxonomy's differences is that value made visible. What cannot be settled here is the palette — eight undeclared hues against a kit that declares one accent. Two honest resolutions, both thesis-consistent: declare a category ramp in the preset, or drop to label-only. Left in place, unchanged, until that is chosen | `ai-color-palette` |
 
 ## Open
 
-**~~What replaces the violet is not decided here.~~ Decided 2026-07-27: coral.** Of the two
-paths this record named as thesis-consistent, the second was taken — categories lose color
-and lean on the label. The choice was forced rather than free: a single-accent kit cannot
-also run a per-category ramp without declaring a second system, and the accent question had
-to be settled before the category question could be.
+**~~What replaces the violet is not decided here.~~ The *accent* was decided 2026-07-27:
+coral. The *category* question is still open and still belongs to a person.** These were
+always two questions and this record ran them together. Settling the accent does not settle
+the categories: a single-accent kit and a declared category ramp coexist without
+contradiction — that is what a sidecar palette extension is for. The two paths this record
+named remain both live and both thesis-consistent.
+
+*(A first pass at this deleted the eight category hues outright and recorded the choice as
+"forced" by the accent decision. It was not forced, and the decision that authorized the
+accent migration said nothing about category pills. Backed out and restored unchanged.)*
 
 Worth recording that this record's framing of the problem was wrong in both directions.
 "Coral already works as the action color" — coral existed in exactly one file,
@@ -71,14 +76,17 @@ Everything else holds — `heading-rhythm` 7, `image-hover-transform` 7, `text-o
 Page total 72 → 67. The replacement is `text-white`, deliberately not a brand color: the
 violet question below stays open.
 
-**~~The same device survives on two surfaces this record does not cover~~ — both resolved
-2026-07-27.** The "NC" avatar initials on `/about` and the `insight` callout title in
-`Callout.tsx` were the same violet→orange gradient, deferred because neither surface had a
-direction record. The accent migration retired the gradient's second hue outright, so the
-device had nowhere left to stand: `/about` is now flat coral, and the `insight` callout is
-flat cyan. Twenty-four gradient constructs went with it. The deferral was correct at the
-time — what dissolved it was a decision one level up, not a verdict invented for an
-unadjudicated surface.
+**The device no longer exists on those two surfaces — which is not the same as adjudicating
+them.** The "NC" avatar initials on `/about` and the `insight` callout title in
+`Callout.tsx` carried the same violet→orange gradient, deferred here because neither surface
+has a direction record. The accent migration retired the gradient's second hue across the
+codebase, so the construct disappeared as a side effect: `/about` is flat coral now, the
+`insight` callout flat cyan, and 24 gradient constructs went with them.
+
+No verdict is being entered for those surfaces. `/about` still has no record, and a finding
+there still has no authorized row — absence of a record is not permission, and that holds
+just as much when a change happens to make the finding go away. They belong to whichever
+record covers them next, exactly as before.
 
 **`heading-rhythm` ×7 was recorded as a real defect that "flattens the structure this
 thesis depends on." Measured, it is the rule failing on a shape it cannot evaluate.**
