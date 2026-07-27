@@ -28,7 +28,7 @@ can be said for it.
 | `serial-rail` | authorized | Right rail: currently-serializing chapter count, essay series, four channels each with a latest item | Public practice made structural — the reader sees what is mid-flight, not only what is finished | — |
 | `editorial-kickers` | authorized | Small-caps letterspaced section labels (FEATURED, CURRENTLY SERIALIZING, ESSAY SERIES, ALSO HERE) | Periodical, not product. Sections are departments of an issue | — |
 | `serif-masthead` | authorized | Serif wordmark and italic serif tagline against sans body — four `ui-serif` leaves against 74 in Inter | The same claim in type: edited writing, not content marketing | — |
-| `wordmark-gradient` | condemned — removed | Violet→orange gradient under `bg-clip-text` on the **sticky nav** wordmark (`SiteHeader.astro:43`) | **Could not cite it.** A gradient nameplate is the finished-insight look — the visual form of the "In this post, I'll explore…" opener the voice guide rejects by name | `gradient-text` |
+| `wordmark-gradient` | removed | Violet→orange gradient under `bg-clip-text` on the **sticky nav** wordmark (`SiteHeader.astro:43`) | **Could not cite it.** A gradient nameplate is the finished-insight look — the visual form of the "In this post, I'll explore…" opener the voice guide rejects by name | `gradient-text` |
 | `category-violet` | condemned | Every category resolves to one `--color-athletic-brand-violet`, with the category argument discarded (`astro-build/src/utils/category-colors.ts`) | **Cannot cite it.** Pattern recognition is this publication's stated core value; declining to show the taxonomy's differences argues the opposite — in a token named for a design system no app in the workspace defines | `ai-color-palette` |
 
 ## Open
