@@ -27,8 +27,8 @@ can be said for it.
 |---|---|---|---|---|
 | `serial-rail` | authorized | Right rail: currently-serializing chapter count, essay series, four channels each with a latest item | Public practice made structural — the reader sees what is mid-flight, not only what is finished | — |
 | `editorial-kickers` | authorized | Small-caps letterspaced section labels (FEATURED, CURRENTLY SERIALIZING, ESSAY SERIES, ALSO HERE) | Periodical, not product. Sections are departments of an issue | — |
-| `serif-masthead` | authorized | Serif wordmark and italic serif tagline against sans body | The same claim in type: edited writing, not content marketing. **Device authorized, treatment condemned** — see `wordmark-gradient` | — |
-| `wordmark-gradient` | condemned | `background-clip: text` + gradient on the masthead and two other headings | **Cannot cite it.** A gradient headline is the finished-insight look — the visual form of the "In this post, I'll explore…" opener the voice guide rejects by name | `gradient-text` |
+| `serif-masthead` | authorized | Serif wordmark and italic serif tagline against sans body — four `ui-serif` leaves against 74 in Inter | The same claim in type: edited writing, not content marketing | — |
+| `wordmark-gradient` | condemned — removed | Violet→orange gradient under `bg-clip-text` on the **sticky nav** wordmark (`SiteHeader.astro:43`) | **Could not cite it.** A gradient nameplate is the finished-insight look — the visual form of the "In this post, I'll explore…" opener the voice guide rejects by name | `gradient-text` |
 | `category-violet` | condemned | Every category resolves to one `--color-athletic-brand-violet`, with the category argument discarded (`astro-build/src/utils/category-colors.ts`) | **Cannot cite it.** Pattern recognition is this publication's stated core value; declining to show the taxonomy's differences argues the opposite — in a token named for a design system no app in the workspace defines | `ai-color-palette` |
 
 ## Open
@@ -44,6 +44,26 @@ surfaces. A periodical running two grounds with no rule for which is which is a
 thesis-level question, not a token bug. Do not "fix" it by forcing one mode.
 
 ## Notes
+
+**Two claims in the first draft of this record were wrong, and the DOM says so.** It read
+`gradient-text` ×3 as "the masthead and two other headings." There is exactly **one**
+gradient-clipped element on the page — the sticky nav wordmark — and the detector counts it
+three ways. Querying every element's computed `background-clip` returned one hit; every
+stylesheet on the page contains zero `background-clip: text` rules; the raw HTML contains
+one `bg-clip-text`. The serif masthead this record authorizes never carried a gradient, so
+the "device authorized, treatment condemned" split against it was also wrong.
+
+Removed, and measured against live on the same build: `gradient-text` 3 → 0, with
+`ai-color-palette` 28 → 27 and `low-contrast` 21 → 20 as the gradient's two side effects.
+Everything else holds — `heading-rhythm` 7, `image-hover-transform` 7, `text-occlusion` 2.
+Page total 72 → 67. The replacement is `text-white`, deliberately not a brand color: the
+violet question below stays open.
+
+**The same device survives on two surfaces this record does not cover** — the "NC" avatar
+initials on `/about` and the `insight` callout title in `Callout.tsx`. Both are the same
+violet→orange gradient and would fail the same reasoning, but neither surface has a
+direction record, and inventing a verdict for an unadjudicated surface is exactly what this
+layer exists to prevent. They belong to whichever record covers those surfaces next.
 
 `heading-rhythm` ×7 (h3s at 12px above / 24px below) is not a device and is not
 adjudicable. It binds each heading to the block above, flattening the structure this
