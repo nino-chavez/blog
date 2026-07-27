@@ -40,7 +40,11 @@ function linkClasses(id: string, base: string) {
     <div class="flex items-center justify-between h-14 md:h-16">
       <!-- Logo (tagline dropped intentionally) -->
       <a href="/blog" class="flex items-center gap-2 flex-shrink-0">
-        <span class="text-base sm:text-lg font-bold bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange bg-clip-text text-transparent whitespace-nowrap">
+        <!-- Solid, not a gradient (DIRECTION.md#wordmark-gradient). A gradient
+             nameplate is the finished-insight look; this publication argues it
+             is thinking in progress. White also leaves the open question about
+             the violet untouched — see DIRECTION.md § Open. -->
+        <span class="text-base sm:text-lg font-bold text-white whitespace-nowrap">
           Signal Dispatch
         </span>
       </a>
