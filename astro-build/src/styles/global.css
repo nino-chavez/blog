@@ -8,37 +8,31 @@
   src: local('Inter Variable');
 }
 
-/* Brand-unified utility classes for consistent violet/orange scheme */
-@source "inline(bg-athletic-brand-violet/10 bg-athletic-brand-violet/5)";
-@source "inline(border-athletic-brand-violet border-athletic-brand-violet/30 border-athletic-brand-violet/50)";
-@source "inline(text-athletic-brand-violet)";
-@source "inline(text-athletic-court-orange bg-athletic-court-orange)";
+/* Signal Dispatch accent — see DESIGN.md and DIRECTION.md */
+@source "inline(bg-signal-coral/10 bg-signal-coral/5)";
+@source "inline(border-signal-coral border-signal-coral/30 border-signal-coral/50)";
+@source "inline(text-signal-coral bg-signal-coral bg-signal-coral/40)";
+@source "inline(text-signal-cyan border-signal-cyan bg-signal-cyan/10)";
 @source "inline(bg-teal-600/10 bg-teal-600/5 bg-teal-600/90)";
 @source "inline(border-teal-600/30 border-teal-600/40 border-teal-600/50)";
 @source "inline(text-teal-400 text-teal-500 text-teal-600)";
 @source "inline(from-teal-600 to-cyan-500)";
 
 @theme {
-  /* Athletic Design System Colors */
-  --color-athletic-brand-violet: #7c3aed;
-  --color-athletic-court-orange: #ea580c;
-  --color-athletic-court-navy: #1a365d;
-  --color-athletic-success: #10b981;
-  --color-athletic-warning: #f59e0b;
-  --color-athletic-error: #ef4444;
-
-  /* Athletic neutral scale */
-  --color-athletic-neutral-50: #fafafa;
-  --color-athletic-neutral-100: #f5f5f5;
-  --color-athletic-neutral-200: #e5e5e5;
-  --color-athletic-neutral-300: #d4d4d4;
-  --color-athletic-neutral-400: #a3a3a3;
-  --color-athletic-neutral-500: #737373;
-  --color-athletic-neutral-600: #525252;
-  --color-athletic-neutral-700: #404040;
-  --color-athletic-neutral-800: #262626;
-  --color-athletic-neutral-900: #171717;
-  --color-athletic-neutral-950: #0a0a0a;
+  /* Signal Dispatch accent.
+   *
+   * Replaces the `athletic-*` set, which was named for the volleyball
+   * portfolio and arrived here wholesale with the 2025-11-28 Astro migration.
+   * It was never chosen for this publication — and violet-on-dark with an
+   * orange gradient partner is the single most recognizable generated-UI
+   * palette, which is a poor look on a site whose thesis is pattern
+   * recognition. Coral was already the declared accent in DESIGN.md and was
+   * already implemented in lib/og-card.ts; it just never reached the site.
+   *
+   * Single-accent brand: coral does links, hovers, focus, emphasis. Cyan is
+   * secondary and stays scarce — data viz and the presentations surface. */
+  --color-signal-coral: #e86c5d;
+  --color-signal-cyan: #00ced1;
 
   /* Athletic timing system */
   --transition-duration-quick-snap: 90ms;
@@ -86,12 +80,12 @@ body {
 
 a {
   font-weight: 500;
-  color: #7c3aed;
+  color: var(--color-signal-coral);
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #ea580c;
+  color: #ffffff;
 }
 
 h1 {
@@ -112,7 +106,7 @@ button {
 }
 
 button:hover {
-  border-color: #7c3aed;
+  border-color: var(--color-signal-coral);
 }
 
 button:focus,
@@ -188,7 +182,7 @@ button:focus-visible {
 }
 
 .prose code {
-  color: #7c3aed;
+  color: var(--color-signal-coral);
   background-color: rgba(39, 39, 42, 0.8);
   padding: 0.125rem 0.375rem;
   border-radius: 0.25rem;
@@ -224,14 +218,14 @@ button:focus-visible {
 }
 
 .prose a {
-  color: #7c3aed;
+  color: var(--color-signal-coral);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.15s ease-in-out;
 }
 
 .prose a:hover {
-  color: #ea580c;
+  color: #ffffff;
   text-decoration: underline;
 }
 
@@ -273,7 +267,7 @@ button:focus-visible {
 .prose blockquote {
   font-style: italic;
   border-left-width: 4px;
-  border-left-color: #7c3aed;
+  border-left-color: var(--color-signal-coral);
   padding-left: 1.5rem;
   padding-right: 1rem;
   padding-top: 0.75rem;

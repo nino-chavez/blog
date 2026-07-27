@@ -45,7 +45,7 @@ export function ResearchCitation({
       <sup className="ml-0.5">
         <a
           href={href}
-          className="text-athletic-brand-violet hover:text-athletic-court-orange transition-colors text-xs font-medium no-underline"
+          className="text-signal-coral hover:text-signal-coral transition-colors text-xs font-medium no-underline"
           title={title}
         >
           [{num || '?'}]
@@ -57,11 +57,11 @@ export function ResearchCitation({
   // Inline expandable reference
   if (inline) {
     return (
-      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-athletic-brand-violet/10 border border-athletic-brand-violet/20 text-sm">
-        <Book size={14} className="text-athletic-brand-violet" weight="duotone" />
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-signal-coral/10 border border-signal-coral/20 text-sm">
+        <Book size={14} className="text-signal-coral" weight="duotone" />
         <a
           href={href}
-          className="text-athletic-brand-violet hover:text-athletic-court-orange transition-colors no-underline"
+          className="text-signal-coral hover:text-signal-coral transition-colors no-underline"
         >
           {title}
         </a>
@@ -73,26 +73,26 @@ export function ResearchCitation({
   // Full citation block
   if (block) {
     return (
-      <aside className="my-8 p-6 rounded-xl border border-zinc-700/50 bg-gradient-to-r from-athletic-brand-violet/5 to-transparent">
+      <aside className="my-8 p-6 rounded-xl border border-zinc-700/50 bg-gradient-to-r from-signal-coral/5 to-transparent">
         <div className="flex items-start gap-4">
           <div className="flex-shrink-0 mt-1">
-            <Book size={24} className="text-athletic-brand-violet" weight="duotone" />
+            <Book size={24} className="text-signal-coral" weight="duotone" />
           </div>
           <div className="flex-1 space-y-3">
             <div className="flex items-center justify-between">
-              <h4 className="font-bold text-sm uppercase tracking-wider text-athletic-brand-violet">
+              <h4 className="font-bold text-sm uppercase tracking-wider text-signal-coral">
                 Supporting Research
               </h4>
               <a
                 href={href}
-                className="flex items-center gap-1 text-xs text-zinc-500 hover:text-athletic-brand-violet transition-colors no-underline"
+                className="flex items-center gap-1 text-xs text-zinc-500 hover:text-signal-coral transition-colors no-underline"
               >
                 View full note <ArrowUpRight size={12} />
               </a>
             </div>
             <a
               href={href}
-              className="block text-lg font-semibold text-zinc-200 hover:text-athletic-court-orange transition-colors no-underline"
+              className="block text-lg font-semibold text-zinc-200 hover:text-signal-coral transition-colors no-underline"
             >
               {title}
             </a>

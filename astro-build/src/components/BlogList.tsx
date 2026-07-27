@@ -19,7 +19,15 @@ interface BlogListProps {
   posts: Post[];
 }
 
-// Category colors
+// Category colors.
+//
+// UNDECIDED, deliberately left in place. Eight categories, eight hues, none of
+// them declared in DESIGN.md — which declares a single accent. That is a real
+// tension and it has two honest resolutions: declare a category ramp in the
+// forge-brand preset so these become on-system, or drop to label-only and let
+// the pill text carry the taxonomy. Both are consistent with the thesis, and
+// DIRECTION.md records the choice as belonging to a person. It has not been
+// made, so nothing here changes. See DIRECTION.md ledger, `category-palette`.
 const getCategoryColors = (category: string) => {
   const colors: Record<string, { bg: string; border: string; text: string }> = {
     "AI & Automation": {
@@ -209,7 +217,7 @@ export default function BlogList({ posts }: BlogListProps) {
               placeholder="Search posts..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 text-sm bg-zinc-900/50 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-athletic-brand-violet/50"
+              className="w-full pl-10 pr-4 py-2.5 text-sm bg-zinc-900/50 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-signal-coral/50"
             />
           </div>
 
@@ -220,7 +228,7 @@ export default function BlogList({ posts }: BlogListProps) {
               onClick={() => setSelectedCategory(null)}
               className={`text-xs font-semibold px-3.5 py-1.5 rounded-full border transition-all whitespace-nowrap ${
                 !selectedCategory
-                  ? "bg-athletic-brand-violet text-white border-athletic-brand-violet"
+                  ? "bg-signal-coral text-white border-signal-coral"
                   : "bg-zinc-900/50 text-zinc-400 border-zinc-800 active:bg-zinc-800"
               }`}
             >
@@ -284,7 +292,7 @@ export default function BlogList({ posts }: BlogListProps) {
             onClick={() => setSelectedCategory(null)}
             className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-all ${
               !selectedCategory
-                ? "bg-athletic-brand-violet text-white border-athletic-brand-violet"
+                ? "bg-signal-coral text-white border-signal-coral"
                 : "bg-zinc-900/50 text-zinc-400 border-zinc-800 hover:border-zinc-700"
             }`}
           >
@@ -331,7 +339,7 @@ export default function BlogList({ posts }: BlogListProps) {
           {/* Browse Topics Link */}
           <a
             href="/blog/tags"
-            className="text-xs font-medium px-3 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 hover:border-athletic-brand-violet/50 hover:text-athletic-brand-violet transition-all flex items-center gap-1.5"
+            className="text-xs font-medium px-3 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 hover:border-signal-coral/50 hover:text-signal-coral transition-all flex items-center gap-1.5"
           >
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
@@ -360,7 +368,7 @@ export default function BlogList({ posts }: BlogListProps) {
                 placeholder="Search..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-1.5 text-sm bg-zinc-900/50 border border-zinc-800 rounded-full text-white placeholder-zinc-500 focus:outline-none focus:border-athletic-brand-violet/50"
+                className="w-full pl-10 pr-4 py-1.5 text-sm bg-zinc-900/50 border border-zinc-800 rounded-full text-white placeholder-zinc-500 focus:outline-none focus:border-signal-coral/50"
               />
             </div>
           </div>
@@ -381,14 +389,14 @@ export default function BlogList({ posts }: BlogListProps) {
             {selectedTag && (
               <span>
                 {" "}
-                tagged <span className="text-athletic-brand-violet">{selectedTag}</span>
+                tagged <span className="text-signal-coral">{selectedTag}</span>
               </span>
             )}
             {searchQuery && (
               <span>
                 {" "}
                 matching "
-                <span className="text-athletic-brand-violet">{searchQuery}</span>"
+                <span className="text-signal-coral">{searchQuery}</span>"
               </span>
             )}
           </p>
@@ -410,11 +418,11 @@ export default function BlogList({ posts }: BlogListProps) {
       {featuredPosts.length > 0 && !searchQuery && !selectedCategory && !selectedTag && (
         <section className="relative -mx-4 px-4 py-8 rounded-3xl bg-gradient-to-b from-zinc-900/80 via-zinc-900/40 to-transparent">
           {/* Subtle gradient orb background */}
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-athletic-brand-violet/5 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-athletic-court-orange/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-signal-coral/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-signal-coral/5 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative flex items-center gap-3 mb-6">
-            <div className="h-1 w-10 bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange rounded-full" />
+            <div className="h-1 w-10 bg-signal-coral rounded-full" />
             <h2 className="text-xl font-bold text-white">Featured</h2>
             <span className="text-xs text-zinc-500 bg-zinc-800/50 px-2 py-0.5 rounded-full">
               Editor's picks
@@ -429,12 +437,12 @@ export default function BlogList({ posts }: BlogListProps) {
                   href={`/blog/${post.id}`}
                   className="group block"
                 >
-                  {/* Gradient border wrapper */}
-                  <div className="relative p-[1px] rounded-2xl bg-gradient-to-br from-athletic-brand-violet/50 via-transparent to-athletic-court-orange/50 group-hover:from-athletic-brand-violet group-hover:to-athletic-court-orange transition-all duration-500">
-                    <article className="relative overflow-hidden rounded-2xl bg-zinc-900 group-hover:bg-zinc-900/90 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-2xl group-hover:shadow-athletic-brand-violet/20">
+                  {/* Hairline border, coral on hover */}
+                  <div className="relative p-[1px] rounded-2xl bg-signal-coral/40 group-hover:bg-signal-coral transition-colors duration-500">
+                    <article className="relative overflow-hidden rounded-2xl bg-zinc-900 group-hover:bg-zinc-900/90 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-2xl group-hover:shadow-signal-coral/20">
                       {/* Featured badge */}
                       <div className="absolute top-4 right-4 z-10">
-                        <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange text-white shadow-lg">
+                        <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-signal-coral text-white shadow-lg">
                           Featured
                         </span>
                       </div>
@@ -470,7 +478,7 @@ export default function BlogList({ posts }: BlogListProps) {
                             {formatDate(post.publishedAt)}
                           </span>
                         </div>
-                        <h3 className="text-xl font-bold text-white group-hover:text-athletic-court-orange transition-colors line-clamp-2">
+                        <h3 className="text-xl font-bold text-white group-hover:text-signal-coral transition-colors line-clamp-2">
                           {post.title}
                         </h3>
                         {post.excerpt && (
@@ -487,7 +495,7 @@ export default function BlogList({ posts }: BlogListProps) {
                                   e.preventDefault();
                                   setSelectedTag(tag);
                                 }}
-                                className="text-[10px] px-2 py-0.5 rounded bg-zinc-800/50 text-zinc-500 hover:bg-athletic-brand-violet/20 hover:text-athletic-brand-violet transition-colors"
+                                className="text-[10px] px-2 py-0.5 rounded bg-zinc-800/50 text-zinc-500 hover:bg-signal-coral/20 hover:text-signal-coral transition-colors"
                               >
                                 {tag}
                               </button>
@@ -508,7 +516,7 @@ export default function BlogList({ posts }: BlogListProps) {
       {visiblePosts.length > 0 && (
         <section>
           <div className="flex items-center gap-3 mb-6">
-            <div className="h-1 w-10 bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange rounded-full" />
+            <div className="h-1 w-10 bg-signal-coral rounded-full" />
             <h2 className="text-xl font-bold text-white">
               {searchQuery || selectedCategory ? "Results" : "Latest"}
             </h2>
@@ -558,7 +566,7 @@ export default function BlogList({ posts }: BlogListProps) {
                           {formatDate(post.publishedAt)}
                         </span>
                       </div>
-                      <h3 className="text-lg font-bold text-white group-hover:text-athletic-court-orange transition-colors line-clamp-2">
+                      <h3 className="text-lg font-bold text-white group-hover:text-signal-coral transition-colors line-clamp-2">
                         {post.title}
                       </h3>
                       {post.excerpt && (
@@ -575,7 +583,7 @@ export default function BlogList({ posts }: BlogListProps) {
                                 e.preventDefault();
                                 setSelectedTag(tag);
                               }}
-                              className="text-[10px] px-2 py-0.5 rounded bg-zinc-800/50 text-zinc-500 hover:bg-athletic-brand-violet/20 hover:text-athletic-brand-violet transition-colors"
+                              className="text-[10px] px-2 py-0.5 rounded bg-zinc-800/50 text-zinc-500 hover:bg-signal-coral/20 hover:text-signal-coral transition-colors"
                             >
                               {tag}
                             </button>
@@ -594,7 +602,7 @@ export default function BlogList({ posts }: BlogListProps) {
             <div className="flex justify-center pt-8">
               <button
                 onClick={() => setVisibleCount((c) => c + 8)}
-                className="px-8 py-3 rounded-xl bg-zinc-900/50 text-athletic-brand-violet border border-zinc-800 hover:border-athletic-brand-violet/50 hover:bg-athletic-brand-violet/5 transition-all font-medium"
+                className="px-8 py-3 rounded-xl bg-zinc-900/50 text-signal-coral border border-zinc-800 hover:border-signal-coral/50 hover:bg-signal-coral/5 transition-all font-medium"
               >
                 Load More
                 <span className="ml-2 text-zinc-500">
@@ -616,7 +624,7 @@ export default function BlogList({ posts }: BlogListProps) {
               setSelectedTag(null);
               setSearchQuery("");
             }}
-            className="px-4 py-2 rounded-lg bg-zinc-900 text-athletic-brand-violet hover:bg-zinc-800 transition-colors"
+            className="px-4 py-2 rounded-lg bg-zinc-900 text-signal-coral hover:bg-zinc-800 transition-colors"
           >
             Clear filters
           </button>

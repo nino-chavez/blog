@@ -51,7 +51,7 @@ const categoryColors: Record<string, { bg: string; border: string; text: string 
   'Meta': { bg: 'bg-zinc-500/10', border: 'border-zinc-500/30', text: 'text-zinc-400' },
   'Field Notes': { bg: 'bg-green-500/10', border: 'border-green-500/30', text: 'text-green-400' },
   'Consulting Practice': { bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', text: 'text-cyan-400' },
-  'default': { bg: 'bg-athletic-brand-violet/10', border: 'border-athletic-brand-violet/30', text: 'text-athletic-brand-violet' },
+  'default': { bg: 'bg-signal-coral/10', border: 'border-signal-coral/30', text: 'text-signal-coral' },
 };
 
 const colors = categoryColors[post.data.category || ''] || categoryColors.default;
@@ -92,7 +92,7 @@ const challengingCounterpoint = counterpoints.find(
       <!-- Back link -->
       <a
         href="/blog/archive"
-        class="group inline-flex items-center gap-2 text-zinc-400 hover:text-athletic-court-orange transition-all duration-150 font-medium mb-8 no-print"
+        class="group inline-flex items-center gap-2 text-zinc-400 hover:text-signal-coral transition-all duration-150 font-medium mb-8 no-print"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -160,7 +160,7 @@ const challengingCounterpoint = counterpoints.find(
               {post.data.tags.map((tag) => (
                 <a
                   href={`/blog/tags/${encodeURIComponent(tag)}`}
-                  class="text-xs px-3 py-1.5 rounded-full bg-zinc-900/50 text-zinc-400 border border-zinc-800 hover:border-athletic-brand-violet/50 hover:text-athletic-brand-violet transition-all duration-150"
+                  class="text-xs px-3 py-1.5 rounded-full bg-zinc-900/50 text-zinc-400 border border-zinc-800 hover:border-signal-coral/50 hover:text-signal-coral transition-all duration-150"
                 >
                   {tag}
                 </a>
@@ -170,7 +170,7 @@ const challengingCounterpoint = counterpoints.find(
 
           <!-- Author Info -->
           <div class="flex items-center gap-4 pt-6 mt-2 border-t border-zinc-800/30" data-pagefind-ignore>
-            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-athletic-brand-violet to-athletic-court-orange flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-athletic-brand-violet/20">
+            <div class="w-12 h-12 rounded-full bg-signal-coral flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-signal-coral/20">
               NC
             </div>
             <div>
@@ -203,7 +203,7 @@ const challengingCounterpoint = counterpoints.find(
                   by {challengingCounterpoint.data.challengeSource.name}
                 </p>
               </div>
-              <span class="text-sm text-teal-400 group-hover:text-athletic-court-orange transition-colors font-medium whitespace-nowrap flex items-center gap-1">
+              <span class="text-sm text-teal-400 group-hover:text-signal-coral transition-colors font-medium whitespace-nowrap flex items-center gap-1">
                 Read the counterpoint
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -249,7 +249,7 @@ const challengingCounterpoint = counterpoints.find(
             </a>
             <button
               onclick={`navigator.clipboard.writeText('https://ninochavez.co/blog/${post.id}'); this.textContent = 'Copied!'`}
-              class="text-zinc-400 hover:text-athletic-brand-violet transition-colors text-sm"
+              class="text-zinc-400 hover:text-signal-coral transition-colors text-sm"
               title="Copy link"
             >
               Copy link
@@ -297,12 +297,12 @@ const challengingCounterpoint = counterpoints.find(
           <div class="grid gap-6 md:grid-cols-3">
             {relatedPosts.map((related) => (
               <a href={`/blog/${related.id}`} class="group block">
-                <article class="h-full p-5 rounded-xl border border-zinc-800 hover:border-athletic-brand-violet/50 transition-all duration-200 bg-zinc-900/30 hover:bg-zinc-900/50 hover:shadow-lg hover:shadow-athletic-brand-violet/5 hover:-translate-y-1">
+                <article class="h-full p-5 rounded-xl border border-zinc-800 hover:border-signal-coral/50 transition-all duration-200 bg-zinc-900/30 hover:bg-zinc-900/50 hover:shadow-lg hover:shadow-signal-coral/5 hover:-translate-y-1">
                   <div class="space-y-3">
                     <time class="text-xs text-zinc-500">
                       {new Date(related.data.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
                     </time>
-                    <h3 class="text-base font-bold text-white group-hover:text-athletic-court-orange transition-colors line-clamp-2">
+                    <h3 class="text-base font-bold text-white group-hover:text-signal-coral transition-colors line-clamp-2">
                       {related.data.title}
                     </h3>
                     {related.data.excerpt && (

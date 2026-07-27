@@ -30,15 +30,31 @@ can be said for it.
 | `serif-masthead` | authorized | Serif wordmark and italic serif tagline against sans body — four `ui-serif` leaves against 74 in Inter | The same claim in type: edited writing, not content marketing | — |
 | `wordmark-gradient` | removed | Violet→orange gradient under `bg-clip-text` on the **sticky nav** wordmark (`SiteHeader.astro:43`) | **Could not cite it.** A gradient nameplate is the finished-insight look — the visual form of the "In this post, I'll explore…" opener the voice guide rejects by name | `gradient-text` |
 | `essay-grid` | authorized | Recent essays as a two-column grid of borderless cards — feature image, category pill, title — where the title is the card's last element (`pages/blog/index.astro:192-222`) | It is the live table of contents the thesis names. A periodical's contents page lists what is in the issue; it does not write an excerpt for each entry | `heading-rhythm` |
-| `category-violet` | condemned | Every category resolves to one `--color-athletic-brand-violet`, with the category argument discarded (`astro-build/src/utils/category-colors.ts`) | **Cannot cite it.** Pattern recognition is this publication's stated core value; declining to show the taxonomy's differences argues the opposite — in a token named for a design system no app in the workspace defines | `ai-color-palette` |
+| `coral-accent` | authorized | `--color-signal-coral` `#e86c5d` as the single accent — links, hovers, focus, code, blockquote rule, category selection, card borders (265 references) | The kit has declared coral as this publication's accent since it was generated, and `lib/og-card.ts` already used it for share cards. Implementing it retires a violet→orange pair inherited from the volleyball portfolio — a palette that not only was never chosen for this publication but is the most recognizable generated-UI signature there is, which no page arguing for pattern recognition can afford to wear | `ai-color-palette` |
+| `insight-cyan` | authorized | `--color-signal-cyan` `#00ced1` on the `insight` callout and the presentations surface only | The kit declares cyan as secondary for "highlights, data viz." Three callout types need three treatments; collapsing them to one accent would discard a distinction the reader uses | — |
+| `category-palette` | undecided | Eight categories, eight hues — violet, orange, blue, emerald, amber, pink, cyan, indigo (`BlogList.tsx:23`), none of them in `DESIGN.md` | The *device* cites the thesis directly: pattern recognition is this publication's stated core value, and showing the taxonomy's differences is that value made visible. What cannot be settled here is the palette — eight undeclared hues against a kit that declares one accent. Two honest resolutions, both thesis-consistent: declare a category ramp in the preset, or drop to label-only. Left in place, unchanged, until that is chosen | `ai-color-palette` |
 
 ## Open
 
-**What replaces the violet is not decided here.** Coral already works as the action color
-and teal as the illustration palette, so neither is free to become the category color
-without collision. Whether categories get a system (a ramp, per-category assignment) or
-lose color entirely and lean on the kicker system that already works — both are consistent
-with the thesis. That decision belongs to a person.
+**~~What replaces the violet is not decided here.~~ The *accent* was decided 2026-07-27:
+coral. The *category* question is still open and still belongs to a person.** These were
+always two questions and this record ran them together. Settling the accent does not settle
+the categories: a single-accent kit and a declared category ramp coexist without
+contradiction — that is what a sidecar palette extension is for. The two paths this record
+named remain both live and both thesis-consistent.
+
+*(A first pass at this deleted the eight category hues outright and recorded the choice as
+"forced" by the accent decision. It was not forced, and the decision that authorized the
+accent migration said nothing about category pills. Backed out and restored unchanged.)*
+
+Worth recording that this record's framing of the problem was wrong in both directions.
+"Coral already works as the action color" — coral existed in exactly one file,
+`lib/og-card.ts`, which renders social share images and therefore never appears on the
+site. And "teal as the illustration palette" undersold it: teal/cyan is 350 references,
+concentrated in `content/presentations` and `components/presentations`. That is not an
+illustration palette, it is the presentations surface running its own system — which is
+now reconciled, since the kit declares cyan as secondary and that is what presentations
+were already using.
 
 **Ground color.** `DESIGN.md` declares `mode: dark` while the site ships genuine white
 surfaces. A periodical running two grounds with no rule for which is which is a
@@ -60,11 +76,17 @@ Everything else holds — `heading-rhythm` 7, `image-hover-transform` 7, `text-o
 Page total 72 → 67. The replacement is `text-white`, deliberately not a brand color: the
 violet question below stays open.
 
-**The same device survives on two surfaces this record does not cover** — the "NC" avatar
-initials on `/about` and the `insight` callout title in `Callout.tsx`. Both are the same
-violet→orange gradient and would fail the same reasoning, but neither surface has a
-direction record, and inventing a verdict for an unadjudicated surface is exactly what this
-layer exists to prevent. They belong to whichever record covers those surfaces next.
+**The device no longer exists on those two surfaces — which is not the same as adjudicating
+them.** The "NC" avatar initials on `/about` and the `insight` callout title in
+`Callout.tsx` carried the same violet→orange gradient, deferred here because neither surface
+has a direction record. The accent migration retired the gradient's second hue across the
+codebase, so the construct disappeared as a side effect: `/about` is flat coral now, the
+`insight` callout flat cyan, and 24 gradient constructs went with them.
+
+No verdict is being entered for those surfaces. `/about` still has no record, and a finding
+there still has no authorized row — absence of a record is not permission, and that holds
+just as much when a change happens to make the finding go away. They belong to whichever
+record covers them next, exactly as before.
 
 **`heading-rhythm` ×7 was recorded as a real defect that "flattens the structure this
 thesis depends on." Measured, it is the rule failing on a shape it cannot evaluate.**
@@ -85,7 +107,23 @@ whose entries drift apart is a worse contents page. That is the sanding-toward-d
 record exists to prevent, so the grid is authorized as `essay-grid` and the finding is
 waived against it rather than designed around.
 
-The `category-violet` verdict is not "the kit says coral." `git log --follow` on
-`category-colors.ts` shows the helper was born uniform, inside a commit about Astro SSG
-and LLM crawler access. The color arrived as a migration side effect and the rationale
-exists only as a code comment. Changing the kit to violet would not have fixed it.
+**The `category-violet` row described a file that nothing imports.** It read: "Every
+category resolves to one `--color-athletic-brand-violet`, with the category argument
+discarded (`astro-build/src/utils/category-colors.ts`)." Two things wrong with that. The
+file was **dead** — `grep -rn "category-colors" src` returns nothing outside the file
+itself — and the live helper is a local `getCategoryColors` at `BlogList.tsx:23` that did
+the **opposite**: it assigned eight distinct hues, one per category. The record condemned
+uniformity on a surface that was actually running an eight-color palette. Deleted the dead
+file; the live map is adjudicated above as `category-palette`.
+
+The row's closing clause was also false. It called `athletic-brand-violet` "a token named
+for a design system no app in the workspace defines" — this app defined it, at
+`astro-build/src/styles/global.css:23`, along with an eleven-step `athletic-neutral` ramp
+and `court-navy`/`success`/`warning`/`error` that **nothing** referenced. Those are now
+deleted too.
+
+The pattern across both this record and `website-nc`'s is worth naming once: every false
+claim came from reading a file that *looked* authoritative — `DESIGN.md`, a
+plausibly-named util — and describing the site it implied, instead of querying the site.
+A record that inherits its facts from another document inherits that document's errors,
+and this layer's entire value is being the thing that doesn't.

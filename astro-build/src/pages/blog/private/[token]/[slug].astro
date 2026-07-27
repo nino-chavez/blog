@@ -52,7 +52,7 @@ const categoryColors: Record<string, { bg: string; border: string; text: string 
   'Meta': { bg: 'bg-zinc-500/10', border: 'border-zinc-500/30', text: 'text-zinc-400' },
   'Field Notes': { bg: 'bg-green-500/10', border: 'border-green-500/30', text: 'text-green-400' },
   'Consulting Practice': { bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', text: 'text-cyan-400' },
-  'default': { bg: 'bg-athletic-brand-violet/10', border: 'border-athletic-brand-violet/30', text: 'text-athletic-brand-violet' },
+  'default': { bg: 'bg-signal-coral/10', border: 'border-signal-coral/30', text: 'text-signal-coral' },
 };
 
 const colors = categoryColors[post.data.category || ''] || categoryColors.default;
@@ -142,7 +142,7 @@ const colors = categoryColors[post.data.category || ''] || categoryColors.defaul
           )}
 
           <div class="flex items-center gap-4 pt-6 mt-2 border-t border-zinc-800/30">
-            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-athletic-brand-violet to-athletic-court-orange flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-athletic-brand-violet/20">
+            <div class="w-12 h-12 rounded-full bg-signal-coral flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-signal-coral/20">
               NC
             </div>
             <div>

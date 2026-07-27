@@ -40,7 +40,7 @@ const categoryColors: Record<string, { bg: string; border: string; text: string 
   'Field Notes': { bg: 'bg-green-500/10', border: 'border-green-500/30', text: 'text-green-400' },
   'Consulting Practice': { bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', text: 'text-cyan-400' },
   'Reflection': { bg: 'bg-amber-500/10', border: 'border-amber-500/30', text: 'text-amber-400' },
-  'default': { bg: 'bg-athletic-brand-violet/10', border: 'border-athletic-brand-violet/30', text: 'text-athletic-brand-violet' },
+  'default': { bg: 'bg-signal-coral/10', border: 'border-signal-coral/30', text: 'text-signal-coral' },
 };
 
 const colors = categoryColors[post.data.category || ''] || categoryColors.default;
@@ -65,7 +65,7 @@ const colors = categoryColors[post.data.category || ''] || categoryColors.defaul
       <!-- Back link -->
       <a
         href="/blog/drafts"
-        class="group inline-flex items-center gap-2 text-zinc-400 hover:text-athletic-court-orange transition-all duration-150 font-medium mb-8 no-print"
+        class="group inline-flex items-center gap-2 text-zinc-400 hover:text-signal-coral transition-all duration-150 font-medium mb-8 no-print"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -144,7 +144,7 @@ const colors = categoryColors[post.data.category || ''] || categoryColors.defaul
 
           <!-- Author Info -->
           <div class="flex items-center gap-4 pt-6 mt-2 border-t border-zinc-800/30">
-            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-athletic-brand-violet to-athletic-court-orange flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-athletic-brand-violet/20">
+            <div class="w-12 h-12 rounded-full bg-signal-coral flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-signal-coral/20">
               NC
             </div>
             <div>

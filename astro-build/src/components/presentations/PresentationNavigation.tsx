@@ -186,7 +186,7 @@ export function PresentationNavigation({ totalSlides, title }: PresentationNavig
                 <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
             </a>
-            <div className="hidden xs:flex w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-athletic-brand-violet to-athletic-court-orange items-center justify-center">
+            <div className="hidden xs:flex w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-signal-coral items-center justify-center">
               <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
               </svg>
@@ -222,7 +222,7 @@ export function PresentationNavigation({ totalSlides, title }: PresentationNavig
                   onClick={() => goToSlide(num)}
                   className={`h-2 rounded-full transition-all cursor-pointer ${
                     num === currentSlide
-                      ? 'bg-athletic-brand-violet w-6'
+                      ? 'bg-signal-coral w-6'
                       : 'bg-zinc-600 hover:bg-zinc-400 w-2'
                   }`}
                   aria-label={`Go to slide ${num}`}
@@ -248,7 +248,7 @@ export function PresentationNavigation({ totalSlides, title }: PresentationNavig
             <button
               onClick={nextSlide}
               disabled={currentSlide === actualSlideCount}
-              className="w-9 h-9 sm:w-auto sm:h-auto sm:px-3 sm:py-1.5 text-sm font-medium bg-athletic-brand-violet hover:bg-athletic-brand-violet/80 text-white rounded-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center touch-manipulation"
+              className="w-9 h-9 sm:w-auto sm:h-auto sm:px-3 sm:py-1.5 text-sm font-medium bg-signal-coral hover:bg-signal-coral/80 text-white rounded-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center touch-manipulation"
               aria-label="Next slide"
             >
               <span className="hidden sm:inline">Next →</span>
@@ -279,7 +279,7 @@ export function PresentationNavigation({ totalSlides, title }: PresentationNavig
         {/* Progress bar */}
         <div className="h-0.5 bg-zinc-800">
           <div
-            className="h-full bg-gradient-to-r from-athletic-brand-violet to-athletic-court-orange transition-all duration-300"
+            className="h-full bg-signal-coral transition-all duration-300"
             style={{ width: `${(currentSlide / actualSlideCount) * 100}%` }}
           />
         </div>
