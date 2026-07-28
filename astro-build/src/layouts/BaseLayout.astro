@@ -1,7 +1,16 @@
 ---
-import Analytics from '@vercel/analytics/astro';
-import SpeedInsights from '@vercel/speed-insights/astro';
 import '../styles/global.css';
+
+// ANALYTICS: the Cloudflare beacon near the bottom of <body> is the only one.
+//
+// @vercel/analytics and @vercel/speed-insights used to sit beside it. Both
+// inject a script from /_vercel/…/script.js — a path served by Vercel's
+// infrastructure and by nothing else, and this site is on Cloudflare Pages. So
+// every page view fetched two scripts that 404'd and neither product ever
+// received a data point. Removed rather than repointed: the beacon already
+// collects what they would have. Note this comment lives in the frontmatter
+// rather than beside the tag, because an HTML comment in the template ships to
+// all 319 rendered pages.
 
 interface Props {
   title: string;
@@ -142,11 +151,7 @@ const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
   <body class="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 text-zinc-100">
     <slot />
 
-    <!-- Cloudflare Web Analytics -->
+    <!-- Cloudflare Web Analytics — the only analytics on this site; see above -->
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "24ecd813bb2d45798f0512e6beebc164"}'></script>
-
-    <!-- Vercel Web Analytics -->
-    <Analytics />
-    <SpeedInsights />
   </body>
 </html>
