@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" aria-labelledby="t d">
+  <title id="t">Signal Dispatch</title>
+  <desc id="d">Signal Dispatch — 290 pieces across eight content types at ninochavez.co/blog. Content declares the research that supports it with a typed relationship: a research note feeds a whitepaper by based-on, an essay by informed-by, and a counterpoint by responds-to.</desc>
+
+  <rect width="1200" height="460" fill="#000000"/>
+
+  <!-- kicker -->
+  <text x="64" y="72" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" letter-spacing="2.6" fill="#a3e635">NINO CHAVEZ &#183; WRITING</text>
+
+  <!-- wordmark -->
+  <text x="61" y="160" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="76" font-weight="700" letter-spacing="-2.4" fill="#ffffff">Signal</text>
+  <text x="61" y="232" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="76" font-weight="700" letter-spacing="-2.4" fill="#a3e635">Dispatch</text>
+
+  <text x="64" y="278" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" fill="#a3a3a3">Essays on making things &#8212; AI, architecture, commerce, leadership.</text>
+
+  <!-- counts strip -->
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" letter-spacing="1.4">
+    <text x="64" y="356" fill="#ffffff">240<tspan fill="#737373" letter-spacing="1.8">  ESSAYS</tspan></text>
+    <text x="196" y="356" fill="#ffffff">13<tspan fill="#737373" letter-spacing="1.8">  WHITEPAPERS</tspan></text>
+    <text x="384" y="356" fill="#ffffff">9<tspan fill="#737373" letter-spacing="1.8">  DECKS</tspan></text>
+    <text x="484" y="356" fill="#ffffff">9<tspan fill="#737373" letter-spacing="1.8">  SERIES</tspan></text>
+    <text x="590" y="356" fill="#ffffff">10<tspan fill="#737373" letter-spacing="1.8">  FICTION</tspan></text>
+    <text x="64" y="392" fill="#ffffff">4<tspan fill="#737373" letter-spacing="1.8">  TUTORIALS</tspan></text>
+    <text x="196" y="392" fill="#ffffff">4<tspan fill="#737373" letter-spacing="1.8">  COUNTERPOINTS</tspan></text>
+    <text x="384" y="392" fill="#ffffff">1<tspan fill="#737373" letter-spacing="1.8">  RESEARCH NOTE</tspan></text>
+  </g>
+  <line x1="64" y1="322" x2="640" y2="322" stroke="#262626" stroke-width="1"/>
+
+  <!-- provenance graph -->
+  <g transform="translate(708 96)">
+    <text x="0" y="0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" letter-spacing="2.2" fill="#737373">EVERY PIECE CITES ITS SOURCE</text>
+
+    <!-- source node -->
+    <rect x="0" y="24" width="150" height="52" rx="6" fill="#0a0a0a" stroke="#a3e635" stroke-width="1.5"/>
+    <text x="14" y="47" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10" letter-spacing="1.6" fill="#a3e635">RESEARCH NOTE</text>
+    <text x="14" y="65" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#e5e5e5">the evidence</text>
+
+    <!-- edges -->
+    <g stroke="#404040" stroke-width="1.5" fill="none">
+      <path d="M150 50 H196 V126"/>
+      <path d="M150 50 H196 V194"/>
+      <path d="M150 50 H196 V262"/>
+    </g>
+    <g fill="#404040">
+      <circle cx="196" cy="126" r="3"/><circle cx="196" cy="194" r="3"/><circle cx="196" cy="262" r="3"/>
+    </g>
+
+    <!-- typed edges -->
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10" letter-spacing="1.2" fill="#a3e635">
+      <text x="210" y="118">based-on</text>
+      <text x="210" y="186">informed-by</text>
+      <text x="210" y="254">responds-to</text>
+    </g>
+
+    <!-- target nodes -->
+    <g>
+      <rect x="206" y="126" width="222" height="40" rx="6" fill="#0a0a0a" stroke="#262626" stroke-width="1"/>
+      <text x="220" y="152" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#e5e5e5">a whitepaper</text>
+
+      <rect x="206" y="194" width="222" height="40" rx="6" fill="#0a0a0a" stroke="#262626" stroke-width="1"/>
+      <text x="220" y="220" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#e5e5e5">an essay</text>
+
+      <rect x="206" y="262" width="222" height="40" rx="6" fill="#0a0a0a" stroke="#262626" stroke-width="1"/>
+      <text x="220" y="288" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#e5e5e5">a counterpoint</text>
+    </g>
+  </g>
+</svg>
