@@ -7,7 +7,19 @@
  * - Content relationships and navigation
  */
 
-const SITE_URL = 'https://ninochavez.co/blog';
+/**
+ * Two constants, because this app has two roots.
+ *
+ * Pages live under the /blog base path; static assets are emitted at the ORIGIN root and served
+ * there (the in-page hero is `<img src="/images/generated/…">`). Composing an asset path onto
+ * SITE_URL produced https://ninochavez.co/blog/images/generated/<slug>.webp — a 404 — as the
+ * Article schema's `image.url` on 267 built pages. Readers never saw it, because the visible
+ * <img> uses the correct root-relative path; only crawlers read the broken one.
+ *
+ * Page URLs → SITE_URL. Files under public/ → SITE_ORIGIN.
+ */
+const SITE_ORIGIN = 'https://ninochavez.co';
+const SITE_URL = `${SITE_ORIGIN}/blog`;
 
 const AUTHOR = {
   '@type': 'Person',
@@ -36,7 +48,7 @@ const PUBLISHER = {
   name: 'Nino Chavez',
   logo: {
     '@type': 'ImageObject',
-    url: `${SITE_URL}/og_image.png`,
+    url: `${SITE_ORIGIN}/og_image.png`,
     width: 1200,
     height: 630,
   },
@@ -74,7 +86,7 @@ export function generateWebsiteSchema() {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: `${SITE_URL}/?search={search_term_string}`,
+        urlTemplate: `${SITE_URL}?search={search_term_string}`,
       },
       'query-input': 'required name=search_term_string',
     },
@@ -92,9 +104,10 @@ export function generateArticleSchema(post: BlogPostData) {
     ? new Date(data.updatedAt).toISOString()
     : publishDate;
 
+  // SITE_ORIGIN: featureImage is a root-relative asset path ("/images/generated/…"), not a page.
   const imageUrl = data.featureImage
-    ? (data.featureImage.startsWith('http') ? data.featureImage : `${SITE_URL}${data.featureImage}`)
-    : `${SITE_URL}/og_image.png`;
+    ? (data.featureImage.startsWith('http') ? data.featureImage : `${SITE_ORIGIN}${data.featureImage}`)
+    : `${SITE_ORIGIN}/og_image.png`;
 
   return {
     '@context': 'https://schema.org',
@@ -155,7 +168,7 @@ export function generateBreadcrumbSchema(post: BlogPostData) {
         '@type': 'ListItem',
         position: 2,
         name: data.category,
-        item: `${SITE_URL}/?category=${encodeURIComponent(data.category)}`,
+        item: `${SITE_URL}?category=${encodeURIComponent(data.category)}`,
       }] : []),
       {
         '@type': 'ListItem',
@@ -208,7 +221,10 @@ export function generatePersonSchema() {
     url: 'https://ninochavez.co',
     jobTitle: 'Product Architect',
     description: 'Product architecture, commerce platforms, and AI automation. Building systems that scale.',
-    image: 'https://ninochavez.co/nino-chavez.jpg',
+    // `image` removed rather than repointed: it was https://ninochavez.co/nino-chavez.jpg, which
+    // 404s on both the blog and the main origin, and this schema ships on /blog and /blog/archive.
+    // Person.image is optional; no portrait exists in public/, and og_image.png is a share card,
+    // not a photo of a person. An absent property beats a false one. Add a real headshot here.
     sameAs: [
       'https://linkedin.com/in/ninochavez',
       'https://github.com/ninochavez',
