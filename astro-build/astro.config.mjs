@@ -38,15 +38,18 @@ export default defineConfig({
           {
             theme: "github-dark-dimmed",
             keepBackground: false,
+            /** @param {{ children: unknown[] }} node */
             onVisitLine(node) {
               if (node.children.length === 0) {
                 node.children = [{ type: "text", value: " " }];
               }
             },
+            /** @param {{ properties: { className?: string[] } }} node */
             onVisitHighlightedLine(node) {
               node.properties.className = node.properties.className || [];
               node.properties.className.push("highlighted");
             },
+            /** @param {{ properties: { className?: string[] } }} node */
             onVisitHighlightedWord(node) {
               node.properties.className = ["word"];
             },
@@ -56,7 +59,16 @@ export default defineConfig({
     }),
     react(),
     sitemap({
-      filter: (page) => !page.includes("/draft/") && !page.includes("/private/"),
+      // Only the paths the router (apps/router) actually sends to this app. ninochavez.co is
+      // three Pages projects behind one Worker, and `/about` belongs to the MAIN site — which
+      // serves its own about page there. This sitemap listed https://ninochavez.co/about anyway,
+      // claiming a URL this app never answers. `/blog` and `/research` are the prefixes the
+      // router routes here; keep this list in step with BLOG_PREFIXES in apps/router.
+      filter: (page) => {
+        if (page.includes("/draft/") || page.includes("/private/")) return false;
+        const path = new URL(page).pathname;
+        return path.startsWith("/blog") || path.startsWith("/research");
+      },
       changefreq: "weekly",
       priority: 0.7,
       lastmod: new Date(),
