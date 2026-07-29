@@ -5,6 +5,7 @@ import SiteHeader from '../../../../components/SiteHeader.astro';
 import SiteFooter from '../../../../components/SiteFooter.astro';
 import ReadingProgress from '../../../../components/ReadingProgress';
 import TableOfContents from '../../../../components/TableOfContents.astro';
+import { featureImageSrcset, featureImageSizes } from '../../../../utils/feature-image';
 
 export const prerender = true;
 
@@ -91,13 +92,12 @@ const colors = categoryColors[post.data.category || ''] || categoryColors.defaul
       <article class="space-y-6">
         {post.data.featureImage && (() => {
           const src = post.data.featureImage;
-          const mobile = src.replace('.webp', '-600w.webp');
           return (
             <div class="relative -mx-4 md:-mx-8 lg:mx-0 aspect-video overflow-hidden rounded-2xl border border-zinc-800">
               <img
                 src={src}
-                srcset={`${mobile} 600w, ${src} 1200w`}
-                sizes="(max-width: 768px) 100vw, 1200px"
+                srcset={featureImageSrcset(src)}
+                sizes={featureImageSizes(src)}
                 alt={post.data.title}
                 class="w-full h-full object-cover"
                 width="1200"
