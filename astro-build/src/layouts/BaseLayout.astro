@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { featureImageSrcset, featureImageSizes } from '../utils/feature-image';
 
 // ANALYTICS: the Cloudflare beacon near the bottom of <body> is the only one.
 //
@@ -80,10 +81,8 @@ const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
         rel="preload"
         as="image"
         href={image}
-        imagesrcset={image.includes('imagedelivery.net')
-          ? undefined
-          : `${image.replace('.webp', '-600w.webp')} 600w, ${image} 1200w`}
-        imagesizes={image.includes('imagedelivery.net') ? undefined : "(max-width: 768px) 100vw, 1200px"}
+        imagesrcset={featureImageSrcset(image)}
+        imagesizes={featureImageSizes(image)}
         fetchpriority="high"
       />
     )}
