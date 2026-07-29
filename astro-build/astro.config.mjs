@@ -20,6 +20,13 @@ export default defineConfig({
         // Excluded paths bypass the Pages Function and are served by the
         // static layer. /_redirects only fires for excluded paths, so
         // legacy RSS URLs must live here to redirect to /blog/*.
+        //
+        // `/blog/*` is a different case from the three below it: it collapses
+        // all ~316 prerendered post pages into one rule, the same way the
+        // adapter emits /images/* and /research/*. The consequence is easy to
+        // miss — NO SSR ROUTE CAN LIVE UNDER /blog/. It will build into
+        // _worker.js, never be invoked, and 404. Two draft-preview routes did
+        // exactly that, silently, and one of them reached the sitemap.
         exclude: [
           { pattern: "/blog/*" },
           { pattern: "/rss.xml" },
@@ -64,10 +71,21 @@ export default defineConfig({
       // serves its own about page there. This sitemap listed https://ninochavez.co/about anyway,
       // claiming a URL this app never answers. `/blog` and `/research` are the prefixes the
       // router routes here; keep this list in step with BLOG_PREFIXES in apps/router.
+      // Both tests match WHOLE PATH SEGMENTS. The previous version tested
+      // `page.includes("/draft/")`, which does not match `/blog/drafts` — so
+      // the drafts index landed in the sitemap Google crawls, pointing at a
+      // route that 404s. `startsWith("/blog")` had the same shape of hole in
+      // the other direction: a future `/blogroll` would have claimed to be
+      // ours. `scripts/check-sitemap.mjs` fails the build if a listed URL has
+      // no file to serve it.
       filter: (page) => {
-        if (page.includes("/draft/") || page.includes("/private/")) return false;
-        const path = new URL(page).pathname;
-        return path.startsWith("/blog") || path.startsWith("/research");
+        const segments = new URL(page).pathname.split("/").filter(Boolean);
+        // Preview surfaces are never public.
+        if (segments.some((s) => s === "draft" || s === "drafts" || s === "private")) {
+          return false;
+        }
+        // Only the prefixes the router (apps/router) sends to this app.
+        return segments[0] === "blog" || segments[0] === "research";
       },
       changefreq: "weekly",
       priority: 0.7,
