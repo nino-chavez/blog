@@ -49,7 +49,16 @@ const fullImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
 // og:image prefers the share-card override; the in-page hero/LCP keeps `image`.
 const ogSource = ogImage ?? image;
 const fullOgImage = ogSource.startsWith('http') ? ogSource : `${siteUrl}${ogSource}`;
-const canonical = canonicalUrl || `${siteUrl}${Astro.url.pathname}`.replace(/\/$/, '');
+// `build.format: "file"` emits `slug.html`, so Astro.url.pathname carries the extension at build
+// time — but the site SERVES the extensionless URL and 308-redirects the `.html` form. Left alone,
+// every page told search engines and social platforms that its canonical address was one that
+// redirects, while the sitemap listed the real one: 319 of 323 built pages disagreed with the
+// sitemap about their own URL. Normalize to the address that is actually served.
+const servedPath = Astro.url.pathname
+  .replace(/\/index\.html$/, '')
+  .replace(/\.html$/, '')
+  .replace(/\/$/, '');
+const canonical = canonicalUrl || `${siteUrl}${servedPath}`;
 const pageTitle = title === 'Signal Dispatch' ? title : `${title} - Signal Dispatch`;
 
 // Convert jsonLd to array if single object

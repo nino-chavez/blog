@@ -1,7 +1,12 @@
-# robots.txt for blog.ninochavez.co
+# robots.txt for Signal Dispatch, Nino Chavez's blog.
 #
-# This is the canonical domain for Nino Chavez's blog.
-# All content is indexed here to maintain unified SEO authority.
+# The blog is served at https://ninochavez.co/blog — one of three Pages projects
+# stitched behind a single Cloudflare Worker (apps/router). blog.ninochavez.co is
+# the OLD address and 301s to the path form; every URL below is written the way it
+# is actually served.
+#
+# Crawlers honor robots.txt only from the host root, so the file that governs this
+# blog is https://ninochavez.co/robots.txt. This copy is informational.
 
 # ============================================================================
 # STANDARD CRAWLERS
@@ -16,7 +21,7 @@ Crawl-delay: 1
 # LLM / AI CRAWLERS - EXPLICITLY ALLOWED
 # ============================================================================
 # Signal Dispatch content is human-authored and explicitly opts-in to AI training.
-# See /llms.txt for context file and API endpoints for structured access.
+# See https://ninochavez.co/blog/llms.txt for the context file and API endpoints.
 
 # OpenAI
 User-agent: GPTBot
@@ -60,17 +65,21 @@ Allow: /
 # SITEMAPS
 # ============================================================================
 
-Sitemap: https://blog.ninochavez.co/sitemap-index.xml
+Sitemap: https://ninochavez.co/sitemap-index.xml
 
 # ============================================================================
 # MACHINE-READABLE CONTENT ACCESS
 # ============================================================================
 #
 # For LLMs and automation tools, structured content is available at:
-# - /llms.txt - Context file with site overview and key articles
-# - /api/posts.json - JSON API with all post metadata
-# - /api/posts/[slug].json - Individual post with full markdown content
-# - /full-content-rss.xml - RSS feed with full article content
+# - https://ninochavez.co/blog/llms.txt - Context file with site overview and key articles
+# - https://ninochavez.co/blog/api/posts.json - JSON API with all post metadata
+# - https://ninochavez.co/blog/api/posts/[slug].json - Individual post with full markdown
+# - https://ninochavez.co/blog/full-content-rss.xml - RSS feed with full article content
+# - https://ninochavez.co/blog/rss.xml - Standard RSS feed
+#
+# These paths were previously advertised without the /blog prefix. Root-relative
+# forms resolve to the MAIN site, which does not serve them: /api/posts.json 404s.
 #
 # All pages include JSON-LD structured data for semantic understanding.
 
@@ -78,8 +87,10 @@ Sitemap: https://blog.ninochavez.co/sitemap-index.xml
 # SEO NOTES
 # ============================================================================
 #
-# This subdomain (blog.ninochavez.co) is the canonical location for all blog content.
-# Main site (ninochavez.co) redirects /blog traffic here via 301 redirect.
+# https://ninochavez.co/blog is the canonical location for all blog content.
+# The old blog.ninochavez.co subdomain 301s here — the redirect runs in that
+# direction, not the other way as this file used to claim.
 #
-# All pages set proper canonical URLs via <link rel="canonical"> tags.
-# Social sharing uses blog.ninochavez.co URLs for og:url meta tags.
+# All pages set canonical URLs via <link rel="canonical"> tags, and og:url matches
+# them. Both are extensionless: the built files are `slug.html`, but the site serves
+# and canonicalizes the extensionless form.
