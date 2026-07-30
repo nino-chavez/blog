@@ -1,0 +1,210 @@
+---
+title: "Measure Your Own Token Waste in Four Exercises"
+publishedAt: "2026-07-30T04:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "Install the two mechanical fixes for AI-agent token waste, then run a real measurement tool against your own session logs instead of guessing where the cost goes. Companion workshop to Nothing Broke. It Just Wasn't There."
+category: "Engineering"
+featureImage: "/images/generated/measure-your-own-token-waste.webp"
+tags: ["agentic-systems", "tutorial", "engineering"]
+duration: "20 min"
+difficulty: "beginner"
+prerequisites:
+  - "Claude Code installed and working, with some session history (a week or more of real use gives you something to measure)"
+  - "git installed"
+  - "Read the companion post: Nothing Broke. It Just Wasn't There."
+objectives:
+  - "Install a hook that mechanically blocks two common token wastes and a statusline that makes context usage visible"
+  - "Run a real measurement tool against your own session logs instead of guessing"
+  - "Read the five numbers that actually explain where your tokens go"
+  - "Turn one measured finding into one concrete change to how you work"
+companionOf:
+  type: blog
+  slug: nothing-broke-it-just-wasnt-there
+---
+
+import { Exercise } from '@/components/tutorials/Exercise';
+import { Template } from '@/components/tutorials/Template';
+import { Checkpoint } from '@/components/tutorials/Checkpoint';
+
+# Your Intuition About Where Tokens Go Is Probably Wrong
+
+In [Nothing Broke. It Just Wasn't There.](/blog/nothing-broke-it-just-wasnt-there), an audit of a personal AI coding setup found the token-waste problem already solved — not by reasoning about which habits felt expensive, but by measuring a real 60-day corpus and finding that three of four starting hypotheses were wrong.
+
+This workshop is the hands-on half of that measurement. If you've done the [companion `/doctor` workshop](/blog/tutorials/audit-your-ai-coding-harness), this covers the other clock: not the standing harness, but what accumulates inside every conversation you have with the model.
+
+One idea worth having straight before you start: the agent API is stateless. Every single tool call resends your entire conversation so far, from the top. Nothing is free just because you already said it once. A token that lands early in a long session gets paid for again on every turn that follows it — which is why session length, not any one expensive-feeling action, tends to be the real driver.
+
+---
+
+<Exercise number={1} title="Install the mechanical half" duration="5 min">
+
+## Why this matters
+
+Two of the four levers here don't need you to think about them at all once they're installed — a hook that blocks specific wastes automatically, and a statusline that shows you context usage without you having to ask. Get these in place first; they start paying off immediately, before you've measured anything.
+
+## The structure
+
+Both live in the same public repo as `/doctor`: [`github.com/nino-chavez/agentic-ways-of-working`](https://github.com/nino-chavez/agentic-ways-of-working).
+
+**`hooks/read-guard.py`** — a PreToolUse hook on file reads. It denies two specific patterns once, with a fix handed back in the same response: an oversized image read (over 1400px on the long edge gets a 1000px copy instead), and a re-read of a file that hasn't changed in the last 10 minutes (you get a reminder to cite what's already in context instead). The immediate retry always succeeds — this is friction for the reflexive case, not a wall.
+
+**`statusline.py`** — shows `model | context tokens (color-coded at 50%/80%) | cwd` in your terminal, so a session fattening past a sane point is something you see, not something you discover three tool calls later.
+
+## Your turn
+
+If you already cloned the repo for the `/doctor` workshop, you have everything — just run the installer to wire the rest:
+
+<Template title="Full install" description="Wires hooks, statusline, and commands in one pass — safe to re-run">
+
+```bash
+cd ~/agentic-ways-of-working   # or wherever you cloned it
+./install.sh
+```
+
+</Template>
+
+Starting fresh instead:
+
+<Template title="Fresh clone + install" description="One command, everything wired">
+
+```bash
+git clone https://github.com/nino-chavez/agentic-ways-of-working.git ~/agentic-ways-of-working
+cd ~/agentic-ways-of-working
+./install.sh
+```
+
+</Template>
+
+The installer is idempotent — it backs up your `settings.json` first, only adds hook registrations that aren't already present, and never overwrites a statusline you've already configured.
+
+<Checkpoint>
+
+Restart your Claude Code session. You should see the statusline appear at the bottom of your terminal showing your model, current context usage, and working directory. Re-read a file you haven't touched in the last few minutes, then immediately re-read the exact same file again without it changing — the second read should get bounced once with a reminder, and the retry right after should go through clean. That's the hook working as designed.
+
+</Checkpoint>
+
+</Exercise>
+
+---
+
+<Exercise number={2} title="Measure, don't guess" duration="5 min">
+
+## Why this matters
+
+Intuitions about which tool call is expensive are routinely wrong — that's not a hedge, it's the actual finding from running this against a real 2,335-file, 529-session corpus. Three of four starting hypotheses were wrong there. Your setup is different from that one. The only way to know what's actually happening in yours is to run the measurement, not to reason from what feels heavy.
+
+## The structure
+
+`tools/token-audit.py` reads every session log under `~/.claude/projects/**/*.jsonl`, streams through them (a multi-gigabyte corpus finishes in a minute or two), and reports where your tokens actually went — not where you'd guess.
+
+```
+python3 tools/token-audit.py [--days 60] [--projects-dir ~/.claude/projects] [--top 20]
+```
+
+`--days` controls the lookback window (default 60 — use less if you're newer to the tool), `--projects-dir` lets you point it somewhere else if your Claude Code data isn't in the default location, `--top` controls how many top offenders it lists per category.
+
+## Your turn
+
+Run it against your own history:
+
+<Template title="Run the audit" description="No dependencies beyond Python 3">
+
+```bash
+cd ~/agentic-ways-of-working
+python3 tools/token-audit.py --days 60
+```
+
+</Template>
+
+If you're new to Claude Code and don't have 60 days of history yet, shrink the window: `--days 14` or whatever you actually have. A thin window still tells you something; it just won't be as stable a picture.
+
+<Checkpoint>
+
+You should see a report with a handful of named metrics and numbers specific to your own sessions — not the reference numbers from the tool's own documentation. If the report comes back essentially empty, check that `--projects-dir` is pointing at where your Claude Code session logs actually live (`~/.claude/projects` by default).
+
+</Checkpoint>
+
+</Exercise>
+
+---
+
+<Exercise number={3} title="Read the five numbers" duration="6 min">
+
+## Why this matters
+
+The report isn't useful until you know what each number is telling you to do. Five metrics carry the whole story.
+
+## The structure
+
+**Replay multiplier** — cache reads ÷ tokens written. This is the big one: because the API is stateless, a payload's true cost is its size times every API call that follows it in the session, which makes session cost roughly quadratic in turn count. On the reference corpus this measured 41×. If yours is high, the fix is almost never trimming what you send — it's shorter sessions and delegating exploration to subagents whose context dies with them instead of accumulating in yours.
+
+**Redundant re-read rate** — same file, same session, unchanged content, read more than once. A high rate is usually a symptom of long sessions: compaction drops tool results, the agent re-reads what it lost, context grows, compaction fires again. The `read-guard` hook you installed in Exercise 1 is the backstop; shortening sessions is the actual fix.
+
+**Image reads** — billed by pixel dimensions, not file size. A full-resolution screenshot can cost several times what a cropped, resized copy of the same content costs. On the reference corpus, images were 78% of all read bytes, mostly from full-page captures re-read dozens of times in design-loop sessions.
+
+**Cache-write ratio** — cache writes ÷ fresh input. Writes cost roughly 1.25× the input price and happen on cache-TTL expiry (about 5 idle minutes) and on every subagent spawn. A high ratio usually means a fat session getting resumed after sitting idle — each casual resume rewrites the whole context at the premium rate.
+
+**Per-model spread** — caches are per-model. Switching models mid-session starts a cold cache for whichever model you switched to.
+
+## Your turn
+
+Go back to your own report. Find your replay multiplier first — it's usually the biggest single number and the best place to start. Then check redundant-read rate and image reads; those two are the ones a hook can partially catch, so seeing them stay high after Exercise 1 tells you something specific (older history, before the hook was installed, versus a pattern still happening now).
+
+<Checkpoint>
+
+Name your own replay multiplier and your own redundant-read rate, specifically — not the reference numbers from this page. If either number surprises you compared to what you expected before running the tool, that's the actual point of measuring instead of guessing.
+
+</Checkpoint>
+
+</Exercise>
+
+---
+
+<Exercise number={4} title="Turn one number into one change" duration="4 min">
+
+## Why this matters
+
+A measurement that doesn't change a single habit was a research exercise, not an audit. The point isn't the report — it's what you do differently in your next session.
+
+## The structure
+
+Match what you found to what actually fixes it:
+
+| If your report shows | The fix |
+|---|---|
+| High replay multiplier | Shorter sessions — `/clear` between unrelated tasks instead of one long thread. Delegate multi-file exploration to a subagent when only the conclusion matters to the main task. |
+| High redundant-read rate | Same root cause as above — session length. The hook from Exercise 1 is already backstopping this; shortening sessions addresses the cause instead of the symptom. |
+| Oversized image reads | Already covered — the hook downsizes these automatically now. If your report reflects mostly older history, that's expected; check again in a few weeks. |
+| High cache-write ratio | Stop casually resuming sessions that have been idle a while. Finish sessions instead of leaving them open in the background. |
+| One tool dominating the report | Add a digest step at the source — pull the 20 fields you actually need out of a large raw artifact instead of re-reading the whole thing each time. |
+
+## Your turn
+
+Pick the ONE row that matches your biggest number from Exercise 3. Not all five — one. Write down, in a sentence, the specific habit you're changing starting with your next session.
+
+<Checkpoint>
+
+State your one change out loud or in writing: what you'll do differently, starting when. Run the audit again in a few weeks and check whether that specific number moved. If it didn't, the fix didn't match the actual cause — go back to Exercise 3 and re-read the number more carefully.
+
+</Checkpoint>
+
+</Exercise>
+
+---
+
+## What You Measured
+
+Four exercises, each covering a different half of the same mechanism:
+
+| Exercise | Question | What it protects against |
+|---|---|---|
+| Install the mechanical half | Are the two automatic fixes actually running? | Waste you'd otherwise never notice, turn after turn |
+| Measure, don't guess | What does your own history actually show? | Building a fix for a problem you don't have |
+| Read the five numbers | What does each metric mean for what you do next? | A report nobody acts on because nobody understood it |
+| Turn one number into one change | Did anything actually change? | Measurement as theater instead of practice |
+
+## Where This Is Heading
+
+The statusline is the only piece of this that's live — it tells you about the session you're in right now. Everything else here is a look backward: `token-audit.py` tells you what already happened, not what's happening this minute.
+
+Run it again in a few weeks, the same way the `/doctor` workshop suggests re-running that command. A single measurement is a snapshot. What actually changes your token bill is whether the habit from Exercise 4 is still true the second time you check.
