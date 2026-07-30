@@ -8,7 +8,7 @@
 
 import type { APIRoute } from 'astro'
 import { getCollection } from 'astro:content'
-import { renderBlogCard } from '../../lib/og-card'
+import { cardDate, renderBlogCard } from '../../lib/og-card'
 
 export const prerender = true
 
@@ -28,15 +28,9 @@ export const GET: APIRoute = async ({ params }) => {
 
 	const wordCount = post.body?.split(/\s+/).filter(Boolean).length ?? 0
 	const readingTime = Math.max(1, Math.ceil(wordCount / 200))
-	const dateLabel = new Date(post.data.publishedAt).toLocaleDateString('en-US', {
-		year: 'numeric',
-		month: 'short',
-		day: 'numeric'
-	})
-
 	return renderBlogCard({
 		title: post.data.title,
-		dateLabel,
+		dateLabel: cardDate(post.data.publishedAt),
 		readingTime,
 		category: post.data.category ?? null
 	})
