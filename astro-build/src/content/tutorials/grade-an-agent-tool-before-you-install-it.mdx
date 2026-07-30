@@ -1,0 +1,253 @@
+---
+title: "Grade an Agent Tool Before You Install It"
+slug: "grade-an-agent-tool-before-you-install-it"
+publishedAt: "2026-07-31T15:30:00.000Z"
+author: "Nino Chavez"
+excerpt: "Sort a tool's evidence by who published it, hunt for the one source arguing against its own interest, diff its feature list against your own harness, and check for collisions on your real machine — before anything gets installed. Companion workshop to Everyone Who Told Me It Was Good Was the Project."
+category: "Engineering"
+tags: ["agentic-systems", "tutorial", "tooling"]
+duration: "40 min"
+difficulty: "intermediate"
+prerequisites:
+  - "A specific agent tool, plugin, or extension you are considering installing"
+  - "git and the GitHub CLI (`gh`) installed and authenticated"
+  - "An enumerated list of your own harness — if you don't have one, run Audit Your AI Coding Harness in Four Exercises first"
+  - "Read the companion post: Everyone Who Told Me It Was Good Was the Project"
+objectives:
+  - "Build a source ledger that sorts every claim by who published it"
+  - "Locate the adverse-interest source that actually settles a licensing or auth question"
+  - "Diff a tool's advertised feature list against your existing setup, item by item"
+  - "Check a real installer's filenames and config writes against your machine before running it"
+companionOf:
+  type: blog
+  slug: everyone-who-told-me-it-was-good-was-the-project
+---
+
+import { Exercise } from '@/components/tutorials/Exercise';
+import { Template } from '@/components/tutorials/Template';
+import { Checkpoint } from '@/components/tutorials/Checkpoint';
+
+# Most Tool Recommendations Arrive as a Link, and the Link Is the Vendor
+
+In [Everyone Who Told Me It Was Good Was the Project](/blog/everyone-who-told-me-it-was-good-was-the-project), a 66,000-star agent plugin turned out to have almost no evidence behind it that the project hadn't published itself — including the one critical review, which the README quoted approvingly.
+
+This workshop is the repeatable half. You'll run the same four checks against whatever tool is currently sitting in your inbox. None of them requires installing it.
+
+A few terms, defined once:
+
+- **Harness** — everything wrapped around the model: instructions, skills, commands, hooks, memory files, tool connections. The thing a plugin claims to improve.
+- **Adverse-interest source** — a claim published by a party that loses something by publishing it. A vendor documenting its own product's limitation is the shape to look for.
+- **Source ledger** — a plain table of every claim you've been handed and who owns the page it appeared on.
+- **Collision check** — comparing an installer's filenames and configuration writes against your actual machine before you let it run.
+
+The whole sequence is read-only until the last exercise, and that one only inspects.
+
+---
+
+<Exercise number={1} title="Sort the pile by publisher" duration="10 min">
+
+## Why this matters
+
+Persuasiveness and independence are unrelated properties, and a good landing page deliberately blurs them. A star count, a feature table, a benchmark, and a testimonial wall all feel like four sources. Frequently they're one file in one repository, written by one person.
+
+The sort is trivial. It's skipping the sort that costs you.
+
+## The structure
+
+Start with the repository itself, because identity is the first thing to get wrong. Projects fork, rename, and go stale, and a fork's page looks exactly like the original's:
+
+```bash
+gh api repos/<owner>/<repo> --jq '{
+  fork: .fork,
+  parent: .parent.full_name,
+  stars: .stargazers_count,
+  pushed: .pushed_at,
+  archived: .archived,
+  license: .license.spdx_id
+}'
+```
+
+`fork: true` with a `parent` means you're reading a copy. A `pushed` date more than a few months old on a fast-moving tool means the page is describing something that no longer ships.
+
+Then build the ledger. One row per claim you've been handed.
+
+<Template title="Source ledger" description="One row per claim; the Owner column is the whole point">
+
+| Claim | Where I read it | Who owns that page | Independent? |
+|---|---|---|---|
+| 54 lifecycle hooks | Project README | The project | No |
+| 66,836 stars | GitHub repo page | Measured by GitHub, displayed by the project | Partly |
+| "Cancelled my Cursor subscription" | README testimonials block | The project, quote selected by maintainer | No |
+| "Burns tokens at an alarming rate" | Video review | Third party — but listed in the project's own reviews section | Filtered |
+| Users debating whether it helps | Forum thread | Nobody | Yes |
+
+</Template>
+
+The last column is the only one that matters. Fill it in honestly, including "filtered" for third-party material the vendor chose to feature.
+
+## Your turn
+
+Build the ledger for your candidate tool. Aim for every claim that would influence your decision, not just the headline ones.
+
+<Checkpoint>
+
+You should now have a table where the **Independent?** column is mostly "No." That's the normal result, not a red flag about this particular tool — it's what a product page is for. If you have three or more genuinely independent rows, you're in unusually good shape and can weight them heavily.
+
+</Checkpoint>
+
+</Exercise>
+
+---
+
+<Exercise number={2} title="Hunt the adverse-interest claim" duration="8 min">
+
+## Why this matters
+
+When every source benefits from the conclusion it argues for, one category still carries weight: a party publishing something that costs it. A vendor documenting a limitation of its own product has no marketing incentive to do so, which is exactly why the sentence is worth more than the entire testimonial wall above it.
+
+For agent tooling, the highest-value adverse-interest claims are almost always about authentication, licensing, and terms — because those are where a tool's pitch quietly assumes something it doesn't control.
+
+## The structure
+
+Three places to look, in order of usefulness:
+
+1. **The host platform's own docs**, not the plugin's. If a plugin runs on top of another tool, read that tool's documentation about the thing the plugin depends on. This is where you find sentences like "X explicitly prohibits this," published by the party that would rather it didn't.
+2. **The license file, not the badge.** GitHub renders `NOASSERTION` for anything it can't match to a standard license. A project describing itself as open source under a bespoke license is a fact worth surfacing before it touches client work.
+
+   ```bash
+   gh api repos/<owner>/<repo> --jq '.license'
+   ```
+3. **Terms and changelogs at the source.** If reporting says a policy changed on a date, open the policy page yourself. If the clause isn't there, the claim gets labeled as reporting — not dropped, but not promoted either.
+
+## Your turn
+
+Find at least one adverse-interest claim about your candidate, or establish that none exists. Write down which of the three places it came from.
+
+<Checkpoint>
+
+You should be able to finish this sentence with something concrete: *"The claim that most changes my decision is ____, and it was published by ____, who does not benefit from it."*
+
+If you can't finish it, that's a finding too. It means your decision currently rests entirely on material the vendor controls — which may still be fine, but you now know it.
+
+</Checkpoint>
+
+</Exercise>
+
+---
+
+<Exercise number={3} title="Diff the feature list against your own" duration="12 min">
+
+## Why this matters
+
+A long feature list reads as a long list of things you'd gain. Usually it isn't. Much of it is a rename of something already running in your setup, and you cannot tell which parts without both inventories side by side.
+
+This is also the exercise that fails if you skipped the prerequisite. You can't diff against an inventory you don't have.
+
+## The structure
+
+Get the tool's side from its reference documentation rather than its README — the README sells, the reference enumerates. Most projects publish something like `docs/reference/features.md`:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/<owner>/<repo>/<branch>/docs/reference/features.md
+```
+
+Get your side from wherever your harness is enumerated. If you followed [Audit Your AI Coding Harness](/blog/tutorials/audit-your-ai-coding-harness), the report is your inventory. Otherwise:
+
+```bash
+ls ~/.claude/skills/ ~/.claude/commands/ ~/.claude/hooks/ 2>/dev/null
+```
+
+Then walk the tool's list and mark each item one of three ways:
+
+- **Covered** — you have something that does this, and you can name it
+- **Absent** — genuinely new to you
+- **Blocked** — new, and you can't use it for a reason unrelated to whether it's good
+
+The third category is the one people skip, and it's frequently the most interesting. A feature you can't adopt because it requires patching a tool you don't control is different from a feature you evaluated and declined.
+
+## Your turn
+
+Produce the three-way split for every item on the tool's reference list. Then check the reverse direction: what does *your* setup do that the tool's list doesn't mention at all?
+
+<Checkpoint>
+
+You should have a count for each bucket and be able to name your covering item for every **Covered** row. "I think I have something like that" doesn't count — if you can't name it, mark it **Absent** and be pleasantly surprised later.
+
+The reverse-direction check should produce at least one item. If it produces none, that's a real signal in the tool's favor.
+
+</Checkpoint>
+
+</Exercise>
+
+---
+
+<Exercise number={4} title="Collision-check before you run anything" duration="8 min">
+
+## Why this matters
+
+Installers write files and edit configuration. Most do it politely. The ones that don't will shadow a command you rely on or rewrite a settings block you've been tuning for months, and you'll find out days later when something behaves oddly.
+
+The installer's own documentation almost always tells you exactly what it writes. Reading that page takes five minutes and turns "I hope this is fine" into a checked claim.
+
+## The structure
+
+Find the section of the install guide that lists what lands on disk. Then check each location against your machine.
+
+**Command-name collisions.** Compare what it links against what you already have:
+
+```bash
+# what you have
+ls -1 ~/.local/bin
+
+# what it installs — from the install guide, not from guessing
+# then look for any name appearing in both lists
+```
+
+Every name prefixed with the project's own slug is a good sign. A bare, generic name is worth pausing over.
+
+**Configuration writes.** If the installer edits a config file, read your current version first:
+
+```bash
+grep -nE '^\[' ~/.codex/config.toml     # existing section headers
+```
+
+New, uniquely-named sections are additive and safe to reverse. Rewrites of sections you already use are not. Also look specifically for values that set concurrency, permissions, or approval behavior — installers frequently ship aggressive defaults that were tuned for the author's machine and budget, not yours.
+
+**The uninstall path.** Confirm it exists and read what it removes before you need it.
+
+## Your turn
+
+Produce a one-line verdict for each of the three: name collisions, config writes, uninstall. Then list any default value you would change immediately after installing.
+
+<Checkpoint>
+
+You should be able to say, without having run the installer: which files it creates, which existing file it modifies, whether any name it installs shadows one of yours, and how to reverse it.
+
+If the install guide doesn't tell you enough to answer those, that absence is your finding. Installers that won't say what they write are the ones most worth not running.
+
+</Checkpoint>
+
+</Exercise>
+
+---
+
+## What You Ran
+
+Four checks, none of which required installing the thing:
+
+- A source ledger that separates persuasive material from independent material
+- A hunt for the one claim published against its author's own interest
+- A three-way inventory diff — covered, absent, blocked — in both directions
+- A collision check against your real filenames and config, read from the installer's own documentation
+
+The output is a decision you can defend to someone who disagrees with it, which is a different artifact from a decision you feel good about.
+
+---
+
+## Where This Is Heading
+
+The uncomfortable part of this sequence is exercise 3, and not for the reason it looks like. Diffing against your own harness only works if your harness is written down somewhere. Mine is, in a public repository, and that's the only reason the comparison took twenty minutes instead of an afternoon.
+
+If exercise 3 was the hard one for you, the tool was never the problem.
+
+Which raises a question I don't have a clean answer to yet: at what point does an inventory large enough to make this check easy become the thing that needs auditing? A setup you can diff against anything is also a setup nobody, including you, has read end to end recently.

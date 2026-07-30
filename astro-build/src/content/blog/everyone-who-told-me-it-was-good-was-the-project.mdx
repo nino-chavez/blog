@@ -1,0 +1,141 @@
+---
+title: "Everyone Who Told Me It Was Good Was the Project"
+slug: "everyone-who-told-me-it-was-good-was-the-project"
+publishedAt: "2026-07-31T15:00:00.000Z"
+author: "Nino Chavez"
+status: "published"
+excerpt: "A 66,000-star agent plugin keeps landing in my inbox. Working through the evidence, every source arguing for it turned out to be the project's own page — and the one claim that actually decided the question came from a vendor with no reason to make it."
+category: "AI Development"
+tags: ["ai-development", "agentic-systems", "tooling"]
+featured: false
+seo:
+  metaTitle: "Should You Install oh-my-opencode? Grading the Evidence"
+  metaDescription: "Sixty-six thousand stars, fifty-four hooks, eleven agents, and a wall of testimonials — all published by the same project. What survived when I checked who owned each source."
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+The link keeps arriving. Sometimes with a question mark, sometimes without.
+
+*Have you looked into oh-my-opencode?*
+
+I have now. The answer is no, I'm not installing the main edition — but the answer is the least interesting part. What's worth writing down is how thin the evidence pile turned out to be once I sorted it by who published each piece.
+
+---
+
+## The Pitch Is Genuinely Good
+
+Sixty-six thousand stars. Fifty-four lifecycle hooks. Eleven named agents with a Greek-mythology roster. A "Team Mode" that runs up to eight members in parallel and draws them in a terminal grid. A hash-anchored edit tool with a real benchmark attached. A wall of testimonials from people at recognizable companies.
+
+That is a strong page. It is doing its job.
+
+The first thing I actually learned had nothing to do with any of it. Two repositories carry this name. One had 951 stars and looked plausible; it turned out to be a fork whose last commit was six months old. The live project sits somewhere else, under a different name after a rename, and it had been pushed to that morning.
+
+One API call separated those. Nothing about either page announced the difference.
+
+---
+
+## Every Source Arguing For It Belonged To It
+
+Here is the pile I started with, sorted by publisher rather than by persuasiveness:
+
+The feature table is the project's. The hook inventory is the project's. The four-language README is the project's. The testimonial section — cancelled my Cursor subscription, revolutionized opencode, you will never go back — is a block of quotes the maintainer selected and pasted into a file he controls.
+
+That's four hats on one source, and the source is a file in a repository.
+
+The star count is the one item that genuinely isn't. Sixty-six thousand people clicked a button and GitHub counted. Unaudited, trivially gameable, and a measure of interest rather than fit — but nobody wrote it, and I'm not going to pretend otherwise to make the paragraph land harder.
+
+<PullQuote>
+Sixty-six thousand stars tells you a lot of people liked the page. It does not tell you what you would gain.
+</PullQuote>
+
+The video review is in there too, and it's the strongest item in the pile — because it shows the tool failing. Token burn described as "an alarming rate," a plan drained in about two hours, a warning not to use it for simple tasks because it "seems to maybe sometimes go a bit nuts," and a moment where the plugin deleted its own project config unprompted.
+
+That's real texture and I'm glad it exists. It also sits in the README's own curated reviews list, quoted approvingly, a few lines above a link to the Discord.
+
+A critical review the vendor chose to feature is still evidence. It's just evidence that survived a filter someone else set.
+
+---
+
+## The Source I Couldn't Reach
+
+There was one thread I wanted more than any of it — a subreddit post asking, in plain words, whether this thing really provides an advantage. Users talking to each other, nobody curating.
+
+I could not get it.
+
+Direct fetch, the old interface, the raw JSON endpoint, a real Chrome session driving my own browser profile, a reader proxy, and two mirror instances. Five routes, six attempts. A network security block, a 401 for bad network reputation, and a proof-of-work challenge that failed twice.
+
+<Callout type="warning" title="What I did instead of guessing">
+Nothing. I wrote down that the thread was unreachable and carried on with a pile that had a known hole in it. Summarizing a discussion I never read would have produced the most quotable section in this post and the only invented one.
+</Callout>
+
+The gap matters more than the missing quotes. The one place in the stack where nobody had an interest in the answer was the one place I couldn't get to. Everything left standing was published by a party with something at stake.
+
+---
+
+## The Claim That Decided It Came From Someone With No Reason To Make It
+
+The plugin's most compelling edition runs on OpenCode. My subscription is with Anthropic. So the whole question reduces to one thing: can those two be connected?
+
+The plugin's README answers honestly, which I respect — *technically possible, but I cannot recommend it*. Still the project's own page.
+
+The answer that settled it came from OpenCode's documentation. Their provider page offers a Claude Pro/Max login option and then says, about their own feature, that **Anthropic explicitly prohibits this** — and notes that the plugins enabling it were removed in a later release.
+
+That's a harness vendor publishing a sentence that makes its own product less useful. Nobody writes that for marketing reasons.
+
+<Callout type="insight">
+When every source benefits from the conclusion it argues for, the only real credibility multiplier left is a source arguing against its own interest.
+</Callout>
+
+Secondary reporting fills in a timeline — server-side token rejection in January, updated terms in February, legal demands in March, a final cutoff in April. I read several accounts of it. I could not confirm the specific terms clause on Anthropic's own consumer-terms page, which carries only a generic line about not sharing credentials. So that timeline stays labeled as reporting, not as something I verified.
+
+The verified part is enough. The flagship edition means running on other subscriptions and setting the Claude one aside. That's the actual price, and it isn't on the page.
+
+---
+
+## What I Could Check Without Trusting Anyone
+
+Two things, and they were cheap for a reason worth naming.
+
+I keep a public repository of the working setup — the principles document, the hooks, the skills, the commands, the per-tool adapters. It exists for other reasons entirely. It also meant that lining the plugin's inventory up against mine was a reading exercise rather than an excavation.
+
+Most of the fifty-four hooks had a counterpart already sitting in it. Something that pulls an idle agent back to work. Something that stops the agent re-reading a file it just read. Something that injects project rules at every prompt. Language-server tools for renames and references. Documentation lookup, browser control, structured search. A planner that interviews before it builds.
+
+And one running the other direction: a guard that refuses to let two sessions commit from the same working directory, enforced as a denied tool call rather than offered as an optional flag. The plugin has no equivalent.
+
+The second check was smaller and more concrete. The lighter edition — the one that installs into a terminal agent I *do* drive daily — links a set of command-line tools into a shared directory and writes configuration blocks into a file I've been editing for months. Either could have collided with something. Neither did. Every name it installs is prefixed, and every block it writes is a new named section.
+
+It does set a ceiling of a thousand parallel threads per session, which for someone who has already watched two long-running sessions eat most of a usage window is the wrong default by about three orders of magnitude.
+
+<Callout type="signal" title="The one direction people get backwards">
+"Claude Code compatible" means the plugin, running inside OpenCode, can read my Claude Code hooks and skills. It does not put any of its features into Claude Code. Adopting it moves the driver's seat.
+</Callout>
+
+---
+
+## Two Things I Actually Wanted
+
+The edit tool is a genuinely good idea. Every line the agent reads comes back tagged with a short content hash; edits reference the tag, and a file that changed underneath rejects the edit instead of corrupting it. The project cites one weak model going from a 6.7% to a 68.3% success rate on that change alone.
+
+I can't use it. I can't patch my agent's edit tool, and the read-before-edit rule I already work under covers a good share of the same failure. So it stays a good idea I have no way to act on — a category I'd rather name than quietly drop.
+
+The other one I just took. Structural code search — matching on syntax trees instead of regular expressions — is a separate open-source tool that installs in one command and requires adopting nothing.
+
+---
+
+## What I Say When Someone Asks Now
+
+That the flagship version costs a subscription I already pay for. That the lighter version is a defensible experiment on a different agent. That almost everything in the feature list has a counterpart I can point at in a public repository.
+
+But mostly I say the part that took longest to see. I was handed a page and asked whether the thing was good. The stars were counted on that page. The feature list was written on it. The critical review was quoted on it. The one conversation happening outside it sat behind a wall I couldn't get through.
+
+Sorting the pile by publisher took twenty minutes and moved the answer more than reading any single item in it.
+
+None of which is a plugin problem. It's the default shape of every tool recommendation that arrives as a link, and the question I should have been asking first was never whether the thing is good.
+
+It's who benefits from me thinking so.
+
+---
+
+*The hands-on version — grading a tool's evidence, then running the two mechanical checks against your own machine — is in [Grade an Agent Tool Before You Install It](/blog/tutorials/grade-an-agent-tool-before-you-install-it).*
