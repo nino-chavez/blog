@@ -1,0 +1,120 @@
+---
+title: "One Component I Didn't Already Have"
+slug: "one-component-i-didnt-already-have"
+publishedAt: "2026-07-31T15:00:00.000Z"
+author: "Nino Chavez"
+status: "published"
+excerpt: "A coding-agent plugin with 66,000 stars keeps landing in my inbox. The version that could actually run on my machine ships eight components. Seven of them my setup already does, can't use, or would pay for twice."
+category: "AI Development"
+tags: ["ai-development", "agentic-systems", "engineering"]
+featured: false
+seo:
+  metaTitle: "Should You Install oh-my-opencode? What It Would Actually Add"
+  metaDescription: "Eleven agents and fifty-four hooks sounds like a lot to gain. Measured against a setup that's already written down, the real delta came to one component."
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+The link keeps arriving. Sometimes with a question mark, sometimes without.
+
+*Have you looked into oh-my-opencode?*
+
+The question sounds like it's about the plugin. It isn't. **A tool's feature list is a claim about what you'd gain, and that claim can't be evaluated without the other half of the subtraction.** Eleven agents and fifty-four hooks is only eleven and fifty-four if you're starting from zero.
+
+I'm not starting from zero. Neither is anyone who has been doing this for a year.
+
+---
+
+## Which Version Could Even Land
+
+Two answers here, because the project ships two very different things and the difference decides most of the question.
+
+The full version runs on OpenCode. I have OpenCode installed; I have not opened it since September. My subscription is with Anthropic, and OpenCode's own documentation says — about its own Claude login option — that **Anthropic explicitly prohibits this**, noting the components that enabled it were removed. So the full version means adopting a dormant tool *and* paying for other subscriptions to feed it.
+
+That's not a close call, and it was never the interesting half.
+
+The interesting half is the smaller version, which installs into a terminal agent I do drive every day. That one had a real path onto my machine. So that's the one I measured.
+
+---
+
+## The Subtraction
+
+The smaller version ships eight components. Here is each one against what that agent already does:
+
+| What it installs | What I already have |
+|---|---|
+| Project-rules injection | Native. The agent already loads my instructions file, and mine is 253 lines |
+| Work-continuation enforcement | I already run my own hook for this, ported months ago |
+| An effort keyword | Native reasoning levels, mine enabled through the top tier |
+| A Windows shell shim | I'm on a Mac |
+| A durable multi-goal loop | Currently broken — its own tracker says the required program isn't shipped |
+| Anonymous telemetry | A cost, not a feature |
+| A comment checker | New. Also the piece users name as a token waster |
+| **Language-server tools** | **Genuinely absent** |
+
+<PullQuote>
+Seven of eight were already running, don't apply to my machine, don't currently work, or bill me for the privilege. The delta was a language server.
+</PullQuote>
+
+That's the answer to the question people are actually asking. Not "is it good" — by most accounts it's very good — but "what would it add to *this*." For me: one component, which I could get other ways.
+
+---
+
+## What the Users Filed
+
+The part of this I got wrong the first time is worth naming, because the fix is a habit rather than an insight.
+
+My first pass read the project's README, its reference documentation, and a video review. All well-made, all published or selected by the project. The conclusion I drew was that independent evidence was scarce.
+
+It wasn't scarce. It was in the issue tracker — **161 issues filed in the last thirty days**, none of them curated, because a maintainer can't quietly delete criticism without the gap showing.
+
+<Callout type="insight">
+The least-controlled writing about a tool usually sits inside the vendor's own repository. Not the README — the part next to it where users describe what broke.
+</Callout>
+
+What's in there changes the shape of the decision more than any feature table:
+
+**A cost floor, carefully scoped.** In December, a user reported a "Hello world" costing 15,000–25,000 tokens. The maintainer quoted it back and agreed: *"It does appear to be using a lot because there are many tools currently provided,"* with deferred loading as a plan. I found no evidence that fix has shipped, and context-consumption bugs were still being filed this week. That figure was measured on the **full** version with its whole tool surface — so it doesn't transfer to the smaller one, and I'm not going to pretend it does. It does tell you what the design optimizes for.
+
+**A stability pattern, which does transfer.** The plugin breaks when its host moves: dead on one host release, working on one point version and broken on the next, task calls failing on a third. Its own auto-update broke subscription authentication two days ago, and that one's still open.
+
+---
+
+## The Part That Retracts My Own Advice
+
+Earlier in this process I said the smaller version was a defensible thing to just try, on the reasoning that trying it was cheap and reversing it was clean.
+
+The second half of that is wrong. There are open reports that uninstall doesn't fully work — on *both* versions. Agents left registered after removal on one, the command never disappearing and configuration surviving on the other.
+
+<Callout type="warning">
+"Cheap to try" is a claim about the exit, not the entrance. Any installer can be run in one command. Check that the uninstall works before you count reversibility as a reason.
+</Callout>
+
+That doesn't make it a bad tool. It makes "just try it" a worse recommendation than I gave, and I'd rather correct it here than have someone act on the old version.
+
+---
+
+## What I Took Anyway
+
+One idea in there is genuinely good and I can't use it: an editor that tags every line it reads with a content hash, so an edit against a file that changed underneath gets rejected instead of corrupting it. The project cites a weak model going from a 6.7% to a 68.3% success rate on that change alone. I can't patch my agent's editor, so it stays filed under good-ideas-I-have-no-lever-on.
+
+The other one I just took. Structural code search — matching on syntax trees rather than regular expressions — turned out to be a separate open-source tool that installs in one command and requires adopting nothing at all.
+
+---
+
+## What I Say When Someone Asks
+
+That it's a serious piece of work and the answer still depends entirely on what you're already running.
+
+If your agent is close to stock, the feature list is mostly real gain and you should probably try it — after checking the uninstall.
+
+If you've spent a year accumulating hooks, rules, and helpers, run the subtraction first. Mine came back at one component out of eight, and I only knew that because my own setup is written down where I can read it.
+
+Which is the uncomfortable part, and it isn't really about this plugin. Everyone asking me whether the tool is good is asking a question I can't answer for them. The one that decides it is the one nobody enjoys: *what am I actually running right now?*
+
+Most of the people forwarding me the link can't answer that. Neither could I, two years ago.
+
+---
+
+*The hands-on version — running the subtraction and querying a project's issue tracker before you install anything — is in [Grade an Agent Tool Before You Install It](/blog/tutorials/grade-an-agent-tool-before-you-install-it).*

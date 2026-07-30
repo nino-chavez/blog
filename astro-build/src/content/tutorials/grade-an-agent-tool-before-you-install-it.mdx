@@ -3,95 +3,75 @@ title: "Grade an Agent Tool Before You Install It"
 slug: "grade-an-agent-tool-before-you-install-it"
 publishedAt: "2026-07-31T15:30:00.000Z"
 author: "Nino Chavez"
-excerpt: "Sort a tool's evidence by who published it, hunt for the one source arguing against its own interest, diff its feature list against your own harness, and check for collisions on your real machine — before anything gets installed. Companion workshop to Everyone Who Told Me It Was Good Was the Project."
+excerpt: "Four checks that run before anything touches your machine: enumerate what you already have, subtract it from what the tool ships, query the issue tracker its users write, and confirm the uninstall works. Companion workshop to One Component I Didn't Already Have."
 category: "Engineering"
 tags: ["agentic-systems", "tutorial", "engineering"]
 duration: "40 min"
 difficulty: "intermediate"
 prerequisites:
   - "A specific agent tool, plugin, or extension you are considering installing"
-  - "git and the GitHub CLI (`gh`) installed and authenticated"
-  - "An enumerated list of your own harness — if you don't have one, run Audit Your AI Coding Harness in Four Exercises first"
-  - "Read the companion post: Everyone Who Told Me It Was Good Was the Project"
+  - "The GitHub CLI (`gh`) installed and authenticated"
+  - "An enumerated list of your own setup — if you don't have one, run Audit Your AI Coding Harness in Four Exercises first"
+  - "Read the companion post: One Component I Didn't Already Have"
 objectives:
-  - "Build a source ledger that sorts every claim by who published it"
-  - "Locate the adverse-interest source that actually settles a licensing or auth question"
-  - "Diff a tool's advertised feature list against your existing setup, item by item"
-  - "Check a real installer's filenames and config writes against your machine before running it"
+  - "Enumerate your current setup so an addition can actually be measured"
+  - "Subtract that baseline from the tool's component list into three buckets"
+  - "Query a project's issue tracker for the failure modes its documentation omits"
+  - "Confirm the uninstall works before counting reversibility as a reason to try"
 companionOf:
   type: blog
-  slug: everyone-who-told-me-it-was-good-was-the-project
+  slug: one-component-i-didnt-already-have
 ---
 
 import { Exercise } from '@/components/tutorials/Exercise';
 import { Template } from '@/components/tutorials/Template';
 import { Checkpoint } from '@/components/tutorials/Checkpoint';
 
-# Most Tool Recommendations Arrive as a Link, and the Link Is the Vendor
+# A Feature List Is Half a Subtraction
 
-In [Everyone Who Told Me It Was Good Was the Project](/blog/everyone-who-told-me-it-was-good-was-the-project), a 66,000-star agent plugin turned out to have almost no evidence behind it that the project hadn't published itself — including the one critical review, which the README quoted approvingly.
+In [One Component I Didn't Already Have](/blog/one-component-i-didnt-already-have), a plugin advertising eleven agents and fifty-four hooks came out, measured against an existing setup, at a delta of one component.
 
-This workshop is the repeatable half. You'll run the same four checks against whatever tool is currently sitting in your inbox. None of them requires installing it.
+Nothing in that result was about the plugin's quality. It was about the other half of the subtraction — and that half lives on your machine, not on the project's page.
+
+This workshop runs the four checks against whatever tool is currently in your inbox. None of them requires installing it.
 
 A few terms, defined once:
 
-- **Harness** — everything wrapped around the model: instructions, skills, commands, hooks, memory files, tool connections. The thing a plugin claims to improve.
-- **Adverse-interest source** — a claim published by a party that loses something by publishing it. A vendor documenting its own product's limitation is the shape to look for.
-- **Source ledger** — a plain table of every claim you've been handed and who owns the page it appeared on.
-- **Collision check** — comparing an installer's filenames and configuration writes against your actual machine before you let it run.
-
-The whole sequence is read-only until the last exercise, and that one only inspects.
+- **Baseline** — everything already wrapped around your model: instructions, skills, commands, hooks, memory files, tool connections.
+- **Delta** — what the tool would add *after* subtracting your baseline. The only number that answers "should I install this."
+- **Issue tracker** — the part of a project's repository the maintainer cannot curate without the gap being visible.
+- **Reversibility** — whether the uninstall actually removes what the install added. Frequently assumed, rarely checked.
 
 ---
 
-<Exercise number={1} title="Sort the pile by publisher" duration="10 min">
+<Exercise number={1} title="Enumerate your baseline" duration="10 min">
 
 ## Why this matters
 
-Persuasiveness and independence are unrelated properties, and a good landing page deliberately blurs them. A star count, a feature table, a benchmark, and a testimonial wall all feel like four sources. Frequently they're one file in one repository, written by one person.
+You cannot measure an addition without knowing the starting number. This is the check people skip, and skipping it is what makes every feature list look impressive — a list of fifty-four things is fifty-four gains only against zero.
 
-The sort is trivial. It's skipping the sort that costs you.
+It is also the check that pays off permanently. You do it once, and every future tool evaluation becomes a reading exercise.
 
 ## The structure
 
-Start with the repository itself, because identity is the first thing to get wrong. Projects fork, rename, and go stale, and a fork's page looks exactly like the original's:
+Whatever your agent loads at startup, get it into one readable list: instruction files, skills, commands, hooks, tool connections, and any helper binaries on your path.
 
 ```bash
-gh api repos/<owner>/<repo> --jq '{
-  fork: .fork,
-  parent: .parent.full_name,
-  stars: .stargazers_count,
-  pushed: .pushed_at,
-  archived: .archived,
-  license: .license.spdx_id
-}'
+ls ~/.claude/skills/ ~/.claude/commands/ ~/.claude/hooks/ 2>/dev/null
+ls -1 ~/.local/bin
 ```
 
-`fork: true` with a `parent` means you're reading a copy. A `pushed` date more than a few months old on a fast-moving tool means the page is describing something that no longer ships.
+If you followed [Audit Your AI Coding Harness](/blog/tutorials/audit-your-ai-coding-harness), its report is your baseline and you can skip ahead.
 
-Then build the ledger. One row per claim you've been handed.
-
-<Template title="Source ledger" description="One row per claim; the Owner column is the whole point">
-
-| Claim | Where I read it | Who owns that page | Independent? |
-|---|---|---|---|
-| 54 lifecycle hooks | Project README | The project | No |
-| 66,836 stars | GitHub repo page | Measured by GitHub, displayed by the project | Partly |
-| "Cancelled my Cursor subscription" | README testimonials block | The project, quote selected by maintainer | No |
-| "Burns tokens at an alarming rate" | Video review | Third party — but listed in the project's own reviews section | Filtered |
-| Users debating whether it helps | Forum thread | Nobody | Yes |
-
-</Template>
-
-The last column is the only one that matters. Fill it in honestly, including "filtered" for third-party material the vendor chose to feature.
+The durable version of this is a repository rather than a command. Mine is public, which is the only reason the evaluation in the companion post took twenty minutes instead of an afternoon.
 
 ## Your turn
 
-Build the ledger for your candidate tool. Aim for every claim that would influence your decision, not just the headline ones.
+Produce your list. Then answer one question about each entry: what does this do, in a sentence, without looking it up?
 
 <Checkpoint>
 
-You should now have a table where the **Independent?** column is mostly "No." That's the normal result, not a red flag about this particular tool — it's what a product page is for. If you have three or more genuinely independent rows, you're in unusually good shape and can weight them heavily.
+You should have a list where you can name the function of every item. Anything you can't explain is a finding on its own — it's loaded into every session and you don't know why.
 
 </Checkpoint>
 
@@ -99,81 +79,45 @@ You should now have a table where the **Independent?** column is mostly "No." Th
 
 ---
 
-<Exercise number={2} title="Hunt the adverse-interest claim" duration="8 min">
+<Exercise number={2} title="Subtract the baseline from the tool" duration="12 min">
 
 ## Why this matters
 
-When every source benefits from the conclusion it argues for, one category still carries weight: a party publishing something that costs it. A vendor documenting a limitation of its own product has no marketing incentive to do so, which is exactly why the sentence is worth more than the entire testimonial wall above it.
-
-For agent tooling, the highest-value adverse-interest claims are almost always about authentication, licensing, and terms — because those are where a tool's pitch quietly assumes something it doesn't control.
+The delta is the decision. Everything else in this workshop refines it.
 
 ## The structure
 
-Three places to look, in order of usefulness:
-
-1. **The host platform's own docs**, not the plugin's. If a plugin runs on top of another tool, read that tool's documentation about the thing the plugin depends on. This is where you find sentences like "X explicitly prohibits this," published by the party that would rather it didn't.
-2. **The license file, not the badge.** GitHub renders `NOASSERTION` for anything it can't match to a standard license. A project describing itself as open source under a bespoke license is a fact worth surfacing before it touches client work.
-
-   ```bash
-   gh api repos/<owner>/<repo> --jq '.license'
-   ```
-3. **Terms and changelogs at the source.** If reporting says a policy changed on a date, open the policy page yourself. If the clause isn't there, the claim gets labeled as reporting — not dropped, but not promoted either.
-
-## Your turn
-
-Find at least one adverse-interest claim about your candidate, or establish that none exists. Write down which of the three places it came from.
-
-<Checkpoint>
-
-You should be able to finish this sentence with something concrete: *"The claim that most changes my decision is ____, and it was published by ____, who does not benefit from it."*
-
-If you can't finish it, that's a finding too. It means your decision currently rests entirely on material the vendor controls — which may still be fine, but you now know it.
-
-</Checkpoint>
-
-</Exercise>
-
----
-
-<Exercise number={3} title="Diff the feature list against your own" duration="12 min">
-
-## Why this matters
-
-A long feature list reads as a long list of things you'd gain. Usually it isn't. Much of it is a rename of something already running in your setup, and you cannot tell which parts without both inventories side by side.
-
-This is also the exercise that fails if you skipped the prerequisite. You can't diff against an inventory you don't have.
-
-## The structure
-
-Get the tool's side from its reference documentation rather than its README — the README sells, the reference enumerates. Most projects publish something like `docs/reference/features.md`:
+Pull the tool's component list from its reference documentation rather than its README — the first enumerates, the second sells. Many projects publish something like `docs/reference/features.md`:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/<owner>/<repo>/<branch>/docs/reference/features.md
 ```
 
-Get your side from wherever your harness is enumerated. If you followed [Audit Your AI Coding Harness](/blog/tutorials/audit-your-ai-coding-harness), the report is your inventory. Otherwise:
+Then walk it and mark each item one of three ways:
 
-```bash
-ls ~/.claude/skills/ ~/.claude/commands/ ~/.claude/hooks/ 2>/dev/null
-```
+<Template title="The three buckets" description="Every component lands in exactly one">
 
-Then walk the tool's list and mark each item one of three ways:
+| Bucket | Meaning | What it does to the decision |
+|---|---|---|
+| **Native** | Your setup or your agent already does this | Removes it from the gain column entirely |
+| **New** | Genuinely absent from your baseline | This is the delta. The only column that argues for installing |
+| **Blocked** | New, but unusable for a reason unrelated to quality | Wrong platform, broken upstream, needs a subscription you don't hold, requires patching something you don't control |
 
-- **Covered** — you have something that does this, and you can name it
-- **Absent** — genuinely new to you
-- **Blocked** — new, and you can't use it for a reason unrelated to whether it's good
+</Template>
 
-The third category is the one people skip, and it's frequently the most interesting. A feature you can't adopt because it requires patching a tool you don't control is different from a feature you evaluated and declined.
+**Blocked** is the bucket people collapse into the other two, and it distorts the answer in both directions. A component that is excellent and unusable is not a gain, and it is also not a criticism of the tool.
+
+Then run it backwards: what does your baseline do that the tool's list never mentions? That column is real and nobody publishes it for you.
 
 ## Your turn
 
-Produce the three-way split for every item on the tool's reference list. Then check the reverse direction: what does *your* setup do that the tool's list doesn't mention at all?
+Produce the three-way split, then the reverse column. Count the **New** bucket.
 
 <Checkpoint>
 
-You should have a count for each bucket and be able to name your covering item for every **Covered** row. "I think I have something like that" doesn't count — if you can't name it, mark it **Absent** and be pleasantly surprised later.
+You should be able to name your covering item for every **Native** row. "I think I have something like that" doesn't count — if you can't name it, it belongs in **New**.
 
-The reverse-direction check should produce at least one item. If it produces none, that's a real signal in the tool's favor.
+If **New** is large, the tool is a genuine addition and the rest of this workshop is about risk. If **New** is one or two items, ask whether those items are available on their own before you adopt everything attached to them.
 
 </Checkpoint>
 
@@ -181,49 +125,87 @@ The reverse-direction check should produce at least one item. If it produces non
 
 ---
 
-<Exercise number={4} title="Collision-check before you run anything" duration="8 min">
+<Exercise number={3} title="Query the issue tracker" duration="10 min">
 
 ## Why this matters
 
-Installers write files and edit configuration. Most do it politely. The ones that don't will shadow a command you rely on or rewrite a settings block you've been tuning for months, and you'll find out days later when something behaves oddly.
+A project's documentation describes what it does when it works. Its issue tracker describes what it does on other people's machines. The second is written by users, and unlike testimonials it can't be curated without the absence being obvious.
 
-The installer's own documentation almost always tells you exactly what it writes. Reading that page takes five minutes and turns "I hope this is fine" into a checked claim.
+This is also the fastest read of a project's health that exists, and it's entirely mechanical.
 
 ## The structure
 
-Find the section of the install guide that lists what lands on disk. Then check each location against your machine.
-
-**Command-name collisions.** Compare what it links against what you already have:
+Three queries. Volume, recency, and your own failure modes.
 
 ```bash
-# what you have
-ls -1 ~/.local/bin
+# how much is open, and how fast is it arriving
+gh api "search/issues?q=repo:<owner>/<repo>+is:issue+is:open&per_page=1" --jq '.total_count'
+gh api "search/issues?q=repo:<owner>/<repo>+is:issue+created:>=<30-days-ago>&per_page=1" --jq '.total_count'
 
-# what it installs — from the install guide, not from guessing
-# then look for any name appearing in both lists
+# what users argue about most
+gh api "search/issues?q=repo:<owner>/<repo>+is:issue&sort=comments&order=desc&per_page=25" \
+  --jq '.items[] | "\(.comments)c \(.state) #\(.number) \(.title)"'
 ```
 
-Every name prefixed with the project's own slug is a good sign. A bare, generic name is worth pausing over.
+Then search the tracker for the things that would specifically hurt *you* — your platform, your host tool's version, your cost sensitivity, your workflow.
 
-**Configuration writes.** If the installer edits a config file, read your current version first:
+Read for patterns rather than counts. A high open count on a popular project mostly means it's popular. What matters is shape:
 
-```bash
-grep -nE '^\[' ~/.codex/config.toml     # existing section headers
-```
-
-New, uniquely-named sections are additive and safe to reverse. Rewrites of sections you already use are not. Also look specifically for values that set concurrency, permissions, or approval behavior — installers frequently ship aggressive defaults that were tuned for the author's machine and budget, not yours.
-
-**The uninstall path.** Confirm it exists and read what it removes before you need it.
+- Does it break when its host releases a new version? Search the host's version numbers.
+- Do its own updates break things? Search `auto-update` and `after updating`.
+- Are the most-discussed threads features or the same bug recurring?
 
 ## Your turn
 
-Produce a one-line verdict for each of the three: name collisions, config writes, uninstall. Then list any default value you would change immediately after installing.
+Run the three queries, then two searches specific to your situation. Write down the pattern in one sentence.
 
 <Checkpoint>
 
-You should be able to say, without having run the installer: which files it creates, which existing file it modifies, whether any name it installs shadows one of yours, and how to reverse it.
+You should have one sentence of the form: *"The recurring failure mode is ____, and it would/wouldn't hit me because ____."*
 
-If the install guide doesn't tell you enough to answer those, that absence is your finding. Installers that won't say what they write are the ones most worth not running.
+If your searches return nothing, say that plainly rather than treating silence as a clean bill of health. A young project has a quiet tracker for reasons that have nothing to do with quality.
+
+</Checkpoint>
+
+</Exercise>
+
+---
+
+<Exercise number={4} title="Confirm the exit before the entrance" duration="8 min">
+
+## Why this matters
+
+"It's cheap to try" is a claim about uninstalling, not installing. Every installer is one command. The exit is the part nobody tests, and it's the part that decides whether trying costs you an afternoon or a weekend.
+
+## The structure
+
+Read the install guide's own account of what lands on disk, and check each location against your machine *before* running anything:
+
+```bash
+ls -1 ~/.local/bin                       # names it might shadow
+grep -nE '^\[' <the-config-file-it-edits>  # sections it might rewrite
+```
+
+Prefixed names and new named sections are additive and reversible. Bare generic names and rewrites of sections you already use are not.
+
+Then do the thing almost nobody does: **search the issue tracker for the uninstall itself.**
+
+```bash
+gh api "search/issues?q=repo:<owner>/<repo>+is:issue+uninstall+OR+cleanup+OR+remove" \
+  --jq '.items[] | "\(.state) \(.created_at[0:10]) #\(.number) \(.title)"'
+```
+
+Open reports that removal leaves things behind are worth more than the entire installation guide. They tell you the true cost of being wrong.
+
+## Your turn
+
+Write a one-line verdict for each: name collisions, config writes, and whether uninstall is reported to work.
+
+<Checkpoint>
+
+You should be able to say, without having installed anything: which files it creates, which existing file it modifies, whether any name shadows one of yours, and whether other people have successfully removed it.
+
+If the install guide won't tell you enough to answer those, that absence is your finding. Installers that won't say what they write are the ones most worth not running.
 
 </Checkpoint>
 
@@ -235,19 +217,19 @@ If the install guide doesn't tell you enough to answer those, that absence is yo
 
 Four checks, none of which required installing the thing:
 
-- A source ledger that separates persuasive material from independent material
-- A hunt for the one claim published against its author's own interest
-- A three-way inventory diff — covered, absent, blocked — in both directions
-- A collision check against your real filenames and config, read from the installer's own documentation
+- A baseline you can read, which turns every future evaluation into a lookup
+- A three-bucket subtraction — native, new, blocked — run in both directions
+- Three mechanical queries against the writing the vendor doesn't control
+- An exit check, before the entrance
 
-The output is a decision you can defend to someone who disagrees with it, which is a different artifact from a decision you feel good about.
+The output is a number: how many components this tool would actually add to *your* setup. That number is the decision, and it is different for every person who asks you whether the tool is good.
 
 ---
 
 ## Where This Is Heading
 
-The uncomfortable part of this sequence is exercise 3, and not for the reason it looks like. Diffing against your own harness only works if your harness is written down somewhere. Mine is, in a public repository, and that's the only reason the comparison took twenty minutes instead of an afternoon.
+Exercise 1 is the one that hurts, and not because it's difficult.
 
-If exercise 3 was the hard one for you, the tool was never the problem.
+Most people cannot list what their agent loads at startup. The list has grown by accretion — a hook added during one bad afternoon, a rule added after one bad review, three skills installed and never invoked since. Every one of them still loads.
 
-Which raises a question I don't have a clean answer to yet: at what point does an inventory large enough to make this check easy become the thing that needs auditing? A setup you can diff against anything is also a setup nobody, including you, has read end to end recently.
+Which means the honest version of "should I install this" usually surfaces a second question underneath it, and it's the less comfortable one: *what is already in here that I would not install today?*
