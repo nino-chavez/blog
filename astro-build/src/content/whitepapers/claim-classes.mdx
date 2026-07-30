@@ -210,7 +210,7 @@ There are two tiers, and the cheap one delivers a surprising fraction of the val
 |---|---|---|
 | What it checks | A derivation was *declared* for the figures in this document | The declared derivation, re-executed, produces the stated figure |
 | Catches | Figures with no story at all | Figures whose story does not hold |
-| Misses | A wrong figure with an honest, wrong formula beside it | Figures deliberately phrased to avoid the contract |
+| Misses | Most undeclared figures, by design — see 8.1; plus any wrong figure with an honest, wrong formula beside it | Figures deliberately phrased to avoid the contract |
 | Cost | Low — a lint over shipping documents | High — declaration layer, addressable sources, execution |
 | Verifies the number? | No | Yes, as conformance to the declared process |
 
@@ -218,13 +218,27 @@ There are two tiers, and the cheap one delivers a surprising fraction of the val
 
 The cheapest useful check in this entire document, and almost always available because most pipelines already contain a prose reviewer asking the right question with no executable half.
 
-**The rule:** a shipping deliverable carrying derived figures — a workable trigger is two or more percentage figures — must declare somewhere how they were produced, or it is blocked. An individual figure with nothing attributing it raises a warning.
+**The rule in its general form:** a shipping deliverable carrying derived figures must declare how they were produced, or it is blocked. An individual figure with nothing attributing it raises a warning.
 
-**The design detail that decides whether it works:** the predicate must not be lexical. A document that merely contains the word "methodology" in ambient prose has not declared anything, and a naive keyword check passes it. The declaration has to be structurally deliberate — a derivation note adjacent to the figures, or an actual methodology section — or the gate degrades into a word search and starts certifying documents it never examined.
+**The rule as actually implemented, which is narrower — and the narrowing is the interesting part.** The working version of this gate blocks on a conjunction of three conditions, not two:
 
-**What tier 1 buys:** it converts the failure from *silent* to *stated*. A number with a declared derivation can be argued with by a reader who knows the domain. A number with nothing attached is indistinguishable from a number that was checked. That distinction is most of the practical value, and it costs a lint.
+| # | Condition |
+|---|---|
+| 1 | The document carries two or more percentage figures |
+| 2 | No structural derivation declaration appears anywhere in it |
+| 3 | At least one line pairs a percentage with an admission that part of the set is uncategorized, unclassified, or unverified |
 
-**What tier 1 does not buy:** correctness. It is a completeness check on the *paperwork*, not a verification of the *value*. Reporting it as verification reproduces the original error one level up.
+Condition 3 is doing most of the work, and its absence is the gate's largest miss: a document with ten undeclared percentages and no such admission clears the blocking check entirely. It can raise only the warning in check two, and only for blocks carrying no link, source, or footnote at all.
+
+**Why narrow it that far.** This is the precision-recall tradeoff from section 3.1 applied to the highest-stakes class. A gate blocking every document with two undeclared percentages fires on nearly every document. A gate that fires on everything is bypassed within a week, and a bypassed gate is worse than no gate, because the dashboard still shows it. Condition 3 selects the shape where the skeptical-reader question is most obviously unanswered — *if you've admitted you can't classify part of the set, how is the breakdown known?* — and accepts a large miss rate to buy a near-zero false-positive rate.
+
+**The design detail that decides whether it works at all:** the declaration predicate must not be lexical. A document merely containing the word "methodology" in ambient prose has declared nothing, and a naive keyword check passes it. The declaration must be structurally deliberate — a derivation note adjacent to the figures, or an actual methodology heading — or the gate degrades into a word search and begins certifying documents it never examined.
+
+**What tier 1 buys:** for the shapes it covers, it converts the failure from *silent* to *stated*. A number with a declared derivation can be argued with by a reader who knows the domain. A number with nothing attached is indistinguishable from a number that was already checked. Buying that distinction for the cost of a lint is a good trade even at low recall.
+
+**What tier 1 does not buy:** correctness, and — at the recall the working version runs — not even broad coverage of undeclared figures. It is a completeness check on the *paperwork* for one selected shape, not a verification of the *value*. Reporting it as verification reproduces the original error one level up, which is the specific way cheap gates become dangerous: they are cited as evidence at the scope of their name rather than the scope of their predicate.
+
+**How to grow it honestly.** Recall goes up by adding conditions like condition 3 one at a time — each a new shape where the derivation question is obviously unanswered — measuring the false-positive rate of each against real documents before it ships. What does not work is relaxing the conjunction to raise recall in one move. That produces the fires-on-everything gate, and the resulting bypass costs more than the coverage gained.
 
 ## 8.2 Tier 2 — the re-derivation gate
 

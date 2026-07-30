@@ -167,15 +167,21 @@ That prose reviewer already asked the right question. It just had no teeth. Givi
 
 Here's what it actually does:
 
-- A shipping document carrying two or more percentage figures, with no declaration anywhere of how they were derived, is **blocked**.
-- A figure sitting in prose with nothing attributing it gets a **warning**.
-- Merely using the word "methodology" somewhere in the document does not satisfy it. Ambient prose that happens to contain the word still blocks. The declaration has to be deliberate — a derivation note next to the figures, or a real methodology section.
+- It **blocks** on one specific shape: two or more percentage figures, no declared derivation anywhere in the document, *and* a line where a percentage sits next to an admission that part of the set is uncategorized. Percentages of an incomplete denominator, with no stated method.
+- Any block of prose containing a figure with no link, source, footnote, or *illustrative* marker gets a **warning**.
+- Using the word "methodology" somewhere does not satisfy the declaration. The test is structural, not lexical — a derivation note next to the figures, or an actual methodology heading. Ambient prose containing the word still fails.
+
+I want to flag how I got that list wrong, because it's the same failure the post is about.
+
+My first draft of this section said the gate blocks on two conditions: percentages present, derivation absent. Then I went and read the predicate. There's a third condition, and it's doing most of the work. A document with ten undeclared percentages and no admission of an incomplete set clears the blocking check completely.
 
 <Callout type="signal" title="What it still doesn't do">
-It doesn't check the number. It checks that a derivation was *declared*. A wrong figure with an honest, wrong formula written beside it passes clean. What changed is that a figure with no story at all can't ship quietly anymore.
+It doesn't check the number. It checks that a derivation was *declared*, and only in one narrow shape. A wrong figure with an honest, wrong formula beside it clears everything. What changed is that one specific silent failure — a breakdown of a set you've admitted you can't fully classify — now has to state its method or stop.
 </Callout>
 
-That's a much smaller claim than "we verify our numbers," and it's the true one. Moving a defect from invisible to declared is not the same as catching it. It just puts the number somewhere a reader can argue with it.
+The narrowness is deliberate, and worth defending. A gate that blocked every document with two undeclared percentages would fire on nearly everything, and a gate that fires on everything gets routed around within a week. Under-matching on purpose is how a check survives contact with people who have deadlines.
+
+But it means the honest claim is much smaller than "we verify our numbers." Moving one defect from invisible to declared is not the same as catching it. It puts a number somewhere a reader can argue with it, and only that number.
 
 Which is, I think, most of what verification apparatus actually buys you before it gets expensive — and the reason I wrote the [longer breakdown of the four claim classes](/blog/whitepapers/claim-classes), where the cost model for the expensive half lives.
 
