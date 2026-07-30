@@ -1,0 +1,182 @@
+---
+title: "Every Link Resolves. Nothing Checks the Number."
+slug: "every-link-resolves-nothing-checks-the-number"
+publishedAt: "2026-07-30T16:00:00.000Z"
+author: "Nino Chavez"
+status: "published"
+excerpt: "A strategy document I ship can carry an invented figure through every automated check I built, as long as the sentences around it are well-formed and the links resolve. I went looking for that hole on purpose. Then I decided not to close it."
+category: "AI Development"
+featureImage: "/images/generated/every-link-resolves-nothing-checks-the-number.webp"
+tags: ["ai-development", "ai-governance", "deep-dive"]
+featured: false
+seo:
+  metaTitle: "Every Link Resolves. Nothing Checks the Number."
+  metaDescription: "A citation says where a number came from. A verification says it's right. I audited my own document pipeline and found it only ever did the first one."
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+A strategy document I hand to a stakeholder can carry a completely invented figure through every automated check I've built.
+
+Not because the checks are broken. Because none of them was ever pointed at the figure.
+
+They confirm the file exists. They confirm the test ran. They confirm the link at the end of the sentence resolves to a live page. And then the number sits in the middle of all that green, unexamined, and ships.
+
+I didn't stumble into this. I went looking, because someone else's vocabulary made it possible to look.
+
+---
+
+## The Talk That Handed Me the Question
+
+Vinoo Ganesh — CEO and co-founder of Kepler, a company building AI research tooling for financial services — gave a talk that went up this week on the AI Engineer channel, about what it takes to make an AI system's output trustworthy in a domain where a wrong number is a regulatory event, not a typo.
+
+The line I keep coming back to isn't a quote. It's the shape of his argument, compressed: **AI turned a writing problem into a reading problem.**
+
+Producing the work product — the memo, the model, the code, the deck — got very cheap very fast. Establishing that the produced thing is *correct* did not get cheaper at all. So the bottleneck moved. It used to be in the writing. Now it's in the reading, and almost nobody restaffed for that.
+
+Then he separates two things I had been treating as one:
+
+- A **citation** tells you where a value came from. It's an after-the-fact audit trail. Useful. Roughly half the job.
+- A **verification** is a repeatable check that the value is *right* — re-derivable from the source without asking a probability machine a second time.
+
+<PullQuote>
+A citation tells you where a number came from. A verification tells you it's right. Everything I built does the first one.
+</PullQuote>
+
+That distinction is the whole post. It sounds like a hair being split. It isn't. A citation and a verification feel like the same act when you're reading fast, and they're about half a job apart.
+
+His second claim is the one that should make anyone running evals uncomfortable: you cannot evaluate your way from a non-deterministic model to a deterministic output. A model tuned to very high extraction accuracy still emits wrong values at its error rate. In a domain where the wrong value is a compliance event, that rate isn't a score on a dashboard. It's the entire problem restated in decimal form.
+
+His answer, in his own writing about the system: *"Retrieval is a job for a query engine. Computation is a job for a formula engine."* The model decides what to compute and never performs the computation. Anything that fails an independent check gets stripped before a human ever sees it.
+
+---
+
+## So I Pointed It at My Own Work
+
+I don't extract revenue figures out of filings. I produce strategy documents, prototypes, decision memos, handoff notes — the paper trail around agent-assisted product work. Importing "the model must never write the number" literally would point at machinery I have no demand for.
+
+The useful question was narrower: **which claims in a document I ship carry that same risk profile?**
+
+Four, it turns out, and they're not covered anywhere near equally.
+
+| The claim | Where it shows up | What actually catches a wrong one |
+|---|---|---|
+| Counts and version numbers | Living docs — READMEs, methodology files, agent instructions | A checker that re-derives each count from a located source |
+| External citations | Research and strategy documents | A link checker, which proves the URL loads |
+| "This feature is done" | Status boards, roadmaps, registers | A machine that re-derives status from the repository |
+| **A derived figure in a stakeholder document** | Strategy docs, decision memos, prescriptions | **Nothing. Judgment only.** |
+
+Three of four have a machine behind them. The fourth — the one that would actually embarrass me in a room — has a person squinting at it.
+
+---
+
+## What I Found When I Checked Mechanically
+
+I didn't reason my way to that table. I went and read the code, because a system's claim to have verified something is not verification.
+
+**The engine that decides whether work is done runs nine kinds of check.** Does this file exist. Is this file absent. Does this string appear. Does it not appear. How many times. Does the database have this table. This column. Did a commit message match. Did a named scenario pass.
+
+Every single one answers *does this artifact exist* or *did this run pass*. Not one of them binds a stated figure to a re-derivation of that figure.
+
+**The link checker proves resolution, not correctness** — and says so in its own documentation. That's not a bug, it's the honest scope. But a live link underneath a wrong claim is still a live link. The green checkmark next to it means the internet responded, not that the sentence is true.
+
+**The closest thing I have to a claim checker is deliberately narrow.** It handles five fixed shapes — how many of this thing exist, which version is pinned, is this count current — each against exactly one located source. It under-matches on purpose, so it doesn't manufacture noise. It was never designed to look at a number in a paragraph.
+
+And then the part that actually stopped me:
+
+<Callout type="warning" title="The two checks that could have caught it">
+When I ran this audit, the only two reviewers positioned to catch a fabricated figure were the two that had never been written as code. They existed as prose — instructions to a model. One of them asked exactly the right question: *can a skeptical reader see how this number was produced?* And it was asked, and answered, by the same class of system that produced the answer.
+</Callout>
+
+Stated without hedging: a document could carry a fabricated figure through every gate I built, provided the surrounding prose was well-structured and any URLs near it resolved.
+
+That is precisely the failure the talk's first tenet exists to close.
+
+---
+
+## This Is Not the Drift Problem
+
+I've written before about artifacts that [quietly stop being true](/blog/the-only-thing-that-cant-lie) — the test that still asserts a page layout that got redesigned, the comment describing a function two refactors ago. I built a whole [ranking of which artifacts can lie](/blog/whitepapers/lie-surface) and how loudly they fail when they do.
+
+This is a different animal, and conflating them is what let me miss it for so long.
+
+A document that drifts **was true once.** Its claim had a real source, and the source moved. That's detectable in principle: you re-check the claim against the source and watch them diverge.
+
+A fabricated figure **was never true.** There is no earlier state where it matched. Nothing diverged, because nothing was ever bound.
+
+Every drift detector I own works by comparing a claim to the thing it came from. Point one at an invented number and it finds no source to compare against — so it either says nothing, or it goes looking for a source and finds a plausible-looking citation sitting right there, resolving perfectly.
+
+Drift is decay. Fabrication is a claim born unattached. They look identical on the page and they need completely different machinery.
+
+---
+
+## Verification Is Not Ground Truth
+
+The point from the talk most likely to get skipped is the one I found most useful, and it's the one that keeps this from becoming a fantasy about objective correctness.
+
+Two desks can hold identical data and take opposite positions. Both can be right. What gets verified is not correspondence to a universal fact — it's **conformance to your organization's own declared rules.** Its definitions. Its nouns and verbs.
+
+<Callout type="insight">
+You're not checking whether the number is true in some cosmic sense. You're checking whether it was derived the way your organization says that kind of number gets derived.
+</Callout>
+
+That reframe is what makes value-checking tractable at all. "Is this figure correct" is unanswerable in the general case. "Was this figure produced by the formula we wrote down, from the source we declared" is a yes or no, and a machine can hold the yes or no.
+
+It also means the first cost isn't engineering. It's declaring the definitions — writing down what you actually mean by the terms you've been using loosely for years. Most organizations discover, at that moment, that three departments have three different formulas for the same word.
+
+---
+
+## The One Place I Was Ahead
+
+I want to be honest about where the comparison ran the other way, because otherwise this reads as a system getting graded and losing.
+
+Guaranteeing that each extracted value is right says nothing about whether the **set** of values is complete.
+
+You can verify every figure in a document perfectly and still have shipped a document missing the three figures that would have changed the decision. A true check of the wrong set still lies. It's a harder problem than per-value correctness, because per-value correctness at least tells you what to check — the thing that's on the page. Completeness requires knowing what *should* have been on the page, and nothing on the page can tell you that.
+
+My pipeline has real machinery for that question — a registry of what has to be proven for a piece of work to count as proven, with a rule that a proof's evidence has to come from a source the claim doesn't control. That's the same instinct as "the model emits a reference, never the value," generalized from one value to N claims, and then extended to the question of where the list of N comes from.
+
+Both halves matter. Neither substitutes for the other.
+
+---
+
+## And I'm Not Building It
+
+Here's where I land, and it's the part I expect to get argued with.
+
+I found the hole, I can describe the real fix precisely, and I'm not building it.
+
+The fix isn't mysterious. Every derived figure in a shipping document declares its source and its derivation — source artifact, extraction, formula — in a machine-readable file next to it. A check re-derives and diffs. A figure that fails re-derivation is *blocked*, not shipped with a footnote. That last part is the meaningful upgrade: strip it before a human sees it, rather than flag it and let the author decide.
+
+Two reasons I'm holding.
+
+**I don't build the machine until the failure happens twice, and at least once for real.** This has happened once, in a talk, in someone else's domain, where a wrong number is a compliance event. In mine it's an embarrassing slide. Those aren't the same stakes, and building for the first one because the second one was described vividly is how systems get heavy.
+
+**And the cure is plausibly worse than the disease.** Most of my documents carry a handful of derived figures. A declare-a-formula-for-every-number contract could easily cost more, across every document forever, than the class of error it prevents.
+
+The trigger I'm waiting on is a specific one: a document ships with a wrong derived figure and nothing catches it. Then it's happened twice, and the second time is the one that counts.
+
+---
+
+## The Cheap Half Shipped the Same Morning
+
+There was a smaller move available, and I want to be accurate about what happened to it, because it complicates the tidy version of this story.
+
+That prose reviewer already asked the right question. It just had no teeth. Giving *that specific question* a mechanical half is a far smaller build than a provenance substrate — and it landed within hours of the audit being written down, with the audit's own finding quoted in the code's header.
+
+Here's what it actually does:
+
+- A shipping document carrying two or more percentage figures, with no declaration anywhere of how they were derived, is **blocked**.
+- A figure sitting in prose with nothing attributing it gets a **warning**.
+- Merely using the word "methodology" somewhere in the document does not satisfy it. Ambient prose that happens to contain the word still blocks. The declaration has to be deliberate — a derivation note next to the figures, or a real methodology section.
+
+<Callout type="signal" title="What it still doesn't do">
+It doesn't check the number. It checks that a derivation was *declared*. A wrong figure with an honest, wrong formula written beside it passes clean. What changed is that a figure with no story at all can't ship quietly anymore.
+</Callout>
+
+That's a much smaller claim than "we verify our numbers," and it's the true one. Moving a defect from invisible to declared is not the same as catching it. It just puts the number somewhere a reader can argue with it.
+
+Which is, I think, most of what verification apparatus actually buys you before it gets expensive — and the reason I wrote the [longer breakdown of the four claim classes](/blog/whitepapers/claim-classes), where the cost model for the expensive half lives.
+
+So I'm back to tracking exactly one number to decide whether to build the rest. How many times a wrong derived figure has actually gotten past me and reached someone. Right now that number is zero — and zero, obviously, is a figure in a document that nothing in my system checks either.

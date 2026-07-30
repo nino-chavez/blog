@@ -1,0 +1,326 @@
+---
+title: "Claim Classes: What Can and Can't Be Mechanically Checked in an Agent-Written Document"
+publishedAt: "2026-07-30T16:30:00.000Z"
+author: "Nino Chavez"
+excerpt: "Every document an agent writes for you is a bundle of claims, and they are not equally checkable. This is a taxonomy of four claim classes ranked by whether a machine can catch a wrong one, a diagnosis of why the highest-stakes class is always mechanized last, and a decision model for when binding values to sources is worth the cost."
+category: "AI Development"
+featureImage: "/images/generated/claim-classes.webp"
+tags: ["ai-development", "ai-governance", "deep-dive"]
+companionOf:
+  type: "post"
+  slug: "every-link-resolves-nothing-checks-the-number"
+---
+
+# Executive Summary
+
+This document is the technical companion to [Every Link Resolves. Nothing Checks the Number.](/blog/every-link-resolves-nothing-checks-the-number). The post describes a specific finding: an audit of my own document pipeline showed it verifies that references *resolve* and never that values are *right*. This document generalizes that finding into a taxonomy any team can run against its own agent-assisted workflow.
+
+The premise is an asymmetry that arrived with generative models and has not been absorbed: producing a document became roughly free, and establishing that the document is correct did not get cheaper at all. The bottleneck moved from writing to reading. Verification apparatus is what restaffing for that shift looks like — and most apparatus built so far checks the easy things.
+
+**Key findings:**
+
+- A document is not one artifact with one trust level. It is a bundle of **claim classes** with wildly different failure modes, and mechanical coverage tracks the *cost of building the check*, not the *cost of the error*.
+- Four classes cover nearly everything an agent writes into a business document: enumerable facts, external citations, state assertions, and derived figures. The first three are mechanizable with well-understood techniques. The fourth — the one that carries the most consequence — is almost universally left to human judgment.
+- **A citation is not a verification.** A citation records where a value came from. A verification re-derives the value without asking the model again. Link-checking proves the internet responded; it says nothing about the sentence in front of the link.
+- **Drift and fabrication are different defects and need different machinery.** A drifted claim was true once and its source moved. A fabricated claim was never bound to anything. Every drift detector works by comparing a claim to its source, so pointed at a fabrication it finds nothing to compare and reports clean.
+- **Verification is conformance, not correspondence.** What a machine can check is whether a value was produced the way your organization declared that kind of value gets produced. This makes value-checking tractable and relocates the first cost from engineering to definition.
+- **Per-value correctness does not give you completeness.** A document in which every figure verifies can still omit the figures that would have changed the decision. A true check of the wrong set still lies.
+- Coverage for the fourth class is **not binary**, which is why most teams have none. A cheap *declaration gate* — block a document whose derived figures come with no stated derivation — is separable from the expensive *re-derivation gate* and delivers most of the practical value. Build the first unconditionally; this document gives a cost model and a promotion trigger for the second.
+
+**Who this is for:** anyone whose agent-assisted pipeline emits documents that other people make decisions from — strategy packages, research briefs, architecture proposals, status reports, client deliverables.
+
+---
+
+# 1. The Asymmetry
+
+Three properties of generative systems collide in a way that produces this problem specifically.
+
+**Production collapsed in cost.** A twenty-page strategy document with a research appendix, tables, and citations is now hours of steered agent work rather than weeks.
+
+**Verification did not.** Checking that document still requires someone who understands the domain, reading carefully, re-deriving what matters. That labor did not get cheaper, and in most organizations it did not get funded.
+
+**Fluency became decoupled from accuracy.** This is the part with no precedent. Historically, a document's polish correlated loosely with the care taken to produce it — sloppy thinking usually left visible fingerprints. Generated prose severs that link. A fabricated figure arrives inside sentences as well-constructed as the true ones, in a document with a coherent argument, next to citations that resolve.
+
+The consequence: every heuristic a reviewer has for *where to look harder* is now uncalibrated. The tells are gone. What replaces a tell is a check.
+
+---
+
+# 2. Citation, Verification, Derivation
+
+Three terms used precisely for the rest of this document.
+
+| Term | Definition | What it proves | What it does not prove |
+|---|---|---|---|
+| **Citation** | A recorded pointer from a value to a claimed source | That an origin was asserted | That the origin says what the claim says |
+| **Resolution check** | A test that the cited pointer loads | That the pointer is not dead | Anything at all about the value |
+| **Verification** | A repeatable re-derivation of the value from the source, without invoking the generator again | That the value is what the declared process produces from the declared source | That the value is meaningful, complete, or wise |
+
+The critical property of a verification is **oracle independence**: the evidence has to come from something the claim does not control. A model asked "is this number right?" about a number it produced is not an independent oracle. Neither is a second model reading the same document, and neither is a reviewer prompt evaluated by the same class of system that generated the text.
+
+Most "verification" shipping in agent pipelines today is a resolution check with a verification's name on it.
+
+---
+
+# 3. The Four Claim Classes
+
+Any factual assertion in an agent-written business document falls into one of four classes. The classes are distinguished by **what would have to be true for a machine to catch a wrong one**.
+
+| Class | Example claim | Failure mode | Mechanizable? | Typical coverage |
+|---|---|---|---|---|
+| **1. Enumerable facts** | "Fourteen reviewers", "pinned to v3.2", "the latest release is 27" | Goes stale silently as the system changes | Yes — re-derive the count from a located source | Common |
+| **2. External citations** | "Adoption reached 40% by Q2 [link]" | Link resolves; the page never said it | Partially — resolution is trivial, substance is not | Resolution only |
+| **3. State assertions** | "This feature is complete", "migration finished" | Present but non-functional; the artifact exists and does not work | Yes — re-derive state from the system itself | Uneven |
+| **4. Derived figures** | "Blended margin improves 4.2 points under Option B" | Value never bound to any source; plausible and invented | Yes, but expensive — requires declared formulas | Rare |
+
+## 3.1 Enumerable facts
+
+The easiest class and the one most teams solve first. A count, a version, a "latest N" — anything whose true value exists somewhere machine-readable in the system being described.
+
+The check is a re-derivation: locate the source of record, compute the value, compare. The engineering is trivial. The design work is deciding which claim shapes to cover, and the correct posture is deliberately narrow. A checker that tries to catch every number in every document produces noise at a rate that trains people to ignore it. Under-matching on purpose — five well-chosen shapes with one authoritative source each — is a feature.
+
+Coverage failure here is usually not "we couldn't build it." It is "nobody noticed the README was making a factual claim."
+
+## 3.2 External citations
+
+The class where the gap between what is checked and what is believed is widest.
+
+Resolution is cheap: fetch the URL, confirm a 200. Nearly every pipeline that cites does this or could in an afternoon. And a resolving link produces a strong, entirely unearned trust signal in a reader.
+
+Substance is expensive: does the page actually support the claim made next to it? That requires reading the page and judging the correspondence — either human labor or, again, a probability machine evaluating a probability machine.
+
+Two failure sub-modes worth naming separately:
+
+- **Substitution.** The citation is real, loads, and is about the topic — but does not contain the specific claim attached to it. This is the dominant failure in generated research, and resolution checks are blind to it by construction.
+- **Provenance laundering.** A vendor's marketing page cited as market data. A competitor's blog cited as a correction to it. Both resolve. Neither is evidence. Swapping one for the other is not a fix.
+
+The honest posture is to scope the check to the mechanical half and *say so in the check's own documentation*, so that no one downstream reads a green light as substantive approval.
+
+## 3.3 State assertions
+
+"This is done." The class where automation is most valuable and most often faked.
+
+The specific defect: a **presence oracle is not a function oracle.** Checking that a file exists, a route responds, or a component renders proves the artifact is present. It cannot prove the artifact works. A feature can pass every presence check and fail on every real record.
+
+The correct check re-derives state from the system rather than accepting an assertion about it — run the scenario, query the schema, execute the path. The distinction is not academic: swapping presence checks for executed ones, against a status board reading fully green, reliably surfaces features that had never worked at all. In those cases nothing about the paperwork is wrong. The paperwork is accurate and measuring the wrong property.
+
+A related trap: any status that a human or an agent *types* is an assertion, and assertions belong in the same bucket as prose. Status derived by executing something is evidence.
+
+## 3.4 Derived figures
+
+The highest-consequence class, and the one nearly always left uncovered.
+
+A derived figure is a number computed from other numbers under a definition: a margin, a projected saving, a rate, a total addressable market, a percentage improvement. These are the numbers stakeholders remember and repeat. They are also the numbers most likely to be produced by a language model performing arithmetic-shaped reasoning over context it half-retained.
+
+The failure mode is distinctive: the figure is not merely wrong, it is **unbound**. There is no source it drifted from, no earlier state where it was correct, no artifact to compare it against. It has the syntax of a fact and no referent.
+
+Nothing in classes 1–3 catches it:
+
+- It is not enumerable — no count exists in the system to re-derive.
+- Its neighboring citation resolves fine, and may be a perfectly real document that simply does not contain this arithmetic.
+- It asserts nothing about system state, so no state derivation touches it.
+
+Which means that in most pipelines, the claim class with the most consequence has exactly one check: a person reading carefully, at the end, under time pressure, in a document engineered to read smoothly.
+
+---
+
+# 4. The Coverage Asymmetry
+
+Ranking the four classes by consequence and by cost-to-mechanize produces nearly inverted orders.
+
+| Class | Consequence of a wrong claim | Cost to mechanize | Order built in practice |
+|---|---|---|---|
+| Enumerable facts | Low — embarrassing, self-correcting | Very low | First |
+| External citations (resolution) | Low | Very low | First |
+| State assertions | High — false confidence, shipped defects | Moderate | Second |
+| External citations (substance) | High — argument rests on nothing | High | Rarely |
+| Derived figures | Highest — decisions made on invented numbers | High | Almost never |
+
+This is not negligence. It is the predictable output of building checks in the order they are cheap, which is what every team does and what every team should do first. The failure is not the order. The failure is not noticing that the order produced a green dashboard whose green concentrates entirely in the cheap classes.
+
+**The diagnostic question:** for each class, does a passing pipeline mean the class was checked, or that no check exists for it? A green build that never looked is indistinguishable from a green build that looked and approved — unless the pipeline reports coverage rather than just verdicts.
+
+An immediate, nearly free improvement for most teams: make every gate declare what it does *not* cover, in its own output. A link checker that prints "resolution only — substance unverified" costs one line and removes an entire category of misplaced confidence.
+
+---
+
+# 5. Drift Is Not Fabrication
+
+Two defects that present identically on the page and require opposite machinery.
+
+| | Drift | Fabrication |
+|---|---|---|
+| Was it ever true? | Yes | No |
+| Is there a source? | Yes, and it moved | No |
+| How it is detected | Compare claim to source; watch them diverge | Re-derive value from a declared source and formula |
+| What a drift detector reports | Divergence | Clean — nothing to compare |
+| Root cause | Time | Generation |
+
+Most documentation tooling built in the last two decades targets drift, because drift is the failure mode of human-written documentation. Humans rarely invent a figure out of nothing; they write a true figure and fail to update it.
+
+Generated documents invert this. The dominant defect is no longer decay of a true claim — it is the arrival of a claim that was never bound to anything. Pointing drift machinery at it yields a clean report, which is worse than no report, because a clean report is consumed as evidence of correctness.
+
+**Practical consequence:** if your verification story is "we keep the docs in sync," you have covered the human failure mode and not the machine one.
+
+---
+
+# 6. Verification Is Conformance, Not Correspondence
+
+The most useful reframe in this whole area, and the one that makes class 4 tractable.
+
+Two analysts can hold identical source data and reach opposite conclusions. Both can be defensible. There is frequently no universal fact for a derived figure to correspond to.
+
+So a machine cannot check "is this number true." It can check something narrower and far more useful: **was this number produced by the process we declared, from the sources we declared?**
+
+That relocates the work. The expensive part is not the checker. It is the declaration — writing down the definitions your organization has been using loosely:
+
+- What exactly counts as an active customer?
+- Over what window is a rate computed?
+- Which of the three margin formulas in circulation is *the* margin formula?
+- Which source is authoritative when two systems disagree?
+
+Most organizations discover at this step that three teams hold three definitions of the same word, and have for years. That discovery is worth more than the checker.
+
+**Corollary:** verification apparatus built without a declaration layer will silently encode whichever definition its author happened to hold. It will pass consistently and mean nothing.
+
+---
+
+# 7. The Denominator Problem
+
+Per-value correctness answers "is what's on the page right." It does not answer "is what's on the page the right set."
+
+A document in which every figure verifies perfectly can still be missing the two figures that would have reversed the decision. This is a strictly harder problem, because per-value checking at least tells you what to check — the claims present. Completeness requires knowing what *should* have been present, and nothing on the page can supply that.
+
+Two partial answers:
+
+**A registry of obligations.** Declare, ahead of the work, what must be proven for the work to count as proven — then check the document against the registry rather than checking the document against itself. The governing rule is that a proof's evidence must come from a source the claim does not control.
+
+**Oracle independence, generalized.** "The model emits a reference, never the value" is oracle independence for a single value. Extending it to a set means the *list* of things requiring verification must also come from outside the generator. A generator that proposes both the claims and the list of claims to check will produce a self-consistent, complete-looking, unfalsifiable document.
+
+Neither per-value verification nor completeness substitutes for the other. A system with only the first ships beautifully-verified partial pictures. A system with only the second ships complete pictures full of invented numbers.
+
+---
+
+# 8. Two Tiers of Coverage for Class 4
+
+Class 4 is usually discussed as a binary — either you bind every value to a re-derivation or you have nothing. That framing is why most teams have nothing, because the full contract is genuinely expensive and gets deferred forever.
+
+There are two tiers, and the cheap one delivers a surprising fraction of the value.
+
+| | Tier 1 — Declaration gate | Tier 2 — Re-derivation gate |
+|---|---|---|
+| What it checks | A derivation was *declared* for the figures in this document | The declared derivation, re-executed, produces the stated figure |
+| Catches | Figures with no story at all | Figures whose story does not hold |
+| Misses | A wrong figure with an honest, wrong formula beside it | Figures deliberately phrased to avoid the contract |
+| Cost | Low — a lint over shipping documents | High — declaration layer, addressable sources, execution |
+| Verifies the number? | No | Yes, as conformance to the declared process |
+
+## 8.1 Tier 1 — the declaration gate
+
+The cheapest useful check in this entire document, and almost always available because most pipelines already contain a prose reviewer asking the right question with no executable half.
+
+**The rule:** a shipping deliverable carrying derived figures — a workable trigger is two or more percentage figures — must declare somewhere how they were produced, or it is blocked. An individual figure with nothing attributing it raises a warning.
+
+**The design detail that decides whether it works:** the predicate must not be lexical. A document that merely contains the word "methodology" in ambient prose has not declared anything, and a naive keyword check passes it. The declaration has to be structurally deliberate — a derivation note adjacent to the figures, or an actual methodology section — or the gate degrades into a word search and starts certifying documents it never examined.
+
+**What tier 1 buys:** it converts the failure from *silent* to *stated*. A number with a declared derivation can be argued with by a reader who knows the domain. A number with nothing attached is indistinguishable from a number that was checked. That distinction is most of the practical value, and it costs a lint.
+
+**What tier 1 does not buy:** correctness. It is a completeness check on the *paperwork*, not a verification of the *value*. Reporting it as verification reproduces the original error one level up.
+
+## 8.2 Tier 2 — the re-derivation gate
+
+For teams that decide the full contract is warranted. Included here so the decision in section 9 is made against a real cost, not a vague one.
+
+**The contract.** Every derived figure in a shipping document declares, in a machine-readable file alongside the document:
+
+| Field | Contents |
+|---|---|
+| `value` | The figure as it appears in the document |
+| `source` | The artifact the inputs come from, addressable and versioned |
+| `extraction` | How the inputs are pulled from that artifact |
+| `formula` | The declared derivation, referencing a definition in the declaration layer |
+| `derived_at` | When the derivation was last executed |
+
+**The check.** Re-execute the extraction and formula. Diff the result against `value`. A mismatch, a missing declaration, or an unresolvable source is a failure.
+
+**The disposition — the part that matters most.** A figure that fails re-derivation is **blocked, not annotated.** Shipping it with a caveat preserves the failure mode: caveats are prose, prose is skimmed, and the number is what gets remembered and repeated. Stripping the value before a human sees it is a materially stronger posture than flagging it and delegating the judgment back to the author who is already committed to the document.
+
+**What this costs.** Author friction on every figure, forever. A declaration layer that must exist first. Maintenance as formulas change. A new failure mode of its own — figures deliberately phrased vaguely to avoid triggering the contract.
+
+---
+
+# 9. When to Build It
+
+Mechanizing class 4 is not automatically correct. The apparatus can cost more than the errors it prevents. A decision model:
+
+**Build it when any of these hold:**
+
+| Condition | Why it flips the decision |
+|---|---|
+| A wrong figure is a regulated or contractual event | The error cost is unbounded; friction is cheap by comparison |
+| Documents carry many derived figures each | Fixed declaration cost amortizes; per-figure friction stays flat |
+| The same figures recur across documents | Declaration is written once and reused, not per-document |
+| Readers cannot independently sanity-check | No downstream oracle exists to catch it |
+| It has already happened for real, twice | Observed failure, not anticipated failure |
+
+**Hold when:**
+
+| Condition | Why |
+|---|---|
+| Documents carry a handful of figures | Contract cost exceeds the error class it prevents |
+| Errors are recoverable and visible | An embarrassing slide is not a compliance event |
+| The failure is anticipated, not observed | Building for a vividly described failure in someone else's domain is how systems get heavy |
+| No declaration layer exists yet | The checker will encode an arbitrary definition and pass meaninglessly |
+
+**The trigger I use:** build the machine when the failure has occurred twice, at least once for real, in this system. Once is an anecdote — possibly imported from a talk, a competitor, or a domain with different stakes. Twice is a pattern, and a pattern in your own system is evidence that the general case is worth paying for.
+
+**Note what the conditions actually govern.** Every row above is about tier 2 — the re-derivation gate. Tier 1, the declaration gate in section 8.1, has almost no conditions attached, because its cost is a lint and its payoff is removing an entire category of silent failure. Build tier 1 unconditionally. Defer tier 2 until the table above says otherwise.
+
+That ordering matters more than it sounds. A team that treats class 4 as all-or-nothing evaluates the tier 2 cost, correctly concludes it is not yet worth paying, and ships nothing — leaving the highest-consequence claim class at zero coverage while the cheap tier sat available the whole time.
+
+---
+
+# 10. Self-Assessment
+
+Run against your own pipeline. Each answer requires reading the check's implementation, not its description — a system's claim to have verified something is not a verification.
+
+| # | Question | If the answer is no |
+|---|---|---|
+| 1 | For each of the four classes, can you name the specific check that covers it? | Uncovered classes are invisible, not clean |
+| 2 | Does any check bind a stated value to a re-derivation of that value? | You are checking references, not values |
+| 3 | Does your citation check distinguish resolution from substance in its output? | Readers are consuming a link check as an argument check |
+| 4 | Are your "done" checks executing behavior, or confirming presence? | Presence oracles cannot catch a broken function |
+| 5 | Are the checks that cover your highest-stakes class implemented as code, or as prose instructions to a model? | Prose reviewers are graded by the same class of system that wrote the answer |
+| 6 | Does a passing run report what it did not cover? | Green concentrates in the cheap classes and reads as total |
+| 7 | Does a declaration layer exist — written definitions for the terms your figures derive from? | Any value checker you build will encode an arbitrary definition |
+| 8 | Does the list of things requiring verification come from outside the generator? | A self-consistent, complete-looking, unfalsifiable document |
+
+A useful calibration: run question 5 first. In most pipelines the answer localizes the entire problem, because the checks covering the highest-stakes claims turn out to be the ones nobody ever wrote code for — precisely because those claims were hardest to mechanize.
+
+---
+
+# 11. Limits of This Model
+
+Stated so the taxonomy is not applied beyond what it supports.
+
+- **The four classes are not exhaustive.** They cover factual assertions. They say nothing about the largest risk in a strategy document, which is a well-supported argument toward the wrong conclusion. No check in this document catches a valid derivation of an irrelevant number.
+- **Qualitative claims are out of scope.** "This approach is more maintainable" is not a claim class this model can rank, and pretending otherwise would be the same error the model diagnoses.
+- **Verification is not judgment.** A document in which every figure re-derives cleanly can still be a bad document. Mechanical checks raise the floor. They do not raise the ceiling, and a team that treats a passing pipeline as approval has substituted the floor for the ceiling.
+- **The cost model in section 9 is uncalibrated.** It reflects one operator's stakes across a small number of initiatives. The conditions are directional; the thresholds are not measured.
+- **Provenance for the taxonomy itself.** The citation/verification distinction, the model-emits-a-reference posture, and the conformance-not-correspondence framing come from Vinoo Ganesh's talk on Kepler's architecture for financial services, on the AI Engineer channel. The claim-class decomposition, the drift/fabrication split, the coverage-asymmetry argument, the two-tier split in section 8, and the decision model are mine, developed by running his distinctions against my own pipeline. Section 8.1 describes a gate that exists and runs; section 8.2 describes one that does not, in my system or any I have inspected.
+
+---
+
+# Appendix: Terms
+
+| Term | Meaning as used here |
+|---|---|
+| **Claim class** | A category of factual assertion distinguished by what a machine would need in order to catch a wrong one |
+| **Citation** | A recorded pointer from a value to a claimed source |
+| **Resolution check** | A test that a cited pointer loads |
+| **Verification** | Repeatable re-derivation of a value from its source, independent of the generator |
+| **Oracle independence** | The requirement that a proof's evidence come from a source the claim does not control |
+| **Presence oracle** | A check confirming an artifact exists, as distinct from confirming it works |
+| **Declaration layer** | Written organizational definitions that derived figures are checked for conformance against |
+| **Drift** | A claim that was true and whose source moved |
+| **Fabrication** | A claim never bound to a source |
+| **Denominator problem** | Per-value correctness leaving completeness of the claim set unaddressed |
