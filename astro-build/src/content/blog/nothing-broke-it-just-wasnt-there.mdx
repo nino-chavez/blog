@@ -1,0 +1,150 @@
+---
+title: "Nothing Broke. It Just Wasn't There."
+slug: "nothing-broke-it-just-wasnt-there"
+publishedAt: "2026-07-29T12:00:00.000Z"
+updatedAt: "2026-07-29T12:00:00.000Z"
+author: "Nino Chavez"
+status: "draft"
+excerpt: "I went looking for a tool I'd built four days earlier and it was gone. It hadn't failed — it had run, found two real problems, and fixed both. Working correctly and existing durably turn out to be different properties, and running the thing only tests one of them."
+tags: ["ai-development", "deep-dive"]
+category: "AI Development"
+seo:
+  metaTitle: "Nothing Broke. It Just Wasn't There."
+  metaDescription: "An audit of my AI coding setup went hunting for token waste and found something worse: a working tool that had vanished in four days without producing a single error."
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+I went looking for a tool I'd built four days earlier. It wasn't anywhere.
+
+Not broken. Not stranded on an unmerged branch. Not renamed. Absent — and absent in a way that had produced no signal at all. No error. No log line. Nothing to diff against.
+
+The part that stuck with me is that it had worked. It ran once, found two real problems in my setup, and fixed both. Then it stopped existing, and the absence was the only evidence left.
+
+---
+
+## The Audit Started as a Favor
+
+A colleague dropped two videos into a thread. I said, half-joking, that I'd just recreate the skills so nobody had to go hunting for them.
+
+Then I actually watched them.
+
+The first — *Paste This Into Claude, Never Hit a Token Limit Again*, from Nate B Jones — explains a cost mechanic that almost nobody using these tools has had spelled out for them. Language models don't remember anything between turns. They fake it. Every time you press enter, the entire conversation up to that point gets bundled and sent to the model again, from the top.
+
+Jones calls the resent portion **reused input**: the part of every request the model has already seen. Your first message costs what you typed. Your thirtieth costs what you typed plus twenty-nine turns of history you already paid for. Nobody raised the price on you. The bill compounds on its own while you're not watching.
+
+The second video — *Fable 5 And GPT-5.6 Don't Need Better Prompts. They Need A Clean Setup.* — is about the pile that accumulates around the model.
+
+<Callout type="signal" title="The Frame I Started From">
+Jones defines a **harness** as everything wrapped around the model: custom instructions, project files, saved prompts, memory, skills, tools, permissions. His argument is that almost none of it ever gets designed — it arrives one correction at a time. The AI misses something, you write a rule, and the rule outlives the problem it was written for.
+</Callout>
+
+His own inventory turned up 66 reusable skills and 172 instruction files. One ordinary writing task could pull in an 18,000-word file before it ever reached the prompt.
+
+Which raised a better question than *should I rebuild this for him*.
+
+Hadn't I already solved this?
+
+---
+
+## One Half Was Already Done, and Measured
+
+So I went and looked instead of assuming.
+
+The token side was handled, and handled better than the video described — for one reason. It had been measured rather than reasoned about.
+
+My public methodology repo ([github.com/nino-chavez/agentic-ways-of-working](https://github.com/nino-chavez/agentic-ways-of-working)) already carried three things aimed exactly here: a hook that blocks two mechanically-detectable kinds of waste before they happen (a hook being a small script the tool runs automatically at a specific moment, whether or not the model cooperates), a terminal readout showing live context usage, and a script that measures your own session logs so you stop guessing about them.
+
+That last one had already been run against 60 days of real usage — 2,335 session files, 529 sessions.
+
+The headline number was a **41× replay multiplier**. Because every turn resends the whole conversation, a token that lands early in a long session gets paid for roughly 41 more times before that session closes. Session cost is close to quadratic in turn count. Which means the biggest lever is almost never trimming what you send. It's not letting sessions run forever.
+
+The less flattering finding was about me. I went into that audit with four hypotheses about where the waste was. Three were wrong.
+
+- The prime suspect — web fetches dumping raw HTML into context — was **innocent**. Zero of 873 fetches contained raw HTML. The tool was already filtering them.
+- Injected context I assumed was quietly bloating every session measured at under half a percent of everything being replayed.
+- The actual drivers were boring: session length, plus full-page screenshots captured at full resolution and re-read 25 or more times in a single design loop.
+- Half of all file reads were redundant — same file, same session, unchanged content. Worst single case: one file, 184 reads, one session.
+
+<Callout type="insight">
+The guesses were more expensive than the waste. Every hypothesis I would have built a fix for was pointed at the wrong thing — and I'd never have found out, because a fix aimed at a problem you don't have still feels like progress.
+</Callout>
+
+---
+
+## Then I Went and Guessed Anyway
+
+For the harness half, I checked the folder where I keep skills meant to be shared, found nothing resembling a cleanup tool, and reported that my setup didn't have one.
+
+One folder. Reported as a conclusion about the whole setup.
+
+The right question was the one I hadn't asked: check the history, not the file tree.
+
+The tool I use keeps a transcript log — a searchable record of every session I've ever run with it, including the full text of whatever got loaded into each one. Searching that turned up a custom command I'd written four days earlier. Several thousand words of specification.
+
+It did nearly everything the video described wanting, plus two things the video didn't cover. It correctly separated which external tool connections cost context on every single turn from which ones cost nothing until they're actually called. And its handling of permissions had real security reasoning behind it instead of a blanket loosening.
+
+It had been run. It found a leftover duplicate install and an unused tool connection, and fixed both.
+
+---
+
+## And It Was Gone
+
+Every place it could have lived, I checked. The repo where my machine configuration lives — the one it should have been backed up into — I checked the commit history there too, not just the working directory, in case I'd committed it and then cleaned up.
+
+Nothing. No commit. No file. No trace.
+
+Built, used successfully, gone inside four days. Not deleted in a bad mood. Not broken by an update. It had simply never been saved anywhere durable — it existed as a live command in one place and nowhere else, so when it went, there was nothing to notice. No failure. No error to read. No diff to run.
+
+I only found out because an audit about a different problem went looking for it by name.
+
+<PullQuote>
+Working correctly and existing durably are different properties. Running the thing only ever tests the first one.
+</PullQuote>
+
+---
+
+## The Fix Had to Include Its Own Diagnosis
+
+The specification survived where the file didn't. The transcript had captured the whole command as expanded text, so I rebuilt it from the record.
+
+Before putting it anywhere, I gave it one capability it hadn't had before: a check for the exact failure that had just happened to it.
+
+For every skill, command, hook, and agent definition a session loads, the check asks whether that thing is actually backed by version control — a tracked file, or a pointer whose own entry got committed — or whether it's just sitting there, loadable right now, with no way back if it goes.
+
+That second case is subtler than it sounds. Many of these are symlinks: tiny pointer files that stand in for a real file living somewhere else. A symlink can point at a perfectly legitimate, fully committed repository while the pointer itself was never committed. Checking where it points is not checking the wiring. Both have to be tracked, or the thing can still vanish.
+
+<Callout type="warning">
+Untracked **and** unused is the easy case. Delete it.
+
+Untracked and *actively used* is the one worth losing sleep over: something you lean on regularly, with no recovery path if it disappears.
+</Callout>
+
+Running the new check found a dozen more extensions sitting in that same state.
+
+---
+
+## Bloat Was the Wrong Thing to Be Afraid Of
+
+One of the dozen had been used seven times.
+
+Seven successful runs of something that would have left no evidence it ever existed.
+
+The frame I walked in with — the frame both videos use, and most of the conversation around this — is accumulation. Rules pile up. Skills pile up. Instruction files pile up. Something that started clean turns into a hull covered in barnacles, and the work is scraping.
+
+That's real. 172 instruction files is real.
+
+But it's a story about having too much, and it primed me to go looking for excess. What I found was scarcity wearing the costume of health. Not too much stuff. One good thing, working fine, resting on nothing.
+
+And the audit that found it opened by checking a single folder and calling the whole setup clean.
+
+---
+
+## What I Still Don't Have
+
+The command is committed now, in the public repo, with a history behind it and a check for its own failure mode built in. The fix and the safeguard shipped in the same commit.
+
+What I don't have is a way to catch the next one early. The check I added only runs when I remember to run it, so the safety net is still a person deciding to ask a question. That's the same mechanism that failed silently for four days. It just happened to get asked this time, by accident, about something else.
+
+The version I actually want doesn't wait to be invoked. It notices on its own, the way a build fails on its own, and says something before I go looking.

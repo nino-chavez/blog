@@ -1,0 +1,190 @@
+---
+title: "Audit Your AI Coding Harness in Four Exercises"
+publishedAt: "2026-07-29T12:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "Install a custom Claude Code command, run it against your own setup, and find out what's unused, what's slow, and what could vanish without a trace. Companion workshop to Nothing Broke. It Just Wasn't There."
+category: "Engineering"
+tags: ["agentic-systems", "tutorial", "engineering"]
+duration: "25 min"
+difficulty: "beginner"
+prerequisites:
+  - "Claude Code installed and working"
+  - "git installed"
+  - "Read the companion post: Nothing Broke. It Just Wasn't There."
+objectives:
+  - "Install a custom Claude Code command from a public repo"
+  - "Read a harness health report and understand what each section means"
+  - "Identify extensions in your own setup with no version-control backing"
+  - "Apply a recommended cleanup through Claude Code's confirmation gates, and know how to undo it"
+companionOf:
+  type: blog
+  slug: nothing-broke-it-just-wasnt-there
+---
+
+import { Exercise } from '@/components/tutorials/Exercise';
+import { Template } from '@/components/tutorials/Template';
+import { Checkpoint } from '@/components/tutorials/Checkpoint';
+
+# Everything Loaded Into Your Session Has a Cost, and Some of It Has No Backup
+
+In [Nothing Broke. It Just Wasn't There.](/blog/nothing-broke-it-just-wasnt-there), a custom Claude Code command got built, ran successfully, fixed two real problems — and then disappeared within four days because it was never backed by version control. Nobody noticed until a transcript search went looking for it by name.
+
+This workshop is the hands-on half. You'll install the recovered, hardened version of that command — `/doctor` — and run it against your own AI coding setup. By the end you'll know what's loaded into every one of your Claude Code sessions, what's actually earning its place, and which pieces could vanish the same way the original did.
+
+A few terms, defined once so the rest of this reads clean:
+
+- **Skill** — a task-specific instruction file Claude Code can load on demand.
+- **MCP server** — a connection to an external tool (a database, a browser, a design app) that gives Claude Code new abilities.
+- **Hook** — a script that runs automatically at a specific moment in a session (before a tool call, at session start), whether or not the model asks for it.
+- **Symlink** — a small pointer file that stands in for a real file living somewhere else. Your `~/.claude/skills/` directory is full of these.
+- **Harness** — everything wrapped around the model: instructions, skills, commands, hooks, MCP servers, memory files. The thing this tutorial audits.
+
+---
+
+<Exercise number={1} title="Install /doctor" duration="5 min">
+
+## Why this matters
+
+Claude Code custom commands are just Markdown files in a specific folder. There's no package manager step, no build — you drop a file at `~/.claude/commands/<name>.md` and `/name` becomes available in your next session. That simplicity is exactly what let the original tool disappear without a trace: nothing about "drop a file in a folder" requires that folder to be backed up anywhere.
+
+## The structure
+
+`/doctor` lives in a public methodology repo: [`github.com/nino-chavez/agentic-ways-of-working`](https://github.com/nino-chavez/agentic-ways-of-working), at `commands/doctor.md`. The repo's own `install.sh` symlinks its commands, skills, and hooks into `~/.claude/` — which means installing this way gives you the fix for the vanishing problem for free: a symlink into a git-tracked repo, not a lone file with nothing behind it.
+
+## Your turn
+
+Clone the repo somewhere durable, then either run its installer or symlink the one file by hand if you'd rather not take everything:
+
+<Template title="Install just /doctor" description="Minimal install — one command, one symlink">
+
+```bash
+git clone https://github.com/nino-chavez/agentic-ways-of-working.git ~/agentic-ways-of-working
+mkdir -p ~/.claude/commands
+ln -s ~/agentic-ways-of-working/commands/doctor.md ~/.claude/commands/doctor.md
+```
+
+</Template>
+
+Start a new Claude Code session (or restart your current one) so the command becomes available.
+
+<Checkpoint>
+
+Run `/doctor`. You should see Claude Code begin gathering data with a series of read-only checks — reading your settings, your skill usage counters, your session transcripts — and NOT immediately change anything.
+
+That's the ground rule the command is built on: every check runs read-only first, and nothing gets edited until you explicitly confirm. If you see a file get modified before you've answered a confirmation question, something's wrong — stop and check your install.
+
+</Checkpoint>
+
+</Exercise>
+
+---
+
+<Exercise number={2} title="Read the report" duration="8 min">
+
+## Why this matters
+
+`/doctor` runs ten checks, and the report can look like a wall of findings if you don't know what you're looking at. The report is structured so the summary tells you what matters and the detail table backs it up — read it in that order, not top to bottom as a flat list.
+
+## The structure
+
+The ten checks fall into a few natural groups:
+
+**Is the install itself sound?** (Check 0) — duplicate or leftover Claude Code installs, a PATH problem, settings files that fail to parse, agent-definition files with broken or colliding names. As of the version you just installed, this check also asks whether each skill, command, hook, and agent-definition file is actually backed by version control — more on that in Exercise 3.
+
+**What's costing you and not earning it?** (Check 1) — unused skills, MCP servers, and plugins, scored against real usage counters rather than a guess. The important nuance: some MCP tool connections cost context on every single turn, and some cost nothing until you actually invoke them (Claude Code defers their full definition until it's needed). `/doctor` knows the difference and won't tell you to remove something "to save context" when the real savings are zero — it'll frame that as decluttering instead, which is honest about what you're actually getting.
+
+**Is your memory bloated or duplicated?** (Checks 2-4) — overlap between your personal, always-loaded notes and your project's checked-in rules; content in a `CLAUDE.md` file that a session could just as easily derive by reading the code; guidance that's always loaded but only needed sometimes, which could move to an on-demand skill instead.
+
+**Is anything slow, current, or unnecessarily locked down?** (Checks 5-9) — hooks that run often and take too long, your total resident context cost across everything, whether your Claude Code install itself is current, and two permission-related checks covered in Exercise 4.
+
+## Your turn
+
+Open your own report. Find the plain-language summary at the top — it should be two or three sentences, no jargon. Then find ONE specific item in the detail table below it, and before moving on, answer for yourself: what is this thing, why was it flagged, and what would happen if you removed it?
+
+<Checkpoint>
+
+Write down (even just to yourself) one specific finding from your own report and what it means. If you can't explain why an item was flagged, re-read the relevant check's explanation in the report — a repeat performance of "I don't know what this is" for several items in a row is a sign your harness has grown past what you can hold in your head, which is precisely the problem this tool exists to fix.
+
+</Checkpoint>
+
+</Exercise>
+
+---
+
+<Exercise number={3} title="Find what could vanish" duration="7 min">
+
+## Why this matters
+
+This is the check that didn't exist when the original tool disappeared. Everything else in `/doctor` asks "is this earning its keep." This one asks a different question: "if your machine died tomorrow, would this still exist anywhere?"
+
+## The structure
+
+An **untracked** item is a file or symlink that's present on disk, fully loadable by your next session, and backed by nothing — never committed to git anywhere. If it's lost — a new machine, a careless cleanup command, a bad `git clean` in the wrong directory — there's no error, no log entry, nothing to `git diff` against. It's just gone, the same way the original command was.
+
+The subtle part: a lot of what's in `~/.claude/skills/` and `~/.claude/commands/` is symlinks, not real files — small pointers to a real file living elsewhere. A symlink can point at a perfectly legitimate, fully-committed repository while the *pointer itself* was never added to git. Checking where a symlink points isn't enough. The pointer needs its own entry tracked too, or the wiring disappears even if the target survives.
+
+That gives you two things to actually worry about, and they're not the same severity:
+
+- **Untracked and never used** — the easy case. Nothing is lost if it's gone; it's just clutter. Safe to remove or safe to ignore.
+- **Untracked and actively used** — the one worth taking seriously. Something you rely on, sitting with no recovery path. This is exactly the state the original `/doctor` command was in for the four days before it disappeared.
+
+## Your turn
+
+Go back to your Check 0 findings and pull out everything flagged as untracked. For each one, cross-reference it against Check 1's usage data: has it actually been used?
+
+<Checkpoint>
+
+Identify at least one untracked item in your own setup — or confirm you have none, which is itself a real and useful finding, not a failure to find something. If you found one that's untracked AND actively used, that's your highest-priority fix: commit it somewhere durable before you do anything else in this workshop.
+
+</Checkpoint>
+
+</Exercise>
+
+---
+
+<Exercise number={4} title="Apply a fix, safely" duration="5 min">
+
+## Why this matters
+
+A tool that finds problems and doesn't distinguish "safe to auto-apply" from "changes what runs without asking you" is a tool you'll eventually stop trusting. `/doctor` draws that line explicitly, with two separate confirmation gates instead of one.
+
+## The structure
+
+**Gate one: cleanup.** Checks 0 through 4 and 7 — the unused extensions, the memory dedup, the derivable content, the version currency, and now the untracked-extension findings — bundle into a single question. The recommended action is listed first and labeled "(recommended)"; declining everything is listed last. You can also say "let me pick" and get a follow-up with one option per group.
+
+**Gate two: permissions.** Checks 8 and 9 — turning on auto permission mode by default, and pre-approving specific read-only commands you keep getting denied on — are asked separately, and only if they found something to propose. This is deliberate: changing what runs without asking you is a different kind of risk than deleting an unused skill, and bundling the two would let you consent to a permission change without really seeing it.
+
+Almost everything proposed is reversible. Skills and MCP servers get *disabled*, not deleted — a one-line settings change you can flip back. Where something does get deleted (a leftover duplicate install, for instance), the report quotes exactly what's being removed so you can reconstruct it if needed.
+
+## Your turn
+
+Answer the cleanup question. If you're not sure about a specific item, choose "let me pick" rather than accepting everything blind — the follow-up question lets you approve group by group.
+
+<Checkpoint>
+
+After applying at least one recommended fix, confirm you can state how to undo it, specifically — not just "it's reversible," but the actual mechanism (which settings key, which command). If `/doctor`'s own report told you how to undo it, you're set. If you're not sure, ask before you apply the next one.
+
+</Checkpoint>
+
+</Exercise>
+
+---
+
+## What You Ran
+
+Four exercises, each answering a different question about the same setup:
+
+| Exercise | Question | What it protects against |
+|---|---|---|
+| Install | Is the tool itself durable? | The exact failure that started this workshop |
+| Read the report | What's actually loaded, and why? | Guessing instead of measuring |
+| Find what could vanish | What has no backup? | Silent, undetected loss |
+| Apply a fix | What changed, and can I undo it? | Losing trust in the tool by over-applying it |
+
+## Where This Is Heading
+
+`/doctor` only runs when you remember to run it. That's still true after this workshop — the check that would have caught the original failure is now real, but it's not automatic. Running it once, today, tells you about today. It doesn't tell you about the skill you add next month and forget to commit.
+
+The honest next step isn't a bigger one-time audit. It's making this a habit — after installing something new, after a cleanup pass of your own, before you hand your setup to someone else the way this whole workshop started: a colleague asking what was actually worth reconstructing.
+
+Run it again in a month. See what's different. That's the actual test of whether any of this stuck.
