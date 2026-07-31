@@ -69,7 +69,7 @@ const ILLUSTRATION_STYLES = {
     elements: 'robots with personality, flowing connection lines, geometric brain patterns, glowing nodes',
     personality: 'Curious and forward-looking, like a friendly guide into the future'
   },
-  'Reflections': {
+  'Reflection': {
     background: 'Warm charcoal to soft brown gradient (#2d2d2d to #3d3428)',
     lineColor: 'Golden amber lines (#e8b86d) with cream highlights',
     style: 'Thoughtful sketches like journal marginalia - loose, contemplative, human',
@@ -104,7 +104,7 @@ const ILLUSTRATION_STYLES = {
     elements: 'interconnected nodes, tree-like networks, gears as ecosystems, flowing data rivers',
     personality: 'Pattern-seeking and holistic, finding beauty in complexity'
   },
-  'Consulting Practice': {
+  'Consulting': {
     background: 'Professional charcoal (#262626) with warm undertones',
     lineColor: 'Warm white (#f5f5f4) with copper accents (#f59e0b)',
     style: 'Whiteboard sketches come to life - energetic and collaborative',

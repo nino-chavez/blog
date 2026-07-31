@@ -45,7 +45,7 @@ const getCategoryColors = (category: string) => {
       border: "border-blue-500/30",
       text: "text-blue-400",
     },
-    "Consulting Practice": {
+    Consulting: {
       bg: "bg-emerald-500/10",
       border: "border-emerald-500/30",
       text: "text-emerald-400",
@@ -60,7 +60,7 @@ const getCategoryColors = (category: string) => {
       border: "border-pink-500/30",
       text: "text-pink-400",
     },
-    Reflections: {
+    Reflection: {
       bg: "bg-cyan-500/10",
       border: "border-cyan-500/30",
       text: "text-cyan-400",
@@ -86,11 +86,11 @@ const getCategorySlug = (category: string): string => {
     "AI & Automation": "ai-automation",
     "Systems Thinking": "systems-thinking",
     Leadership: "leadership",
-    "Consulting Practice": "consulting",
+    Consulting: "consulting",
     Photography: "photography",
     Meta: "meta",
     "Field Notes": "field-notes",
-    Reflections: "reflections",
+    Reflection: "reflections",
     Commerce: "consulting",
   };
   return slugs[category] || "ai-automation";

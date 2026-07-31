@@ -48,6 +48,15 @@ const collections = [
 const isoDate = (value: string | Date) =>
   new Date(value).toISOString().slice(0, 10);
 
+const publicCategory = (value: string | undefined, kind: string) => {
+  if (!value || value === 'Counterpoints') {
+    return kind === 'Fiction' ? 'Fiction' : '';
+  }
+  if (value === 'Consulting Practice') return 'Consulting';
+  if (value === 'Reflections') return 'Reflection';
+  return value;
+};
+
 export const GET: APIRoute = async () => {
   const items = [];
   const seriesMembership = new Map<string, number>();
@@ -74,9 +83,7 @@ export const GET: APIRoute = async () => {
         excerpt: entry.data.excerpt ?? '',
         publishedAt: isoDate(entry.data.publishedAt),
         kind: collection.kind,
-        category:
-          entry.data.category ??
-          (collection.kind === 'Fiction' ? 'Fiction' : 'Uncategorized'),
+        category: publicCategory(entry.data.category, collection.kind),
         tags: Array.isArray(entry.data.tags) ? entry.data.tags : [],
         href: `${SITE}${collection.basePath}/${entry.id}`,
       });
@@ -113,7 +120,9 @@ export const GET: APIRoute = async () => {
       items.filter((item) => item.kind === kind).length,
     ]),
   );
-  const categories = [...new Set(items.map((item) => item.category))].sort();
+  const categories = [
+    ...new Set(items.map((item) => item.category).filter(Boolean)),
+  ].sort();
   const years = [
     ...new Set(items.map((item) => item.publishedAt.slice(0, 4))),
   ].sort((a, b) => b.localeCompare(a));
