@@ -1,23 +1,147 @@
 ---
-// Standard footer for all pages
+const primary = [
+  ['Work', '/work'],
+  ['Demos', '/demos'],
+  ['Learn', '/learn'],
+  ['Writing', '/blog'],
+  ['About', '/about'],
+];
+
+const secondary = [
+  ['Photography', '/photography'],
+  ['Now', '/now'],
+  ['Links', '/links'],
+  ['Privacy', '/privacy'],
+];
 ---
 
-<footer class="border-t border-zinc-800/50 py-12 mt-8">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-      <div class="text-center md:text-left">
-        <p class="text-zinc-500 text-sm">
-          &copy; {new Date().getFullYear()} Nino Chavez. All rights reserved.
-        </p>
-      </div>
-      <div class="flex items-center gap-6 flex-wrap justify-center md:justify-end">
-        <a href="/about" class="text-zinc-400 hover:text-white text-sm transition-colors">About</a>
-        <a href="/blog/rss.xml" class="text-zinc-400 hover:text-white text-sm transition-colors">RSS Feed</a>
-        <a href="/blog/full-content-rss.xml" class="text-zinc-400 hover:text-white text-sm transition-colors">Full RSS</a>
-        <a href="/blog/api/posts.json" class="text-zinc-400 hover:text-white text-sm transition-colors">API</a>
-        <a href="/blog/llms.txt" class="text-zinc-400 hover:text-white text-sm transition-colors">llms.txt</a>
-        <a href="https://ninochavez.co" class="text-zinc-400 hover:text-white text-sm transition-colors">ninochavez.co</a>
-      </div>
+<footer class="practice-footer">
+  <div class="practice-footer__inner">
+    <div>
+      <p class="practice-footer__name">Nino Chavez</p>
+      <p>Product architect and builder in Chicago.</p>
     </div>
+
+    <nav aria-label="Site navigation">
+      {primary.map(([label, href]) => <a href={href}>{label}</a>)}
+    </nav>
+
+    <nav aria-label="More pages">
+      {secondary.map(([label, href]) => <a href={href}>{label}</a>)}
+    </nav>
+
+    <nav aria-label="External profiles">
+      <a href="https://github.com/nino-chavez">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/nino-chavez/">LinkedIn ↗</a>
+      <a href="mailto:nino@ninochavez.co">Email ↗</a>
+    </nav>
+  </div>
+
+  <div class="publication-footer">
+    <p>Signal Dispatch</p>
+    <nav aria-label="Signal Dispatch feeds and machine-readable formats">
+      <a href="/blog/rss.xml">RSS Feed</a>
+      <a href="/blog/full-content-rss.xml">Full RSS</a>
+      <a href="/blog/api/posts.json">API</a>
+      <a href="/blog/llms.txt">llms.txt</a>
+    </nav>
+    <small>&copy; {new Date().getFullYear()} Nino Chavez.</small>
   </div>
 </footer>
+
+<style>
+  .practice-footer {
+    margin-top: 32px;
+    border-top: 1px solid rgb(241 234 223 / 0.24);
+    background: #091426;
+    color: #f1eadf;
+  }
+  .practice-footer__inner {
+    display: grid;
+    width: min(1320px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 54px 0 48px;
+    grid-template-columns: minmax(240px, 1.35fr) repeat(3, minmax(120px, 0.55fr));
+    gap: 40px;
+  }
+  .practice-footer p {
+    margin: 0;
+    color: rgb(241 234 223 / 0.58);
+    font-size: 0.9rem;
+  }
+  .practice-footer .practice-footer__name {
+    margin-bottom: 6px;
+    color: #f1eadf;
+    font-size: 1.05rem;
+    font-weight: 760;
+  }
+  .practice-footer nav {
+    display: grid;
+    align-content: start;
+    gap: 10px;
+  }
+  .practice-footer a {
+    color: rgb(241 234 223 / 0.68);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .practice-footer a:hover,
+  .practice-footer a:focus-visible {
+    color: #f1eadf;
+  }
+  .practice-footer :focus-visible {
+    outline: 3px solid #d07a4e;
+    outline-offset: 3px;
+  }
+  .publication-footer {
+    display: grid;
+    width: min(1320px, calc(100% - 48px));
+    min-height: 68px;
+    margin: 0 auto;
+    padding: 16px 0;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 28px;
+    border-top: 1px solid rgb(241 234 223 / 0.18);
+  }
+  .publication-footer p {
+    color: #e86c5d;
+    font-weight: 760;
+  }
+  .publication-footer nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 22px;
+  }
+  .publication-footer small {
+    color: rgb(241 234 223 / 0.5);
+  }
+
+  @media (max-width: 800px) {
+    .practice-footer__inner {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .practice-footer__inner > div {
+      grid-column: 1 / -1;
+    }
+    .publication-footer {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .practice-footer__inner,
+    .publication-footer {
+      width: calc(100% - 32px);
+    }
+    .practice-footer__inner {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .practice-footer__inner > div {
+      grid-column: auto;
+    }
+  }
+</style>
