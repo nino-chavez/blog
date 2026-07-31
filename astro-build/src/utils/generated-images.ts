@@ -9,11 +9,11 @@ const CATEGORY_SLUGS: Record<string, string> = {
   "AI & Automation": "ai-automation",
   "Systems Thinking": "systems-thinking",
   Leadership: "leadership",
-  "Consulting Practice": "consulting",
+  Consulting: "consulting",
   Photography: "photography",
   Meta: "meta",
   "Field Notes": "field-notes",
-  Reflections: "reflections",
+  Reflection: "reflections",
   Commerce: "consulting", // Map commerce to consulting images
   Examples: "ai-automation",
 };
