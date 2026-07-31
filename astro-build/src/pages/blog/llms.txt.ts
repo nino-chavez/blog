@@ -97,7 +97,8 @@ ${fictionSorted.map((e) => renderEntry('/blog/fiction', e)).join('\n') || '_(non
 
 ## Machine-Readable Endpoints
 
-- [/api/posts.json](${SITE}/api/posts.json) — JSON index of all published blog posts (slug, title, excerpt, publishedAt, tags, category, url, featureImage)
+- [/blog/api/content-index.json](${SITE}/blog/api/content-index.json) — JSON inventory of every public essay, whitepaper, presentation, tutorial, counterpoint, fiction entry, and series
+- [/blog/api/posts.json](${SITE}/blog/api/posts.json) — JSON index of published essays (slug, title, excerpt, publishedAt, tags, category, URL, feature image)
 - [/blog/rss.xml](${SITE}/blog/rss.xml) — RSS feed (full corpus, ${blogSorted.length} blog entries)
 - [/blog/full-content-rss.xml](${SITE}/blog/full-content-rss.xml) — RSS feed with full HTML body (most recent 50 entries)
 
