@@ -14,7 +14,7 @@ interface PullQuoteProps {
 
 export function PullQuote({ children, author, source }: PullQuoteProps) {
   return (
-    <figure className="relative my-12 mx-0 md:-mx-8 lg:-mx-12">
+    <figure className="relative my-12 mx-0 md:-mx-4 lg:-mx-12">
       {/* Quote mark decoration */}
       <div className="absolute -top-4 left-0 md:left-4">
         <Quotes

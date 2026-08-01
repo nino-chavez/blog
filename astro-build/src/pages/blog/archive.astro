@@ -36,7 +36,7 @@ const personSchema = generatePersonSchema();
 
 <BaseLayout
   title="Essays — Signal Dispatch"
-  description="All essays. Architecture, commerce, and the signals that matter."
+  description="Browse every Signal Dispatch essay by subject or search the full archive."
   jsonLd={[websiteSchema, blogSchema, personSchema]}
 >
   <main class="min-h-screen">
@@ -58,7 +58,7 @@ const personSchema = generatePersonSchema();
           Essays
         </h1>
         <p class="font-serif italic text-lg text-zinc-500">
-          All {sortedPosts.length} posts, filterable by category and searchable by text.
+          All {sortedPosts.length} essays, filterable by subject and searchable by text.
         </p>
       </div>
     </section>

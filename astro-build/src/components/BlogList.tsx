@@ -199,6 +199,9 @@ export default function BlogList({ posts }: BlogListProps) {
         <div className="flex flex-col gap-3 sm:hidden">
           {/* Search - Full width on mobile */}
           <div className="relative">
+            <label className="sr-only" htmlFor="essay-search-mobile">
+              Search these essays
+            </label>
             <svg
               className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500"
               fill="none"
@@ -213,8 +216,9 @@ export default function BlogList({ posts }: BlogListProps) {
               />
             </svg>
             <input
+              id="essay-search-mobile"
               type="text"
-              placeholder="Search posts..."
+              placeholder="Search these essays..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-2.5 text-sm bg-zinc-900/50 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-signal-coral/50"
@@ -350,6 +354,9 @@ export default function BlogList({ posts }: BlogListProps) {
           {/* Search */}
           <div className="flex-1 min-w-[200px] max-w-xs ml-auto">
             <div className="relative">
+              <label className="sr-only" htmlFor="essay-search-desktop">
+                Search these essays
+              </label>
               <svg
                 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500"
                 fill="none"
@@ -364,8 +371,9 @@ export default function BlogList({ posts }: BlogListProps) {
                 />
               </svg>
               <input
+                id="essay-search-desktop"
                 type="text"
-                placeholder="Search..."
+                placeholder="Search these essays..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-1.5 text-sm bg-zinc-900/50 border border-zinc-800 rounded-full text-white placeholder-zinc-500 focus:outline-none focus:border-signal-coral/50"
@@ -379,7 +387,7 @@ export default function BlogList({ posts }: BlogListProps) {
       {(searchQuery || selectedCategory || selectedTag) && (
         <div className="flex items-center justify-between">
           <p className="text-sm text-zinc-500">
-            Showing {filteredPosts.length} posts
+            Showing {filteredPosts.length} essays
             {selectedCategory && (
               <span>
                 {" "}
@@ -416,7 +424,7 @@ export default function BlogList({ posts }: BlogListProps) {
 
       {/* Featured Section */}
       {featuredPosts.length > 0 && !searchQuery && !selectedCategory && !selectedTag && (
-        <section className="relative -mx-4 px-4 py-8 rounded-3xl bg-gradient-to-b from-zinc-900/80 via-zinc-900/40 to-transparent">
+        <section className="relative mx-0 sm:-mx-4 px-4 py-8 overflow-hidden rounded-3xl bg-gradient-to-b from-zinc-900/80 via-zinc-900/40 to-transparent">
           {/* Subtle gradient orb background */}
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-signal-coral/5 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-signal-coral/5 rounded-full blur-3xl pointer-events-none" />
@@ -617,7 +625,15 @@ export default function BlogList({ posts }: BlogListProps) {
       {/* Empty State */}
       {filteredPosts.length === 0 && (
         <div className="text-center py-16 space-y-4">
-          <p className="text-zinc-400 text-lg">No posts found</p>
+          <p className="text-zinc-400 text-lg">No essays match these filters</p>
+          {searchQuery && (
+            <a
+              href={`/search?q=${encodeURIComponent(searchQuery)}`}
+              className="inline-flex text-sm text-zinc-400 hover:text-signal-coral transition-colors"
+            >
+              Search the whole site for “{searchQuery}”
+            </a>
+          )}
           <button
             onClick={() => {
               setSelectedCategory(null);

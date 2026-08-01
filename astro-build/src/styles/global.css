@@ -322,6 +322,21 @@ button:focus-visible {
   color: #a1a1aa;
 }
 
+@media (max-width: 640px) {
+  .prose table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .prose a,
+  .prose code {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}
+
 /*
  * ============================================================================
  * Mobile Utilities
