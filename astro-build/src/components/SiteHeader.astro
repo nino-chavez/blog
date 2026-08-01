@@ -39,6 +39,7 @@ const practiceLinks = [
   { href: '/demos', label: 'Demos' },
   { href: '/learn', label: 'Learn' },
   { href: '/blog', label: 'Writing', current: true },
+  { href: '/photography', label: 'Photography' },
   { href: '/about', label: 'About' },
 ];
 ---
@@ -53,7 +54,7 @@ const practiceLinks = [
     </nav>
     <a class="open-practice-shell__search" href="/search">Search site</a>
     <details class="open-practice-shell__mobile">
-      <summary>Site menu</summary>
+      <summary>Menu</summary>
       <nav aria-label="Nino Chavez site">
         {practiceLinks.map((link) => (
           <a href={link.href} aria-current={link.current ? 'location' : undefined}>{link.label}</a>
@@ -334,7 +335,7 @@ const practiceLinks = [
     transform: rotate(180deg);
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 920px) {
     .open-practice-shell {
       --practice-shell-height: 56px;
     }
