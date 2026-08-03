@@ -1,6 +1,6 @@
 Every tool recommendation I've given, including the ones I still stand behind, was a report on my own machine wearing the clothes of a review.
 
-That isn't false modesty, it's arithmetic. What a real evaluation produces isn't a verdict, it's a count — how many components the thing would actually add to your setup — and that count comes out different for every person who asks. Something transformative for a person running stock tooling is worth roughly nothing to a person a year into accumulating their own. The number is personal and the recommendation isn't transferable, which is inconvenient, because a verdict is what people actually want.
+That isn't false modesty, it's arithmetic. What a real evaluation produces isn't a verdict, it's a count — how many components the thing would actually add to your setup — and that count comes out different for every person who asks. Something worth every minute to a person running stock tooling is worth roughly nothing to a person a year into accumulating their own. The number is personal and the recommendation isn't transferable, which is inconvenient, because a verdict is what people actually want.
 
 A few things sharpen the count more than I expected. The component list is worth pulling from a project's reference documentation rather than its README, since the first enumerates and the second sells.
 

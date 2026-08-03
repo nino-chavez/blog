@@ -1,4 +1,4 @@
-I installed a thing to make my READMEs prettier. This is the kind of job you hand to a machine when you don't want to think — nicer headings, a banner, make it look like someone cared. I pointed it at five of my own repositories and went to get coffee.
+I installed a thing to make my READMEs prettier. This is the kind of job you hand to a machine when you don't want to think — nicer headings, a banner, make it look like someone cared. I pointed it at five of my own repositories.
 
 It barely touched the design. What it did instead was read the code and start telling me the documentation was lying.
 
@@ -6,7 +6,7 @@ The first README says the project deploys to one platform; the config has said a
 
 Then the install instructions, which tell you to use one package manager. There's a lockfile sitting in that repo from the other one, and there has only ever been a lockfile from the other one. Every command in that guide would send a new person down a path that has never worked, and it would take them a while to figure out why, because the document sounds so certain of itself.
 
-Then a count, which is my favourite of these. One README described nine small command-line scripts. The directory holds ten. And the tenth isn't registered in the package manifest, so a global install wouldn't expose it at all — meaning the wrong number was sitting on top of a real packaging bug and hiding it.
+Then a count, which is my favorite of these. One README described nine small command-line scripts. The directory holds ten. And the tenth isn't registered in the package manifest, so a global install wouldn't expose it at all — meaning the wrong number was sitting on top of a real packaging bug and hiding it.
 
 Then drift running the other direction entirely: a feature list missing whole capabilities the code had grown since anyone last looked. Photo enrichment through a model API. An ingest pipeline over OAuth. A worker that streams album archives. None of it mentioned anywhere.
 
