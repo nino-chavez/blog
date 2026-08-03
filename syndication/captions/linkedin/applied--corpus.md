@@ -12,6 +12,6 @@ One discipline holds the rest together: re-derive the number when you use it. A 
 
 The ledger has to grade what got ripped out, too. The mining tool's own honest entry is that it was rebuilt several times before it held. That entry is worth more than any success it logged, because the measure is survival — what's still in the codebase months later rather than what got committed.
 
-A prior earns its place by surviving, not by being said. Most of mine have never been put through that.
+A prior earns its place by surviving, not by being said. The stack has 1,419 signals and no survival column.
 
 https://ninochavez.co/demos/applied/corpus

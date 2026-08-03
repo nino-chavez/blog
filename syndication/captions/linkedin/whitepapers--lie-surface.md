@@ -8,7 +8,7 @@ Authority and trustworthiness turn out to be different axes, and I'd been readin
 
 The part I got wrong: I assumed binding claims to verifiers would cut what a session costs. Tested cold, answer quality improved inside a single turn and the token count didn't move at all. The agent read the registry and then went and verified against source anyway — which, annoyingly, is exactly the behavior the whole model exists to protect. Verification isn't the waste. It's the point.
 
-What I still can't solve is the layer underneath. Rationale has no verifier. You can date it, append to it, refuse to silently edit it, and it may rot regardless, because its only source is a memory that fades.
+What I still can't solve is the layer underneath. Rationale has no verifier. You can date it and append to it. The source is one person's memory.
 
 The ranking, the knowledge-type table, and where the pattern frays:
 https://ninochavez.co/blog/whitepapers/lie-surface

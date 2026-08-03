@@ -12,6 +12,6 @@ The missing pushback was mine, and it wasn't traceable to any single rule. Confi
 
 Two runs failed in ways that turned out to be useful. The first probe followed the workspace map in my own preferences straight to the live repo, found the finished answer, and cheerfully graded its own homework — so every arm now runs from a worktree pinned to before that answer existed. And half the first batch died on an expired key, burning the replicate budget before anything got measured.
 
-What sits badly is that the loss was invisible by construction. I never saw the pushback that didn't happen. The signal had to arrive from outside the setup, and I don't have a way to generate it from inside.
+What sits badly is that the loss was invisible by construction. I never saw the pushback that didn't happen. The signal came from outside the setup. There's no arm for that.
 
 https://ninochavez.co/demos/applied/config-probe

@@ -10,6 +10,6 @@ So the fix wasn't "be more careful," which isn't a fix. Every page now declares 
 
 The honest limit is that this only works backwards. Gates encode failures already survived. That sweep happened with the methodology already in place, eighty-eight versioned revisions in and fourteen projects running on it. Anyone selling a gate set that catches failures nobody has hit yet is selling the sentence, not the check.
 
-And I still have no mechanism for the thing that actually caused it. Nothing tells me what's currently distinguishable only in my head.
+And I still have no mechanism for the thing that actually caused it. No schema field covers the next one.
 
 https://ninochavez.co/demos/agentic-gates

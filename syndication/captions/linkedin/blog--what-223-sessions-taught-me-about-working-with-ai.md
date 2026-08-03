@@ -8,7 +8,7 @@ The other number that rearranged something was that 42% of sessions ran between 
 
 Which is not how most descriptions of these tools assume you use them. I don't ask quick questions. I open a conversation inside a project directory and stay in it, sometimes across days, and each project carries a file that tells the agent the stack, the conventions, and where the thing deploys — so nothing is spent re-explaining.
 
-What I still don't know is whether the meta-work grew because an agent made it cheap, or whether it was always that large a share of the job and I never counted.
+Either an agent made that work cheap, or it was always there and uncounted. The log can't tell me which.
 
 The rest of it, including what I actually type to start a session:
 https://ninochavez.co/blog/what-223-sessions-taught-me-about-working-with-ai

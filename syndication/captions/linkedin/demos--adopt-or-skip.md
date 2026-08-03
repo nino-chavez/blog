@@ -10,7 +10,7 @@ The uncomfortable part is what the exercise did in the other direction. Writing 
 
 So the honest version of "should I install this" surfaces a second question underneath, and it's the less comfortable one: what's already in here that I wouldn't install today?
 
-I also got this wrong the first time and had to retract a recommendation to get to the right answer. That correction is in the session rather than edited out of it, which felt like the minimum.
+I also got this wrong the first time and had to retract a recommendation to get to the right answer. That correction is in the session, not edited out of it.
 
 The full component-by-component pass, including the tracker queries and the retraction:
 https://ninochavez.co/demos/adopt-or-skip

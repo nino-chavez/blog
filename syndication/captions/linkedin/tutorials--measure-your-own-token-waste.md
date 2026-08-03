@@ -6,7 +6,7 @@ The number I genuinely didn't see coming was images, at 78 percent of every byte
 
 The workshop is the hands-on half of that. A hook that blocks two specific wastes without you having to think about them. A statusline that makes context usage visible while it's happening, rather than three tool calls later. Then the measurement tool, run against your own session logs instead of mine. Five metrics, with enough on each to pick one habit to change.
 
-My reference numbers are honestly the least useful part of it. They came from my sessions, my projects, my bad habits. What's interesting is what a different history says — and whether the number that surprised me moves at all when I check again in a few weeks.
+My reference numbers are honestly the least useful part of it. They came from my sessions, my projects, my bad habits. What's interesting is what a different history says. The 41 gets re-checked in a few weeks.
 
 Four exercises, twenty minutes:
 https://ninochavez.co/blog/tutorials/measure-your-own-token-waste
