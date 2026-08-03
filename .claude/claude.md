@@ -19,7 +19,7 @@ Astro-based blog with **eight content collections** (defined in `astro-build/src
 
 ## Non-Obvious Rules
 
-- **Voice guide enforcement:** All blog content follows `/docs/signal-dispatch-voice-guide.md`. Open with tension, show the work, self-interrogate, end provisionally.
+- **Voice guide enforcement:** All blog content follows `/docs/signal-dispatch-voice-guide.md` (v1.3). Open with the defect in hand (concrete broken/missing thing + scale), show the work (re-derive claims from the primary source, report counts), self-interrogate procedurally mid-post, close on a compressed reversal — final sentence under 12 words, concrete. No stock provisional closes ("here's where I've landed—for now" is a retired tell).
 - **Whitepapers use NO MDX components** -- plain markdown only, tables liberally. Escape `<` in tables ("Under 50ms" not "<50ms").
 - **Canonical tags only:** Must use approved tags from `astro-build/src/config/tags.ts` (18 total). 1-3 per post. No new tags without updating `tags.ts`.
 - **Feature images are generated:** `node scripts/generate-illustration-images.js --dir {blog|whitepapers|presentations} {filename}.mdx` (requires `OPENROUTER_API_KEY` from `astro-build/.env` — source it with `export $(grep OPENROUTER_API_KEY .env)` before running).
