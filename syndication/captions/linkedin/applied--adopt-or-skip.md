@@ -12,5 +12,5 @@ What changed my read most, though, was reading a project's issue tracker instead
 
 Last is the exit. "Cheap to try" is a claim about removal, and removal is the part nobody tests. The single most useful query turned out to be searching that same tracker for the uninstall itself. Silence there is its own answer.
 
-The full pass, with the queries:
+All four checks, with the queries:
 https://ninochavez.co/demos/applied/adopt-or-skip
