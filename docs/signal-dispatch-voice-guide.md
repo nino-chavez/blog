@@ -1,9 +1,9 @@
 # Signal Dispatch: Voice & Tone Guide
 ## Copy Editor and Ghostwriter Touchstone
 
-**Version**: 1.2
-**Last Updated**: 2026-05-24
-**Source**: Empirical analysis of 156 blog posts, 15 deep-read corpus sample
+**Version**: 1.3
+**Last Updated**: 2026-08-03
+**Source**: Empirical analysis of 156 blog posts, 15 deep-read corpus sample; adversarial audit against the 8 most recent posts (Jun–Jul 2026) plus a held-out generation test, 2026-08-03
 
 ---
 
@@ -45,7 +45,7 @@ These phrases were once authentic expressions of Nino's voice. Through repetitio
 
 ## Freshness Check (Rolling)
 
-> **Updated**: 2026-03-03
+> **Updated**: 2026-08-03
 > **Review Cadence**: After every 5 posts or monthly, whichever comes first
 
 This section tracks patterns and phrases that have appeared in *recent* posts. Even if they're not on the permanent "overused tells" list, repetition across a short window creates staleness. Avoid these in upcoming posts.
@@ -54,20 +54,13 @@ This section tracks patterns and phrases that have appeared in *recent* posts. E
 
 | Pattern/Phrase | Last Used | Cool Until |
 |----------------|-----------|------------|
-| Graveyard/death metaphor for ideas | 2026-01-21 | 2026-03-21 |
-| Opening with a scene-setting image (no "I") | 2026-03-01 | 2026-04-01 |
-| "I should be honest about my bias here" / confessing bias | 2026-03-01 | 2026-04-01 |
-| "And that's probably where my blind spot lives" | 2026-03-01 | 2026-05-01 |
-| "Splitting X. Splitting Y. Splitting Z." anaphora | 2026-03-01 | 2026-05-01 |
-| "Both paths are stuck" / parallel dead-end framing | 2026-03-01 | 2026-04-01 |
-| "I stared at that number for a while" / staring-at-data beat | 2026-03-01 | 2026-04-01 |
-| "Sounds like a promotion. In practice..." inversion | 2026-03-01 | 2026-04-01 |
-| Brownfield/greenfield as central metaphor | 2026-03-01 | 2026-05-01 |
-| Counterpoint opener: "I just wrote about X. But something kept nagging..." | 2026-03-01 | 2026-05-01 |
-| Prediction scorecard / "what I got right vs wrong" structure | 2026-03-03 | 2026-05-03 |
-| Kierkegaard "understood backwards, lived forwards" reference | 2026-03-03 | 2026-05-03 |
-| "The map diverges from the terrain" metaphor | 2026-03-03 | 2026-05-03 |
-| Trilogy framing (article → deck → retrospective) | 2026-03-03 | 2026-05-03 |
+| Defect-in-hand cold open | 2026-07-31 | n/a — house opener (8/8 recent posts); vary the artifact and scale, not the shape |
+| Compressed-reversal close (thesis turned back on the author) | 2026-07-31 | watch — 6/8 recent posts; alternate with a concrete-image close |
+| "What I Still Don't Have"-shaped final H2 | 2026-07-31 | watch — 8/8 recent posts; vary the wording, keep the concrete-absence job |
+| Bold-lead-in enumeration blocks | 2026-07-30 | 2026-09-15 |
+| "I went and read the code / the predicate / the registry" phrasing | 2026-07-31 | 2026-09-15 — keep the re-derivation beat, vary the sentence |
+
+*(Prior entries, all from 2026-03, removed per this section's own 60-day rule — the table had gone unmaintained for five months, which the 2026-08-03 audit flagged.)*
 
 ### How to Use This Section
 
@@ -103,7 +96,14 @@ After analyzing the full corpus, the Signal Dispatch voice is characterized by:
 
 ### Opening Patterns
 
-**The Question-First Hook** (Most Common)
+**The Defect-in-Hand Cold Open** (current dominant — 8 of 8 recent posts, audited 2026-08-03)
+First or second sentence states a concrete thing that broke, was absent, or was wrong — in your own system, with the scale attached. The tension is the failure itself, not an interrogative:
+
+- ✅ "I rebuilt a database table and it silently deleted two columns I needed. No error."
+- ✅ "There's a file in my project whose only job is to stop me from making one specific mistake. Last week I made that exact mistake. Three times in a row."
+- ✅ "A strategy document I hand to a stakeholder can carry a completely invented figure through every automated check I've built."
+
+**The Question-First Hook** (historical — zero uses in the 8 most recent posts)
 Every strong post opens with tension, not thesis:
 
 - ✅ "There's a specific kind of tension that lives between finishing a post and hitting publish."
@@ -139,6 +139,8 @@ State the thing most people don't say out loud:
 
 **The test**: Could you delete any explicit "I used to / now I" language and still feel the evolution? If yes, you probably don't need it.
 
+**Current form (audited 2026-08-03)**: the evolution now happens *inside* the piece, not across posts. Recent posts correct themselves mid-argument — "Earlier in this process I said the smaller version was a defensible thing to just try... The second half of that is wrong"; "My first draft of this section said the gate blocks on two conditions... Then I went and read the predicate. There's a third." Retracting your own earlier sentence, with the evidence that forced the retraction, is the strongest working form of this pattern.
+
 **2. The Compare/Contrast Pattern**
 
 **The spirit**: Nino often shows both sides of a tension—not to resolve it, but to sit in it. The reader sees a mind weighing options, comfortable with ambiguity.
@@ -166,6 +168,10 @@ State the thing most people don't say out loud:
 
 **The test**: Does your ending feel like a period or an ellipsis? Aim for ellipsis energy, but don't literally use ellipses.
 
+**The current dominant close (audited 2026-08-03)**: 6 of 8 recent posts end on a compressed reversal that turns the post's own thesis back on the author or the post itself — "Most of my discipline, it turns out, is just lint I haven't written yet." It reads open because the author is the unresolved case, not because the question is unanswered.
+
+**Checkable floor**: the final sentence runs under 12 words and lands on something concrete — an object, a place, a count. If the close is a question, it must contain a concrete noun, not an abstraction about your own state of mind. A closing sentence over 20 words is a failed close regardless of which shape you picked (corpus p90 is 22).
+
 **⚠️ Phrases to Retire (Overused Tells)**
 
 These phrases appeared in earlier versions of this guide as examples. They've been copied so often they now signal inauthenticity. **Do not use them**:
@@ -183,18 +189,21 @@ If you catch yourself reaching for one of these, find different words that captu
 **4. Short Sections with Bold Headers**
 Scannable. Punchy. Clear signposting.
 
-Header style:
-- Questions ("Is This Just Me?")
-- Statements ("The Real Work Is Reading the Signal")
-- Provocations ("You're Not the Driver. But You're Still in the Car")
+Header style (recent corpus runs declarative — all 46 recent H2s are statements, most opening with "What…" or "The…"):
+- Statements that make a claim someone could disagree with ("The Ledger Isn't Balanced", "Red Is the Good News")
+- Concrete-absence headers for the closing section ("What I Still Don't Have", "What's Left to Design") — 8 of 8 recent posts end on one
+- Questions and provocations remain legal but currently sit at zero
+- Avoid headers that narrate the essay's own movement ("Where This Leaves Me", "What I'm Still Turning Over") — they are Conclusion wearing better clothes and pass the generic-header ban-list cleanly. The closing-header exception names a concrete missing thing, never an interior state.
 
-**4. Short Sections with Bold Headers**
-Scannable. Punchy. Clear signposting.
+### Signature Moves (added 2026-08-03 — in nearly every recent post, previously undocumented)
 
-Header style:
-- Questions ("Is This Just Me?")
-- Statements ("The Real Work Is Reading the Signal")
-- Provocations ("You're Not the Driver. But You're Still in the Car")
+**1. The mechanical re-derivation beat.** Every recent post contains a passage where the author stops asserting and goes to read the primary source — then reports what he found as raw counts ("2,335 session files", "161 issues filed in the last thirty days", "nine kinds of check"). This is the structural spine of the current voice, not decoration: claims get re-derived, not repeated. A draft with no go-and-look passage reads as someone else.
+
+**2. The adverse-evidence section.** Six of eight recent posts give a dedicated H2 to weakening their own argument — scoping which evidence doesn't transfer, naming where the comparison ran the other way, or declining to act on the finding ("The One Place I Was Ahead", "The Ledger Isn't Balanced", "And I'm Not Building It"). This is the same signature as the compressed-reversal close and the mid-post retraction — one move occupying three positions.
+
+**3. The third-party-artifact response mode.** Five of eight recent posts are built around someone else's published artifact — a talk, a job listing, a paper, a tweet exchange — quoted verbatim with attribution and links, then tested against the author's own system. In this mode the artifact gets a bare `>` blockquote and the test gets the mechanical re-derivation beat.
+
+**4. The title echo (minor — about one post in six).** State the title as a bare bolded sentence at the argument's turn, then vary its verb through the piece ("You can't engineer trust. You can't fast-forward chemistry."). Works when the title is an assertion rather than a topic.
 
 ---
 
@@ -208,6 +217,8 @@ Header style:
 ✅ "So when people reflect something back—some version of 'you're built different'—my first instinct is to shrug it off. But lately, I've stopped shrugging."
 ✅ "I wonder if this shift signals growth—or if it's a symptom of overthinking."
 ```
+
+**Register shift (audited 2026-08-03)**: recent posts interrogate procedure, not feelings. The questions audit the author's own method and report the error rate — "I went into that audit with four hypotheses about where the waste was. Three were wrong." Interior-emotional self-questioning (the examples above) has zero instances in the recent corpus; default to the procedural form unless the piece is explicitly personal.
 
 **2. Cultural Touchstones (Personal, Specific)**
 ```
@@ -310,12 +321,22 @@ These phrases were once authentic. Through overuse, they've become tells. The sp
 
 ## Sentence-Level Mechanics
 
+### Registers: Composed vs. Spoken (added 2026-08-03)
+
+Signal Dispatch has two registers. Pick one before drafting — a drafter who doesn't will reproduce the modal post and miss the tails.
+
+**Composed** (the default — technical and analytical posts): median sentence 8–11 words, prose paragraphs, first-person singular, one idea per paragraph. Everything else in this guide describes this register unless marked.
+
+**Spoken** (short reflective pieces that began as something said out loud — e.g. "You Can't Engineer Growth"): median sentence ~6 words, single clauses stacked on consecutive lines inside one paragraph, heavy deliberate anaphora, collective "we" when writing about a team or club. The anti-tic warnings in the Freshness Check apply to the composed register only — in the spoken register, repeated sentence openers are the rhythmic engine, not a tic.
+
 ### Rhythm and Pacing
 
-**Mix Long and Short**
+**Mix Long and Short — with a checkable target**
 ```
 ✅ "I've never seen myself as exceptional. Not in a false humility kind of way. Just… I only know what it's like to be in my head."
 ```
+
+"Mix long and short" is not a target; these are: median sentence 8–11 words, at least a third of sentences six words or shorter, no more than one in eight at twenty words or longer. Count them if unsure — drafts reliably under-run the short end (the 2026-08-03 held-out test produced 28% short sentences against the corpus median of 37%).
 
 **Use Fragments for Emphasis**
 
@@ -338,12 +359,15 @@ These phrases were once authentic. Through overuse, they've become tells. The sp
 ✅ "What if that reflection isn't about praise? What if it's just a different camera angle?"
 ```
 
+**Placement and floor (audited 2026-08-03)**: questions now live mid-post, as the pivot that marks the turn in the investigation ("Hadn't I already solved this?") — not in openers or headers. Checkable floor: a post of 800 words or fewer carries at least two literal question marks; longer posts carry three to five. Zero questions is the single clearest tell of a composed-essay draft rather than thinking-out-loud.
+
 ### Formatting for Emphasis
 
-**Blockquotes for Key Moments**
+**Blockquotes Carry External Evidence** (usage shifted — audited 2026-08-03)
 ```markdown
-> "This is it. This is the thing that finally leaves me behind."
+> "A clean-sheet redefinition of the shared IA contract would repeat the exact mistake..."
 ```
+Recent posts use `>` exclusively for verbatim third-party material — a quoted job listing, a rival model's objection, the artifact under response. The author's own signature line goes to `<PullQuote>`, never to a bare blockquote.
 
 **Bold for Section Headers and Key Terms**
 ```markdown
@@ -394,7 +418,7 @@ After you have grounded a term — described what it does plainly — you can us
 
 ### Adjacent Rules
 
-- **Project / repo / tool names**: in posts intended for a public audience, sanitize internal names to generic descriptors ("a workflow tool", "another codebase"). Real names invite inference about employer, clients, and stack that may not be intended.
+- **Project / repo / tool names**: sanitization is selective, not flat (audited 2026-08-03). Your own private stack stays generic ("a terminal agent I drive every day", "my agent", "a rival model") — real names invite inference about employer, clients, and stack. Third-party sources and your own public artifacts run the other way: named in full and linked (the NBER paper, the Gartner forecast, the public GitHub repo). Anonymize what's yours-and-private; cite what's public.
 - **Inventories are highest-risk**: a list of items the reader has not met is where this trap is most likely to fire. Inventories must be either glossed inline or rewritten as function-descriptions.
 - **Function fragments beat noun lists** at the climax of a post: "The checks that block bad output. The joins that surface where systems disagree. The traces that tie code back to intent." Each fragment carries meaning without requiring a glossary.
 
@@ -403,6 +427,8 @@ After you have grounded a term — described what it does plainly — you can us
 ## Content Themes (What to Write About)
 
 ### Primary Themes (Evidence from Corpus)
+
+> **Currency note (2026-08-03)**: the 8 posts published Jun–Jul 2026 sit entirely in themes 1–2; themes 3–6 (and the photography / Spanish / volleyball touchstones) have zero hits in that window. A 45-day single-phase window can't prove them dead, so they stay listed — but a drafter matching *current* output should default to themes 1–2 and treat 3–6 as dormant until one recurs in a published post.
 
 **1. AI-Assisted Development (Practical, Not Hype)**
 - Actual workflows, not marketecture
@@ -498,6 +524,17 @@ After you have grounded a term — described what it does plainly — you can us
 **The Invitation**: How you might start
 
 **Example**: "From Fear to Flow," "Why I Started Signal Reflex"
+
+### Template 5: The Investigation (current dominant — 8 of 8 recent posts, audited 2026-08-03)
+
+**Hook**: Defect in hand — the concrete broken/missing/wrong thing, with its scale, in sentence one or two
+**How I Got Here**: the path that produced the defect
+**The Mechanical Check**: stop asserting, go read the primary source, report the counts (see Signature Moves)
+**The Adverse Evidence**: a dedicated section that weakens the post's own argument — scope what doesn't transfer, name where the comparison ran the other way
+**What Changed**: the concrete change made, or explicitly declined ("I found the hole and I'm not building the fix")
+**What I Still Don't Have**: close on the concrete missing thing
+
+**Example**: "Nothing Broke, It Just Wasn't There," "Every Link Resolves, Nothing Checks the Number"
 
 ---
 
@@ -771,10 +808,11 @@ You can't read about Aegis and "get it." You have to live through the drift.
 ```
 
 **Usage guidelines:**
-- 2-4 callouts per post maximum
+- 1-3 callouts per post (recent corpus: short posts carry exactly one; only the longest reach 2-3)
 - Space them throughout—don't cluster
-- Use different types for variety
+- Types in current use: `warning`, `insight`, `signal`; `noise` has zero recent uses — reach for it only deliberately
 - Title is optional; omit for shorter callouts
+- Never a callout whose content restates the PullQuote or already flows in prose
 
 **When to use:**
 - A insight that deserves to stand apart from the prose
@@ -838,6 +876,8 @@ I see this in my own work constantly:
 - No periods at end of items (unless full sentences)
 - Parallel structure (all start with verbs, or all are nouns)
 - 3-7 items typical; more than 7 may need subheaders
+
+**Current-corpus amendment (2026-08-03)**: recent posts increasingly carry enumeration as **bold-lead-in paragraph blocks** — "**A time window that never opened.** ... **A retry queue that stranded its own work.** ..." — rather than bullets, and send genuinely tabular material to a markdown table. Bullets remain legal; the blocks read more like prose and are currently the house default for enumerating findings.
 
 ### Headers
 
@@ -944,18 +984,20 @@ Hackathons and show-and-tells. Not as one-off events—as ongoing practice. Crea
 **Voice Consistency Score**: 8.5/10
 Posts maintain consistent voice even across different topics. Strongest consistency in opening hooks, structural patterns, and provisional conclusions. Slight variation in technical depth based on topic.
 
-**Unique Voice Markers**:
-- Meta-awareness (writing about writing)
-- Photography metaphors
-- Spanish cultural references
-- Volleyball coaching examples
-- Provisional conclusions (directional, varied phrasing)
-- Question-first openings
-- Bold section headers
-- Intentional fragments
+**Unique Voice Markers** (recent-window status from the 2026-08-03 audit in parentheses):
+- Meta-awareness (writing about writing) — active
+- Photography metaphors — dormant, zero uses Jun–Jul 2026
+- Spanish cultural references — dormant, zero uses Jun–Jul 2026
+- Volleyball coaching examples — dormant, zero uses Jun–Jul 2026
+- Provisional conclusions — active, now in compressed-reversal form
+- Question-first openings — dormant, zero of 8 recent posts (replaced by the defect-in-hand cold open)
+- Bold section headers — active
+- Intentional fragments — active
+- Mechanical re-derivation beat — active, 8/8 (added 2026-08-03)
+- Adverse-evidence section — active, 6/8 (added 2026-08-03)
 
 ---
 
-**Last Updated**: 2025-12-14
+**Last Updated**: 2026-08-03 (adversarial audit + held-out generation test; header, Freshness Check, and this stamp reconciled — they previously carried three different dates)
 **Next Review**: Quarterly or after 50 new posts
 **Maintained By**: Signal Dispatch Editorial (AI-assisted)
