@@ -740,11 +740,11 @@
     },
     "linkedin": {
      "mode": "teaser",
-     "state": "eligible",
+     "state": "posted",
      "caption": "captions/linkedin/blog--what-223-sessions-taught-me-about-working-with-ai.md",
-     "postedAt": null,
+     "postedAt": "2026-08-03",
      "scheduledFor": "2026-08-04",
-     "url": null
+     "url": "https://www.linkedin.com/feed/update/urn:li:activity:7490181409349783552"
     },
     "devto": {
      "mode": "skip",
