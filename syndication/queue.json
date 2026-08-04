@@ -313,6 +313,7 @@
     "linkedin": {
      "mode": "native",
      "state": "eligible",
+     "caption": "captions/linkedin/blog--what-if-the-fork-is-the-problem.md",
      "postedAt": null,
      "scheduledFor": "2026-08-06",
      "url": null
