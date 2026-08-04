@@ -9,6 +9,62 @@ Per methodology rule, no entry here is automatically promoted upstream. Methodol
 
 ---
 
+## 2026-08-03 — Derived artifacts drift from their source by copying, and only a verifier catches it
+
+**Trigger**: A caption shipped asserting the opposite of what its source post said. The claim survived a voice audit, six editing passes, an n-gram scan and four threshold checks, then drew a comment answering the invented version.
+
+**Scope**: Candidate for methodology promotion
+
+**Bucket**: consumer-local
+
+**Status**: Active
+
+### What happened
+
+The source post says the cross-project meta-work is *invisible to a sprint board and a git log*. The caption said *"before I could hand this work to a machine, most of it just didn't happen."* Those are different claims — one is about measurement, the other about existence. The first commenter responded to the second: "if you didn't do it before and were still successful, why bother doing it now?" She was answering a sentence the author never wrote.
+
+A full sweep found four ungrounded claims in that one caption. Three were introduced *during* the session's editing passes, two of them in the pass argued at the time to be the more faithful version.
+
+### The mechanism
+
+**Drift by copying.** The first draft is written from the source. Every later pass is written from the draft. After pass one the derived artifact silently becomes the working source of truth, and the editor does not re-read the original because they remember having read it. Each pass is a copy of a copy, and no individual step feels like invention.
+
+This is why the existing rule did not help. "Never fabricate interior state" was known, stated in the operator's own preferences, and violated anyway — the violation did not arrive as a fabrication, it arrived as an edit.
+
+### Why no existing check caught it
+
+| Check | Compared | Result |
+|---|---|---|
+| Voice audit (agent) | caption vs voice guide | passed |
+| n-gram scan | caption vs other captions | zero overlap |
+| Threshold checks | caption vs numbers | 20/20 clean |
+| Numeric fidelity | caption figures vs source figures | 20/20 clean |
+
+Every one compared the caption to something other than its source's *meaning*. The failing sentence contained no number, so numeric fidelity — the one check that did read the source — passed it.
+
+### The fix, as a verifier rather than a rule
+
+`syndication/check-captions.mjs`. Splitting claims by what is mechanically decidable:
+
+- **Figures** — every number in a caption must appear in its source; non-zero exit otherwise. Airtight, and not where captions go wrong.
+- **Experiential claims** — first-person past-tense assertions. Not mechanizable. The tool extracts each one and prints it with its source path, turning "check the source" into a worklist that cannot be skipped silently.
+
+Written as code because a documented rule demonstrably does not survive drift-by-copying. This is the same argument the lie-surface piece makes about its own subject: a claim with no passing verifier is a liability wearing documentation's clothes. The rule existed. The verifier didn't.
+
+### The general form
+
+Any artifact derived from a source and then edited more than once will drift, and the drift is invisible to checks that compare the artifact to itself, to its siblings, or to a threshold. **Re-derivation must be repeated per editing pass, not performed once at draft time.** Applies to captions, summaries, briefs, decks, release notes, and any agent-generated restatement of a longer document.
+
+The cheap tell that a check is not doing this work: it can pass without ever opening the source file.
+
+**References**:
+- `syndication/check-captions.mjs` — the gate
+- `46d1470` — the two fabrications it found that were still fixable
+- LinkedIn activity 7490181409349783552 — the live caption and the comment answering its invented claim
+- Session 2026-08-03
+
+---
+
 ## 2026-08-03 — The drip scheduler posts every series in reverse order
 
 **Trigger**: Reading the three taste-test captions in posting order showed part 3 scheduled a week ahead of part 2 — the conclusion reaching followers before the middle.

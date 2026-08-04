@@ -7,7 +7,35 @@ node syndication/build-queue.mjs --due       # what is owed in the next 14 days
 node syndication/build-queue.mjs --report    # tallies, writes nothing
 node syndication/build-queue.mjs             # rewrite queue.json
 node syndication/build-queue.mjs --refresh   # re-pull the Substack archive first
+node syndication/check-captions.mjs          # source-fidelity gate — run before posting
 ```
+
+## Run the fidelity gate before a caption ships
+
+`check-captions.mjs` compares every caption against the piece it points at. It
+exists because on 2026-08-03 a caption went live claiming "before I could hand
+this work to a machine, most of it just didn't happen" — the source says the
+work is invisible to a sprint board and a git log, not that it wasn't happening.
+The first commenter answered the invented claim, not the post.
+
+That sentence survived a voice audit, six editing passes, an n-gram scan, and
+four threshold checks. All of them compared captions to each other or to a
+number. None re-read the source. The failure mode is drift-by-copying: once a
+draft exists, the caption becomes the working source of truth and every later
+edit is a copy of a copy. A written rule does not survive that, because the
+editor believes they already checked.
+
+The gate splits claims by what can actually be verified mechanically:
+
+- **Figures** — every number in a caption must appear in its source. Non-zero
+  exit if not. This part is airtight and it is not where captions go wrong.
+- **Experiential claims** — first-person statements about what happened. No
+  matcher can check these; the tool prints each one with its source path so the
+  reading has a worklist. Skipping it is then a visible choice rather than an
+  oversight.
+
+Both classes matter, but the second is the one that ships wrong. The 8/4 claim
+contained no number, which is exactly why every numeric check passed it.
 
 ## Nothing here is scheduled
 
