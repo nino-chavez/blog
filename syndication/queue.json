@@ -99,11 +99,11 @@
     },
     "linkedin": {
      "mode": "teaser",
-     "state": "eligible",
+     "state": "posted",
      "caption": "captions/linkedin/whitepapers--claim-classes.md",
-     "postedAt": null,
+     "postedAt": "2026-08-04",
      "scheduledFor": "2026-08-06",
-     "url": null
+     "url": "https://www.linkedin.com/feed/update/urn:li:activity:7490384517342388224"
     },
     "devto": {
      "mode": "skip",
@@ -140,10 +140,11 @@
     },
     "devto": {
      "mode": "canonical",
-     "state": "eligible",
-     "postedAt": null,
+     "state": "posted",
+     "postedAt": "2026-08-04",
      "scheduledFor": "2026-08-12",
-     "url": null
+     "url": "https://dev.to/ninochavez/measure-your-own-token-waste-in-four-exercises-al6",
+     "articleId": 4312982
     }
    }
   },

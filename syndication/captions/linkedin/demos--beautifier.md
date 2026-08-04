@@ -2,7 +2,7 @@ I installed a thing to make my READMEs prettier. This is the kind of job you han
 
 It barely touched the design. What it did instead was read the code and start telling me the documentation was lying.
 
-The first README says the project deploys to one platform. The config has said a different one for months. Nobody had noticed, because why would you. A README is the file you write once and then never open again, which is exactly what makes it the most confident liar in the repo.
+The first README says the project deploys to one platform. The config has said a different one for months. Nobody had noticed, because why would you. A README is written once and then trusted indefinitely, which is exactly what makes it the most confident liar in the repo.
 
 Then the install instructions, which tell you to use one package manager. There's a lockfile sitting in that repo from the other one. There has only ever been a lockfile from the other one. Every command in that guide would send a new person down a path that has never worked. It would take them a while to figure out why, because the document sounds so certain of itself.
 

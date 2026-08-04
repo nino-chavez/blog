@@ -12,7 +12,7 @@ A count that comes back at one or two isn't automatically a no, either. It's a d
 
 One step almost nobody runs. Read the install guide's own account of what it writes to disk. Prefixed names and new named sections are additive and reversible. Bare generic names, and rewrites of sections you already use, are not.
 
-There's still no clean answer to "is this tool worth it." The honest response is a method, not a verdict. Nobody wants the method.
+There's still no clean answer to "is this tool worth it." The honest response is a method, not a verdict. The ask is for a verdict.
 
 Forty minutes, nothing installed:
 https://ninochavez.co/blog/tutorials/grade-an-agent-tool-before-you-install-it

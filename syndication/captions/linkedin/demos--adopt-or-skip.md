@@ -6,7 +6,7 @@ Eight of its components could plausibly have landed on my setup. Three I was alr
 
 That left one worth installing.
 
-The uncomfortable part is what the exercise did in the other direction. Writing down my own baseline meant listing what loads at startup. Every hook. Every rule. Every helper. That list had grown one reasonable addition at a time. No single entry was a mistake. An earlier audit of the same setup found a duplicate install and a tool connection nothing had invoked. All of it still loading, every session. Nothing ever prompts you to take something out.
+The uncomfortable part is what the exercise did in the other direction. Writing down my own baseline meant listing what loads at startup. Every hook. Every rule. Every helper. That list had grown one reasonable addition at a time. No single entry was a mistake. An earlier audit of the same setup found a duplicate install and a tool connection nothing had invoked. All of it still loading, every session. Nothing in that loop asks whether it should still be there.
 
 So the honest version of "should I install this" surfaces a second question underneath. It's the less comfortable one: what's already in here that I wouldn't install today?
 
