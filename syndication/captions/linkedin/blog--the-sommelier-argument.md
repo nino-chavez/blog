@@ -10,7 +10,7 @@ The job is matching, not production and not critique. What's the occasion? What 
 
 It demands domain depth, the kind that makes non-obvious connections. It demands reading the situation, technical and human. And it demands an honest inventory of what AI does well today, not the marketing version.
 
-The inventory is the part people skip. Half the bad AI implementations I've seen came from matching a problem to a capability that doesn't exist yet. They read the brochure. They didn't taste the wine.
+Skip the inventory and you're guessing with confidence. Half the bad AI implementations I've seen came from matching a problem to a capability that doesn't exist yet. They read the brochure. They didn't taste the wine.
 
 The catch is what it costs to accept. Your value isn't in making things.
 

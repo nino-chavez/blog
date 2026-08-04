@@ -14,13 +14,19 @@
 // that says "check the source" does not survive that, because the editor believes
 // they already did. A command does.
 //
-// Two classes, checked differently:
+// Three classes, checked differently:
 //   NUMBERS       — mechanizable. Every figure in a caption must appear in its
 //                   source. Fails the build.
-//   EXPERIENTIAL  — not mechanizable. First-person claims about what the author
-//                   did, believed, or observed cannot be verified by matching;
-//                   they require reading. This prints them with the source path
-//                   so the reading has a worklist and cannot be skipped silently.
+//   FIRST-PERSON  — not mechanizable. Claims about what the author did, believed,
+//                   or observed cannot be verified by matching; they require
+//                   reading. Printed with the source path so the reading has a
+//                   worklist and cannot be skipped silently.
+//   SCOPE         — the mirror image, added 2026-08-04. Claims about the reader
+//                   or about people in general. A caption can break fidelity in
+//                   either direction: narrowing a source's general claim onto the
+//                   author, or widening a claim about his system onto everyone.
+//                   The second kind cost a comment thread that opened by
+//                   disputing a premise instead of engaging the argument.
 //
 // Usage:
 //   node syndication/check-captions.mjs            # all captions
@@ -79,9 +85,31 @@ const FIRST_PERSON = /\b(I|I'd|I've|I'm|I'll|my|mine|me|myself)\b/i
 const PAST_TENSE =
   /\b(was|were|had|did|didn't|got|built|ran|wrote|asked|installed|pointed|found|kept|spent|skipped|been|assumed|guessed|logged|typed|measured|watched|noticed|tried|used to)\b/i
 
+// The mirror image, and the reason this second pass exists. Relocation narrows
+// a source's general claim onto Nino. The same instinct also runs the other
+// way: a claim the source makes about HIS system gets widened onto everyone
+// ("a README is the file you write once and never open again"), which a reader
+// can deny from experience in one line. Both break the same rule — the caption
+// changed the scope the source assigned.
+//
+// FIRST_PERSON cannot see these; they contain no first-person pronoun. A manual
+// scan cannot be trusted either: on 2026-08-04 one such line was fixed and its
+// twin four paragraphs up, in the same caption, survived the same read.
+//
+// This deliberately has no companion verb list. The first draft paired it with
+// one (skip/write/read/want/...) and that filter silently dropped "Nothing ever
+// PROMPTS you to take something out" — reproducing, in a new check written the
+// same day, the exact bug the PAST_TENSE note above describes. A verb list
+// fails on the verb nobody listed, and it fails silently, which is the worst
+// property a gate can have. Pronoun alone: 26 printed lines become 75. That is
+// the correct trade — 49 lines of noise cost a few seconds of reading, and one
+// silent miss costs a published correction.
+const SCOPE_CLAIM = /\b(you|your|you're|nobody|no one|everyone|everybody|anyone|people|most people|nearly every|almost every)\b/i
+
 let unverified = 0
 let missing = 0
 const worklist = []
+const scopelist = []
 
 for (const file of readdirSync(CAPTIONS).filter((f) => f.endsWith('.md')).sort()) {
   if (filter && !file.includes(filter)) continue
@@ -101,12 +129,18 @@ for (const file of readdirSync(CAPTIONS).filter((f) => f.endsWith('.md')).sort()
     unverified++
   }
 
-  const claims = caption
+  const sentences = caption
     .split(/(?<=[.?!])\s+/)
     .map((s) => s.replace(/\s+/g, ' ').trim())
-    .filter((s) => s && FIRST_PERSON.test(s))
+    .filter(Boolean)
+
+  const claims = sentences
+    .filter((s) => FIRST_PERSON.test(s))
     .sort((a, b) => Number(PAST_TENSE.test(b)) - Number(PAST_TENSE.test(a)))
   if (claims.length) worklist.push({ file, path, claims })
+
+  const scoped = sentences.filter((s) => !FIRST_PERSON.test(s) && SCOPE_CLAIM.test(s))
+  if (scoped.length) scopelist.push({ file, path, claims: scoped })
 }
 
 if (worklist.length) {
@@ -122,10 +156,24 @@ if (worklist.length) {
   }
 }
 
+if (scopelist.length) {
+  console.log('\nSCOPE CLAIMS — claims about the reader, or about people in general.')
+  console.log('Same test, other direction: find the source sentence that makes this claim')
+  console.log('about PEOPLE. If the source only says it about Nino\'s own system, the')
+  console.log('caption must say it about his system. A reader who does the thing you said')
+  console.log('nobody does will answer the premise instead of the idea.\n')
+  for (const { file, path, claims } of scopelist) {
+    console.log(`  ${file}\n  source: ${path}`)
+    for (const c of claims) console.log(`    ? ${c}`)
+    console.log()
+  }
+}
+
 const total = readdirSync(CAPTIONS).filter((f) => f.endsWith('.md')).length
 console.log(
   `${total} caption(s): ${unverified} with unverified figures, ${missing} with no source, ` +
-    `${worklist.reduce((n, w) => n + w.claims.length, 0)} first-person claim(s) needing a read.`
+    `${worklist.reduce((n, w) => n + w.claims.length, 0)} first-person claim(s) and ` +
+    `${scopelist.reduce((n, w) => n + w.claims.length, 0)} scope claim(s) needing a read.`
 )
 
 process.exit(missing ? 2 : unverified ? 1 : 0)

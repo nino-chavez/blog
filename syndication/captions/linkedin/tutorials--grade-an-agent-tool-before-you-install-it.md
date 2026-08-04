@@ -1,6 +1,6 @@
 "Is this tool any good" has no answer. What an evaluation produces is a count: how many components the thing would actually add to your setup. That count comes out different for every person who asks.
 
-Which makes a recommendation a report on one machine, wearing a review's clothes. Something worth every minute to a person running stock tooling is worth roughly nothing to a person a year into accumulating their own. The number is personal and the recommendation isn't transferable. Which is inconvenient, because a verdict is what people want.
+Which makes a recommendation a report on one machine, wearing a review's clothes. Something worth every minute to a person running stock tooling is worth roughly nothing to a person a year into accumulating their own. The number is personal and the recommendation isn't transferable.
 
 Four checks produce that count, none of them requiring you to install the thing.
 

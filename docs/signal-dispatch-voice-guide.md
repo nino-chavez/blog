@@ -1,9 +1,9 @@
 # Signal Dispatch: Voice & Tone Guide
 ## Copy Editor and Ghostwriter Touchstone
 
-**Version**: 1.4
-**Last Updated**: 2026-08-03
-**Source**: Empirical analysis of 156 blog posts, 15 deep-read corpus sample; adversarial audit against the 8 most recent posts (Jun–Jul 2026) plus a held-out generation test, 2026-08-03; v1.4 adds the relocated-claim rule, measured against seven violations in one caption batch, 2026-08-03
+**Version**: 1.5
+**Last Updated**: 2026-08-04
+**Source**: Empirical analysis of 156 blog posts, 15 deep-read corpus sample; adversarial audit against the 8 most recent posts (Jun–Jul 2026) plus a held-out generation test, 2026-08-03; v1.4 adds the relocated-claim rule, measured against seven violations in one caption batch, 2026-08-03; v1.5 generalises it to scope preservation in both directions, 2026-08-04
 
 ---
 
@@ -45,7 +45,9 @@ These phrases were once authentic expressions of Nino's voice. Through repetitio
 
 ## Freshness Check (Rolling)
 
-> **Updated**: 2026-08-03
+> **Updated**: 2026-08-03 — this is the date of the last *phrase-table* review,
+> not of the guide. It moves when recent posts are re-scanned for stale patterns,
+> which is a different job from a rule change. Do not sync it to the header.
 > **Review Cadence**: After every 5 posts or monthly, whichever comes first
 
 This section tracks patterns and phrases that have appeared in *recent* posts. Even if they're not on the permanent "overused tells" list, repetition across a short window creates staleness. Avoid these in upcoming posts.
@@ -304,6 +306,28 @@ self-implication.
 > it **to Nino specifically**. Not a sentence that supports the idea — one that
 > assigns it to him. If the source states it generally, the draft states it
 > generally.
+
+**It runs in both directions** (added 2026-08-04). The rule above is half of a
+rule. The same instinct that narrows a general claim onto Nino also widens a
+claim about his own system onto everyone, because a sentence about *the reader*
+lands harder than a sentence about one machine:
+
+| Source says | Draft said |
+|---|---|
+| a README of his drifted from its config | "a README is the file **you** write once and then never open again" |
+| the count is different for every person who asks | "a verdict is what **people** want" |
+| *(nothing — invented)* | "**Nobody** wants the method" |
+
+The general rule is scope preservation: **the draft keeps the subject the source
+assigned it.** Not narrower, not wider. A widened claim is the cheaper failure to
+make and the cheaper one to answer — a reader who does maintain their READMEs
+replies denying the premise, and the thread is now about whether the premise
+holds rather than about the argument.
+
+Not every general statement is a violation. If the source makes the claim about
+people, the draft may too ("the exit is the part nobody tests" is in the source
+verbatim). The test is the same in both directions: **find the sentence that
+assigns the claim to that subject.**
 
 **Run it on every editing pass, not once at draft time.** Five of the seven
 entered during revision, after the draft had replaced the source as the thing
@@ -1045,6 +1069,6 @@ Posts maintain consistent voice even across different topics. Strongest consiste
 
 ---
 
-**Last Updated**: 2026-08-03 (v1.4 — added §1b, relocated claims: the "which friend?" test catches invented people and misses the failure that actually ships, where nothing is invented and only the attribution moves. v1.3 was the adversarial audit + held-out generation test; header, Freshness Check, and this stamp reconciled — they previously carried three different dates)
+**Last Updated**: 2026-08-04 (v1.5 — §1b generalised: scope preservation runs both ways, after three widened claims and one twin that a manual scan missed inside a caption already being edited. v1.4 added §1b, relocated claims: the "which friend?" test catches invented people and misses the failure that actually ships, where nothing is invented and only the attribution moves. v1.3 was the adversarial audit + held-out generation test; header, Freshness Check, and this stamp reconciled — they previously carried three different dates)
 **Next Review**: Quarterly or after 50 new posts
 **Maintained By**: Signal Dispatch Editorial (AI-assisted)
