@@ -29,13 +29,29 @@ The gate splits claims by what can actually be verified mechanically:
 
 - **Figures** — every number in a caption must appear in its source. Non-zero
   exit if not. This part is airtight and it is not where captions go wrong.
-- **Experiential claims** — first-person statements about what happened. No
+- **First-person claims** — every sentence containing "I", "my", or "me". No
   matcher can check these; the tool prints each one with its source path so the
   reading has a worklist. Skipping it is then a visible choice rather than an
   oversight.
 
 Both classes matter, but the second is the one that ships wrong. The 8/4 claim
 contained no number, which is exactly why every numeric check passed it.
+
+For each printed claim, find the sentence in the source that attributes it **to
+Nino specifically** — not one that supports the idea, one that assigns it to
+him. If the source states it generally, the caption states it generally. The
+failure is almost never invention; it is relocation, which reads as paraphrase
+while you draft and passes any check aimed at made-up people and events.
+
+The first version of this gate also required a past-tense verb from a fixed
+list, on the theory that present-tense opinion is argument rather than
+autobiography. It reported all 20 captions clean while four violations sat in
+them, because the verbs were ones nobody had listed — "which I hadn't
+**thought** to do until recently", "sharpen it more than I **expected**", "I'd
+been **reading** one for the other". The list is now a sort order, not a
+filter. Relocation hides in whichever verb the filter is missing, so the filter
+had to go: 40 printed claims became 99, and the extra 59 held three of the
+seven defects this sweep found.
 
 ## Nothing here is scheduled
 

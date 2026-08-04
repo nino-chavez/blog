@@ -67,11 +67,16 @@ function sourceFor(file) {
 // "38,322" everywhere — normalise both sides rather than guessing the format.
 const figures = (s) => new Set((s.match(/\b\d[\d,]*(?:\.\d+)?\b/g) || []).map((n) => n.replace(/,/g, '')))
 
-// A claim is experiential when it is first-person AND asserts something happened.
-// Present-tense opinion ("I think X is wrong") is argument, not a factual claim
-// about the author's history, and does not need source backing.
-const FIRST_PERSON = /\b(I|I'd|I've|I'm|my|me)\b/i
-const PAST_ASSERTION =
+// Every first-person sentence gets read. An earlier version also required a
+// verb from PAST_TENSE below, on the theory that present-tense opinion ("I
+// think X is wrong") is argument rather than a claim about the author's
+// history. That gate ran clean over captions carrying four real violations,
+// because the violations used verbs nobody thought to list: "which I hadn't
+// THOUGHT to do until recently", "sharpen it more than I EXPECTED", "I'd been
+// READING one for the other". The verb list is now a sort order, not a filter
+// — relocation hides in whichever verb the list is missing.
+const FIRST_PERSON = /\b(I|I'd|I've|I'm|I'll|my|mine|me|myself)\b/i
+const PAST_TENSE =
   /\b(was|were|had|did|didn't|got|built|ran|wrote|asked|installed|pointed|found|kept|spent|skipped|been|assumed|guessed|logged|typed|measured|watched|noticed|tried|used to)\b/i
 
 let unverified = 0
@@ -99,16 +104,20 @@ for (const file of readdirSync(CAPTIONS).filter((f) => f.endsWith('.md')).sort()
   const claims = caption
     .split(/(?<=[.?!])\s+/)
     .map((s) => s.replace(/\s+/g, ' ').trim())
-    .filter((s) => s && FIRST_PERSON.test(s) && PAST_ASSERTION.test(s))
+    .filter((s) => s && FIRST_PERSON.test(s))
+    .sort((a, b) => Number(PAST_TENSE.test(b)) - Number(PAST_TENSE.test(a)))
   if (claims.length) worklist.push({ file, path, claims })
 }
 
 if (worklist.length) {
-  console.log('\nEXPERIENTIAL CLAIMS — verify each against its source by reading.')
-  console.log('No matcher can do this. Absence of a figure is why the 8/4 caption shipped wrong.\n')
+  console.log('\nFIRST-PERSON CLAIMS — verify each against its source by reading.')
+  console.log('For each one, find the sentence in the source that attributes it to Nino')
+  console.log('SPECIFICALLY — not one that supports the idea, one that assigns it to him.')
+  console.log('If the source states it generally, the caption must state it generally.')
+  console.log('Past-tense claims sort first; they are likelier, not the only risk.\n')
   for (const { file, path, claims } of worklist) {
     console.log(`  ${file}\n  source: ${path}`)
-    for (const c of claims) console.log(`    · ${c}`)
+    for (const c of claims) console.log(`    ${PAST_TENSE.test(c) ? '!' : '·'} ${c}`)
     console.log()
   }
 }
@@ -116,7 +125,7 @@ if (worklist.length) {
 const total = readdirSync(CAPTIONS).filter((f) => f.endsWith('.md')).length
 console.log(
   `${total} caption(s): ${unverified} with unverified figures, ${missing} with no source, ` +
-    `${worklist.reduce((n, w) => n + w.claims.length, 0)} experiential claim(s) needing a read.`
+    `${worklist.reduce((n, w) => n + w.claims.length, 0)} first-person claim(s) needing a read.`
 )
 
 process.exit(missing ? 2 : unverified ? 1 : 0)
