@@ -25,6 +25,14 @@ draft exists, the caption becomes the working source of truth and every later
 edit is a copy of a copy. A written rule does not survive that, because the
 editor believes they already checked.
 
+**The 8/4 caption file no longer matches what is live on LinkedIn.** The file
+was corrected on 2026-08-03 (four fixes: the invented motive, the "I kept a
+log" agency, and the two relocations in the "part I keep turning over"
+paragraph). The published post at the `url` in `queue.json` still carries the
+original text and has a comment thread answering the invented claim. Editing a
+live post is the operator's call, so the divergence is recorded here rather
+than silently reconciled. `state: posted` means posted, not posted-as-written.
+
 The gate splits claims by what can actually be verified mechanically:
 
 - **Figures** — every number in a caption must appear in its source. Non-zero
