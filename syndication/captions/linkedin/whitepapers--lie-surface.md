@@ -10,7 +10,7 @@ What separates them isn't accuracy. It's how wrong a thing can get without anyth
 
 Authority and trustworthiness turn out to be different axes. I'd been reading one for the other.
 
-The part I got wrong: I assumed binding claims to verifiers would cut what a session costs. Tested cold, answer quality improved inside a single turn. The token count didn't move at all. The agent read the registry, then verified against source anyway. That is the behavior the whole model exists to protect. Verification isn't the waste. It's the point.
+The tempting justification is efficiency. An agent that reads a registry skips the rediscovery and answers in fewer tokens. Tested cold, that's wrong in an instructive way. Answer quality improved inside a single turn. The token count didn't move at all. The agent read the registry, then verified against source anyway. That is the behavior the whole model exists to protect. Verification isn't the waste. It's the point.
 
 The layer underneath resists all of it. Rationale has no verifier. You can date it and append to it. The source is one person's memory.
 

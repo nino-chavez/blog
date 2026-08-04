@@ -1,6 +1,6 @@
-Every tool recommendation I've given, including the ones I still stand behind, was a report on my own machine wearing the clothes of a review.
+"Is this tool any good" has no answer. What an evaluation produces is a count: how many components the thing would actually add to your setup. That count comes out different for every person who asks.
 
-That isn't false modesty. It's arithmetic. What a real evaluation produces isn't a verdict. It's a count: how many components the thing would actually add to your setup. That count comes out different for every person who asks. Something worth every minute to a person running stock tooling is worth roughly nothing to a person a year into accumulating their own. The number is personal and the recommendation isn't transferable. Which is inconvenient, because a verdict is what people want.
+Which makes a recommendation a report on one machine, wearing a review's clothes. Something worth every minute to a person running stock tooling is worth roughly nothing to a person a year into accumulating their own. The number is personal and the recommendation isn't transferable. Which is inconvenient, because a verdict is what people want.
 
 Four checks produce that count. A couple of them sharpen it more than I expected.
 
