@@ -2,7 +2,7 @@ The pushback I wanted from my AI agent had gone missing. It took a while to work
 
 What tipped me off was external, which I suspect it usually has to be. Another model reviewed the same problem and its answer read sharper than mine. The tempting move there is to declare a winner and switch. But three things are tangled in that comparison. The models. The harnesses wrapped around them. And the seats they sat in, because the reviewer's chair is a great deal easier than the author's.
 
-Untangling it took a control arm. My own model, run with its configuration stripped entirely off. No preference files. No hooks. No memory. No injected priors. Same model, same effort setting, same prompt bytes. Everything before that was opinion.
+Untangling it took a control arm. My own model, run with its configuration stripped entirely off. No preference files, no hooks, no memory, no injected priors. Same model, same effort setting, same prompt bytes. Everything before that was opinion.
 
 Score behaviors rather than quality. It sounds fussy and isn't. Did it compare alternatives? Did it push back? Those are countable. "Which answer was better" just restarts the argument you were trying to end.
 

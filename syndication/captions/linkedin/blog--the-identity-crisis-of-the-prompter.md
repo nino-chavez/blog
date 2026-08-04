@@ -4,7 +4,7 @@ Watch how people talk about prompting and the reaching is impossible to miss. We
 
 The metaphors aren't about accuracy. They're about self-preservation. If prompting is a craft then I'm still a craftsperson. If it's just typing instructions, the question stays open.
 
-Being straight about what it involves. Knowing what you want, which is harder than it sounds. Describing it precisely. Recognizing when the output misses. Iterating with enough direction to close the gap. All of that is real. None of it is nothing. It also isn't making. It's closer to directing. Or commissioning. Or the one that actually needles: managing. And I've always been slightly suspicious of people whose primary skill is judgment without production.
+Being straight about what it involves: knowing what you want, which is harder than it sounds. Describing it precisely. Recognizing when the output misses. Iterating with enough direction to close the gap. All of that is real, and none of it is nothing. It also isn't making. It's closer to directing, or commissioning, or the one that actually needles: managing. And I've always been slightly suspicious of people whose primary skill is judgment without production.
 
 The crisis lands hardest in the middle. Beginners don't have one. The tool is simply powerful and they're learning. Experts have a manageable version, because the gap between what the machine produces and what they'd accept is obvious enough to be reassuring. In the middle, where most of us live, the output is almost what you'd have made. Close enough that the delta feels trivial. An identity built on a trivial delta starts to wobble.
 
