@@ -6,9 +6,9 @@ So the split needs three columns. Native, meaning your setup already covers it. 
 
 Then the same split runs backwards, which I hadn't thought to do until fairly recently. What does your own side already handle that the tool's list never mentions? Nobody writes that column for you. It tends to be longer than expected.
 
-Getting my own side written down was the step I kept deferring. It's the one that pays permanently. Done once, every later question about a tool turns into a lookup rather than an afternoon.
+Writing the baseline down is the check most people skip, and the one that pays permanently. Done once, every later question about a tool turns into a lookup rather than an afternoon.
 
-What changed my read most was reading a project's issue tracker instead of its documentation. Documentation describes a tool working. The tracker describes it running on other people's machines. Users write that, so pruning it leaves a visible hole.
+Then the uncurated half: a project's issue tracker rather than its documentation. Documentation describes a tool working. The tracker describes it running on other people's machines. Users write that, so pruning it leaves a visible hole.
 
 Last is the exit. "Cheap to try" is a claim about removal, and removal is the part nobody tests. The single most useful query turned out to be searching that same tracker for the uninstall itself. Silence there is its own answer.
 

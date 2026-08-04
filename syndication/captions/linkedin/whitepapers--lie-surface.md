@@ -8,7 +8,7 @@ Exactly one of the five failed loudly. It was the humblest thing in the pile: a 
 
 What separates them isn't accuracy. It's how wrong a thing can get without anything signaling that it's wrong. I've been calling that lie-surface. Ranking artifacts by it inverts the instinct almost completely. The polished architecture document carries the most — the one that reads as most authoritative, the one you'd hand a new hire. A test asserting something obvious carries nearly none, because it fails the build the moment it stops being true.
 
-Authority and trustworthiness turn out to be different axes. I'd been reading one for the other.
+Authority and trustworthiness are not the same axis.
 
 The tempting justification is efficiency. An agent that reads a registry skips the rediscovery and answers in fewer tokens. Tested cold, that's wrong in an instructive way. Answer quality improved inside a single turn. The token count didn't move at all. The agent read the registry, then verified against source anyway. That is the behavior the whole model exists to protect. Verification isn't the waste. It's the point.
 
