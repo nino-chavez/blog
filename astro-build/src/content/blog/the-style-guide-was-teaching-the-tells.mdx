@@ -1,0 +1,79 @@
+---
+title: "The Style Guide Was Teaching the Tells"
+slug: "the-style-guide-was-teaching-the-tells"
+publishedAt: "2026-08-03T23:30:00.000Z"
+updatedAt: "2026-08-03T23:30:00.000Z"
+author: "Nino Chavez"
+status: "published"
+featureImage: "/images/generated/the-style-guide-was-teaching-the-tells.webp"
+excerpt: "I asked an AI to audit the style guides that teach AI to write like me. The tone card was describing machine messages, the guide's examples had become tells, and a checker was grading drafts for phrases the corpus abandoned months ago."
+tags: ["ai-governance", "ai-development"]
+category: "AI Development"
+seo:
+  metaTitle: "The Style Guide Was Teaching the Tells"
+  metaDescription: "An adversarial audit of my own voice guides found the enforcement layer rewarding the exact phrases the corpus had abandoned — and a fingerprint experiment that lost to its own control arm."
+---
+
+There's a checker in my content pipeline whose job is to keep AI drafts sounding like me. This week I read its source. It docks a draft a full point for *not* containing a phrase my own voice guide bans.
+
+That wasn't the plan for the day. The plan was to build something new: a voice fingerprint pulled from my Gmail. Agents drafting as me would get real evidence instead of vibes. I added one condition before any building started. Audit the guides I already had. Adversarially. Assume they're wrong and make them prove otherwise.
+
+They didn't survive it.
+
+## The Tone Card Was Describing the Robots
+
+My terminal voice card is the file that tells agents how I type. It claimed I hedge in 11% of my messages. Recomputing it meant going back to the raw session logs: 4,534 user messages. Except 684 of them weren't mine. Automated commit reviews. Agent-to-agent chatter. Template text. All injected into the transcript as "the user."
+
+Fifteen percent of my corpus was machine-written. Strip it, and the numbers move hard. Hedge rate: 1%, not 11%. Median sentence: 8 words, not 12. Lowercase openers: 83%. The card had been averaging me with the robots, and the robots are more polite than I am.
+
+A related file was worse. A generated "tone fingerprint" put my hedge rate at 14.9%. The reason: it computed stats only over messages that had tripped a signal regex. Messages flagged *for hedging* were overrepresented in the sample measuring hedging. The metric inherited the bias of its own filter.
+
+## The Guide's Signature Move Had Left the Corpus
+
+Then the prose guide, the one for this blog. Its signature instruction: open with a question. Its prescribed ending: provisional phrases like "here's where I've landed—for now."
+
+The audit checked the 8 most recent posts. Question-first openers: zero of eight. Every single one opens with a concrete thing that broke, went missing, or was wrong. All 46 recent section headers are declarative statements. And the provisional closers? Gone. Not because the thinking got less provisional. The exact phrases got copied so often that they now read as AI. By me, and by every model imitating me.
+
+How does a guide end up banning its own examples?
+
+The lifecycle is almost mechanical. A guide publishes a phrase as a good example. Drafters copy it, because copying the example is the path of least resistance. The phrase saturates. Readers learn it as a tell. The living voice moves on. The guide doesn't.
+
+## The Checker Graded for the Fakes
+
+So I opened the enforcement layer — the code that scores drafts against the guide. Three findings, each worse than a stale document.
+
+The checker penalized any draft *missing* "provisional language." Its suggested fix was literal: add "for now," "today," or "here's where I've landed." The revision engine went further — it marked sentences containing those phrases as strengths to preserve, walling them off from edits. And the validator required a question mark in the opening paragraph, a shape the corpus abandoned entirely.
+
+A post written the way I actually write now would have failed the check. A post assembled from retired tells would have passed with compliments.
+
+That's the part worth generalizing. Prose updates don't propagate to machines. Every style guide accretes mechanical consumers — checkers, presets, lint rules, agent instructions — that encode its examples as rewards. Fix the document and skip the sweep, and the tooling enforces your previous voice against your current one.
+
+## Two of Thirty-Five Documents Were Actually Mine
+
+The fingerprint work itself surfaced the strangest number of the day. Harvesting my Google Drive for writing samples returned 35 documents I own. Curation kept 2. The other 33 were agent-drafted — reports, plans, summaries, some produced by earlier voice-cloning experiments.
+
+Ownership is not authorship. Feed those 33 into a fingerprint and you get an imitation of an imitation. Each generation more confident. Each less me. The corpus you train a voice on has to be provably human first. "It's in my account" proves nothing anymore.
+
+## The Guide Lost to No Guide
+
+Here's the adverse evidence, because a post like this owes you one.
+
+We did build the email fingerprint. 83 sent emails, curated to 30, distilled into a guide, calibrated once against 8 held-out real replies. Then we ran the test that matters: four drafting arms scored on deviation from my real replies. Guide in hand: 263. No guide at all: 171. Generic-assistant prompt: 236.
+
+The guide made drafts *less* like me than giving the model nothing. Version one was a caricature. It applied my sign-off 100% of the time; the real rate is 43%. The patched version overcorrected into 81-word drafts against my real median of 189. Both were fitted to the same 7 threads they were scored on. That's overfitting, just with prose.
+
+Would I let it draft unsupervised? The control arm already answered. The guide's own header now carries its failing score. Round three isn't happening. Partly because the eval was too small to tune against. Mostly because I don't actually use AI to write my email. The corpus was always input for the public writing.
+
+## What Changed by End of Day
+
+The prose guide is at v1.3, rebuilt from what the recent corpus actually does. The retired phrases live in one file, as a banlist. Every checker now penalizes them instead of prescribing them. 194 downstream tests still green. The tone cards carry their sample sizes next to their numbers. Four registers are documented: terminal, prose, email, chat. The audit's clearest finding was that I'm a different writer when a human is reading.
+
+And one operating rule got written down for everything else I maintain. A style guide is an untested hypothesis until it beats a no-guide control.
+
+## The Missing Piece Is a Real Eval Set
+
+What today didn't produce: a held-out evaluation set worth trusting. Twenty to thirty threads, stratified by mode, never touched during patching. Until that exists, every one of these guides is evidence-backed but unvalidated, and the honest label stays on.
+
+The guide itself got the same treatment as everything it governs. Its examples were audited, its greatest hits were retired, and the enforcement code was made to agree with it.
+
+The guide now ends with a banlist of its own examples.
