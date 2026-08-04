@@ -10,7 +10,7 @@ I keep landing on three parts. Context sensitivity, meaning what this situation 
 
 That last one is the killer, because it isn't transferable. I can describe outcomes and show examples. But the weighting, the sense that this example matters more than that one here, is the gap.
 
-The uncomfortable part isn't that AI lacks taste. It's that most of us aren't building ours either. I skip the step more than I'd like to admit. The output checks the boxes. Moving on feels productive.
+AI lacking taste isn't the hard part. Most people aren't building theirs either. I skip the step more than I'd like to admit. The output checks the boxes. Moving on feels productive.
 
 Better models won't close this. They'll widen it. More output, more polish, more correct, and the same human sitting between generated and good.
 

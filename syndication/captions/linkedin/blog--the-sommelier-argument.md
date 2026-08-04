@@ -8,9 +8,9 @@ They don't make the wine or grow the grapes. Take them out and the experience co
 
 The job is matching, not production and not critique. What's the occasion? What are the unspoken preferences — they said bold, but they've been drinking pinot all night. What's the budget nobody states out loud. What's actually in the cellar tonight.
 
-It demands three things. Domain depth, the kind that makes non-obvious connections. Context reading, technical and human. And honest inventory: what AI actually does well today, not the marketing version.
+It demands domain depth, the kind that makes non-obvious connections. It demands reading the situation, technical and human. And it demands an honest inventory of what AI does well today, not the marketing version.
 
-That last one is underrated. Half the bad AI implementations I've seen came from matching a problem to a capability that doesn't exist yet. They read the brochure. They didn't taste the wine.
+The inventory is the part people skip. Half the bad AI implementations I've seen came from matching a problem to a capability that doesn't exist yet. They read the brochure. They didn't taste the wine.
 
 The catch is what it costs to accept. Your value isn't in making things.
 
