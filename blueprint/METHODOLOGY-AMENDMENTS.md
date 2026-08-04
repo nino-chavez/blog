@@ -51,9 +51,28 @@ Every one compared the caption to something other than its source's *meaning*. T
 
 Written as code because a documented rule demonstrably does not survive drift-by-copying. This is the same argument the lie-surface piece makes about its own subject: a claim with no passing verifier is a liability wearing documentation's clothes. The rule existed. The verifier didn't.
 
+### What the drift actually looks like
+
+Working the full worklist by hand found seven violations across the batch, and **none of them were inventions.** Every one took a true, sourced, general observation and moved its subject to the author:
+
+| Source says | Caption said |
+|---|---|
+| "the check **people** skip" | "the step **I** kept deferring" |
+| "the fix is almost never trimming what you send" | "**I'd been** trimming what I sent" |
+| "authority and trustworthiness are not the same axis" | "**I'd been** reading one for the other" |
+| the work "doesn't show up in a sprint board or a git log" | "most of it **didn't happen**" |
+
+The facts were correct and the attribution was not. This is why the existing "never fabricate interior state" rule did not fire: nothing was fabricated. It reads as paraphrase while drafting, and it survives a self-check aimed at invented people and events.
+
+The pull is that a confession outperforms an assertion. "People skip this check" is a claim about the world; "I kept deferring it" is vulnerable competence, which is the shape this voice rewards. The better sentence is the whole mechanism.
+
+**The mechanical test** that catches relocation where "did I invent this?" does not:
+
+> For every first-person claim, find the sentence in the source that attributes it **to the author specifically** — not one that supports the idea, one that assigns it to him. If the source states it generally, the derived artifact states it generally.
+
 ### The general form
 
-Any artifact derived from a source and then edited more than once will drift, and the drift is invisible to checks that compare the artifact to itself, to its siblings, or to a threshold. **Re-derivation must be repeated per editing pass, not performed once at draft time.** Applies to captions, summaries, briefs, decks, release notes, and any agent-generated restatement of a longer document.
+Any artifact derived from a source and then edited more than once will drift, and the drift is invisible to checks that compare the artifact to itself, to its siblings, or to a threshold. **Re-derivation must be repeated per editing pass, not performed once at draft time.** Five of the seven violations entered during revision rather than at draft. Applies to captions, summaries, briefs, decks, release notes, and any agent-generated restatement of a longer document.
 
 The cheap tell that a check is not doing this work: it can pass without ever opening the source file.
 
