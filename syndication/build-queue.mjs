@@ -68,6 +68,14 @@ function frontmatter(text) {
     // A piece with tables therefore cannot go across as `full`, so the count is
     // carried here and routing downgrades on it.
     tableRows: (body.match(/^\s*\|/gm) || []).length,
+    // Same problem, second cause. Blog posts are MDX: they carry `import`
+    // statements and JSX components (<Callout>, <PullQuote>, <Figure>,
+    // <Mermaid>, and the tutorial set). Substack renders none of it — a paste
+    // puts `import { Callout } from '@/components/mdx/Callout';` and the raw
+    // tags into the issue. 32 of the 51 remaining `full` items carry these.
+    mdxNodes:
+      (body.match(/^import .*from '@\/components/gm) || []).length +
+      (body.match(/<(Callout|PullQuote|Figure|Mermaid|Slide|Exercise|Template|Checkpoint)\b/g) || []).length,
   }
 }
 
@@ -131,6 +139,7 @@ function readDemos() {
         series: '',
         seriesPos: 0,
         tableRows: 0,
+        mdxNodes: 0,
         category: 'Demo',
         url: `${SITE}/demos/${kind === 'applied' ? 'applied/' : ''}${slug}`,
       })
@@ -364,10 +373,18 @@ function routeWithGuards(p, now) {
   // This is not a niche case: 35 of 85 queued `full` items carry tables, and it
   // is every whitepaper, because whitepapers are the one collection the repo's
   // CLAUDE.md tells you to use tables liberally in.
-  if (out.routes.substack?.mode === 'full' && p.tableRows > 0) {
+  //
+  // The predicate is "does this body survive a paste", not "does it have
+  // tables". Tables were the first cause found; MDX components are the second,
+  // and both fail the same way — the reader gets markup instead of prose.
+  if (out.routes.substack?.mode === 'full' && (p.tableRows > 0 || p.mdxNodes > 0)) {
+    const why = [
+      p.tableRows > 0 ? `${p.tableRows} table rows` : '',
+      p.mdxNodes > 0 ? `${p.mdxNodes} MDX nodes` : '',
+    ].filter(Boolean).join(' + ')
     out.routes.substack = {
       mode: 'link',
-      reason: `${p.tableRows} table rows — Substack's editor drops tables, so the body cannot go across intact`,
+      reason: `${why} — Substack renders neither, so the body cannot go across intact`,
     }
   }
   return out

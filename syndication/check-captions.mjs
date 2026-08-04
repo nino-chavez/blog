@@ -129,8 +129,18 @@ const SCOPE_CLAIM = /\b(you|your|you're|nobody|no one|everyone|everybody|anyone|
 // why it caught nothing on 2026-08-04 when a Substack note was drafted by
 // rearranging the LinkedIn caption for the same piece instead of returning to the
 // source: 70 shared runs, the same drift-by-copying this whole gate exists for.
+// One deliberate exception. `link`-mode Substack notes close with a standing
+// line explaining why the piece is linked rather than pasted. It is house
+// boilerplate and it SHOULD be identical every time — a subscriber reading
+// three of them gets the same explanation in the same words, which is the point.
+// Varying it to satisfy the check would read as disguising a template.
+//
+// It is stripped before the comparison rather than whitelisted after, so it can
+// never mask a real echo in the sentence next to it.
+const BOILERPLATE = /^Linked rather than sent in full[^\n]*$/gim
+
 const fiveGrams = (s) => {
-  const w = s.replace(/https?:\/\/\S+/g, ' ').toLowerCase().replace(/[^a-z0-9' ]/g, ' ').split(/\s+/).filter(Boolean)
+  const w = s.replace(BOILERPLATE, ' ').replace(/https?:\/\/\S+/g, ' ').toLowerCase().replace(/[^a-z0-9' ]/g, ' ').split(/\s+/).filter(Boolean)
   const out = new Set()
   for (let i = 0; i + 5 <= w.length; i++) out.add(w.slice(i, i + 5).join(' '))
   return out
