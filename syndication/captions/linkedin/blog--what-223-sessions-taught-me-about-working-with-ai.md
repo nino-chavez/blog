@@ -8,7 +8,7 @@ Twenty-one percent of everything I typed went to work that isn't part of any pro
 
 None of that shows up on a task board. It doesn't show up in the record of code changes either. It's invisible to every system that tracks whether anything got done.
 
-Here's the part I keep turning over. A lot of that work now runs without me asking. A checker fires when I edit a component. The voice guide loads itself when I open a post. Nobody assigns that work and nothing tracks it. It runs anyway.
+Here's the part I keep turning over. A lot of that work now runs without me asking. A checker fires when I edit a component. The voice guide loads itself when I open a post. Nobody assigns that work and nothing tracks it. It runs in every project at once.
 
 One more number changed how I think. Forty-two percent of my conversations ran between 51 and 150 messages. Not quick questions. Not all-day marathons. Long enough to get somewhere. Short enough to stay about one thing.
 

@@ -4,7 +4,7 @@ You sort a tool's components into things you already have and things you don't. 
 
 So the split needs three columns. Native, meaning your setup already covers it. New, meaning genuinely absent — the only column that argues for installing anything. And blocked, that third case, tracked on its own so it stops bending the count.
 
-Then the same split runs backwards, which I hadn't thought to do until fairly recently. What does your own side already handle that the tool's list never mentions? Nobody writes that column for you. It tends to be longer than expected.
+Then the same split runs backwards. What does your own side already handle that the tool's list never mentions? Nobody writes that column for you. It tends to be longer than expected.
 
 Writing the baseline down is the check most people skip, and the one that pays permanently. Done once, every later question about a tool turns into a lookup rather than an afternoon.
 

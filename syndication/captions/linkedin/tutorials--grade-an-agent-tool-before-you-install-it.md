@@ -2,7 +2,7 @@
 
 Which makes a recommendation a report on one machine, wearing a review's clothes. Something worth every minute to a person running stock tooling is worth roughly nothing to a person a year into accumulating their own. The number is personal and the recommendation isn't transferable. Which is inconvenient, because a verdict is what people want.
 
-Four checks produce that count. A couple of them sharpen it more than I expected.
+Four checks produce that count, none of them requiring you to install the thing.
 
 The component list is worth pulling from a project's reference documentation rather than its README. The first enumerates. The second sells.
 
@@ -12,7 +12,7 @@ A count that comes back at one or two isn't automatically a no, either. It's a d
 
 One step almost nobody runs. Read the install guide's own account of what it writes to disk. Prefixed names and new named sections are additive and reversible. Bare generic names, and rewrites of sections you already use, are not.
 
-What I still don't have a good answer for is what to say when someone asks whether a tool is worth it. The honest response is a method, not a verdict. Nobody wants the method.
+There's still no clean answer to "is this tool worth it." The honest response is a method, not a verdict. Nobody wants the method.
 
 Forty minutes, nothing installed:
 https://ninochavez.co/blog/tutorials/grade-an-agent-tool-before-you-install-it
