@@ -9,6 +9,69 @@ Per methodology rule, no entry here is automatically promoted upstream. Methodol
 
 ---
 
+## 2026-08-03 — The drip scheduler posts every series in reverse order
+
+**Trigger**: Reading the three taste-test captions in posting order showed part 3 scheduled a week ahead of part 2 — the conclusion reaching followers before the middle.
+
+**Scope**: Candidate for methodology promotion
+
+**Bucket**: consumer-local
+
+**Status**: Active
+
+### The defect
+
+`syndication/build-queue.mjs` orders the drip with:
+
+```js
+const order = (a, b) =>
+  a.tier - b.tier || (b.publishedAt || '0000').localeCompare(a.publishedAt || '0000')
+```
+
+Newest-first, and deliberately so — the comment above it reads "a 2025 essay is not the thing to open with when there is 2026 material that says the same idea better." That reasoning is correct for standalone essays and exactly wrong for a series, which is authored oldest-first. **Every multi-part series therefore drips backwards.**
+
+Confirmed live, not theoretical:
+
+| Post | Series position | Scheduled |
+|---|---|---|
+| The Identity Crisis of the Prompter | 1 | 2026-08-18 |
+| The Sommelier Argument | **3** | 2026-08-27 |
+| The Taste Gap | **2** | 2026-09-03 |
+
+The sommelier post opens "*Previous: The Taste Gap*" and its caption builds on an argument the reader will not meet for another week.
+
+### Scope of the problem
+
+Six series in the content set, roughly twenty-two posts. All inherit the same reversal:
+
+`the-taste-test`, `agentic-workflows-in-practice`, `from-prompt-to-pattern`, `grid-level-thinking`, `signal-reflex-launch`, `the-talent-engine`.
+
+`the-talent-engine` is a second, separate defect: its positions 3 and 4 carry *earlier* `publishedAt` timestamps than positions 1 and 2, so it is scrambled at the source and no ordering rule can rescue it without reading `series.position`. Its part 2 is scheduled 2026-10-01, so this recurs within the month.
+
+### Why the fix wasn't applied here
+
+The loader already computes `inSeries` (line 55) as a boolean — **and never reads it.** Assigned twice, referenced nowhere. That is the signature of series handling that was started and abandoned, which is the strongest evidence this is an oversight rather than a decision.
+
+The fix is two small changes:
+
+1. In the frontmatter reader, extract `series.slug` and `series.position` instead of the current boolean. The loader's own comment says series is read "shallowly" on purpose, so this is a deliberate reversal of that call, not a bug fix.
+2. In `order`, when two pieces share a series slug, sort ascending by position; otherwise keep newest-first.
+
+It was **not** applied because `build-queue.mjs` was explicitly placed off-limits by the operator's handoff ("Do not... touch `build-queue.mjs` or `post-devto.mjs`"), and changing drip ordering rewrites the publishing sequence for twenty-two posts. Campsite Mode governs the quality of authorized work; it does not widen an operator-set boundary. Documented at the point of decision instead, so applying it is one call rather than one investigation.
+
+### The general finding worth promoting
+
+**Per-artifact checks cannot see sequence defects.** Every caption in this batch passed its own thresholds — median, short share, long share, close length, retired phrases, zero shared n-grams. The series was still out of order, and two captions still shared a structural move ("a three-item list capped by *that last one is X*") that no lexical check reports, because the words differed.
+
+A syndication register needs a **sequence check** alongside its per-item thresholds: read cluster-mates and series entries consecutively, in posting order, before they ship. Reading is the instrument. There is no metric substitute.
+
+**References**:
+- `syndication/build-queue.mjs` lines 33, 55, 474-475 — the shallow read, the dead flag, and the ordering rule
+- `5b90540` — the structural de-duplication that reading in order surfaced
+- Session 2026-08-03
+
+---
+
 ## 2026-08-03 — Plainness is two dials, not one: syntax and lexicon are independent
 
 **Trigger**: Three measured revisions of the same LinkedIn caption showed that "write it plainer" bundles two separable changes — sentence shape and domain vocabulary — which have opposite costs and should be set independently.
