@@ -93,6 +93,39 @@ Observed, same session:
 
 Each rule was adjudicated conversationally as it came up — transfer, waive, or override — with the reasoning living in the session rather than the guide. That worked because the operator was present for every call. It does not survive the session.
 
+### Measured: which thresholds actually transfer (added 2026-08-03, same day)
+
+The gap above was filed as "we don't know which rules carry over." Measuring the
+four captions that existed before this session — written by a prior session, kept
+by the operator, and the only caption ground truth not authored during it — answers
+it for the three sentence thresholds:
+
+| Metric | Caption baseline (pooled, n=4) | v1.3 blog threshold | Transfers? |
+|---|---|---|---|
+| Median sentence | 10.0 words | 8–11 words | **Yes** |
+| Short share (≤6 words) | 30% | ≥33% | **No** |
+| Long share (≥20 words) | 16% | ≤12.5% | **No** |
+
+**The median transfers; both tails do not.** Captions carry fewer short sentences
+and more long ones than blog posts, and that is a property of the format rather
+than a defect in the writing. A caption ground toward the blog's 33% short floor
+moves away from how captions actually read.
+
+This was nearly missed. Nine captions were flagged against the 33% floor and a
+restructuring pass had already started before anyone asked whether the number
+applied — enforcing a blog threshold on captions, in the same session that filed
+an amendment saying blog thresholds don't govern captions.
+
+**Provisional syndication thresholds**, pending a larger sample: median 8–11 words
+(inherited, confirmed), short share ≥25%, long share ≤20%. n=4 is thin; treat as a
+floor to beat rather than a target to hit, and re-derive once a dozen captions have
+shipped and survived operator review.
+
+**Measurement note**: v1.3 specifies *median* sentence length. Mean was measured
+throughout this session by mistake. The two diverge on right-skewed prose — mean ran
+0.5 to 1.6 words higher per caption — so every sentence-length figure reported before
+this correction was overstated. Any future check reads median.
+
 ### Proposed fix
 
 Add an explicit jurisdiction statement to the voice guide, in one of two shapes:
