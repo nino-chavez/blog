@@ -1,9 +1,9 @@
 # Signal Dispatch: Voice & Tone Guide
 ## Copy Editor and Ghostwriter Touchstone
 
-**Version**: 1.3
+**Version**: 1.4
 **Last Updated**: 2026-08-03
-**Source**: Empirical analysis of 156 blog posts, 15 deep-read corpus sample; adversarial audit against the 8 most recent posts (Jun–Jul 2026) plus a held-out generation test, 2026-08-03
+**Source**: Empirical analysis of 156 blog posts, 15 deep-read corpus sample; adversarial audit against the 8 most recent posts (Jun–Jul 2026) plus a held-out generation test, 2026-08-03; v1.4 adds the relocated-claim rule, measured against seven violations in one caption batch, 2026-08-03
 
 ---
 
@@ -270,6 +270,53 @@ If you didn't witness it or experience it directly, don't write it as if you did
 ```
 
 General observations grounded in real experience are fine. Fabricating specific people or conversations is not. The line: would Nino be comfortable if someone asked "which friend?" or "which client?" If the answer requires inventing details, the anecdote is fabricated.
+
+**1b. Relocated claims — the form that actually ships**
+
+The "which friend?" test above catches invented people. It does not catch the
+failure that reaches publication, because that one invents nothing.
+
+Measured 2026-08-03: seven violations in a single batch of derived captions,
+none of them inventions. Each took a true, sourced, **general** statement and
+moved its subject to Nino.
+
+| Source says | Draft said |
+|---|---|
+| "the check **people** skip" | "the step **I** kept deferring" |
+| "the fix is almost never trimming what you send" | "**I'd been** trimming what I sent" |
+| "authority and trustworthiness are not the same axis" | "**I'd been** reading one for the other" |
+| the work "doesn't show up in a sprint board or a git log" | "most of it **didn't happen**" |
+
+Every fact was right. Only the attribution was wrong. There is no friend to
+name and no client to produce, so "which friend?" returns clean — which is why
+one of these reached a live post, where the first commenter argued against the
+relocated version rather than the real one.
+
+**Why it happens**: a confession outranks an assertion. "People skip this" is a
+claim about the world; "I kept deferring it" is vulnerable competence, which is
+the shape this voice rewards. The pull toward the better sentence is the entire
+mechanism, so this will keep recurring wherever the voice rewards
+self-implication.
+
+**The test**, which catches relocation where "did I invent this?" does not:
+
+> For every first-person claim, find the sentence in the source that attributes
+> it **to Nino specifically**. Not a sentence that supports the idea — one that
+> assigns it to him. If the source states it generally, the draft states it
+> generally.
+
+**Run it on every editing pass, not once at draft time.** Five of the seven
+entered during revision, after the draft had replaced the source as the thing
+being edited; two came from a pass explicitly argued to be improving fidelity.
+
+Where a repo derives short artifacts from longer sources, make this a command
+rather than a rule — a rule loses to an editor who believes they already
+checked. Reference implementation: `syndication/check-captions.mjs`, which
+prints every first-person sentence with its source path. Note that its first
+version also required a past-tense verb from a fixed list and reported all 20
+captions clean while four violations sat in them, because relocation used
+verbs nobody had listed ("thought", "expected", "reading"). A filter built from
+a verb list fails silently on the verb you forgot.
 
 **2. Corporate Jargon**
 ```
@@ -998,6 +1045,6 @@ Posts maintain consistent voice even across different topics. Strongest consiste
 
 ---
 
-**Last Updated**: 2026-08-03 (adversarial audit + held-out generation test; header, Freshness Check, and this stamp reconciled — they previously carried three different dates)
+**Last Updated**: 2026-08-03 (v1.4 — added §1b, relocated claims: the "which friend?" test catches invented people and misses the failure that actually ships, where nothing is invented and only the attribution moves. v1.3 was the adversarial audit + held-out generation test; header, Freshness Check, and this stamp reconciled — they previously carried three different dates)
 **Next Review**: Quarterly or after 50 new posts
 **Maintained By**: Signal Dispatch Editorial (AI-assisted)
