@@ -1,6 +1,6 @@
 {
- "generatedAt": "2026-08-03",
- "linkedinHistory": "harvested from the activity feed (114 link-shares read)",
+ "generatedAt": "2026-08-04",
+ "linkedinHistory": "harvested from the activity feed (115 link-shares read)",
  "cadence": {
   "linkedin": {
    "days": [
@@ -24,25 +24,25 @@
  },
  "summary": {
   "linkedin": {
-   "posted": 40,
-   "queued": 115,
-   "skipped": 151,
-   "firstSlot": "2026-08-04",
-   "lastSlot": "2027-09-07"
+   "posted": 42,
+   "queued": 93,
+   "skipped": 152,
+   "firstSlot": "2026-08-06",
+   "lastSlot": "2027-06-24"
   },
   "substack": {
    "posted": 153,
-   "queued": 97,
-   "skipped": 56,
+   "queued": 86,
+   "skipped": 48,
    "firstSlot": "2026-08-09",
-   "lastSlot": "2028-06-11"
+   "lastSlot": "2028-03-26"
   },
   "devto": {
-   "posted": 1,
-   "queued": 6,
-   "skipped": 299,
+   "posted": 2,
+   "queued": 5,
+   "skipped": 280,
    "firstSlot": "2026-08-12",
-   "lastSlot": "2026-10-21"
+   "lastSlot": "2026-10-07"
   }
  },
  "items": [
@@ -57,17 +57,19 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "5 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-09-13",
+     "scheduledFor": "2026-08-23",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
+     "caption": "captions/linkedin/tutorials--grade-an-agent-tool-before-you-install-it.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-08",
+     "scheduledFor": "2026-08-13",
      "url": null
     },
     "devto": {
@@ -91,10 +93,11 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "79 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-08-09",
+     "scheduledFor": "2026-08-16",
      "url": null
     },
     "linkedin": {
@@ -125,17 +128,19 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "13 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-09-27",
+     "scheduledFor": "2026-09-13",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
+     "caption": "captions/linkedin/tutorials--measure-your-own-token-waste.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-01",
+     "scheduledFor": "2026-08-25",
      "url": null
     },
     "devto": {
@@ -159,426 +164,54 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "6 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-10-25",
+     "scheduledFor": "2026-10-11",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
+     "caption": "captions/linkedin/tutorials--audit-your-ai-coding-harness.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-22",
+     "scheduledFor": "2026-09-08",
      "url": null
     },
     "devto": {
      "mode": "canonical",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-07",
+     "scheduledFor": "2026-08-12",
      "url": null
     }
    }
   },
   {
-   "id": "demos/adopt-or-skip",
-   "title": "One Component I Didn't Already Have",
-   "url": "https://ninochavez.co/demos/adopt-or-skip",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
-   "words": 0,
-   "pitch": "A plugin advertising eleven agents and fifty-four hooks, measured against the setup I already run. Of the eight components that could land on my machine, three were already going, one was the wrong platform, one was broken upstream, two were costs. The delta was one.",
-   "cluster": "one-component-i-didnt-already-have",
+   "id": "blog/where-the-api-stops",
+   "title": "Where the API Stops",
+   "url": "https://ninochavez.co/blog/where-the-api-stops",
+   "publishedAt": "2026-06-15",
+   "collection": "blog",
+   "words": 1623,
+   "series": "the-bifurcation",
+   "seriesPos": 3,
+   "cluster": "where-the-api-stops",
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "link",
+     "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-16",
+     "scheduledFor": "2026-08-30",
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "caption": "captions/linkedin/demos--adopt-or-skip.md",
-     "postedAt": null,
-     "scheduledFor": "2026-08-11",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
+     "mode": "teaser",
+     "state": "posted",
+     "postedAt": "share-history",
      "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "demos/agentic-gates",
-   "title": "Gates Between Agentic Stages",
-   "url": "https://ninochavez.co/demos/agentic-gates",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
-   "words": 0,
-   "pitch": "Agents are strong inside a stage and unreliable at the boundaries. A delivery methodology built on that: deterministic gates between agentic stages — 88 versioned revisions, 14 running initiatives, and the day production published fiction.",
-   "cluster": "agentic-gates",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "link",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-09-06",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-08-20",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "demos/beautifier",
-   "title": "The Beautifier Was an Auditor",
-   "url": "https://ninochavez.co/demos/beautifier",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
-   "words": 0,
-   "pitch": "A skill built to make a README prettier turned out to be a drift detector. Across five repos it flagged a deploy doc still pointing at a platform the project left months ago, a command list that no longer matched the actual commands, and capabilities the code had grown that nobody had written down. The visual polish was the smallest thing it did.",
-   "cluster": "beautifier",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "link",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-10-11",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-09-15",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "demos/browse-tool",
-   "title": "The Browser Is a Shell Command",
-   "url": "https://ninochavez.co/demos/browse-tool",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
-   "words": 0,
-   "pitch": "Replacing 18,000 tokens of always-loaded browser-automation schema with ten shell commands and a README — and why the agent gets sharper, not weaker.",
-   "cluster": "browse-tool",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "link",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-11-08",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-10-01",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "demos/config-probe",
-   "title": "The Sycophancy Was in the Config",
-   "url": "https://ninochavez.co/demos/config-probe",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
-   "words": 0,
-   "pitch": "A rival model reviewing my agent's work looked sharper — it demanded competing candidates and restraint. So my agent A/B tested its own harness: same model, same prompt, config on and off. The vanilla arm pushed back on me twice. The configured arm never did.",
-   "cluster": "config-probe",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "link",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-12-06",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-10-20",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "demos/enforced-forever",
-   "title": "Taught Once, Enforced Forever",
-   "url": "https://ninochavez.co/demos/enforced-forever",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
-   "words": 0,
-   "pitch": "Corrections given in chat decay when the session ends. The fix is changing the agent's environment — helpers, deny-hooks, and CI ratchets that carry the rule forever.",
-   "cluster": "enforced-forever",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "link",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-01-03",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-11-05",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "demos/feedback-loop",
-   "title": "The Product That Files Its Own Tickets",
-   "url": "https://ninochavez.co/demos/feedback-loop",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
-   "words": 0,
-   "pitch": "End users file feedback, an LLM judge triages it into GitHub Issues, an agent implements the safe ones — with the autonomy boundary in deterministic code and a human holding the only merge key.",
-   "cluster": "feedback-loop",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "link",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-01-31",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-11-19",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "demos/four-questions",
-   "title": "The Chiropractor's Four Questions",
-   "url": "https://ninochavez.co/demos/four-questions",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
-   "words": 0,
-   "pitch": "A sports chiropractor asked four plain questions about selling rehab programs from his website. The AI's answer was confident, tabulated, sourced — and its evidence was marketing all the way down. Twice.",
-   "cluster": "four-questions",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "link",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-02-28",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-12-03",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "demos/landmine-registry",
-   "title": "The Registry of Landmines",
-   "url": "https://ninochavez.co/demos/landmine-registry",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
-   "words": 0,
-   "pitch": "Some load-bearing facts are invisible to search — the code compiles and the behavior is still wrong. One registry file holds them, a derive catalog enforces them in CI, and a meta-test keeps the registry from lying about itself.",
-   "cluster": "landmine-registry",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "link",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-03-21",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-12-17",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "demos/said-it-checked",
-   "title": "The Agent Said It Checked",
-   "url": "https://ninochavez.co/demos/said-it-checked",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
-   "words": 0,
-   "pitch": "\"Verified\" is a sentence, not a fact. A security migration passed its audit while production was broken — and the discipline that came out of it caught three more false claims building this very series.",
-   "cluster": "said-it-checked",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "link",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-04-04",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-12-29",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "demos/session-corpus",
-   "title": "Your Sessions Are a Corpus",
-   "url": "https://ninochavez.co/demos/session-corpus",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
-   "words": 0,
-   "pitch": "2,747 agent-session transcripts, mined: reusable prompts, your corrections as standing priors, and an honest ledger of what the agent built that survived.",
-   "cluster": "session-corpus",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "link",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-05-02",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-01-07",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "demos/twelve-messages",
-   "title": "Twelve Messages",
-   "url": "https://ninochavez.co/demos/twelve-messages",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
-   "words": 0,
-   "pitch": "Everything typed to take a live event from spreadsheet chaos to published social content — and the method that made the other 99% happen.",
-   "cluster": "twelve-messages",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "link",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-05-23",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-01-19",
      "url": null
     },
     "devto": {
@@ -604,7 +237,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-22",
+     "scheduledFor": "2026-10-25",
      "url": null
     },
     "linkedin": {
@@ -624,6 +257,76 @@
    }
   },
   {
+   "id": "blog/the-civil-war-inside-every-agent",
+   "title": "The Civil War Inside Every Agent",
+   "url": "https://ninochavez.co/blog/the-civil-war-inside-every-agent",
+   "publishedAt": "2026-03-01",
+   "collection": "blog",
+   "words": 1361,
+   "series": "the-bifurcation",
+   "seriesPos": 1,
+   "cluster": "the-civil-war-inside-every-agent",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "archive",
+     "scheduledFor": null,
+     "url": null
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "posted",
+     "postedAt": "share-history",
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/what-if-the-fork-is-the-problem",
+   "title": "What If the Fork Is the Problem?",
+   "url": "https://ninochavez.co/blog/what-if-the-fork-is-the-problem",
+   "publishedAt": "2026-03-01",
+   "collection": "blog",
+   "words": 1428,
+   "series": "the-bifurcation",
+   "seriesPos": 2,
+   "cluster": "what-if-the-fork-is-the-problem",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-08-09",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-08-06",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
    "id": "whitepapers/lie-surface",
    "title": "Lie-Surface: Ranking What an Agent Can Trust in Your Codebase",
    "url": "https://ninochavez.co/blog/whitepapers/lie-surface",
@@ -634,17 +337,19 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "40 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-08-30",
+     "scheduledFor": "2026-09-06",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
+     "caption": "captions/linkedin/whitepapers--lie-surface.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-18",
+     "scheduledFor": "2026-08-11",
      "url": null
     },
     "devto": {
@@ -667,17 +372,19 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "44 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-10-04",
+     "scheduledFor": "2026-09-27",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
+     "caption": "captions/linkedin/whitepapers--big-blueprint-methodology.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-10",
+     "scheduledFor": "2026-08-20",
      "url": null
     },
     "devto": {
@@ -700,17 +407,19 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "10 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-12-20",
+     "scheduledFor": "2026-11-15",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
+     "caption": "captions/linkedin/tutorials--make-your-cli-agent-native.md",
      "postedAt": null,
-     "scheduledFor": "2026-10-08",
+     "scheduledFor": "2026-09-15",
      "url": null
     },
     "devto": {
@@ -767,17 +476,18 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "13 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-01-17",
+     "scheduledFor": "2026-12-06",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-27",
+     "scheduledFor": "2026-09-24",
      "url": null
     },
     "devto": {
@@ -803,7 +513,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-23",
+     "scheduledFor": "2026-09-20",
      "url": null
     },
     "linkedin": {
@@ -811,7 +521,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--the-source-of-their-intelligence.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-13",
+     "scheduledFor": "2026-08-18",
      "url": null
     },
     "devto": {
@@ -837,7 +547,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-20",
+     "scheduledFor": "2026-10-04",
      "url": null
     },
     "linkedin": {
@@ -863,6 +573,8 @@
    "publishedAt": "2026-03-05",
    "collection": "blog",
    "words": 973,
+   "series": "the-taste-test",
+   "seriesPos": 1,
    "cluster": "the-identity-crisis-of-the-prompter",
    "tier": 1,
    "routes": {
@@ -870,12 +582,49 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-18",
+     "scheduledFor": "2026-11-01",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
+     "caption": "captions/linkedin/blog--the-identity-crisis-of-the-prompter.md",
+     "postedAt": null,
+     "scheduledFor": "2026-08-27",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/the-taste-gap",
+   "title": "The Taste Gap",
+   "url": "https://ninochavez.co/blog/the-taste-gap",
+   "publishedAt": "2026-03-05",
+   "collection": "blog",
+   "words": 1005,
+   "series": "the-taste-test",
+   "seriesPos": 2,
+   "cluster": "the-taste-gap",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-11-22",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "caption": "captions/linkedin/blog--the-taste-gap.md",
      "postedAt": null,
      "scheduledFor": "2026-09-03",
      "url": null
@@ -896,40 +645,9 @@
    "publishedAt": "2026-03-05",
    "collection": "blog",
    "words": 1420,
+   "series": "the-taste-test",
+   "seriesPos": 3,
    "cluster": "the-sommelier-argument",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-11-15",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-09-24",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "blog/the-taste-gap",
-   "title": "The Taste Gap",
-   "url": "https://ninochavez.co/blog/the-taste-gap",
-   "publishedAt": "2026-03-05",
-   "collection": "blog",
-   "words": 1005,
-   "cluster": "the-taste-gap",
    "tier": 1,
    "routes": {
     "substack": {
@@ -942,8 +660,9 @@
     "linkedin": {
      "mode": "native",
      "state": "eligible",
+     "caption": "captions/linkedin/blog--the-sommelier-argument.md",
      "postedAt": null,
-     "scheduledFor": "2026-10-13",
+     "scheduledFor": "2026-09-17",
      "url": null
     },
     "devto": {
@@ -969,40 +688,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-01-10",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "posted",
-     "postedAt": "share-history",
-     "scheduledFor": null,
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "blog/the-civil-war-inside-every-agent",
-   "title": "The Civil War Inside Every Agent",
-   "url": "https://ninochavez.co/blog/the-civil-war-inside-every-agent",
-   "publishedAt": "2026-03-01",
-   "collection": "blog",
-   "words": 1361,
-   "cluster": "the-civil-war-inside-every-agent",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "posted",
-     "postedAt": "archive",
-     "scheduledFor": null,
+     "scheduledFor": "2027-01-03",
      "url": null
     },
     "linkedin": {
@@ -1032,17 +718,19 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "108 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-11-01",
+     "scheduledFor": "2026-10-18",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
+     "caption": "captions/linkedin/whitepapers--the-bifurcation-of-autonomy.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-29",
+     "scheduledFor": "2026-09-01",
      "url": null
     },
     "devto": {
@@ -1065,10 +753,11 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "30 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-02-14",
+     "scheduledFor": "2026-12-27",
      "url": null
     },
     "linkedin": {
@@ -1082,7 +771,7 @@
      "mode": "canonical",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-21",
+     "scheduledFor": "2026-10-07",
      "url": null
     }
    }
@@ -1098,17 +787,268 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "49 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-11-29",
+     "scheduledFor": "2026-11-08",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-15",
+     "scheduledFor": "2026-09-10",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/22gb-to-2gb-video-compression-as-agentic-collaboration",
+   "title": "22GB to 2GB: Video Compression as Agentic Collaboration",
+   "url": "https://ninochavez.co/blog/22gb-to-2gb-video-compression-as-agentic-collaboration",
+   "publishedAt": "2026-01-17",
+   "collection": "blog",
+   "words": 830,
+   "series": "agentic-workflows-in-practice",
+   "seriesPos": 1,
+   "cluster": "22gb-to-2gb-video-compression-as-agentic-collaboration",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "reason": "5 table rows — Substack's editor drops tables, so the body cannot go across intact",
+     "postedAt": null,
+     "scheduledFor": "2027-01-17",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-09-29",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/the-cowork-moment-when-agentic-ai-goes-mainstream",
+   "title": "The Cowork Moment: When Agentic AI Goes Mainstream",
+   "url": "https://ninochavez.co/blog/the-cowork-moment-when-agentic-ai-goes-mainstream",
+   "publishedAt": "2026-01-17",
+   "collection": "blog",
+   "words": 945,
+   "series": "agentic-workflows-in-practice",
+   "seriesPos": 2,
+   "cluster": "the-cowork-moment-when-agentic-ai-goes-mainstream",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2027-01-31",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-10-06",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/the-signal-forge-method-agentic-document-generation",
+   "title": "The Signal Forge Method: Agentic Document Generation",
+   "url": "https://ninochavez.co/blog/the-signal-forge-method-agentic-document-generation",
+   "publishedAt": "2026-01-18",
+   "collection": "blog",
+   "words": 1418,
+   "series": "agentic-workflows-in-practice",
+   "seriesPos": 3,
+   "cluster": "the-signal-forge-method-agentic-document-generation",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "reason": "5 table rows — Substack's editor drops tables, so the body cannot go across intact",
+     "postedAt": null,
+     "scheduledFor": "2027-02-14",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-10-13",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/when-the-voice-guide-becomes-the-problem",
+   "title": "When the Voice Guide Becomes the Problem",
+   "url": "https://ninochavez.co/blog/when-the-voice-guide-becomes-the-problem",
+   "publishedAt": "2026-01-21",
+   "collection": "blog",
+   "words": 970,
+   "series": "agentic-workflows-in-practice",
+   "seriesPos": 4,
+   "cluster": "when-the-voice-guide-becomes-the-problem",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2027-02-28",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-10-20",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/from-research-paper-to-working-toolkit-in-one-session",
+   "title": "From Research Paper to Working Toolkit in One Session",
+   "url": "https://ninochavez.co/blog/from-research-paper-to-working-toolkit-in-one-session",
+   "publishedAt": "2026-02-04",
+   "collection": "blog",
+   "words": 1393,
+   "series": "agentic-workflows-in-practice",
+   "seriesPos": 5,
+   "cluster": "from-research-paper-to-working-toolkit-in-one-session",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "reason": "13 table rows — Substack's editor drops tables, so the body cannot go across intact",
+     "postedAt": null,
+     "scheduledFor": "2027-03-14",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "posted",
+     "postedAt": "share-history",
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/spec-driven-development-with-multi-agent-orchestration",
+   "title": "Spec-Driven Development with Multi-Agent Orchestration",
+   "url": "https://ninochavez.co/blog/spec-driven-development-with-multi-agent-orchestration",
+   "publishedAt": "2026-02-04",
+   "collection": "blog",
+   "words": 1214,
+   "series": "agentic-workflows-in-practice",
+   "seriesPos": 6,
+   "cluster": "spec-driven-development-with-multi-agent-orchestration",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "reason": "11 table rows — Substack's editor drops tables, so the body cannot go across intact",
+     "postedAt": null,
+     "scheduledFor": "2027-03-28",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-10-27",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/from-aegis-to-specchain-when-governance-meets-reality",
+   "title": "From Aegis to SpecChain: When Governance Meets Reality",
+   "url": "https://ninochavez.co/blog/from-aegis-to-specchain-when-governance-meets-reality",
+   "publishedAt": "2026-02-21",
+   "collection": "blog",
+   "words": 1739,
+   "series": "agentic-workflows-in-practice",
+   "seriesPos": 7,
+   "cluster": "from-aegis-to-specchain-when-governance-meets-reality",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "reason": "5 table rows — Substack's editor drops tables, so the body cannot go across intact",
+     "postedAt": null,
+     "scheduledFor": "2027-04-11",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "teaser",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-11-03",
      "url": null
     },
     "devto": {
@@ -1140,8 +1080,9 @@
     "linkedin": {
      "mode": "native",
      "state": "eligible",
+     "caption": "captions/linkedin/blog--two-doors-for-agents.md",
      "postedAt": null,
-     "scheduledFor": "2026-10-29",
+     "scheduledFor": "2026-11-10",
      "url": null
     },
     "devto": {
@@ -1241,40 +1182,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-12",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "blog/the-cowork-moment-when-agentic-ai-goes-mainstream",
-   "title": "The Cowork Moment: When Agentic AI Goes Mainstream",
-   "url": "https://ninochavez.co/blog/the-cowork-moment-when-agentic-ai-goes-mainstream",
-   "publishedAt": "2026-01-17",
-   "collection": "blog",
-   "words": 945,
-   "cluster": "the-cowork-moment-when-agentic-ai-goes-mainstream",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-02-07",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-11-26",
+     "scheduledFor": "2026-11-17",
      "url": null
     },
     "devto": {
@@ -1297,17 +1205,89 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "5 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-03-07",
+     "scheduledFor": "2027-04-18",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-12-10",
+     "scheduledFor": "2026-11-19",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/the-cognitive-foundry",
+   "title": "The Cognitive Foundry",
+   "url": "https://ninochavez.co/blog/the-cognitive-foundry",
+   "publishedAt": "2026-01-16",
+   "collection": "blog",
+   "words": 1778,
+   "series": "the-talent-engine",
+   "seriesPos": 1,
+   "cluster": "the-cognitive-foundry",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "reason": "7 table rows — Substack's editor drops tables, so the body cannot go across intact",
+     "postedAt": null,
+     "scheduledFor": "2027-04-25",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "teaser",
+     "state": "posted",
+     "postedAt": "share-history",
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/the-cognitive-foundry-part-2",
+   "title": "The Cognitive Foundry, Part 2: What the Simulation Can't Teach",
+   "url": "https://ninochavez.co/blog/the-cognitive-foundry-part-2",
+   "publishedAt": "2026-01-16",
+   "collection": "blog",
+   "words": 1835,
+   "series": "the-talent-engine",
+   "seriesPos": 2,
+   "cluster": "the-cognitive-foundry-part-2",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2027-05-02",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "teaser",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-11-24",
      "url": null
     },
     "devto": {
@@ -1330,17 +1310,18 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "89 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-12-27",
+     "scheduledFor": "2026-11-29",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-03",
+     "scheduledFor": "2026-09-22",
      "url": null
     },
     "devto": {
@@ -1363,22 +1344,131 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "69 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-01-24",
+     "scheduledFor": "2026-12-20",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-17",
+     "scheduledFor": "2026-10-01",
      "url": null
     },
     "devto": {
      "mode": "skip",
      "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/the-ai-analyst",
+   "title": "The AI Analyst",
+   "url": "https://ninochavez.co/blog/the-ai-analyst",
+   "publishedAt": "2026-01-12",
+   "collection": "blog",
+   "words": 1711,
+   "series": "the-talent-engine",
+   "seriesPos": 3,
+   "cluster": "the-ai-analyst",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2027-05-09",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "teaser",
+     "state": "posted",
+     "postedAt": "share-history",
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/the-agentic-student",
+   "title": "The Agentic Student",
+   "url": "https://ninochavez.co/blog/the-agentic-student",
+   "publishedAt": "2026-01-10",
+   "collection": "blog",
+   "words": 1187,
+   "series": "the-talent-engine",
+   "seriesPos": 4,
+   "cluster": "the-agentic-student",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2027-05-16",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-11-26",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/the-entry-level-developer-evolution-not-extinction",
+   "title": "The Entry-Level Developer: Evolution, Not Extinction",
+   "url": "https://ninochavez.co/blog/the-entry-level-developer-evolution-not-extinction",
+   "publishedAt": "2025-06-04",
+   "collection": "blog",
+   "words": 392,
+   "series": "the-talent-engine",
+   "seriesPos": 5,
+   "cluster": "the-entry-level-developer-evolution-not-extinction",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "skip",
+     "state": "posted",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": "archive",
+     "scheduledFor": null,
+     "url": null
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -1396,17 +1486,18 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "56 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-02-21",
+     "scheduledFor": "2027-01-10",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-12-01",
+     "scheduledFor": "2026-10-08",
      "url": null
     },
     "devto": {
@@ -1439,40 +1530,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-12-22",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "blog/the-agentic-student",
-   "title": "The Agentic Student",
-   "url": "https://ninochavez.co/blog/the-agentic-student",
-   "publishedAt": "2026-01-10",
-   "collection": "blog",
-   "words": 1187,
-   "cluster": "the-agentic-student",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-04-11",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-12-31",
+     "scheduledFor": "2026-12-01",
      "url": null
     },
     "devto": {
@@ -1495,17 +1553,18 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "50 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-03-14",
+     "scheduledFor": "2027-01-24",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-12-15",
+     "scheduledFor": "2026-10-15",
      "url": null
     },
     "devto": {
@@ -1528,17 +1587,18 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "41 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-03-28",
+     "scheduledFor": "2027-02-07",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-12-24",
+     "scheduledFor": "2026-10-22",
      "url": null
     },
     "devto": {
@@ -1627,10 +1687,11 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "10 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-04-25",
+     "scheduledFor": "2027-02-21",
      "url": null
     },
     "linkedin": {
@@ -1739,7 +1800,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-01-12",
+     "scheduledFor": "2026-12-03",
      "url": null
     },
     "devto": {
@@ -1795,17 +1856,18 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "24 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-05-16",
+     "scheduledFor": "2027-03-07",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-01-05",
+     "scheduledFor": "2026-10-29",
      "url": null
     },
     "devto": {
@@ -1831,14 +1893,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-18",
+     "scheduledFor": "2027-05-23",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-01-21",
+     "scheduledFor": "2026-12-08",
      "url": null
     },
     "devto": {
@@ -1864,14 +1926,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-09",
+     "scheduledFor": "2027-05-30",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-01-28",
+     "scheduledFor": "2026-12-10",
      "url": null
     },
     "devto": {
@@ -1894,17 +1956,18 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "35 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-06-06",
+     "scheduledFor": "2027-03-21",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-01-14",
+     "scheduledFor": "2026-11-05",
      "url": null
     },
     "devto": {
@@ -1927,17 +1990,18 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "23 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-06-13",
+     "scheduledFor": "2027-04-04",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-01-26",
+     "scheduledFor": "2026-11-12",
      "url": null
     },
     "devto": {
@@ -1970,7 +2034,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-02-02",
+     "scheduledFor": "2026-12-15",
      "url": null
     },
     "devto": {
@@ -2003,7 +2067,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-02-04",
+     "scheduledFor": "2026-12-17",
      "url": null
     },
     "devto": {
@@ -2036,7 +2100,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-02-09",
+     "scheduledFor": "2026-12-22",
      "url": null
     },
     "devto": {
@@ -2062,14 +2126,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-30",
+     "scheduledFor": "2027-06-06",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-02-11",
+     "scheduledFor": "2026-12-24",
      "url": null
     },
     "devto": {
@@ -2170,7 +2234,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-02-16",
+     "scheduledFor": "2026-12-29",
      "url": null
     },
     "devto": {
@@ -2237,7 +2301,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-02-18",
+     "scheduledFor": "2026-12-31",
      "url": null
     },
     "devto": {
@@ -2270,7 +2334,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-02-23",
+     "scheduledFor": "2027-01-05",
      "url": null
     },
     "devto": {
@@ -2304,7 +2368,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-02-25",
+     "scheduledFor": "2027-01-07",
      "url": null
     },
     "devto": {
@@ -2338,7 +2402,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-03-02",
+     "scheduledFor": "2027-01-12",
      "url": null
     },
     "devto": {
@@ -2371,7 +2435,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-03-04",
+     "scheduledFor": "2027-01-14",
      "url": null
     },
     "devto": {
@@ -2405,7 +2469,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-03-09",
+     "scheduledFor": "2027-01-19",
      "url": null
     },
     "devto": {
@@ -2438,7 +2502,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-03-11",
+     "scheduledFor": "2027-01-21",
      "url": null
     },
     "devto": {
@@ -2472,7 +2536,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-03-16",
+     "scheduledFor": "2027-01-26",
      "url": null
     },
     "devto": {
@@ -2506,7 +2570,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-03-18",
+     "scheduledFor": "2027-01-28",
      "url": null
     },
     "devto": {
@@ -2519,287 +2583,33 @@
    }
   },
   {
-   "id": "applied/adopt-or-skip",
-   "title": "Run the Subtraction Before You Install",
-   "url": "https://ninochavez.co/demos/applied/adopt-or-skip",
-   "publishedAt": "",
-   "collection": "applied",
-   "words": 0,
-   "pitch": "Four checks that run before anything touches your machine: enumerate what you already have, subtract it from what the tool ships into native, new, and blocked, query the part of the repository nobody curates, and confirm the uninstall actually works. The technique behind demo 12.",
-   "cluster": "one-component-i-didnt-already-have",
-   "tier": 1,
+   "id": "blog/the-style-guide-was-teaching-the-tells",
+   "title": "The Style Guide Was Teaching the Tells",
+   "url": "https://ninochavez.co/blog/the-style-guide-was-teaching-the-tells",
+   "publishedAt": "2026-08-03",
+   "collection": "blog",
+   "words": 1053,
+   "cluster": "the-style-guide-was-teaching-the-tells",
+   "tier": 2,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "companion piece; the demo carries the story",
+     "mode": "full",
+     "state": "eligible",
      "postedAt": null,
-     "scheduledFor": null,
+     "scheduledFor": "2027-06-13",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
+     "caption": "captions/linkedin/blog--the-style-guide-was-teaching-the-tells.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-25",
+     "scheduledFor": "2027-02-02",
      "url": null
     },
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "applied/config-probe",
-   "title": "Bare-Arm Test Your Agent Config",
-   "url": "https://ninochavez.co/demos/applied/config-probe",
-   "publishedAt": "",
-   "collection": "applied",
-   "words": 0,
-   "pitch": "How to tell whether an AI behavior gap is the model or your harness: run the same model bare as a control arm, isolate suspect config blocks, validate candidate rules as experiment arms, and promote only what the grid confirms. The technique behind demo 11.",
-   "cluster": "config-probe",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "companion piece; the demo carries the story",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-08-27",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "applied/corpus",
-   "title": "Mine Your Own Transcripts",
-   "url": "https://ninochavez.co/demos/applied/corpus",
-   "publishedAt": "",
-   "collection": "applied",
-   "words": 0,
-   "pitch": "Every agent session is a transcript you usually throw away. Mine them instead: reusable prompts, your corrections as standing priors, and counted waste numbers that justify the next fix. The loop, from 614 real sessions.",
-   "cluster": "session-corpus",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "companion piece; the demo carries the story",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-09-17",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "applied/gates",
-   "title": "Gate Every Hand-Off",
-   "url": "https://ninochavez.co/demos/applied/gates",
-   "publishedAt": "",
-   "collection": "applied",
-   "words": 0,
-   "pitch": "An AI agent is strong inside a stage and weak at the seams between them. The fix is a deterministic gate on every hand-off — a non-AI check the agent can't talk its way past. The shape, and the day production published fiction.",
-   "cluster": "agentic-gates",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "companion piece; the demo carries the story",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-10-06",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "applied/guardrails",
-   "title": "Promote a Correction to a Guardrail",
-   "url": "https://ninochavez.co/demos/applied/guardrails",
-   "publishedAt": "",
-   "collection": "applied",
-   "words": 0,
-   "pitch": "A correction you give an AI in chat dies with the session. The fix is changing its environment — a wrapper, a deny-hook, or a CI ratchet — so the rule holds forever. The three-rung ladder, with real deny-hooks firing.",
-   "cluster": "enforced-forever",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "companion piece; the demo carries the story",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-10-22",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "applied/provenance",
-   "title": "Put Provenance Labels on AI Research",
-   "url": "https://ninochavez.co/demos/applied/provenance",
-   "publishedAt": "",
-   "collection": "applied",
-   "words": 0,
-   "pitch": "How to make AI-assisted research trustworthy for a reader who can't check it: a three-tier confidence label on every number, an adversarial audit loop that re-derives claims at their sources, and the honest downgrade when a source can't be read. The technique behind demo 10.",
-   "cluster": "four-questions",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "companion piece; the demo carries the story",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-11-10",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "applied/registry",
-   "title": "A Registry for What Grep Can't Find",
-   "url": "https://ninochavez.co/demos/applied/registry",
-   "publishedAt": "",
-   "collection": "applied",
-   "words": 0,
-   "pitch": "Some load-bearing facts are invisible to search — the code compiles and the behavior is still wrong. Hold them in one registry, enforce the mechanical ones in CI, and split why / decided / currently-true. The technique, quoted from a real 25-entry registry.",
-   "cluster": "landmine-registry",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "companion piece; the demo carries the story",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-11-24",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "applied/two-ways",
-   "title": "Two Ways to Draw a System",
-   "url": "https://ninochavez.co/demos/applied/two-ways",
-   "publishedAt": "",
-   "collection": "applied",
-   "words": 0,
-   "pitch": "How an AI agent draws a technical diagram that looks like your project and doesn't go stale — hand-authored SVG vs themed Mermaid, chosen per diagram. The first Applied technique companion to the ways-of-working session demos.",
-   "cluster": "two-ways",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "companion piece; the demo carries the story",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-12-08",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -2817,17 +2627,18 @@
    "tier": 2,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "10 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-06-20",
+     "scheduledFor": "2027-07-04",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-03-23",
+     "scheduledFor": "2027-02-11",
      "url": null
     },
     "devto": {
@@ -2850,17 +2661,18 @@
    "tier": 2,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "6 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-07-11",
+     "scheduledFor": "2027-07-25",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-01",
+     "scheduledFor": "2027-02-23",
      "url": null
     },
     "devto": {
@@ -2886,14 +2698,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-01",
+     "scheduledFor": "2027-08-15",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-13",
+     "scheduledFor": "2027-03-04",
      "url": null
     },
     "devto": {
@@ -2919,14 +2731,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-22",
+     "scheduledFor": "2027-09-05",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-22",
+     "scheduledFor": "2027-03-16",
      "url": null
     },
     "devto": {
@@ -2985,14 +2797,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-09-12",
+     "scheduledFor": "2027-09-19",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-04",
+     "scheduledFor": "2027-03-23",
      "url": null
     },
     "devto": {
@@ -3018,47 +2830,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-09-26",
+     "scheduledFor": "2027-10-03",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-11",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "blog/where-the-api-stops",
-   "title": "Where the API Stops",
-   "url": "https://ninochavez.co/blog/where-the-api-stops",
-   "publishedAt": "2026-06-15",
-   "collection": "blog",
-   "words": 1623,
-   "cluster": "where-the-api-stops",
-   "tier": 2,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-10-10",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "teaser",
-     "state": "posted",
-     "postedAt": "share-history",
-     "scheduledFor": null,
+     "scheduledFor": "2027-03-25",
      "url": null
     },
     "devto": {
@@ -3084,7 +2863,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-10-24",
+     "scheduledFor": "2027-10-17",
      "url": null
     },
     "linkedin": {
@@ -3117,14 +2896,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-11-07",
+     "scheduledFor": "2027-10-31",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-13",
+     "scheduledFor": "2027-03-30",
      "url": null
     },
     "devto": {
@@ -3150,7 +2929,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-11-21",
+     "scheduledFor": "2027-11-14",
      "url": null
     },
     "linkedin": {
@@ -3180,17 +2959,18 @@
    "tier": 2,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "12 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-07-04",
+     "scheduledFor": "2027-06-27",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-03-30",
+     "scheduledFor": "2027-02-09",
      "url": null
     },
     "devto": {
@@ -3213,17 +2993,18 @@
    "tier": 2,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "6 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-12-05",
+     "scheduledFor": "2027-11-28",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-18",
+     "scheduledFor": "2027-04-01",
      "url": null
     },
     "devto": {
@@ -3249,7 +3030,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-12-12",
+     "scheduledFor": "2027-12-05",
      "url": null
     },
     "linkedin": {
@@ -3279,17 +3060,18 @@
    "tier": 2,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "12 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-07-25",
+     "scheduledFor": "2027-07-18",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-08",
+     "scheduledFor": "2027-02-18",
      "url": null
     },
     "devto": {
@@ -3315,7 +3097,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-12-19",
+     "scheduledFor": "2027-12-12",
      "url": null
     },
     "linkedin": {
@@ -3348,7 +3130,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-12-26",
+     "scheduledFor": "2027-12-19",
      "url": null
     },
     "linkedin": {
@@ -3381,14 +3163,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-01-02",
+     "scheduledFor": "2027-12-26",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-20",
+     "scheduledFor": "2027-04-06",
      "url": null
     },
     "devto": {
@@ -3414,14 +3196,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-01-09",
+     "scheduledFor": "2028-01-02",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-25",
+     "scheduledFor": "2027-04-08",
      "url": null
     },
     "devto": {
@@ -3434,20 +3216,22 @@
    }
   },
   {
-   "id": "fiction/the-room",
-   "title": "The Room",
-   "url": "https://ninochavez.co/blog/fiction/the-room",
-   "publishedAt": "2026-04-15",
+   "id": "fiction/the-bell",
+   "title": "The Bell",
+   "url": "https://ninochavez.co/blog/fiction/the-bell",
+   "publishedAt": "2026-04-10",
    "collection": "fiction",
-   "words": 545,
-   "cluster": "the-room",
+   "words": 954,
+   "series": "it-was-a-wonderful-life",
+   "seriesPos": 1,
+   "cluster": "the-bell",
    "tier": 2,
    "routes": {
     "substack": {
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-27",
+     "scheduledFor": "2027-06-20",
      "url": null
     },
     "linkedin": {
@@ -3468,20 +3252,22 @@
    }
   },
   {
-   "id": "fiction/the-fig",
-   "title": "The Fig",
-   "url": "https://ninochavez.co/blog/fiction/the-fig",
-   "publishedAt": "2026-04-14",
+   "id": "fiction/the-word",
+   "title": "The Word",
+   "url": "https://ninochavez.co/blog/fiction/the-word",
+   "publishedAt": "2026-04-11",
    "collection": "fiction",
-   "words": 454,
-   "cluster": "the-fig",
+   "words": 883,
+   "series": "it-was-a-wonderful-life",
+   "seriesPos": 2,
+   "cluster": "the-word",
    "tier": 2,
    "routes": {
     "substack": {
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-18",
+     "scheduledFor": "2027-07-11",
      "url": null
     },
     "linkedin": {
@@ -3502,20 +3288,94 @@
    }
   },
   {
-   "id": "fiction/the-page",
-   "title": "The Page",
-   "url": "https://ninochavez.co/blog/fiction/the-page",
-   "publishedAt": "2026-04-14",
+   "id": "fiction/the-neck",
+   "title": "The Neck",
+   "url": "https://ninochavez.co/blog/fiction/the-neck",
+   "publishedAt": "2026-04-12",
    "collection": "fiction",
-   "words": 399,
-   "cluster": "the-page",
+   "words": 574,
+   "series": "it-was-a-wonderful-life",
+   "seriesPos": 3,
+   "cluster": "the-neck",
    "tier": 2,
    "routes": {
     "substack": {
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-08",
+     "scheduledFor": "2027-08-01",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "wrong register for a professional feed",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "fiction/the-song",
+   "title": "The Song",
+   "url": "https://ninochavez.co/blog/fiction/the-song",
+   "publishedAt": "2026-04-12",
+   "collection": "fiction",
+   "words": 743,
+   "series": "it-was-a-wonderful-life",
+   "seriesPos": 4,
+   "cluster": "the-song",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2027-08-22",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "wrong register for a professional feed",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "fiction/the-cup",
+   "title": "The Cup",
+   "url": "https://ninochavez.co/blog/fiction/the-cup",
+   "publishedAt": "2026-04-13",
+   "collection": "fiction",
+   "words": 684,
+   "series": "it-was-a-wonderful-life",
+   "seriesPos": 5,
+   "cluster": "the-cup",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2027-09-12",
      "url": null
     },
     "linkedin": {
@@ -3542,6 +3402,8 @@
    "publishedAt": "2026-04-14",
    "collection": "fiction",
    "words": 855,
+   "series": "it-was-a-wonderful-life",
+   "seriesPos": 6,
    "cluster": "the-supper",
    "tier": 2,
    "routes": {
@@ -3549,7 +3411,79 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-29",
+     "scheduledFor": "2027-09-26",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "wrong register for a professional feed",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "fiction/the-room",
+   "title": "The Room",
+   "url": "https://ninochavez.co/blog/fiction/the-room",
+   "publishedAt": "2026-04-15",
+   "collection": "fiction",
+   "words": 545,
+   "series": "it-was-a-wonderful-life",
+   "seriesPos": 7,
+   "cluster": "the-room",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2027-10-10",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "wrong register for a professional feed",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "fiction/the-fig",
+   "title": "The Fig",
+   "url": "https://ninochavez.co/blog/fiction/the-fig",
+   "publishedAt": "2026-04-14",
+   "collection": "fiction",
+   "words": 454,
+   "series": "the-words-are-correct",
+   "seriesPos": 1,
+   "cluster": "the-fig",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2027-10-24",
      "url": null
     },
     "linkedin": {
@@ -3576,6 +3510,8 @@
    "publishedAt": "2026-04-14",
    "collection": "fiction",
    "words": 279,
+   "series": "the-words-are-correct",
+   "seriesPos": 2,
    "cluster": "the-window",
    "tier": 2,
    "routes": {
@@ -3583,7 +3519,43 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-09-19",
+     "scheduledFor": "2027-11-07",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "wrong register for a professional feed",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "fiction/the-page",
+   "title": "The Page",
+   "url": "https://ninochavez.co/blog/fiction/the-page",
+   "publishedAt": "2026-04-14",
+   "collection": "fiction",
+   "words": 399,
+   "series": "the-words-are-correct",
+   "seriesPos": 3,
+   "cluster": "the-page",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2027-11-21",
      "url": null
     },
     "linkedin": {
@@ -3617,183 +3589,13 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-01-16",
+     "scheduledFor": "2028-01-09",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "posted",
      "postedAt": "share-history",
-     "scheduledFor": null,
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "fiction/the-cup",
-   "title": "The Cup",
-   "url": "https://ninochavez.co/blog/fiction/the-cup",
-   "publishedAt": "2026-04-13",
-   "collection": "fiction",
-   "words": 684,
-   "cluster": "the-cup",
-   "tier": 2,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-10-03",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "wrong register for a professional feed",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "fiction/the-neck",
-   "title": "The Neck",
-   "url": "https://ninochavez.co/blog/fiction/the-neck",
-   "publishedAt": "2026-04-12",
-   "collection": "fiction",
-   "words": 574,
-   "cluster": "the-neck",
-   "tier": 2,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-10-17",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "wrong register for a professional feed",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "fiction/the-song",
-   "title": "The Song",
-   "url": "https://ninochavez.co/blog/fiction/the-song",
-   "publishedAt": "2026-04-12",
-   "collection": "fiction",
-   "words": 743,
-   "cluster": "the-song",
-   "tier": 2,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-10-31",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "wrong register for a professional feed",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "fiction/the-word",
-   "title": "The Word",
-   "url": "https://ninochavez.co/blog/fiction/the-word",
-   "publishedAt": "2026-04-11",
-   "collection": "fiction",
-   "words": 883,
-   "cluster": "the-word",
-   "tier": 2,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-11-14",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "wrong register for a professional feed",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "fiction/the-bell",
-   "title": "The Bell",
-   "url": "https://ninochavez.co/blog/fiction/the-bell",
-   "publishedAt": "2026-04-10",
-   "collection": "fiction",
-   "words": 954,
-   "cluster": "the-bell",
-   "tier": 2,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-11-28",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "wrong register for a professional feed",
-     "postedAt": null,
      "scheduledFor": null,
      "url": null
     },
@@ -3820,14 +3622,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-01-23",
+     "scheduledFor": "2028-01-16",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-27",
+     "scheduledFor": "2027-04-13",
      "url": null
     },
     "devto": {
@@ -3886,14 +3688,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-01-30",
+     "scheduledFor": "2028-01-23",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-01",
+     "scheduledFor": "2027-04-15",
      "url": null
     },
     "devto": {
@@ -3919,14 +3721,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-02-06",
+     "scheduledFor": "2028-01-30",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-03",
+     "scheduledFor": "2027-04-20",
      "url": null
     },
     "devto": {
@@ -3986,7 +3788,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-02-13",
+     "scheduledFor": "2028-02-06",
      "url": null
     },
     "linkedin": {
@@ -4019,14 +3821,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-02-20",
+     "scheduledFor": "2028-02-13",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-08",
+     "scheduledFor": "2027-04-22",
      "url": null
     },
     "devto": {
@@ -4052,47 +3854,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-02-27",
+     "scheduledFor": "2028-02-20",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-10",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "blog/what-if-the-fork-is-the-problem",
-   "title": "What If the Fork Is the Problem?",
-   "url": "https://ninochavez.co/blog/what-if-the-fork-is-the-problem",
-   "publishedAt": "2026-03-01",
-   "collection": "blog",
-   "words": 1428,
-   "cluster": "what-if-the-fork-is-the-problem",
-   "tier": 2,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2028-03-05",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-06-15",
+     "scheduledFor": "2027-04-27",
      "url": null
     },
     "devto": {
@@ -4115,17 +3884,18 @@
    "tier": 2,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "30 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-08-15",
+     "scheduledFor": "2027-08-08",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-20",
+     "scheduledFor": "2027-03-02",
      "url": null
     },
     "devto": {
@@ -4159,7 +3929,7 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-03-25",
+     "scheduledFor": "2027-02-04",
      "url": null
     },
     "devto": {
@@ -4192,7 +3962,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-17",
+     "scheduledFor": "2027-04-29",
      "url": null
     },
     "devto": {
@@ -4225,40 +3995,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-22",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "blog/from-aegis-to-specchain-when-governance-meets-reality",
-   "title": "From Aegis to SpecChain: When Governance Meets Reality",
-   "url": "https://ninochavez.co/blog/from-aegis-to-specchain-when-governance-meets-reality",
-   "publishedAt": "2026-02-21",
-   "collection": "blog",
-   "words": 1739,
-   "cluster": "from-aegis-to-specchain-when-governance-meets-reality",
-   "tier": 2,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2028-03-12",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-06-24",
+     "scheduledFor": "2027-05-04",
      "url": null
     },
     "devto": {
@@ -4284,7 +4021,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-03-19",
+     "scheduledFor": "2028-02-27",
      "url": null
     },
     "linkedin": {
@@ -4324,7 +4061,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-29",
+     "scheduledFor": "2027-05-06",
      "url": null
     },
     "devto": {
@@ -4347,17 +4084,18 @@
    "tier": 2,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "19 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-09-05",
+     "scheduledFor": "2027-08-29",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-29",
+     "scheduledFor": "2027-03-11",
      "url": null
     },
     "devto": {
@@ -4403,72 +4141,6 @@
    }
   },
   {
-   "id": "blog/from-research-paper-to-working-toolkit-in-one-session",
-   "title": "From Research Paper to Working Toolkit in One Session",
-   "url": "https://ninochavez.co/blog/from-research-paper-to-working-toolkit-in-one-session",
-   "publishedAt": "2026-02-04",
-   "collection": "blog",
-   "words": 1393,
-   "cluster": "from-research-paper-to-working-toolkit-in-one-session",
-   "tier": 2,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2028-03-26",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "posted",
-     "postedAt": "share-history",
-     "scheduledFor": null,
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "blog/spec-driven-development-with-multi-agent-orchestration",
-   "title": "Spec-Driven Development with Multi-Agent Orchestration",
-   "url": "https://ninochavez.co/blog/spec-driven-development-with-multi-agent-orchestration",
-   "publishedAt": "2026-02-04",
-   "collection": "blog",
-   "words": 1214,
-   "cluster": "spec-driven-development-with-multi-agent-orchestration",
-   "tier": 2,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2028-04-02",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-07-01",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
    "id": "presentations/investing-101-zoey",
    "title": "Investing 101: Your Money's Jobs",
    "url": "https://ninochavez.co/blog/presentations/investing-101-zoey",
@@ -4490,172 +4162,7 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-06",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "blog/when-the-voice-guide-becomes-the-problem",
-   "title": "When the Voice Guide Becomes the Problem",
-   "url": "https://ninochavez.co/blog/when-the-voice-guide-becomes-the-problem",
-   "publishedAt": "2026-01-21",
-   "collection": "blog",
-   "words": 970,
-   "cluster": "when-the-voice-guide-becomes-the-problem",
-   "tier": 2,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2028-04-09",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-07-06",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "blog/the-signal-forge-method-agentic-document-generation",
-   "title": "The Signal Forge Method: Agentic Document Generation",
-   "url": "https://ninochavez.co/blog/the-signal-forge-method-agentic-document-generation",
-   "publishedAt": "2026-01-18",
-   "collection": "blog",
-   "words": 1418,
-   "cluster": "the-signal-forge-method-agentic-document-generation",
-   "tier": 2,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2028-04-16",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-07-08",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "blog/22gb-to-2gb-video-compression-as-agentic-collaboration",
-   "title": "22GB to 2GB: Video Compression as Agentic Collaboration",
-   "url": "https://ninochavez.co/blog/22gb-to-2gb-video-compression-as-agentic-collaboration",
-   "publishedAt": "2026-01-17",
-   "collection": "blog",
-   "words": 830,
-   "cluster": "22gb-to-2gb-video-compression-as-agentic-collaboration",
-   "tier": 2,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2028-04-23",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-07-13",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "blog/the-cognitive-foundry-part-2",
-   "title": "The Cognitive Foundry, Part 2: What the Simulation Can't Teach",
-   "url": "https://ninochavez.co/blog/the-cognitive-foundry-part-2",
-   "publishedAt": "2026-01-16",
-   "collection": "blog",
-   "words": 1835,
-   "cluster": "the-cognitive-foundry-part-2",
-   "tier": 2,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2028-04-30",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-07-15",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "blog/the-cognitive-foundry",
-   "title": "The Cognitive Foundry",
-   "url": "https://ninochavez.co/blog/the-cognitive-foundry",
-   "publishedAt": "2026-01-16",
-   "collection": "blog",
-   "words": 1778,
-   "cluster": "the-cognitive-foundry",
-   "tier": 2,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2028-05-07",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "teaser",
-     "state": "posted",
-     "postedAt": "share-history",
-     "scheduledFor": null,
+     "scheduledFor": "2027-02-16",
      "url": null
     },
     "devto": {
@@ -4689,7 +4196,7 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-15",
+     "scheduledFor": "2027-02-25",
      "url": null
     },
     "devto": {
@@ -4721,39 +4228,6 @@
     },
     "linkedin": {
      "mode": "link",
-     "state": "posted",
-     "postedAt": "share-history",
-     "scheduledFor": null,
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "blog/the-ai-analyst",
-   "title": "The AI Analyst",
-   "url": "https://ninochavez.co/blog/the-ai-analyst",
-   "publishedAt": "2026-01-12",
-   "collection": "blog",
-   "words": 1711,
-   "cluster": "the-ai-analyst",
-   "tier": 2,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2028-05-14",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "teaser",
      "state": "posted",
      "postedAt": "share-history",
      "scheduledFor": null,
@@ -4813,10 +4287,11 @@
    "tier": 2,
    "routes": {
     "substack": {
-     "mode": "full",
+     "mode": "link",
      "state": "eligible",
+     "reason": "7 table rows — Substack's editor drops tables, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-05-21",
+     "scheduledFor": "2028-03-05",
      "url": null
     },
     "linkedin": {
@@ -4891,7 +4366,7 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-27",
+     "scheduledFor": "2027-03-09",
      "url": null
     },
     "devto": {
@@ -4917,7 +4392,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-05-28",
+     "scheduledFor": "2028-03-12",
      "url": null
     },
     "linkedin": {
@@ -5004,12 +4479,90 @@
    }
   },
   {
+   "id": "blog/the-storefront-is-dead",
+   "title": "The Storefront Is Dead",
+   "url": "https://ninochavez.co/blog/the-storefront-is-dead",
+   "publishedAt": "2025-06-02",
+   "collection": "blog",
+   "words": 259,
+   "series": "the-storefront",
+   "seriesPos": 1,
+   "cluster": "the-storefront-is-dead",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "skip",
+     "state": "posted",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": "archive",
+     "scheduledFor": null,
+     "url": null
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/if-the-storefront-is-dead-where-do-you-compete-now",
+   "title": "If the Storefront Is Dead, Where Do You Compete Now?",
+   "url": "https://ninochavez.co/blog/if-the-storefront-is-dead-where-do-you-compete-now",
+   "publishedAt": "2025-06-06",
+   "collection": "blog",
+   "words": 371,
+   "series": "the-storefront",
+   "seriesPos": 2,
+   "cluster": "if-the-storefront-is-dead-where-do-you-compete-now",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "skip",
+     "state": "posted",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": "archive",
+     "scheduledFor": null,
+     "url": null
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
    "id": "blog/the-storefront-that-builds-itself",
    "title": "The Storefront That Builds Itself",
    "url": "https://ninochavez.co/blog/the-storefront-that-builds-itself",
    "publishedAt": "2025-12-03",
    "collection": "blog",
    "words": 1045,
+   "series": "the-storefront",
+   "seriesPos": 3,
    "cluster": "the-storefront-that-builds-itself",
    "tier": 2,
    "routes": {
@@ -5017,14 +4570,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-06-04",
+     "scheduledFor": "2028-03-19",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-20",
+     "scheduledFor": "2027-05-11",
      "url": null
     },
     "devto": {
@@ -5050,14 +4603,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-06-11",
+     "scheduledFor": "2028-03-26",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-22",
+     "scheduledFor": "2027-05-13",
      "url": null
     },
     "devto": {
@@ -5125,7 +4678,7 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-06",
+     "scheduledFor": "2027-03-18",
      "url": null
     },
     "devto": {
@@ -5158,7 +4711,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-27",
+     "scheduledFor": "2027-05-18",
      "url": null
     },
     "devto": {
@@ -5188,15 +4741,17 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
-     "scheduledFor": "2027-07-29",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
      "mode": "skip",
      "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -5369,7 +4924,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-03",
+     "scheduledFor": "2027-05-20",
      "url": null
     },
     "devto": {
@@ -5403,7 +4958,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-05",
+     "scheduledFor": "2027-05-25",
      "url": null
     },
     "devto": {
@@ -5473,7 +5028,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-10",
+     "scheduledFor": "2027-05-27",
      "url": null
     },
     "devto": {
@@ -5575,7 +5130,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-12",
+     "scheduledFor": "2027-06-01",
      "url": null
     },
     "devto": {
@@ -5609,7 +5164,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-17",
+     "scheduledFor": "2027-06-03",
      "url": null
     },
     "devto": {
@@ -5643,7 +5198,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-19",
+     "scheduledFor": "2027-06-08",
      "url": null
     },
     "devto": {
@@ -6097,7 +5652,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-24",
+     "scheduledFor": "2027-06-10",
      "url": null
     },
     "devto": {
@@ -6271,7 +5826,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-26",
+     "scheduledFor": "2027-06-15",
      "url": null
     },
     "devto": {
@@ -6305,7 +5860,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-31",
+     "scheduledFor": "2027-06-17",
      "url": null
     },
     "devto": {
@@ -6339,7 +5894,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-09-02",
+     "scheduledFor": "2027-06-22",
      "url": null
     },
     "devto": {
@@ -6373,7 +5928,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-09-07",
+     "scheduledFor": "2027-06-24",
      "url": null
     },
     "devto": {
@@ -6398,7 +5953,7 @@
     "substack": {
      "mode": "skip",
      "state": "skip",
-     "reason": "too short to carry an issue alone",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -6414,6 +5969,7 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7465,121 +7021,15 @@
    }
   },
   {
-   "id": "blog/from-prompt-to-pattern",
-   "title": "From Prompt to Pattern",
-   "url": "https://ninochavez.co/blog/from-prompt-to-pattern",
-   "publishedAt": "2025-07-02",
-   "collection": "blog",
-   "words": 441,
-   "cluster": "from-prompt-to-pattern",
-   "tier": 3,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": "archive",
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
    "id": "blog/help-me-help-you-help-me",
    "title": "Help Me Help You (Help Me)",
    "url": "https://ninochavez.co/blog/help-me-help-you-help-me",
    "publishedAt": "2025-07-02",
    "collection": "blog",
    "words": 665,
+   "series": "from-prompt-to-pattern",
+   "seriesPos": 1,
    "cluster": "help-me-help-you-help-me",
-   "tier": 3,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": "archive",
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "blog/how-i-work-with-ais-and-why",
-   "title": "How I Work With AIs (And Why)",
-   "url": "https://ninochavez.co/blog/how-i-work-with-ais-and-why",
-   "publishedAt": "2025-07-02",
-   "collection": "blog",
-   "words": 654,
-   "cluster": "how-i-work-with-ais-and-why",
-   "tier": 3,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": "archive",
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "blog/prompt-strategists-agent-orchestras-and-what-comes-next",
-   "title": "Prompt Strategists, Agent Orchestras, and What Comes Next",
-   "url": "https://ninochavez.co/blog/prompt-strategists-agent-orchestras-and-what-comes-next",
-   "publishedAt": "2025-07-02",
-   "collection": "blog",
-   "words": 655,
-   "cluster": "prompt-strategists-agent-orchestras-and-what-comes-next",
    "tier": 3,
    "routes": {
     "substack": {
@@ -7615,7 +7065,123 @@
    "publishedAt": "2025-07-02",
    "collection": "blog",
    "words": 488,
+   "series": "from-prompt-to-pattern",
+   "seriesPos": 2,
    "cluster": "when-one-ai-rewrites-for-another",
+   "tier": 3,
+   "routes": {
+    "substack": {
+     "mode": "skip",
+     "state": "posted",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": "archive",
+     "scheduledFor": null,
+     "url": null
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/prompt-strategists-agent-orchestras-and-what-comes-next",
+   "title": "Prompt Strategists, Agent Orchestras, and What Comes Next",
+   "url": "https://ninochavez.co/blog/prompt-strategists-agent-orchestras-and-what-comes-next",
+   "publishedAt": "2025-07-02",
+   "collection": "blog",
+   "words": 655,
+   "series": "from-prompt-to-pattern",
+   "seriesPos": 3,
+   "cluster": "prompt-strategists-agent-orchestras-and-what-comes-next",
+   "tier": 3,
+   "routes": {
+    "substack": {
+     "mode": "skip",
+     "state": "posted",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": "archive",
+     "scheduledFor": null,
+     "url": null
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/how-i-work-with-ais-and-why",
+   "title": "How I Work With AIs (And Why)",
+   "url": "https://ninochavez.co/blog/how-i-work-with-ais-and-why",
+   "publishedAt": "2025-07-02",
+   "collection": "blog",
+   "words": 654,
+   "series": "from-prompt-to-pattern",
+   "seriesPos": 4,
+   "cluster": "how-i-work-with-ais-and-why",
+   "tier": 3,
+   "routes": {
+    "substack": {
+     "mode": "skip",
+     "state": "posted",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": "archive",
+     "scheduledFor": null,
+     "url": null
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/from-prompt-to-pattern",
+   "title": "From Prompt to Pattern",
+   "url": "https://ninochavez.co/blog/from-prompt-to-pattern",
+   "publishedAt": "2025-07-02",
+   "collection": "blog",
+   "words": 441,
+   "series": "from-prompt-to-pattern",
+   "seriesPos": 5,
+   "cluster": "from-prompt-to-pattern",
    "tier": 3,
    "routes": {
     "substack": {
@@ -8149,42 +7715,6 @@
    }
   },
   {
-   "id": "blog/becoming-the-copilot",
-   "title": "Becoming the Copilot",
-   "url": "https://ninochavez.co/blog/becoming-the-copilot",
-   "publishedAt": "2025-06-16",
-   "collection": "blog",
-   "words": 450,
-   "cluster": "becoming-the-copilot",
-   "tier": 3,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": "archive",
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
    "id": "blog/reading-the-road",
    "title": "Reading the Road",
    "url": "https://ninochavez.co/blog/reading-the-road",
@@ -8257,12 +7787,166 @@
    }
   },
   {
+   "id": "blog/start-here-why-signal-reflex-exists",
+   "title": "Start Here: Why Signal Reflex Exists",
+   "url": "https://ninochavez.co/blog/start-here-why-signal-reflex-exists",
+   "publishedAt": "2025-06-02",
+   "collection": "blog",
+   "words": 424,
+   "series": "signal-reflex-launch",
+   "seriesPos": 1,
+   "cluster": "start-here-why-signal-reflex-exists",
+   "tier": 3,
+   "routes": {
+    "substack": {
+     "mode": "skip",
+     "state": "posted",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": "archive",
+     "scheduledFor": null,
+     "url": null
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/why-i-started-signal-reflex",
+   "title": "Why I Started Signal Reflex",
+   "url": "https://ninochavez.co/blog/why-i-started-signal-reflex",
+   "publishedAt": "2025-06-02",
+   "collection": "blog",
+   "words": 203,
+   "series": "signal-reflex-launch",
+   "seriesPos": 2,
+   "cluster": "why-i-started-signal-reflex",
+   "tier": 3,
+   "routes": {
+    "substack": {
+     "mode": "skip",
+     "state": "posted",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": "archive",
+     "scheduledFor": null,
+     "url": null
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/how-i-built-signal-reflex-in-a-week",
+   "title": "How I Built Signal Reflex in a Week",
+   "url": "https://ninochavez.co/blog/how-i-built-signal-reflex-in-a-week",
+   "publishedAt": "2025-06-04",
+   "collection": "blog",
+   "words": 576,
+   "series": "signal-reflex-launch",
+   "seriesPos": 3,
+   "cluster": "how-i-built-signal-reflex-in-a-week",
+   "tier": 3,
+   "routes": {
+    "substack": {
+     "mode": "skip",
+     "state": "posted",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": "archive",
+     "scheduledFor": null,
+     "url": null
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/becoming-the-copilot",
+   "title": "Becoming the Copilot",
+   "url": "https://ninochavez.co/blog/becoming-the-copilot",
+   "publishedAt": "2025-06-16",
+   "collection": "blog",
+   "words": 450,
+   "series": "signal-reflex-launch",
+   "seriesPos": 4,
+   "cluster": "becoming-the-copilot",
+   "tier": 3,
+   "routes": {
+    "substack": {
+     "mode": "skip",
+     "state": "posted",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": "archive",
+     "scheduledFor": null,
+     "url": null
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
    "id": "blog/signal-reflex-signal-dispatch",
    "title": "Signal Reflex → Signal Dispatch",
    "url": "https://ninochavez.co/blog/signal-reflex-signal-dispatch",
    "publishedAt": "2025-06-16",
    "collection": "blog",
    "words": 188,
+   "series": "signal-reflex-launch",
+   "seriesPos": 5,
    "cluster": "signal-reflex-signal-dispatch",
    "tier": 3,
    "routes": {
@@ -8407,6 +8091,8 @@
    "publishedAt": "2025-06-14",
    "collection": "blog",
    "words": 371,
+   "series": "the-loom",
+   "seriesPos": 1,
    "cluster": "the-human-loom",
    "tier": 3,
    "routes": {
@@ -8443,6 +8129,8 @@
    "publishedAt": "2025-06-14",
    "collection": "blog",
    "words": 481,
+   "series": "the-loom",
+   "seriesPos": 2,
    "cluster": "the-machine-loom",
    "tier": 3,
    "routes": {
@@ -9337,42 +9025,6 @@
    }
   },
   {
-   "id": "blog/if-the-storefront-is-dead-where-do-you-compete-now",
-   "title": "If the Storefront Is Dead, Where Do You Compete Now?",
-   "url": "https://ninochavez.co/blog/if-the-storefront-is-dead-where-do-you-compete-now",
-   "publishedAt": "2025-06-06",
-   "collection": "blog",
-   "words": 371,
-   "cluster": "if-the-storefront-is-dead-where-do-you-compete-now",
-   "tier": 3,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": "archive",
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
    "id": "blog/is-chatgpt-doing-my-thinking-for-me",
    "title": "Is ChatGPT Doing My Thinking for Me?",
    "url": "https://ninochavez.co/blog/is-chatgpt-doing-my-thinking-for-me",
@@ -9805,84 +9457,14 @@
    }
   },
   {
-   "id": "blog/grid-level-thinking-wasnt-the-plan",
-   "title": "Grid-Level Thinking Wasn't the Plan",
-   "url": "https://ninochavez.co/blog/grid-level-thinking-wasnt-the-plan",
-   "publishedAt": "2025-06-04",
-   "collection": "blog",
-   "words": 310,
-   "cluster": "grid-level-thinking-wasnt-the-plan",
-   "tier": 3,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": "archive",
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "blog/how-i-built-signal-reflex-in-a-week",
-   "title": "How I Built Signal Reflex in a Week",
-   "url": "https://ninochavez.co/blog/how-i-built-signal-reflex-in-a-week",
-   "publishedAt": "2025-06-04",
-   "collection": "blog",
-   "words": 576,
-   "cluster": "how-i-built-signal-reflex-in-a-week",
-   "tier": 3,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": "archive",
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
    "id": "blog/plug-in-then-rethink-the-system",
    "title": "Plug In. Then Rethink the System.",
    "url": "https://ninochavez.co/blog/plug-in-then-rethink-the-system",
    "publishedAt": "2025-06-04",
    "collection": "blog",
    "words": 248,
+   "series": "grid-level-thinking",
+   "seriesPos": 3,
    "cluster": "plug-in-then-rethink-the-system",
    "tier": 3,
    "routes": {
@@ -9919,7 +9501,47 @@
    "publishedAt": "2025-06-04",
    "collection": "blog",
    "words": 413,
+   "series": "grid-level-thinking",
+   "seriesPos": 4,
    "cluster": "power-without-purpose-is-just-a-bill",
+   "tier": 3,
+   "routes": {
+    "substack": {
+     "mode": "skip",
+     "state": "posted",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": "archive",
+     "scheduledFor": null,
+     "url": null
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/grid-level-thinking-wasnt-the-plan",
+   "title": "Grid-Level Thinking Wasn't the Plan",
+   "url": "https://ninochavez.co/blog/grid-level-thinking-wasnt-the-plan",
+   "publishedAt": "2025-06-04",
+   "collection": "blog",
+   "words": 310,
+   "series": "grid-level-thinking",
+   "seriesPos": 5,
+   "cluster": "grid-level-thinking-wasnt-the-plan",
    "tier": 3,
    "routes": {
     "substack": {
@@ -9992,42 +9614,6 @@
    "collection": "blog",
    "words": 429,
    "cluster": "the-bet-i-didnt-know-i-was-making",
-   "tier": 3,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": "archive",
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "blog/the-entry-level-developer-evolution-not-extinction",
-   "title": "The Entry-Level Developer: Evolution, Not Extinction",
-   "url": "https://ninochavez.co/blog/the-entry-level-developer-evolution-not-extinction",
-   "publishedAt": "2025-06-04",
-   "collection": "blog",
-   "words": 392,
-   "cluster": "the-entry-level-developer-evolution-not-extinction",
    "tier": 3,
    "routes": {
     "substack": {
@@ -10171,6 +9757,8 @@
    "publishedAt": "2025-06-04",
    "collection": "blog",
    "words": 203,
+   "series": "grid-level-thinking",
+   "seriesPos": 1,
    "cluster": "wired-for-power-ai-is-the-grid-youre-the-architect",
    "tier": 3,
    "routes": {
@@ -10207,6 +9795,8 @@
    "publishedAt": "2025-06-04",
    "collection": "blog",
    "words": 151,
+   "series": "grid-level-thinking",
+   "seriesPos": 2,
    "cluster": "wired-for-power-everyone-got-the-current-not-everyone-built-the-city",
    "tier": 3,
    "routes": {
@@ -10242,7 +9832,7 @@
    "url": "https://ninochavez.co/blog/you-cant-engineer-growth",
    "publishedAt": "2025-06-04",
    "collection": "blog",
-   "words": 359,
+   "words": 367,
    "cluster": "you-cant-engineer-growth",
    "tier": 3,
    "routes": {
@@ -10417,42 +10007,6 @@
    }
   },
   {
-   "id": "blog/start-here-why-signal-reflex-exists",
-   "title": "Start Here: Why Signal Reflex Exists",
-   "url": "https://ninochavez.co/blog/start-here-why-signal-reflex-exists",
-   "publishedAt": "2025-06-02",
-   "collection": "blog",
-   "words": 424,
-   "cluster": "start-here-why-signal-reflex-exists",
-   "tier": 3,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": "archive",
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
    "id": "blog/start-smart-not-perfect",
    "title": "Start Smart, Not Perfect",
    "url": "https://ninochavez.co/blog/start-smart-not-perfect",
@@ -10489,42 +10043,6 @@
    }
   },
   {
-   "id": "blog/the-storefront-is-dead",
-   "title": "The Storefront Is Dead",
-   "url": "https://ninochavez.co/blog/the-storefront-is-dead",
-   "publishedAt": "2025-06-02",
-   "collection": "blog",
-   "words": 259,
-   "cluster": "the-storefront-is-dead",
-   "tier": 3,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": "archive",
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
    "id": "blog/why-i-shoot-senior-nights",
    "title": "Why I Shoot Senior Nights",
    "url": "https://ninochavez.co/blog/why-i-shoot-senior-nights",
@@ -10532,42 +10050,6 @@
    "collection": "blog",
    "words": 591,
    "cluster": "why-i-shoot-senior-nights",
-   "tier": 3,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": "archive",
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "blog/why-i-started-signal-reflex",
-   "title": "Why I Started Signal Reflex",
-   "url": "https://ninochavez.co/blog/why-i-started-signal-reflex",
-   "publishedAt": "2025-06-02",
-   "collection": "blog",
-   "words": 203,
-   "cluster": "why-i-started-signal-reflex",
    "tier": 3,
    "routes": {
     "substack": {

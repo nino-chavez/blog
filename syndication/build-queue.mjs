@@ -45,6 +45,12 @@ function frontmatter(text) {
   // a nested key, so it needs its own read rather than the flat `get`.
   const companion = /^companionOf:\s*\n(?:\s+\w+:.*\n)*?\s+slug:\s*"?([^"\n]+)"?/m.exec(fm)
 
+  // `series` was previously a bare boolean (`inSeries`) that nothing ever read.
+  // The drip needs the slug and the position, because a series has to go out in
+  // reading order and the global sort is newest-first. See `order` below.
+  const series = /^series:\s*\n(?:\s+\w+:.*\n)*?\s+slug:\s*"?([^"\n]+)"?/m.exec(fm)
+  const seriesPos = /^series:\s*\n(?:\s+\w+:.*\n)*?\s+position:\s*(\d+)/m.exec(fm)
+
   return {
     title: get('title'),
     date: get('publishedAt').slice(0, 10),
@@ -52,9 +58,16 @@ function frontmatter(text) {
     status: get('status') || 'published', // schema default, content.config.ts
     featured: get('featured') === 'true',
     origin: get('source'), // "linkedin" on the 34 imported from Pulse
-    inSeries: /^series:/m.test(fm),
+    series: series ? series[1].trim() : '',
+    seriesPos: seriesPos ? Number(seriesPos[1]) : 0,
     companionOf: companion ? companion[1].trim() : '',
     words: body.trim().split(/\s+/).length,
+    // Substack's editor has no table node. Verified 2026-08-04 by pasting real
+    // <table> markup into it: zero table elements survived and the cells
+    // flattened to run-together text ("ClassCheckableEnumerableYesDerivedNo").
+    // A piece with tables therefore cannot go across as `full`, so the count is
+    // carried here and routing downgrades on it.
+    tableRows: (body.match(/^\s*\|/gm) || []).length,
   }
 }
 
@@ -115,7 +128,9 @@ function readDemos() {
         status: 'published',
         featured: false,
         origin: '',
-        inSeries: false,
+        series: '',
+        seriesPos: 0,
+        tableRows: 0,
         category: 'Demo',
         url: `${SITE}/demos/${kind === 'applied' ? 'applied/' : ''}${slug}`,
       })
@@ -338,6 +353,23 @@ function routeWithGuards(p, now) {
   if (p.origin === 'linkedin') {
     out.routes.linkedin = { mode: 'skip', reason: 'originated on LinkedIn' }
   }
+  // `full` means a human pastes the body into Substack's editor. That editor has
+  // no table node — pasting real <table> markup yields zero tables and cells run
+  // together into one string, verified 2026-08-04 while trying to send
+  // claim-classes (79 table rows). So `full` is not a mode this piece can use,
+  // and the queue must not instruct someone to paste something that arrives
+  // broken. It becomes `link` — the mode demos already use — which is a framing
+  // note plus a link home.
+  //
+  // This is not a niche case: 35 of 85 queued `full` items carry tables, and it
+  // is every whitepaper, because whitepapers are the one collection the repo's
+  // CLAUDE.md tells you to use tables liberally in.
+  if (out.routes.substack?.mode === 'full' && p.tableRows > 0) {
+    out.routes.substack = {
+      mode: 'link',
+      reason: `${p.tableRows} table rows — Substack's editor drops tables, so the body cannot go across intact`,
+    }
+  }
   return out
 }
 
@@ -422,6 +454,7 @@ const items = pieces.map((p) => {
     collection: p.collection,
     words: p.words,
     ...(p.pitch ? { pitch: p.pitch } : {}),
+    ...(p.series ? { series: p.series, seriesPos: p.seriesPos } : {}),
     cluster: p.cluster,
     tier: was?.tier ?? tier,
     routes: {},
@@ -467,12 +500,75 @@ const items = pieces.map((p) => {
   return out
 })
 
+// A series is one editorial unit, so it also has to share one tier. Tier is the
+// outermost sort key, so a series split across tiers plays split no matter what
+// the date and position rules do: `agentic-workflows-in-practice` had part 2
+// featured (tier 1) and the rest tier 2, which scheduled part 2 for 2026-09-17
+// and parts 1 and 3-7 for 2027-04 — seven months, in the wrong order, for a
+// reader who met part 2 first.
+//
+// The whole series takes the best tier any member earned. If one entry is strong
+// enough to feature, running it alone ahead of its own context is worse than
+// running the series at that priority.
+for (const [series, tier] of (() => {
+  const best = new Map()
+  for (const i of items) {
+    if (!i.series) continue
+    const cur = best.get(i.series)
+    if (cur === undefined || i.tier < cur) best.set(i.series, i.tier)
+  }
+  return best
+})()) {
+  for (const i of items) if (i.series === series) i.tier = tier
+}
+
+// Every series' anchor, computed once over the finished item list rather than
+// per comparison — Array#sort calls the comparator O(n log n) times and the
+// anchor is a property of the series, not of the pair.
+const anchors = seriesAnchors(items)
+
 // Order the drip: tier first, then newest — a 2025 essay is not the thing to
 // open with when there is 2026 material that says the same idea better. Undated
 // pieces (the applied companions) sort last within their tier rather than first,
 // which an empty string would otherwise do.
-const order = (a, b) =>
-  a.tier - b.tier || (b.publishedAt || '0000').localeCompare(a.publishedAt || '0000')
+//
+// Series are the exception, and they were silently broken. Newest-first applied
+// to a series plays it backwards: `agentic-workflows-in-practice` was scheduled
+// 2,7,6,4,3,1, and `the-taste-test` 1,3,2. A reader meeting part 7 first has no
+// way to know parts 1-6 exist. The old `inSeries` boolean was computed and never
+// read by anything, so nothing had ever acted on this.
+//
+// The fix anchors each series to its NEWEST member's date, then plays the
+// members in position order from there. The series lands where newest-first
+// would have put it, so the drip's shape is unchanged; only the internal order
+// is. Anchoring matters for correctness, not just taste: a comparator that
+// special-cased same-series pairs while leaving cross-series pairs on raw date
+// would not be transitive, and Array#sort on a non-transitive comparator gives
+// an arbitrary result rather than an error.
+function seriesAnchors(items) {
+  const anchor = new Map()
+  for (const i of items) {
+    if (!i.series) continue
+    const cur = anchor.get(i.series)
+    const d = i.publishedAt || '0000'
+    if (!cur || d > cur) anchor.set(i.series, d)
+  }
+  return anchor
+}
+
+const orderWith = (anchor) => (a, b) => {
+  const ad = a.series ? anchor.get(a.series) : a.publishedAt || '0000'
+  const bd = b.series ? anchor.get(b.series) : b.publishedAt || '0000'
+  return (
+    a.tier - b.tier ||
+    (bd || '0000').localeCompare(ad || '0000') ||
+    // Same series: reading order. Different series sharing an anchor date, or
+    // non-series pieces, fall through to their own dates newest-first.
+    (a.series && a.series === b.series
+      ? a.seriesPos - b.seriesPos
+      : (b.publishedAt || '0000').localeCompare(a.publishedAt || '0000'))
+  )
+}
 
 // Interleave by collection inside each tier. Straight tier-then-date ordering
 // put twelve demos in consecutive slots — six weeks of one format, which reads
@@ -562,7 +658,7 @@ function spaceClusters(list) {
 
 for (const platform of Object.keys(CADENCE)) {
   const queued = spaceClusters(
-    interleave(items.filter((i) => i.routes[platform]?.state === 'eligible').sort(order))
+    interleave(items.filter((i) => i.routes[platform]?.state === 'eligible').sort(orderWith(anchors)))
   )
   const dates = slots(platform, queued.length, today)
   queued.forEach((i, n) => {
@@ -602,7 +698,7 @@ const doc = {
     : 'unknown — linkedin-shares.json missing, run the harvest in the README',
   cadence: CADENCE,
   summary,
-  items: items.sort(order),
+  items: items.sort(orderWith(anchors)),
 }
 
 // Nothing schedules this. The dates are a plan, so the queue has to be able to
