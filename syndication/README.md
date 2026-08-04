@@ -19,7 +19,9 @@ work is invisible to a sprint board and a git log, not that it wasn't happening.
 The first commenter answered the invented claim, not the post.
 
 That sentence survived a voice audit, six editing passes, an n-gram scan, and
-four threshold checks. All of them compared captions to each other or to a
+four threshold checks — and the n-gram scan was a command someone ran once in a
+session, never a file in this repo, which is the difference this whole directory
+is about. All of them compared captions to each other or to a
 number. None re-read the source. The failure mode is drift-by-copying: once a
 draft exists, the caption becomes the working source of truth and every later
 edit is a copy of a copy. A written rule does not survive that, because the
@@ -33,23 +35,38 @@ original text and has a comment thread answering the invented claim. Editing a
 live post is the operator's call, so the divergence is recorded here rather
 than silently reconciled. `state: posted` means posted, not posted-as-written.
 
-The gate splits claims by what can actually be verified mechanically:
+The gate splits claims by what can actually be verified mechanically. Two
+classes get a verdict; two get a worklist:
 
-- **Figures** — every number in a caption must appear in its source. Non-zero
-  exit if not. This part is airtight and it is not where captions go wrong.
-- **First-person claims** — every sentence containing "I", "my", or "me". No
-  matcher can check these; the tool prints each one with its source path so the
-  reading has a worklist. Skipping it is then a visible choice rather than an
-  oversight.
+- **Figures** (verdict) — every number in a caption must appear in its source.
+  Airtight, and not where captions go wrong.
+- **Repeated phrasing** (verdict) — no two captions may share a five-word run,
+  across platforms as well as within one. Captions are drafted weeks apart from
+  the same voice and often the same source, so phrasing converges without anyone
+  deciding it should.
+- **First-person claims** (worklist) — every sentence containing "I", "my", or
+  "me". No matcher can check these; each is printed with its source path so the
+  reading has a worklist and skipping it is a visible choice.
+- **Scope claims** (worklist) — every sentence about the reader or about people
+  in general. The mirror image of the above; see below.
 
-Both classes matter, but the second is the one that ships wrong. The 8/4 claim
-contained no number, which is exactly why every numeric check passed it.
+The verdict classes are cheap and catch nothing interesting. The worklist
+classes are where captions actually go wrong: the 8/4 claim contained no number,
+which is exactly why every numeric check passed it.
 
 For each printed claim, find the sentence in the source that attributes it **to
 Nino specifically** — not one that supports the idea, one that assigns it to
 him. If the source states it generally, the caption states it generally. The
 failure is almost never invention; it is relocation, which reads as paraphrase
 while you draft and passes any check aimed at made-up people and events.
+
+**It runs in both directions.** The rule above is half of one. The same instinct
+that narrows a general claim onto Nino also widens a claim about his own system
+onto everyone — "a README of mine drifted" becomes "a README is the file you
+write once and never open again". A reader who maintains theirs replies denying
+the premise, and the thread is about the premise instead of the argument. Keep
+the subject the source assigned: not narrower, not wider. A general claim is
+fine when the source makes one ("the exit is the part nobody tests" is verbatim).
 
 The first version of this gate also required a past-tense verb from a fixed
 list, on the theory that present-tense opinion is argument rather than
