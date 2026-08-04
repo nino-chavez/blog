@@ -1,4 +1,4 @@
-I built a pipeline to check the documents I was generating. It took me an embarrassingly long time to notice it wasn't checking anything I cared about.
+I built a pipeline to check the documents I was generating. Then I went looking for a hole in it on purpose. It wasn't checking anything I cared about.
 
 It verified that every reference resolved. The link went somewhere. A page came back. It never once looked at the number in the sentence sitting in front of the link. Link-checking proves the internet answered. That is all it proves.
 
@@ -12,5 +12,5 @@ Two failure modes sit underneath, and conflating them is why single fixes underp
 
 The premise behind all of it is an asymmetry I don't think has landed. Producing a document became roughly free. Establishing that it's correct got no cheaper at all. The bottleneck moved from writing to reading. Nearly every tool built since aims at the writing.
 
-The taxonomy, why the highest-stakes class gets mechanized last, and when binding values to sources earns its cost:
+The taxonomy, and why the highest-stakes class gets mechanized last:
 https://ninochavez.co/blog/whitepapers/claim-classes
