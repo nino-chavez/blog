@@ -21,6 +21,10 @@
 //                   or observed cannot be verified by matching; they require
 //                   reading. Printed with the source path so the reading has a
 //                   worklist and cannot be skipped silently.
+//   REPETITION    — mechanizable, added 2026-08-04. No two captions may share a
+//                   five-word run. Captions are drafted weeks apart from the same
+//                   voice and often the same source, so phrasing converges without
+//                   anyone deciding it should.
 //   SCOPE         — the mirror image, added 2026-08-04. Claims about the reader
 //                   or about people in general. A caption can break fidelity in
 //                   either direction: narrowing a source's general claim onto the
@@ -32,7 +36,7 @@
 //   node syndication/check-captions.mjs            # all captions
 //   node syndication/check-captions.mjs <slug>     # one, by caption filename fragment
 //
-// Exit codes: 0 clean, 1 unverified figures, 2 missing source.
+// Exit codes: 0 clean, 1 unverified figures, 2 missing source, 3 repeated phrasing.
 
 import { readFileSync, readdirSync, existsSync } from 'node:fs'
 import { join, dirname } from 'node:path'
@@ -40,7 +44,17 @@ import { fileURLToPath } from 'node:url'
 import { homedir } from 'node:os'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
-const CAPTIONS = join(HERE, 'captions', 'linkedin')
+const CAPTION_ROOT = join(HERE, 'captions')
+
+// Every platform directory under captions/ is checked, not just linkedin.
+// build-queue.mjs resolves `captions/<platform>/<id>.md` for ANY platform
+// (line 488), so a substack/ or devto/ directory wires itself into the queue
+// the moment it exists. A gate that only read linkedin/ would let that copy
+// ship unverified — and 35 substack routes are `link` mode, which means a
+// written framing note, which means the same fidelity rules apply.
+const PLATFORMS = existsSync(CAPTION_ROOT)
+  ? readdirSync(CAPTION_ROOT, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name).sort()
+  : []
 const CONTENT = join(HERE, '..', 'astro-build', 'src', 'content')
 const DEMOS = join(homedir(), 'Workspace', 'dev', 'apps', 'nc-demos')
 
@@ -106,41 +120,64 @@ const PAST_TENSE =
 // silent miss costs a published correction.
 const SCOPE_CLAIM = /\b(you|your|you're|nobody|no one|everyone|everybody|anyone|people|most people|nearly every|almost every)\b/i
 
+// Five-word runs, used for the repetition check. Five is short enough to catch a
+// reworded-but-not-rewritten passage and long enough that ordinary English does
+// not collide: at 23 captions the count is 0, so any hit is a real echo.
+//
+// This existed as an ad-hoc command in a prior session and the README cites it as
+// one of the checks the 8/4 caption "survived". It was never in the repo, which is
+// why it caught nothing on 2026-08-04 when a Substack note was drafted by
+// rearranging the LinkedIn caption for the same piece instead of returning to the
+// source: 70 shared runs, the same drift-by-copying this whole gate exists for.
+const fiveGrams = (s) => {
+  const w = s.replace(/https?:\/\/\S+/g, ' ').toLowerCase().replace(/[^a-z0-9' ]/g, ' ').split(/\s+/).filter(Boolean)
+  const out = new Set()
+  for (let i = 0; i + 5 <= w.length; i++) out.add(w.slice(i, i + 5).join(' '))
+  return out
+}
+const grams = new Map()
+
 let unverified = 0
 let missing = 0
 const worklist = []
 const scopelist = []
 
-for (const file of readdirSync(CAPTIONS).filter((f) => f.endsWith('.md')).sort()) {
-  if (filter && !file.includes(filter)) continue
-  const caption = readFileSync(join(CAPTIONS, file), 'utf8').replace(/https?:\/\/\S+/g, '')
-  const { path, text } = sourceFor(file)
+let total = 0
+for (const platform of PLATFORMS) {
+  const dir = join(CAPTION_ROOT, platform)
+  for (const file of readdirSync(dir).filter((f) => f.endsWith('.md')).sort()) {
+    total++
+    if (filter && !file.includes(filter)) continue
+    const caption = readFileSync(join(dir, file), 'utf8').replace(/https?:\/\/\S+/g, '')
+    grams.set(`${platform}/${file}`, fiveGrams(caption))
+    const { path, text } = sourceFor(file)
 
-  if (text === null) {
-    console.log(`✗ ${file}\n    no source at ${path}`)
-    missing++
-    continue
+    if (text === null) {
+      console.log(`✗ ${platform}/${file}\n    no source at ${path}`)
+      missing++
+      continue
+    }
+
+    const inSource = figures(text)
+    const bad = [...figures(caption)].filter((n) => !inSource.has(n))
+    if (bad.length) {
+      console.log(`✗ ${platform}/${file}\n    figures absent from source: ${bad.join(', ')}\n    source: ${path}`)
+      unverified++
+    }
+
+    const sentences = caption
+      .split(/(?<=[.?!])\s+/)
+      .map((s) => s.replace(/\s+/g, ' ').trim())
+      .filter(Boolean)
+
+    const claims = sentences
+      .filter((s) => FIRST_PERSON.test(s))
+      .sort((a, b) => Number(PAST_TENSE.test(b)) - Number(PAST_TENSE.test(a)))
+    if (claims.length) worklist.push({ file: `${platform}/${file}`, path, claims })
+
+    const scoped = sentences.filter((s) => !FIRST_PERSON.test(s) && SCOPE_CLAIM.test(s))
+    if (scoped.length) scopelist.push({ file: `${platform}/${file}`, path, claims: scoped })
   }
-
-  const inSource = figures(text)
-  const bad = [...figures(caption)].filter((n) => !inSource.has(n))
-  if (bad.length) {
-    console.log(`✗ ${file}\n    figures absent from source: ${bad.join(', ')}\n    source: ${path}`)
-    unverified++
-  }
-
-  const sentences = caption
-    .split(/(?<=[.?!])\s+/)
-    .map((s) => s.replace(/\s+/g, ' ').trim())
-    .filter(Boolean)
-
-  const claims = sentences
-    .filter((s) => FIRST_PERSON.test(s))
-    .sort((a, b) => Number(PAST_TENSE.test(b)) - Number(PAST_TENSE.test(a)))
-  if (claims.length) worklist.push({ file, path, claims })
-
-  const scoped = sentences.filter((s) => !FIRST_PERSON.test(s) && SCOPE_CLAIM.test(s))
-  if (scoped.length) scopelist.push({ file, path, claims: scoped })
 }
 
 if (worklist.length) {
@@ -169,11 +206,30 @@ if (scopelist.length) {
   }
 }
 
-const total = readdirSync(CAPTIONS).filter((f) => f.endsWith('.md')).length
+// Repetition is mechanically decidable, so unlike the two reading worklists it
+// gets a verdict rather than a printout to review.
+const echoes = []
+const names = [...grams.keys()]
+for (let i = 0; i < names.length; i++) {
+  for (let j = i + 1; j < names.length; j++) {
+    const shared = [...grams.get(names[i])].filter((g) => grams.get(names[j]).has(g))
+    if (shared.length) echoes.push({ a: names[i], b: names[j], shared })
+  }
+}
+if (echoes.length) {
+  console.log('\nREPEATED PHRASING — these captions share a five-word run.')
+  console.log('Rewrite from the source, not from the other caption. Rearranging the')
+  console.log('sentences of an existing caption is how the runs survive a rewrite.\n')
+  for (const { a, b, shared } of echoes) {
+    console.log(`  ${a}\n  ${b}\n    ${shared.length} shared run(s), first: "${shared[0]}"\n`)
+  }
+}
+
 console.log(
-  `${total} caption(s): ${unverified} with unverified figures, ${missing} with no source, ` +
+  `${total} caption(s) across ${PLATFORMS.join(', ') || 'no platforms'}: ${unverified} with unverified figures, ${missing} with no source, ` +
     `${worklist.reduce((n, w) => n + w.claims.length, 0)} first-person claim(s) and ` +
-    `${scopelist.reduce((n, w) => n + w.claims.length, 0)} scope claim(s) needing a read.`
+    `${scopelist.reduce((n, w) => n + w.claims.length, 0)} scope claim(s) needing a read, ` +
+    `${echoes.length} repeated-phrasing pair(s).`
 )
 
-process.exit(missing ? 2 : unverified ? 1 : 0)
+process.exit(missing ? 2 : unverified ? 1 : echoes.length ? 3 : 0)

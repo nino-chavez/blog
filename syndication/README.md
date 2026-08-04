@@ -12,7 +12,7 @@ node syndication/check-captions.mjs          # source-fidelity gate — run befo
 
 ## Run the fidelity gate before a caption ships
 
-`check-captions.mjs` compares every caption against the piece it points at. It
+`check-captions.mjs` compares every caption against the piece it points at, across every platform directory under `captions/`. It
 exists because on 2026-08-03 a caption went live claiming "before I could hand
 this work to a machine, most of it just didn't happen" — the source says the
 work is invisible to a sprint board and a git log, not that it wasn't happening.

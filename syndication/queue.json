@@ -96,6 +96,7 @@
      "mode": "link",
      "state": "eligible",
      "reason": "79 table rows — Substack's editor drops tables, so the body cannot go across intact",
+     "caption": "captions/substack/whitepapers--claim-classes.md",
      "postedAt": null,
      "scheduledFor": "2026-08-16",
      "url": null
