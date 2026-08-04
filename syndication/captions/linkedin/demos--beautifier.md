@@ -14,6 +14,6 @@ A tool named for decoration doing its most valuable work as a diagnostic isn't m
 
 The failure it produced on me is almost too on the nose. I wrote that the hand-drawn banners would render fine against a dark background, having only ever looked at them locally in a preview app. Never once on the page where they actually ship. I asserted the render and skipped the render.
 
-Five repos, all mine, all one stack family. A large project with many contributors might drift in ways this pass would never see.
+Five repos, all mine, all one stack family. A project with many contributors could drift in ways this pass never sees. The sample is small and homogeneous.
 
 https://ninochavez.co/demos/beautifier

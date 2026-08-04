@@ -12,6 +12,6 @@ Here's where the argument gets interesting rather than just uncomfortable. The a
 
 If that's true, AI didn't remove the thinking. It relocated where the thinking has to happen.
 
-Which leaves something the "AI replaces developers" framing handles badly. When sourcing gets fast enough to be free, what's left to be good at? I have a partial answer and no confidence that it's the whole one.
+Which leaves something the "AI replaces developers" framing handles badly. When sourcing gets fast enough to be free, what's left to be good at? I have a partial answer. Not a whole one.
 
 https://ninochavez.co/blog/the-source-of-their-intelligence
