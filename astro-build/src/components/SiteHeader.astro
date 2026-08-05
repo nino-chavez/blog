@@ -252,15 +252,23 @@ const practiceLinks = [
 <SearchModal />
 
 <style>
+  /* Shell chrome values are a machine copy of the parent site's contract —
+     website-nc docs/claude-design-system.md (2026-08-04 token table:
+     ground #f0f1f4, text #14202e, muted #5a6472, rule #b9bec6,
+     action #14679e, action-quiet #d9e5ef, ink #0e1928). This strip
+     impersonates the ninochavez.co shell, so it tracks that contract;
+     everything below the Signal Dispatch masthead is governed by this
+     repo's DESIGN.md instead. Update here when the parent tokens change. */
   .open-practice-shell {
     --practice-shell-height: 64px;
     position: sticky;
     top: 0;
     z-index: 60;
     height: var(--practice-shell-height);
-    border-bottom: 1px solid rgb(241 234 223 / 0.22);
-    background: #091426;
-    color: #f1eadf;
+    border-bottom: 1px solid #b9bec6;
+    background: rgb(240 241 244 / 0.94);
+    color: #14202e;
+    backdrop-filter: blur(12px);
   }
   .open-practice-shell__inner {
     display: grid;
@@ -291,27 +299,29 @@ const practiceLinks = [
     height: 100%;
     align-items: center;
     border-bottom: 3px solid transparent;
-    color: rgb(241 234 223 / 0.62);
+    color: #5a6472;
   }
   .open-practice-shell__desktop a:hover,
   .open-practice-shell__desktop a:focus-visible,
   .open-practice-shell__desktop a[aria-current] {
-    color: #f1eadf;
+    color: #14202e;
   }
   .open-practice-shell__desktop a[aria-current] {
-    border-bottom-color: #d07a4e;
+    border-bottom-color: #14679e;
   }
   .open-practice-shell__search {
     justify-self: end;
-    color: rgb(241 234 223 / 0.62) !important;
+    color: #5a6472 !important;
   }
   .open-practice-shell__search:hover,
   .open-practice-shell__search:focus-visible {
-    color: #f1eadf !important;
+    color: #14202e !important;
   }
   .open-practice-shell :focus-visible {
-    outline: 3px solid #d07a4e;
-    outline-offset: 3px;
+    outline: none;
+    box-shadow:
+      0 0 0 2px #f0f1f4,
+      0 0 0 4px #14679e;
   }
   .open-practice-shell__mobile {
     display: none;
@@ -355,7 +365,7 @@ const practiceLinks = [
     .open-practice-shell__mobile summary {
       min-height: 44px;
       padding: 10px 12px;
-      border: 1px solid rgb(241 234 223 / 0.34);
+      border: 1px solid #b9bec6;
       border-radius: 2px;
       cursor: pointer;
       font-size: 0.82rem;
@@ -372,9 +382,9 @@ const practiceLinks = [
       display: grid;
       width: min(270px, calc(100vw - 32px));
       padding: 8px;
-      border: 1px solid rgb(241 234 223 / 0.34);
-      background: #091426;
-      box-shadow: 0 20px 44px rgb(0 0 0 / 0.42);
+      border: 1px solid #b9bec6;
+      background: #f0f1f4;
+      box-shadow: 0 20px 44px rgb(14 25 40 / 0.18);
     }
     .open-practice-shell__mobile nav a {
       min-height: 44px;
@@ -382,8 +392,8 @@ const practiceLinks = [
       border-left: 3px solid transparent;
     }
     .open-practice-shell__mobile nav a[aria-current] {
-      border-left-color: #d07a4e;
-      background: rgb(64 81 237 / 0.16);
+      border-left-color: #14679e;
+      background: #d9e5ef;
     }
   }
 </style>

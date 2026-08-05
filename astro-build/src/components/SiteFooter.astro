@@ -1,7 +1,7 @@
 ---
 const primary = [
   ['Work', '/work'],
-  ['Demos', '/demos'],
+  ['Sessions', '/demos'],
   ['Learn', '/learn'],
   ['Writing', '/blog'],
   ['Photography', '/photography'],
@@ -50,11 +50,14 @@ const secondary = [
 </footer>
 
 <style>
+  /* Shell chrome values are a machine copy of the parent site's contract —
+     website-nc docs/claude-design-system.md (2026-08-04). See SiteHeader.astro
+     for the token table; the two shell components change together. */
   .practice-footer {
     margin-top: 32px;
-    border-top: 1px solid rgb(241 234 223 / 0.24);
-    background: #091426;
-    color: #f1eadf;
+    border-top: 1px solid #b9bec6;
+    background: #f0f1f4;
+    color: #14202e;
   }
   .practice-footer__inner {
     display: grid;
@@ -66,12 +69,12 @@ const secondary = [
   }
   .practice-footer p {
     margin: 0;
-    color: rgb(241 234 223 / 0.58);
+    color: #5a6472;
     font-size: 0.9rem;
   }
   .practice-footer .practice-footer__name {
     margin-bottom: 6px;
-    color: #f1eadf;
+    color: #14202e;
     font-size: 1.05rem;
     font-weight: 760;
   }
@@ -81,18 +84,20 @@ const secondary = [
     gap: 10px;
   }
   .practice-footer a {
-    color: rgb(241 234 223 / 0.68);
+    color: #5a6472;
     font-size: 0.82rem;
     font-weight: 600;
     text-decoration: none;
   }
   .practice-footer a:hover,
   .practice-footer a:focus-visible {
-    color: #f1eadf;
+    color: #14202e;
   }
   .practice-footer :focus-visible {
-    outline: 3px solid #d07a4e;
-    outline-offset: 3px;
+    outline: none;
+    box-shadow:
+      0 0 0 2px #f0f1f4,
+      0 0 0 4px #14679e;
   }
   .publication-footer {
     display: grid;
@@ -103,10 +108,14 @@ const secondary = [
     grid-template-columns: 1fr auto auto;
     align-items: center;
     gap: 28px;
-    border-top: 1px solid rgb(241 234 223 / 0.18);
+    border-top: 1px solid #b9bec6;
   }
+  /* On the shell's bone ground the publication credit runs ink — coral at
+     0.9rem on #f0f1f4 reads 2.7:1 and fails contrast. Coral stays the
+     publication's accent inside the article surface, where its ground is
+     its own (DESIGN.md). */
   .publication-footer p {
-    color: #e86c5d;
+    color: #14202e;
     font-weight: 760;
   }
   .publication-footer nav {
@@ -115,7 +124,7 @@ const secondary = [
     gap: 14px 22px;
   }
   .publication-footer small {
-    color: rgb(241 234 223 / 0.5);
+    color: #5a6472;
   }
 
   @media (max-width: 800px) {
