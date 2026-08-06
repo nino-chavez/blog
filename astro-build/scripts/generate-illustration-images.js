@@ -583,8 +583,15 @@ function updateMdxFile(filepath, newImagePath) {
       content = lines.join('\n');
     }
 
-    // Verify content was actually modified
+    // An unchanged file is success when it already names this exact image.
+    // Regenerating over a correct featureImage is a no-op, not a failure —
+    // reporting it as one marks a generated post as failed and tells the
+    // operator to re-run work that already succeeded.
     if (content === originalContent) {
+      if (originalContent.includes(`featureImage: "${newImagePath}"`)) {
+        console.log(`              ✅ MDX already names this image — no change needed`);
+        return true;
+      }
       console.error(`              ❌ Content was not modified!`);
       return false;
     }
