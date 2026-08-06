@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-04",
+ "generatedAt": "2026-08-06",
  "linkedinHistory": "harvested from the activity feed (115 link-shares read)",
  "cadence": {
   "linkedin": {
@@ -24,11 +24,11 @@
  },
  "summary": {
   "linkedin": {
-   "posted": 42,
-   "queued": 93,
-   "skipped": 152,
-   "firstSlot": "2026-08-06",
-   "lastSlot": "2027-06-24"
+   "posted": 43,
+   "queued": 88,
+   "skipped": 156,
+   "firstSlot": "2026-08-11",
+   "lastSlot": "2027-06-10"
   },
   "substack": {
    "posted": 153,
@@ -41,8 +41,8 @@
    "posted": 2,
    "queued": 5,
    "skipped": 280,
-   "firstSlot": "2026-08-12",
-   "lastSlot": "2026-10-07"
+   "firstSlot": "2026-08-19",
+   "lastSlot": "2026-10-14"
   }
  },
  "items": [
@@ -69,7 +69,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/tutorials--grade-an-agent-tool-before-you-install-it.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-13",
+     "scheduledFor": "2026-08-18",
      "url": null
     },
     "devto": {
@@ -141,7 +141,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/tutorials--measure-your-own-token-waste.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-25",
+     "scheduledFor": "2026-08-27",
      "url": null
     },
     "devto": {
@@ -177,14 +177,14 @@
      "state": "eligible",
      "caption": "captions/linkedin/tutorials--audit-your-ai-coding-harness.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-08",
+     "scheduledFor": "2026-09-10",
      "url": null
     },
     "devto": {
      "mode": "canonical",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-12",
+     "scheduledFor": "2026-08-19",
      "url": null
     }
    }
@@ -254,7 +254,7 @@
      "mode": "canonical",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-26",
+     "scheduledFor": "2026-09-02",
      "url": null
     }
    }
@@ -310,17 +310,18 @@
      "mode": "link",
      "state": "eligible",
      "reason": "6 MDX nodes — Substack renders neither, so the body cannot go across intact",
+     "caption": "captions/substack/blog--what-if-the-fork-is-the-problem.md",
      "postedAt": null,
      "scheduledFor": "2026-08-09",
      "url": null
     },
     "linkedin": {
      "mode": "native",
-     "state": "eligible",
+     "state": "posted",
      "caption": "captions/linkedin/blog--what-if-the-fork-is-the-problem.md",
-     "postedAt": null,
+     "postedAt": "2026-08-06",
      "scheduledFor": "2026-08-06",
-     "url": null
+     "url": "https://www.linkedin.com/feed/update/urn:li:share:7491111822524080128/"
     },
     "devto": {
      "mode": "skip",
@@ -354,7 +355,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/whitepapers--lie-surface.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-11",
+     "scheduledFor": "2026-08-13",
      "url": null
     },
     "devto": {
@@ -389,7 +390,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/whitepapers--big-blueprint-methodology.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-20",
+     "scheduledFor": "2026-08-25",
      "url": null
     },
     "devto": {
@@ -424,14 +425,14 @@
      "state": "eligible",
      "caption": "captions/linkedin/tutorials--make-your-cli-agent-native.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-15",
+     "scheduledFor": "2026-09-17",
      "url": null
     },
     "devto": {
      "mode": "canonical",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-09",
+     "scheduledFor": "2026-09-16",
      "url": null
     }
    }
@@ -492,14 +493,14 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-24",
+     "scheduledFor": "2026-09-29",
      "url": null
     },
     "devto": {
      "mode": "canonical",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-23",
+     "scheduledFor": "2026-09-30",
      "url": null
     }
    }
@@ -527,7 +528,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--the-source-of-their-intelligence.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-18",
+     "scheduledFor": "2026-08-11",
      "url": null
     },
     "devto": {
@@ -598,7 +599,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--the-identity-crisis-of-the-prompter.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-27",
+     "scheduledFor": "2026-08-20",
      "url": null
     },
     "devto": {
@@ -635,7 +636,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--the-taste-gap.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-03",
+     "scheduledFor": "2026-09-01",
      "url": null
     },
     "devto": {
@@ -672,7 +673,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--the-sommelier-argument.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-17",
+     "scheduledFor": "2026-09-08",
      "url": null
     },
     "devto": {
@@ -741,7 +742,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/whitepapers--the-bifurcation-of-autonomy.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-01",
+     "scheduledFor": "2026-09-03",
      "url": null
     },
     "devto": {
@@ -782,7 +783,7 @@
      "mode": "canonical",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-07",
+     "scheduledFor": "2026-10-14",
      "url": null
     }
    }
@@ -809,7 +810,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-10",
+     "scheduledFor": "2026-09-15",
      "url": null
     },
     "devto": {
@@ -845,7 +846,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-29",
+     "scheduledFor": "2026-09-22",
      "url": null
     },
     "devto": {
@@ -880,7 +881,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-06",
+     "scheduledFor": "2026-10-01",
      "url": null
     },
     "devto": {
@@ -916,7 +917,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-13",
+     "scheduledFor": "2026-10-08",
      "url": null
     },
     "devto": {
@@ -952,7 +953,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-20",
+     "scheduledFor": "2026-10-15",
      "url": null
     },
     "devto": {
@@ -1024,7 +1025,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-27",
+     "scheduledFor": "2026-10-22",
      "url": null
     },
     "devto": {
@@ -1060,7 +1061,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-03",
+     "scheduledFor": "2026-10-29",
      "url": null
     },
     "devto": {
@@ -1094,7 +1095,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--two-doors-for-agents.md",
      "postedAt": null,
-     "scheduledFor": "2026-11-10",
+     "scheduledFor": "2026-11-05",
      "url": null
     },
     "devto": {
@@ -1194,7 +1195,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-17",
+     "scheduledFor": "2026-11-12",
      "url": null
     },
     "devto": {
@@ -1334,7 +1335,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-22",
+     "scheduledFor": "2026-09-24",
      "url": null
     },
     "devto": {
@@ -1368,7 +1369,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-01",
+     "scheduledFor": "2026-10-06",
      "url": null
     },
     "devto": {
@@ -1512,7 +1513,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-08",
+     "scheduledFor": "2026-10-13",
      "url": null
     },
     "devto": {
@@ -1579,7 +1580,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-15",
+     "scheduledFor": "2026-10-20",
      "url": null
     },
     "devto": {
@@ -1613,7 +1614,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-22",
+     "scheduledFor": "2026-10-27",
      "url": null
     },
     "devto": {
@@ -1882,7 +1883,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-29",
+     "scheduledFor": "2026-11-03",
      "url": null
     },
     "devto": {
@@ -1982,7 +1983,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-05",
+     "scheduledFor": "2026-11-10",
      "url": null
     },
     "devto": {
@@ -2016,7 +2017,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-12",
+     "scheduledFor": "2026-11-17",
      "url": null
     },
     "devto": {
@@ -5857,15 +5858,17 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
-     "scheduledFor": "2027-06-15",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
      "mode": "skip",
      "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -5891,15 +5894,17 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
-     "scheduledFor": "2027-06-17",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
      "mode": "skip",
      "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -5925,15 +5930,17 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
-     "scheduledFor": "2027-06-22",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
      "mode": "skip",
      "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -5959,15 +5966,17 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
-     "scheduledFor": "2027-06-24",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
      "mode": "skip",
      "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
