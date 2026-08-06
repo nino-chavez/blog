@@ -122,6 +122,42 @@ result so ordinary runs work offline, and entries already marked `posted`
 survive regeneration — so a stale cache can only mis-queue something published
 since the last refresh.
 
+### A Substack draft goes in the ledger, not in a commit message
+
+Staging a piece in the Substack editor without publishing it creates a real post
+that already exists on the platform. Record it, the same way dev.to drafts are
+recorded:
+
+```json
+"substack": {
+  "state": "draft",
+  "url": "https://signaldispatch.substack.com/publish/post/209790190",
+  "postId": 209790190
+}
+```
+
+`postId` is the durable key and the editor URL is the only one that opens — an
+unpublished Substack post has no public page, exactly as on dev.to.
+
+Leaving it `eligible` is the failure this prevents, and it is quiet: the piece is
+written, the caption is on disk, so `--due` renders the slot as untouched work
+and the obvious next move is to draft it a second time. Two copies, one
+subscriber email each.
+
+**Publishing is what closes it, and Substack needs no `--sync`.** dev.to has one
+because its API can be asked; Substack cannot be, so the refreshed archive is the
+proof. `--refresh` finds the piece by title and the next build flips the route to
+`posted`, swaps the editor URL for the public `/p/<slug>` one, and takes the real
+publication date off the archive rather than the day you happened to rebuild.
+That override exists specifically because `draft` is otherwise preserved
+untouched — without it a hand-published Substack post reads `draft` forever and
+its slot never reopens.
+
+A `draft` also keeps its slot in the schedule and stays in `--due`, marked
+`[drafted — publish it]`. Both follow from the same thing: it is queued work that
+happens to be staged already. The first version of this dropped drafts from the
+scheduling pool and put two `link` pieces on the same Sunday.
+
 ## What there is to work with
 
 `--report` prints the current counts. Numbers are deliberately not repeated

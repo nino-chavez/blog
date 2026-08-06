@@ -206,10 +206,13 @@ async function refreshSubstack() {
 
 const norm = (s) => (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '')
 
-function substackPosted() {
+// Keyed by normalised title rather than reduced to a Set of them, because the
+// archive entry carries the slug and the real publication date — the only way
+// to turn a draft that went live into a `posted` route with a working URL.
+function substackArchive() {
   const f = join(HERE, 'substack-archive.json')
-  if (!existsSync(f)) return new Set()
-  return new Set(JSON.parse(readFileSync(f, 'utf8')).map((p) => norm(p.title)))
+  if (!existsSync(f)) return new Map()
+  return new Map(JSON.parse(readFileSync(f, 'utf8')).map((p) => [norm(p.title), p]))
 }
 
 // LinkedIn history was recorded as unrecoverable at first, and that was wrong.
@@ -451,7 +454,7 @@ const collections = [
 const clusterOf = buildClusters(collections)
 const pieces = collections.map((p) => ({ ...p, cluster: clusterOf(p) }))
 
-const onSubstack = substackPosted()
+const onSubstack = substackArchive()
 const onLinkedIn = linkedinShared()
 
 const prior = existsSync(QUEUE) ? JSON.parse(readFileSync(QUEUE, 'utf8')) : { items: [] }
@@ -485,6 +488,25 @@ const items = pieces.map((p) => {
     // platform as an unpublished draft already EXISTS there. Letting it fall
     // back to `eligible` would queue it again and create a duplicate on the
     // next run — the failure is invisible until two copies are live.
+    //
+    // But `draft` cannot be sticky forever, and that is the other half. The
+    // publish button lives on the platform, not here, so a draft mark outlives
+    // the draft it describes. dev.to closes the loop with `post-devto.mjs
+    // --sync`; Substack has no writer at all, so the refreshed archive is the
+    // only thing that can tell the ledger a draft went live. Without this a
+    // Substack draft published by hand reads `draft` in perpetuity, its slot
+    // never reopens, and `--refresh` — the one command that knows the truth —
+    // is short-circuited before it gets a chance to say so.
+    const live = platform === 'substack' && prev?.state === 'draft' ? onSubstack.get(norm(p.title)) : null
+    if (live) {
+      out.routes[platform] = {
+        ...prev,
+        state: 'posted',
+        postedAt: live.date || 'archive',
+        url: `https://signaldispatch.substack.com/p/${live.slug}`,
+      }
+      continue
+    }
     if (prev?.state === 'posted' || prev?.state === 'skip-manual' || prev?.state === 'draft') {
       out.routes[platform] = prev
       continue
@@ -673,9 +695,16 @@ function spaceClusters(list) {
   return out
 }
 
+// A drafted piece is queued work that happens to be staged already, so it holds
+// its slot. Dropping it from the pool hands its date to the next item and
+// double-books the day it actually goes out — which is how marking one Substack
+// note `draft` put two `link` pieces on 2026-08-09 the first time this ran.
+// One predicate, three readers: the scheduler, the summary, and `--due`.
+const isQueued = (r) => r?.state === 'eligible' || r?.state === 'draft'
+
 for (const platform of Object.keys(CADENCE)) {
   const queued = spaceClusters(
-    interleave(items.filter((i) => i.routes[platform]?.state === 'eligible').sort(orderWith(anchors)))
+    interleave(items.filter((i) => isQueued(i.routes[platform])).sort(orderWith(anchors)))
   )
   const dates = slots(platform, queued.length, today)
   queued.forEach((i, n) => {
@@ -691,7 +720,7 @@ for (const platform of Object.keys(CADENCE)) {
   // goes out first — reading the date off `order`'s head reported a start two
   // weeks late.
   const dates = items
-    .filter((i) => i.routes[platform]?.state === 'eligible')
+    .filter((i) => isQueued(i.routes[platform]))
     .map((i) => i.routes[platform].scheduledFor)
     .sort()
   summary[platform] = {
@@ -728,8 +757,12 @@ if (has('--due')) {
   const cutoff = until.toISOString().slice(0, 10)
   let n = 0
   for (const platform of Object.keys(CADENCE)) {
+    // `draft` counts as owed, and more so than `eligible`. A drafted piece is
+    // written, staged, and one click from live — leaving it out of the owed
+    // list hides the cheapest thing on it, and hides it precisely because the
+    // work is nearly done. Worse, an invisible draft gets drafted twice.
     const due = items
-      .filter((i) => i.routes[platform]?.state === 'eligible')
+      .filter((i) => isQueued(i.routes[platform]))
       .filter((i) => (i.routes[platform].scheduledFor ?? '9999') <= cutoff)
       .sort((a, b) => a.routes[platform].scheduledFor.localeCompare(b.routes[platform].scheduledFor))
     if (!due.length) continue
@@ -740,7 +773,8 @@ if (has('--due')) {
       // A LinkedIn slot with no caption cannot be posted, and that is the whole
       // bottleneck — flag it here rather than at the moment of posting.
       const needs = platform === 'linkedin' && !r.caption ? '  [needs caption]' : ''
-      console.log(`  ${r.scheduledFor}${late}  ${r.mode.padEnd(9)} ${i.title.slice(0, 52)}${needs}`)
+      const staged = r.state === 'draft' ? '  [drafted — publish it]' : ''
+      console.log(`  ${r.scheduledFor}${late}  ${r.mode.padEnd(9)} ${i.title.slice(0, 52)}${needs}${staged}`)
       n += 1
     }
   }

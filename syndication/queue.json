@@ -308,12 +308,13 @@
    "routes": {
     "substack": {
      "mode": "link",
-     "state": "eligible",
+     "state": "draft",
      "reason": "6 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "caption": "captions/substack/blog--what-if-the-fork-is-the-problem.md",
      "postedAt": null,
      "scheduledFor": "2026-08-09",
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/post/209790190",
+     "postId": 209790190
     },
     "linkedin": {
      "mode": "native",
