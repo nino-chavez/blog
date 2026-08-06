@@ -1,0 +1,121 @@
+---
+title: "The Cut You'll Make Twice"
+slug: "the-cut-youll-make-twice"
+publishedAt: "2026-08-06T22:32:46.000Z"
+updatedAt: "2026-08-06T22:32:46.000Z"
+author: "Nino Chavez"
+status: "published"
+excerpt: "In March I wrote that a jig is the thing that accelerates the real work. Five months later I went and counted what's in one of mine. It accelerates nothing. Its entire job is to make a cut impossible."
+featureImage: "/images/generated/the-cut-youll-make-twice.webp"
+tags: ["agentic-systems", "architecture"]
+category: "AI & Automation"
+seo:
+  metaTitle: "The Cut You'll Make Twice"
+  metaDescription: "A capability questionnaire wanted to know whether we ship an assembled agent. The more useful thing sits a rung below — and my own definition of it was missing half its function."
+---
+
+A capability questionnaire I worked through last week has a row for no-code agent builders. After the row, two words: *if available*.
+
+That's a form telling on itself. It expects a finished product. It has already decided a vendor either has the builder or doesn't. An absence scores as a zero, never as a position.
+
+The next row down asks how you use AI to speed up development — writing code, configuring, testing, deploying. That row only makes sense if you believe the opposite thing. Nobody speeds up development by buying an assembled agent. They speed it up because the surface underneath is clean enough that a general-purpose agent can work it without a human translating.
+
+Two rows. Same form. Opposite bets about where the finishing happens.
+
+Forms like this carry a bias and they don't hide it. Native scores above extension. Self-serve scores above configured. Push-button scores above assembled-by-a-competent-person. The closer a capability sits to turnkey, the better it does.
+
+That isn't laziness on the grader's part. It's the only thing a rubric can do, because a rubric compares things that come out the same in every hand.
+
+## I Already Wrote the Jig Post, and It Was Half the Idea
+
+Five months ago I reached for carpentry to explain this, and defined the thing I keep coming back to:
+
+> A master carpenter doesn't build every piece from scratch. They build *jigs*—custom tools that hold material at the right angle, guide a cut along a precise line, make a repeatable operation fast and accurate. The jig isn't the product. It's the thing that accelerates the real work of making the product.
+
+Everything after that sentence was about proliferation. Agents make jigs cheap, cheap jigs breed, and you end up managing a drawer of one-off fixtures instead of doing the work. I still think that's right.
+
+But read the definition again. Every clause is about speed. *Accelerates. Fast and accurate. Repeatable.* A jig, in that post, is a thing that makes the good outcome quicker.
+
+That's one of its two jobs, and I wrote as if it were the only one.
+
+## The Jig That Doesn't Speed Anything Up
+
+Before writing this I went and counted what's actually in one of mine rather than trusting my memory of it.
+
+It's a storefront where a model composes the page layout. A catalog file declares every named place that model may write: twenty-eight of them, across ten surfaces. Twenty-seven are open to the composition engine. Twenty-seven are open to a merchant editing by hand. They are not the same twenty-seven. One region, the strip under a product grid, is open to the merchant and closed to the model.
+
+The cart has exactly three. One above the checkout button. One below the fold, capped at two items. One empty state.
+
+Line items, totals, promo entry, the checkout button itself — none of those are on the list.
+
+That catalog accelerates nothing. It makes no operation faster or more repeatable. Composing a page through it is slower than letting the model emit whatever it wants.
+
+What it does is remove a cut.
+
+There is no policy anywhere in that system saying the model may not change the cart total. Nobody wrote that sentence. The model receives a schema of the places it can put things, and no address in that schema reaches the total. It isn't forbidden from touching it. There's nowhere to put the instruction.
+
+That's the difference between a jig and a warning label. A warning label depends on the tool obeying it. A jig depends on geometry.
+
+## Two Directions, and I Only Ever Wrote About One
+
+In March, every jig I named was something the agent built for me. A script to reformat data, a workflow to pre-screen inputs, a template to scaffold a document. Agent makes the fixture, human does the cabinetry.
+
+I kept writing them that way. Two months later I described asking an agent to extract a whole methodology into a reusable template, and called that a jig too. Same direction. Same definition.
+
+The zone catalog runs the other way. I build the fixture. The agent works inside it.
+
+Both kinds have been sitting in my repos the whole time. Only one of them ever got a definition. That's the tell. I had a word for the fixtures that save me time, and none for the fixtures that take away my options.
+
+The risks aren't the same either. When an agent builds me a jig, the failure is clutter: a drawer of snowflakes, which is what I warned about. When I build a jig for an agent, the failure is quieter. I cut the fence in the wrong place and never find out, because a working jig makes the cut it prevents unobservable. Nothing errors. The bad cut just never appears in the pile.
+
+## Build the Jig When You'll Make the Cut Twice
+
+The old post buried the rule in a warning box. You only built a jig when the task was worth the investment. Agents dropping that cost to zero is what killed the discipline.
+
+It survives the inversion intact. Nobody builds a jig for one cut. For one cut you clamp carefully, measure twice, and go slow.
+
+The one I lean on hardest is a small set of shell commands that drive a real browser. Navigate, run JavaScript on a page, screenshot, scrape. Ten of them. [The whole thing is public](https://github.com/nino-chavez/browse-tool).
+
+I didn't build it for a project, and that's the part that matters. It's installed permanently, the way a fence lives on the table saw. Because it's already there, I start every integration reaching for a real interface — a command line, an API. Driving a human interface stays the fallback it should be.
+
+That ordering only works if the fallback exists before you need it. Built per project, it doesn't. It's a sprint you don't have when you hit a system with no API. So you skip the work, or you build the whole architecture around mimicry from the start.
+
+The jig came first. The sequencing followed from it.
+
+## Someone Else's Jig Charges Rent
+
+A jig somebody else built is a fixture for a cut you didn't specify. Sometimes that's exactly right. Often you're paying for a setup you'll never use.
+
+The measurable version, for that same browser capability. The protocol-server equivalents load thirteen to eighteen thousand tokens of tool description, before the agent has done anything. The shell commands load a few hundred, and only when the agent goes and reads the file. Roughly forty times the standing cost, charged every session, for a general-purpose fixture whose specific cut you may not be making.
+
+The token count isn't the argument. The argument is that the agent already knows how to write JavaScript and read a DOM. A command that hands it a page and gets out of the way lets it use what it arrived with. A bespoke schema wrapping the same operations makes it learn a private vocabulary first.
+
+So the general jig isn't free, and neither is the finished product. Both are somebody's decisions about which cuts matter, priced into every job you run through them.
+
+And if you'll genuinely make the cut once, buy the assembled thing. That isn't a compromise. That's the rule working.
+
+## A Scorecard Can Only Rank Dinners
+
+Carpentry runs out here. Switch to dinner.
+
+A TV dinner ranks cleanly against another TV dinner. Same tray, same six minutes, same result in every kitchen on earth. Variance is the enemy and the product has none, which is exactly what makes it scoreable.
+
+A meal kit mostly ranks too. Somebody else picked the cuts, portioned the spice, wrote the card. What you add is small and bounded.
+
+A scratch kitchen doesn't rank at all. The output depends on who is cooking. That's not a defect in the kitchen — it's the entire proposition. You keep the raw ingredients and your own knives *because* you want to decide what gets made. Ask which scratch kitchen is better and the only honest reply is a question: whose, cooking what, for whom?
+
+So the bias in the form isn't a mistake. Turnkey scores well because turnkey is the only thing that can be scored. Hand someone primitives instead and you trade away the thing that demos identically every time. What you get back is the thing that fits the job in front of you.
+
+I'll make that trade most days. But it's a trade, and pretending it's free is how you lose the room.
+
+## What the Form Has No Row For
+
+Go back to the questionnaire.
+
+A scoring form can record whether you ship a builder. It can record whether you have an assistant. There's no cell for *we made a category of mistake structurally impossible in this surface*, because that isn't a feature and it doesn't demo. It's an absence. A cut the tool can no longer make.
+
+I don't think that's bad form design. The form inventories finished products, and it inventories them well. The jig sits one rung below, where somebody decided what shouldn't be possible, and there's nothing there to photograph.
+
+The drawer of snowflakes I warned about in March is still a real hazard. I've been building both kinds all along. Only one of them got a name.
+
+The jigs stay on the bench, unscored.
