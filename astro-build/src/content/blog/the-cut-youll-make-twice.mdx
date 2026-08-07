@@ -2,16 +2,16 @@
 title: "The Cut You'll Make Twice"
 slug: "the-cut-youll-make-twice"
 publishedAt: "2026-08-06T22:32:46.000Z"
-updatedAt: "2026-08-07T13:46:51.000Z"
+updatedAt: "2026-08-07T14:09:34.000Z"
 author: "Nino Chavez"
 status: "published"
-excerpt: "There's a file in this repo that says build validation will reject unapproved tags. I went and counted. Thirty-two unapproved tags, sixty-four times, and the build has never once complained."
+excerpt: "A guardrail that fires tells you it fired. A constraint built into the shape of what you hand a model tells you nothing, ever — including when you put it in the wrong place. I went looking for the line that would have logged it. There isn't one."
 featureImage: "/images/generated/the-cut-youll-make-twice.webp"
 tags: ["agentic-systems", "ai-development", "architecture"]
 category: "AI & Automation"
 seo:
   metaTitle: "The Cut You'll Make Twice"
-  metaDescription: "Most of what I tell my coding agents is a request it can decline. The useful version isn't a rule at all — it's a surface with nowhere to put the bad instruction."
+  metaDescription: "Three ways to constrain a coding agent: a rule it can decline, a valve that trips and announces itself, and a surface with nowhere to put the bad instruction. Only one of them is silent when it's wrong."
 ---
 
 There is a file in this blog's repo called `tags.ts`. Eight lines in, it says this:
@@ -41,13 +41,11 @@ That file is a warning label. It works by being read and agreed with.
 
 Most of what any of us gives a coding agent is a warning label. `CLAUDE.md`, `AGENTS.md`, `.cursorrules`, the system prompt, the paragraph you paste at the top of a session. All of it is text the model reads and mostly honors. Mostly is the operative word, and mostly is worse than it sounds. When a rule gets skipped and the work still looks fine, what tells you? The green build told me my tags were clean for two hundred seventy-seven files.
 
-There is a second kind of thing, and it doesn't work that way at all. It works by shape. The instruction has nowhere to land.
-
-Carpenters call that a jig — a fixture that holds the work so the tool can only move where the fixture allows. I'm going to use the word for the rest of this piece, and then leave the woodshop alone. The point isn't the metaphor. The point is a mechanism with two very different enforcement models, and almost everything I've built for agents sits on the weak side of that line.
+There are two other things you can build instead, and I had them filed under one name.
 
 ## I Defined the Jig by Half
 
-In March I reached for that word and defined it:
+In March I reached for carpentry and defined the one I keep coming back to:
 
 > A master carpenter doesn't build every piece from scratch. They build *jigs*—custom tools that hold material at the right angle, guide a cut along a precise line, make a repeatable operation fast and accurate. The jig isn't the product. It's the thing that accelerates the real work of making the product.
 
@@ -57,9 +55,17 @@ Everything after that sentence was about proliferation — agents make jigs chea
 
 A jig has two jobs. That definition covers one of them.
 
+## Two Directions, and I Only Named One
+
+In March, every jig I named was something an agent built for me. A script to reformat data. A workflow to pre-screen inputs. A template to scaffold a document. Agent makes the fixture, human does the work.
+
+The other direction is the one I never defined. I build the fixture. The agent works inside it.
+
+Both kinds have been in my repos the whole time. Only one ever got a word. That's the tell — I had a name for the fixtures that save me time, and none for the fixtures that take away the agent's options.
+
 ## The Catalog That Makes a Cut Impossible
 
-Before writing this I went and counted the other kind rather than trusting my memory of it.
+Before writing this I went and counted the second kind rather than trusting my memory of it.
 
 It's a retail storefront where a model composes the page layout. A catalog file declares every named place that model may write. Twenty-eight zones across ten surfaces — home, product listing, product detail, cart, checkout, search, account, store locator, and two error states. Each entry carries two booleans: whether the composition engine may target it, and whether a merchant may author there by hand.
 
@@ -75,39 +81,69 @@ That catalog accelerates nothing. Composing a page through it is slower than let
 
 No policy in that system says the model may not change the cart total. Nobody wrote that sentence, and nobody has to. The model receives a schema of the places it may put things, and no address in that schema reaches the total. It isn't forbidden. There's nowhere to put the instruction.
 
-That's the difference. A warning label depends on the tool agreeing. A jig depends on the shape of what you handed it.
+## A Hook Is Not a Jig
 
-## Two Directions, and I Only Named One
+Here is where my own filing was wrong, and it took someone else pointing at the paragraph to see it.
 
-In March, every jig I named was something an agent built for me. A script to reformat data. A workflow to pre-screen inputs. A template to scaffold a document. Agent makes the fixture, human does the work.
+I have two hooks on this laptop that I'd been calling jigs. One enforces a rule that parallel agent sessions work in separate git worktrees, because sessions sharing one checkout switch each other's branches underneath each other. It's a `PreToolUse` hook matched against `Bash`, `Write`, `Edit`, and `MultiEdit`. It reads a lock directory, checks whether another live session holds the repo, and returns `permissionDecision: "deny"` with a paste-ready command for making the worktree instead.
 
-The zone catalog runs the other way. I build the fixture. The agent works inside it.
+The second guards reads. Images over 1400 pixels on the long edge get denied — it downscales a copy to 1000px, caches it, hands back the new path. Re-reading a file you already read inside a ten-minute window gets denied too, with a note to cite from context.
 
-Both kinds have been in my repos the whole time. Only one ever got a definition. That's the tell — I had a word for the fixtures that save me time, and none for the fixtures that take away the agent's options.
+Those aren't jigs. They're safety valves.
 
-The risks aren't symmetric either. When an agent builds me a jig, the failure is clutter: a drawer of one-off snowflakes, which is what I warned about. When I build one for an agent, the failure is silent. I put the fence in the wrong place and never find out, because a working jig makes the cut it prevents unobservable. Nothing errors. The bad output never appears — and neither does the good output I excluded by accident, which is the part that should worry me more. How would I ever see the page the model didn't compose because I forgot to declare a zone for it?
+A jig is shape. Nothing about the zone catalog detects a violation, because a violation has no representation — there is no cart-total address to attempt. A valve is the opposite: it senses a condition and interrupts. It needs the bad thing to be attemptable in order to catch it.
 
-## The Same Mechanism Runs on My Laptop
+The tell is a feature I'd written off as a footnote. Both hooks let the immediate retry through. In the read guard that's an explicit latch — deny once, set `pending_retry: True`, and clear it on the next call so the same read succeeds. Its own docstring says "fail-open by design" and calls itself "friction for the reflexive re-read, not a wall." There's an off switch: `touch ~/.claude/cache/read-guard/.guard-off`.
 
-The storefront catalog is client-scale. The same split shows up in my own dailies, and that's where it's cheap enough for anyone to copy.
+Every one of those is valve behavior. A fixture has no reset, no fail-open, and no off switch, because there is nothing to switch off. You cannot retry your way past a shape.
 
-I have a rule that parallel agent sessions must work in separate git worktrees, because sessions sharing one checkout switch each other's branches underneath each other and commits land on the wrong one. That rule is written in the same instructions file as everything else. It's a warning label.
+So there are three things, not two, and the ladder is: a rule the agent can decline, a valve that stops it and can be reset, and a surface with nowhere to put the bad instruction.
 
-It's also a hook. `PreToolUse`, matched against `Bash`, `Write`, `Edit`, and `MultiEdit`. It reads a lock directory, checks whether another live session holds the repo, and when one does, returns `permissionDecision: "deny"` with a paste-ready command for creating the worktree instead. The agent does not decide to comply with that one. The tool call doesn't run.
+The valves are the cheap ones. Five hundred fifty lines of Python for the worktree hook, 293 for the read guard, a few lines of JSON in `settings.json`. Anyone running a coding agent can add one this afternoon. Sort your own instructions file into the three columns sometime — mine has two valves, one jig at client scale, and everything else is labels.
 
-A second one guards reads. Images over 1400 pixels on the long edge get denied once — the hook downscales a copy to 1000px, writes it to a cache dir, and hands back the new path. Re-reading a file you already read inside a ten-minute window gets denied once too, with a note to cite from context. Both let the immediate retry through, because sometimes the re-read is legitimate.
+## A Working Jig Erases Its Own Evidence
 
-Neither of those is sophisticated. The worktree one is 550 lines of Python, the read one 293, and both are wired up by a few lines of JSON in `settings.json`. What makes them different in kind from the paragraph above them in my instructions file isn't the code. It's that they run before the model's output reaches anything.
+Here's what took me longest to see, and it's the reason the third column is harder than it looks.
 
-So which of your rules are labels, and which are geometry? Sort your instructions file into two columns sometime. Mine has two hooks in the geometry column and everything else in the other one. The tag rule sat in the label column for two hundred seventy-seven files without me or any agent that read it noticing.
+A valve announces itself. Every time one of my hooks trips, a denial message goes to the agent in-band, with a reason. The trip *is* the record. If I put the threshold in the wrong place — say 1400 pixels was too aggressive — I find out, because I watch the agent get stopped from doing something reasonable.
+
+A jig produces nothing. That's the point of it, and it's also the problem.
+
+Go back to the storefront resolver. It's 116 lines. When it's handed a zone ID that doesn't exist in the catalog, it throws:
+
+```ts
+throw new Error(`resolveZone: unknown zone instance "${opts.zoneId}"`);
+```
+
+Loud, immediate, unmissable. Now here's the line that enforces the actual constraint, twelve lines further down:
+
+```ts
+if (engineRaw !== undefined && meta.engineComposable) {
+```
+
+If the engine produced content for a zone it isn't allowed to write, that condition is false. Execution falls to the next block, then to the static fallback. The page renders. Nothing throws, nothing warns, and the merchant sees a completely normal page with default content in it.
+
+So the resolver is loud about the harmless failure and silent about the real one.
+
+I went looking for where the silent case gets recorded. There's a retrieval log next to it, and its entry type has fields for surface, seed entities, session, brand, and the products that got placed in each zone. Every field describes something that succeeded. There is no field for a discarded write, no source, no reason.
+
+Then I grepped for `engineComposable` across the entire codebase. It appears in three places: the catalog that declares it, a test file, and line 71 of the resolver. The one line that enforces the constraint is the same line that swallows the evidence, and nothing else in the system ever reads the flag.
+
+That's the second grade of invisibility. The third is worse, and it's the one that should actually worry me: a zone I never declared at all. The engine can't attempt it, so there's no branch to instrument, no discard to log, no line to grep for. The model simply never composes the thing I forgot to make a place for.
+
+How would I ever see that page? Not from an error, not from the log, not from the diff. The output that should have existed and doesn't leaves no trace anywhere in the system that excluded it.
+
+That's the asymmetry that makes jigs genuinely hard rather than just underrated. A fence in the wrong place and a fence in the right place produce identical telemetry: clean.
+
+The fix isn't cleverer geometry. It's putting a valve next to the jig — one `else` branch at line 71 that records the discard, so the thing the fixture ate leaves a mark on the way down. The catalog stays geometry. The valve makes it observable. That's four lines, and it isn't written.
 
 ## Build the Jig When You'll Make the Cut Twice
 
 The old post buried the rule in a warning box. You built a jig only when the task was worth the setup. Agents dropping the cost of building one to near zero is what killed that discipline.
 
-The rule survives the inversion intact. Nobody builds a jig for one cut. For one cut you clamp carefully, measure twice, go slow.
+The rule survives intact. Nobody builds a jig for one cut. For one cut you clamp carefully, measure twice, go slow.
 
-The jig I lean on hardest is ten shell commands that drive a real Chrome profile. Navigate, evaluate JavaScript in the page, screenshot, scrape to markdown, crawl, manage tabs. That's it. [The whole thing is public.](https://github.com/nino-chavez/browse-tool)
+The one I lean on hardest is ten shell commands that drive a real Chrome profile. Navigate, evaluate JavaScript in the page, screenshot, scrape to markdown, crawl, manage tabs. That's it. [The whole thing is public.](https://github.com/nino-chavez/browse-tool)
 
 I didn't build it for a project, and that's the part that matters. It's installed permanently, on `PATH` in every shell. Because it's already there, I start every integration reaching for a real interface — a CLI, an API — and driving a human interface stays the fallback it should be. That ordering only works if the fallback exists before I need it. Built per project, it doesn't. It's a detour I don't have time for at the moment I hit a system with no API, so I either skip the work or design the whole thing around mimicry from the start.
 
@@ -130,19 +166,19 @@ There's a second cost that doesn't show up in bytes. The agent already knows how
 
 None of which means don't use them. If you'll genuinely make the cut once, buy the assembled thing. That isn't a compromise; that's the rule working.
 
-## The Jig I Left on a Branch
+## The Valve I Left on a Branch
 
 Here's the part that undercuts everything above.
 
-The operator card I load into every session cites one of my own scripts as a reference implementation — a mechanical check that verifies a short-form caption against the long-form post it was derived from, so a claim can't quietly change owners between the source and the summary. I wrote it because I'd watched exactly that failure happen and decided a rule wasn't enough. Turning the rule into a command was the right instinct, and it's the whole thesis of this post.
+The operator card I load into every session cites one of my own scripts as a reference implementation — a mechanical check that verifies a short-form caption against the long-form post it was derived from, so a claim can't quietly change owners between the source and the summary. I wrote it because I'd watched exactly that failure happen and decided a rule wasn't enough.
 
 It lives on a branch called `caption-edits-0803`. Five commits of gate work, none of them on `main`. The `syndication/` directory on `main` has no gate script in it at all.
 
 So the file that tells agents "this rule is enforced mechanically, here's the implementation" points at a check that has never run against anything I've published.
 
-That is the same failure as `tags.ts`, one level up. The first one wrote a rule and never built the mechanism. This one built the mechanism and never installed it. Both read as geometry from inside the instructions file, and both are labels.
+That's the same failure as `tags.ts`, one level up. The first wrote a rule and never built the mechanism. This one built the mechanism and never installed it. Both read as enforcement from inside the instructions file, and both are labels.
 
-The silence is the whole problem. A missing warning produces a warning you notice. A missing jig produces nothing — the bad cut just doesn't get prevented, and nothing anywhere says so.
+An uninstalled valve is indistinguishable from an installed one until the day it should have tripped. Which is the same silence as before, arriving by a different route.
 
 ## Nothing Here Demos
 
@@ -150,14 +186,14 @@ I ran through a vendor capability questionnaire last week. It has a row for no-c
 
 Two rows, opposite bets. One expects a finished product a buyer can score. The other only makes sense if the surface underneath is clean enough that a general-purpose agent can work it without a human translating.
 
-The form isn't badly designed. A rubric compares things that come out the same in every hand, and turnkey is the only category that does. But there's no cell for *we made a class of mistake structurally impossible in this surface*, because that isn't a feature. It's an absence. A cut the tool can no longer make, invisible in every demo, and the better it works the less there is to see.
+The form isn't badly designed. A rubric compares things that come out the same in every hand, and turnkey is the only category that does. A valve at least demos — you can trip it on a stage and watch it stop something. But there's no cell for *we made a class of mistake structurally impossible in this surface*, because that isn't a feature. It's an absence, and the better it works the less there is to see.
 
 ## What I Still Don't Have
 
-I don't have a validator on the tag list. Writing one is small — read the canonical keys, refine the Zod schema from `z.string()` to an enum built from them, let the build fail. It has been small the entire time the file has been claiming it already exists.
+I don't have an instrument for the third column. Nothing in that storefront can tell me what the engine tried to compose and wasn't allowed to, and nothing at all can tell me about the zone I never declared. That's the gap that matters, and it's four lines of `else` branch away from being half-closed.
 
-I also don't have a way to tell, from inside a session, which of my rules the agent actually followed and which it merely didn't contradict.
+I also don't have a validator on the tag list. Read the canonical keys, refine the Zod schema from `z.string()` to an enum built from them, let the build fail. Small the entire time the file has been claiming it already exists.
 
-The drawer of snowflakes I warned about in March is still real. But it's the cheerful failure. The other one has been sitting in my repo the whole time, green.
+The drawer of snowflakes I warned about in March is still real. But that one's the cheerful failure — you trip over the clutter and clean it up. The other kind doesn't accumulate anywhere you can trip over it.
 
-Eighteen approved tags. Thirty-two in the wild. No error.
+The fallback rendered. The page looked right. Nothing asked what was missing.
