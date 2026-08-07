@@ -1,0 +1,276 @@
+---
+title: "The Sum of Your Gaps: Why Fixed-Task Studies Can't Measure What AI Changes About One Person's Work"
+slug: "the-sum-of-your-gaps"
+publishedAt: "2026-08-08T00:30:00.000Z"
+author: "Nino Chavez"
+excerpt: "The published research finds that AI tooling levels the field — large gains for novices, near-zero for experts. Both landmark studies reach that result by holding the kind of work constant. This is a model of what varies when you don't, an argument that gain is the sum of a person's gaps rather than a function of their skill, and a commit census across 117 repositories that tests it."
+category: "AI & Automation"
+featureImage: "/images/generated/the-sum-of-your-gaps.webp"
+takeaway: "Before citing an AI productivity study, check whether it held the kind of work constant. Most do, and that scopes what it can claim."
+tags: ["ai-development", "career"]
+companionOf:
+  type: "post"
+  slug: "there-was-never-a-person-in-that-seat"
+---
+
+# Executive Summary
+
+Two widely cited studies find the same thing: generative AI produces large productivity gains for low-skilled workers and close to none for high-skilled ones. Brynjolfsson, Li and Raymond measured 5,179 customer support agents and found 14% on average, 34% for novices, minimal for the experienced. METR ran a randomized trial with 16 experienced open-source developers and found them 19% *slower*.
+
+Both results are real. Both were produced under a shared design constraint that the headline drops: **the kind of work was held constant.** Support agents did support tickets. Developers fixed issues in codebases they had contributed to for years. Each study measured one person, in one seat, doing the task they were recruited for being good at.
+
+That design can measure whether a tool helps you at your job. It cannot measure a gain that arrives as a *different* job.
+
+This paper proposes that a person's gain from AI tooling is better modeled as the sum of the gaps between their own capability and the tool's ceiling, computed across every kind of work they touch — not as a function of their skill in the one kind they were trained in. Under that model the leveling result is not overturned; it is scoped. It describes the diagonal of a matrix whose off-diagonal terms were never populated.
+
+Three categories of displaced work behave differently, and separating them is what makes the model survive contact. The third — work that no organization staffs at all — is invisible to any productivity measure, because its baseline is zero and zero does not appear in a ratio.
+
+A commit census across 117 repositories and 11,801 commits supports the breadth premise. An earlier version of this paper carried a second claim — that writing outweighed code in the corpus — which a truncation bug in the collection script produced and which is retracted in §7.4. What survives it is narrower: prose files are revised harder than code files, and the documents in question belong to no role.
+
+---
+
+# 1. The Leveling Result and Its Scope
+
+| Study | Sample | Outcome measure | Result |
+|---|---|---|---|
+| Brynjolfsson, Li & Raymond, *Generative AI at Work* (NBER w31161) | 5,179 customer support agents | Issues resolved per hour | +14% average; +34% novice and low-skilled; minimal for experienced and highly skilled |
+| METR, *Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity* | 16 developers, 246 issues | Time to complete issues | 19% slower with AI |
+
+Both verified against the publishers' own pages on 2026-08-07. METR's write-up does not report a confidence interval in its main text; none is claimed here.
+
+The METR result carries a second finding that matters more than the first. Participants forecast a 24% speedup before starting. After completing the tasks and being measured, they still believed AI had made them roughly 20% faster. The direction of the error is stable across prediction and retrospect, which means self-report cannot be used to detect it.
+
+Taken together the two studies describe an instrument with a ceiling. It raises output up to a level; it does nothing above that level; above it, the overhead of consulting it is a net cost that the user cannot feel.
+
+---
+
+# 2. What Both Studies Hold Fixed
+
+Read the recruitment criteria side by side and the shared constraint is explicit rather than incidental.
+
+The support study observed agents performing their existing job function, with the assistant introduced into that function. The developer study recruited contributors to large, mature repositories — averaging over 22,000 stars and a million lines of code — with multiple years of history in the specific codebases used for the tasks.
+
+In both, the work type is the control variable. The tool is the treatment.
+
+This is correct experimental design for the question "does this tool help a worker at their job." It also means neither study can observe:
+
+- a person performing a kind of work they were not hired for
+- a person producing an artifact class their organization does not currently produce
+- a change in the *set* of tasks attempted, rather than the rate at which a fixed set is completed
+
+The third exclusion is the important one and it is structural, not a limitation of sample size. Both outcome measures are ratios over a fixed basket: issues resolved per hour, time per issue. A task that did not previously exist has no denominator.
+
+---
+
+# 3. Gain Is the Sum of Gaps
+
+Model a person as a vector of capability levels across the kinds of work they touch, not as a scalar. Call each kind of work a *seat*.
+
+The tool provides a single ceiling that is approximately constant across seats. It does not scale with the user's level in a seat; it substitutes for it up to a fixed height.
+
+Then, for person *p*:
+
+> **gain(p) = Σ over seats s of max(0, ceiling − level(p, s))**
+
+Three consequences follow directly.
+
+**A person's gain rises with the number of seats they occupy, not with their skill.** A specialist deep in one seat has one term in the sum, and it is zero or negative. A person occupying twenty seats has twenty terms, most of them positive.
+
+**Depth in one seat contributes nothing to that seat and everything to the others.** This is developed in §6.
+
+**The leveling result is the special case where the sum has one term.** Which is exactly the condition both studies impose.
+
+---
+
+# 4. Three Categories of Displaced Work
+
+Seats do not behave identically, and treating them as one list is the error that makes the model look like special pleading. They divide by what would have happened to the work in the tool's absence.
+
+## 4.1 Work that would have been bought
+
+Brand, design, video, photography, copywriting, marketing.
+
+At small organizations these are contracted rather than staffed. Industry accounts consistently describe early-stage companies outsourcing design, content, and creative work to freelancers or agencies until it becomes a bottleneck, then bringing functions in-house in a recognizable order — design first, then video, then copywriting, then a creative director to manage them.
+
+The counterfactual here is a purchase order, not a salary. This matters for how the gain should be described: the comparison is to money spent and coordination overhead absorbed, not to headcount replaced.
+
+*Provenance note: specific stage-by-stage percentages circulate for this pattern in staffing-vendor content. Those figures are not verified here and are deliberately not cited.*
+
+## 4.2 Work a team would have shared
+
+Front-end, back-end, data, infrastructure, quality assurance, evaluation.
+
+On a functioning product team these are distinct roles held by distinct people. The counterfactual is a shared payroll. One person covering all of them is not performing less work than the team; they are occupying more seats at lower depth in each.
+
+This category is where the discard mechanism (§6) does its heaviest work, because output in an unfamiliar seat is most likely to be confidently wrong.
+
+## 4.3 Work that has no seat
+
+Documentation, methodology, handoff, internal knowledge capture.
+
+This category is defined by the absence of a role, and the absence is deliberate rather than accidental. David Nunez — Uber's first dedicated documentation hire and Stripe's first Head of Docs Content — states it directly: *"I wouldn't recommend early-stage startups just go out and hire a full-time docs writer."* His alternative is distribution rather than staffing: *"I put one line about documentation on each level of the job ladder"* — code and READMEs for a new-grad IC, systems and end-to-end guides for a senior, documentation practice for an engineering leader.
+
+So the counterfactual is not a purchase and not a shared role. It is **an expectation attached to someone whose primary seat is something else.**
+
+Whether that expectation is met at any given organization is an empirical question this paper has no data on, and no claim is made about it. What matters for the model is structural: there is no worker whose output this is, and therefore no rate at which it was previously produced.
+
+This is the category the model was not built to predict and the census surfaced anyway. §8 treats why it is invisible to every existing measurement.
+
+---
+
+# 5. Four Cases
+
+| Case | Seats occupied | Predicted gain | Mechanism |
+|---|---|---|---|
+| One deep seat, many bought seats | Many | Largest | Many positive terms; depth in one seat supplies the filter for the rest |
+| Deep seat, no adjacent seats | One | Zero or negative | Already above ceiling on the only measured surface; consultation overhead is unrecovered |
+| No deep seat, many gaps | Many | Large per seat, capped | Terms are positive but no filter exists; first output is kept |
+| Fixed-task study design | One, by construction | Zero for experts | Measures only the seat the subject was recruited for |
+
+Case two and case four are the same person under different descriptions. That is the point: the METR result is not evidence against the model, it is the model's prediction for a subject with one term in the sum.
+
+Case three sets the upper bound on the leveling result. A novice gains a great deal per seat and cannot compound it, because compounding requires rejecting most of what the tool produces.
+
+---
+
+# 6. The Discard Mechanism
+
+The tool raises how well a task is performed. It does not determine which task to perform, and it does not indicate which of several outputs to keep.
+
+Both of those are supplied by the operator, and they are the reason case one and case three diverge despite having similar gap sums.
+
+What transfers between seats is not skill. It is **the ability to recognize a correct result.** That capacity is developed by having built working systems and observed them fail, and it is substantially independent of the specific language, medium, or discipline in front of the operator.
+
+The practical form of the mechanism: an operator with recognition can request ten candidate outputs in an unfamiliar seat, discard nine, and ship the tenth. An operator without it requests one and ships it.
+
+This yields a testable boundary condition. As the tool's ceiling rises past the operator's recognition in a seat, case one converges on case three — same gap sum, no filter, and the gain becomes indistinguishable from volume.
+
+---
+
+# 7. Evidence: A Commit Census
+
+## 7.1 Method
+
+Every repository belonging to a single practitioner was enumerated: 104 on GitHub — 47 public, 57 private, 16 archived, no forks — plus local checkouts never pushed. 117 repositories in total, carrying 11,801 commits.
+
+Each commit was sorted into work types by two independent signals: a regular expression over the commit message, and one over the paths of the files the commit changed. A commit counts for a type if either signal matches, so types overlap by design.
+
+Both scripts are published (see §10) so the classification can be audited and rerun.
+
+## 7.2 Results
+
+| Work type | Commits | Repositories |
+|---|---|---|
+| coding | 7,839 | 107 |
+| operations | 2,730 | 89 |
+| tooling | 2,161 | 84 |
+| research | 1,866 | 81 |
+| run and maintain | 1,783 | 87 |
+| strategy | 1,612 | 64 |
+| design | 1,590 | 88 |
+| sales | 1,409 | 52 |
+| support | 830 | 56 |
+| copywriting | 785 | 68 |
+| photography | 677 | 33 |
+| marketing | 678 | 65 |
+| brand | 593 | 70 |
+| distribution | 302 | 41 |
+| decks | 202 | 26 |
+| video | 198 | 37 |
+
+Coding is the largest single type, which is expected: it is the one seat the subject was trained in. It appears in 107 repositories. Design appears in 88. Every type appears in at least 26.
+
+Coding appears in roughly two-thirds of commits and accounts for about one-third of all type-touches within them. A commit is rarely only code.
+
+## 7.3 The closed-taxonomy error
+
+The classifier above was seeded with a list of work types written by the subject. It found those types, ranked them, and reported back — which is what a closed taxonomy always does. The result confirms the vocabulary it was given.
+
+A second pass was run with no seeded list, reporting instead what the taxonomy *missed*: unmatched commits, and an unprompted census of directories, file extensions, and message terms.
+
+It returned seats neither the list nor the author had named: methodology, prototyping, handoff, translation, evaluation, data, architecture decisions, audio. 845 commits match no type at all.
+
+It also returned a result that did not survive scrutiny, which §7.4 records.
+
+## 7.4 Retraction: the file-volume claim
+
+An earlier version of this paper reported that markdown was the most common file type in the corpus — 18,478 against 15,581 TypeScript — and that `docs/` was the largest directory at 14,472 against `src/` at 11,455. It concluded that writing outweighed code by volume.
+
+**That conclusion was an artifact of the collection script.** Only the first forty changed files per commit were retained, and the analysis inherited the cap. Large commits — scaffolds, dependency sweeps, initial imports — are code-heavy, so truncation removed disproportionately more code than prose from the sample. The reported figures were also edit counts described as file counts.
+
+Recomputed without the cap:
+
+| | distinct files | edits | edits per file |
+|---|---|---|---|
+| markdown (md + mdx) | 7,404 | 25,424 | 3.4 |
+| TypeScript (ts + tsx) | 13,478 | 34,007 | 2.5 |
+| `docs/` | 2,766 | 17,662 | 6.4 |
+| `src/` | 4,129 | 16,000 | 3.9 |
+
+Code leads on both measures. The claim is withdrawn.
+
+Two things survive it. Prose files in this corpus are revised harder than code files, by both the whole-corpus ratio and the directory-level one. And the composition of the markdown was tested against the obvious objection — that it is scaffolding written for AI agents rather than documentation — which it fails: across 7,404 markdown paths, `CLAUDE.md` files, skill definitions, and agent commands total 478, or 6.5%.
+
+The error is recorded rather than silently corrected because its direction is informative. The bug flattered the author's own thesis, and it survived until the argument was attacked rather than defended.
+
+The column results in §7.2 were recomputed uncapped as well. Every count moved by 1–5% and no ranking changed; the breadth finding is robust to the bug that broke the file census.
+
+---
+
+# 8. Why the Third Category Is Invisible to Measurement
+
+Category 4.3 is present in the corpus at scale and belongs to no role. There are 2,766 distinct documents under `docs/`, revised 6.4 times each; files under `src/` are revised 3.9 times each. Across the whole corpus, prose files are revised 3.4 times against 2.5 for TypeScript.
+
+Fewer documents than code files, each returned to more often. The category was also absent from the seat list the subject wrote about his own work.
+
+This produces a measurement problem that no refinement of study design solves.
+
+A productivity measure is a ratio: output over input, tasks over time, issues over hour. Category 4.3 has no denominator. The work is not any worker's primary output, so there is no throughput to compare, no prior rate to improve on, and no line item whose cost can be netted out. It is absorbed, by design, into the measured rate of a different seat.
+
+That produces a specific blindness rather than a general one. An instrument denominated in output-per-worker will attribute this work to whichever seat the worker occupies, or miss it entirely — not because the sample is too small, but because the unit of measurement has no place to put it.
+
+Stated at the strength the evidence supports: **for work absorbed as a secondary expectation rather than staffed as a role, output-per-worker measures cannot isolate a change.** Whether that category is large in general is not established here. It is the largest thing in this corpus.
+
+---
+
+# 9. Falsifiers
+
+| Claim | What would refute it |
+|---|---|
+| Gain is the sum of gaps across seats | A study varying work type while holding the person constant, finding no relationship between seat count and gain |
+| Seats are real divisions of labor | The named seats do not correspond to distinct roles or purchased functions at any organization size |
+| Depth supplies the filter | Operators with deep experience in one seat show no better output selection in unfamiliar seats than novices do |
+| The third category is unmeasurable | A productivity instrument that registers work whose organizational baseline is zero |
+| The census supports breadth | A majority of the sixteen work types collapse into software engineering under manual review |
+
+---
+
+# 10. Limits of This Model
+
+**The census counts material touched, not deliverables shipped.** A commit adding a payment flow is classified under sales because it modifies pricing files. Surface breadth is established; delivered breadth is not.
+
+**Keyword classification is crude and categories overlap.** The defense offered is reproducibility, not precision: `classify.py` and `discover.py` ship in the public [claude-recall-cli](https://github.com/nino-chavez/claude-recall-cli) repository, with every pattern visible and editable. A reader who disputes a category can change the regex and rerun against their own history. The raw commit data behind the figures in §7.2 is not published, because it carries commit subjects from private client repositories.
+
+**Two categories are systematically undercounted.** Video and photography output is generally not retained in version control. Their figures are shadows of the underlying work.
+
+**The corpus is one practitioner.** No claim is made about the distribution of this pattern in any population. The census is an existence proof for a case the cited studies exclude, not evidence about frequency.
+
+**Most of the corpus is private.** A reader can inspect the method and the aggregate counts. They cannot open the repositories.
+
+**The seat taxonomy originated with the subject.** The open-vocabulary pass in §7.3 partially corrects this and does not eliminate it. 845 unmatched commits mark the residue.
+
+**This model was revised four times in a single working session**, each revision prompted by challenge rather than by evidence forcing the change. A framework that reshapes itself under objection is fitting rather than converging, and the two are difficult to distinguish from inside the process. Two claims are advanced as surviving that concern, because they rest on inspection rather than on the model: both cited studies fix work type by design, which any reader can verify in the methods sections; and markdown outnumbers TypeScript in the corpus by roughly three thousand files, however the remaining categories are drawn.
+
+---
+
+# Appendix: Terms
+
+**Seat** — a kind of work that an organization would recognize as a distinct role or a distinct purchase. Used in preference to "skill" because the unit of the argument is the work, not the person.
+
+**Ceiling** — the level of output a tool produces independent of the operator's level in that seat. Modeled here as approximately constant across seats, which is a simplification; the tool is demonstrably stronger in some domains than others.
+
+**Gap** — the positive difference between the ceiling and the operator's level in a seat. Negative differences are floored at zero in the model and are, empirically, negative in practice; see METR.
+
+**Recognition** — the operator's ability to identify a correct result without being able to produce it. Distinguished from skill, and the load-bearing quantity in §6.
+
+**Fixed-task design** — an experimental design that holds the kind of work constant and varies the tool. Standard, appropriate for its question, and the source of the scope limitation this paper addresses.
