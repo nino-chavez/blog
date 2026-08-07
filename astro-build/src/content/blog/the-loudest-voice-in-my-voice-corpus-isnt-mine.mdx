@@ -1,0 +1,153 @@
+---
+title: "The Loudest Voice in My Voice Corpus Isn't Mine"
+slug: "the-loudest-voice-in-my-voice-corpus-isnt-mine"
+publishedAt: "2026-08-07T21:40:00.000Z"
+updatedAt: "2026-08-07T21:40:00.000Z"
+author: "Nino Chavez"
+status: "published"
+excerpt: "A pipeline mines my agent sessions into a character sheet that gets loaded as context. The top-ranked correction in it is a deny message from a hook I installed, quoted back at me across 117 sessions."
+featureImage: "/images/generated/the-loudest-voice-in-my-voice-corpus-isnt-mine.webp"
+tags: ["ai-development", "agentic-systems"]
+category: "AI Development"
+seo:
+  metaTitle: "The Loudest Voice in My Voice Corpus Isn't Mine"
+  metaDescription: "Four gigabytes of agent transcripts distilled into a seventeen-kilobyte character sheet — and a measurement of what the filter kept, what it ranked first, and what it can't see."
+---
+
+import { Callout } from '@/components/mdx/Callout';
+import { PullQuote } from '@/components/mdx/PullQuote';
+
+The top entry in my agent's character sheet is a sentence I never typed.
+
+It sits at position one under "red lines — what Nino rejects." That's the section a model reads to learn what I push back on. The line is a deny message from a hook I installed months ago. The miner found it in 117 separate sessions. It ranked the hook first.
+
+I have a pipeline that reads my own agent transcripts and distills them into that file. The file is called Poe — a character sheet of how I correct, prefer, and refuse, assembled from my own sessions and read back into new ones as context.
+
+This is what it does, what it got right, and the thing it can't see about itself.
+
+---
+
+## Four Gigabytes In, Seventeen Kilobytes Out
+
+The mechanism is small. When a session ends, a hook records which transcript just closed. That's it. A five-second job that writes an identifier and exits. A worker does the database work later, out of band. Nothing slows down the moment I stop typing.
+
+That worker scans the transcript for human turns matching a signal pattern. A correction. A stated preference, a rejection, a reason, a declaration, an approval. Matches land in a local SQLite database. A second step assembles the database into one markdown file.
+
+On this machine there are 1,209 transcripts. Four gigabytes.
+
+The assembled file is seventeen kilobytes.
+
+Inside it: 2,308 signals from 780 sessions across 106 project folders. September 2025 to this morning. Three different coding agents feed it — 1,668 signals from one, 608 from another, 32 from a third.
+
+Six buckets, ranked by count:
+
+| Signal type | Count |
+|---|---|
+| approval | 972 |
+| rejection | 452 |
+| preference | 282 |
+| correction | 245 |
+| declaration | 214 |
+| rationale | 143 |
+
+A third hook runs on every prompt I submit. It keyword-searches that database and injects the matches above my message. So the loop closes. Sessions produce signals. Signals produce a character sheet. The sheet gets read back into new sessions.
+
+---
+
+## The Instrument Is in the Sample
+
+Now the entry at position one.
+
+The full text is a hook's deny message: *"Stop hook feedback: You ended your turn with a hesitation question — exactly the pattern that the CLAUDE.md 'decision bias' rule prohibits."*
+
+I wrote the rule. I wrote the hook that enforces it. I have never said that sentence to anything.
+
+It gets in because hook feedback is delivered into the transcript as a user turn. Structurally it's indistinguishable from me talking. The miner can't tell them apart.
+
+One query settles the scale. That single message contributed 234 rows. Two different regexes each caught a piece of it, so 117 were filed as a correction and 117 as a rejection. Out of 2,308 signals, one in ten is that string.
+
+It is also the entire machine-written contamination that survived into the signal corpus, as far as any pattern I can write will find. Not a diffuse fog. One sentence, wearing two hats, 117 times.
+
+Strip it and the correction bucket falls from 245 to 128. Half the record of me correcting an agent is the harness correcting itself.
+
+<Callout type="warning">
+A [published audit of my voice guides](/blog/the-style-guide-was-teaching-the-tells) found this in aggregate form. Fifteen percent of the raw messages were machine-written, and pulling them moved every tone number. That's a skewed average. This is worse. The contamination isn't distorting a mean — it's holding first place in a list an agent reads as instruction.
+</Callout>
+
+---
+
+## Nine Characters Wide
+
+The largest bucket is approval. 972 of them. The plurality of everything mined.
+
+Then I looked at what they contain. Of 972 approvals, 953 are ten characters or shorter. Ranked by how many sessions carried them: `go` in 230, `proceed` in 207, `next` in 158, `continue` in 151, `push` in 92. Mean message length across the bucket: nine characters.
+
+Rejections average 627 characters. Reasons average 731.
+
+So which bucket is this corpus actually made of? By count, approval, by a wide margin. By content, approval is nearly empty.
+
+<PullQuote>
+A character sheet built from my approvals would be one word, repeated nine hundred times.
+</PullQuote>
+
+That asymmetry is the most useful thing the pipeline has surfaced. It isn't what the thing was built to find.
+
+I explain myself when I say no. The refusal arrives wrapped in argument. When I say yes I say "go."
+
+So an agent learning my preferences from what I approved learns almost nothing. Everything that carries information is in the refusals.
+
+---
+
+## The Taxonomy Finds What It Can Match
+
+There are seven labels for corrections. One of them eats the bucket.
+
+`opening-negative` — a test for a message that begins with a negating word — carries 184 of 245. Remove the hook's 117 and it still leads at 67 of 128. Meanwhile `why-did-you` fires 9 times. `not-what-i-asked` fires once. `you-are-wrong` fires once.
+
+A separate audit of how I actually correct things found the opposite weighting. Five of six corrections name a symptom and demand a cause. They supply no alternative. That shape — the diagnostic question — is my primary instrument.
+
+Its label fires nine times. The label for "starts with the word don't" fires 184.
+
+Nothing is broken here. The regex does exactly what it says. But what comes out is a ranking of *matchability*, and it gets read as a ranking of importance.
+
+Same distortion as the approval bucket, pointed the other way. There, an easy match inflated an empty category. Here, a hard match buried the one that matters.
+
+Every number this thing reports about me is, first, a number about its own filter.
+
+---
+
+## The Retrieval Doesn't Read the Question
+
+That's the statistics. Here is where it fails in production.
+
+The prompt hook matches priors by keyword. Is the question in front of it asking to expand something, or to hold back? It has no check for that.
+
+That gap has a measured case, and I've [written it up](/blog/i-configured-my-agent-to-agree-with-me). A controlled A/B run on my own configuration. A mined prior about pushing for north-star features got injected into a question about whether to throw out a shared contract. The configured arm tilted toward a fleet-wide rewrite. The runs without the injection pushed back on me, twice out of two.
+
+The mitigation that shipped is one sentence, hard-coded in the extractor and appended below every injected block:
+
+> Caution: these are keyword-matched, not situation-matched. Discard any prior that rewards scale, rebuilds, or new scope when the actual question is whether to hold back, compare candidates, or use an existing smaller mechanism.
+
+That is a warning label, not a filter. It asks the model to notice the bad prior after it has already read it.
+
+The real fix is written down and unbuilt. Classify whether the prompt wants to expand, restrain, or compare. Then drop the priors whose label rewards the opposite. The taxonomy already carries most of what that needs. It has sat in the backlog since July.
+
+---
+
+## Why It's Still Loaded
+
+So why keep any of it?
+
+Not because it remembers me. It doesn't. It keeps a filtered sample and reports the filter's shape as if it were mine.
+
+I keep it because I can check it. The [extractor is public](https://github.com/nino-chavez/claude-recall-cli), and every number in this post is one SQL statement away from the database that produced it. The contamination was findable. The approval asymmetry was findable. The lopsided taxonomy was findable, in an afternoon, by a query anyone could write.
+
+Set that against the alternative I already had: a prose voice guide. Confident, unqueryable, and wrong until an audit went looking.
+
+The rest of the design follows the same instinct. Raw transcripts never leave the machine. Nothing reaches a second machine unless a human marks it approved.
+
+And the character sheet opens by telling you not to trust it too much. Treat it as a lens, not a script. Treat missing guidance as missing, not as permission.
+
+That's a strange thing to write into a file about yourself. Then you see what it ranks first.
+
+The red lines still open with a hook quoting my rule.
