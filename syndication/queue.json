@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-03",
+ "generatedAt": "2026-08-07",
  "linkedinHistory": "harvested from the activity feed (114 link-shares read)",
  "cadence": {
   "linkedin": {
@@ -25,27 +25,61 @@
  "summary": {
   "linkedin": {
    "posted": 40,
-   "queued": 115,
-   "skipped": 151,
-   "firstSlot": "2026-08-04",
+   "queued": 113,
+   "skipped": 156,
+   "firstSlot": "2026-08-11",
    "lastSlot": "2027-09-07"
   },
   "substack": {
    "posted": 153,
-   "queued": 97,
-   "skipped": 56,
+   "queued": 99,
+   "skipped": 57,
    "firstSlot": "2026-08-09",
-   "lastSlot": "2028-06-11"
+   "lastSlot": "2028-06-25"
   },
   "devto": {
    "posted": 1,
    "queued": 6,
-   "skipped": 299,
-   "firstSlot": "2026-08-12",
-   "lastSlot": "2026-10-21"
+   "skipped": 302,
+   "firstSlot": "2026-08-19",
+   "lastSlot": "2026-10-28"
   }
  },
  "items": [
+  {
+   "id": "demos/session-corpus",
+   "title": "Your Sessions Are a Corpus",
+   "url": "https://ninochavez.co/demos/session-corpus",
+   "publishedAt": "2026-08-01",
+   "collection": "demos",
+   "words": 0,
+   "pitch": "A 24 GB session archive forced the next question: how do you keep the lessons, prove closeout, and let the raw record expire?",
+   "cluster": "session-corpus",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-08-16",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-08-18",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
   {
    "id": "tutorials/grade-an-agent-tool-before-you-install-it",
    "title": "Grade an Agent Tool Before You Install It",
@@ -60,14 +94,15 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-13",
+     "scheduledFor": "2026-08-30",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
+     "caption": "captions/linkedin/tutorials--grade-an-agent-tool-before-you-install-it.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-08",
+     "scheduledFor": "2026-09-03",
      "url": null
     },
     "devto": {
@@ -102,7 +137,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/whitepapers--claim-classes.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-06",
+     "scheduledFor": "2026-08-13",
      "url": null
     },
     "devto": {
@@ -128,21 +163,22 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-27",
+     "scheduledFor": "2026-09-20",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
+     "caption": "captions/linkedin/tutorials--measure-your-own-token-waste.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-01",
+     "scheduledFor": "2026-09-08",
      "url": null
     },
     "devto": {
      "mode": "canonical",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-12",
+     "scheduledFor": "2026-08-19",
      "url": null
     }
    }
@@ -168,14 +204,14 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-22",
+     "scheduledFor": "2026-09-29",
      "url": null
     },
     "devto": {
      "mode": "canonical",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-07",
+     "scheduledFor": "2026-10-14",
      "url": null
     }
    }
@@ -195,7 +231,7 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-16",
+     "scheduledFor": "2026-09-27",
      "url": null
     },
     "linkedin": {
@@ -203,7 +239,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/demos--adopt-or-skip.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-11",
+     "scheduledFor": "2026-09-17",
      "url": null
     },
     "devto": {
@@ -230,14 +266,15 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-06",
+     "scheduledFor": "2026-10-11",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
+     "caption": "captions/linkedin/demos--agentic-gates.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-20",
+     "scheduledFor": "2026-09-22",
      "url": null
     },
     "devto": {
@@ -264,14 +301,15 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-11",
+     "scheduledFor": "2026-11-08",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
+     "caption": "captions/linkedin/demos--beautifier.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-15",
+     "scheduledFor": "2026-10-08",
      "url": null
     },
     "devto": {
@@ -298,14 +336,14 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-08",
+     "scheduledFor": "2026-12-06",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-01",
+     "scheduledFor": "2026-10-27",
      "url": null
     },
     "devto": {
@@ -332,14 +370,14 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-12-06",
+     "scheduledFor": "2027-01-03",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-20",
+     "scheduledFor": "2026-11-12",
      "url": null
     },
     "devto": {
@@ -366,14 +404,14 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-01-03",
+     "scheduledFor": "2027-01-31",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-05",
+     "scheduledFor": "2026-11-26",
      "url": null
     },
     "devto": {
@@ -400,14 +438,14 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-01-31",
+     "scheduledFor": "2027-02-28",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-19",
+     "scheduledFor": "2026-12-10",
      "url": null
     },
     "devto": {
@@ -434,14 +472,14 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-02-28",
+     "scheduledFor": "2027-03-21",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-12-03",
+     "scheduledFor": "2026-12-24",
      "url": null
     },
     "devto": {
@@ -468,14 +506,14 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-03-21",
+     "scheduledFor": "2027-04-04",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-12-17",
+     "scheduledFor": "2027-01-07",
      "url": null
     },
     "devto": {
@@ -502,40 +540,6 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-04",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-12-29",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "demos/session-corpus",
-   "title": "Your Sessions Are a Corpus",
-   "url": "https://ninochavez.co/demos/session-corpus",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
-   "words": 0,
-   "pitch": "2,747 agent-session transcripts, mined: reusable prompts, your corrections as standing priors, and an honest ledger of what the agent built that survived.",
-   "cluster": "session-corpus",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "link",
-     "state": "eligible",
-     "postedAt": null,
      "scheduledFor": "2027-05-02",
      "url": null
     },
@@ -543,7 +547,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-01-07",
+     "scheduledFor": "2027-01-19",
      "url": null
     },
     "devto": {
@@ -577,7 +581,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-01-19",
+     "scheduledFor": "2027-01-28",
      "url": null
     },
     "devto": {
@@ -617,7 +621,7 @@
      "mode": "canonical",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-26",
+     "scheduledFor": "2026-09-02",
      "url": null
     }
    }
@@ -636,14 +640,15 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-30",
+     "scheduledFor": "2026-09-06",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
+     "caption": "captions/linkedin/whitepapers--lie-surface.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-18",
+     "scheduledFor": "2026-08-27",
      "url": null
     },
     "devto": {
@@ -675,8 +680,9 @@
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
+     "caption": "captions/linkedin/whitepapers--big-blueprint-methodology.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-10",
+     "scheduledFor": "2026-09-15",
      "url": null
     },
     "devto": {
@@ -709,14 +715,14 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-08",
+     "scheduledFor": "2026-10-15",
      "url": null
     },
     "devto": {
      "mode": "canonical",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-09",
+     "scheduledFor": "2026-09-16",
      "url": null
     }
    }
@@ -743,7 +749,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--what-223-sessions-taught-me-about-working-with-ai.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-04",
+     "scheduledFor": "2026-08-11",
      "url": null
     },
     "devto": {
@@ -776,14 +782,14 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-27",
+     "scheduledFor": "2026-11-03",
      "url": null
     },
     "devto": {
      "mode": "canonical",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-23",
+     "scheduledFor": "2026-09-30",
      "url": null
     }
    }
@@ -810,7 +816,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--the-source-of-their-intelligence.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-13",
+     "scheduledFor": "2026-08-25",
      "url": null
     },
     "devto": {
@@ -836,7 +842,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-20",
+     "scheduledFor": "2026-09-13",
      "url": null
     },
     "linkedin": {
@@ -875,8 +881,9 @@
     "linkedin": {
      "mode": "native",
      "state": "eligible",
+     "caption": "captions/linkedin/blog--the-identity-crisis-of-the-prompter.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-03",
+     "scheduledFor": "2026-09-10",
      "url": null
     },
     "devto": {
@@ -909,7 +916,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-24",
+     "scheduledFor": "2026-10-01",
      "url": null
     },
     "devto": {
@@ -942,7 +949,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-13",
+     "scheduledFor": "2026-10-20",
      "url": null
     },
     "devto": {
@@ -1041,7 +1048,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-29",
+     "scheduledFor": "2026-10-06",
      "url": null
     },
     "devto": {
@@ -1081,7 +1088,7 @@
      "mode": "canonical",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-21",
+     "scheduledFor": "2026-10-28",
      "url": null
     }
    }
@@ -1107,7 +1114,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-15",
+     "scheduledFor": "2026-10-22",
      "url": null
     },
     "devto": {
@@ -1140,7 +1147,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-29",
+     "scheduledFor": "2026-11-05",
      "url": null
     },
     "devto": {
@@ -1240,7 +1247,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-12",
+     "scheduledFor": "2026-11-19",
      "url": null
     },
     "devto": {
@@ -1273,7 +1280,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-26",
+     "scheduledFor": "2026-12-03",
      "url": null
     },
     "devto": {
@@ -1306,7 +1313,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-12-10",
+     "scheduledFor": "2026-12-17",
      "url": null
     },
     "devto": {
@@ -1339,7 +1346,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-03",
+     "scheduledFor": "2026-11-10",
      "url": null
     },
     "devto": {
@@ -1372,7 +1379,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-17",
+     "scheduledFor": "2026-11-24",
      "url": null
     },
     "devto": {
@@ -1405,7 +1412,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-12-01",
+     "scheduledFor": "2026-12-08",
      "url": null
     },
     "devto": {
@@ -1438,7 +1445,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-12-22",
+     "scheduledFor": "2026-12-31",
      "url": null
     },
     "devto": {
@@ -1471,7 +1478,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-12-31",
+     "scheduledFor": "2027-01-12",
      "url": null
     },
     "devto": {
@@ -1504,7 +1511,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-12-15",
+     "scheduledFor": "2026-12-22",
      "url": null
     },
     "devto": {
@@ -1537,7 +1544,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-12-24",
+     "scheduledFor": "2027-01-05",
      "url": null
     },
     "devto": {
@@ -1738,7 +1745,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-01-12",
+     "scheduledFor": "2027-01-21",
      "url": null
     },
     "devto": {
@@ -1804,7 +1811,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-01-05",
+     "scheduledFor": "2027-01-14",
      "url": null
     },
     "devto": {
@@ -1837,7 +1844,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-01-21",
+     "scheduledFor": "2027-02-02",
      "url": null
     },
     "devto": {
@@ -1870,7 +1877,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-01-28",
+     "scheduledFor": "2027-02-09",
      "url": null
     },
     "devto": {
@@ -1903,7 +1910,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-01-14",
+     "scheduledFor": "2027-01-26",
      "url": null
     },
     "devto": {
@@ -1936,7 +1943,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-01-26",
+     "scheduledFor": "2027-02-04",
      "url": null
     },
     "devto": {
@@ -1969,7 +1976,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-02-02",
+     "scheduledFor": "2027-02-11",
      "url": null
     },
     "devto": {
@@ -2002,7 +2009,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-02-04",
+     "scheduledFor": "2027-02-16",
      "url": null
     },
     "devto": {
@@ -2035,7 +2042,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-02-09",
+     "scheduledFor": "2027-02-18",
      "url": null
     },
     "devto": {
@@ -2068,7 +2075,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-02-11",
+     "scheduledFor": "2027-02-23",
      "url": null
     },
     "devto": {
@@ -2169,7 +2176,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-02-16",
+     "scheduledFor": "2027-02-25",
      "url": null
     },
     "devto": {
@@ -2236,7 +2243,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-02-18",
+     "scheduledFor": "2027-03-02",
      "url": null
     },
     "devto": {
@@ -2269,7 +2276,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-02-23",
+     "scheduledFor": "2027-03-04",
      "url": null
     },
     "devto": {
@@ -2303,7 +2310,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-02-25",
+     "scheduledFor": "2027-03-09",
      "url": null
     },
     "devto": {
@@ -2337,7 +2344,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-03-02",
+     "scheduledFor": "2027-03-11",
      "url": null
     },
     "devto": {
@@ -2370,7 +2377,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-03-04",
+     "scheduledFor": "2027-03-16",
      "url": null
     },
     "devto": {
@@ -2404,7 +2411,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-03-09",
+     "scheduledFor": "2027-03-18",
      "url": null
     },
     "devto": {
@@ -2437,7 +2444,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-03-11",
+     "scheduledFor": "2027-03-23",
      "url": null
     },
     "devto": {
@@ -2471,7 +2478,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-03-16",
+     "scheduledFor": "2027-03-25",
      "url": null
     },
     "devto": {
@@ -2505,7 +2512,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-03-18",
+     "scheduledFor": "2027-03-30",
      "url": null
     },
     "devto": {
@@ -2539,8 +2546,9 @@
     "linkedin": {
      "mode": "native",
      "state": "eligible",
+     "caption": "captions/linkedin/applied--adopt-or-skip.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-25",
+     "scheduledFor": "2026-08-20",
      "url": null
     },
     "devto": {
@@ -2575,8 +2583,9 @@
     "linkedin": {
      "mode": "native",
      "state": "eligible",
+     "caption": "captions/linkedin/applied--config-probe.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-27",
+     "scheduledFor": "2026-09-01",
      "url": null
     },
     "devto": {
@@ -2597,7 +2606,7 @@
    "collection": "applied",
    "words": 0,
    "pitch": "Every agent session is a transcript you usually throw away. Mine them instead: reusable prompts, your corrections as standing priors, and counted waste numbers that justify the next fix. The loop, from 614 real sessions.",
-   "cluster": "session-corpus",
+   "cluster": "corpus",
    "tier": 1,
    "routes": {
     "substack": {
@@ -2611,8 +2620,9 @@
     "linkedin": {
      "mode": "native",
      "state": "eligible",
+     "caption": "captions/linkedin/applied--corpus.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-17",
+     "scheduledFor": "2026-09-24",
      "url": null
     },
     "devto": {
@@ -2648,7 +2658,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-06",
+     "scheduledFor": "2026-10-13",
      "url": null
     },
     "devto": {
@@ -2684,7 +2694,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-22",
+     "scheduledFor": "2026-10-29",
      "url": null
     },
     "devto": {
@@ -2720,7 +2730,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-10",
+     "scheduledFor": "2026-11-17",
      "url": null
     },
     "devto": {
@@ -2756,7 +2766,43 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-24",
+     "scheduledFor": "2026-12-01",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "no markdown body — rendered deck, nothing to cross-post",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "applied/session-closeout",
+   "title": "Close the Session, Keep the Lesson",
+   "url": "https://ninochavez.co/demos/applied/session-closeout",
+   "publishedAt": "",
+   "collection": "applied",
+   "words": 0,
+   "pitch": "Promote project truth, distill the reusable method, enqueue fast, mine in the background, and delete raw transcripts only after an explicit archive-safety receipt.",
+   "cluster": "session-corpus",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "companion piece; the demo carries the story",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-12-15",
      "url": null
     },
     "devto": {
@@ -2792,13 +2838,79 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-12-08",
+     "scheduledFor": "2026-12-29",
      "url": null
     },
     "devto": {
      "mode": "skip",
      "state": "skip",
      "reason": "no markdown body — rendered deck, nothing to cross-post",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/the-cut-youll-make-twice",
+   "title": "The Cut You'll Make Twice",
+   "url": "https://ninochavez.co/blog/the-cut-youll-make-twice",
+   "publishedAt": "2026-08-06",
+   "collection": "blog",
+   "words": 2827,
+   "cluster": "the-cut-youll-make-twice",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2027-06-20",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "teaser",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2027-04-01",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/the-style-guide-was-teaching-the-tells",
+   "title": "The Style Guide Was Teaching the Tells",
+   "url": "https://ninochavez.co/blog/the-style-guide-was-teaching-the-tells",
+   "publishedAt": "2026-08-03",
+   "collection": "blog",
+   "words": 1053,
+   "cluster": "the-style-guide-was-teaching-the-tells",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2027-07-11",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2027-04-13",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -2819,14 +2931,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-20",
+     "scheduledFor": "2027-08-01",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-03-23",
+     "scheduledFor": "2027-04-22",
      "url": null
     },
     "devto": {
@@ -2852,14 +2964,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-11",
+     "scheduledFor": "2027-08-22",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-01",
+     "scheduledFor": "2027-05-04",
      "url": null
     },
     "devto": {
@@ -2885,14 +2997,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-01",
+     "scheduledFor": "2027-09-12",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-13",
+     "scheduledFor": "2027-05-13",
      "url": null
     },
     "devto": {
@@ -2918,14 +3030,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-22",
+     "scheduledFor": "2027-09-26",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-22",
+     "scheduledFor": "2027-05-20",
      "url": null
     },
     "devto": {
@@ -2984,14 +3096,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-09-12",
+     "scheduledFor": "2027-10-10",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-04",
+     "scheduledFor": "2027-05-25",
      "url": null
     },
     "devto": {
@@ -3017,14 +3129,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-09-26",
+     "scheduledFor": "2027-10-24",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-11",
+     "scheduledFor": "2027-05-27",
      "url": null
     },
     "devto": {
@@ -3050,7 +3162,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-10-10",
+     "scheduledFor": "2027-11-07",
      "url": null
     },
     "linkedin": {
@@ -3083,7 +3195,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-10-24",
+     "scheduledFor": "2027-11-21",
      "url": null
     },
     "linkedin": {
@@ -3116,14 +3228,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-11-07",
+     "scheduledFor": "2027-12-05",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-13",
+     "scheduledFor": "2027-06-01",
      "url": null
     },
     "devto": {
@@ -3149,7 +3261,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-11-21",
+     "scheduledFor": "2027-12-12",
      "url": null
     },
     "linkedin": {
@@ -3189,7 +3301,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-03-30",
+     "scheduledFor": "2027-04-08",
      "url": null
     },
     "devto": {
@@ -3215,14 +3327,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-12-05",
+     "scheduledFor": "2027-12-19",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-18",
+     "scheduledFor": "2027-06-03",
      "url": null
     },
     "devto": {
@@ -3248,7 +3360,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-12-12",
+     "scheduledFor": "2027-12-26",
      "url": null
     },
     "linkedin": {
@@ -3288,7 +3400,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-08",
+     "scheduledFor": "2027-04-20",
      "url": null
     },
     "devto": {
@@ -3314,7 +3426,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-12-19",
+     "scheduledFor": "2028-01-02",
      "url": null
     },
     "linkedin": {
@@ -3347,7 +3459,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-12-26",
+     "scheduledFor": "2028-01-09",
      "url": null
     },
     "linkedin": {
@@ -3380,14 +3492,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-01-02",
+     "scheduledFor": "2028-01-16",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-20",
+     "scheduledFor": "2027-06-08",
      "url": null
     },
     "devto": {
@@ -3413,14 +3525,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-01-09",
+     "scheduledFor": "2028-01-23",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-25",
+     "scheduledFor": "2027-06-10",
      "url": null
     },
     "devto": {
@@ -3616,7 +3728,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-01-16",
+     "scheduledFor": "2028-01-30",
      "url": null
     },
     "linkedin": {
@@ -3819,14 +3931,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-01-23",
+     "scheduledFor": "2028-02-06",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-27",
+     "scheduledFor": "2027-06-15",
      "url": null
     },
     "devto": {
@@ -3885,14 +3997,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-01-30",
+     "scheduledFor": "2028-02-13",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-01",
+     "scheduledFor": "2027-06-17",
      "url": null
     },
     "devto": {
@@ -3918,14 +4030,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-02-06",
+     "scheduledFor": "2028-02-20",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-03",
+     "scheduledFor": "2027-06-22",
      "url": null
     },
     "devto": {
@@ -3985,7 +4097,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-02-13",
+     "scheduledFor": "2028-02-27",
      "url": null
     },
     "linkedin": {
@@ -4018,14 +4130,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-02-20",
+     "scheduledFor": "2028-03-05",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-08",
+     "scheduledFor": "2027-06-24",
      "url": null
     },
     "devto": {
@@ -4051,14 +4163,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-02-27",
+     "scheduledFor": "2028-03-12",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-10",
+     "scheduledFor": "2027-06-29",
      "url": null
     },
     "devto": {
@@ -4084,14 +4196,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-03-05",
+     "scheduledFor": "2028-03-19",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-15",
+     "scheduledFor": "2027-07-01",
      "url": null
     },
     "devto": {
@@ -4124,7 +4236,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-20",
+     "scheduledFor": "2027-04-29",
      "url": null
     },
     "devto": {
@@ -4158,7 +4270,7 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-03-25",
+     "scheduledFor": "2027-04-06",
      "url": null
     },
     "devto": {
@@ -4191,7 +4303,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-17",
+     "scheduledFor": "2027-07-06",
      "url": null
     },
     "devto": {
@@ -4224,7 +4336,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-22",
+     "scheduledFor": "2027-07-08",
      "url": null
     },
     "devto": {
@@ -4250,14 +4362,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-03-12",
+     "scheduledFor": "2028-03-26",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-24",
+     "scheduledFor": "2027-07-13",
      "url": null
     },
     "devto": {
@@ -4283,7 +4395,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-03-19",
+     "scheduledFor": "2028-04-02",
      "url": null
     },
     "linkedin": {
@@ -4323,7 +4435,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-29",
+     "scheduledFor": "2027-07-15",
      "url": null
     },
     "devto": {
@@ -4356,7 +4468,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-29",
+     "scheduledFor": "2027-05-11",
      "url": null
     },
     "devto": {
@@ -4415,7 +4527,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-03-26",
+     "scheduledFor": "2028-04-09",
      "url": null
     },
     "linkedin": {
@@ -4448,14 +4560,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-04-02",
+     "scheduledFor": "2028-04-16",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-01",
+     "scheduledFor": "2027-07-20",
      "url": null
     },
     "devto": {
@@ -4489,7 +4601,7 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-06",
+     "scheduledFor": "2027-04-15",
      "url": null
     },
     "devto": {
@@ -4515,14 +4627,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-04-09",
+     "scheduledFor": "2028-04-23",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-06",
+     "scheduledFor": "2027-07-22",
      "url": null
     },
     "devto": {
@@ -4548,14 +4660,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-04-16",
+     "scheduledFor": "2028-04-30",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-08",
+     "scheduledFor": "2027-07-27",
      "url": null
     },
     "devto": {
@@ -4581,14 +4693,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-04-23",
+     "scheduledFor": "2028-05-07",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-13",
+     "scheduledFor": "2027-07-29",
      "url": null
     },
     "devto": {
@@ -4614,14 +4726,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-04-30",
+     "scheduledFor": "2028-05-14",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-15",
+     "scheduledFor": "2027-08-03",
      "url": null
     },
     "devto": {
@@ -4647,7 +4759,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-05-07",
+     "scheduledFor": "2028-05-21",
      "url": null
     },
     "linkedin": {
@@ -4688,7 +4800,7 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-15",
+     "scheduledFor": "2027-04-27",
      "url": null
     },
     "devto": {
@@ -4748,7 +4860,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-05-14",
+     "scheduledFor": "2028-05-28",
      "url": null
     },
     "linkedin": {
@@ -4815,7 +4927,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-05-21",
+     "scheduledFor": "2028-06-04",
      "url": null
     },
     "linkedin": {
@@ -4890,7 +5002,7 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-27",
+     "scheduledFor": "2027-05-06",
      "url": null
     },
     "devto": {
@@ -4916,7 +5028,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-05-28",
+     "scheduledFor": "2028-06-11",
      "url": null
     },
     "linkedin": {
@@ -5016,14 +5128,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-06-04",
+     "scheduledFor": "2028-06-18",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-20",
+     "scheduledFor": "2027-08-05",
      "url": null
     },
     "devto": {
@@ -5049,14 +5161,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-06-11",
+     "scheduledFor": "2028-06-25",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-22",
+     "scheduledFor": "2027-08-10",
      "url": null
     },
     "devto": {
@@ -5124,7 +5236,7 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-06",
+     "scheduledFor": "2027-05-18",
      "url": null
     },
     "devto": {
@@ -5157,7 +5269,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-27",
+     "scheduledFor": "2027-08-12",
      "url": null
     },
     "devto": {
@@ -5187,15 +5299,17 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
-     "scheduledFor": "2027-07-29",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
      "mode": "skip",
      "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -5368,7 +5482,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-03",
+     "scheduledFor": "2027-08-17",
      "url": null
     },
     "devto": {
@@ -5402,7 +5516,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-05",
+     "scheduledFor": "2027-08-19",
      "url": null
     },
     "devto": {
@@ -5472,7 +5586,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-10",
+     "scheduledFor": "2027-08-24",
      "url": null
     },
     "devto": {
@@ -5574,7 +5688,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-12",
+     "scheduledFor": "2027-08-26",
      "url": null
     },
     "devto": {
@@ -5608,7 +5722,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-17",
+     "scheduledFor": "2027-08-31",
      "url": null
     },
     "devto": {
@@ -5642,7 +5756,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-19",
+     "scheduledFor": "2027-09-02",
      "url": null
     },
     "devto": {
@@ -6096,7 +6210,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-24",
+     "scheduledFor": "2027-09-07",
      "url": null
     },
     "devto": {
@@ -6267,15 +6381,17 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
-     "scheduledFor": "2027-08-26",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
      "mode": "skip",
      "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -6301,15 +6417,17 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
-     "scheduledFor": "2027-08-31",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
      "mode": "skip",
      "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -6335,15 +6453,17 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
-     "scheduledFor": "2027-09-02",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
      "mode": "skip",
      "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -6369,15 +6489,17 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
-     "scheduledFor": "2027-09-07",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
      "mode": "skip",
      "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -6397,7 +6519,7 @@
     "substack": {
      "mode": "skip",
      "state": "skip",
-     "reason": "too short to carry an issue alone",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -6413,6 +6535,7 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
+     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10241,7 +10364,7 @@
    "url": "https://ninochavez.co/blog/you-cant-engineer-growth",
    "publishedAt": "2025-06-04",
    "collection": "blog",
-   "words": 359,
+   "words": 367,
    "cluster": "you-cant-engineer-growth",
    "tier": 3,
    "routes": {

@@ -149,16 +149,18 @@ I didn't build it for a project, and that's the part that matters. It's installe
 
 Which raises the obvious question: why not use the MCP servers that already do this?
 
-My own config says to prefer the shell commands because of the token footprint. It doesn't say by how much, so I measured. I started each server over stdio, completed the handshake, and called `tools/list`.
+My own config says to prefer the shell commands because of the token footprint. It doesn't say by how much, and the README for my own tool claims thirteen to eighteen thousand tokens with no method attached. So I measured: started each server over stdio, completed the handshake, called `tools/list`, and ran the result through a real tokenizer instead of dividing by four.
 
-| Server | Tools | Bytes of tool schema | Approx. tokens |
+| Server | Tools | Bytes of tool schema | Tokens |
 |---|---|---|---|
-| chrome-devtools-mcp | 29 | 23,244 | ~5,800 |
-| @playwright/mcp | 24 | 18,502 | ~4,600 |
+| chrome-devtools-mcp | 29 | 23,244 | 4,968 |
+| @playwright/mcp | 24 | 18,502 | 3,928 |
 
-That's smaller than I'd have guessed, and the size isn't the argument anyway. The argument is *when you pay*.
+My own README is off by roughly three and a half times, in the direction that flatters my tool. It reads like a measurement and it was an assumption about characters per token — the real ratio here is 4.7, and somebody, probably me, used something near 1.3.
 
-Those bytes load at connection, in every session where the server is configured, whether or not the agent ever opens a page. The shell commands cost one sentence in my instructions file — a pointer to a README. Sessions that browse spend about 4,500 tokens reading it. Sessions that don't spend nothing.
+So the honest number is smaller than I'd been telling people, and the size isn't the argument anyway. The argument is *when you pay*.
+
+Those bytes load at connection, in every session where the server is configured, whether or not the agent ever opens a page. The shell commands cost one sentence in my instructions file — a pointer to a README. Sessions that browse spend about 4,000 tokens reading it. Sessions that don't spend nothing.
 
 I have 3,711 session transcripts on this machine. Two hundred fifty of them made a real `browse-*` call. Sixty-eight made a real call to one of those MCP servers. Whatever the right denominator is, the shape is the same: a browser is a thing I need occasionally and pay for constantly.
 
