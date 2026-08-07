@@ -294,6 +294,18 @@ INSTRUCTIONS:
 - Avoid cliches: no robots, lightbulbs, handshakes, puzzle pieces, or generic tech imagery
 - Think about what makes THIS post different from others on similar topics
 
+RENDERABILITY CONSTRAINTS — a downstream QA pass rejects any image that does not
+plausibly match your description, so describe only what a single still frame can
+actually show. Argument-shaped posts tempt you toward before/after comparisons;
+those fail. Specifically:
+- ONE subject. Never two people side by side representing two cases.
+- No implied motion — nothing falling, rising, being lifted, propelled, or mid-transformation.
+- No emotional state that depends on reading a face ("annoyed", "surprised", "waiting").
+- No scale words a frame can't establish ("endless", "infinite", "stretching forever").
+- No text, labels, numbers, charts, or writing anywhere in the scene.
+- Prefer a single object, tool, or arrangement that carries the idea over a person doing something.
+- Every noun you write must be visible in the frame. If it can only be inferred, cut it.
+
 Respond with ONLY the visual scene description, nothing else.`
         }
       ],
@@ -309,6 +321,48 @@ Respond with ONLY the visual scene description, nothing else.`
   } catch (e) {
     console.log(`              ⚠️  Visual concept LLM failed (${e.message}), using keyword fallback`);
     return extractVisualConcept(title);
+  }
+}
+
+// A QA rejection is usually a verdict on the concept, not the render. Ask for a
+// replacement that is told exactly what failed, and forced to be simpler.
+async function regenerateVisualConcept(title, category, rejectedConcept, reason) {
+  try {
+    const response = await openrouter.chat.completions.create({
+      model: 'google/gemini-2.5-flash',
+      messages: [{
+        role: 'user',
+        content: `An illustration concept was rejected by a vision QA judge. Write a replacement.
+
+TITLE: ${title}
+CATEGORY: ${category || 'general'}
+
+REJECTED CONCEPT:
+${rejectedConcept}
+
+WHY THE RENDER FAILED TO MATCH IT:
+${reason}
+
+The rejected concept was too complex to draw. Your replacement must be simpler than it — not a rewording of the same scene.
+
+HARD RULES:
+- ONE subject only. If the rejected concept contained two people, two objects being compared, or a before/after, yours must contain exactly one thing.
+- No implied motion, transformation, or action mid-flight.
+- No emotional states, facial expressions, or postures that must be interpreted.
+- No text, numbers, labels, charts, or writing.
+- No superlatives or scale claims a single frame cannot show.
+- Prefer one static object or arrangement over any person.
+- Every noun must be literally visible. Cut anything inferred.
+
+Two sentences maximum. Respond with ONLY the scene description.`
+      }],
+      max_tokens: 160,
+      temperature: 0.9
+    });
+    const c = response.choices?.[0]?.message?.content?.trim();
+    return (c && c.length > 20) ? c : null;
+  } catch {
+    return null;
   }
 }
 
@@ -478,7 +532,9 @@ Respond with ONLY JSON: {"pass": true} or {"pass": false, "reason": "<which rule
 const MAX_ATTEMPTS = 3;
 
 // Generate → optimize → QA, retrying on transient API failures and QA rejections
-async function generateImage(prompt, filename, visualConcept) {
+async function generateImage(promptIn, filename, conceptIn, onConceptRejected = null, rebuildPrompt = null) {
+  let prompt = promptIn;
+  let visualConcept = conceptIn;
   const outputPath = path.join(OUTPUT_DIR, `${filename}.webp`);
   let lastError = null;
 
@@ -497,6 +553,19 @@ async function generateImage(prompt, filename, visualConcept) {
       if (!qa.pass) {
         lastError = new Error(`QA rejected: ${qa.reason}`);
         console.log(`              🚫 QA rejected (attempt ${attempt}): ${qa.reason}`);
+        // A rejection usually means the CONCEPT is unrenderable, not that the
+        // render was unlucky — argument-shaped posts produce two-subject
+        // before/after scenes that no single frame can satisfy. Re-rolling the
+        // same concept just fails three times. Ask for a new one, told exactly
+        // why the last attempt failed.
+        if (attempt < MAX_ATTEMPTS && typeof onConceptRejected === 'function') {
+          const next = await onConceptRejected(visualConcept, qa.reason);
+          if (next) {
+            visualConcept = next;
+            prompt = rebuildPrompt(next);
+            console.log(`              🧠 New concept: ${next.substring(0, 80)}...`);
+          }
+        }
         continue;
       }
       console.log(`              🔍 QA passed${qa.reason === 'judge unavailable' ? ' (mechanical checks only)' : ''}`);
@@ -696,7 +765,16 @@ async function main() {
       );
 
       const slug = filename.replace('.mdx', '');
-      const result = await generateImage(prompt, slug, visualConcept);
+      const rebuildPrompt = (concept) => createImagePrompt(
+        frontmatter.title,
+        frontmatter.excerpt || frontmatter.metaDescription || '',
+        frontmatter.category,
+        concept
+      );
+      const onConceptRejected = (rejected, reason) => regenerateVisualConcept(
+        frontmatter.title, frontmatter.category, rejected, reason
+      );
+      const result = await generateImage(prompt, slug, visualConcept, onConceptRejected, rebuildPrompt);
 
       const mdxUpdated = updateMdxFile(filepath, result.path);
       totalSize += result.size;

@@ -28,6 +28,11 @@ const blogCollection = defineCollection({
     category: z.string().optional(),
     featured: z.boolean().default(false),
     featureImage: z.string().optional(),
+    // Reader payoff — one plain sentence naming what the reader can do, decide, or
+    // check afterward. Required for content published on/after the reader-contract
+    // effective date; enforced by scripts/check-takeaway.mjs, not by this schema,
+    // so the ~150 pieces predating the contract still build.
+    takeaway: z.string().optional(),
     source: z.string().optional(),
     linkedinUrl: z.string().optional(),
     externalUrl: z.string().optional(),
@@ -57,6 +62,11 @@ const whitepaperCollection = defineCollection({
     excerpt: z.string().optional().default(''),
     category: z.string().optional(),
     featureImage: z.string().optional(),
+    // Reader payoff — one plain sentence naming what the reader can do, decide, or
+    // check afterward. Required for content published on/after the reader-contract
+    // effective date; enforced by scripts/check-takeaway.mjs, not by this schema,
+    // so the ~150 pieces predating the contract still build.
+    takeaway: z.string().optional(),
     tags: z.array(z.string()).optional(),
     // Companion content - links to related blog post
     companionOf: z.object({
@@ -105,6 +115,11 @@ const tutorialCollection = defineCollection({
     excerpt: z.string().optional().default(''),
     category: z.string().optional(),
     featureImage: z.string().optional(),
+    // Reader payoff — one plain sentence naming what the reader can do, decide, or
+    // check afterward. Required for content published on/after the reader-contract
+    // effective date; enforced by scripts/check-takeaway.mjs, not by this schema,
+    // so the ~150 pieces predating the contract still build.
+    takeaway: z.string().optional(),
     tags: z.array(z.string()).optional(),
     // Tutorial-specific fields
     duration: z.string().optional(),

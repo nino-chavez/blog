@@ -86,7 +86,7 @@ import { PullQuote } from '@/components/mdx/PullQuote';
 Blog posts have a `status` field with three values (default `"published"`):
 
 - **`published`** — normal. Appears in indexes, RSS, tags, sitemap, and search. Accessible at `/blog/{slug}`.
-- **`draft`** — work-in-progress. Filtered out of all public surfaces. Previewable at `/blog/draft/{slug}`.
+- **`draft`** — work-in-progress. Filtered out of all public surfaces. **No route is generated at all** — there is no `/blog/draft/` page (verified 2026-08-07). A draft is unreadable in a build; to review one, use `status: "unlisted"` with a `privateToken` per the workflow below.
 - **`unlisted`** — shareable privately. Filtered out of all public surfaces AND the sitemap. Carries `noindex, nofollow` meta. Accessible only at `/blog/private/{privateToken}/{slug}`.
 
 ### Unlisted post workflow (for private sharing)

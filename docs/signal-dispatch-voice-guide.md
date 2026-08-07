@@ -1,8 +1,8 @@
 # Signal Dispatch: Voice & Tone Guide
 ## Copy Editor and Ghostwriter Touchstone
 
-**Version**: 1.3
-**Last Updated**: 2026-08-03
+**Version**: 1.4
+**Last Updated**: 2026-08-08
 **Source**: Empirical analysis of 156 blog posts, 15 deep-read corpus sample; adversarial audit against the 8 most recent posts (Jun–Jul 2026) plus a held-out generation test, 2026-08-03
 
 ---
@@ -469,6 +469,71 @@ After you have grounded a term — described what it does plainly — you can us
 - Team dynamics
 - Personal growth through public work
 - Volleyball coaching (when relevant)
+
+---
+
+## The Reader Payoff (added 2026-08-08 — outranks every template below)
+
+`reader-contract.json` at the repo root has always declared the reader's job:
+**"understand the argument, see the evidence, and leave with a usable idea."**
+This guide never had a step that produced the third one, and the machine that
+enforces the contract (`tools/lib/encounter-audit.mjs`) checks denied terms,
+block length, opaque tokens, and undefined acronyms — none of which detect
+whether a reader leaves with anything. The clause was decorative for the life of
+the guide.
+
+**The defect it produced.** Template 5 below — defect → mechanical check →
+adverse evidence → close on an absence — reliably yields a well-evidenced
+*investigation log*. The reader learns what the author did and how the author was
+wrong. They do not learn what to do. Its prescribed ending is an absence, which
+is the structural opposite of a takeaway, and its counts ("design appears in 84
+repositories") satisfy the evidence clause while breaking this guide's own
+Concrete Over Coined rule: a number is not a picture.
+
+**Three rules, in priority order.**
+
+**1. State the payoff early, not only at the end.** The defect-in-hand open is a
+hook, not an answer. Minto's rule — lead with the answer — applies: within the
+first 150 words, after the hook, say what the piece establishes. The reader
+should be able to stop there and still have gotten the point.
+
+**2. Every abstract count needs a picture next to it.** If a section reports
+"design appears in 84 repositories," the next sentence names one: the rebrand
+whose palette came out of the client's own logo, the nine contrast failures
+cleared without touching the brand color. Counts establish scale. Only concrete
+instances let the reader picture the thing. A piece with counts and no instances
+has evidence and no substance.
+
+**3. The close may be an image, but it may not be the first time the reader
+learns the point.** A compressed reversal or a concrete image is still the house
+close. It works only when the payoff already landed in the body. If cutting the
+final two sentences would leave the reader with nothing, the close is carrying
+weight the argument should have carried.
+
+**Mechanically enforced.** Every blog post, whitepaper, and tutorial published on
+or after 2026-08-08 carries a required `takeaway` in frontmatter — one plain
+sentence naming what the reader can now do, decide, or check.
+`astro-build/scripts/check-takeaway.mjs` fails the build when it is missing, when
+it runs shorter than six or longer than thirty words, when it describes the piece
+or its author instead of the reader, or when it merely restates the excerpt or
+title. Pieces predating the contract are date-gated out rather than backfilled.
+
+Write the `takeaway` *before* drafting. If it can't be written, the piece isn't
+ready — that is the check's actual purpose, and the build failure is only its
+last line of defense.
+
+**Which job is the piece doing?** Diátaxis separates four, and Signal Dispatch
+uses three. An essay is *explanation* — it orients, it does not instruct. A
+tutorial is *tutorial* and belongs in `content/tutorials/`, not in a post with a
+how-to section bolted on. A whitepaper is *reference*, and its precision beats its
+warmth. Mixing two jobs in one piece is the most common cause of a draft that
+reads fine and lands nowhere.
+
+**Plainness is set by `reader-contract.json`, not by this guide.** Essays run
+`practitioner`; fiction runs `lay`. The contract owns that setting and the
+`precisionLocks` that protect the voice, technical names, sourced numbers, and
+deliberate metaphors from being flattened. Do not restate those values here — one
+owner per rule.
 
 ---
 
@@ -998,6 +1063,6 @@ Posts maintain consistent voice even across different topics. Strongest consiste
 
 ---
 
-**Last Updated**: 2026-08-03 (adversarial audit + held-out generation test; header, Freshness Check, and this stamp reconciled — they previously carried three different dates)
+**Last Updated**: 2026-08-08 (v1.4 — added The Reader Payoff, which outranks the structure templates; reconciled the guide with `reader-contract.json` and the Minto/Diataxis rules in `working-style.md`. v1.3, 2026-08-03: adversarial audit + held-out generation test)
 **Next Review**: Quarterly or after 50 new posts
 **Maintained By**: Signal Dispatch Editorial (AI-assisted)
