@@ -2,120 +2,162 @@
 title: "The Cut You'll Make Twice"
 slug: "the-cut-youll-make-twice"
 publishedAt: "2026-08-06T22:32:46.000Z"
-updatedAt: "2026-08-06T22:32:46.000Z"
+updatedAt: "2026-08-07T13:46:51.000Z"
 author: "Nino Chavez"
 status: "published"
-excerpt: "In March I wrote that a jig is the thing that accelerates the real work. Five months later I went and counted what's in one of mine. It accelerates nothing. Its entire job is to make a cut impossible."
+excerpt: "There's a file in this repo that says build validation will reject unapproved tags. I went and counted. Thirty-two unapproved tags, sixty-four times, and the build has never once complained."
 featureImage: "/images/generated/the-cut-youll-make-twice.webp"
-tags: ["agentic-systems", "architecture"]
+tags: ["agentic-systems", "ai-development", "architecture"]
 category: "AI & Automation"
 seo:
   metaTitle: "The Cut You'll Make Twice"
-  metaDescription: "A capability questionnaire wanted to know whether we ship an assembled agent. The more useful thing sits a rung below — and my own definition of it was missing half its function."
+  metaDescription: "Most of what I tell my coding agents is a request it can decline. The useful version isn't a rule at all — it's a surface with nowhere to put the bad instruction."
 ---
 
-A capability questionnaire I worked through last week has a row for no-code agent builders. After the row, two words: *if available*.
+There is a file in this blog's repo called `tags.ts`. Eight lines in, it says this:
 
-That's a form telling on itself. It expects a finished product. It has already decided a vendor either has the builder or doesn't. An absence scores as a zero, never as a position.
+> IMPORTANT: Do not add new tags without updating this file.
+> Build validation will reject posts with unapproved tags.
 
-The next row down asks how you use AI to speed up development — writing code, configuring, testing, deploying. That row only makes sense if you believe the opposite thing. Nobody speeds up development by buying an assembled agent. They speed it up because the surface underneath is clean enough that a general-purpose agent can work it without a human translating.
+I wrote that. It's addressed to an agent, and every agent that writes a post here reads it.
 
-Two rows. Same form. Opposite bets about where the finishing happens.
+The schema that would do the rejecting is one line in a different file:
 
-Forms like this carry a bias and they don't hide it. Native scores above extension. Self-serve scores above configured. Push-button scores above assembled-by-a-competent-person. The closer a capability sits to turnkey, the better it does.
+```ts
+tags: z.array(z.string()).optional(),
+```
 
-That isn't laziness on the grader's part. It's the only thing a rubric can do, because a rubric compares things that come out the same in every hand.
+Any array of any strings. It appears eight times, once per content collection. There is no validation anywhere that compares a post's tags against the approved list.
 
-## I Already Wrote the Jig Post, and It Was Half the Idea
+So I counted. Two hundred seventy-seven files carry tags. The approved list has eighteen entries. Forty-nine distinct tags are actually in use — thirty-two of them off-list, across sixty-four uses.
 
-Five months ago I reached for carpentry to explain this, and defined the thing I keep coming back to:
+The worst one is instructive. `ai-development` declares a `replaces` array, a list of the sloppy tags it exists to absorb. `'AI'` is in that list by name. `AI` appears as a live tag on four posts.
+
+The file names the exact mistake. The mistake is in the repo four times. The build has been green the entire time.
+
+## A Rule in a File Is a Request
+
+That file is a warning label. It works by being read and agreed with.
+
+Most of what any of us gives a coding agent is a warning label. `CLAUDE.md`, `AGENTS.md`, `.cursorrules`, the system prompt, the paragraph you paste at the top of a session. All of it is text the model reads and mostly honors. Mostly is the operative word, and mostly is worse than it sounds. When a rule gets skipped and the work still looks fine, what tells you? The green build told me my tags were clean for two hundred seventy-seven files.
+
+There is a second kind of thing, and it doesn't work that way at all. It works by shape. The instruction has nowhere to land.
+
+Carpenters call that a jig — a fixture that holds the work so the tool can only move where the fixture allows. I'm going to use the word for the rest of this piece, and then leave the woodshop alone. The point isn't the metaphor. The point is a mechanism with two very different enforcement models, and almost everything I've built for agents sits on the weak side of that line.
+
+## I Defined the Jig by Half
+
+In March I reached for that word and defined it:
 
 > A master carpenter doesn't build every piece from scratch. They build *jigs*—custom tools that hold material at the right angle, guide a cut along a precise line, make a repeatable operation fast and accurate. The jig isn't the product. It's the thing that accelerates the real work of making the product.
 
-Everything after that sentence was about proliferation. Agents make jigs cheap, cheap jigs breed, and you end up managing a drawer of one-off fixtures instead of doing the work. I still think that's right.
+Read the clauses. *Accelerates. Fast and accurate. Repeatable.* Every one is about speed.
 
-But read the definition again. Every clause is about speed. *Accelerates. Fast and accurate. Repeatable.* A jig, in that post, is a thing that makes the good outcome quicker.
+Everything after that sentence was about proliferation — agents make jigs cheap, cheap jigs breed, you end up curating a drawer of one-off fixtures instead of doing the work. I still think that's right. Eleven weeks later I described asking an agent to extract a whole methodology into a reusable template, and called that a jig too. Same definition. Same direction.
 
-That's one of its two jobs, and I wrote as if it were the only one.
+A jig has two jobs. That definition covers one of them.
 
-## The Jig That Doesn't Speed Anything Up
+## The Catalog That Makes a Cut Impossible
 
-Before writing this I went and counted what's actually in one of mine rather than trusting my memory of it.
+Before writing this I went and counted the other kind rather than trusting my memory of it.
 
-It's a storefront where a model composes the page layout. A catalog file declares every named place that model may write: twenty-eight of them, across ten surfaces. Twenty-seven are open to the composition engine. Twenty-seven are open to a merchant editing by hand. They are not the same twenty-seven. One region, the strip under a product grid, is open to the merchant and closed to the model.
+It's a retail storefront where a model composes the page layout. A catalog file declares every named place that model may write. Twenty-eight zones across ten surfaces — home, product listing, product detail, cart, checkout, search, account, store locator, and two error states. Each entry carries two booleans: whether the composition engine may target it, and whether a merchant may author there by hand.
 
-The cart has exactly three. One above the checkout button. One below the fold, capped at two items. One empty state.
+Twenty-seven are open to the engine. Twenty-seven are open to the merchant. They are not the same twenty-seven.
 
-Line items, totals, promo entry, the checkout button itself — none of those are on the list.
+One zone under a product grid is open to the merchant and closed to the engine. One zone on the product page is open to the engine and closed to the merchant. Two booleans, two exceptions, and the reason each exception exists is that a person sat down and decided this one thing the model shouldn't touch, and this other thing the merchant shouldn't. The entire governance model for the surface is two flags in a config file that disagree exactly twice.
 
-That catalog accelerates nothing. It makes no operation faster or more repeatable. Composing a page through it is slower than letting the model emit whatever it wants.
+The cart has three zones. One above the checkout button. One below the fold, capped at two items. One empty state.
 
-What it does is remove a cut.
+Line items, order totals, promo entry, the checkout button itself — none of them are zones. There is no address for them.
 
-There is no policy anywhere in that system saying the model may not change the cart total. Nobody wrote that sentence. The model receives a schema of the places it can put things, and no address in that schema reaches the total. It isn't forbidden from touching it. There's nowhere to put the instruction.
+That catalog accelerates nothing. Composing a page through it is slower than letting the model emit whatever markup it wants. What it does is remove a cut.
 
-That's the difference between a jig and a warning label. A warning label depends on the tool obeying it. A jig depends on geometry.
+No policy in that system says the model may not change the cart total. Nobody wrote that sentence, and nobody has to. The model receives a schema of the places it may put things, and no address in that schema reaches the total. It isn't forbidden. There's nowhere to put the instruction.
 
-## Two Directions, and I Only Ever Wrote About One
+That's the difference. A warning label depends on the tool agreeing. A jig depends on the shape of what you handed it.
 
-In March, every jig I named was something the agent built for me. A script to reformat data, a workflow to pre-screen inputs, a template to scaffold a document. Agent makes the fixture, human does the cabinetry.
+## Two Directions, and I Only Named One
 
-I kept writing them that way. Two months later I described asking an agent to extract a whole methodology into a reusable template, and called that a jig too. Same direction. Same definition.
+In March, every jig I named was something an agent built for me. A script to reformat data. A workflow to pre-screen inputs. A template to scaffold a document. Agent makes the fixture, human does the work.
 
 The zone catalog runs the other way. I build the fixture. The agent works inside it.
 
-Both kinds have been sitting in my repos the whole time. Only one of them ever got a definition. That's the tell. I had a word for the fixtures that save me time, and none for the fixtures that take away my options.
+Both kinds have been in my repos the whole time. Only one ever got a definition. That's the tell — I had a word for the fixtures that save me time, and none for the fixtures that take away the agent's options.
 
-The risks aren't the same either. When an agent builds me a jig, the failure is clutter: a drawer of snowflakes, which is what I warned about. When I build a jig for an agent, the failure is quieter. I cut the fence in the wrong place and never find out, because a working jig makes the cut it prevents unobservable. Nothing errors. The bad cut just never appears in the pile.
+The risks aren't symmetric either. When an agent builds me a jig, the failure is clutter: a drawer of one-off snowflakes, which is what I warned about. When I build one for an agent, the failure is silent. I put the fence in the wrong place and never find out, because a working jig makes the cut it prevents unobservable. Nothing errors. The bad output never appears — and neither does the good output I excluded by accident, which is the part that should worry me more. How would I ever see the page the model didn't compose because I forgot to declare a zone for it?
+
+## The Same Mechanism Runs on My Laptop
+
+The storefront catalog is client-scale. The same split shows up in my own dailies, and that's where it's cheap enough for anyone to copy.
+
+I have a rule that parallel agent sessions must work in separate git worktrees, because sessions sharing one checkout switch each other's branches underneath each other and commits land on the wrong one. That rule is written in the same instructions file as everything else. It's a warning label.
+
+It's also a hook. `PreToolUse`, matched against `Bash`, `Write`, `Edit`, and `MultiEdit`. It reads a lock directory, checks whether another live session holds the repo, and when one does, returns `permissionDecision: "deny"` with a paste-ready command for creating the worktree instead. The agent does not decide to comply with that one. The tool call doesn't run.
+
+A second one guards reads. Images over 1400 pixels on the long edge get denied once — the hook downscales a copy to 1000px, writes it to a cache dir, and hands back the new path. Re-reading a file you already read inside a ten-minute window gets denied once too, with a note to cite from context. Both let the immediate retry through, because sometimes the re-read is legitimate.
+
+Neither of those is sophisticated. The worktree one is 550 lines of Python, the read one 293, and both are wired up by a few lines of JSON in `settings.json`. What makes them different in kind from the paragraph above them in my instructions file isn't the code. It's that they run before the model's output reaches anything.
+
+So which of your rules are labels, and which are geometry? Sort your instructions file into two columns sometime. Mine has two hooks in the geometry column and everything else in the other one. The tag rule sat in the label column for two hundred seventy-seven files without me or any agent that read it noticing.
 
 ## Build the Jig When You'll Make the Cut Twice
 
-The old post buried the rule in a warning box. You only built a jig when the task was worth the investment. Agents dropping that cost to zero is what killed the discipline.
+The old post buried the rule in a warning box. You built a jig only when the task was worth the setup. Agents dropping the cost of building one to near zero is what killed that discipline.
 
-It survives the inversion intact. Nobody builds a jig for one cut. For one cut you clamp carefully, measure twice, and go slow.
+The rule survives the inversion intact. Nobody builds a jig for one cut. For one cut you clamp carefully, measure twice, go slow.
 
-The one I lean on hardest is a small set of shell commands that drive a real browser. Navigate, run JavaScript on a page, screenshot, scrape. Ten of them. [The whole thing is public](https://github.com/nino-chavez/browse-tool).
+The jig I lean on hardest is ten shell commands that drive a real Chrome profile. Navigate, evaluate JavaScript in the page, screenshot, scrape to markdown, crawl, manage tabs. That's it. [The whole thing is public.](https://github.com/nino-chavez/browse-tool)
 
-I didn't build it for a project, and that's the part that matters. It's installed permanently, the way a fence lives on the table saw. Because it's already there, I start every integration reaching for a real interface — a command line, an API. Driving a human interface stays the fallback it should be.
+I didn't build it for a project, and that's the part that matters. It's installed permanently, on `PATH` in every shell. Because it's already there, I start every integration reaching for a real interface — a CLI, an API — and driving a human interface stays the fallback it should be. That ordering only works if the fallback exists before I need it. Built per project, it doesn't. It's a detour I don't have time for at the moment I hit a system with no API, so I either skip the work or design the whole thing around mimicry from the start.
 
-That ordering only works if the fallback exists before you need it. Built per project, it doesn't. It's a sprint you don't have when you hit a system with no API. So you skip the work, or you build the whole architecture around mimicry from the start.
+Which raises the obvious question: why not use the MCP servers that already do this?
 
-The jig came first. The sequencing followed from it.
+My own config says to prefer the shell commands because of the token footprint. It doesn't say by how much, so I measured. I started each server over stdio, completed the handshake, and called `tools/list`.
 
-## Someone Else's Jig Charges Rent
+| Server | Tools | Bytes of tool schema | Approx. tokens |
+|---|---|---|---|
+| chrome-devtools-mcp | 29 | 23,244 | ~5,800 |
+| @playwright/mcp | 24 | 18,502 | ~4,600 |
 
-A jig somebody else built is a fixture for a cut you didn't specify. Sometimes that's exactly right. Often you're paying for a setup you'll never use.
+That's smaller than I'd have guessed, and the size isn't the argument anyway. The argument is *when you pay*.
 
-The measurable version, for that same browser capability. The protocol-server equivalents load thirteen to eighteen thousand tokens of tool description, before the agent has done anything. The shell commands load a few hundred, and only when the agent goes and reads the file. Roughly forty times the standing cost, charged every session, for a general-purpose fixture whose specific cut you may not be making.
+Those bytes load at connection, in every session where the server is configured, whether or not the agent ever opens a page. The shell commands cost one sentence in my instructions file — a pointer to a README. Sessions that browse spend about 4,500 tokens reading it. Sessions that don't spend nothing.
 
-The token count isn't the argument. The argument is that the agent already knows how to write JavaScript and read a DOM. A command that hands it a page and gets out of the way lets it use what it arrived with. A bespoke schema wrapping the same operations makes it learn a private vocabulary first.
+I have 3,711 session transcripts on this machine. Two hundred fifty of them made a real `browse-*` call. Sixty-eight made a real call to one of those MCP servers. Whatever the right denominator is, the shape is the same: a browser is a thing I need occasionally and pay for constantly.
 
-So the general jig isn't free, and neither is the finished product. Both are somebody's decisions about which cuts matter, priced into every job you run through them.
+There's a second cost that doesn't show up in bytes. The agent already knows how to write JavaScript and read a DOM. A command that hands it a page and gets out of the way lets it use what it arrived with. A bespoke tool schema wrapping the same operations makes it learn a private vocabulary first, and that vocabulary is a fixture somebody else built for a cut I may not be making.
 
-And if you'll genuinely make the cut once, buy the assembled thing. That isn't a compromise. That's the rule working.
+None of which means don't use them. If you'll genuinely make the cut once, buy the assembled thing. That isn't a compromise; that's the rule working.
 
-## A Scorecard Can Only Rank Dinners
+## The Jig I Left on a Branch
 
-Carpentry runs out here. Switch to dinner.
+Here's the part that undercuts everything above.
 
-A TV dinner ranks cleanly against another TV dinner. Same tray, same six minutes, same result in every kitchen on earth. Variance is the enemy and the product has none, which is exactly what makes it scoreable.
+The operator card I load into every session cites one of my own scripts as a reference implementation — a mechanical check that verifies a short-form caption against the long-form post it was derived from, so a claim can't quietly change owners between the source and the summary. I wrote it because I'd watched exactly that failure happen and decided a rule wasn't enough. Turning the rule into a command was the right instinct, and it's the whole thesis of this post.
 
-A meal kit mostly ranks too. Somebody else picked the cuts, portioned the spice, wrote the card. What you add is small and bounded.
+It lives on a branch called `caption-edits-0803`. Five commits of gate work, none of them on `main`. The `syndication/` directory on `main` has no gate script in it at all.
 
-A scratch kitchen doesn't rank at all. The output depends on who is cooking. That's not a defect in the kitchen — it's the entire proposition. You keep the raw ingredients and your own knives *because* you want to decide what gets made. Ask which scratch kitchen is better and the only honest reply is a question: whose, cooking what, for whom?
+So the file that tells agents "this rule is enforced mechanically, here's the implementation" points at a check that has never run against anything I've published.
 
-So the bias in the form isn't a mistake. Turnkey scores well because turnkey is the only thing that can be scored. Hand someone primitives instead and you trade away the thing that demos identically every time. What you get back is the thing that fits the job in front of you.
+That is the same failure as `tags.ts`, one level up. The first one wrote a rule and never built the mechanism. This one built the mechanism and never installed it. Both read as geometry from inside the instructions file, and both are labels.
 
-I'll make that trade most days. But it's a trade, and pretending it's free is how you lose the room.
+The silence is the whole problem. A missing warning produces a warning you notice. A missing jig produces nothing — the bad cut just doesn't get prevented, and nothing anywhere says so.
 
-## What the Form Has No Row For
+## Nothing Here Demos
 
-Go back to the questionnaire.
+I ran through a vendor capability questionnaire last week. It has a row for no-code agent builders, and two words after the row: *if available*. The next row down asks how you use AI to speed up your own development — writing code, configuring, testing, deploying.
 
-A scoring form can record whether you ship a builder. It can record whether you have an assistant. There's no cell for *we made a category of mistake structurally impossible in this surface*, because that isn't a feature and it doesn't demo. It's an absence. A cut the tool can no longer make.
+Two rows, opposite bets. One expects a finished product a buyer can score. The other only makes sense if the surface underneath is clean enough that a general-purpose agent can work it without a human translating.
 
-I don't think that's bad form design. The form inventories finished products, and it inventories them well. The jig sits one rung below, where somebody decided what shouldn't be possible, and there's nothing there to photograph.
+The form isn't badly designed. A rubric compares things that come out the same in every hand, and turnkey is the only category that does. But there's no cell for *we made a class of mistake structurally impossible in this surface*, because that isn't a feature. It's an absence. A cut the tool can no longer make, invisible in every demo, and the better it works the less there is to see.
 
-The drawer of snowflakes I warned about in March is still a real hazard. I've been building both kinds all along. Only one of them got a name.
+## What I Still Don't Have
 
-The jigs stay on the bench, unscored.
+I don't have a validator on the tag list. Writing one is small — read the canonical keys, refine the Zod schema from `z.string()` to an enum built from them, let the build fail. It has been small the entire time the file has been claiming it already exists.
+
+I also don't have a way to tell, from inside a session, which of my rules the agent actually followed and which it merely didn't contradict.
+
+The drawer of snowflakes I warned about in March is still real. But it's the cheerful failure. The other one has been sitting in my repo the whole time, green.
+
+Eighteen approved tags. Thirty-two in the wild. No error.
