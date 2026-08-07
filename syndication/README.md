@@ -270,20 +270,62 @@ Applied companions were routed here at first and should not be: they are
 `deck.html` plus `meta.json`, with no markdown body to cross-post. They stay on
 LinkedIn.
 
-## What this does not do yet
+## Posting to LinkedIn and Substack
 
-**LinkedIn and Substack do not post.** This routes and schedules them; dev.to is
-the only channel wired.
+Both are browser work — neither has an API credential (`op item list --vault
+"Developer Secrets"` has no LinkedIn or Substack item), so both drive the
+signed-in composer inside `browser-box` rather than calling an API.
 
-**Neither platform has API credentials.** `op item list --vault "Developer
-Secrets"` has no LinkedIn or Substack item, so nothing is API-wired today
-regardless of what either vendor offers, and standing up a LinkedIn developer
-app is its own project. Treat both as browser work — the same shape as
-`letspepper/scripts/social-publish/fb-post-video.sh`, driving the composer
-inside `browser-box` (`tools/browser-box`) so nothing takes over the screen.
-dev.to is the exception and can be a plain API call. (Whether either vendor
-publishes a usable long-form API was not checked this session; the missing
-credential is what decides the approach either way.)
+```bash
+browser-box start --profile social        # CDP on 9400; survives restarts
+
+node syndication/post-linkedin.mjs --dry --id blog/<slug>   # fill, screenshot, do not publish
+node syndication/post-linkedin.mjs --id blog/<slug>
+node syndication/post-substack.mjs --dry --id blog/<slug>   # fill a draft, no email
+node syndication/post-substack.mjs --id blog/<slug>
+```
+
+Both take `--due` for everything scheduled today or earlier. Both borrow
+`puppeteer-core` from `browse-tool` rather than adding a dependency here;
+`BROWSE_TOOL_HOME` overrides the path.
+
+**Run `--dry` first.** It fills the real composer and screenshots it without
+publishing, which is the only way to see what the platform did to the content.
+Both refuse to publish if the editor received noticeably less than the source.
+
+Four things that are not obvious, each of which cost a debugging round:
+
+**LinkedIn's editor is inside a shadow root.** `document.querySelector` never
+finds it, and neither does an iframe walk — the composer is a `.ql-editor` under
+a shadow host, so the selector needs puppeteer's `>>>` piercing combinator. The
+"Start a post" button has no stable text or class either (LinkedIn ships
+obfuscated class names like `_4c6efdeb`), so the composer opens by deep link:
+`/feed/?shareActive=true`.
+
+**Text must arrive as real keystrokes.** Both editors keep their own document
+model — Quill on LinkedIn, TipTap/ProseMirror on Substack. Assigning
+`textContent` or `innerHTML` leaves that model empty and the publish button
+disabled, so LinkedIn goes through `type()` and Substack through a synthetic
+`ClipboardEvent` carrying `text/html`.
+
+**Substack destroys pasted tables.** The MCP measurement table in one post
+arrived as `ServerToolsBytes of tool schemaTokenschrome-devtools-mcp2923,244` —
+one unreadable run, and the editor reported zero tables. Code blocks survive
+intact, so `post-substack.mjs` renders every table as aligned monospace inside a
+`<pre>` before pasting. This matters more for whitepapers, which use tables
+liberally.
+
+**Substack bodies come from the deploy preview, not the apex.** The apex
+bot-blocks headless Chrome, so the script lifts the rendered `.prose` block from
+`ninochavez-blog.pages.dev` (`BLOG_ORIGIN` overrides). It reads `.innerHTML`
+in-page rather than regexing the response, because a regex cannot close the div.
+
+**`--dry` leaves a real draft behind on Substack.** There is no preview that
+isn't a draft. Delete them from the drafts list when you are done iterating, or
+they accumulate under the post's own title.
+
+Publishing to Substack sends email to subscribers and cannot be unsent. That is
+the one action here with no undo; dev.to and LinkedIn posts can both be deleted.
 
 **The logins are done.** As of 2026-08-03 the `social` box is signed into
 LinkedIn, Substack and dev.to, and that survives restarts. A future one is the
