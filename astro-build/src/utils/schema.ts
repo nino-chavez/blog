@@ -27,8 +27,8 @@ const AUTHOR = {
   name: 'Nino Chavez',
   url: 'https://ninochavez.co',
   sameAs: [
-    'https://linkedin.com/in/ninochavez',
-    'https://github.com/ninochavez',
+    'https://linkedin.com/in/nino-chavez',
+    'https://github.com/nino-chavez',
   ],
   jobTitle: 'Product Architect',
   description: 'Product architecture, commerce platforms, and AI automation. Building systems that scale.',
@@ -226,8 +226,8 @@ export function generatePersonSchema() {
     // Person.image is optional; no portrait exists in public/, and og_image.png is a share card,
     // not a photo of a person. An absent property beats a false one. Add a real headshot here.
     sameAs: [
-      'https://linkedin.com/in/ninochavez',
-      'https://github.com/ninochavez',
+      'https://linkedin.com/in/nino-chavez',
+      'https://github.com/nino-chavez',
       'https://ninochavez.co/blog',
     ],
     knowsAbout: [
