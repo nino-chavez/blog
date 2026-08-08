@@ -5,11 +5,17 @@ FIRST: Read `/docs/signal-dispatch-voice-guide.md` to understand the voice stand
 Then review the post against these criteria:
 
 ## Voice Authenticity
-- Does it open with tension or question (not thesis)?
-- Does it show evolution and work-in-progress thinking?
-- Are there self-interrogating moments?
-- Is the tone provisional ("for now," "today")?
+- Does it give the reader a concrete reason to care and state the controlling point within 150 words?
+- Is any evolution tied to evidence that actually changed the claim?
+- Are self-interrogating moments genuine rather than mechanically inserted?
+- Does it state supported conclusions plainly and scope only the unresolved part as provisional?
 - No corporate jargon or academic distance?
+
+## Evidence and Reader Job
+- Are claims identified honestly as observed evidence, reported experience, or hypothesis?
+- Does the conclusion stay within the evidence's scope in both directions?
+- Is the piece doing one primary job, with a usable payoff for its declared reader?
+- Has session steering or revision churn been mistaken for a changed POV?
 
 ## Structural Integrity
 - Bold section headers for scannability?
@@ -28,6 +34,7 @@ Then review the post against these criteria:
 - Don't remove intentional fragments
 - Don't formalize rough edges if they sound authentic
 - Don't add corporate polish
-- Don't make conclusions more definitive
+- Don't weaken a supported conclusion to sound provisional
+- Don't add question marks, process beats, or a compressed reversal to satisfy corpus metrics
 
 Provide specific revision suggestions with before/after examples.

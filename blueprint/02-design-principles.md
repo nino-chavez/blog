@@ -61,10 +61,10 @@ Per [[01-research.md]] D5, v2's voice register starts from the v1 voice guide (`
 
 ### Inherits from v1 voice guide
 
-- Open with tension (not throat-clearing)
+- Give the reader a concrete reason to care; state the controlling point within 150 words
 - Show the work (concrete artifacts, specific files, named decisions; never abstract claim without grounding)
 - Self-interrogate (questions Nino is actually wrestling with, not rhetorical setups)
-- End provisionally (not with conclusion-bow)
+- Complete the answer before leaving genuine uncertainty open
 - No fabricated interior state (never invent specific people, conversations, internal admissions without grounding evidence)
 
 ### Likely v2 deltas (codify in Stage 2 pass after D1)
@@ -186,10 +186,10 @@ This stage surfaces decisions but does not answer them where they require Nino's
 
 | Voice principle | Serves JTBDs |
 |---|---|
-| Open with tension | P2-firstread-postdetail (engages within first fold) |
+| Land the controlling point within 150 words | P2-firstread-postdetail (the first fold carries the payoff) |
 | Show the work | P2-firstread-postdetail, P1-firstread-postdetail (concrete artifacts signal practice) |
 | Self-interrogate | P2-firstread-postdetail (signals intellectual honesty) |
-| End provisionally | P2-firstread-postdetail (avoids prescriptive-authority anti-pattern) |
+| Complete the answer before an open close | P2-firstread-postdetail (preserves humility without withholding the point) |
 | No fabricated interior state | P2-firstread-postdetail (any single fabrication detected = whole-tab close) |
 
 ### Format-mix decisions → JTBDs served

@@ -12,7 +12,8 @@ Write LinkedIn captions for the Signal Dispatch syndication queue.
 **Load `docs/signal-dispatch-voice-guide.md` before drafting anything.** This is
 prose for a human reader, not terminal output. The terminal/CLI voice stack does
 not cover it, and drafting from that alone produces generic thoughtful-LinkedIn
-cadence. Mode is Thought Leadership: narrative, question-led, self-interrogating.
+cadence. Mode is Thought Leadership: composed, evidence-aware, and provisional
+only where the source remains uncertain.
 
 **What to write**
 
@@ -54,8 +55,9 @@ concrete thing named. Three coined terms in a row with no gloss is the failure
 shape.
 
 Also: no phrases from the guide's retired list, no corporate jargon, no
-prescriptive "you should" framing, no humble-bragging. Endings stay open — no
-summary, no wrap-up.
+prescriptive "you should" framing, no humble-bragging. Give the standalone
+reader the point before any open ending. Do not add a question, self-correction,
+or apparent POV change unless the source contains the evidence for it.
 
 **Check before finishing**
 

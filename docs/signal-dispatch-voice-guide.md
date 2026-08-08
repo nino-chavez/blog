@@ -1,9 +1,9 @@
 # Signal Dispatch: Voice & Tone Guide
 ## Copy Editor and Ghostwriter Touchstone
 
-**Version**: 1.6
+**Version**: 1.7
 **Last Updated**: 2026-08-08
-**Source**: Empirical analysis of 156 blog posts, 15 deep-read corpus sample; adversarial audit against the 8 most recent posts (Jun–Jul 2026) plus a held-out generation test, 2026-08-03; v1.4 adds the relocated-claim rule, measured against seven violations in one caption batch, 2026-08-03; v1.5 generalises it to scope preservation in both directions, 2026-08-04; v1.6 adds the reader payoff and reconciles two divergent v1.4s, 2026-08-08
+**Source**: Empirical analysis of 156 blog posts, 15 deep-read corpus sample; adversarial audit against the 8 most recent posts (Jun–Jul 2026) plus a held-out generation test, 2026-08-03; v1.4 adds the relocated-claim rule, measured against seven violations in one caption batch, 2026-08-03; v1.5 generalises it to scope preservation in both directions, 2026-08-04; v1.6 adds the reader payoff and reconciles two divergent v1.4s, 2026-08-08; v1.7 separates evidence, reader job, argument, cognitive load, voice, and surface mechanics after a cross-register audit against Slack and email, 2026-08-08
 
 ---
 
@@ -15,13 +15,58 @@ This guide defines the **actual voice** of Signal Dispatch based on production c
 - Evaluating AI-generated drafts
 - Maintaining tonal coherence across all posts
 
+## The Writing Decision Stack
+
+Voice is the last interpretive layer, not the first. Apply these layers in
+order. A later layer may not override an earlier one.
+
+1. **Truth and evidence.** Separate what the source demonstrates, what a person
+   reported, and what remains a hypothesis. The Mom Test informs evidence
+   collection from humans; it is not a prose style. A polished hypothesis is
+   still a hypothesis.
+2. **Reader and job.** Use `reader-contract.json` to name the reader, the job,
+   the assumed knowledge, and the precision locks. Use Diátaxis only to assign
+   a documentation job. Do not force its four-part taxonomy onto an essay.
+3. **Argument.** Put every section under one controlling point. Minto and SCQA
+   are reasoning aids: establish the situation, name the complication, surface
+   the reader's question, and answer it early. Do not expose those labels or
+   import consultant cadence into the finished essay.
+4. **Cognitive load.** Write for a capable reader who may be tired, distracted,
+   or holding little in working memory. Use explicit subjects, stable terms,
+   short blocks, and one idea per sentence when the material is difficult.
+   “CTE-based writing” is local shorthand for this constraint, not an
+   established writing framework and never a license for baby-talk.
+5. **Signal Dispatch voice.** Add the composed, evidence-aware, provisional
+   register described below without weakening the first four layers.
+6. **Surface mechanics.** Apply the rules for a post, whitepaper, tutorial,
+   caption, email, or chat only to that surface.
+
+### What carries across Slack, email, and published prose
+
+The Slack and email corpora reveal durable behaviors, not transferable
+punctuation or sentence quotas. Published prose may carry these invariants:
+
+- Give enough context for the reader to understand why the point matters.
+- Disagree concretely and supply the better alternative.
+- Invite correction when the evidence is incomplete.
+- Hedge scope and completeness, not decisions already made.
+- Keep claims attached to their actual source and subject.
+- Avoid corporate filler, manufactured certainty, and generic praise.
+
+Do not import Slack casing, chat punctuation, message length, email greetings,
+sign-offs, or terminal imperatives into a post. The email guide's held-out
+calibration failed: its guided drafts diverged more than the no-guide control.
+That is a standing warning against merging registers or turning every observed
+habit into a drafting rule. Corpus measurements in this guide are diagnostics.
+They describe the sample; they do not earn a sentence a place in a draft.
+
 ---
 
 ## The Cardinal Rule: Spirit Over Literals
 
 > **This guide describes patterns, not templates. If you copy phrases from this document, you're using it wrong.**
 
-Every example in this guide represents *one way* Nino has expressed a particular spirit. The examples are evidence, not instructions. When you read "Ask me again in six months" as an example of provisional endings, the takeaway is not "use this phrase." The takeaway is: *endings should feel open, not concluded*.
+Every example in this guide represents *one way* Nino has expressed a particular spirit. The examples are evidence, not instructions. When you read "Ask me again in six months" as an example of provisional endings, the takeaway is not "use this phrase." The takeaway is: *scope the uncertainty honestly after the answer has landed*.
 
 **Why this matters**: AI systems (and humans following guides too literally) tend to pattern-match to specific phrases. This creates two problems:
 
@@ -82,15 +127,15 @@ If a phrase appears in the "Recently Used" table three or more times within six 
 
 After analyzing the full corpus, the Signal Dispatch voice is characterized by:
 
-**PUBLIC PRACTICE**: Shows the work, not just the result. Readers see the thinking process, the false starts, the iterations.
+**PUBLIC PRACTICE**: Shows the evidence behind the result when that evidence helps the reader assess the claim. Session chronology, false starts, and steering stay out unless they materially changed the evidence or conclusion.
 
-**META-AWARE**: Constantly examining his own process. Writing about writing. Thinking about thinking. Leadership about leadership.
+**META-AWARE**: Examines his own process when the examination changes what the piece establishes. Writing about writing is a topic, not a mandatory beat.
 
 **VULNERABLE COMPETENCE**: Genuine uncertainty paired with demonstrated skill. Not "humble bragging" — actual intellectual honesty about what's still being figured out.
 
 **PATTERN RECOGNITION**: Core value is seeing what others don't, then translating it clearly. The "signal in the noise" metaphor is operational, not decorative.
 
-**PROVISIONAL CONCLUSIONS**: Keeps the door open for evolution. Signals thinking is still in motion—without undermining conviction. Phrasing varies; the principle is directional, not a formula.
+**PROVISIONAL CONCLUSIONS**: States the supported conclusion plainly and keeps only the genuinely unresolved boundary open. Phrasing varies; the principle is evidentiary, not a formula.
 
 ---
 
@@ -106,7 +151,9 @@ First or second sentence states a concrete thing that broke, was absent, or was 
 - ✅ "A strategy document I hand to a stakeholder can carry a completely invented figure through every automated check I've built."
 
 **The Question-First Hook** (historical — zero uses in the 8 most recent posts)
-Every strong post opens with tension, not thesis:
+A post may open with tension, a concrete defect, or the governing answer. The
+hook earns attention; it may not delay the controlling point beyond the first
+150 words:
 
 - ✅ "There's a specific kind of tension that lives between finishing a post and hitting publish."
 - ✅ "I've never been interested in being the loudest person in the room."
@@ -141,7 +188,7 @@ State the thing most people don't say out loud:
 
 **The test**: Could you delete any explicit "I used to / now I" language and still feel the evolution? If yes, you probably don't need it.
 
-**Current form (audited 2026-08-03)**: the evolution now happens *inside* the piece, not across posts. Recent posts correct themselves mid-argument — "Earlier in this process I said the smaller version was a defensible thing to just try... The second half of that is wrong"; "My first draft of this section said the gate blocks on two conditions... Then I went and read the predicate. There's a third." Retracting your own earlier sentence, with the evidence that forced the retraction, is the strongest working form of this pattern.
+**Current form (audited 2026-08-03)**: the evolution now happens *inside* the piece, not across posts. Recent posts correct themselves mid-argument — "Earlier in this process I said the smaller version was a defensible thing to just try... The second half of that is wrong"; "My first draft of this section said the gate blocks on two conditions... Then I went and read the predicate. There's a third." Use that form only when new evidence actually changed the claim. A model's steering, a session's process churn, or a rewritten sentence does not become a new point of view by being narrated. If the evidence and conclusion did not change, omit the apparent evolution.
 
 **2. The Compare/Contrast Pattern**
 
@@ -157,22 +204,22 @@ State the thing most people don't say out loud:
 
 **3. Endings That Stay Open**
 
-**The spirit**: Nino's posts don't conclude—they pause. The reader leaves feeling like the conversation continues beyond the page. There's confidence in the direction, but humility about the destination.
+**The spirit**: Nino's posts complete the answer and leave the unresolved boundary visible. The reader may feel that the conversation continues beyond the page, but never because the piece withheld its point.
 
 **What this is NOT**: A closing line chosen from a list of "provisional" phrases. Phrases like "ask me again in six months," "here's where I've landed—for now," and "that's what I think today" are now *overused tells* that signal templated writing. **Do not use these phrases.**
 
 **How to embody this spirit**:
 - End with forward motion: where is this thinking going next? What question remains?
 - End with an image or specific detail, not a summary
-- End mid-thought if that's where the energy is
+- End after the argument is complete, even if the final image carries forward motion
 - End with a question you're genuinely still holding, not a rhetorical flourish
 - Sometimes the best ending is just... stopping. No wrap-up. The argument made its point.
 
-**The test**: Does your ending feel like a period or an ellipsis? Aim for ellipsis energy, but don't literally use ellipses.
+**The test**: If the final paragraph vanished, would the reader still know what the piece established? If not, the ending is doing work the argument should have done earlier.
 
 **The current dominant close (audited 2026-08-03)**: 6 of 8 recent posts end on a compressed reversal that turns the post's own thesis back on the author or the post itself — "Most of my discipline, it turns out, is just lint I haven't written yet." It reads open because the author is the unresolved case, not because the question is unanswered.
 
-**Checkable floor**: the final sentence runs under 12 words and lands on something concrete — an object, a place, a count. If the close is a question, it must contain a concrete noun, not an abstraction about your own state of mind. A closing sentence over 20 words is a failed close regardless of which shape you picked (corpus p90 is 22).
+**Corpus diagnostic, not a gate**: recent final sentences often run under 12 words and land on something concrete. Use that measurement to diagnose a close that feels diffuse. Do not shorten an accurate ending or manufacture an object, question, or reversal to satisfy it.
 
 **⚠️ Phrases to Retire (Overused Tells)**
 
@@ -199,9 +246,9 @@ Header style (recent corpus runs declarative — all 46 recent H2s are statement
 
 ### Signature Moves (added 2026-08-03 — in nearly every recent post, previously undocumented)
 
-**1. The mechanical re-derivation beat.** Every recent post contains a passage where the author stops asserting and goes to read the primary source — then reports what he found as raw counts ("2,335 session files", "161 issues filed in the last thirty days", "nine kinds of check"). This is the structural spine of the current voice, not decoration: claims get re-derived, not repeated. A draft with no go-and-look passage reads as someone else.
+**1. The mechanical re-derivation beat.** Every recent post contains a passage where the author stops asserting and goes to read the primary source — then reports what he found as raw counts ("2,335 session files", "161 issues filed in the last thirty days", "nine kinds of check"). This is evidence about the current corpus, not a requirement to manufacture a search scene. When a claim depends on a repository, study, log, or other primary artifact, re-derive it and show enough evidence for the reader to assess it. When the claim does not, omit the ritual.
 
-**2. The adverse-evidence section.** Six of eight recent posts give a dedicated H2 to weakening their own argument — scoping which evidence doesn't transfer, naming where the comparison ran the other way, or declining to act on the finding ("The One Place I Was Ahead", "The Ledger Isn't Balanced", "And I'm Not Building It"). This is the same signature as the compressed-reversal close and the mid-post retraction — one move occupying three positions.
+**2. The adverse-evidence section.** Six of eight recent posts give a dedicated H2 to weakening their own argument — scoping which evidence doesn't transfer, naming where the comparison ran the other way, or declining to act on the finding ("The One Place I Was Ahead", "The Ledger Isn't Balanced", "And I'm Not Building It"). Include adverse evidence when it changes the claim's scope or confidence. Do not create a ceremonial counterpoint, false balance, or self-correction merely to reproduce the pattern.
 
 **3. The third-party-artifact response mode.** Five of eight recent posts are built around someone else's published artifact — a talk, a job listing, a paper, a tweet exchange — quoted verbatim with attribution and links, then tested against the author's own system. In this mode the artifact gets a bare `>` blockquote and the test gets the mechanical re-derivation beat.
 
@@ -402,12 +449,16 @@ Signal Dispatch has two registers. Pick one before drafting — a drafter who do
 
 ### Rhythm and Pacing
 
-**Mix Long and Short — with a checkable target**
+**Mix Long and Short — with a corpus diagnostic**
 ```
 ✅ "I've never seen myself as exceptional. Not in a false humility kind of way. Just… I only know what it's like to be in my head."
 ```
 
-"Mix long and short" is not a target; these are: median sentence 8–11 words, at least a third of sentences six words or shorter, no more than one in eight at twenty words or longer. Count them if unsure — drafts reliably under-run the short end (the 2026-08-03 held-out test produced 28% short sentences against the corpus median of 37%).
+The recent composed corpus has a median sentence of 8–11 words, at least a third
+of sentences six words or shorter, and no more than one in eight at twenty words
+or longer. These figures diagnose density and rhythm; they are not drafting
+quotas. Count them only after meaning and evidence are correct. Never split a
+necessary relationship or add fragments to hit the distribution.
 
 **Use Fragments for Emphasis**
 
@@ -430,7 +481,12 @@ Signal Dispatch has two registers. Pick one before drafting — a drafter who do
 ✅ "What if that reflection isn't about praise? What if it's just a different camera angle?"
 ```
 
-**Placement and floor (audited 2026-08-03)**: questions now live mid-post, as the pivot that marks the turn in the investigation ("Hadn't I already solved this?") — not in openers or headers. Checkable floor: a post of 800 words or fewer carries at least two literal question marks; longer posts carry three to five. Zero questions is the single clearest tell of a composed-essay draft rather than thinking-out-loud.
+**Placement diagnostic (audited 2026-08-03)**: questions often live mid-post,
+at a genuine turn in the reasoning ("Hadn't I already solved this?") rather
+than in openers or headers. There is no question-count floor. A declarative
+essay is not defective because it has no question marks, and a draft does not
+become thoughtful by adding them. Keep only questions the author is genuinely
+asking or that express the reader's actual question.
 
 ### Formatting for Emphasis
 
@@ -593,6 +649,14 @@ Write the `takeaway` *before* drafting. If it can't be written, the piece isn't
 ready — that is the check's actual purpose, and the build failure is only its
 last line of defense.
 
+**Label what the evidence can carry.** Repository history can demonstrate that
+an activity occurred, changed, or broadened in one observed case. It does not by
+itself establish cause, quality, value, or a population-level prediction. Keep
+three states distinct in the prose: observed evidence, a person's reported
+experience, and an open hypothesis. Preserving scope runs in both directions:
+do not move a general claim onto the author, and do not widen the author's case
+into a general rule.
+
 **Which job is the piece doing?** Diátaxis separates four, and Signal Dispatch
 uses three. An essay is *explanation* — it orients, it does not instruct. A
 tutorial is *tutorial* and belongs in `content/tutorials/`, not in a post with a
@@ -614,9 +678,10 @@ owner per rule.
 
 ### Template 1: The Reflection Post
 
-**Hook**: State the tension or uncomfortable truth
+**Hook**: Give the reader a concrete reason to care; tension is one option
+**Controlling point**: State what the piece establishes within 150 words
 **Context**: Set the scene—what prompted this reflection
-**The Shift**: Show evolution (explicit or implicit—see Evolution Pattern above)
+**The Shift**: Show evolution only when evidence changed the claim
 **The Tension**: Introduce complication. Vary how:
   - "But that raises a question..."
   - "And yet—"
@@ -624,7 +689,7 @@ owner per rule.
   - "Which sounds right. Except."
   - Let the tension emerge from the content without announcing it.
 **Exploration**: Unpack the nuances
-**Close**: Directional, not formulaic (see Provisional Conclusions above)
+**Close**: Complete the answer; leave only the unresolved boundary open
 
 **Example**: "The Cost of Sophistication," "Do I Still Sound Like Me"
 
@@ -741,35 +806,39 @@ The actual blog is:
 ### For Copy Editing
 
 When editing existing posts:
-1. Preserve intentional fragments and conversational flow
-2. Don't "fix" sentences that sound rough if they sound authentic
-3. Check for corporate jargon and remove it
-4. Ensure headers are punchy, not academic
-5. Verify conclusions feel directional (phrasing varies—don't default to same pattern)
+1. Verify evidence status, claim scope, and the controlling point before voice
+2. Preserve intentional fragments and conversational flow
+3. Don't "fix" sentences that sound rough if they sound authentic
+4. Check for corporate jargon and remove it
+5. Ensure headers carry the argument for a scanning reader
+6. Verify the answer lands before any open or provisional close
 
 ### For Ghostwriting
 
 When writing new content:
-1. Start with a tension or question, never a thesis
-2. Show evolution when the content calls for it (don't force the "I used to / now I" structure)
-3. Use specific examples from actual experience
-4. Show the work, not just the conclusion
-5. End directionally—provisional without being formulaic
+1. Write the controlling point and `takeaway` first
+2. Open with a concrete reason to care; state the point within 150 words
+3. Show evolution only when evidence changed the claim
+4. Use specific examples from actual experience
+5. Show the evidence needed to assess the conclusion, not session chronology
+6. End after the answer; keep only genuine uncertainty open
 
 ### For AI-Generated Content Review
 
 When evaluating AI drafts:
-1. Does it open with tension or uncomfortable truth?
-2. Is there self-interrogation without self-doubt?
-3. Are conclusions provisional, not authoritative?
-4. Does it show evolution and iteration?
-5. Does it sound like Nino, or like a "professional blog"?
+1. What does the piece establish, and does that appear within 150 words?
+2. Which claims are observed, reported, or hypothesized?
+3. Does every conclusion stay within the evidence's scope?
+4. Did a real evidentiary change justify any self-correction or POV movement?
+5. Can a scanning reader follow the argument from the headers?
+6. Does it sound like Nino, or like a "professional blog"?
 
 **Red flags**:
 - "In this post, I'll explore..."
 - "Research shows..."
 - "You should always..."
-- No questions, all answers
+- Questions or self-interrogation inserted only to satisfy a voice pattern
+- Session steering presented as changed conviction without changed evidence
 - Too polished, no texture
 - Three or more coined internal terms in a row with no gloss (see "Concrete Over Coined")
 
@@ -1134,7 +1203,9 @@ Posts maintain consistent voice even across different topics. Strongest consiste
 
 ---
 
-**Last Updated**: 2026-08-08 (v1.6 — merges two lines of development that briefly both called themselves v1.4. One added §1b on a working branch: relocated claims, then scope preservation in both directions. The other added The Reader Payoff on `main`, unaware the branch existed, and reused the version number. Both are here; the numbering collision is recorded rather than tidied away, because a guide with two v1.4s is exactly the drift this guide's own "one owner per rule" discipline exists to prevent, and it happened anyway.
+**Last Updated**: 2026-08-08 (v1.7 — establishes the writing decision stack; imports only cross-register invariants from Slack and email; records the email guide's failed control; makes payoff and evidentiary scope outrank narrative patterns; demotes corpus metrics, question counts, process beats, and open endings from gates to diagnostics; and prohibits presenting session steering as POV change without changed evidence.
+
+Prior: v1.6, 2026-08-08 — merges two lines of development that briefly both called themselves v1.4. One added §1b on a working branch: relocated claims, then scope preservation in both directions. The other added The Reader Payoff on `main`, unaware the branch existed, and reused the version number. Both are here; the numbering collision is recorded rather than tidied away, because a guide with two v1.4s is exactly the drift this guide's own "one owner per rule" discipline exists to prevent, and it happened anyway.
 
 Prior: v1.5, 2026-08-04 — §1b generalised, scope preservation runs both ways, after three widened claims and one twin that a manual scan missed inside a caption already being edited. v1.4, 2026-08-03 — §1b, relocated claims: the "which friend?" test catches invented people and misses the failure that actually ships, where nothing is invented and only the attribution moves. v1.3, 2026-08-03 — adversarial audit + held-out generation test; header, Freshness Check, and this stamp reconciled after carrying three different dates.)
 **Next Review**: Quarterly or after 50 new posts

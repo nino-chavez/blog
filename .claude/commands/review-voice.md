@@ -5,10 +5,16 @@ FIRST: Read `/docs/signal-dispatch-voice-guide.md` for the complete voice standa
 Then evaluate the draft on a scale of 1-10 for each dimension:
 
 ## Voice Authenticity (/10)
-- Opens with tension/question (not thesis)
-- Shows self-interrogation
-- Provisional conclusions
+- Gives the reader a reason to care and states the controlling point early
+- Uses self-interrogation only for a real evidentiary turn
+- States supported conclusions plainly and scopes uncertainty
 - Uses "I" not "you should"
+
+## Evidence and Reader Payoff (/10)
+- Distinguishes observed evidence, reported experience, and hypothesis
+- Preserves claim scope in both directions
+- Lets a reader state the point after the first 150 words
+- Does not present session steering as a changed POV without changed evidence
 
 ## Structural Patterns (/10)
 - Bold section headers
@@ -28,7 +34,8 @@ Then evaluate the draft on a scale of 1-10 for each dimension:
 - "You should always..."
 - Corporate buzzwords
 - Too polished/sterile
-- No questions, all answers
+- Questions or self-corrections inserted to satisfy a voice pattern
+- Point withheld until the ending
 
 Provide:
 1. Overall voice match score (/10)
