@@ -3,3 +3,4 @@
 /api/posts.json         /blog/api/posts.json         301
 /api/posts/*            /blog/api/posts/:splat       301
 /llms.txt               /blog/llms.txt               301
+/blog/counterpoints/the-instrument-flattered-the-argument /blog/whitepapers/the-sum-of-your-gaps 301
