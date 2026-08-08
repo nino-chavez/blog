@@ -2,171 +2,117 @@
 title: "There Was Never a Person in That Seat"
 slug: "there-was-never-a-person-in-that-seat"
 publishedAt: "2026-08-08T00:10:00.000Z"
-updatedAt: "2026-08-08T00:10:00.000Z"
+updatedAt: "2026-08-08T10:11:48.000Z"
 author: "Nino Chavez"
 status: "published"
-excerpt: "The research says AI helps beginners and does nothing for experts. I counted 11,801 commits across 117 repositories to find out why that isn't my experience — then found a bug in my own count that had been flattering the answer."
+excerpt: "Fixed-task studies measure whether AI helps with familiar work. My repository history raises a different question: does AI change the range of work one person attempts?"
 featureImage: "/images/generated/there-was-never-a-person-in-that-seat.webp"
-takeaway: "List the kinds of work you would have hired out. That count, not your skill in any one of them, predicts what AI is worth to you."
+takeaway: "Fixed-task studies measure performance within familiar work. They do not tell us whether AI changes which work someone attempts."
 tags: ["ai-development", "career"]
 category: "AI & Automation"
 seo:
   metaTitle: "There Was Never a Person in That Seat"
-  metaDescription: "Two studies say AI levels the field and does nothing for experts. Both hold the task fixed. A census of 117 repositories shows what that design can't see."
+  metaDescription: "Fixed-task AI studies measure performance within familiar work. One repository history raises a different question about the range of work a person attempts."
 ---
 
 import { Callout } from '@/components/mdx/Callout';
 import { PullQuote } from '@/components/mdx/PullQuote';
 
-A friend described the AI he wants as plus ten to a stat in Baldur's Gate. I liked it and pushed it further — a cloak of intelligence. It makes you better. So if your numbers start low, don't expect much magic.
+A friend described the AI he wants as plus ten to a stat in *Baldur's Gate*. I liked it and pushed it further: a cloak of intelligence. It makes you better. If your numbers start low, do not expect much magic.
 
 Then I looked up what the item actually does.
 
 > Set the wearer's Intelligence score to 17. The enchantment has no effect if their Intelligence score is higher without it.
 
-It doesn't add. It sets.
+It does not add. It sets.
 
-We had it backwards. An item that sets a score is worth the most to the character with the worst one. It is worth nothing to the character already above it.
+That reversal gave me a clean explanation for two AI studies. It also tempted me into a claim my evidence cannot support.
 
-That reversal is the small version of a bigger one. The research everyone cites for *AI levels the field* measures one person doing one job. Count the jobs instead and the answer changes: what the tool is worth to you tracks how many kinds of work you touch, not how good you are at any single one. So the useful question isn't how skilled you are. It's how long your list is.
+The studies measure how AI affects performance within a fixed kind of work. They do not measure work someone attempts only because AI made it accessible. My repository history demonstrates breadth in one person's activity. It does not prove that breadth predicts gain, quality, or value.
 
-I counted mine. One category turned out to be work nobody gets hired to do — and I got its size wrong twice before the number held still.
-
----
-
-## The Research Says the Item, Not the Analogy
-
-Two studies, and they read like the item text.
-
-Brynjolfsson, Li and Raymond gave a generative assistant to 5,179 customer support agents. They measured issues resolved per hour. Fourteen percent better on average. **Thirty-four percent for novice and low-skilled workers. Minimal for the experienced and highly skilled.**
-
-METR ran a randomized trial with 16 open-source developers. They worked on repositories they'd contributed to for years. Those developers were **19% slower** with AI.
-
-The part that sticks: they predicted 24% faster going in. Afterward, having been measured, they still believed it had sped them up by 20%.
-
-So above the threshold the item isn't neutral. It costs you, and it doesn't tell you.
+That boundary is the point. The rest is an open question.
 
 ---
 
-## Then I Should Be Getting Nothing
+## The studies measure familiar work
 
-Except I'm not, and that's the problem with the tidy version.
+[Brynjolfsson, Li, and Raymond](https://www.nber.org/papers/w31161) studied 5,179 customer-support agents. Access to a generative assistant increased issues resolved per hour by 14% on average. Novice and lower-skilled workers improved by 34%. The effect was minimal for experienced and higher-skilled workers.
 
-I'm not a novice. The gains aren't small. So which is it — am I the exception, or is the finding narrower than its headline?
+[METR's early-2025 randomized trial](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) followed 16 experienced open-source developers working on 246 issues from repositories they already knew. With AI available, they took 19% longer.
 
-I went looking.
+Both findings matter. Both also have a boundary.
 
----
+The support agents still handled support conversations. The developers still worked on issues from their own repositories. The tool changed. The kind of work did not.
 
-## Both Studies Hold the Work Fixed
-
-Read the setups next to each other and the same shape appears twice.
-
-The support agents were doing support tickets. The developers were fixing issues in codebases they'd worked in for years. They were recruited for depth in the exact thing being measured.
-
-One kind of work each. Held constant. The tool varies.
-
-Under that design an expert has nowhere to go. The only surface being measured is the one they're already best at. Neither study is wrong. Both are answering "does this help you at your job," and job means one job.
+That is the right design for asking whether AI helps someone perform familiar work faster. It cannot answer whether AI changes the work that person chooses to attempt.
 
 <Callout type="insight">
-A fixed-task design can't detect a gain that arrives as a new task. That isn't a flaw. It's a scope, and the headline drops it.
+A fixed-task study can measure performance inside a known category. It cannot observe a category that enters the person's work only after the tool does.
 </Callout>
+
+METR later encountered this distinction directly. In a [2026 update](https://metr.org/blog/2026-02-24-uplift-update/), 30% to 50% of surveyed developers said they withheld some tasks because they did not want to perform them without AI. Some also reported choosing different kinds of tasks or producing different amounts of documentation and testing.
+
+Once the tool changes task selection, a fixed basket stops describing the whole effect.
 
 ---
 
-## Counting My Own Work Took Two Tries
+## My repository history contains a different signal
 
-So I counted. What would that even take?
+I counted 11,801 commits across 117 repositories: 104 on GitHub and 13 local checkouts that had never been pushed.
 
-Every repository I have. 104 on GitHub — 47 public, 57 private — plus local checkouts never pushed. 117 in all. 11,801 commits, sorted by the words in each message and the files it changed.
+Coding is the largest category. It appears in 7,839 commits across 107 repositories. That is the work I trained to do.
 
-Coding shows up in 7,839 commits across 107 repositories. It's the largest single thing, which is what you'd expect from the one kind of work I trained in.
+But it is not the only work in the record. Design appears in 88 repositories. Operations appears in 89. Research appears in 81. Sales appears in 52. The categories overlap because the work overlaps.
 
-Design shows up in 88 repositories. Operations in 89. Research in 81. Sales in 52.
+Those are counts, not pictures. The record includes a therapy practice's rebrand, with colors pulled from its existing logo. It includes accessibility corrections, social graphics, sales copy, evaluation plans, handoff notes, and thousands of documents under `docs/`.
 
-Those are numbers, and numbers aren't pictures. So: a therapy practice's rebrand, teal and plum pulled out of the butterfly in their own logo. Nine contrast failures cleared on an athletic-training site without touching the brand color. A social kit — bugs, badges, overlays, share cards, a scoreboard component, reel intro and outro. A tournament series' payout copy reframed as a condition instead of a count, and its app icon cut from the logo. Porting a client's own answers into his site's content, one section at a time.
+There was no designer, copywriter, researcher, or documentation lead sitting beside me for most of that work. In several cases there was no open seat to fill. The work would have remained part of somebody else's job, gone to a contractor, or not happened.
 
-Every one of those went to someone who wasn't me. None of them are coding.
-
-Coding is in two-thirds of my commits, and about a third of the work inside them. A commit is almost never only code.
-
-Then the part I got wrong. I had built the classifier from a list of work types I wrote myself. It found the things on my list, ranked them, and reported back. Of course it did.
-
-An open pass fixes that. No list. Just what's in the files. It turned up work neither the list nor I had named. Methodology. Prototyping. Handoff notes. Translation. Evaluation. Eight hundred and forty-five commits still match nothing at all.
+The repository history shows that the range of my activity expanded. It does not tell me why.
 
 <PullQuote>
-I gave the instrument my own vocabulary and it handed my vocabulary back, sorted.
+The record can show that I attempted more kinds of work. It cannot show that AI caused the expansion or made the results good.
 </PullQuote>
 
 ---
 
-## The First Version of This Section Was Wrong
+## I already caught the record flattering the argument
 
-The open pass told me markdown was the most common file type in the corpus, ahead of TypeScript. I wrote that down. It made a good headline: *I write more than I code.*
+My first analysis reported that Markdown outnumbered TypeScript. That would have made a convenient headline: I write more than I code.
 
-Then I went to red-team my own post and the number fell apart.
+It was wrong.
 
-My collection script stored only the first forty changed files per commit. Large commits — scaffolds, dependency sweeps, initial imports — are code-heavy, so the truncation quietly deleted more code than prose from the sample. The analysis script inherited the same cap. Both numbers were measuring my own bug.
+The collection script kept only the first 40 changed files in each commit. Large scaffolds and dependency sweeps are code-heavy, so the cap removed more code than prose. I also called repeated edits "files," which overstated both sides.
 
-Uncapped, code wins, and it isn't close either:
+Without the cap, TypeScript leads:
 
-| | files | edits | edits per file |
-|---|---|---|---|
-| markdown | 7,404 | 25,424 | 3.4 |
+| | distinct files | edits | edits per file |
+|---|---:|---:|---:|
+| Markdown | 7,404 | 25,424 | 3.4 |
 | TypeScript | 13,478 | 34,007 | 2.5 |
 
-I'd also called those figures "files" when they were edit counts. A document revised twenty times counted twenty times.
+The correction did not erase the breadth in the repository history. It did erase a result that made the story cleaner.
 
-So the headline is dead. What replaced it is smaller and, I think, more interesting.
+That matters because every other limit runs in the same direction. Keyword categories can show activity without showing a delivered artifact. Private repositories prevent most readers from checking the classifications. Photography and video are undercounted because their output usually lives outside Git. A commit does not say whether a client approved the work. It says nothing about quality.
 
-**Prose files get worked harder than code files.** 3.4 revisions each against 2.5. Narrow the frame to the two folders that matter and the gap widens: files under `docs/` are edited 6.4 times each, files under `src/` 3.9.
-
-There are 2,766 distinct documents under `docs/` in my repositories. Fewer documents than code files. Each one returned to more often.
-
-And before you assume that's just prompt scaffolding for the agents — I checked that too, because it's the obvious objection. Across all 7,404 markdown files, the CLAUDE.md files, skill definitions, and agent commands come to 478. Six and a half percent. It's specs, methodology, and decision records.
-
-So who normally does that job?
-
-Nobody, and on purpose. David Nunez was Uber's first documentation hire and Stripe's first Head of Docs Content, which makes him about as pro-documentation as a person gets. His advice:
-
-> I wouldn't recommend early-stage startups just go out and hire a full-time docs writer.
-
-What he recommends instead is spreading it: *"I put one line about documentation on each level of the job ladder."* Code and READMEs for a new grad. Systems and end-to-end guides for a senior. Documentation practice for a lead.
-
-So the framing I'd been building collapses in a useful direction.
-
-This isn't a seat AI let me fill instead of hiring. **There was never a person in that seat.** The work exists as a line on somebody else's job description, and it belongs to whoever is already busy.
-
-Which means there's no rate it was previously produced at. No worker whose throughput you could compare. Any measure shaped like output-per-person has nowhere to put this and will read it as zero — not because the sample was small, but because the ruler has no such marking.
-
-That claim doesn't need the number I lost. It needs 2,766 documents that exist and a role that doesn't.
-
-The full argument, with both studies' methods and the model's falsifiers, is in the companion paper: [The Sum of Your Gaps](/blog/whitepapers/the-sum-of-your-gaps).
+The census is evidence of breadth. It is not a score for value.
 
 ---
 
-## What the Count Can't Carry
+## The list is a research question, not an estimate
 
-The census has holes, and the largest one already fired in this post: a forty-file cap that produced a headline flattering to my own argument, and survived until I tried to attack it. It's worth noticing which direction the error ran. The bug didn't make my thesis look worse.
+I originally wanted breadth to explain why my experience felt different from the fixed-task studies. Then I promoted that explanation into a prediction: count the kinds of work you touch, and that count predicts what AI is worth to you.
 
-Four more I'd rather name than have found.
+My data cannot carry that claim.
 
-Sorting by keyword is crude and the categories overlap. A commit adding a payment flow lands under sales because it touches pricing files. That counts material touched, not anything delivered. Video and photography barely register — 187 and 646 commits — because that output usually isn't kept in version control. And most of the repositories are private, so a reader is taking my word for the bulk of it.
+Breadth might predict gain. It might predict nothing more than activity. The added work might be useful, mediocre, or actively harmful. AI might have caused the expansion, accelerated an expansion already underway, or merely left a visible trace in work I would have attempted anyway.
 
-The fifth hole is worse and it's about me. This argument changed shape four times in a single working session. Floor, then breadth, then seats, then this. Every turn came from being pushed, not from evidence forcing the move. A thesis that reshapes itself each time it's challenged is fitting, not converging. How would I tell those apart from the inside?
+Testing that would require more than repository counts. We would need to observe which tasks people considered, which they attempted, whether AI changed that choice, what they completed, how independent reviewers judged the results, and what value the work produced.
 
-Two things survive that anyway, because they're measurements rather than analogies. Both studies fix the work type by design — anyone can read the methods sections and check. And 2,766 documents exist under `docs/` in my repositories against a role that nobody staffs, however you carve up the rest.
+Until then, the honest conclusion is narrower:
 
----
+Fixed-task studies tell us whether AI helps someone perform familiar work faster. They do not tell us whether AI changes the range of work that person attempts. My repository history shows that range expanded in one case. It does not yet show that the added work was valuable, good, or caused by AI. Whether breadth predicts gain remains an open research question.
 
-## Nobody Reviews the Biggest Thing
+The companion whitepaper, [The Sum of Your Gaps](/blog/whitepapers/the-sum-of-your-gaps), separates the measured claims from the open ones and outlines what a useful study would need to observe.
 
-The absence I keep circling is quality, not quantity.
-
-Two thousand seven hundred documents and no one whose job is to judge them. No editor. No standard. No review gate.
-
-The seat that was never staffed never came with a reader either. I can't tell you whether any of it is good. Only that it exists, and that four years ago it wouldn't have.
-
-So if you want the number that matters for you, it isn't your skill in the thing you trained for. Write down the kinds of work you'd have paid someone else to do. That list is the whole estimate.
-
-The cloak works. It just doesn't come with a mirror.
+There was never a person in that seat. There is still work to measure.
