@@ -1,9 +1,9 @@
 # Signal Dispatch: Voice & Tone Guide
 ## Copy Editor and Ghostwriter Touchstone
 
-**Version**: 1.4
+**Version**: 1.6
 **Last Updated**: 2026-08-08
-**Source**: Empirical analysis of 156 blog posts, 15 deep-read corpus sample; adversarial audit against the 8 most recent posts (Jun–Jul 2026) plus a held-out generation test, 2026-08-03
+**Source**: Empirical analysis of 156 blog posts, 15 deep-read corpus sample; adversarial audit against the 8 most recent posts (Jun–Jul 2026) plus a held-out generation test, 2026-08-03; v1.4 adds the relocated-claim rule, measured against seven violations in one caption batch, 2026-08-03; v1.5 generalises it to scope preservation in both directions, 2026-08-04; v1.6 adds the reader payoff and reconciles two divergent v1.4s, 2026-08-08
 
 ---
 
@@ -45,7 +45,9 @@ These phrases were once authentic expressions of Nino's voice. Through repetitio
 
 ## Freshness Check (Rolling)
 
-> **Updated**: 2026-08-03
+> **Updated**: 2026-08-03 — this is the date of the last *phrase-table* review,
+> not of the guide. It moves when recent posts are re-scanned for stale patterns,
+> which is a different job from a rule change. Do not sync it to the header.
 > **Review Cadence**: After every 5 posts or monthly, whichever comes first
 
 This section tracks patterns and phrases that have appeared in *recent* posts. Even if they're not on the permanent "overused tells" list, repetition across a short window creates staleness. Avoid these in upcoming posts.
@@ -270,6 +272,75 @@ If you didn't witness it or experience it directly, don't write it as if you did
 ```
 
 General observations grounded in real experience are fine. Fabricating specific people or conversations is not. The line: would Nino be comfortable if someone asked "which friend?" or "which client?" If the answer requires inventing details, the anecdote is fabricated.
+
+**1b. Relocated claims — the form that actually ships**
+
+The "which friend?" test above catches invented people. It does not catch the
+failure that reaches publication, because that one invents nothing.
+
+Measured 2026-08-03: seven violations in a single batch of derived captions,
+none of them inventions. Each took a true, sourced, **general** statement and
+moved its subject to Nino.
+
+| Source says | Draft said |
+|---|---|
+| "the check **people** skip" | "the step **I** kept deferring" |
+| "the fix is almost never trimming what you send" | "**I'd been** trimming what I sent" |
+| "authority and trustworthiness are not the same axis" | "**I'd been** reading one for the other" |
+| the work "doesn't show up in a sprint board or a git log" | "most of it **didn't happen**" |
+
+Every fact was right. Only the attribution was wrong. There is no friend to
+name and no client to produce, so "which friend?" returns clean — which is why
+one of these reached a live post, where the first commenter argued against the
+relocated version rather than the real one.
+
+**Why it happens**: a confession outranks an assertion. "People skip this" is a
+claim about the world; "I kept deferring it" is vulnerable competence, which is
+the shape this voice rewards. The pull toward the better sentence is the entire
+mechanism, so this will keep recurring wherever the voice rewards
+self-implication.
+
+**The test**, which catches relocation where "did I invent this?" does not:
+
+> For every first-person claim, find the sentence in the source that attributes
+> it **to Nino specifically**. Not a sentence that supports the idea — one that
+> assigns it to him. If the source states it generally, the draft states it
+> generally.
+
+**It runs in both directions** (added 2026-08-04). The rule above is half of a
+rule. The same instinct that narrows a general claim onto Nino also widens a
+claim about his own system onto everyone, because a sentence about *the reader*
+lands harder than a sentence about one machine:
+
+| Source says | Draft said |
+|---|---|
+| a README of his drifted from its config | "a README is the file **you** write once and then never open again" |
+| the count is different for every person who asks | "a verdict is what **people** want" |
+| *(nothing — invented)* | "**Nobody** wants the method" |
+
+The general rule is scope preservation: **the draft keeps the subject the source
+assigned it.** Not narrower, not wider. A widened claim is the cheaper failure to
+make and the cheaper one to answer — a reader who does maintain their READMEs
+replies denying the premise, and the thread is now about whether the premise
+holds rather than about the argument.
+
+Not every general statement is a violation. If the source makes the claim about
+people, the draft may too ("the exit is the part nobody tests" is in the source
+verbatim). The test is the same in both directions: **find the sentence that
+assigns the claim to that subject.**
+
+**Run it on every editing pass, not once at draft time.** Five of the seven
+entered during revision, after the draft had replaced the source as the thing
+being edited; two came from a pass explicitly argued to be improving fidelity.
+
+Where a repo derives short artifacts from longer sources, make this a command
+rather than a rule — a rule loses to an editor who believes they already
+checked. Reference implementation: `syndication/check-captions.mjs`, which
+prints every first-person sentence with its source path. Note that its first
+version also required a past-tense verb from a fixed list and reported all 20
+captions clean while four violations sat in them, because relocation used
+verbs nobody had listed ("thought", "expected", "reading"). A filter built from
+a verb list fails silently on the verb you forgot.
 
 **2. Corporate Jargon**
 ```
@@ -1063,6 +1134,8 @@ Posts maintain consistent voice even across different topics. Strongest consiste
 
 ---
 
-**Last Updated**: 2026-08-08 (v1.4 — added The Reader Payoff, which outranks the structure templates; reconciled the guide with `reader-contract.json` and the Minto/Diataxis rules in `working-style.md`. v1.3, 2026-08-03: adversarial audit + held-out generation test)
+**Last Updated**: 2026-08-08 (v1.6 — merges two lines of development that briefly both called themselves v1.4. One added §1b on a working branch: relocated claims, then scope preservation in both directions. The other added The Reader Payoff on `main`, unaware the branch existed, and reused the version number. Both are here; the numbering collision is recorded rather than tidied away, because a guide with two v1.4s is exactly the drift this guide's own "one owner per rule" discipline exists to prevent, and it happened anyway.
+
+Prior: v1.5, 2026-08-04 — §1b generalised, scope preservation runs both ways, after three widened claims and one twin that a manual scan missed inside a caption already being edited. v1.4, 2026-08-03 — §1b, relocated claims: the "which friend?" test catches invented people and misses the failure that actually ships, where nothing is invented and only the attribution moves. v1.3, 2026-08-03 — adversarial audit + held-out generation test; header, Freshness Check, and this stamp reconciled after carrying three different dates.)
 **Next Review**: Quarterly or after 50 new posts
 **Maintained By**: Signal Dispatch Editorial (AI-assisted)

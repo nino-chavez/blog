@@ -1,14 +1,16 @@
-I built a pipeline to check the documents I was generating, and it took me an embarrassingly long time to notice it wasn't checking anything I cared about. It verified that every reference resolved — that the link went somewhere and a page came back. It never once looked at the number in the sentence sitting directly in front of the link. Link-checking proves the internet answered. That is the entire extent of what it proves.
+I built a pipeline to check the documents I was generating. Then I went looking for a hole in it on purpose. It wasn't checking anything I cared about.
 
-What made this worth generalizing rather than just fixing is that the gap wasn't an oversight. It's structural. Mechanical coverage follows the cost of building the check, not the cost of the error being wrong, and those two things have almost nothing to do with each other.
+It verified that every reference resolved. The link went somewhere. A page came back. It never once looked at the number in the sentence sitting in front of the link. Link-checking proves the internet answered. That is all it proves.
 
-So I ended up sorting what an agent writes into a business document into four kinds of claim. Enumerable facts. External citations. State assertions, meaning what's currently true of some system. And derived figures — the numbers you get by doing arithmetic on other numbers.
+What made this worth generalizing is that the gap wasn't an oversight. It's structural. Mechanical coverage follows the cost of building the check, not the cost of the error being wrong. Those two things have almost nothing to do with each other.
 
-The first three are mechanizable with techniques that already exist and mostly already work. The fourth is the one that moves budgets and headcount, and it's almost always the one left to somebody reading carefully at the end. Not because it's impossible. Because it's the most expensive check to build, and the ranking has been by build cost rather than by blast radius.
+So I sorted what an agent writes into a business document into four kinds of claim. Enumerable facts. External citations. State assertions, meaning what's currently true of some system. And derived figures, the numbers you get by doing arithmetic on other numbers.
 
-Underneath that sit two failure modes that get conflated constantly, which is why single fixes keep underperforming. A drifted claim was true when it was written and its source moved since. A fabricated claim was never true at all. Identical wrongness on the page, entirely different machinery required to catch it.
+The first three are mechanizable with techniques that already exist. The fourth is the one that moves budgets and headcount. It's also the one left to whoever reads carefully at the end. Not because it's impossible. Because it's the most expensive check to build, and the ranking has been by build cost rather than blast radius.
 
-The premise behind all of it is an asymmetry I don't think has been absorbed yet. Producing a document became roughly free, and establishing that it's correct got no cheaper at all. The bottleneck moved from writing to reading, and most of the apparatus built since has been aimed at the easy end.
+Two failure modes sit underneath, and conflating them is why single fixes underperform. A drifted claim was true when written and its source moved since. A fabricated claim was never true. Identical wrongness on the page. Entirely different machinery to catch it.
 
-The taxonomy, why the highest-stakes class gets mechanized last, and when binding values to sources earns its cost:
+The premise behind all of it is an asymmetry I don't think has landed. Producing a document became roughly free. Establishing that it's correct got no cheaper at all. The bottleneck moved from writing to reading. Nearly every tool built since aims at the writing.
+
+The taxonomy, and why the highest-stakes class gets mechanized last:
 https://ninochavez.co/blog/whitepapers/claim-classes

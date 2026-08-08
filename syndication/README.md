@@ -7,7 +7,76 @@ node syndication/build-queue.mjs --due       # what is owed in the next 14 days
 node syndication/build-queue.mjs --report    # tallies, writes nothing
 node syndication/build-queue.mjs             # rewrite queue.json
 node syndication/build-queue.mjs --refresh   # re-pull the Substack archive first
+node syndication/check-captions.mjs          # source-fidelity gate — run before posting
 ```
+
+## Run the fidelity gate before a caption ships
+
+`check-captions.mjs` compares every caption against the piece it points at, across every platform directory under `captions/`. It
+exists because on 2026-08-03 a caption went live claiming "before I could hand
+this work to a machine, most of it just didn't happen" — the source says the
+work is invisible to a sprint board and a git log, not that it wasn't happening.
+The first commenter answered the invented claim, not the post.
+
+That sentence survived a voice audit, six editing passes, an n-gram scan, and
+four threshold checks — and the n-gram scan was a command someone ran once in a
+session, never a file in this repo, which is the difference this whole directory
+is about. All of them compared captions to each other or to a
+number. None re-read the source. The failure mode is drift-by-copying: once a
+draft exists, the caption becomes the working source of truth and every later
+edit is a copy of a copy. A written rule does not survive that, because the
+editor believes they already checked.
+
+**The 8/4 caption file no longer matches what is live on LinkedIn.** The file
+was corrected on 2026-08-03 (four fixes: the invented motive, the "I kept a
+log" agency, and the two relocations in the "part I keep turning over"
+paragraph). The published post at the `url` in `queue.json` still carries the
+original text and has a comment thread answering the invented claim. Editing a
+live post is the operator's call, so the divergence is recorded here rather
+than silently reconciled. `state: posted` means posted, not posted-as-written.
+
+The gate splits claims by what can actually be verified mechanically. Two
+classes get a verdict; two get a worklist:
+
+- **Figures** (verdict) — every number in a caption must appear in its source.
+  Airtight, and not where captions go wrong.
+- **Repeated phrasing** (verdict) — no two captions may share a five-word run,
+  across platforms as well as within one. Captions are drafted weeks apart from
+  the same voice and often the same source, so phrasing converges without anyone
+  deciding it should.
+- **First-person claims** (worklist) — every sentence containing "I", "my", or
+  "me". No matcher can check these; each is printed with its source path so the
+  reading has a worklist and skipping it is a visible choice.
+- **Scope claims** (worklist) — every sentence about the reader or about people
+  in general. The mirror image of the above; see below.
+
+The verdict classes are cheap and catch nothing interesting. The worklist
+classes are where captions actually go wrong: the 8/4 claim contained no number,
+which is exactly why every numeric check passed it.
+
+For each printed claim, find the sentence in the source that attributes it **to
+Nino specifically** — not one that supports the idea, one that assigns it to
+him. If the source states it generally, the caption states it generally. The
+failure is almost never invention; it is relocation, which reads as paraphrase
+while you draft and passes any check aimed at made-up people and events.
+
+**It runs in both directions.** The rule above is half of one. The same instinct
+that narrows a general claim onto Nino also widens a claim about his own system
+onto everyone — "a README of mine drifted" becomes "a README is the file you
+write once and never open again". A reader who maintains theirs replies denying
+the premise, and the thread is about the premise instead of the argument. Keep
+the subject the source assigned: not narrower, not wider. A general claim is
+fine when the source makes one ("the exit is the part nobody tests" is verbatim).
+
+The first version of this gate also required a past-tense verb from a fixed
+list, on the theory that present-tense opinion is argument rather than
+autobiography. It reported all 20 captions clean while four violations sat in
+them, because the verbs were ones nobody had listed — "which I hadn't
+**thought** to do until recently", "sharpen it more than I **expected**", "I'd
+been **reading** one for the other". The list is now a sort order, not a
+filter. Relocation hides in whichever verb the filter is missing, so the filter
+had to go: 40 printed claims became 99, and the extra 59 held three of the
+seven defects this sweep found.
 
 ## Nothing here is scheduled
 
@@ -52,6 +121,42 @@ Run it after posting to Substack by hand. `substack-archive.json` caches the
 result so ordinary runs work offline, and entries already marked `posted`
 survive regeneration — so a stale cache can only mis-queue something published
 since the last refresh.
+
+### A Substack draft goes in the ledger, not in a commit message
+
+Staging a piece in the Substack editor without publishing it creates a real post
+that already exists on the platform. Record it, the same way dev.to drafts are
+recorded:
+
+```json
+"substack": {
+  "state": "draft",
+  "url": "https://signaldispatch.substack.com/publish/post/209790190",
+  "postId": 209790190
+}
+```
+
+`postId` is the durable key and the editor URL is the only one that opens — an
+unpublished Substack post has no public page, exactly as on dev.to.
+
+Leaving it `eligible` is the failure this prevents, and it is quiet: the piece is
+written, the caption is on disk, so `--due` renders the slot as untouched work
+and the obvious next move is to draft it a second time. Two copies, one
+subscriber email each.
+
+**Publishing is what closes it, and Substack needs no `--sync`.** dev.to has one
+because its API can be asked; Substack cannot be, so the refreshed archive is the
+proof. `--refresh` finds the piece by title and the next build flips the route to
+`posted`, swaps the editor URL for the public `/p/<slug>` one, and takes the real
+publication date off the archive rather than the day you happened to rebuild.
+That override exists specifically because `draft` is otherwise preserved
+untouched — without it a hand-published Substack post reads `draft` forever and
+its slot never reopens.
+
+A `draft` also keeps its slot in the schedule and stays in `--due`, marked
+`[drafted — publish it]`. Both follow from the same thing: it is queued work that
+happens to be staged already. The first version of this dropped drafts from the
+scheduling pool and put two `link` pieces on the same Sunday.
 
 ## What there is to work with
 
