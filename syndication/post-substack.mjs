@@ -36,7 +36,7 @@ const PORT = process.env.BROWSE_PORT || 9400
 const PUB = process.env.SUBSTACK_PUB || 'https://signaldispatch.substack.com'
 // Read the body from the deploy preview: the apex bot-blocks headless Chrome.
 const ORIGIN = process.env.BLOG_ORIGIN || 'https://ninochavez-blog.pages.dev'
-const today = new Date().toISOString().slice(0, 10)
+const today = new Date().toLocaleDateString('en-CA') // local date; toISOString is UTC and rolls over at 19:00 CDT
 
 const argv = process.argv.slice(2)
 const has = (f) => argv.includes(f)

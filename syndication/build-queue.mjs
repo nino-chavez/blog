@@ -460,7 +460,10 @@ const onLinkedIn = linkedinShared()
 const prior = existsSync(QUEUE) ? JSON.parse(readFileSync(QUEUE, 'utf8')) : { items: [] }
 const priorById = new Map((prior.items || []).map((i) => [i.id, i]))
 
-const today = new Date().toISOString().slice(0, 10)
+// Local calendar date, not toISOString() — that is UTC, which rolls over at
+// 19:00 CDT. A rebuild on a Saturday evening read "today" as Sunday, skipped
+// the next morning's Substack slot, and slid the whole drip a week.
+const today = new Date().toLocaleDateString('en-CA')
 
 const items = pieces.map((p) => {
   const id = `${p.collection}/${p.slug}`
@@ -733,7 +736,7 @@ for (const platform of Object.keys(CADENCE)) {
 }
 
 const doc = {
-  generatedAt: new Date().toISOString().slice(0, 10),
+  generatedAt: today,
   // This said "unknown" until the activity feed was actually read. The two
   // things being confused: `source: linkedin` marks the 34 articles imported
   // FROM Pulse, and says nothing about posts SHARED TO LinkedIn as links —

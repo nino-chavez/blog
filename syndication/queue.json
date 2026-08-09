@@ -25,22 +25,22 @@
  "summary": {
   "linkedin": {
    "posted": 43,
-   "queued": 114,
+   "queued": 113,
    "skipped": 156,
    "firstSlot": "2026-08-11",
-   "lastSlot": "2027-09-09"
+   "lastSlot": "2027-09-07"
   },
   "substack": {
    "posted": 153,
-   "queued": 103,
+   "queued": 102,
    "skipped": 57,
    "firstSlot": "2026-08-09",
-   "lastSlot": "2028-07-23"
+   "lastSlot": "2028-07-16"
   },
   "devto": {
    "posted": 2,
    "queued": 5,
-   "skipped": 306,
+   "skipped": 305,
    "firstSlot": "2026-08-19",
    "lastSlot": "2026-10-14"
   }
@@ -48,18 +48,18 @@
  "items": [
   {
    "id": "whitepapers/the-sum-of-your-gaps",
-   "title": "The Sum of Your Gaps: Why Fixed-Task Studies Can't Measure What AI Changes About One Person's Work",
+   "title": "The Sum of Your Gaps: What Fixed-Task AI Studies Do Not Measure",
    "url": "https://ninochavez.co/blog/whitepapers/the-sum-of-your-gaps",
    "publishedAt": "2026-08-08",
    "collection": "whitepapers",
-   "words": 3305,
+   "words": 1947,
    "cluster": "there-was-never-a-person-in-that-seat",
    "tier": 1,
    "routes": {
     "substack": {
      "mode": "link",
      "state": "eligible",
-     "reason": "41 table rows — Substack renders neither, so the body cannot go across intact",
+     "reason": "38 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
      "scheduledFor": "2026-08-16",
      "url": null
@@ -3377,7 +3377,7 @@
    "url": "https://ninochavez.co/blog/there-was-never-a-person-in-that-seat",
    "publishedAt": "2026-08-08",
    "collection": "blog",
-   "words": 1703,
+   "words": 1046,
    "cluster": "there-was-never-a-person-in-that-seat",
    "tier": 2,
    "routes": {
@@ -3390,43 +3390,10 @@
      "url": null
     },
     "linkedin": {
-     "mode": "teaser",
+     "mode": "native",
      "state": "eligible",
      "postedAt": null,
      "scheduledFor": "2027-04-20",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "counterpoints/the-instrument-flattered-the-argument",
-   "title": "The Instrument Flattered the Argument: Six Objections to the Seat-Count Thesis",
-   "url": "https://ninochavez.co/blog/counterpoints/the-instrument-flattered-the-argument",
-   "publishedAt": "2026-08-08",
-   "collection": "counterpoints",
-   "words": 1199,
-   "cluster": "the-instrument-flattered-the-argument",
-   "tier": 2,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-09-26",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-04-22",
      "url": null
     },
     "devto": {
@@ -3590,14 +3557,14 @@
      "state": "eligible",
      "reason": "6 table rows + 6 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-12-26",
+     "scheduledFor": "2027-12-19",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-10",
+     "scheduledFor": "2027-06-08",
      "url": null
     },
     "devto": {
@@ -3624,14 +3591,14 @@
      "state": "eligible",
      "reason": "6 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-01-09",
+     "scheduledFor": "2028-01-02",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-15",
+     "scheduledFor": "2027-06-10",
      "url": null
     },
     "devto": {
@@ -3658,14 +3625,14 @@
      "state": "eligible",
      "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-01-23",
+     "scheduledFor": "2028-01-16",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-17",
+     "scheduledFor": "2027-06-15",
      "url": null
     },
     "devto": {
@@ -3725,14 +3692,14 @@
      "state": "eligible",
      "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-02-06",
+     "scheduledFor": "2028-01-30",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-22",
+     "scheduledFor": "2027-06-17",
      "url": null
     },
     "devto": {
@@ -3759,14 +3726,14 @@
      "state": "eligible",
      "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-02-20",
+     "scheduledFor": "2028-02-13",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-24",
+     "scheduledFor": "2027-06-22",
      "url": null
     },
     "devto": {
@@ -3793,7 +3760,7 @@
      "state": "eligible",
      "reason": "2 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-03-05",
+     "scheduledFor": "2028-02-27",
      "url": null
     },
     "linkedin": {
@@ -3827,14 +3794,14 @@
      "state": "eligible",
      "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-03-12",
+     "scheduledFor": "2028-03-05",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-29",
+     "scheduledFor": "2027-06-24",
      "url": null
     },
     "devto": {
@@ -3861,7 +3828,7 @@
      "state": "eligible",
      "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-03-19",
+     "scheduledFor": "2028-03-12",
      "url": null
     },
     "linkedin": {
@@ -3895,14 +3862,14 @@
      "state": "eligible",
      "reason": "12 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-10-17",
+     "scheduledFor": "2027-09-26",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-04",
+     "scheduledFor": "2027-04-27",
      "url": null
     },
     "devto": {
@@ -3929,14 +3896,14 @@
      "state": "eligible",
      "reason": "6 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-03-26",
+     "scheduledFor": "2028-03-19",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-01",
+     "scheduledFor": "2027-06-29",
      "url": null
     },
     "devto": {
@@ -3963,7 +3930,7 @@
      "state": "eligible",
      "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-04-02",
+     "scheduledFor": "2028-03-26",
      "url": null
     },
     "linkedin": {
@@ -3997,14 +3964,14 @@
      "state": "eligible",
      "reason": "12 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-11-07",
+     "scheduledFor": "2027-10-17",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-13",
+     "scheduledFor": "2027-05-06",
      "url": null
     },
     "devto": {
@@ -4031,7 +3998,7 @@
      "state": "eligible",
      "reason": "2 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-04-09",
+     "scheduledFor": "2028-04-02",
      "url": null
     },
     "linkedin": {
@@ -4064,7 +4031,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-04-16",
+     "scheduledFor": "2028-04-09",
      "url": null
     },
     "linkedin": {
@@ -4098,14 +4065,14 @@
      "state": "eligible",
      "reason": "6 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-04-23",
+     "scheduledFor": "2028-04-16",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-06",
+     "scheduledFor": "2027-07-01",
      "url": null
     },
     "devto": {
@@ -4132,14 +4099,14 @@
      "state": "eligible",
      "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-04-30",
+     "scheduledFor": "2028-04-23",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-08",
+     "scheduledFor": "2027-07-06",
      "url": null
     },
     "devto": {
@@ -4347,7 +4314,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-01-02",
+     "scheduledFor": "2027-12-26",
      "url": null
     },
     "linkedin": {
@@ -4383,7 +4350,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-01-16",
+     "scheduledFor": "2028-01-09",
      "url": null
     },
     "linkedin": {
@@ -4419,7 +4386,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-01-30",
+     "scheduledFor": "2028-01-23",
      "url": null
     },
     "linkedin": {
@@ -4455,7 +4422,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-02-13",
+     "scheduledFor": "2028-02-06",
      "url": null
     },
     "linkedin": {
@@ -4491,7 +4458,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-02-27",
+     "scheduledFor": "2028-02-20",
      "url": null
     },
     "linkedin": {
@@ -4526,7 +4493,7 @@
      "state": "eligible",
      "reason": "5 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-05-07",
+     "scheduledFor": "2028-04-30",
      "url": null
     },
     "linkedin": {
@@ -4560,14 +4527,14 @@
      "state": "eligible",
      "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-05-14",
+     "scheduledFor": "2028-05-07",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-13",
+     "scheduledFor": "2027-07-08",
      "url": null
     },
     "devto": {
@@ -4627,14 +4594,14 @@
      "state": "eligible",
      "reason": "6 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-05-21",
+     "scheduledFor": "2028-05-14",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-15",
+     "scheduledFor": "2027-07-13",
      "url": null
     },
     "devto": {
@@ -4661,14 +4628,14 @@
      "state": "eligible",
      "reason": "6 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-05-28",
+     "scheduledFor": "2028-05-21",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-20",
+     "scheduledFor": "2027-07-15",
      "url": null
     },
     "devto": {
@@ -4729,7 +4696,7 @@
      "state": "eligible",
      "reason": "5 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-06-04",
+     "scheduledFor": "2028-05-28",
      "url": null
     },
     "linkedin": {
@@ -4763,14 +4730,14 @@
      "state": "eligible",
      "reason": "5 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-06-11",
+     "scheduledFor": "2028-06-04",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-22",
+     "scheduledFor": "2027-07-20",
      "url": null
     },
     "devto": {
@@ -4797,14 +4764,14 @@
      "state": "eligible",
      "reason": "5 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-06-18",
+     "scheduledFor": "2028-06-11",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-27",
+     "scheduledFor": "2027-07-22",
      "url": null
     },
     "devto": {
@@ -4831,14 +4798,14 @@
      "state": "eligible",
      "reason": "30 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-11-28",
+     "scheduledFor": "2027-11-07",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-25",
+     "scheduledFor": "2027-05-18",
      "url": null
     },
     "devto": {
@@ -4872,7 +4839,7 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-27",
+     "scheduledFor": "2027-04-22",
      "url": null
     },
     "devto": {
@@ -4905,7 +4872,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-07-29",
+     "scheduledFor": "2027-07-27",
      "url": null
     },
     "devto": {
@@ -4938,7 +4905,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-03",
+     "scheduledFor": "2027-07-29",
      "url": null
     },
     "devto": {
@@ -4965,7 +4932,7 @@
      "state": "eligible",
      "reason": "5 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-06-25",
+     "scheduledFor": "2028-06-18",
      "url": null
     },
     "linkedin": {
@@ -5005,7 +4972,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-05",
+     "scheduledFor": "2027-08-03",
      "url": null
     },
     "devto": {
@@ -5032,14 +4999,14 @@
      "state": "eligible",
      "reason": "19 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-12-19",
+     "scheduledFor": "2027-11-28",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-03",
+     "scheduledFor": "2027-05-27",
      "url": null
     },
     "devto": {
@@ -5106,7 +5073,7 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-06",
+     "scheduledFor": "2027-05-04",
      "url": null
     },
     "devto": {
@@ -5140,7 +5107,7 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-18",
+     "scheduledFor": "2027-05-13",
      "url": null
     },
     "devto": {
@@ -5235,7 +5202,7 @@
      "state": "eligible",
      "reason": "7 table rows + 7 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-07-02",
+     "scheduledFor": "2028-06-25",
      "url": null
     },
     "linkedin": {
@@ -5310,7 +5277,7 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-27",
+     "scheduledFor": "2027-05-25",
      "url": null
     },
     "devto": {
@@ -5336,7 +5303,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-07-09",
+     "scheduledFor": "2028-07-02",
      "url": null
     },
     "linkedin": {
@@ -5514,14 +5481,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-07-16",
+     "scheduledFor": "2028-07-09",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-10",
+     "scheduledFor": "2027-08-05",
      "url": null
     },
     "devto": {
@@ -5547,14 +5514,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2028-07-23",
+     "scheduledFor": "2028-07-16",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-12",
+     "scheduledFor": "2027-08-10",
      "url": null
     },
     "devto": {
@@ -5622,7 +5589,7 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-08",
+     "scheduledFor": "2027-06-03",
      "url": null
     },
     "devto": {
@@ -5655,7 +5622,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-17",
+     "scheduledFor": "2027-08-12",
      "url": null
     },
     "devto": {
@@ -5868,7 +5835,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-19",
+     "scheduledFor": "2027-08-17",
      "url": null
     },
     "devto": {
@@ -5902,7 +5869,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-24",
+     "scheduledFor": "2027-08-19",
      "url": null
     },
     "devto": {
@@ -5972,7 +5939,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-26",
+     "scheduledFor": "2027-08-24",
      "url": null
     },
     "devto": {
@@ -6074,7 +6041,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-08-31",
+     "scheduledFor": "2027-08-26",
      "url": null
     },
     "devto": {
@@ -6108,7 +6075,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-09-02",
+     "scheduledFor": "2027-08-31",
      "url": null
     },
     "devto": {
@@ -6142,7 +6109,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-09-07",
+     "scheduledFor": "2027-09-02",
      "url": null
     },
     "devto": {
@@ -6596,7 +6563,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-09-09",
+     "scheduledFor": "2027-09-07",
      "url": null
     },
     "devto": {

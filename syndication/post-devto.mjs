@@ -240,7 +240,7 @@ if (has('--sync')) {
   }
   process.exit(0)
 }
-const today = new Date().toISOString().slice(0, 10)
+const today = new Date().toLocaleDateString('en-CA') // local date; toISOString is UTC and rolls over at 19:00 CDT
 
 const due = queue.items
   .filter((i) => i.routes.devto?.state === 'eligible')
