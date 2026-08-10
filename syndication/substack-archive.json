@@ -968,5 +968,610 @@
   "slug": "the-cut-youll-make-twice",
   "title": "The Cut You'll Make Twice",
   "date": "2026-08-07"
+ },
+ {
+  "slug": "the-migration-that-ate-two-columns",
+  "title": "The Migration That Ate Two Columns",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "i-wrote-the-rule-down-i-broke-it",
+  "title": "I Wrote the Rule Down. I Broke It Anyway.",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-neuro-symbolic-convergence",
+  "title": "The Neuro-Symbolic Convergence",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "structural-discontinuities-in-the",
+  "title": "Structural Discontinuities in the Metering Phase Thesis",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "red-teaming-the-metering-phase",
+  "title": "Red-Teaming the Metering Phase",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-bifurcation-under-stress-five",
+  "title": "The Bifurcation Under Stress: Five Structural Objections to the Dual-Track Thesis",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-jevons-trap",
+  "title": "The Jevons Trap",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-48-hour-artifact",
+  "title": "The 48-Hour Artifact",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-cart-is-a-protocol-now",
+  "title": "The Cart Is a Protocol Now",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "setting-up-an-ai-native-dev-environment",
+  "title": "Setting Up an AI-Native Dev Environment",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "skip-the-steps",
+  "title": "Skip the Steps",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "when-the-grid-goes-dark",
+  "title": "When the Grid Goes Dark",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-walk-in-is-full",
+  "title": "The Walk-In Is Full",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "curation-is-not-composition",
+  "title": "Curation Is Not Composition",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-side-project-is-pottery",
+  "title": "The Side Project Is Pottery",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "i-dont-write-any-code",
+  "title": "I Don't Write Any Code",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "process-beats-inspection-why-the",
+  "title": "Process Beats Inspection: Why the Chassis Doesn't Just Shift the Review Burden",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-scaffolding-the-agent-doesnt",
+  "title": "The Scaffolding the Agent Doesn't Build",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-ab-test-that-built-the-lathe",
+  "title": "The A/B Test That Built the Lathe",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "five-months-later-the-evidence-showed",
+  "title": "Five Months Later, the Evidence Showed Up",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "when-your-lawyer-tells-you-to-use",
+  "title": "When Your Lawyer Tells You to Use ChatGPT",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-only-thing-in-my-codebase-that",
+  "title": "The Only Thing in My Codebase That Can't Lie",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "open-kitchen",
+  "title": "Open Kitchen",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-gate-verifies-the-work-it-never",
+  "title": "The Gate Verifies the Work. It Never Looks at the Plan.",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "red-is-the-good-news",
+  "title": "Red Is the Good News",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "i-configured-my-agent-to-agree-with",
+  "title": "I Configured My Agent to Agree With Me",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-algorithmic-consumer-agentic",
+  "title": "The Algorithmic Consumer: Agentic Commerce, Merchandising Dynamics, and the Future of Retail Discovery",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-fourth-channel-a-strategic-analysis",
+  "title": "The Fourth Channel: A Strategic Analysis of Agentic Commerce as the New Digital Wholesale",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-agentic-shift-a-strategic-analysis",
+  "title": "The Agentic Shift: A Strategic Analysis of LLM Impact on the 2025 Holiday Shopping Season",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-dissolution-of-syntax-intent",
+  "title": "The Dissolution of Syntax: Intent-Driven Engineering and the Economics of Ephemeral Software",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-neuro-symbolic-convergence-a",
+  "title": "The Neuro-Symbolic Convergence: A Strategic Roadmap for Native AI Integration in Operating Systems (2025–2027)",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-agentic-student-a-comprehensive",
+  "title": "The Agentic Student: A Comprehensive Analysis of Generative AI Maturity in Higher Education (2024-2026)",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-ai-analyst-strategic-analysis",
+  "title": "The AI Analyst: Strategic Analysis of AI Analyst Training in the Era of Agentic Intelligence",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-agentic-student",
+  "title": "The Agentic Student",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-ai-analyst",
+  "title": "The AI Analyst",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-cognitive-foundry-re-architecting",
+  "title": "The Cognitive Foundry: Re-Architecting Talent Development in the Post-Traditional Consulting Era",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-cognitive-foundry-part-2-a-red",
+  "title": "The Cognitive Foundry Part 2: A Red Team Analysis of Synthetic Apprenticeship",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-cognitive-foundry-part-2-what",
+  "title": "The Cognitive Foundry, Part 2: What the Simulation Can't Teach",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-cognitive-foundry",
+  "title": "The Cognitive Foundry",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-next-chapter-what-happens-when",
+  "title": "The Next Chapter: What Happens When You Try to Scale Intent-Driven Engineering",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-graveyard",
+  "title": "The Graveyard",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "from-aegis-to-specchain-when-governance",
+  "title": "From Aegis to SpecChain: When Governance Meets Reality",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "spec-driven-development-with-multi",
+  "title": "Spec-Driven Development with Multi-Agent Orchestration",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "from-research-paper-to-working-toolkit",
+  "title": "From Research Paper to Working Toolkit in One Session",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "when-the-voice-guide-becomes-the",
+  "title": "When the Voice Guide Becomes the Problem",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-signal-forge-method-agentic-document",
+  "title": "The Signal Forge Method: Agentic Document Generation",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "22gb-to-2gb-video-compression-as",
+  "title": "22GB to 2GB: Video Compression as Agentic Collaboration",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-amplified-mind-epistemology-trust",
+  "title": "The Amplified Mind: Epistemology, Trust Infrastructure, and the Deconstruction of the Calculator Analogy",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "beyond-chat-build-your-first-agentic",
+  "title": "Beyond Chat: Build Your First Agentic Workflow",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-bifurcation-of-autonomy-mimicry",
+  "title": "The Bifurcation of Autonomy: Mimicry, Machine-Native Interfaces, and the Fork in Agent Architecture",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "six-months-after-the-horizon",
+  "title": "Six Months After the Horizon",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-sommelier-argument",
+  "title": "The Sommelier Argument",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-taste-gap",
+  "title": "The Taste Gap",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-identity-crisis-of-the-prompter",
+  "title": "The Identity Crisis of the Prompter",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "can-vs-should",
+  "title": "Can vs. Should",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-source-of-their-intelligence",
+  "title": "The Source of Their Intelligence",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "set-up-an-ai-native-dev-environment",
+  "title": "Set Up an AI-Native Dev Environment",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "make-your-cli-agent-native-in-three",
+  "title": "Make Your CLI Agent-Native in Three Layers",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "big-blueprint-a-production-line-for",
+  "title": "Big Blueprint: A Production Line for Agent-Assisted Product Work",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "lie-surface-ranking-what-an-agent",
+  "title": "Lie-Surface: Ranking What an Agent Can Trust in Your Codebase",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "multi-account-instagram-publishing",
+  "title": "Multi-Account Instagram Publishing With the Graph API",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "where-the-api-stops",
+  "title": "Where the API Stops",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "audit-your-ai-coding-harness-in-four",
+  "title": "Audit Your AI Coding Harness in Four Exercises",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "measure-your-own-token-waste-in-four",
+  "title": "Measure Your Own Token Waste in Four Exercises",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "claim-classes-what-can-and-cant-be",
+  "title": "Claim Classes: What Can and Can't Be Mechanically Checked in an Agent-Written Document",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "grade-an-agent-tool-before-you-install",
+  "title": "Grade an Agent Tool Before You Install It",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-sum-of-your-gaps-what-fixed-task",
+  "title": "The Sum of Your Gaps: What Fixed-Task AI Studies Do Not Measure",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "how-structured-documentation-turned",
+  "title": "How Structured Documentation Turned My AI Into an Engineering Team",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "building-a-production-app-solo-in",
+  "title": "Building a Production App Solo in Seven Days with AI",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "designing-ai-enforced-safeguards",
+  "title": "Designing AI-Enforced Safeguards for Development",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "how-i-made-a-cache-bug-impossible",
+  "title": "How I Made a Cache Bug Impossible to Reintroduce",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "why-light-and-dark-mode-werent-enough",
+  "title": "Why Light and Dark Mode Weren't Enough for Our Volleyball App",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "when-fast-isnt-fast-enough-from-ai",
+  "title": "When Fast Isn't Fast Enough: From AI Coding to AI Concurrency",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "why-i-built-feature-toggles-into",
+  "title": "Why I Built Feature Toggles Into the Bracket App",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "building-an-ai-driven-e2e-testing",
+  "title": "Building an AI-Driven E2E Testing Framework from Scratch",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "why-demo-mode-should-be-a-first-class",
+  "title": "Why Demo Mode Should Be a First-Class Feature",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "when-documentation-becomes-a-contract",
+  "title": "When Documentation Becomes a Contract Your AI Must Follow",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "treating-ai-prompts-like-jira-stories",
+  "title": "Treating AI Prompts Like Jira Stories Changed My Workflow",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "why-my-react-app-doesnt-use-jsx",
+  "title": "Why My React App Doesn't Use JSX",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "what-my-jsx-free-react-app-taught",
+  "title": "What My JSX-Free React App Taught Me About AI-Assisted Engineering",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "when-intent-becomes-the-source-code",
+  "title": "When Intent Becomes the Source Code",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "why-im-skeptical-of-agentic-ai-despite",
+  "title": "Why I'm Skeptical of Agentic AI (Despite Using AI Every Day)",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "what-800-in-ai-credits-taught-me",
+  "title": "What $800 in AI Credits Taught Me About Building",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "why-the-storefront-is-becoming-an",
+  "title": "Why the Storefront Is Becoming an AI-Optimized Validation Layer",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "when-the-ai-governance-framework",
+  "title": "When the AI Governance Framework Didn't Catch the Violation",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "when-i-asked-the-ai-to-critique-its",
+  "title": "When I Asked the AI to Critique Its Own Framework",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "how-we-caught-our-ai-framework-lying",
+  "title": "How We Caught Our AI Framework Lying to Us",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "why-ai-native-development-needs-building",
+  "title": "Why AI-Native Development Needs Building Codes",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "why-i-burned-my-ai-generated-app",
+  "title": "Why I Burned My AI-Generated App to the Ground (Again)",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "how-ai-agents-will-reshape-the-web",
+  "title": "How AI Agents Will Reshape the Web Over the Next Decade",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "what-shipping-with-ai-actually-looks",
+  "title": "What Shipping with AI Actually Looks Like",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "after-moores-law-where-tech-progress",
+  "title": "After Moore's Law: Where Tech Progress Is Actually Heading",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "what-actually-worked-when-i-let-multiple",
+  "title": "What Actually Worked When I Let Multiple AI Agents Rebuild My App",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "building-for-ai-agents-changes-everything",
+  "title": "Building for AI Agents Changes Everything About Your Technical Skills",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "from-asking-ai-questions-to-giving",
+  "title": "From Asking AI Questions to Giving It Directives",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "four-questions-that-expose-fake-genai",
+  "title": "Four Questions That Expose Fake GenAI Expertise",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "from-wearing-many-hats-to-orchestrating",
+  "title": "From Wearing Many Hats to Orchestrating AI Specialists",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "how-ai-is-splitting-consulting-into",
+  "title": "How AI Is Splitting Consulting Into Architects and Parrots",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-modern-javascript-stack-is-powerful",
+  "title": "The Modern JavaScript Stack Is Powerful and Painful",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-infinite-concierge-why-agentic",
+  "title": "The Infinite Concierge: Why Agentic Shopping Is Just Old School Merchandising on New School Rails",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-storefront-that-builds-itself",
+  "title": "The Storefront That Builds Itself",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-kitchen-im-looking-for",
+  "title": "The Kitchen I'm Looking For",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-page",
+  "title": "The Page",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-window",
+  "title": "The Window",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-fig",
+  "title": "The Fig",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-room",
+  "title": "The Room",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-supper",
+  "title": "The Supper",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-cup",
+  "title": "The Cup",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-song",
+  "title": "The Song",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-neck",
+  "title": "The Neck",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-word",
+  "title": "The Word",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-bell",
+  "title": "The Bell",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-question-that-isnt-a-question",
+  "title": "The Question That Isn't a Question",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "8f0",
+  "title": "'",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "ai-isnt-a-bubble-its-infrastructure",
+  "title": "AI Isn't a Bubble. It's Infrastructure.",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "toolmaker-or-tool-user-finding-your",
+  "title": "Toolmaker or Tool User: Finding Your True Nature in the AI Age",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-netflix-paradox-why-shopping-583",
+  "title": "The Netflix Paradox: Why Shopping Isn't \\",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-role-that-doesnt-have-a-title",
+  "title": "The Role That Doesn't Have a Title",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "i-dont-want-to-be-a-10-person-team",
+  "title": "I Don't Want to Be a 10-Person Team of One",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "the-cowork-moment-when-agentic-ai",
+  "title": "The Cowork Moment: When Agentic AI Goes Mainstream",
+  "date": "2026-08-10"
+ },
+ {
+  "slug": "how-fear-of-ai-turned-into-an-ai",
+  "title": "How Fear of AI Turned Into an AI Development System",
+  "date": "2026-08-10"
  }
 ]

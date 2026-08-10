@@ -258,10 +258,36 @@ const norm = (s) => (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '')
 // Keyed by normalised title rather than reduced to a Set of them, because the
 // archive entry carries the slug and the real publication date — the only way
 // to turn a draft that went live into a `posted` route with a working URL.
+// Matches on title OR slug, and the slug half is not redundant. A title is
+// editable; the slug is the filename and does not move. Retitle a post on the
+// blog after it went to Substack and the title lookup stops finding it, so the
+// ledger reads "never sent" and queues it again.
+//
+// That is not hypothetical — it is what the 2026-08-10 backfill did. Five posts
+// republished as second copies, each one live on Substack since 2025 under its
+// original title: when-fast-isnt-fast-enough, the-netflix-paradox,
+// what-my-jsx-free-react-app, why-my-react-app-doesnt-use-jsx, and
+// i-let-a-bunch-of-ai-agents-rebuild-my-app. Four match the old Substack slug
+// exactly; the fifth matches on prefix, because Substack truncates long slugs
+// (`the-netflix-paradox-why-shopping` for
+// `the-netflix-paradox-why-shopping-isnt-streaming-yet`).
 function substackArchive() {
   const f = join(HERE, 'substack-archive.json')
-  if (!existsSync(f)) return new Map()
-  return new Map(JSON.parse(readFileSync(f, 'utf8')).map((p) => [norm(p.title), p]))
+  if (!existsSync(f)) return { match: () => null }
+  const list = JSON.parse(readFileSync(f, 'utf8'))
+  const byTitle = new Map(list.map((p) => [norm(p.title), p]))
+  const bySlug = new Map(list.filter((p) => p.slug).map((p) => [p.slug, p]))
+  // 20 chars is long enough that a prefix shared by two genuinely different
+  // pieces is not plausible here; shorter slugs are matched exactly only.
+  const truncated = list.filter((p) => p.slug && p.slug.length >= 20)
+  return {
+    match(piece) {
+      const hit = byTitle.get(norm(piece.title))
+      if (hit) return hit
+      if (!piece.slug) return null
+      return bySlug.get(piece.slug) || truncated.find((p) => piece.slug.startsWith(p.slug)) || null
+    },
+  }
 }
 
 // LinkedIn history was recorded as unrecoverable at first, and that was wrong.
@@ -665,7 +691,7 @@ const items = pieces.map((p) => {
     // Substack draft published by hand reads `draft` in perpetuity, its slot
     // never reopens, and `--refresh` — the one command that knows the truth —
     // is short-circuited before it gets a chance to say so.
-    const live = platform === 'substack' && prev?.state === 'draft' ? onSubstack.get(norm(p.title)) : null
+    const live = platform === 'substack' && prev?.state === 'draft' ? onSubstack.match(p) : null
     if (live) {
       out.routes[platform] = {
         ...prev,
@@ -681,7 +707,18 @@ const items = pieces.map((p) => {
     }
     let state = r.mode === 'skip' ? 'skip' : 'eligible'
     let postedAt = null
-    if (platform === 'substack' && onSubstack.has(norm(p.title))) {
+    // The archive is keyed by normalised TITLE, and titles are not unique across
+    // collections: a deck in `presentations` and the essay it was drawn from
+    // routinely share one. A piece routed `skip` was never sent to Substack, so
+    // a title hit against it is necessarily a collision with the sibling that
+    // was — which is why the mode check has to come first.
+    //
+    // Measured 2026-08-10, the first --refresh after publishing 121 pieces in a
+    // day: five `presentations` decks flipped skip -> posted, every one of them
+    // matching a blog post published hours earlier under the same title. The
+    // ledger would have recorded five syndications that never happened, and the
+    // count moved in the direction that looks like successful reconciliation.
+    if (platform === 'substack' && r.mode !== 'skip' && onSubstack.match(p)) {
       state = 'posted'
       postedAt = 'archive'
     }
