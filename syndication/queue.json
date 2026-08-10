@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-08",
+ "generatedAt": "2026-08-10",
  "linkedinHistory": "harvested from the activity feed (115 link-shares read)",
  "cadence": {
   "linkedin": {
@@ -11,7 +11,13 @@
   },
   "substack": {
    "days": [
-    0
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
    ],
    "every": 1
   },
@@ -24,23 +30,24 @@
  },
  "summary": {
   "linkedin": {
-   "posted": 43,
-   "queued": 113,
-   "skipped": 156,
+   "posted": 44,
+   "queued": 14,
+   "skipped": 256,
    "firstSlot": "2026-08-11",
-   "lastSlot": "2027-09-07"
+   "lastSlot": "2026-09-24"
   },
   "substack": {
-   "posted": 153,
-   "queued": 102,
-   "skipped": 57,
-   "firstSlot": "2026-08-09",
-   "lastSlot": "2028-07-16"
+   "posted": 209,
+   "queued": 7,
+   "backfill": 89,
+   "skipped": 9,
+   "firstSlot": "2026-08-11",
+   "lastSlot": "2026-08-17"
   },
   "devto": {
    "posted": 2,
    "queued": 5,
-   "skipped": 305,
+   "skipped": 307,
    "firstSlot": "2026-08-19",
    "lastSlot": "2026-10-14"
   }
@@ -61,14 +68,130 @@
      "state": "eligible",
      "reason": "38 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-08-16",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
+     "caption": "captions/linkedin/whitepapers--the-sum-of-your-gaps.md",
+     "postedAt": null,
+     "scheduledFor": "2026-08-18",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "demos/twelve-messages",
+   "title": "Twelve Messages",
+   "url": "https://ninochavez.co/demos/twelve-messages",
+   "publishedAt": "2026-07-15",
+   "collection": "demos",
+   "words": 0,
+   "pitch": "Everything typed to take a live event from spreadsheet chaos to published social content — and the method that made the other 99% happen.",
+   "series": "demos",
+   "seriesPos": 1,
+   "cluster": "twelve-messages",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "caption": "captions/linkedin/demos--twelve-messages.md",
      "postedAt": null,
      "scheduledFor": "2026-08-13",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "demos/browse-tool",
+   "title": "The Browser Is a Shell Command",
+   "url": "https://ninochavez.co/demos/browse-tool",
+   "publishedAt": "2026-07-15",
+   "collection": "demos",
+   "words": 0,
+   "pitch": "Replacing 18,000 tokens of always-loaded browser-automation schema with ten shell commands and a README — and why the agent gets sharper, not weaker.",
+   "series": "demos",
+   "seriesPos": 2,
+   "cluster": "browse-tool",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "caption": "captions/linkedin/demos--browse-tool.md",
+     "postedAt": null,
+     "scheduledFor": "2026-08-25",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "demos/enforced-forever",
+   "title": "Taught Once, Enforced Forever",
+   "url": "https://ninochavez.co/demos/enforced-forever",
+   "publishedAt": "2026-07-15",
+   "collection": "demos",
+   "words": 0,
+   "pitch": "Corrections given in chat decay when the session ends. The fix is changing the agent's environment — helpers, deny-hooks, and CI ratchets that carry the rule forever.",
+   "series": "demos",
+   "seriesPos": 3,
+   "cluster": "enforced-forever",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "caption": "captions/linkedin/demos--enforced-forever.md",
+     "postedAt": null,
+     "scheduledFor": "2026-09-01",
      "url": null
     },
     "devto": {
@@ -84,10 +207,12 @@
    "id": "demos/session-corpus",
    "title": "Your Sessions Are a Corpus",
    "url": "https://ninochavez.co/demos/session-corpus",
-   "publishedAt": "2026-08-01",
+   "publishedAt": "2026-07-15",
    "collection": "demos",
    "words": 0,
    "pitch": "A 24 GB session archive forced the next question: how do you keep the lessons, prove closeout, and let the raw record expire?",
+   "series": "demos",
+   "seriesPos": 4,
    "cluster": "session-corpus",
    "tier": 1,
    "routes": {
@@ -95,19 +220,398 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-23",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2026-08-18",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
      "mode": "skip",
      "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "demos/feedback-loop",
+   "title": "The Product That Files Its Own Tickets",
+   "url": "https://ninochavez.co/demos/feedback-loop",
+   "publishedAt": "2026-07-15",
+   "collection": "demos",
+   "words": 0,
+   "pitch": "End users file feedback, an LLM judge triages it into GitHub Issues, an agent implements the safe ones — with the autonomy boundary in deterministic code and a human holding the only merge key.",
+   "series": "demos",
+   "seriesPos": 5,
+   "cluster": "feedback-loop",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "demos/landmine-registry",
+   "title": "The Registry of Landmines",
+   "url": "https://ninochavez.co/demos/landmine-registry",
+   "publishedAt": "2026-07-15",
+   "collection": "demos",
+   "words": 0,
+   "pitch": "Some load-bearing facts are invisible to search — the code compiles and the behavior is still wrong. One registry file holds them, a derive catalog enforces them in CI, and a meta-test keeps the registry from lying about itself.",
+   "series": "demos",
+   "seriesPos": 6,
+   "cluster": "landmine-registry",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "demos/said-it-checked",
+   "title": "The Agent Said It Checked",
+   "url": "https://ninochavez.co/demos/said-it-checked",
+   "publishedAt": "2026-07-15",
+   "collection": "demos",
+   "words": 0,
+   "pitch": "\"Verified\" is a sentence, not a fact. A security migration passed its audit while production was broken — and the discipline that came out of it caught three more false claims building this very series.",
+   "series": "demos",
+   "seriesPos": 7,
+   "cluster": "said-it-checked",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-09-08",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "demos/agentic-gates",
+   "title": "Gates Between Agentic Stages",
+   "url": "https://ninochavez.co/demos/agentic-gates",
+   "publishedAt": "2026-07-15",
+   "collection": "demos",
+   "words": 0,
+   "pitch": "Agents are strong inside a stage and unreliable at the boundaries. A delivery methodology built on that: deterministic gates between agentic stages — 88 versioned revisions, 14 running initiatives, and the day production published fiction.",
+   "series": "demos",
+   "seriesPos": 8,
+   "cluster": "agentic-gates",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-09-15",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "demos/beautifier",
+   "title": "The Beautifier Was an Auditor",
+   "url": "https://ninochavez.co/demos/beautifier",
+   "publishedAt": "2026-07-15",
+   "collection": "demos",
+   "words": 0,
+   "pitch": "A skill built to make a README prettier turned out to be a drift detector. Across five repos it flagged a deploy doc still pointing at a platform the project left months ago, a command list that no longer matched the actual commands, and capabilities the code had grown that nobody had written down. The visual polish was the smallest thing it did.",
+   "series": "demos",
+   "seriesPos": 9,
+   "cluster": "beautifier",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "demos/four-questions",
+   "title": "The Chiropractor's Four Questions",
+   "url": "https://ninochavez.co/demos/four-questions",
+   "publishedAt": "2026-07-17",
+   "collection": "demos",
+   "words": 0,
+   "pitch": "A sports chiropractor asked four plain questions about selling rehab programs from his website. The AI's answer was confident, tabulated, sourced — and its evidence was marketing all the way down. Twice.",
+   "series": "demos",
+   "seriesPos": 10,
+   "cluster": "four-questions",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "demos/config-probe",
+   "title": "The Sycophancy Was in the Config",
+   "url": "https://ninochavez.co/demos/config-probe",
+   "publishedAt": "2026-07-20",
+   "collection": "demos",
+   "words": 0,
+   "pitch": "A rival model reviewing my agent's work looked sharper — it demanded competing candidates and restraint. So my agent A/B tested its own harness: same model, same prompt, config on and off. The vanilla arm pushed back on me twice. The configured arm never did.",
+   "series": "demos",
+   "seriesPos": 11,
+   "cluster": "config-probe",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "demos/adopt-or-skip",
+   "title": "One Component I Didn't Already Have",
+   "url": "https://ninochavez.co/demos/adopt-or-skip",
+   "publishedAt": "2026-07-30",
+   "collection": "demos",
+   "words": 0,
+   "pitch": "A plugin advertising eleven agents and fifty-four hooks, measured against the setup I already run. Of the eight components that could land on my machine, three were already going, one was the wrong platform, one was broken upstream, two were costs. The delta was one.",
+   "series": "demos",
+   "seriesPos": 12,
+   "cluster": "one-component-i-didnt-already-have",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "demos/gate-first",
+   "title": "The Gate Was Written First",
+   "url": "https://ninochavez.co/demos/gate-first",
+   "publishedAt": "2026-08-08",
+   "collection": "demos",
+   "words": 0,
+   "pitch": "Three ways to make a meeting archive answer a question, three preregistered gates, three refusals in one day. Each gate was committed to git before the model weights finished downloading — so when the scores came back plausible, there was nothing left to negotiate with. The feature that shipped is the one the evidence admitted.",
+   "series": "demos",
+   "seriesPos": 13,
+   "cluster": "gate-first",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-09-22",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "applied/session-closeout",
+   "title": "Close the Session, Keep the Lesson",
+   "url": "https://ninochavez.co/demos/applied/session-closeout",
+   "publishedAt": "2026-08-02",
+   "collection": "applied",
+   "words": 0,
+   "pitch": "Promote project truth, distill the reusable method, enqueue fast, mine in the background, and delete raw transcripts only after an explicit archive-safety receipt.",
+   "cluster": "session-corpus",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "companion duplicates its demo on a feed; the demo carries the incident",
+     "caption": "captions/linkedin/applied--session-closeout.md",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "no markdown body — rendered deck, nothing to cross-post",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -129,15 +633,17 @@
      "state": "eligible",
      "reason": "5 table rows + 12 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-08-30",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "caption": "captions/linkedin/tutorials--grade-an-agent-tool-before-you-install-it.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-03",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -166,8 +672,9 @@
      "reason": "79 table rows — Substack renders neither, so the body cannot go across intact",
      "caption": "captions/substack/whitepapers--claim-classes.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-13",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "teaser",
@@ -201,15 +708,17 @@
      "state": "eligible",
      "reason": "13 table rows + 14 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-09-20",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "caption": "captions/linkedin/tutorials--measure-your-own-token-waste.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-08",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -219,6 +728,44 @@
      "scheduledFor": "2026-08-12",
      "url": "https://dev.to/ninochavez/measure-your-own-token-waste-in-four-exercises-al6",
      "articleId": 4312982
+    }
+   }
+  },
+  {
+   "id": "applied/adopt-or-skip",
+   "title": "Run the Subtraction Before You Install",
+   "url": "https://ninochavez.co/demos/applied/adopt-or-skip",
+   "publishedAt": "2026-07-30",
+   "collection": "applied",
+   "words": 0,
+   "pitch": "Four checks that run before anything touches your machine: enumerate what you already have, subtract it from what the tool ships into native, new, and blocked, query the part of the repository nobody curates, and confirm the uninstall actually works. The technique behind demo 12.",
+   "cluster": "one-component-i-didnt-already-have",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "companion duplicates its demo on a feed; the demo carries the incident",
+     "caption": "captions/linkedin/applied--adopt-or-skip.md",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "no markdown body — rendered deck, nothing to cross-post",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
     }
    }
   },
@@ -237,15 +784,16 @@
      "state": "eligible",
      "reason": "6 table rows + 12 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-10-25",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
-     "caption": "captions/linkedin/tutorials--audit-your-ai-coding-harness.md",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2026-09-29",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -258,152 +806,13 @@
    }
   },
   {
-   "id": "demos/adopt-or-skip",
-   "title": "One Component I Didn't Already Have",
-   "url": "https://ninochavez.co/demos/adopt-or-skip",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
+   "id": "applied/config-probe",
+   "title": "Bare-Arm Test Your Agent Config",
+   "url": "https://ninochavez.co/demos/applied/config-probe",
+   "publishedAt": "2026-07-20",
+   "collection": "applied",
    "words": 0,
-   "pitch": "A plugin advertising eleven agents and fifty-four hooks, measured against the setup I already run. Of the eight components that could land on my machine, three were already going, one was the wrong platform, one was broken upstream, two were costs. The delta was one.",
-   "cluster": "one-component-i-didnt-already-have",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "link",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-09-27",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "caption": "captions/linkedin/demos--adopt-or-skip.md",
-     "postedAt": null,
-     "scheduledFor": "2026-09-17",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "demos/agentic-gates",
-   "title": "Gates Between Agentic Stages",
-   "url": "https://ninochavez.co/demos/agentic-gates",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
-   "words": 0,
-   "pitch": "Agents are strong inside a stage and unreliable at the boundaries. A delivery methodology built on that: deterministic gates between agentic stages — 88 versioned revisions, 14 running initiatives, and the day production published fiction.",
-   "cluster": "agentic-gates",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "link",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-10-18",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "caption": "captions/linkedin/demos--agentic-gates.md",
-     "postedAt": null,
-     "scheduledFor": "2026-09-22",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "demos/beautifier",
-   "title": "The Beautifier Was an Auditor",
-   "url": "https://ninochavez.co/demos/beautifier",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
-   "words": 0,
-   "pitch": "A skill built to make a README prettier turned out to be a drift detector. Across five repos it flagged a deploy doc still pointing at a platform the project left months ago, a command list that no longer matched the actual commands, and capabilities the code had grown that nobody had written down. The visual polish was the smallest thing it did.",
-   "cluster": "beautifier",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "link",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-11-15",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "caption": "captions/linkedin/demos--beautifier.md",
-     "postedAt": null,
-     "scheduledFor": "2026-10-08",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "demos/browse-tool",
-   "title": "The Browser Is a Shell Command",
-   "url": "https://ninochavez.co/demos/browse-tool",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
-   "words": 0,
-   "pitch": "Replacing 18,000 tokens of always-loaded browser-automation schema with ten shell commands and a README — and why the agent gets sharper, not weaker.",
-   "cluster": "browse-tool",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "link",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-12-13",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-10-27",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "demos/config-probe",
-   "title": "The Sycophancy Was in the Config",
-   "url": "https://ninochavez.co/demos/config-probe",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
-   "words": 0,
-   "pitch": "A rival model reviewing my agent's work looked sharper — it demanded competing candidates and restraint. So my agent A/B tested its own harness: same model, same prompt, config on and off. The vanilla arm pushed back on me twice. The configured arm never did.",
+   "pitch": "How to tell whether an AI behavior gap is the model or your harness: run the same model bare as a control arm, isolate suspect config blocks, validate candidate rules as experiment arms, and promote only what the grid confirms. The technique behind demo 11.",
    "cluster": "config-probe",
    "tier": 1,
    "routes": {
@@ -411,19 +820,22 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-01-10",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "companion duplicates its demo on a feed; the demo carries the incident",
      "postedAt": null,
-     "scheduledFor": "2026-11-12",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
      "mode": "skip",
      "state": "skip",
+     "reason": "no markdown body — rendered deck, nothing to cross-post",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -431,81 +843,13 @@
    }
   },
   {
-   "id": "demos/enforced-forever",
-   "title": "Taught Once, Enforced Forever",
-   "url": "https://ninochavez.co/demos/enforced-forever",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
+   "id": "applied/provenance",
+   "title": "Put Provenance Labels on AI Research",
+   "url": "https://ninochavez.co/demos/applied/provenance",
+   "publishedAt": "2026-07-17",
+   "collection": "applied",
    "words": 0,
-   "pitch": "Corrections given in chat decay when the session ends. The fix is changing the agent's environment — helpers, deny-hooks, and CI ratchets that carry the rule forever.",
-   "cluster": "enforced-forever",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "link",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-02-07",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-11-26",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "demos/feedback-loop",
-   "title": "The Product That Files Its Own Tickets",
-   "url": "https://ninochavez.co/demos/feedback-loop",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
-   "words": 0,
-   "pitch": "End users file feedback, an LLM judge triages it into GitHub Issues, an agent implements the safe ones — with the autonomy boundary in deterministic code and a human holding the only merge key.",
-   "cluster": "feedback-loop",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "link",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-03-07",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-12-10",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "demos/four-questions",
-   "title": "The Chiropractor's Four Questions",
-   "url": "https://ninochavez.co/demos/four-questions",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
-   "words": 0,
-   "pitch": "A sports chiropractor asked four plain questions about selling rehab programs from his website. The AI's answer was confident, tabulated, sourced — and its evidence was marketing all the way down. Twice.",
+   "pitch": "How to make AI-assisted research trustworthy for a reader who can't check it: a three-tier confidence label on every number, an adversarial audit loop that re-derives claims at their sources, and the honest downgrade when a source can't be read. The technique behind demo 10.",
    "cluster": "four-questions",
    "tier": 1,
    "routes": {
@@ -513,19 +857,22 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-03-28",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "companion duplicates its demo on a feed; the demo carries the incident",
      "postedAt": null,
-     "scheduledFor": "2026-12-24",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
      "mode": "skip",
      "state": "skip",
+     "reason": "no markdown body — rendered deck, nothing to cross-post",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -533,13 +880,125 @@
    }
   },
   {
-   "id": "demos/landmine-registry",
-   "title": "The Registry of Landmines",
-   "url": "https://ninochavez.co/demos/landmine-registry",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
+   "id": "applied/corpus",
+   "title": "Mine Your Own Transcripts",
+   "url": "https://ninochavez.co/demos/applied/corpus",
+   "publishedAt": "2026-07-16",
+   "collection": "applied",
    "words": 0,
-   "pitch": "Some load-bearing facts are invisible to search — the code compiles and the behavior is still wrong. One registry file holds them, a derive catalog enforces them in CI, and a meta-test keeps the registry from lying about itself.",
+   "pitch": "Every agent session is a transcript you usually throw away. Mine them instead: reusable prompts, your corrections as standing priors, and counted waste numbers that justify the next fix. The loop, from 614 real sessions.",
+   "cluster": "corpus",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "companion duplicates its demo on a feed; the demo carries the incident",
+     "caption": "captions/linkedin/applied--corpus.md",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "no markdown body — rendered deck, nothing to cross-post",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "applied/gates",
+   "title": "Gate Every Hand-Off",
+   "url": "https://ninochavez.co/demos/applied/gates",
+   "publishedAt": "2026-07-16",
+   "collection": "applied",
+   "words": 0,
+   "pitch": "An AI agent is strong inside a stage and weak at the seams between them. The fix is a deterministic gate on every hand-off — a non-AI check the agent can't talk its way past. The shape, and the day production published fiction.",
+   "cluster": "agentic-gates",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "companion duplicates its demo on a feed; the demo carries the incident",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "no markdown body — rendered deck, nothing to cross-post",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "applied/guardrails",
+   "title": "Promote a Correction to a Guardrail",
+   "url": "https://ninochavez.co/demos/applied/guardrails",
+   "publishedAt": "2026-07-16",
+   "collection": "applied",
+   "words": 0,
+   "pitch": "A correction you give an AI in chat dies with the session. The fix is changing its environment — a wrapper, a deny-hook, or a CI ratchet — so the rule holds forever. The three-rung ladder, with real deny-hooks firing.",
+   "cluster": "enforced-forever",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "companion duplicates its demo on a feed; the demo carries the incident",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "no markdown body — rendered deck, nothing to cross-post",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "applied/registry",
+   "title": "A Registry for What Grep Can't Find",
+   "url": "https://ninochavez.co/demos/applied/registry",
+   "publishedAt": "2026-07-16",
+   "collection": "applied",
+   "words": 0,
+   "pitch": "Some load-bearing facts are invisible to search — the code compiles and the behavior is still wrong. Hold them in one registry, enforce the mechanical ones in CI, and split why / decided / currently-true. The technique, quoted from a real 25-entry registry.",
    "cluster": "landmine-registry",
    "tier": 1,
    "routes": {
@@ -547,19 +1006,22 @@
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-04-18",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "companion duplicates its demo on a feed; the demo carries the incident",
      "postedAt": null,
-     "scheduledFor": "2027-01-07",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
      "mode": "skip",
      "state": "skip",
+     "reason": "no markdown body — rendered deck, nothing to cross-post",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -567,67 +1029,36 @@
    }
   },
   {
-   "id": "demos/said-it-checked",
-   "title": "The Agent Said It Checked",
-   "url": "https://ninochavez.co/demos/said-it-checked",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
+   "id": "applied/two-ways",
+   "title": "Two Ways to Draw a System",
+   "url": "https://ninochavez.co/demos/applied/two-ways",
+   "publishedAt": "2026-07-15",
+   "collection": "applied",
    "words": 0,
-   "pitch": "\"Verified\" is a sentence, not a fact. A security migration passed its audit while production was broken — and the discipline that came out of it caught three more false claims building this very series.",
-   "cluster": "said-it-checked",
+   "pitch": "How an AI agent draws a technical diagram that looks like your project and doesn't go stale — hand-authored SVG vs themed Mermaid, chosen per diagram. The first Applied technique companion to the ways-of-working session demos.",
+   "cluster": "two-ways",
    "tier": 1,
    "routes": {
     "substack": {
      "mode": "link",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-05-09",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-01-19",
-     "url": null
-    },
-    "devto": {
      "mode": "skip",
      "state": "skip",
+     "reason": "companion duplicates its demo on a feed; the demo carries the incident",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
-    }
-   }
-  },
-  {
-   "id": "demos/twelve-messages",
-   "title": "Twelve Messages",
-   "url": "https://ninochavez.co/demos/twelve-messages",
-   "publishedAt": "2026-07-01",
-   "collection": "demos",
-   "words": 0,
-   "pitch": "Everything typed to take a live event from spreadsheet chaos to published social content — and the method that made the other 99% happen.",
-   "cluster": "twelve-messages",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "link",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-05-30",
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-01-28",
-     "url": null
     },
     "devto": {
      "mode": "skip",
      "state": "skip",
+     "reason": "no markdown body — rendered deck, nothing to cross-post",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -648,13 +1079,14 @@
    "routes": {
     "substack": {
      "mode": "link",
-     "state": "draft",
+     "state": "posted",
      "reason": "6 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "caption": "captions/substack/blog--what-if-the-fork-is-the-problem.md",
-     "postedAt": null,
-     "scheduledFor": "2026-09-06",
-     "url": "https://signaldispatch.substack.com/publish/post/209790190",
-     "postId": 209790190
+     "postedAt": "2026-08-04",
+     "scheduledFor": null,
+     "url": "https://signaldispatch.substack.com/p/what-if-the-fork-is-the-problem",
+     "postId": 209790190,
+     "backfill": true
     },
     "linkedin": {
      "mode": "native",
@@ -690,8 +1122,9 @@
      "state": "eligible",
      "reason": "5 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-08-09",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "teaser",
@@ -724,8 +1157,9 @@
      "state": "eligible",
      "reason": "17 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-11-22",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "teaser",
@@ -793,15 +1227,17 @@
      "state": "eligible",
      "reason": "40 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-10-11",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "caption": "captions/linkedin/whitepapers--lie-surface.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-27",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -828,15 +1264,17 @@
      "state": "eligible",
      "reason": "44 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-11-08",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "caption": "captions/linkedin/whitepapers--big-blueprint-methodology.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-15",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -863,15 +1301,17 @@
      "state": "eligible",
      "reason": "10 table rows + 15 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-12-20",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "caption": "captions/linkedin/tutorials--make-your-cli-agent-native.md",
      "postedAt": null,
-     "scheduledFor": "2026-10-15",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -932,14 +1372,16 @@
      "state": "eligible",
      "reason": "13 table rows + 15 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-01-17",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2026-11-03",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -966,15 +1408,17 @@
      "state": "eligible",
      "reason": "5 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-10-04",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "caption": "captions/linkedin/blog--the-source-of-their-intelligence.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-11",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -1001,8 +1445,9 @@
      "state": "eligible",
      "reason": "6 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-11-01",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "teaser",
@@ -1037,15 +1482,17 @@
      "state": "eligible",
      "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-11-29",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "caption": "captions/linkedin/blog--the-identity-crisis-of-the-prompter.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-25",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -1074,15 +1521,17 @@
      "state": "eligible",
      "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-12-27",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "caption": "captions/linkedin/blog--the-taste-gap.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-10",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -1111,15 +1560,17 @@
      "state": "eligible",
      "reason": "5 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-01-24",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "caption": "captions/linkedin/blog--the-sommelier-argument.md",
      "postedAt": null,
-     "scheduledFor": "2026-10-01",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -1146,8 +1597,9 @@
      "state": "eligible",
      "reason": "5 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-02-21",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "native",
@@ -1180,15 +1632,17 @@
      "state": "eligible",
      "reason": "108 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2026-12-06",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "caption": "captions/linkedin/whitepapers--the-bifurcation-of-autonomy.md",
      "postedAt": null,
-     "scheduledFor": "2026-10-06",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -1215,8 +1669,9 @@
      "state": "eligible",
      "reason": "30 table rows + 19 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-02-14",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "teaser",
@@ -1249,14 +1704,16 @@
      "state": "eligible",
      "reason": "49 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-01-03",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2026-10-22",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -1285,14 +1742,16 @@
      "state": "eligible",
      "reason": "5 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-03-14",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2026-10-20",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -1318,16 +1777,18 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-04-04",
-     "url": null
+     "state": "posted",
+     "postedAt": "2026-08-10",
+     "scheduledFor": null,
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210599338/share-center",
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2026-11-05",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -1356,14 +1817,16 @@
      "state": "eligible",
      "reason": "5 table rows + 4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-04-25",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2026-11-19",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -1392,14 +1855,16 @@
      "state": "eligible",
      "reason": "5 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-05-16",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2026-12-03",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -1428,8 +1893,9 @@
      "state": "eligible",
      "reason": "13 table rows + 4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-06-06",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "native",
@@ -1464,14 +1930,16 @@
      "state": "eligible",
      "reason": "11 table rows + 4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-06-20",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2026-12-17",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -1500,14 +1968,16 @@
      "state": "eligible",
      "reason": "5 table rows + 6 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-07-04",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2026-12-31",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -1537,11 +2007,12 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "caption": "captions/linkedin/blog--two-doors-for-agents.md",
      "postedAt": null,
-     "scheduledFor": "2027-01-12",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -1630,18 +2101,20 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
+     "mode": "link",
+     "state": "eligible",
+     "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
      "scheduledFor": null,
-     "url": null
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-01-21",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -1668,14 +2141,16 @@
      "state": "eligible",
      "reason": "5 table rows + 5 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-07-18",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-02-02",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -1704,8 +2179,9 @@
      "state": "eligible",
      "reason": "7 table rows + 6 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-07-25",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "teaser",
@@ -1740,14 +2216,16 @@
      "state": "eligible",
      "reason": "7 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-08-01",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-02-09",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -1774,14 +2252,16 @@
      "state": "eligible",
      "reason": "89 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-01-31",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2026-11-10",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -1808,14 +2288,16 @@
      "state": "eligible",
      "reason": "69 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-02-28",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2026-11-24",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -1844,8 +2326,9 @@
      "state": "eligible",
      "reason": "7 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-08-08",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "teaser",
@@ -1880,14 +2363,16 @@
      "state": "eligible",
      "reason": "5 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-08-15",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-02-11",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -1922,7 +2407,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -1930,7 +2415,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -1952,14 +2436,16 @@
      "state": "eligible",
      "reason": "56 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-03-21",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2026-12-08",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -1989,10 +2475,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-02-16",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2019,14 +2506,16 @@
      "state": "eligible",
      "reason": "50 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-04-11",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2026-12-22",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2053,14 +2542,16 @@
      "state": "eligible",
      "reason": "41 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-05-02",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-01-05",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2153,8 +2644,9 @@
      "state": "eligible",
      "reason": "10 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-05-23",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "teaser",
@@ -2183,12 +2675,12 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210599429/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "native",
@@ -2217,12 +2709,12 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210599548/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "native",
@@ -2259,10 +2751,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-02-18",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2322,14 +2815,16 @@
      "state": "eligible",
      "reason": "24 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-06-13",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-01-14",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2353,16 +2848,18 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-08-22",
-     "url": null
+     "state": "posted",
+     "postedAt": "2026-08-10",
+     "scheduledFor": null,
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210599624/share-center",
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-02-23",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2386,16 +2883,18 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-08-29",
-     "url": null
+     "state": "posted",
+     "postedAt": "2026-08-10",
+     "scheduledFor": null,
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210599721/share-center",
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-02-25",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2422,14 +2921,16 @@
      "state": "eligible",
      "reason": "35 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-06-27",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-01-26",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2456,14 +2957,16 @@
      "state": "eligible",
      "reason": "23 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-07-11",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-02-04",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2493,10 +2996,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-03-02",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2526,10 +3030,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-03-04",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2559,10 +3064,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-03-09",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2586,16 +3092,18 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-09-05",
-     "url": null
+     "state": "posted",
+     "postedAt": "2026-08-10",
+     "scheduledFor": null,
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210599808/share-center",
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-03-11",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2693,10 +3201,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-03-16",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2760,10 +3269,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-03-18",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2793,10 +3303,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-03-23",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2819,18 +3330,19 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210599891/share-center",
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-03-25",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2861,10 +3373,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-03-30",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2894,10 +3407,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-04-01",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2928,10 +3442,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-04-06",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2961,10 +3476,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-04-08",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -2995,10 +3511,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-04-13",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -3029,10 +3546,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-04-15",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -3045,326 +3563,34 @@
    }
   },
   {
-   "id": "applied/adopt-or-skip",
-   "title": "Run the Subtraction Before You Install",
-   "url": "https://ninochavez.co/demos/applied/adopt-or-skip",
-   "publishedAt": "",
-   "collection": "applied",
-   "words": 0,
-   "pitch": "Four checks that run before anything touches your machine: enumerate what you already have, subtract it from what the tool ships into native, new, and blocked, query the part of the repository nobody curates, and confirm the uninstall actually works. The technique behind demo 12.",
-   "cluster": "one-component-i-didnt-already-have",
-   "tier": 1,
+   "id": "blog/the-depth-penalty-is-gone",
+   "title": "The Depth Penalty Is Gone",
+   "url": "https://ninochavez.co/blog/the-depth-penalty-is-gone",
+   "publishedAt": "2026-08-09",
+   "collection": "blog",
+   "words": 1012,
+   "cluster": "the-depth-penalty-is-gone",
+   "tier": 2,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "companion piece; the demo carries the story",
+     "mode": "link",
+     "state": "eligible",
+     "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": null,
+     "scheduledFor": "2026-08-11",
      "url": null
     },
     "linkedin": {
      "mode": "native",
-     "state": "eligible",
-     "caption": "captions/linkedin/applied--adopt-or-skip.md",
-     "postedAt": null,
-     "scheduledFor": "2026-08-20",
-     "url": null
+     "state": "posted",
+     "caption": "captions/linkedin/blog--the-depth-penalty-is-gone.md",
+     "postedAt": "2026-08-10",
+     "scheduledFor": null,
+     "url": "https://www.linkedin.com/feed/update/urn:li:activity:7492559625226199040/"
     },
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "applied/config-probe",
-   "title": "Bare-Arm Test Your Agent Config",
-   "url": "https://ninochavez.co/demos/applied/config-probe",
-   "publishedAt": "",
-   "collection": "applied",
-   "words": 0,
-   "pitch": "How to tell whether an AI behavior gap is the model or your harness: run the same model bare as a control arm, isolate suspect config blocks, validate candidate rules as experiment arms, and promote only what the grid confirms. The technique behind demo 11.",
-   "cluster": "config-probe",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "companion piece; the demo carries the story",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "caption": "captions/linkedin/applied--config-probe.md",
-     "postedAt": null,
-     "scheduledFor": "2026-09-01",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "applied/corpus",
-   "title": "Mine Your Own Transcripts",
-   "url": "https://ninochavez.co/demos/applied/corpus",
-   "publishedAt": "",
-   "collection": "applied",
-   "words": 0,
-   "pitch": "Every agent session is a transcript you usually throw away. Mine them instead: reusable prompts, your corrections as standing priors, and counted waste numbers that justify the next fix. The loop, from 614 real sessions.",
-   "cluster": "corpus",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "companion piece; the demo carries the story",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "caption": "captions/linkedin/applied--corpus.md",
-     "postedAt": null,
-     "scheduledFor": "2026-09-24",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "applied/gates",
-   "title": "Gate Every Hand-Off",
-   "url": "https://ninochavez.co/demos/applied/gates",
-   "publishedAt": "",
-   "collection": "applied",
-   "words": 0,
-   "pitch": "An AI agent is strong inside a stage and weak at the seams between them. The fix is a deterministic gate on every hand-off — a non-AI check the agent can't talk its way past. The shape, and the day production published fiction.",
-   "cluster": "agentic-gates",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "companion piece; the demo carries the story",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-10-13",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "applied/guardrails",
-   "title": "Promote a Correction to a Guardrail",
-   "url": "https://ninochavez.co/demos/applied/guardrails",
-   "publishedAt": "",
-   "collection": "applied",
-   "words": 0,
-   "pitch": "A correction you give an AI in chat dies with the session. The fix is changing its environment — a wrapper, a deny-hook, or a CI ratchet — so the rule holds forever. The three-rung ladder, with real deny-hooks firing.",
-   "cluster": "enforced-forever",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "companion piece; the demo carries the story",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-10-29",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "applied/provenance",
-   "title": "Put Provenance Labels on AI Research",
-   "url": "https://ninochavez.co/demos/applied/provenance",
-   "publishedAt": "",
-   "collection": "applied",
-   "words": 0,
-   "pitch": "How to make AI-assisted research trustworthy for a reader who can't check it: a three-tier confidence label on every number, an adversarial audit loop that re-derives claims at their sources, and the honest downgrade when a source can't be read. The technique behind demo 10.",
-   "cluster": "four-questions",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "companion piece; the demo carries the story",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-11-17",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "applied/registry",
-   "title": "A Registry for What Grep Can't Find",
-   "url": "https://ninochavez.co/demos/applied/registry",
-   "publishedAt": "",
-   "collection": "applied",
-   "words": 0,
-   "pitch": "Some load-bearing facts are invisible to search — the code compiles and the behavior is still wrong. Hold them in one registry, enforce the mechanical ones in CI, and split why / decided / currently-true. The technique, quoted from a real 25-entry registry.",
-   "cluster": "landmine-registry",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "companion piece; the demo carries the story",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-12-01",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "applied/session-closeout",
-   "title": "Close the Session, Keep the Lesson",
-   "url": "https://ninochavez.co/demos/applied/session-closeout",
-   "publishedAt": "",
-   "collection": "applied",
-   "words": 0,
-   "pitch": "Promote project truth, distill the reusable method, enqueue fast, mine in the background, and delete raw transcripts only after an explicit archive-safety receipt.",
-   "cluster": "session-corpus",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "companion piece; the demo carries the story",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-12-15",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "applied/two-ways",
-   "title": "Two Ways to Draw a System",
-   "url": "https://ninochavez.co/demos/applied/two-ways",
-   "publishedAt": "",
-   "collection": "applied",
-   "words": 0,
-   "pitch": "How an AI agent draws a technical diagram that looks like your project and doesn't go stale — hand-authored SVG vs themed Mermaid, chosen per diagram. The first Applied technique companion to the ways-of-working session demos.",
-   "cluster": "two-ways",
-   "tier": 1,
-   "routes": {
-    "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "companion piece; the demo carries the story",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    },
-    "linkedin": {
-     "mode": "native",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2026-12-29",
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -3386,14 +3612,15 @@
      "state": "eligible",
      "reason": "4 table rows + 4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-09-12",
+     "scheduledFor": "2026-08-12",
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-04-20",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -3420,14 +3647,15 @@
      "state": "eligible",
      "reason": "8 table rows + 4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-10-03",
+     "scheduledFor": "2026-08-13",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
+     "caption": "captions/linkedin/blog--the-loudest-voice-in-my-voice-corpus-isnt-mine.md",
      "postedAt": null,
-     "scheduledFor": "2027-04-29",
+     "scheduledFor": "2026-08-11",
      "url": null
     },
     "devto": {
@@ -3451,10 +3679,10 @@
    "routes": {
     "substack": {
      "mode": "link",
-     "state": "eligible",
+     "state": "posted",
      "reason": "4 table rows — Substack renders neither, so the body cannot go across intact",
-     "postedAt": null,
-     "scheduledFor": "2027-10-24",
+     "postedAt": "archive",
+     "scheduledFor": null,
      "url": null
     },
     "linkedin": {
@@ -3462,7 +3690,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--the-cut-youll-make-twice.md",
      "postedAt": null,
-     "scheduledFor": "2027-05-11",
+     "scheduledFor": "2026-08-20",
      "url": null
     },
     "devto": {
@@ -3488,7 +3716,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-11-14",
+     "scheduledFor": "2026-08-14",
      "url": null
     },
     "linkedin": {
@@ -3496,7 +3724,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--the-style-guide-was-teaching-the-tells.md",
      "postedAt": null,
-     "scheduledFor": "2027-05-20",
+     "scheduledFor": "2026-08-27",
      "url": null
     },
     "devto": {
@@ -3523,14 +3751,14 @@
      "state": "eligible",
      "reason": "10 table rows + 5 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-12-05",
+     "scheduledFor": "2026-08-15",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-01",
+     "scheduledFor": "2026-09-03",
      "url": null
     },
     "devto": {
@@ -3557,14 +3785,14 @@
      "state": "eligible",
      "reason": "6 table rows + 6 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-12-19",
+     "scheduledFor": "2026-08-16",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-08",
+     "scheduledFor": "2026-09-10",
      "url": null
     },
     "devto": {
@@ -3591,14 +3819,14 @@
      "state": "eligible",
      "reason": "6 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-01-02",
+     "scheduledFor": "2026-08-17",
      "url": null
     },
     "linkedin": {
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-10",
+     "scheduledFor": "2026-09-17",
      "url": null
     },
     "devto": {
@@ -3625,14 +3853,15 @@
      "state": "eligible",
      "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-01-16",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2027-06-15",
+     "scheduledFor": "2026-09-24",
      "url": null
     },
     "devto": {
@@ -3692,15 +3921,18 @@
      "state": "eligible",
      "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-01-30",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "native",
-     "state": "eligible",
+     "state": "skip-manual",
+     "admittedOn": "2026-08-09",
      "postedAt": null,
-     "scheduledFor": "2027-06-17",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "reason": "802w note from the 2026-06-16 batch — cut from the feed 2026-08-09, kept on Substack"
     },
     "devto": {
      "mode": "skip",
@@ -3726,15 +3958,18 @@
      "state": "eligible",
      "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-02-13",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "native",
-     "state": "eligible",
+     "state": "skip-manual",
+     "admittedOn": "2026-08-09",
      "postedAt": null,
-     "scheduledFor": "2027-06-22",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "reason": "967w note from the 2026-06-16 batch — cut from the feed 2026-08-09, kept on Substack"
     },
     "devto": {
      "mode": "skip",
@@ -3760,8 +3995,9 @@
      "state": "eligible",
      "reason": "2 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-02-27",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "native",
@@ -3794,14 +4030,16 @@
      "state": "eligible",
      "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-03-05",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-06-24",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -3828,8 +4066,9 @@
      "state": "eligible",
      "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-03-12",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "native",
@@ -3862,14 +4101,16 @@
      "state": "eligible",
      "reason": "12 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-09-26",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-04-27",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -3896,14 +4137,16 @@
      "state": "eligible",
      "reason": "6 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-03-19",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-06-29",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -3930,8 +4173,9 @@
      "state": "eligible",
      "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-03-26",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "native",
@@ -3964,14 +4208,16 @@
      "state": "eligible",
      "reason": "12 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-10-17",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-05-06",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -3998,8 +4244,9 @@
      "state": "eligible",
      "reason": "2 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-04-02",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "native",
@@ -4029,10 +4276,11 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2028-04-09",
-     "url": null
+     "state": "posted",
+     "postedAt": "2026-08-10",
+     "scheduledFor": null,
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210599987/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "native",
@@ -4065,14 +4313,16 @@
      "state": "eligible",
      "reason": "6 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-04-16",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-07-01",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -4099,14 +4349,16 @@
      "state": "eligible",
      "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-04-23",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-07-06",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -4132,10 +4384,11 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-09-19",
-     "url": null
+     "state": "posted",
+     "postedAt": "2026-08-10",
+     "scheduledFor": null,
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210600332/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -4168,10 +4421,11 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-10-10",
-     "url": null
+     "state": "posted",
+     "postedAt": "2026-08-10",
+     "scheduledFor": null,
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210600418/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -4204,10 +4458,11 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-10-31",
-     "url": null
+     "state": "posted",
+     "postedAt": "2026-08-10",
+     "scheduledFor": null,
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210600519/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -4240,10 +4495,11 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-11-21",
-     "url": null
+     "state": "posted",
+     "postedAt": "2026-08-10",
+     "scheduledFor": null,
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210600601/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -4276,10 +4532,11 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-12-12",
-     "url": null
+     "state": "posted",
+     "postedAt": "2026-08-10",
+     "scheduledFor": null,
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210600696/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -4312,10 +4569,11 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2027-12-26",
-     "url": null
+     "state": "posted",
+     "postedAt": "2026-08-10",
+     "scheduledFor": null,
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210600780/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -4348,10 +4606,11 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2028-01-09",
-     "url": null
+     "state": "posted",
+     "postedAt": "2026-08-10",
+     "scheduledFor": null,
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210600857/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -4384,10 +4643,11 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2028-01-23",
-     "url": null
+     "state": "posted",
+     "postedAt": "2026-08-10",
+     "scheduledFor": null,
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210600935/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -4420,10 +4680,11 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2028-02-06",
-     "url": null
+     "state": "posted",
+     "postedAt": "2026-08-10",
+     "scheduledFor": null,
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210601035/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -4456,10 +4717,11 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2028-02-20",
-     "url": null
+     "state": "posted",
+     "postedAt": "2026-08-10",
+     "scheduledFor": null,
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210601103/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -4493,8 +4755,9 @@
      "state": "eligible",
      "reason": "5 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-04-30",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "teaser",
@@ -4527,14 +4790,16 @@
      "state": "eligible",
      "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-05-07",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-07-08",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -4594,14 +4859,16 @@
      "state": "eligible",
      "reason": "6 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-05-14",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-07-13",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -4628,14 +4895,16 @@
      "state": "eligible",
      "reason": "6 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-05-21",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-07-15",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -4696,8 +4965,9 @@
      "state": "eligible",
      "reason": "5 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-05-28",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "teaser",
@@ -4730,14 +5000,16 @@
      "state": "eligible",
      "reason": "5 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-06-04",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-07-20",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -4764,14 +5036,16 @@
      "state": "eligible",
      "reason": "5 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-06-11",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-07-22",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -4798,14 +5072,16 @@
      "state": "eligible",
      "reason": "30 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-11-07",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-05-18",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -4836,10 +5112,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "link",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-04-22",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -4869,10 +5146,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-07-27",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -4902,10 +5180,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-07-29",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -4932,8 +5211,9 @@
      "state": "eligible",
      "reason": "5 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-06-18",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "teaser",
@@ -4969,10 +5249,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-08-03",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -4999,14 +5280,16 @@
      "state": "eligible",
      "reason": "19 table rows — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2027-11-28",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-05-27",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -5070,10 +5353,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "link",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-05-04",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -5104,10 +5388,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "link",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-05-13",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -5202,8 +5487,9 @@
      "state": "eligible",
      "reason": "7 table rows + 7 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
-     "scheduledFor": "2028-06-25",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "teaser",
@@ -5274,10 +5560,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "link",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-05-25",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -5301,10 +5588,11 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2028-07-02",
-     "url": null
+     "state": "posted",
+     "postedAt": "2026-08-10",
+     "scheduledFor": null,
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210601190/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "teaser",
@@ -5412,7 +5700,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -5420,7 +5708,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -5450,7 +5737,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -5458,7 +5745,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -5479,16 +5765,18 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2028-07-09",
-     "url": null
+     "state": "posted",
+     "postedAt": "2026-08-10",
+     "scheduledFor": null,
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210601269/share-center",
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-08-05",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -5512,16 +5800,18 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
-     "scheduledFor": "2028-07-16",
-     "url": null
+     "state": "posted",
+     "postedAt": "2026-08-10",
+     "scheduledFor": null,
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210601385/share-center",
+     "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-08-10",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -5586,10 +5876,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "link",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-06-03",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -5619,10 +5910,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-08-12",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -5654,7 +5946,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -5662,7 +5954,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -5680,12 +5971,12 @@
    "tier": 2,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210601488/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -5698,7 +5989,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -5726,7 +6016,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -5734,7 +6024,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -5762,7 +6051,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -5770,7 +6059,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -5798,7 +6086,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -5806,7 +6094,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -5824,19 +6111,22 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
+     "mode": "link",
+     "state": "eligible",
+     "reason": "2 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
      "scheduledFor": null,
-     "url": null
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "native",
-     "state": "eligible",
+     "state": "skip-manual",
+     "admittedOn": "2026-08-09",
      "postedAt": null,
-     "scheduledFor": "2027-08-17",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "reason": "677w note from the 2026-06-16 batch — cut from the feed 2026-08-09, kept on Substack"
     },
     "devto": {
      "mode": "skip",
@@ -5858,19 +6148,22 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
+     "mode": "link",
+     "state": "eligible",
+     "reason": "4 MDX nodes — Substack renders neither, so the body cannot go across intact",
      "postedAt": null,
      "scheduledFor": null,
-     "url": null
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "native",
-     "state": "eligible",
+     "state": "skip-manual",
+     "admittedOn": "2026-08-09",
      "postedAt": null,
-     "scheduledFor": "2027-08-19",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "reason": "731w note from the 2026-06-16 batch — cut from the feed 2026-08-09, kept on Substack"
     },
     "devto": {
      "mode": "skip",
@@ -5936,10 +6229,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-08-24",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -6038,10 +6332,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-08-26",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -6072,10 +6367,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-08-31",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -6106,10 +6402,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-09-02",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -6132,12 +6429,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210601560/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -6167,12 +6464,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210601641/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -6202,12 +6499,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210601715/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -6237,12 +6534,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210601816/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -6272,12 +6569,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210601904/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -6307,12 +6604,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210602001/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -6342,12 +6639,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210602108/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -6377,12 +6674,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210602203/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -6412,12 +6709,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210602304/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -6447,12 +6744,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210602393/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -6482,12 +6779,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210602482/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -6517,12 +6814,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210602579/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -6560,10 +6857,11 @@
      "url": null
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
-     "scheduledFor": "2027-09-07",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -6621,12 +6919,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210602688/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -6656,12 +6954,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210602782/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -6691,12 +6989,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "too short to carry an issue alone",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210602881/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -6736,7 +7034,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -6744,7 +7042,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -6772,7 +7069,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -6780,7 +7077,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -6808,7 +7104,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -6816,7 +7112,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -6844,7 +7139,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -6852,7 +7147,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -6870,12 +7164,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210602962/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -6888,7 +7182,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -6906,12 +7199,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210603050/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -6924,7 +7217,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -6952,7 +7244,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -6960,7 +7252,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -6978,12 +7269,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210603164/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -6996,7 +7287,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7014,12 +7304,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210603257/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -7032,7 +7322,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7050,12 +7339,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210603342/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -7068,7 +7357,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7096,7 +7384,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7104,7 +7392,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7122,12 +7409,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210603435/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -7140,7 +7427,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7168,7 +7454,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7176,7 +7462,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7194,12 +7479,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210603507/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -7212,7 +7497,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7240,7 +7524,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7248,7 +7532,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7276,7 +7559,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7284,7 +7567,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7312,7 +7594,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7320,7 +7602,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7338,12 +7619,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210603599/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -7356,7 +7637,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7374,12 +7654,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210603686/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -7392,7 +7672,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7420,7 +7699,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7428,7 +7707,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7446,12 +7724,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210603780/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -7464,7 +7742,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7482,12 +7759,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210603877/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -7500,7 +7777,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7518,12 +7794,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210603966/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -7536,7 +7812,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7554,12 +7829,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210604072/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -7572,7 +7847,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7590,12 +7864,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210604159/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -7608,7 +7882,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7626,12 +7899,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210604252/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -7644,7 +7917,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7662,12 +7934,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210604343/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -7680,7 +7952,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7698,12 +7969,12 @@
    "tier": 3,
    "routes": {
     "substack": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
-     "postedAt": null,
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-10",
      "scheduledFor": null,
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/210598030/share-center",
+     "backfill": true
     },
     "linkedin": {
      "mode": "skip",
@@ -7716,7 +7987,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7744,7 +8014,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7752,7 +8022,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7780,7 +8049,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7788,7 +8057,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7816,7 +8084,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7824,7 +8092,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7852,7 +8119,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7860,7 +8127,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7888,7 +8154,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7896,7 +8162,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7924,7 +8189,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7932,7 +8197,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7962,7 +8226,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -7970,7 +8234,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8000,7 +8263,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8008,7 +8271,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8038,7 +8300,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8046,7 +8308,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8076,7 +8337,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8084,7 +8345,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8114,7 +8374,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8122,7 +8382,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8150,7 +8409,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8158,7 +8417,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8186,7 +8444,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8194,7 +8452,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8222,7 +8479,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8230,7 +8487,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8258,7 +8514,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8266,7 +8522,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8294,7 +8549,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8302,7 +8557,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8330,7 +8584,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8338,7 +8592,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8366,7 +8619,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8374,7 +8627,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8402,7 +8654,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8410,7 +8662,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8438,7 +8689,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8446,7 +8697,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8474,7 +8724,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8482,7 +8732,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8510,7 +8759,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8518,7 +8767,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8546,7 +8794,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8554,7 +8802,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8582,7 +8829,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8590,7 +8837,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8618,7 +8864,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8626,7 +8872,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8654,7 +8899,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8662,7 +8907,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8690,7 +8934,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8698,7 +8942,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8728,7 +8971,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8736,7 +8979,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8766,7 +9008,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8774,7 +9016,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8804,7 +9045,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8812,7 +9053,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8842,7 +9082,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8850,7 +9090,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8880,7 +9119,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8888,7 +9127,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8916,7 +9154,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8924,7 +9162,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8952,7 +9189,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8960,7 +9197,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8988,7 +9224,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -8996,7 +9232,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9026,7 +9261,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9034,7 +9269,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9064,7 +9298,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9072,7 +9306,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9100,7 +9333,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9108,7 +9341,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9136,7 +9368,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9144,7 +9376,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9172,7 +9403,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9180,7 +9411,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9208,7 +9438,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9216,7 +9446,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9244,7 +9473,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9252,7 +9481,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9280,7 +9508,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9288,7 +9516,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9316,7 +9543,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9324,7 +9551,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9352,7 +9578,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9360,7 +9586,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9388,7 +9613,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9396,7 +9621,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9424,7 +9648,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9432,7 +9656,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9460,7 +9683,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9468,7 +9691,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9496,7 +9718,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9504,7 +9726,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9532,7 +9753,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9540,7 +9761,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9568,7 +9788,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9576,7 +9796,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9604,7 +9823,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9612,7 +9831,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9640,7 +9858,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9648,7 +9866,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9676,7 +9893,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9684,7 +9901,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9712,7 +9928,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9720,7 +9936,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9748,7 +9963,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9756,7 +9971,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9784,7 +9998,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9792,7 +10006,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9820,7 +10033,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9828,7 +10041,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9856,7 +10068,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9864,7 +10076,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9892,7 +10103,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9900,7 +10111,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9928,7 +10138,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9936,7 +10146,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9964,7 +10173,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -9972,7 +10181,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10000,7 +10208,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10008,7 +10216,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10036,7 +10243,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10044,7 +10251,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10072,7 +10278,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10080,7 +10286,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10108,7 +10313,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10116,7 +10321,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10144,7 +10348,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10152,7 +10356,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10180,7 +10383,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10188,7 +10391,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10216,7 +10418,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10224,7 +10426,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10252,7 +10453,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10260,7 +10461,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10288,7 +10488,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10296,7 +10496,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10324,7 +10523,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10332,7 +10531,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10360,7 +10558,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10368,7 +10566,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10398,7 +10595,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10406,7 +10603,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10436,7 +10632,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10444,7 +10640,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10474,7 +10669,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10482,7 +10677,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10510,7 +10704,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10518,7 +10712,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10546,7 +10739,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10554,7 +10747,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10582,7 +10774,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10590,7 +10782,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10618,7 +10809,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10626,7 +10817,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10654,7 +10844,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10662,7 +10852,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10692,7 +10881,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10700,7 +10889,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10730,7 +10918,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10738,7 +10926,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10766,7 +10953,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10774,7 +10961,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10802,7 +10988,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10810,7 +10996,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10838,7 +11023,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10846,7 +11031,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10874,7 +11058,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10882,7 +11066,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10910,7 +11093,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10918,7 +11101,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10946,7 +11128,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10954,7 +11136,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10982,7 +11163,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -10990,7 +11171,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -11018,7 +11198,7 @@
     "linkedin": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -11026,7 +11206,6 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "older than 12 months and not featured — archive, not drip",
      "postedAt": null,
      "scheduledFor": null,
      "url": null

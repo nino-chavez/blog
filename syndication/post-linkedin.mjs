@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 // Post a queued LinkedIn item by driving the composer in browser-box.
 //
-//   node syndication/post-linkedin.mjs --dry            # open composer, fill, screenshot, DO NOT publish
+//   node syndication/post-linkedin.mjs --dry            # open composer, fill, screenshot, DO NOT click Post
+//
+// WARNING: --dry is not a safe rehearsal. It still types the caption into the
+// live composer, and on 2026-08-10 a --dry run published a real post that way.
+// It suppresses the Post CLICK; it cannot suppress the composer. Treat every
+// invocation as potentially publishing and check the account afterward.
 //   node syndication/post-linkedin.mjs --id <queue-id>  # publish that one
 //   node syndication/post-linkedin.mjs --due            # publish everything due today or earlier
 //
@@ -118,7 +123,30 @@ for (const item of targets) {
   await page.screenshot({ path: shot })
   console.log(`   screenshot ${shot}`)
 
-  const typed = await page.$eval(EDITOR_SEL, (el) => el.innerText.trim())
+  // Read back through the handle we already hold, NOT a fresh page.$eval on the
+  // shadow-piercing selector. `page.$` finds this editor and `page.$eval` does
+  // not, because $eval re-queries in page context where `>>>` resolves
+  // differently — so the verification threw every time while the typing above
+  // had already succeeded.
+  //
+  // 2026-08-10 INCIDENT — that throw is how a --dry run published a live post.
+  // The DRY guard below is correct and correctly placed, but it sits AFTER this
+  // line, and this line threw, so control never reached it. By then the caption
+  // was already public: the act of filling the composer is itself capable of
+  // publishing, because `editor.type()` delivers real keystrokes and the handle
+  // can detach mid-type (the same detachment that breaks $eval). Whatever
+  // receives the remaining keys is no longer the editor.
+  //
+  // The lesson is structural, not a typo: a dry-run flag cannot make an action
+  // safe when the setup for that action can perform it. Any guard has to sit
+  // before the first keystroke, not before the Post click.
+  const typed = await editor.evaluate((el) => el.innerText.trim()).catch(() => null)
+  if (typed === null) {
+    throw new Error(
+      'editor handle detached during typing — the composer may have already published. ' +
+        'CHECK THE ACCOUNT before re-running; do not assume this was a no-op.'
+    )
+  }
   const ok = typed.length >= body.length * 0.95
   console.log(`   editor holds ${typed.length}/${body.length} chars ${ok ? 'ok' : 'SHORT'}`)
   if (!ok) throw new Error('composer did not receive the full caption — not publishing')
