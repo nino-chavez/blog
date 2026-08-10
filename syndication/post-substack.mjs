@@ -132,6 +132,32 @@ for (const item of targets) {
       t.replaceWith(pre)
     }
 
+    // <PullQuote> renders as <figure><blockquote><div>text</div><figcaption>.
+    // Substack's paste handler discards the <figure> and takes its contents
+    // with it, so the quote's sentence never arrives. Caught 2026-08-10 on
+    // blog/the-ai-analyst: 1653 words in, 1634 out, and the only prose missing
+    // was the pull quote — which is unique copy there, not a repeat of a body
+    // line, so it was a silently lost sentence rather than a lost duplicate.
+    //
+    // Rebuild each one as a bare <blockquote> of paragraphs, which pastes
+    // intact. Only figures that actually contain a blockquote are touched, so
+    // image figures keep whatever handling they already get.
+    let quoteCount = 0
+    for (const f of clone.querySelectorAll('figure')) {
+      const inner = f.querySelector('blockquote')
+      if (!inner) continue
+      const lines = inner.innerText.split('\n').map((l) => l.trim()).filter(Boolean)
+      if (!lines.length) continue
+      const bq = document.createElement('blockquote')
+      for (const l of lines) {
+        const p = document.createElement('p')
+        p.textContent = l
+        bq.appendChild(p)
+      }
+      f.replaceWith(bq)
+      quoteCount++
+    }
+
     return {
       html: clone.innerHTML,
       text: clone.innerText,
@@ -140,12 +166,13 @@ for (const item of targets) {
         pre: clone.querySelectorAll('pre').length,
         table: tableCount,
         quote: clone.querySelectorAll('blockquote').length,
+        pullquote: quoteCount,
       },
     }
   }, BODY_SEL)
   await src.close()
   if (!html) throw new Error(`${item.id}: no body block (${BODY_SEL}) found at ${ORIGIN + path}`)
-  console.log(`   source ${text.split(/\s+/).length} words — h2:${counts.h2} pre:${counts.pre} (${counts.table} table->pre) quote:${counts.quote}`)
+  console.log(`   source ${text.split(/\s+/).length} words — h2:${counts.h2} pre:${counts.pre} (${counts.table} table->pre) quote:${counts.quote} (${counts.pullquote} figure->quote)`)
 
   // 2. Open a fresh draft.
   const page = await browser.newPage()

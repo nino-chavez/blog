@@ -62,20 +62,20 @@ function frontmatter(text) {
     seriesPos: seriesPos ? Number(seriesPos[1]) : 0,
     companionOf: companion ? companion[1].trim() : '',
     words: body.trim().split(/\s+/).length,
-    // Substack's editor has no table node. Verified 2026-08-04 by pasting real
-    // <table> markup into it: zero table elements survived and the cells
-    // flattened to run-together text ("ClassCheckableEnumerableYesDerivedNo").
-    // A piece with tables therefore cannot go across as `full`, so the count is
-    // carried here and routing downgrades on it.
+    // Kept as reporting only. Both counts once gated Substack routing, on the
+    // premise that `full` meant pasting this source into the editor. The poster
+    // lifts the rendered page instead, where tables are rewritten to aligned
+    // <pre> and MDX components are already ordinary HTML — so neither count
+    // describes anything the poster cannot do. See the routing note in
+    // routeWithGuards for the measurements that retired the gate.
     tableRows: (body.match(/^\s*\|/gm) || []).length,
-    // Same problem, second cause. Blog posts are MDX: they carry `import`
-    // statements and JSX components (<Callout>, <PullQuote>, <Figure>,
-    // <Mermaid>, and the tutorial set). Substack renders none of it — a paste
-    // puts `import { Callout } from '@/components/mdx/Callout';` and the raw
-    // tags into the issue. 32 of the 51 remaining `full` items carry these.
     mdxNodes:
       (body.match(/^import .*from '@\/components/gm) || []).length +
       (body.match(/<(Callout|PullQuote|Figure|Mermaid|Slide|Exercise|Template|Checkpoint)\b/g) || []).length,
+    // Components that render to a diagram, image, or deck rather than to text.
+    // These are the only ones that genuinely cannot go across: the poster reads
+    // innerText, so they lift as empty and the piece silently arrives short.
+    nonTextNodes: (body.match(/<(Mermaid|Figure|Slide)\b/g) || []).length,
   }
 }
 
@@ -188,6 +188,7 @@ function readDemos() {
         seriesPos: Number(m.number) || 0,
         tableRows: 0,
         mdxNodes: 0,
+        nonTextNodes: 0,
         category: 'Demo',
         url: `${SITE}/demos/${kind === 'applied' ? 'applied/' : ''}${slug}`,
       })
@@ -476,29 +477,39 @@ function routeWithGuards(p, now, picks) {
   if (out.routes.linkedin.mode !== 'skip' && !picks.has(id)) {
     out.routes.linkedin = { mode: 'skip', reason: 'not in linkedin-picks.json' }
   }
-  // `full` means a human pastes the body into Substack's editor. That editor has
-  // no table node — pasting real <table> markup yields zero tables and cells run
-  // together into one string, verified 2026-08-04 while trying to send
-  // claim-classes (79 table rows). So `full` is not a mode this piece can use,
-  // and the queue must not instruct someone to paste something that arrives
-  // broken. It becomes `link` — the mode demos already use — which is a framing
-  // note plus a link home.
+  // This gate used to downgrade any piece with tables or MDX nodes to `link`,
+  // on the premise that `full` meant a human pasting the source. That premise
+  // expired when post-substack.mjs started lifting the RENDERED body off the
+  // site, and nothing here was updated to match. The result was a routing rule
+  // asserting a limit the poster does not have:
   //
-  // This is not a niche case: 35 of 85 queued `full` items carry tables, and it
-  // is every whitepaper, because whitepapers are the one collection the repo's
-  // CLAUDE.md tells you to use tables liberally in.
+  //   - Tables. post-substack.mjs already rewrites every <table> into an
+  //     aligned monospace <pre>, with a comment explaining why. That code had
+  //     never once executed, because this gate diverted every table-bearing
+  //     piece before the poster could see it. Verified 2026-08-10 on
+  //     the-bifurcation-of-autonomy, the heaviest in the corpus: 15 tables,
+  //     108 rows, 4689 words in and 4687 out, all 15 converted and aligned.
   //
-  // The predicate is "does this body survive a paste", not "does it have
-  // tables". Tables were the first cause found; MDX components are the second,
-  // and both fail the same way — the reader gets markup instead of prose.
-  if (out.routes.substack?.mode === 'full' && (p.tableRows > 0 || p.mdxNodes > 0)) {
-    const why = [
-      p.tableRows > 0 ? `${p.tableRows} table rows` : '',
-      p.mdxNodes > 0 ? `${p.mdxNodes} MDX nodes` : '',
-    ].filter(Boolean).join(' + ')
+  //   - MDX. The poster reads rendered HTML, so there is no MDX left by the
+  //     time it looks. <Callout> is already an <aside> with a heading;
+  //     <PullQuote> is already a <figure><blockquote>. Verified same day on
+  //     grade-an-agent-tool-before-you-install-it, which uses five component
+  //     types and came across whole.
+  //
+  // Counting source syntax was the error. A source-level count sees markup it
+  // cannot interpret and reports that as an incompatibility, which is a claim
+  // about the poster's capability made without reference to the poster.
+  //
+  // What survives is the narrow case the counts were reaching for: a component
+  // that renders to something other than text. Those lift as empty. <Slide> is
+  // the only one in the corpus and lives solely in `presentations`, already
+  // `link` above; <Mermaid> and <Figure> were named in the old comment but
+  // appear in no content file. The guard stays anyway, because the failure is
+  // silent — an empty lift reads as a short post, not as an error.
+  if (out.routes.substack?.mode === 'full' && p.nonTextNodes > 0) {
     out.routes.substack = {
       mode: 'link',
-      reason: `${why} — Substack renders neither, so the body cannot go across intact`,
+      reason: 'renders to a diagram or deck, which lifts as empty text',
     }
   }
   return out
