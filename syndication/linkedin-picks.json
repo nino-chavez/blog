@@ -1,0 +1,79 @@
+{
+  "_comment": [
+    "The LinkedIn feed, by explicit selection. Membership in `picks` is the ONLY",
+    "thing that makes a piece eligible for LinkedIn — there is no window, no tier,",
+    "no word floor, no aging rule. Adding a line here is how a piece gets fed.",
+    "",
+    "This file exists because the alternatives failed. A 12-month horizon let 2025",
+    "essays hold 2027 slots. A 2-month window plus sticky admission needed a second",
+    "mechanism to undo itself. A 1000-word floor silently governed all future",
+    "writing when the instruction had been to select from a known 37. Selection is",
+    "editorial, so it is stored as editorial rather than approximated by a rule that",
+    "keeps re-deciding.",
+    "",
+    "`reviewed` records how far the source was actually read before picking:",
+    "  full    — source read end to end (demo deck, or the essay itself)",
+    "  summary — excerpt, takeaway, and opening read; not the full body",
+    "Do not upgrade a value without doing the reading. A pick marked `summary` is a",
+    "defensible shortlist entry, not a verified judgment.",
+    "",
+    "Built 2026-08-09 from the last 30 days, using real dates: demo dates come from",
+    "git first-commit, not meta.json's month bucket, which ran up to two weeks early."
+  ],
+
+  "picks": [
+    { "id": "blog/the-depth-penalty-is-gone", "reviewed": "full",
+      "why": "49 of 95 programs past their end date reported as live, 21 still taking signups; a consent near-miss nobody asked about; and it prices its own claim — proposals, not invoices" },
+    { "id": "whitepapers/the-sum-of-your-gaps", "reviewed": "full",
+      "why": "the census corrects itself against its own thesis and withdraws the claim; the strongest evidence-handling piece in the window" },
+    { "id": "blog/the-loudest-voice-in-my-voice-corpus-isnt-mine", "reviewed": "full",
+      "why": "the top entry in his agent's character sheet is a sentence he never typed; one contaminating string is 1 in 10 signals, and stripping it halves the correction bucket" },
+    { "id": "blog/the-cut-youll-make-twice", "reviewed": "full",
+      "why": "three grades of constraint — rule, valve, jig — and the discovery that the one line enforcing the constraint is the same line that swallows the evidence" },
+    { "id": "blog/the-style-guide-was-teaching-the-tells", "reviewed": "full",
+      "why": "the checker docks a draft for missing a phrase his own guide bans; 15% of the tone corpus was machine-written; and the email guide lost to its own no-guide control, 263 vs 171" },
+    { "id": "demos/gate-first", "reviewed": "summary",
+      "why": "newest demo, first commit 2026-08-08" },
+    { "id": "blog/one-component-i-didnt-already-have", "reviewed": "summary",
+      "why": "66,000 stars, eight components, seven already covered — the argument, stronger here than in its tutorial" },
+    { "id": "blog/every-link-resolves-nothing-checks-the-number", "reviewed": "summary",
+      "why": "an invented figure survives every automated check he built; he went looking for the hole on purpose" },
+    { "id": "blog/nothing-broke-it-just-wasnt-there", "reviewed": "summary",
+      "why": "the tool ran, fixed two real problems, and was gone in four days — working and existing durably are different properties" },
+    { "id": "demos/twelve-messages", "reviewed": "full",
+      "why": "series entry point; twelve verbatim messages, and the honest failure report of the render that is simply gone" },
+    { "id": "demos/browse-tool", "reviewed": "full",
+      "why": "18,000 tokens of always-loaded schema replaced by ten commands, and the agent misusing its own tool on camera" },
+    { "id": "demos/enforced-forever", "reviewed": "full",
+      "why": "122 pkills, 553 permission questions, a 41x replay multiplier — every guard traced to a counted waste pattern" },
+    { "id": "blog/i-configured-my-agent-to-agree-with-me", "reviewed": "summary",
+      "why": "controlled experiment on his own harness where the vanilla arm argued back and the configured one did not" },
+    { "id": "demos/said-it-checked", "reviewed": "summary",
+      "why": "\"verified\" is a sentence, not a fact — a migration passed its audit while production was broken" },
+    { "id": "demos/agentic-gates", "reviewed": "summary",
+      "why": "a production site publishing fiction because a migration sweep did exactly what it was told" }
+  ],
+
+  "considered_not_picked": {
+    "_comment": "Reviewed and left out, with the reason. Move one into `picks` to feed it.",
+    "blog/there-was-never-a-person-in-that-seat": "same subject as the whitepaper picked above; the whitepaper is the stronger artifact",
+    "whitepapers/claim-classes": "technical companion to every-link-resolves, which is picked",
+    "tutorials/grade-an-agent-tool-before-you-install-it": "workshop register; its argument is picked as the blog post instead",
+    "tutorials/measure-your-own-token-waste": "workshop register; companion to nothing-broke, which is picked",
+    "tutorials/audit-your-ai-coding-harness": "workshop register; second companion to nothing-broke",
+    "applied/*": "each is a distillation of a demo already picked or available; on a feed that is one subject twice"
+  },
+
+  "unreviewed_candidates": {
+    "_comment": "In the 30-day window on corrected dates, NOT read beyond the meta.json hook, so deliberately not ranked. Read one before promoting it.",
+    "ids": [
+      "demos/session-corpus",
+      "demos/landmine-registry",
+      "demos/feedback-loop",
+      "demos/four-questions",
+      "demos/beautifier",
+      "demos/config-probe",
+      "demos/adopt-or-skip"
+    ]
+  }
+}

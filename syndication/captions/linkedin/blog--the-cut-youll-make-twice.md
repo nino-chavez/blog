@@ -1,19 +1,22 @@
-There's a file in my blog repo that says build validation will reject posts with unapproved tags. I wrote it. It's addressed to the agents that write here, and they all read it.
+There is a file in this blog's repo that tells every agent writing a post: do not add new tags without updating this file, because build validation will reject unapproved tags.
 
-The validation doesn't exist. The schema accepts any array of any strings.
+The schema that would do the rejecting accepts any array of any strings. No validation anywhere compares a post's tags against the approved list.
 
-So I counted. Two hundred seventy-seven tagged files, eighteen approved tags, forty-nine actually in use. Thirty-two of them off-list. One is "AI" — which the approved list names by name as a tag it exists to replace. Four posts carry it. The build has been green the entire time.
+So I counted. Two hundred seventy-seven files carry tags. The approved list has eighteen entries. Forty-nine distinct tags are actually in use, thirty-two of them off-list, across sixty-four uses. One approved tag even declares a list of the sloppy tags it exists to absorb, names `AI` in that list by name, and `AI` is live on four posts.
 
-That file is a warning label. So is most of what any of us hands a coding agent: CLAUDE.md, AGENTS.md, the paragraph pasted at the top of a session. Text the model reads and mostly honors. Mostly is worse than it sounds, because the failures are the sessions nobody watched.
+The file names the exact mistake. The mistake is in the repo four times. The build has been green the entire time.
 
-I'd been filing two very different fixes under one name.
+That file is a warning label, and most of what any of us gives a coding agent is a warning label — the instructions file, the rules file, the paragraph pasted at the top of a session. Text that gets read and mostly honored. Mostly is worse than it sounds, because when a rule gets skipped and the work still looks fine, nothing tells you.
 
-A hook that denies a tool call is a safety valve. It senses a condition and interrupts. Every trip announces itself, so if I set the threshold wrong I find out — I watch it stop something reasonable.
+There are three things here, not two. A rule the agent can decline. A valve that stops it and can be reset. And a surface with nowhere to put the bad instruction.
 
-A schema with no address for the thing you don't want touched is a different animal. Nothing is forbidden; there's nowhere to put the instruction. Which sounds strictly better until you ask how you would audit it.
+The third is the one I never had a word for. In a retail storefront where a model composes the page layout, a catalog declares every named place that model may write — twenty-eight zones across ten surfaces. The cart has three. Line items, order totals, promo entry, the checkout button itself: none of them are zones. No policy says the model may not change the cart total. Nobody wrote that sentence and nobody has to. There is nowhere to put the instruction.
 
-In a storefront I'm working on, a model composes page layout into twenty-eight declared zones. Hand the resolver a zone that doesn't exist and it throws. Have the model write to a zone it isn't allowed to touch and one boolean goes false, execution falls to the static fallback, and the page renders fine. Nothing logs it. I grepped that flag across the codebase. It's read in one place, and that place is the line that drops the evidence.
+Here is the part that took longest to see. A valve announces itself. The trip is the record, so when I set a threshold in the wrong place I find out, because I watch the agent get stopped from doing something reasonable. A jig produces nothing. That is the point of it, and it is also the problem.
 
-A fence in the right place and a fence in the wrong place produce identical telemetry: clean.
+The resolver throws loudly on a zone ID that doesn't exist. The line enforcing the actual constraint sits twelve lines further down, and when the engine writes somewhere it isn't allowed, that condition is simply false. Execution falls through to the static fallback. The page renders. Nothing throws, and a merchant sees a completely normal page.
 
+Loud about the harmless failure, silent about the real one. A fence in the wrong place and a fence in the right place produce identical telemetry: clean.
+
+The full piece, including the measurement where my own README came out off by roughly three and a half times, in the direction that flattered my own tool:
 https://ninochavez.co/blog/the-cut-youll-make-twice

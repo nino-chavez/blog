@@ -104,8 +104,50 @@ function readCollection(name) {
 // applied companions carry no date at all. Both are evergreen technique pieces,
 // so an exact date buys nothing — what matters is the running order, which
 // `number` gives for demos and the demo link gives for companions.
+//
+// That was the stated intent and it was not implemented: `number` was read here
+// and never referenced again, so twelve demos sharing the date "2026-07-01" fell
+// through every tiebreak to readdir order and played 4, 12, 8, 9, 2, 11, 3, 5,
+// 10, 6, 7, 1 — demo 01 ("Twelve Messages"), the entry point, scheduled last, in
+// January 2027. Same defect the series fix caught, second instance.
+//
+// So a numbered demo run IS a series, and gets the machinery already in the file
+// (see `seriesAnchors` below): the run anchors to its newest member's date and
+// plays in position order from there, so it lands where newest-first would have
+// put it and only the internal order changes. `demos` is not a slug on the site
+// — nothing renders it — it is the group key the sort needs.
+// `meta.json` carries `date` at month precision ("2026-07"), which every earlier
+// version floored to the 1st and then treated as a publication date. It is a
+// bucket, not a date, and it was wrong by up to two weeks in one direction only.
+// That skew is not cosmetic: it is what sorted eleven demos ahead of essays
+// actually written later, and it would have pushed the whole demo run outside a
+// 30-day review window that every one of them belongs in.
+//
+// The real date is the first commit that added the demo's directory. This is the
+// only git call outside `refreshSubstack`, and it runs once per demo — 22 short
+// invocations, which is cheap at this size and worth the accuracy.
+function firstCommitDate(relDir) {
+  try {
+    const out = execFileSync(
+      'git',
+      ['-C', DEMOS, 'log', '--diff-filter=A', '--format=%ad', '--date=short', '--', relDir],
+      { encoding: 'utf8' }
+    )
+    // Oldest last: `git log` is newest-first, and the add we want is the first one.
+    return out.trim().split('\n').filter(Boolean).at(-1) || ''
+  } catch {
+    return ''
+  }
+}
+
 function readDemos() {
   const out = []
+  // Demos are read before companions so a companion can inherit its demo's date.
+  // It has none of its own, and every date filter in this file therefore dropped
+  // all nine of them silently — invisible, because "no date" and "too old" are
+  // the same answer to a `>=` against a cutoff. The companion is written from
+  // the demo and published alongside it, so the demo's date is the true one.
+  const demoDate = new Map()
   for (const kind of ['demos', 'applied']) {
     const dir = join(DEMOS, kind)
     if (!existsSync(dir)) continue
@@ -119,25 +161,31 @@ function readDemos() {
         continue
       }
       const month = /^\d{4}-\d{2}$/.test(m.date || '') ? `${m.date}-01` : ''
+      // Git first, the month bucket only as a fallback for an uncommitted demo.
+      const dated = firstCommitDate(`${kind}/${slug}`) || month
+      const companionOf = (m.relatedSessionSlugs || [])[0] || ''
+      if (kind === 'demos' && dated) demoDate.set(slug, dated)
       out.push({
         collection: kind,
         slug,
         title: m.title || slug,
-        date: month,
+        date: dated || demoDate.get(companionOf) || '',
         // `hook` / `for` / `get` / `do` on a demo, `description` on a companion:
         // the copy each piece already uses to sell itself. Carried through so
         // caption drafting starts from Nino's words rather than a fresh summary.
         pitch: m.hook || m.description || m.cardDesc || '',
-        number: m.number || '',
         // An applied companion names the demo it was distilled from; that demo
         // is the same subject, so the two must not land in the same week.
-        companionOf: (m.relatedSessionSlugs || [])[0] || '',
+        companionOf,
         words: 0,
         status: 'published',
         featured: false,
         origin: '',
-        series: '',
-        seriesPos: 0,
+        // Companions are deliberately left out of the run: they carry no number,
+        // and each is already tied to its demo by cluster, which spaces the two
+        // apart rather than ordering them.
+        series: kind === 'demos' && m.number ? 'demos' : '',
+        seriesPos: Number(m.number) || 0,
         tableRows: 0,
         mdxNodes: 0,
         category: 'Demo',
@@ -233,6 +281,13 @@ function linkedinShared() {
 // score: it decides what drips first, and Nino overrides any entry by editing
 // queue.json — a manual `tier` or `state` survives regeneration.
 //
+// One exception, and it is the one worth knowing: hand-setting `state:
+// 'eligible'` on a piece LinkedIn's window has skipped does NOT hold. The window
+// runs on every rebuild and recomputes it straight back to `skip`. The override
+// there is `admittedOn` — add the field to the route and the piece is
+// grandfathered in permanently. That is the way back for anything the 2026-08-09
+// reset dropped, including the ten pieces whose captions were already written.
+//
 // The rules encode one judgment: length and form decide the platform. Long
 // argument reads as an essay and belongs where people sit down (Substack).
 // Short argument reads as a post and belongs in a feed (LinkedIn). A technique
@@ -251,13 +306,44 @@ function linkedinShared() {
 // fiction is evergreen by form, not by date.
 const HORIZON_MONTHS = 12
 
-function agedOut(p, now) {
-  if (p.collection !== 'blog') return false
-  if (!p.date) return false
-  if (p.featured || p.words >= 1500) return false
-  const cut = new Date(now)
-  cut.setUTCMonth(cut.getUTCMonth() - HORIZON_MONTHS)
-  return p.date < cut.toISOString().slice(0, 10)
+// LinkedIn eligibility is membership in `linkedin-picks.json`. That is the whole
+// rule, and the file explains why it replaced four successive attempts to infer
+// "strongest" from a property of the piece.
+//
+// Rebuilt 2026-08-09 on the instruction to feed LinkedIn the strongest pieces
+// going forward, with the initial set drawn from a review of the last 30 days.
+// A review produces a list, so the list is the mechanism. Nothing here computes
+// eligibility from dates, tiers, word counts, or flags any more.
+function linkedInPicks() {
+  const f = join(HERE, 'linkedin-picks.json')
+  if (!existsSync(f)) return new Map()
+  const doc = JSON.parse(readFileSync(f, 'utf8'))
+  return new Map((doc.picks || []).map((p) => [p.id, p]))
+}
+
+// A word floor for the feed was written here on 2026-08-09 and removed the same
+// day. It is recorded because the mistake is easy to repeat.
+//
+// The instruction was to pick the best from what was queued — a selection over
+// 37 known pieces. A constant in this function is not that. It re-evaluates on
+// every rebuild, so it would have silently governed all future writing, and it
+// sat ahead of the window check, which meant `admittedOn` could not rescue a
+// short piece. That contradicted the documented recovery path: one essay with a
+// finished caption (973 words) became unreachable by the exact mechanism it was
+// told to use.
+//
+// A one-time selection belongs in the ledger, not the rules. The four essays cut
+// from the feed carry `skip-manual` in queue.json, which survives regeneration
+// and expresses what it is — four specific editorial calls, not a policy.
+
+// Retired 2026-08-09. It existed because routing everything at LinkedIn put 261
+// items in front of a 2/week feed, and aging essays out was the release valve.
+// LinkedIn no longer takes anything it was not explicitly picked for, so the
+// pressure it relieved is gone — and Substack is now parity with the blog, which
+// an archive cutoff directly contradicts. dev.to keeps its own `skip` reasons
+// per collection and never depended on this.
+function agedOut() {
+  return false
 }
 
 function route(p, now) {
@@ -317,11 +403,27 @@ function route(p, now) {
   if (c === 'applied') {
     // Routed to dev.to at first, wrongly: an applied companion is a deck.html
     // and a meta.json, with no markdown body anywhere. There is no article to
-    // cross-post. It still works as a LinkedIn post because the technique fits
-    // in one, written from meta.json's own description.
-    r.linkedin.mode = 'native'
+    // cross-post.
+    //
+    // It ran on LinkedIn until 2026-08-09, and the reason it stopped is that a
+    // companion and its demo are one subject twice. The demo carries the
+    // incident with its numbers; the companion carries the same technique
+    // generalized. On a feed six weeks apart that reads as repetition, and the
+    // evidence it was too close is mechanical: the only repeated-phrasing
+    // failure the caption gate has caught was between a companion and the piece
+    // it was distilled from. Seven companions were displacing seven recent
+    // essays.
+    //
+    // Dropping them from the feed alone would have unsyndicated them completely,
+    // because this branch also skipped Substack — the first version of this
+    // change did exactly that, on a comment asserting Substack would keep them.
+    // It would not have. So the companions move rather than stop: `link` mode,
+    // a framing note and a link home, which is what demos already do there. An
+    // inbox archive is where a generalized technique belongs, and at a daily
+    // cadence there is room for it.
+    r.linkedin.reason = 'companion duplicates its demo on a feed; the demo carries the incident'
     r.devto.reason = 'no markdown body — rendered deck, nothing to cross-post'
-    r.substack.reason = 'companion piece; the demo carries the story'
+    r.substack.mode = 'link'
     return { routes: r, tier: 1 }
   }
 
@@ -346,9 +448,13 @@ function route(p, now) {
     r.substack.mode = 'full'
     r.linkedin.mode = 'native'
   } else {
-    // Under 800 words is a post, not an issue. Sending these to Substack one at
-    // a time trains subscribers that the newsletter is thin.
-    r.substack.reason = 'too short to carry an issue alone'
+    // Under 800 words used to be skipped here — "a post, not an issue", on the
+    // theory that sending them one at a time trains subscribers that the
+    // newsletter is thin. Operator instruction, 2026-08-09: double-post the blog
+    // to Substack. Coverage beats issue-weight, so the 18 short essays that rule
+    // was holding back go across too. The judgment it encoded is real, and the
+    // place to answer it is a digest that batches them, not a silent skip.
+    r.substack.mode = 'full'
     r.linkedin.mode = 'native'
   }
 
@@ -360,10 +466,15 @@ function route(p, now) {
 // wrong is enforced in one place rather than per branch. All 34 imported Pulse
 // articles happen to sit in `blog` today; guarding only the essay branch would
 // hold now and fail silently the first time one lands in another collection.
-function routeWithGuards(p, now) {
+function routeWithGuards(p, now, picks) {
   const out = route(p, now)
+  const id = `${p.collection}/${p.slug}`
   if (p.origin === 'linkedin') {
     out.routes.linkedin = { mode: 'skip', reason: 'originated on LinkedIn' }
+  }
+  // The only LinkedIn gate. A piece is fed because it was picked, or not at all.
+  if (out.routes.linkedin.mode !== 'skip' && !picks.has(id)) {
+    out.routes.linkedin = { mode: 'skip', reason: 'not in linkedin-picks.json' }
   }
   // `full` means a human pastes the body into Substack's editor. That editor has
   // no table node — pasting real <table> markup yields zero tables and cells run
@@ -396,13 +507,52 @@ function routeWithGuards(p, now) {
 // ------------------------------------------------------------------ scheduling
 
 // Cadence, one slot per platform-day. Two LinkedIn slots a week is the most a
-// personal feed absorbs without the account reading as automated; Substack is
-// weekly because an inbox punishes more; dev.to is a slow backfill.
+// personal feed absorbs without the account reading as automated; dev.to is a
+// slow backfill.
+//
+// Substack was weekly, "because an inbox punishes more". Weekly is 4.3 slots a
+// month and the blog publishes about 5 essays a month, so a weekly newsletter
+// could not mirror the blog even if it carried nothing else — the instruction to
+// double-post was arithmetically impossible at that cadence, before any backlog.
+//
+// Sunday plus Wednesday fixed the mirror and did not fix the backlog: 8.7/month
+// against ~5/month of new writing nets 3.7, and 122 queued pieces at that rate
+// reach parity in 33 months. That is not catching up, it is holding station.
+//
+// Operator instruction, 2026-08-09: drip Substack until it is current with the
+// blog. Daily is 30/month, nets ~25, and clears the backlog in under five
+// months. The cadence is self-limiting by construction — once the queue holds
+// only new writing, there are ~5 pieces a month to send and the send rate falls
+// back on its own without anyone changing this table. The subscriber-churn risk
+// of a daily send is real and belongs to the catch-up window, not to the steady
+// state.
 const CADENCE = {
   linkedin: { days: [2, 4], every: 1 }, // Tue, Thu
-  substack: { days: [0], every: 1 }, // Sun
+  substack: { days: [0, 1, 2, 3, 4, 5, 6], every: 1 }, // daily, until caught up
   devto: { days: [3], every: 2 }, // Wed, fortnightly
 }
+
+// A blog post published in the last two weeks goes to Substack next, ahead of
+// everything queued. Without this, "double post" is a lie the ordering tells:
+// tier-then-newest puts a fresh tier-2 essay behind all 57 tier-1 items, so the
+// mirror would reach subscribers months after the post went live. LinkedIn is
+// deliberately excluded — it was asked for a drip, and jumping the newest demo
+// ahead of demos 1-12 would re-break the run order fixed one commit ago.
+// A one-time pin for the head of a platform's drip lived here. Used 2026-08-10
+// to move that day's LinkedIn post off the Tue/Thu cadence, then removed the
+// same day — because a pin that survives its own post re-applies to whatever
+// item inherits the head, which would have put a second post on the same day.
+// A head pin is a single-use tool: set it, run it, delete it.
+
+const MIRROR_DAYS = 14
+
+// Substack is parity with the blog as of 2026-08-09: every entry belongs there,
+// so the backlog is not a campaign and does not get dates. Dripping it implied a
+// choice about WHICH pieces go, and there is no such choice left to make — the
+// answer is all of them. What remains is a backfill work-list, counted and
+// reported. Only pieces inside the mirror window carry a scheduled date, because
+// those are the ones that still have a send attached.
+const SUBSTACK_BACKFILL = true
 
 function slots(platform, count, from) {
   const { days, every } = CADENCE[platform]
@@ -454,6 +604,10 @@ const collections = [
 const clusterOf = buildClusters(collections)
 const pieces = collections.map((p) => ({ ...p, cluster: clusterOf(p) }))
 
+// The LinkedIn feed, read once. See linkedin-picks.json for why selection is a
+// file rather than a rule.
+const picks = linkedInPicks()
+
 const onSubstack = substackArchive()
 const onLinkedIn = linkedinShared()
 
@@ -467,8 +621,8 @@ const today = new Date().toLocaleDateString('en-CA')
 
 const items = pieces.map((p) => {
   const id = `${p.collection}/${p.slug}`
-  const { routes, tier } = routeWithGuards(p, today)
   const was = priorById.get(id)
+  const { routes, tier } = routeWithGuards(p, today, picks)
   const out = {
     id,
     title: p.title,
@@ -572,7 +726,11 @@ const anchors = seriesAnchors(items)
 // Order the drip: tier first, then newest — a 2025 essay is not the thing to
 // open with when there is 2026 material that says the same idea better. Undated
 // pieces (the applied companions) sort last within their tier rather than first,
-// which an empty string would otherwise do.
+// which an empty string would otherwise do — "last within their tier" describes
+// this sort, not the schedule. `interleave` re-buckets by collection immediately
+// after and round-robins, which is why the undated companions land across
+// Aug-Dec rather than at the tail. That is the intent of interleaving, not a
+// defect; the sort only has to hand it a stable order to draw from.
 //
 // Series are the exception, and they were silently broken. Newest-first applied
 // to a series plays it backwards: `agentic-workflows-in-practice` was scheduled
@@ -598,11 +756,21 @@ function seriesAnchors(items) {
   return anchor
 }
 
-const orderWith = (anchor) => (a, b) => {
+// `byTier` is false for LinkedIn as of 2026-08-09. Tier was the outermost key,
+// and `route()` hands every demo and applied companion tier 1, so all 24 of them
+// drained before any essay could start — which put thirteen posts written in the
+// first week of August behind a July backfill, starting in November. Nothing in
+// the date logic was wrong; tier outranked it.
+//
+// Substack and dev.to keep tier ordering. An inbox and a docs cross-post are
+// archives, where running the strongest material first is right. A feed is not
+// an archive, and three-month-old commentary competing with this week's writing
+// is the thing the whole horizon rule exists to prevent.
+const orderWith = (anchor, byTier = true) => (a, b) => {
   const ad = a.series ? anchor.get(a.series) : a.publishedAt || '0000'
   const bd = b.series ? anchor.get(b.series) : b.publishedAt || '0000'
   return (
-    a.tier - b.tier ||
+    (byTier ? a.tier - b.tier : 0) ||
     (bd || '0000').localeCompare(ad || '0000') ||
     // Same series: reading order. Different series sharing an anchor date, or
     // non-series pieces, fall through to their own dates newest-first.
@@ -616,11 +784,17 @@ const orderWith = (anchor) => (a, b) => {
 // put twelve demos in consecutive slots — six weeks of one format, which reads
 // as a bot emptying a folder. Round-robin keeps the run order intact within a
 // collection while varying what a reader sees week to week.
-function interleave(list) {
+// `useTier` mirrors `orderWith`'s flag and has to, because this function
+// re-imposes whatever the comparator just decided. It groups by tier and emits
+// tier 1 entirely before tier 2, so ordering LinkedIn by recency in the sort and
+// leaving this alone would have quietly restored the tier-first schedule two
+// lines later. One flag, both places, or neither works.
+function interleave(list, useTier = true) {
   const byTier = new Map()
   for (const i of list) {
-    if (!byTier.has(i.tier)) byTier.set(i.tier, new Map())
-    const buckets = byTier.get(i.tier)
+    const key = useTier ? i.tier : 0
+    if (!byTier.has(key)) byTier.set(key, new Map())
+    const buckets = byTier.get(key)
     if (!buckets.has(i.collection)) buckets.set(i.collection, [])
     buckets.get(i.collection).push(i)
   }
@@ -677,15 +851,31 @@ function buildClusters(list) {
   return (p) => find(p.slug)
 }
 
-const SPACING = 4 // slots; at 2/week on LinkedIn, about two weeks apart
+// Two weeks between two pieces on the same subject. This was written as `SPACING
+// = 4` with the comment "slots; at 2/week on LinkedIn, about two weeks apart" —
+// a duration expressed in slots, which silently stopped meaning two weeks the
+// moment a cadence changed. Moving Substack to daily on 2026-08-09 turned four
+// slots into four days, and six same-subject pairs landed inside a fortnight
+// before this was converted.
+//
+// So the constant is the duration, and each platform converts it using its own
+// cadence. LinkedIn at 2/week still resolves to 4 slots, which is why this is a
+// correction rather than a retune.
+const SPACING_DAYS = 14
 
-function spaceClusters(list) {
+function spacingSlots(platform) {
+  const { days, every } = CADENCE[platform]
+  const perWeek = days.length / every
+  return Math.max(1, Math.round(SPACING_DAYS / (7 / perWeek)))
+}
+
+function spaceClusters(list, spacing) {
   const pending = [...list]
   const out = []
   const lastSeen = new Map()
   while (pending.length) {
     let pick = pending.findIndex(
-      (i) => !lastSeen.has(i.cluster) || out.length - lastSeen.get(i.cluster) >= SPACING
+      (i) => !lastSeen.has(i.cluster) || out.length - lastSeen.get(i.cluster) >= spacing
     )
     // Everything left is too close to something already placed. Take the head
     // rather than loop forever: a small cluster of near-identical pieces at the
@@ -706,9 +896,44 @@ function spaceClusters(list) {
 const isQueued = (r) => r?.state === 'eligible' || r?.state === 'draft'
 
 for (const platform of Object.keys(CADENCE)) {
-  const queued = spaceClusters(
-    interleave(items.filter((i) => isQueued(i.routes[platform])).sort(orderWith(anchors)))
-  )
+  const all = items.filter((i) => isQueued(i.routes[platform]))
+  // Fresh blog posts skip the queue entirely — no interleaving, no cluster
+  // spacing. Both exist to vary what a reader sees across a long drip, and a
+  // mirror is not a drip: the whole point is that it lands while the piece is
+  // new. Newest first among them, so a burst of two publishes in reading order.
+  const cutoff = new Date(today)
+  cutoff.setUTCDate(cutoff.getUTCDate() - MIRROR_DAYS)
+  const isMirror = (i) =>
+    platform === 'substack' &&
+    i.collection === 'blog' &&
+    (i.publishedAt || '') >= cutoff.toISOString().slice(0, 10)
+  const mirror = all.filter(isMirror).sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+  const queued = [
+    ...mirror,
+    ...spaceClusters(
+      interleave(
+        all.filter((i) => !isMirror(i)).sort(orderWith(anchors, platform !== 'linkedin')),
+        platform !== 'linkedin'
+      ),
+      spacingSlots(platform)
+    ),
+  ]
+  // Substack's backlog gets no dates. Parity means every entry belongs there, so
+  // there is nothing left to schedule — assigning slots to 137 pieces would
+  // dress a backfill up as a campaign and put the last one in 2027. Only the
+  // mirror set carries dates, because only those still have a send attached.
+  // Everything else is `backfill`, counted by --due and worked through in a run.
+  if (platform === 'substack' && SUBSTACK_BACKFILL) {
+    const dates = slots(platform, mirror.length, today)
+    mirror.forEach((i, n) => {
+      i.routes.substack.scheduledFor = dates[n]
+    })
+    queued.slice(mirror.length).forEach((i) => {
+      i.routes.substack.scheduledFor = null
+      i.routes.substack.backfill = true
+    })
+    continue
+  }
   const dates = slots(platform, queued.length, today)
   queued.forEach((i, n) => {
     i.routes[platform].scheduledFor = dates[n]
@@ -723,12 +948,14 @@ for (const platform of Object.keys(CADENCE)) {
   // goes out first — reading the date off `order`'s head reported a start two
   // weeks late.
   const dates = items
-    .filter((i) => isQueued(i.routes[platform]))
+    .filter((i) => isQueued(i.routes[platform]) && i.routes[platform].scheduledFor)
     .map((i) => i.routes[platform].scheduledFor)
     .sort()
+  const backfill = tally((i) => isQueued(i.routes[platform]) && i.routes[platform].backfill)
   summary[platform] = {
     posted: tally((i) => i.routes[platform]?.state === 'posted'),
     queued: dates.length,
+    ...(backfill ? { backfill } : {}),
     skipped: tally((i) => i.routes[platform]?.state?.startsWith('skip')),
     firstSlot: dates[0] ?? null,
     lastSlot: dates.at(-1) ?? null,
@@ -764,8 +991,17 @@ if (has('--due')) {
     // written, staged, and one click from live — leaving it out of the owed
     // list hides the cheapest thing on it, and hides it precisely because the
     // work is nearly done. Worse, an invisible draft gets drafted twice.
+    const backfill = items.filter(
+      (i) => isQueued(i.routes[platform]) && i.routes[platform].backfill
+    )
+    if (backfill.length) {
+      console.log(`\n${platform.toUpperCase()} BACKFILL`)
+      console.log(
+        `  ${backfill.length} entries missing from ${platform} — no dates; parity is a run, not a drip`
+      )
+    }
     const due = items
-      .filter((i) => isQueued(i.routes[platform]))
+      .filter((i) => isQueued(i.routes[platform]) && !i.routes[platform].backfill)
       .filter((i) => (i.routes[platform].scheduledFor ?? '9999') <= cutoff)
       .sort((a, b) => a.routes[platform].scheduledFor.localeCompare(b.routes[platform].scheduledFor))
     if (!due.length) continue

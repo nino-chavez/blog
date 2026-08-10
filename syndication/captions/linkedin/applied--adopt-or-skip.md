@@ -1,16 +1,17 @@
-There's a third bucket in any install decision and most people don't have a name for it. That's exactly why it keeps getting collapsed into the other two.
+An earlier version of this method reached a verdict, and the verdict was wrong. It had skipped the issue-tracker query, decided the evidence was thin, and the recommendation had to be retracted.
 
-You sort a tool's components into things you already have and things you don't. Fine as far as it goes. But some of what you don't have is genuinely good and completely unusable, for reasons that have nothing to do with quality. Wrong platform. Broken upstream. Needs a subscription you don't hold. Fold that into "don't have it" and you've inflated the case for installing. Fold it into "already covered" and you've written the tool off unfairly. Something excellent you can't run isn't a gain. It also isn't a criticism.
+That retraction is why the card exists in its current shape. A method that produces an answer without one of its inputs still produces an answer — confidently, and in whichever direction the missing input would have argued against.
 
-So the split needs three columns. Native, meaning your setup already covers it. New, meaning genuinely absent — the only column that argues for installing anything. And blocked, that third case, tracked on its own so it stops bending the count.
+The failure it guards against is subtler than a bad tool. It is an impressive roster of capabilities, each item plausible, summing to an obvious yes. Volume standing in for measurement. Fifty-four hooks is fifty-four only against zero, and almost nobody is at zero. Against a year of accumulated helpers the real figure is whatever survives subtraction, and that operand lives on your own machine where no project page can see it.
 
-Then the same split runs backwards. What does your own side already handle that the tool's list never mentions? Nobody writes that column for you. It tends to be longer than expected.
+Which makes every recommendation a report from one specific machine wearing a review's clothes. The identical roster resolves differently for someone on stock tooling than for someone deep into their own.
 
-Writing the baseline down is the check most people skip, and the one that pays permanently. Done once, every later question about a tool turns into a lookup rather than an afternoon.
+The check that pays permanently is the unglamorous one: get everything your agent loads at startup into a list you can actually read, then say what each item does in one sentence without looking it up. Anything unexplainable is already a finding — it loads every session and its purpose is gone. Do that once and every future evaluation collapses into a lookup.
 
-Then the uncurated half: a project's issue tracker rather than its documentation. Documentation describes a tool working. The tracker describes it running on other people's machines. Users write that, so pruning it leaves a visible hole.
+The tracker half deserves its own defense, given what skipping it cost. Documentation describes behavior when things work. The tracker describes behavior on other people's machines, written by users, and it cannot be quietly pruned without the absence showing. Read it for shape rather than volume — whether the busiest threads are features or one bug returning, whether releases of the host break it, whether its own updates do.
 
-Last is the exit. "Cheap to try" is a claim about removal, and removal is the part nobody tests. The single most useful query turned out to be searching that same tracker for the uninstall itself. Silence there is its own answer.
+Then the query hardly anyone runs: search that tracker for the uninstall. Reports that removal leaves residue are worth more than the entire install guide, because they price being wrong. Silence there is a finding too, not a clearance.
 
-All four checks, with the queries:
+Forty minutes, nothing touched. What comes out is a count rather than a verdict, and the count belongs to you.
+
 https://ninochavez.co/demos/applied/adopt-or-skip

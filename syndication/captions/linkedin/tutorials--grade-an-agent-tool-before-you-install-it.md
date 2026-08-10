@@ -1,18 +1,16 @@
-"Is this tool any good" has no answer. What an evaluation produces is a count: how many components the thing would actually add to your setup. That count comes out different for every person who asks.
+A feature list is half a subtraction. The other half sits on your own machine, and nobody publishes that half for you.
 
-Which makes a recommendation a report on one machine, wearing a review's clothes. Something worth every minute to a person running stock tooling is worth roughly nothing to a person a year into accumulating their own. The number is personal and the recommendation isn't transferable.
+Which is why the first check is the one that gets skipped: write down what your agent already loads at startup. Instruction files, skills, commands, hooks, tool connections, helper binaries on the path. A list of fifty-four things is fifty-four gains only against zero.
 
-Four checks produce that count, none of them requiring you to install the thing.
+Then subtract. Every component the tool ships lands in exactly one of three buckets. Native — your setup already does this. New — genuinely absent, and the only column that argues for installing. Blocked — new but unusable for a reason unrelated to quality: wrong platform, a subscription you don't hold, patching something you don't control.
 
-The component list is worth pulling from a project's reference documentation rather than its README. The first enumerates. The second sells.
+Blocked is the bucket that gets collapsed into the other two, and it distorts the answer in both directions. A component that is excellent and unusable is not a gain, and it is also not a criticism of the tool.
 
-Then the coverage test. The easiest place in the whole exercise to fool yourself. For every item marked as already handled, the question is whether you can name the specific thing on your side that handles it. "I think I have something like that" isn't coverage. An item you can't name isn't covered. It belongs in the column arguing for installation.
+One rule keeps the whole thing honest. For every row marked Native, name the specific thing on your side that covers it. "I think I have something like that" is not coverage. If it can't be named, it belongs in New.
 
-A count that comes back at one or two isn't automatically a no, either. It's a different question. Are those one or two things available on their own, without adopting everything attached to them?
+The two remaining checks are mechanical. A project's documentation describes what it does when it works; its issue tracker describes what it does on other people's machines, and a maintainer cannot curate that without the gap being obvious. Then read the install guide's own account of what lands on disk. Prefixed names and new named sections are additive and reversible. Bare generic names and rewrites of sections you already use are not. Search the tracker for the uninstall itself while you're there — "it's cheap to try" is a claim about uninstalling, not installing, and the exit is the part nobody tests.
 
-One step almost nobody runs. Read the install guide's own account of what it writes to disk. Prefixed names and new named sections are additive and reversible. Bare generic names, and rewrites of sections you already use, are not.
+The first exercise is the one that hurts, and not because it is difficult. It tends to raise a second question underneath the first: what is already loaded that I would not install today?
 
-There's still no clean answer to "is this tool worth it." The honest response is a method, not a verdict. The ask is for a verdict.
-
-Forty minutes, nothing installed:
+Four checks, forty minutes, nothing touched:
 https://ninochavez.co/blog/tutorials/grade-an-agent-tool-before-you-install-it
