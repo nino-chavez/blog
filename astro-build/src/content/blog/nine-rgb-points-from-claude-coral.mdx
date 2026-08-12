@@ -1,0 +1,56 @@
+---
+title: "Nine RGB Points from Claude Coral"
+publishedAt: "2026-08-12T16:00:00.000Z"
+author: "Nino Chavez"
+status: "published"
+excerpt: "A colleague looked at my freshly redesigned site and typed one line into Slack: it feels very Claudeish. He was more right than he knew — the accent color measured nine RGB points from Claude's own coral. The interesting part is where the sameness actually came from."
+category: "AI & Automation"
+tags: ["design-systems", "agentic-ai", "taste"]
+takeaway: "When an AI-built design feels AI-generic, audit your own docs and archetypes for the attractor first, then fix by rationing visual markers, not documenting more."
+---
+
+Two days after I shipped a redesign of ninochavez.co, a colleague typed a one-line observation into Slack: "Nice and clean look. I will say it feels even more AI generated — feels very Claudeish, which may be completely intentional."
+
+It was not intentional. And he was more right than he knew. When the diagnosis pass pulled anthropic.com's own stylesheet and measured it against mine, the site's copper accent — `#d07a4e` — sat nine points of red, three of green, and nine of blue from Claude's brand coral, `#d97757`. On a cream ground that matched too. The pairing wasn't reminiscent of Claude's brand. Within measurement error of a glance, it was Claude's brand.
+
+My reply in that Slack thread was "it's so hard to prompt for taste." That was the wrong diagnosis, and this post is the record of finding the right one. The palette was only half the tell, the deeper half was sitting in my own repository before any model touched the redesign, and the fix that finally worked was not a better prompt. It was a budget.
+
+## The Palette Was Half the Tell
+
+The obvious fix came first: replace the Claude-adjacent palette with one harvested from my own photography archive. Real colors, from photographs I took, instead of whatever the model reached for.
+
+It shipped, and my own reaction on seeing it was "still looks mostly the same — palette may not be the only issue then."
+
+The diagnosis that followed named five structural tells, and none of them were colors. The section formula never varied: mono uppercase eyebrow, giant two-line headline, supporting paragraph in a right rail, card grid — on every page. Declarative sentence-case headlines with terminal periods, sized to fill the viewport. Uppercase letterspaced mono as decoration on everything. A pastel category tile grid. Ordinals and arrows as ornament. Each one defensible alone. Together, on every page, at the same rhythm — the consistency of the formula was itself the tell. Codex, reviewing later from the other side of the fence, put the same point more bluntly: "every section gets label + title + support" is itself an AI-layout tell.
+
+That reframes the colleague's observation. He wasn't detecting a palette. He was detecting a grammar.
+
+## The Attractor Was Already in the Repo
+
+Here's the part that changed how I think about this. The redesign's art direction had been run as a series of divergence rounds — generate genuinely different directions, compare, reject, repeat. Round three's brief opens by rejecting everything: all six prior directions "converged on one visual family," so the next round "must change the visual premise rather than restyle the same premise."
+
+Five days before the Slack message, the model running those rounds diagnosed why the convergence kept happening. Not model defaults. Inputs I owned. The repo's own DESIGN.md authorized the contact-sheet motif, numbered sections, tracked mono labels, and giant display type. An earlier research round had concluded an "editorial eye" should unify all the work. And a site-generation archetype in my own tooling defaulted to dark mode, loud typography, mono labels, and extreme whitespace. Its verdict: "the three concepts were not genuinely independent. They were variations inside the same editorial attractor."
+
+And then the sentence I keep coming back to: "The agentic tooling structured the exercise; it did not supply the taste."
+
+I have written before about style guides decaying into their own tells — a guide's positive examples get copied until they signal templated writing. This is the same failure in a different medium, one level deeper than I had traced it. The models were not imposing an AI aesthetic on my site. They were faithfully executing an aesthetic my own documents had encoded, and every "fresh" direction inherited it, because the documents were in the context window and taste was not.
+
+## Ration Beat Coverage
+
+The instinct after a diagnosis like that is to write a bigger system: comprehensive component library, canonical style guide, document everything. I asked exactly that question mid-stream, and it's worth recording that the answer was no.
+
+The reference sites I held up as clean — a marketing site and my own work library — turned out to be small, not well-documented. The library's entire visual identity is 402 lines of CSS and 13 design tokens, with no style guide at all. The site drawing the "Claudeish" comment ran 10,615 lines and 42 tokens, three accent families, three display voices. Coverage was not the cure. Ration was.
+
+So the system that shipped is a set of budgets, not a component encyclopedia: ten tokens with one job each, at most one dark band per page and it must be a photograph, zero or one photographs per page, one accent per ground, one display face, at most three visual markers per component.
+
+Two models competed for that contract — I had Codex design a system in parallel and prefixed each candidate by author so they could be compared. Codex rendered both and conceded in writing: "Claude's candidate is the better visual foundation. Mine is organized and usable, but it overcorrects into a generic portfolio template… the result could belong to almost any product consultant." The concession came with amendments, one of which caught a real defect — focus rings at 2.91:1 contrast on dark ground — and its interaction, accessibility, and routing contracts survived as the non-visual layer of the system that shipped.
+
+The budgets were not self-executing. The implementation oscillated twice: strip toward the ration and the site went sterile; reintroduce photography and it went heavy — my live reaction was "like you took a hammer to the entire site." The correction that ended the loop was treating budgets as spending targets, not ceilings: spend the whole allowance deliberately, every page, and stop there. Nine implementation slices later, the stylesheet had dropped from 10,724 lines to 7,687 and the redesign went to production.
+
+## What This Hasn't Proved
+
+The colleague whose message started this has not re-judged the result — that check is deliberately deferred, so the claim "it no longer reads as AI-generated" is not yet measured. Separate feedback since shipping has been positive, but liking a site and spotting a tell are different instruments, and the one that caught the original problem hasn't run again.
+
+The budgets are also one site old. Whether a ration transfers, or whether every property needs its own, is exactly the kind of claim a second application would test.
+
+What did change is checkable today: the accent on the site is now a red pulled from a photograph I took. If the palette ever drifts again, it will at least be drifting toward mine.
