@@ -1,0 +1,172 @@
+---
+title: "The Agent Needs a Safety Label"
+slug: "the-agent-needs-a-safety-label"
+publishedAt: "2026-08-13T15:57:30.000Z"
+updatedAt: "2026-08-13T15:57:30.000Z"
+author: "Nino Chavez"
+status: "published"
+excerpt: "AI standards already exist. What teams still need is a current, workflow-level record of what one configured agent may do, how it was tested, where it must stop, and when its evidence expires."
+category: "AI & Automation"
+featureImage: "/images/generated/the-agent-needs-a-safety-label.webp"
+tags: ["ai-governance", "agentic-systems", "systems-thinking"]
+featured: false
+takeaway: "Before a consequential agent workflow goes live, document its permitted job, evidence, limits, owner, and revalidation triggers in one current assurance record."
+seo:
+  metaTitle: "The Agent Needs a Safety Label"
+  metaDescription: "Model access is not dependable delivery. A Workflow Assurance Card makes one configured agent's authority, evidence, limits, and expiration visible."
+---
+
+An agent can produce the right answer and still be unsafe to connect to a refund queue.
+
+The model may be capable. That does not tell us what data the workflow can read, which actions it may take, how it was tested, where it must stop, or who answers when it is wrong.
+
+The grid analogy explains capability. It does not explain trust.
+
+Trust in electrical devices comes from a larger system: defined requirements, testing, installation rules, responsible parties, and marks that communicate a bounded claim. AI already has standards and even product-level certification. UL Solutions offers [UL 3115 certification for AI-enabled products](https://www.ul.com/services/ul-3115-ai-safety-certification-services-ai-enabled-products), including large-language-model customer service applications.
+
+The practical gap sits closer to the work. A deployed agent needs a concise, current record of what this configured workflow may do, what evidence supports it, and when that evidence expires.
+
+That is the last mile between model access and dependable delivery.
+
+## The Grid Was Only the Beginning
+
+The early [*Grid-Level Thinking*](/blog/series/grid-level-thinking) pieces made a simple argument: large language models are closer to a utility than a finished product.
+
+They provide capability. They do not decide where that capability belongs, how it should behave, or what counts as safe use. The work is not merely plugging in. The work is designing the system around the power.
+
+I still believe that.
+
+But electricity becomes ordinary through more than wiring. It sits inside an ecosystem of requirements, testing, installation rules, responsible parties, and marks that communicate a bounded claim.
+
+A [UL certification mark](https://www.ul.com/look-ul-safety-mark-you-buy) does not promise that a product is perfect or useful for every purpose. It means the product was evaluated against specified requirements within the scope of that certification. UL also performs follow-up work to check continued compliance.
+
+The boundary matters more than the badge.
+
+The FCC provides a different kind of assurance. Its equipment-authorization process evaluates certain radio-frequency devices against technical rules before they are marketed. Depending on the device, that may involve third-party certification or a supplier's declaration supported by compliance information. It is not a general endorsement of quality or usefulness. It is authorization against a defined technical scope. [The FCC describes those two authorization paths here.](https://docs.fcc.gov/public/attachments/DA-22-920A1.pdf)
+
+UL and FCC are not interchangeable examples. That is precisely the point.
+
+An assurance only means something when the claim, scope, evidence, evaluator, and conditions are visible.
+
+## AI Standards Already Exist
+
+UL 3115 is an Outline of Investigation used for third-party certification of AI-enabled products before and during deployment. It is not a universal consensus standard for every kind of agent, but it is real product-level AI certification.
+
+There is already a broader standards landscape too.
+
+The [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework) gives organizations a voluntary structure for governing, mapping, measuring, and managing AI risk. Its [Generative AI Profile](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence) applies that work to generative systems across design, development, use, and evaluation.
+
+[ISO/IEC 42001](https://www.iso.org/standard/42001) specifies requirements for an organization-wide AI management system. [ISO/IEC 42005](https://www.iso.org/standard/42005) goes closer to the individual system by guiding impact assessments across an AI system's lifecycle.
+
+These are meaningful controls. They also operate at different levels.
+
+An organization can govern AI responsibly and still be unable to answer a basic operational question:
+
+> What exactly is this agent allowed to do in this workflow today?
+
+That is the gap I care about.
+
+Not an absence of standards. An assurance gap at the point of use.
+
+## The Unit That Matters Is the Workflow
+
+A model is not the whole thing being deployed.
+
+The working system includes the model, prompt, tools, data sources, permissions, fallback logic, human approvals, and the environment where an action has consequences. Change any one of those and the evidence may no longer describe the same system.
+
+That makes the configured workflow the useful unit of assurance.
+
+A model benchmark asks what a model can do across a test set. A workflow assessment asks whether this configured system can do its declared job, with these inputs and permissions, under these operating conditions.
+
+The distinction becomes obvious around actions.
+
+A model may summarize a refund request correctly. The deployed workflow still has to decide whether it may read the customer record, recommend a refund, issue one, retry after a timeout, or stop when two policies disagree. The risk does not live in the model alone. It lives in the connection between capability and authority.
+
+That connection is the last mile.
+
+## A Workflow Assurance Card
+
+“Safety label” works as a metaphor. It is too strong as the formal name for what most teams can produce themselves.
+
+A certification is an independent judgment against defined requirements. A team-authored record is not that. Calling it certification would borrow trust the artifact has not earned.
+
+I would call the practical version a **Workflow Assurance Card**: a short, versioned front door to the evidence behind one deployed AI workflow.
+
+It is not a safety guarantee. It does not replace a risk-management program, impact assessment, formal certification, or legal review. It gives an operator, reviewer, buyer, or affected team enough information to understand the claim being made.
+
+For example:
+
+> **Workflow:** Order Exception Resolver, version 1.4
+>
+> **Owner:** Operations Engineering
+>
+> **Approved job:** Classify order exceptions and recommend a route
+>
+> **Prohibited actions:** Issue refunds, alter inventory, or contact customers
+>
+> **Inputs:** Approved order and policy records; no payment credentials
+>
+> **Output requirements:** Valid schema, cited policy source, explicit refusal when evidence conflicts
+>
+> **Evaluation:** Named test set, results, known failures, and review date
+>
+> **Failure behavior:** Stop, record the attempt, and escalate to the queue owner
+>
+> **Operating limits:** Cost, latency, retries, and duplicate-action protection
+>
+> **Revalidation triggers:** Model, prompt, tool, data-source, permission, or policy change
+>
+> **Evidence expires:** Date
+
+The card is not the evidence itself. It points to the evaluations, logs, incident history, and decisions that support the claim.
+
+This idea also has a lineage. [Model Cards](https://research.google/pubs/model-cards-for-model-reporting/) already document intended uses, evaluation procedures, performance, and limitations for trained models. Safety engineering uses [assurance cases](https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/20160000772.pdf) to connect a claim about a defined system to an argument and supporting evidence.
+
+The Workflow Assurance Card moves that pattern to the last mile. It describes the assembled workflow people are actually about to trust—not only the model inside it.
+
+## The Six Contracts Become Evidence
+
+A workflow assurance card needs six contracts. Questions alone are not assurance. Each contract needs an owner, a test, and a current result.
+
+1. **Input contract.** Name approved sources, sensitive-data restrictions, retention rules, provenance requirements, and missing-data behavior.
+2. **Output contract.** Define the schema, required evidence, rejection criteria, and permitted downstream uses.
+3. **Failure contract.** Separate technical failure, uncertain output, and harmful business outcome. Name the safe terminal state and escalation owner.
+4. **Authority contract.** List permitted actions, approval thresholds, reversibility, and the person accountable when the system is wrong.
+5. **Operational contract.** Set limits for cost, latency, throughput, retries, duplicate execution, monitoring, and incident response.
+6. **Change contract.** Record the model, prompt, tools, and policies under test. Name the evaluation set, rollout method, rollback trigger, review date, and expiration condition.
+
+None of this makes the model more intelligent.
+
+It makes the claim about the system inspectable.
+
+## The Label Must Expire
+
+The lamp comparison breaks if I push it too far.
+
+An agent is probabilistic. Its behavior depends on context. Its provider may change the model. Its tools, permissions, retrieval data, prompts, and policies can change independently. A test result from six months ago may describe a workflow that no longer exists.
+
+That makes continuing evaluation central rather than optional.
+
+UL 3115 recognizes the same problem. It evaluates AI products before and during deployment. NIST's Generative AI Profile likewise treats measurement, documentation, monitoring, and risk management as lifecycle work.
+
+So the card needs an expiration date. A material change should make the assurance stale until the relevant checks run again.
+
+That may be the most useful part of the whole artifact.
+
+The label does not say, “Trust this agent.”
+
+It says, “This is the workflow we assessed. This is the evidence we have. These are the limits. This is when we have to look again.”
+
+## The Last Mile Is Assurance
+
+The grid analogy still holds, but the next advantage will not come from access to more current.
+
+It will come from building systems whose behavior can be bounded, tested, observed, and stopped. Systems with a named owner. Systems that show their evidence. Systems that admit when the evidence is stale.
+
+Formal standards and certification will keep developing. Some products will need them. Every team deploying an agent does not need to invent a certification body.
+
+But every consequential workflow should be able to produce its card.
+
+We already know how to plug in.
+
+The last mile is knowing what we plugged in—and what we are willing to let it do.
