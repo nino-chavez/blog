@@ -106,11 +106,21 @@ for (const item of targets) {
     )
     .catch(() => {})
 
-  const { html, text, counts } = await src.evaluate((sel) => {
+  const { html, text, counts } = await src.evaluate((sel, canonicalUrl) => {
     const el = document.querySelector(sel)
     if (!el) return { html: '', text: '', counts: {} }
     const clone = el.cloneNode(true)
     const tableCount = clone.querySelectorAll('table').length
+
+    // Relative links are correct on the blog, but Substack resolves pasted
+    // HTML against its own editor origin. Without this rewrite, `/blog/foo`
+    // silently becomes `signaldispatch.substack.com/blog/foo`. Preserve the
+    // canonical blog destination before the HTML crosses origins.
+    for (const a of clone.querySelectorAll('a[href]')) {
+      const href = a.getAttribute('href')
+      if (!href || href.startsWith('#') || /^[a-z][a-z0-9+.-]*:/i.test(href)) continue
+      a.setAttribute('href', new URL(href, canonicalUrl).href)
+    }
 
     // Substack's paste handler discards table structure — a two-column table
     // arrives as "ServerToolschrome-devtools-mcp29", one unreadable run of text.
@@ -169,7 +179,7 @@ for (const item of targets) {
         pullquote: quoteCount,
       },
     }
-  }, BODY_SEL)
+  }, BODY_SEL, item.url)
   await src.close()
   if (!html) throw new Error(`${item.id}: no body block (${BODY_SEL}) found at ${ORIGIN + path}`)
   console.log(`   source ${text.split(/\s+/).length} words — h2:${counts.h2} pre:${counts.pre} (${counts.table} table->pre) quote:${counts.quote} (${counts.pullquote} figure->quote)`)
