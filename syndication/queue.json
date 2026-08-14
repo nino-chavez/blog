@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-13",
+ "generatedAt": "2026-08-14",
  "linkedinHistory": "harvested from the activity feed (115 link-shares read)",
  "cadence": {
   "linkedin": {
@@ -30,19 +30,19 @@
  },
  "summary": {
   "linkedin": {
-   "posted": 46,
-   "queued": 15,
+   "posted": 47,
+   "queued": 14,
    "skipped": 262,
-   "firstSlot": "2026-08-14",
+   "firstSlot": "2026-08-18",
    "lastSlot": "2026-10-01"
   },
   "substack": {
    "posted": 280,
-   "queued": 7,
-   "backfill": 27,
+   "queued": 5,
+   "backfill": 29,
    "skipped": 9,
-   "firstSlot": "2026-08-14",
-   "lastSlot": "2026-08-20"
+   "firstSlot": "2026-08-15",
+   "lastSlot": "2026-08-19"
   },
   "devto": {
    "posted": 2,
@@ -719,12 +719,12 @@
     },
     "linkedin": {
      "mode": "native",
-     "state": "eligible",
+     "state": "posted",
      "caption": "captions/linkedin/demos--guardrail-removed.md",
-     "postedAt": null,
+     "postedAt": "2026-08-14",
      "scheduledFor": "2026-08-14",
      "pinnedFor": "2026-08-14",
-     "url": null
+     "url": "https://www.linkedin.com/feed/update/urn:li:activity:7494013457533693952/"
     },
     "devto": {
      "mode": "skip",
@@ -3794,7 +3794,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-15",
+     "scheduledFor": "2026-08-16",
      "url": null
     },
     "linkedin": {
@@ -3896,7 +3896,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-16",
+     "scheduledFor": "2026-08-17",
      "url": null
     },
     "linkedin": {
@@ -3965,7 +3965,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-17",
+     "scheduledFor": "2026-08-18",
      "url": null
     },
     "linkedin": {
@@ -3999,7 +3999,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-18",
+     "scheduledFor": "2026-08-19",
      "url": null
     },
     "linkedin": {
@@ -4032,8 +4032,9 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-19",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "teaser",
@@ -4065,8 +4066,9 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-20",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "teaser",
@@ -6336,7 +6338,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-14",
+     "scheduledFor": "2026-08-15",
      "url": null
     },
     "linkedin": {

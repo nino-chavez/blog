@@ -193,7 +193,10 @@ for (const item of targets) {
 
   item.routes.linkedin.state = 'posted'
   item.routes.linkedin.postedAt = today
-  writeFileSync(QUEUE, JSON.stringify(queue, null, 2))
+  // indent 1, matching build-queue.mjs's own write. At indent 2 this rewrote
+  // every one of the file's ~11k lines on each post, burying the three-line
+  // state change in a whole-file diff.
+  writeFileSync(QUEUE, JSON.stringify(queue, null, 1) + '\n')
   console.log('   published, recorded in queue.json')
   await page.close()
 }

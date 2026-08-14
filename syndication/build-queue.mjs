@@ -1024,11 +1024,28 @@ for (const platform of Object.keys(CADENCE)) {
   // feed — the exact pair the fourteen-day rule exists to separate, and invisible
   // because both dates looked deliberate. A pinned date is a decision and does
   // not move; the unpinned sibling is what yields.
+  //
+  // Anchors come from two places, and leaving out the second is how the same
+  // pair drifted back together the day after it was fixed. A pinned date holds
+  // the cluster only while the piece is still queued; the moment it posts it
+  // leaves `queued`, stops anchoring, and the sibling snaps into the slot the
+  // rule was keeping clear. A piece that already published is the strongest
+  // reason to stay away from its date, not a reason to forget it — so recently
+  // posted routes anchor their cluster too, for as long as the window runs.
+  const anchorFloor = Date.parse(today) - SPACING_DAYS * 864e5
   const pinnedByCluster = new Map()
-  for (const i of pinned) {
-    const k = i.cluster
+  const anchor = (k, t) => {
+    if (!Number.isFinite(t)) return
     if (!pinnedByCluster.has(k)) pinnedByCluster.set(k, [])
-    pinnedByCluster.get(k).push(Date.parse(i.routes[platform].pinnedFor))
+    pinnedByCluster.get(k).push(t)
+  }
+  for (const i of pinned) anchor(i.cluster, Date.parse(i.routes[platform].pinnedFor))
+  for (const i of items) {
+    const at = i.routes[platform]?.postedAt
+    // 'archive' and 'share-history' are provenance markers, not dates.
+    if (!at || !/^\d{4}-\d{2}-\d{2}$/.test(at)) continue
+    const t = Date.parse(at)
+    if (t >= anchorFloor) anchor(i.cluster, t)
   }
   const tooClose = (item, date) =>
     (pinnedByCluster.get(item.cluster) || []).some(
