@@ -656,6 +656,15 @@ const priorById = new Map((prior.items || []).map((i) => [i.id, i]))
 // the next morning's Substack slot, and slid the whole drip a week.
 const today = new Date().toLocaleDateString('en-CA')
 
+// Index by normalised title so a piece can tell whether a same-titled sibling
+// exists in another collection before it claims that title's archive entry.
+const byTitle = new Map()
+for (const p of pieces) {
+  const k = norm(p.title)
+  if (!byTitle.has(k)) byTitle.set(k, [])
+  byTitle.get(k).push(p)
+}
+
 const items = pieces.map((p) => {
   const id = `${p.collection}/${p.slug}`
   const was = priorById.get(id)
@@ -718,11 +727,21 @@ const items = pieces.map((p) => {
     // matching a blog post published hours earlier under the same title. The
     // ledger would have recorded five syndications that never happened, and the
     // count moved in the direction that looks like successful reconciliation.
-    if (platform === 'substack' && r.mode !== 'skip' && onSubstack.match(p)) {
+    // The mode check above catches a collision only when the sibling is routed
+    // `skip`. It is not the general case: a demo deck and the essay written
+    // from it share a title AND both route to Substack, so the demo took the
+    // essay's archive entry and the ledger recorded a syndication that never
+    // happened — the 2026-08-10 defect again, one route over. A title is owned
+    // by the piece that was actually sent, and what Substack publishes is the
+    // essay, so a non-blog piece may not claim an archive match that a blog
+    // sibling with the same title can also claim.
+    const titleOwnedByBlog =
+      p.collection !== 'blog' && byTitle.get(norm(p.title))?.some((o) => o.collection === 'blog')
+    if (platform === 'substack' && r.mode !== 'skip' && !titleOwnedByBlog && onSubstack.match(p)) {
       state = 'posted'
       postedAt = 'archive'
     }
-    if (platform === 'linkedin' && onLinkedIn.has(norm(p.title))) {
+    if (platform === 'linkedin' && !titleOwnedByBlog && onLinkedIn.has(norm(p.title))) {
       state = 'posted'
       postedAt = 'share-history'
     }
@@ -731,6 +750,15 @@ const items = pieces.map((p) => {
     // keeps the ledger an index and leaves the writing reviewable in a diff.
     const rel = `captions/${platform}/${id.replace('/', '--')}.md`
 
+    // `pinnedFor` is the date override, and it exists because the other two
+    // overrides documented above (`tier`, `state`) could not express "this one
+    // goes out on this day". Tier only reorders, and every demo is already
+    // tier 1, so a piece that had to lead could not be moved. Hand-editing
+    // `scheduledFor` looked like it worked — the value sits in the ledger — but
+    // the scheduler recomputes that field from cadence on every run, so `--due`
+    // read straight past it and the date was decorative within one command.
+    // A pinned date is deliberately allowed to be off-cadence: it is a decision,
+    // not a slot.
     out.routes[platform] = {
       mode: r.mode,
       state,
@@ -738,6 +766,7 @@ const items = pieces.map((p) => {
       ...(existsSync(join(HERE, rel)) ? { caption: rel } : {}),
       postedAt,
       scheduledFor: null,
+      ...(prev?.pinnedFor ? { pinnedFor: prev.pinnedFor } : {}),
       url: prev?.url ?? null,
     }
   }
@@ -982,10 +1011,44 @@ for (const platform of Object.keys(CADENCE)) {
     })
     continue
   }
-  const dates = slots(platform, queued.length, today)
-  queued.forEach((i, n) => {
-    i.routes[platform].scheduledFor = dates[n]
+  // A pinned piece holds its own date and is dealt out of the slot pool, so it
+  // neither takes a generated slot nor pushes everything behind it by one.
+  const pinned = queued.filter((i) => i.routes[platform].pinnedFor)
+  const unpinned = queued.filter((i) => !i.routes[platform].pinnedFor)
+  pinned.forEach((i) => {
+    i.routes[platform].scheduledFor = i.routes[platform].pinnedFor
   })
+  // Cluster spacing is enforced by POSITION in the sequence, so dealing a pinned
+  // piece out of the pool also deals it out of the spacing guarantee. That put
+  // an essay and the demo written from the same incident four days apart on one
+  // feed — the exact pair the fourteen-day rule exists to separate, and invisible
+  // because both dates looked deliberate. A pinned date is a decision and does
+  // not move; the unpinned sibling is what yields.
+  const pinnedByCluster = new Map()
+  for (const i of pinned) {
+    const k = i.cluster
+    if (!pinnedByCluster.has(k)) pinnedByCluster.set(k, [])
+    pinnedByCluster.get(k).push(Date.parse(i.routes[platform].pinnedFor))
+  }
+  const tooClose = (item, date) =>
+    (pinnedByCluster.get(item.cluster) || []).some(
+      (t) => Math.abs(Date.parse(date) - t) < SPACING_DAYS * 864e5
+    )
+  // Walk slots, not items. A shared cursor over the item list made one deferred
+  // piece push every piece behind it — the first version of this deferred the
+  // essay past the pinned demo and moved the whole LinkedIn queue two months.
+  // Only the conflicting piece yields; the pieces after it move up.
+  const dates = slots(platform, unpinned.length + pinned.length * 4, today)
+  const waiting = [...unpinned]
+  for (const date of dates) {
+    if (!waiting.length) break
+    const n = waiting.findIndex((i) => !tooClose(i, date))
+    // Everything left conflicts with this date. Leave the slot empty rather
+    // than place a piece the rule says must not go here.
+    if (n === -1) continue
+    const [item] = waiting.splice(n, 1)
+    item.routes[platform].scheduledFor = date
+  }
 }
 
 const tally = (fn) => items.reduce((n, i) => n + (fn(i) ? 1 : 0), 0)

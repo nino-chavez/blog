@@ -105,6 +105,11 @@
       "id": "blog/the-guardrail-removed-the-storefront",
       "reviewed": "full",
       "why": "a real AI storefront needs live model judgment inside merchant-owned schemas; bounded decisions, unchanged outcomes, and safe fallbacks must remain visible"
+    },
+    {
+      "id": "demos/guardrail-removed",
+      "reviewed": "full",
+      "why": "nineteen commits of safety verbs ending in the feature's deletion, with 27 agent sessions that day and zero typed instructions in any of them; the contract test rewritten to assert the capability is gone; and the agent sent to fix it repeating the mistake"
     }
   ],
   "considered_not_picked": {

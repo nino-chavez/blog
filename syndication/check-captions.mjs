@@ -56,7 +56,13 @@ const PLATFORMS = existsSync(CAPTION_ROOT)
   ? readdirSync(CAPTION_ROOT, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name).sort()
   : []
 const CONTENT = join(HERE, '..', 'astro-build', 'src', 'content')
-const DEMOS = join(homedir(), 'Workspace', 'dev', 'apps', 'nc-demos')
+// Resolved relative to this file, not from $HOME. The absolute form pointed at
+// `dev/apps/nc-demos` — a path this repo left behind when the demo source moved
+// under `sites/nino/` — so every demos/ and applied/ caption resolved to "no
+// source" and silently skipped the figure and phrasing checks that are the
+// point of this gate. Seven captions had been passing on an empty read.
+// build-queue.mjs already resolves the same directory this way (its line 20).
+const DEMOS = join(HERE, '..', '..', 'nc-demos')
 
 const filter = process.argv[2]
 

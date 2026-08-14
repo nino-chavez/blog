@@ -31,15 +31,15 @@
  "summary": {
   "linkedin": {
    "posted": 46,
-   "queued": 14,
+   "queued": 15,
    "skipped": 262,
-   "firstSlot": "2026-08-18",
+   "firstSlot": "2026-08-14",
    "lastSlot": "2026-10-01"
   },
   "substack": {
    "posted": 280,
    "queued": 7,
-   "backfill": 26,
+   "backfill": 27,
    "skipped": 9,
    "firstSlot": "2026-08-14",
    "lastSlot": "2026-08-20"
@@ -47,7 +47,7 @@
   "devto": {
    "posted": 2,
    "queued": 5,
-   "skipped": 314,
+   "skipped": 316,
    "firstSlot": "2026-08-26",
    "lastSlot": "2026-10-21"
   }
@@ -155,7 +155,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/demos--enforced-forever.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-03",
+     "scheduledFor": "2026-09-08",
      "url": null
     },
     "devto": {
@@ -306,7 +306,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-10",
+     "scheduledFor": "2026-09-15",
      "url": null
     },
     "devto": {
@@ -343,7 +343,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-17",
+     "scheduledFor": "2026-09-22",
      "url": null
     },
     "devto": {
@@ -532,7 +532,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-24",
+     "scheduledFor": "2026-09-29",
      "url": null
     },
     "devto": {
@@ -697,6 +697,45 @@
    }
   },
   {
+   "id": "demos/guardrail-removed",
+   "title": "The Guardrail Removed the Storefront",
+   "url": "https://ninochavez.co/demos/guardrail-removed",
+   "publishedAt": "2026-08-13",
+   "collection": "demos",
+   "words": 0,
+   "pitch": "I asked one agent to make an AI storefront look as good as the real one, then handed the work to a second agent in four words: “pick up where Claude ended.” Nineteen commits later the AI was gone — and every commit message was a safety word. Nobody typed “remove the model.” The tests stayed green because they were rewritten to expect it. What caught it was remembering what the live site used to do.",
+   "series": "demos",
+   "seriesPos": 18,
+   "cluster": "the-guardrail-removed-the-storefront",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "caption": "captions/linkedin/demos--guardrail-removed.md",
+     "postedAt": null,
+     "scheduledFor": "2026-08-14",
+     "pinnedFor": "2026-08-14",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
    "id": "whitepapers/the-sum-of-your-gaps",
    "title": "The Sum of Your Gaps: What Fixed-Task AI Studies Do Not Measure",
    "url": "https://ninochavez.co/blog/whitepapers/the-sum-of-your-gaps",
@@ -719,7 +758,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/whitepapers--the-sum-of-your-gaps.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-25",
+     "scheduledFor": "2026-08-20",
      "url": null
     },
     "devto": {
@@ -3708,6 +3747,40 @@
    }
   },
   {
+   "id": "blog/the-guardrail-removed-the-storefront",
+   "title": "The Guardrail Removed the Storefront",
+   "url": "https://ninochavez.co/blog/the-guardrail-removed-the-storefront",
+   "publishedAt": "2026-08-13",
+   "collection": "blog",
+   "words": 1703,
+   "cluster": "the-guardrail-removed-the-storefront",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "posted",
+     "postedAt": "2026-08-13",
+     "scheduledFor": "2026-08-14",
+     "url": "https://signaldispatch.substack.com/p/the-guardrail-removed-the-storefront"
+    },
+    "linkedin": {
+     "mode": "teaser",
+     "state": "eligible",
+     "caption": "captions/linkedin/blog--the-guardrail-removed-the-storefront.md",
+     "postedAt": null,
+     "scheduledFor": "2026-09-01",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
    "id": "blog/nine-rgb-points-from-claude-coral",
    "title": "Nine RGB Points from Claude Coral",
    "url": "https://ninochavez.co/blog/nine-rgb-points-from-claude-coral",
@@ -3866,7 +3939,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--the-cut-youll-make-twice.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-20",
+     "scheduledFor": "2026-08-25",
      "url": null
     },
     "devto": {
@@ -3900,7 +3973,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--the-style-guide-was-teaching-the-tells.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-01",
+     "scheduledFor": "2026-09-03",
      "url": null
     },
     "devto": {
@@ -3933,7 +4006,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-08",
+     "scheduledFor": "2026-09-10",
      "url": null
     },
     "devto": {
@@ -3966,7 +4039,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-15",
+     "scheduledFor": "2026-09-17",
      "url": null
     },
     "devto": {
@@ -3999,7 +4072,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-22",
+     "scheduledFor": "2026-09-24",
      "url": null
     },
     "devto": {
@@ -4033,7 +4106,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-29",
+     "scheduledFor": "2026-10-01",
      "url": null
     },
     "devto": {
@@ -11382,40 +11455,6 @@
      "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
-     "url": null
-    },
-    "devto": {
-     "mode": "skip",
-     "state": "skip",
-     "postedAt": null,
-     "scheduledFor": null,
-     "url": null
-    }
-   }
-  },
-  {
-   "id": "blog/the-guardrail-removed-the-storefront",
-   "title": "The Guardrail Removed the Storefront",
-   "url": "https://ninochavez.co/blog/the-guardrail-removed-the-storefront",
-   "publishedAt": "2026-08-13",
-   "collection": "blog",
-   "words": 1703,
-   "cluster": "the-guardrail-removed-the-storefront",
-   "tier": 2,
-   "routes": {
-    "substack": {
-     "mode": "full",
-     "state": "posted",
-     "postedAt": "2026-08-13",
-     "scheduledFor": "2026-08-14",
-     "url": "https://signaldispatch.substack.com/p/the-guardrail-removed-the-storefront"
-    },
-    "linkedin": {
-     "mode": "teaser",
-     "state": "eligible",
-     "caption": "captions/linkedin/blog--the-guardrail-removed-the-storefront.md",
-     "postedAt": null,
-     "scheduledFor": "2026-10-01",
      "url": null
     },
     "devto": {
