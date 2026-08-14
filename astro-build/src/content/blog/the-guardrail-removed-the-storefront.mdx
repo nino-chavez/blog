@@ -1,0 +1,145 @@
+---
+title: "The Guardrail Removed the Storefront"
+publishedAt: "2026-08-13T23:00:00.000Z"
+author: "Nino Chavez"
+status: "published"
+excerpt: "A safe AI storefront cannot give the model a blank canvas. It also cannot remove the model and still claim that inference changes the shopping experience."
+category: "AI & Automation"
+tags: ["commerce", "ai-governance", "architecture", "product-strategy"]
+takeaway: "Design AI commerce as live model judgment inside a merchant-owned grammar, and make every decision, cache state, failure, and fallback visible."
+seo:
+  metaTitle: "The Guardrail Removed the Storefront"
+  metaDescription: "A real AI storefront needs live model judgment inside merchant-owned schemas, with visible decisions and safe fallbacks."
+---
+
+An AI storefront can pass every schema check and still stop being an AI storefront.
+
+That is the uncomfortable result of the Aisles investigation. The early system let a model generate whole page layouts. The output was real, but the pages could drift away from the merchant's actual storefront. The later system tightened the boundary until the page was safe, faithful, and almost entirely unable to change.
+
+The first failure was too much freedom. The second was treating no model authority as the definition of safety.
+
+The useful product sits between them: live model judgment inside a merchant-owned grammar, with the decision visible and the fallback explicit.
+
+## The model was already making real storefront decisions
+
+The April source is unambiguous. The original layout endpoint imported `generateText`, called an Anthropic model, and requested a Zod-validated `Layout` object. The prompt gave the model a fixed component vocabulary, real product IDs, and rules about how those components could be used. The model chose sections, product order, and copy within that vocabulary.
+
+The next day's streaming path made the behavior more visible. A cache miss loaded products, built a prompt, called the AI Gateway, streamed partial sections, validated the final object, cached it, and logged the model, token usage, and estimated cost. A later commit extended the same idea to the home page. This was not a title card with an AI label attached. The model sat in the request path that decided what the shopper saw.
+
+The May work added a second shape of composition: named zones. The resolver had three sources and a clear precedence order:
+
+```text
+engine output → merchant-authored content → static fallback
+```
+
+Each zone had a finite schema. The renderer knew which component belonged to each zone. A development overlay labeled the source as `AI`, `admin`, `fallback`, or `foundation`, with the zone ID, persona, reasoning, and latency available for inspection.
+
+That distinction matters. “The model generated the page” is too broad. “The model made a typed decision at this named insertion point, from these approved inputs” is a product contract.
+
+## The blank canvas was the actual bug
+
+The first Aisles version treated a category page as a layout problem. The model could choose from `editorial-header`, `hero-product`, `product-grid`, and `category-header`. The schema prevented invented component names and required catalog product IDs. Those were meaningful controls.
+
+They did not preserve the merchant's page.
+
+The model was still deciding the page's composition. A generic renderer could wear the merchant's colors, typography, product images, and copy, then produce something that was technically valid and visually wrong. The failure was not that the model had no guardrails. The failure was that the guardrails described the renderer, not the merchant's existing experience.
+
+This is why visual parity is not a cosmetic gate. If the reference storefront is part of the product promise, its page geometry, chrome, facts, pricing, content hierarchy, and commerce behavior are inputs to the AI contract. A model that can replace those things is not personalizing the storefront. It is selecting a different storefront.
+
+The safer answer is not “never let the model act.” It is “give the model a smaller, truthful job.”
+
+## The safer architecture was already there
+
+The August 13 bounded design made the right move before the model was removed.
+
+The route grant was issued by the page, signed on the server, bound to the session, and checked against the exact consuming route. The model endpoint could not infer authority from a client-supplied `surface` field or from an `Origin` header. The request had to arrive from a route that had already been granted access.
+
+The model could then operate only inside named zones. Its output had to pass a strict schema. Product IDs had to come from the approved candidate set. Images and destinations had to come from registered assets and routes. CSS, HTML, arbitrary components, arbitrary zone IDs, and invented URLs were rejected. The result was returned as a decision envelope with its route, policy, source, engine provenance, and terminal state attached.
+
+The policy made the intended latitude explicit:
+
+| Surface | Model's job | What stayed fixed |
+| --- | --- | --- |
+| Home and category pages | No model composition in the bounded implementation | Page structure, content, and fallback |
+| Product detail | Trusted product-ranking rules | Product page scaffold and facts |
+| Cart and checkout | Bounded copy, component, and product decisions | Transaction steps and security-critical structure |
+
+This is the pattern worth keeping. The merchant owns the grammar. The model makes a decision inside it.
+
+## A fixture is not a product policy
+
+The investigation also exposed a category error around provider traffic.
+
+The parity fixture was supposed to be cheap and deterministic. Its code explicitly disabled database access, enrichment-provider execution, and generation logging. The route-grant contract carried separate provenance for a live catalog and a parity fixture. Those are good test boundaries.
+
+But “the fixture made no provider calls” answers a test question. It does not answer the product question “may an authorized live demo make a provider call?”
+
+The distinction disappeared in the final August change. The shopper layout endpoint became a no-cost `403`. It parsed no input, loaded no provider, consulted no cache, and returned no decision envelope. That is a valid cost-control implementation. It is not evidence of a working AI commerce feature.
+
+The code had solved two different problems and then allowed one to stand in for the other:
+
+```text
+ordinary test fixture:     no provider calls
+live bounded experience:   authorized provider call, validated decision, visible result
+```
+
+The first line should remain true. The second line is the product we still need to build.
+
+## A decision does not have to change the page
+
+There is a subtle trap in demos like this. Teams often treat a changed button label or a different timestamp as proof that a model did something. That is not enough. The shopper needs to see the actual commerce outcome.
+
+The opposite trap is just as bad: if the model returns the current product order, the team reports “nothing happened” and removes the provider path.
+
+A model can make a valid preserve decision. The important thing is that the system says what happened:
+
+| Runtime state | What the prospect should be able to see |
+| --- | --- |
+| Fresh call | The provider made a decision from the approved candidate set |
+| Cache hit | The storefront reused a prior decision for the same inputs |
+| Unchanged result | The model considered the options and retained the current order or copy |
+| Failure | The provider or validation step failed |
+| Fallback | The merchant-owned reference stayed in control |
+
+“Unchanged” is not the same as “no model.” It is a result. A good inspector should show the before-and-after candidate order, the selected zone, the authority that applied, and the terminal state. A good shopper-facing demo should show the consequence without exposing internal scoring or pretending that a fallback was a model decision.
+
+## The new commerce pattern is a grammar, not a blank canvas
+
+A merchant-owned schema should constrain more than JSON shape. It should define the facts and freedoms that make the storefront itself trustworthy:
+
+- product IDs, prices, inventory facts, and approved promotions;
+- components the renderer actually supports;
+- destinations and assets that exist;
+- legal, policy, and service copy that may be shown;
+- zones where model decisions are allowed;
+- conditions that force a fallback or an explicit Hidden terminal.
+
+Inside that grammar, a model can still do useful work. It can select or order products. It can choose an approved copy variant. It can select a promotion or marketing block from a merchant-owned set. It can choose a component variant. It can choose the order of eligible sections when the surface contract permits it.
+
+That is enough autonomy to make the product interesting. It is also narrow enough to make the result testable.
+
+The live call is part of the feature because judgment is part of the feature. The schema is part of the feature because merchant authority is part of the feature. The inspector is part of the feature because a prospect needs to tell the difference between inference, a rule, a cache, a fallback, and a page that simply did not change.
+
+## The missing proof is the point
+
+The current Bealls source ends in the corrected state: shopper model authority is empty, whole-layout generation is historical, and the remaining shopper behavior is fixed or rules-driven. That is useful evidence about the boundary. It is not proof of the next product.
+
+The next Aisles capability for Kibble & Co. should start with the traditional storefront as the reference contract. It should preserve the production-grade shell, then add a bounded live decision path where inference can visibly affect approved commerce presentation. It should pay for real calls deliberately, identify their budget, and keep provider-free fixtures for ordinary tests.
+
+The test is not whether the model can make a page look different.
+
+The test is whether the storefront can let the model matter without letting it become the merchant.
+
+The most honest successful result may be a small line in the inspector:
+
+```text
+model called · approved zone · current order retained · reference preserved
+```
+
+That is not a failure to personalize. It is a personalized decision with the merchant still in control.
+
+## Source trail and scope
+
+The implementation claims above are drawn from the Aisles source history, not from the earlier public demo caption. The [April walking-skeleton commit](https://github.com/nino-chavez/bealls-aisles/commit/6275308) contains the direct provider-backed layout endpoint and fixed schema. The [streaming layout commit](https://github.com/nino-chavez/bealls-aisles/commit/fb04c09) records cache misses, provider generation, validation, streaming, and generation logging. The [bounded route-decision commit](https://github.com/nino-chavez/bealls-aisles/commit/1877ac8) contains the signed route grants, named zones, decision envelopes, and approved-input validation. The [fixture-boundary commit](https://github.com/nino-chavez/bealls-aisles/commit/05ef70e) separates parity-fixture behavior from live publication context. The [current public README](https://github.com/nino-chavez/bealls-aisles/blob/0edd3ea/README.md) records the later corrected state.
+
+This piece intentionally does not claim that the current Bealls deployment makes live shopper model calls. It does not publish private transcripts, provider credentials, real-merchant analytics, Sleep Country data, model-cost totals, or a claim of production visual parity. Those are separate proof gates.

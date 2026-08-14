@@ -31,14 +31,14 @@
  "summary": {
   "linkedin": {
    "posted": 46,
-   "queued": 13,
+   "queued": 14,
    "skipped": 262,
    "firstSlot": "2026-08-18",
-   "lastSlot": "2026-09-29"
+   "lastSlot": "2026-10-01"
   },
   "substack": {
    "posted": 279,
-   "queued": 7,
+   "queued": 8,
    "backfill": 26,
    "skipped": 9,
    "firstSlot": "2026-08-14",
@@ -11382,6 +11382,40 @@
      "reason": "not in linkedin-picks.json",
      "postedAt": null,
      "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/the-guardrail-removed-the-storefront",
+   "title": "The Guardrail Removed the Storefront",
+   "url": "https://ninochavez.co/blog/the-guardrail-removed-the-storefront",
+   "publishedAt": "2026-08-13",
+   "collection": "blog",
+   "words": 1703,
+   "cluster": "the-guardrail-removed-the-storefront",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-08-14",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "teaser",
+     "state": "eligible",
+     "caption": "captions/linkedin/blog--the-guardrail-removed-the-storefront.md",
+     "postedAt": null,
+     "scheduledFor": "2026-10-01",
      "url": null
     },
     "devto": {

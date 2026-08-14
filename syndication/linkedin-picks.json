@@ -100,6 +100,11 @@
       "id": "blog/nine-rgb-points-from-claude-coral",
       "reviewed": "full",
       "why": "the claudeish redesign retrospective \u2014 accent measured nine RGB points from Claude coral; the attractor traced to his own docs; ration beat coverage"
+    },
+    {
+      "id": "blog/the-guardrail-removed-the-storefront",
+      "reviewed": "full",
+      "why": "a real AI storefront needs live model judgment inside merchant-owned schemas; bounded decisions, unchanged outcomes, and safe fallbacks must remain visible"
     }
   ],
   "considered_not_picked": {
