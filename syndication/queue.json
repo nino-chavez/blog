@@ -37,8 +37,8 @@
    "lastSlot": "2026-10-01"
   },
   "substack": {
-   "posted": 279,
-   "queued": 8,
+   "posted": 280,
+   "queued": 7,
    "backfill": 26,
    "skipped": 9,
    "firstSlot": "2026-08-14",
@@ -11405,10 +11405,10 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
+     "state": "posted",
+     "postedAt": "2026-08-13",
      "scheduledFor": "2026-08-14",
-     "url": null
+     "url": "https://signaldispatch.substack.com/p/the-guardrail-removed-the-storefront"
     },
     "linkedin": {
      "mode": "teaser",
