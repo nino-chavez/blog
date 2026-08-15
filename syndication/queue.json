@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-14",
+ "generatedAt": "2026-08-15",
  "linkedinHistory": "harvested from the activity feed (115 link-shares read)",
  "cadence": {
   "linkedin": {
@@ -31,28 +31,65 @@
  "summary": {
   "linkedin": {
    "posted": 47,
-   "queued": 14,
-   "skipped": 262,
+   "queued": 15,
+   "skipped": 263,
    "firstSlot": "2026-08-18",
-   "lastSlot": "2026-10-01"
+   "lastSlot": "2026-10-06"
   },
   "substack": {
    "posted": 280,
    "queued": 5,
-   "backfill": 29,
+   "backfill": 31,
    "skipped": 9,
-   "firstSlot": "2026-08-15",
-   "lastSlot": "2026-08-19"
+   "firstSlot": "2026-08-16",
+   "lastSlot": "2026-08-20"
   },
   "devto": {
    "posted": 2,
    "queued": 5,
-   "skipped": 316,
+   "skipped": 318,
    "firstSlot": "2026-08-26",
    "lastSlot": "2026-10-21"
   }
  },
  "items": [
+  {
+   "id": "applied/one-heavy-job",
+   "title": "One Heavy Job at a Time",
+   "url": "https://ninochavez.co/demos/applied/one-heavy-job",
+   "publishedAt": "2026-08-15",
+   "collection": "applied",
+   "words": 0,
+   "pitch": "Running a model locally turns a laptop into a machine that has to be scheduled. A kernel panic during an inference run, how to decode the panic's exit reason from the vendor's own header instead of guessing at it, and the habits that made recovery a twenty-minute job instead of a lost morning.",
+   "cluster": "one-heavy-job",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "companion duplicates its demo on a feed; the demo carries the incident",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "no markdown body — rendered deck, nothing to cross-post",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
   {
    "id": "demos/twelve-messages",
    "title": "Twelve Messages",
@@ -79,7 +116,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/demos--twelve-messages.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-18",
+     "scheduledFor": "2026-08-20",
      "url": null
     },
     "devto": {
@@ -758,7 +795,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/whitepapers--the-sum-of-your-gaps.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-20",
+     "scheduledFor": "2026-08-25",
      "url": null
     },
     "devto": {
@@ -3713,6 +3750,39 @@
    }
   },
   {
+   "id": "blog/the-panic-log-says-signal-not-shortage",
+   "title": "The Panic Log Says Signal, Not Shortage",
+   "url": "https://ninochavez.co/blog/the-panic-log-says-signal-not-shortage",
+   "publishedAt": "2026-08-15",
+   "collection": "blog",
+   "words": 1207,
+   "cluster": "the-panic-log-says-signal-not-shortage",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-08-16",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-08-18",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
    "id": "blog/the-agent-needs-a-safety-label",
    "title": "The Agent Needs a Safety Label",
    "url": "https://ninochavez.co/blog/the-agent-needs-a-safety-label",
@@ -3794,7 +3864,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-16",
+     "scheduledFor": "2026-08-18",
      "url": null
     },
     "linkedin": {
@@ -3896,7 +3966,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-17",
+     "scheduledFor": "2026-08-19",
      "url": null
     },
     "linkedin": {
@@ -3939,7 +4009,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--the-cut-youll-make-twice.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-25",
+     "scheduledFor": "2026-09-03",
      "url": null
     },
     "devto": {
@@ -3965,7 +4035,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-18",
+     "scheduledFor": "2026-08-20",
      "url": null
     },
     "linkedin": {
@@ -3973,7 +4043,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--the-style-guide-was-teaching-the-tells.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-03",
+     "scheduledFor": "2026-09-10",
      "url": null
     },
     "devto": {
@@ -3999,14 +4069,15 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-19",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "backfill": true
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-10",
+     "scheduledFor": "2026-09-17",
      "url": null
     },
     "devto": {
@@ -4040,7 +4111,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-17",
+     "scheduledFor": "2026-09-24",
      "url": null
     },
     "devto": {
@@ -4074,7 +4145,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-24",
+     "scheduledFor": "2026-10-01",
      "url": null
     },
     "devto": {
@@ -4108,7 +4179,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-01",
+     "scheduledFor": "2026-10-06",
      "url": null
     },
     "devto": {
@@ -6338,7 +6409,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-15",
+     "scheduledFor": "2026-08-17",
      "url": null
     },
     "linkedin": {

@@ -110,6 +110,11 @@
       "id": "demos/guardrail-removed",
       "reviewed": "full",
       "why": "nineteen commits of safety verbs ending in the feature's deletion, with 27 agent sessions that day and zero typed instructions in any of them; the contract test rewritten to assert the capability is gone; and the agent sent to fix it repeating the mistake"
+    },
+    {
+      "id": "blog/the-panic-log-says-signal-not-shortage",
+      "reviewed": "full",
+      "why": "the wrong reason for a crash cost more than the crash \u2014 namespace 2 is OS_REASON_SIGNAL and subcode 0xb is SIGSEGV, both read out of Apple's own reason.h, while jetsam is namespace 1 and never appears in the string; and it keeps memory exhaustion labelled a hypothesis because the report says memoryPressure false at the instant of the panic"
     }
   ],
   "considered_not_picked": {
