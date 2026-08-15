@@ -1,0 +1,101 @@
+---
+title: "The Panic Log Says Signal, Not Shortage"
+publishedAt: "2026-08-15T17:40:00.000Z"
+author: "Nino Chavez"
+status: "draft"
+excerpt: "A local model run took my Mac down at 10:55:33. Recovering the research cost about twenty minutes. Writing down the wrong reason for the crash cost more, and the file that proves it wrong ships with the operating system."
+category: "AI & Automation"
+tags: ["local-first", "ai-assisted-development"]
+takeaway: "When a panic names an exit reason namespace and subcode, look both integers up in Apple's header before translating — the plausible reading and the real one differ."
+---
+
+At 10:55:33 this morning my Mac kernel-panicked in the middle of a local model run. The panic report lists every process that was alive when it happened. One Python process was holding 29.1 GB resident on a 36 GB machine.
+
+Losing the run cost about twenty minutes. That was cheap for reasons that had nothing to do with the crash — the research was already set up so that a machine dying mid-run is an inconvenience rather than a data loss.
+
+The expensive part was the sentence I wrote afterward explaining *why* the machine died. It named the wrong mechanism. Apple publishes the file that proves it wrong, and checking took less time than writing the sentence had.
+
+---
+
+## Three Heavy Jobs and 36 GB
+
+Everything running was mine, and I had started all of it.
+
+- A local inference run: a 12-billion-parameter model, quantized, under Apple's MLX, batch size one. It classifies excerpts from consented meeting recordings one candidate at a time. A run takes 25 to 40 minutes.
+- The project's full Python worker test suite, where each test spawns subprocess bridges. One fixture is a synthetic 720-turn transcript, and that single test runs over four minutes.
+- Profiling runs, because a test kept timing out and I wanted to know where the time went.
+
+Plus a browser and a file-sync client, which are always open.
+
+None of those is unreasonable alone. Stacked, they are a scheduling decision, and I made it without noticing I was making one. That is the actual failure. The model didn't misbehave and macOS didn't have a bug.
+
+---
+
+## The Log Names Two Integers
+
+Here is the panic string, verbatim:
+
+> panic(cpu 10 caller 0xfffffe00408bcce0): initproc exited -- exit reason namespace 2 subcode 0xb description: none
+
+`initproc` is launchd, process 1. When process 1 exits, the kernel panics on purpose — there is nothing left to supervise the machine, so it stops rather than continue in an undefined state. That part is unambiguous and it is where most readings stop.
+
+The two integers are the part worth reading. They are not opaque. They are constants in a header Apple publishes with the kernel source, `bsd/sys/reason.h`:
+
+| Constant | Value |
+|---|---|
+| `OS_REASON_JETSAM` | 1 |
+| `OS_REASON_SIGNAL` | 2 |
+
+Namespace 2 is the signal namespace. The kernel builds that exit reason by passing the signal number straight through as the code, so subcode `0xb` is signal 11. On this machine, `signal.h` in the command-line-tools SDK defines `SIGSEGV` as 11.
+
+So launchd did not get killed to reclaim memory. Launchd took a segmentation fault, and the kernel panicked because launchd is not allowed to exit.
+
+Jetsam — the mechanism that kills processes to survive memory pressure — is namespace 1. It is not in the string.
+
+The note I put in the project's evaluation log that morning says the opposite: that launchd was killed under memory exhaustion, and that the panic log carries the jetsam markers. The first half is a hypothesis stated as a finding. The second half is not true. The fields I read as jetsam markers are per-process bookkeeping that every process in a panic report carries, whether or not anything was killed.
+
+One caveat on my own check: I read the current published kernel source, not the tree tagged for this exact macOS build. Namespace numbers are append-only in practice, so 1 and 2 are almost certainly stable, but I did not verify that against the matching tag.
+
+---
+
+## The Memory Story Is Observed. The Link Is Not.
+
+The memory picture in the report is real, and it is not subtle.
+
+The compressor was holding 844,864 pages. The log states its own page size — 16,384 bytes — which puts roughly 13.8 GB of compressed memory in play, after 1.04 billion recorded compressions. Alongside that, the 29.1 GB resident set on one process.
+
+That compressor number is system-wide. It is not a measurement of the inference job's footprint, and I shouldn't use it as one. The 29.1 GB is per-process and it is the number that means something.
+
+And the report contains a field that points the other way. At the instant of the panic, `memoryPressure` reads `false`, `pagesWanted` reads 0, and about 886 MB was free.
+
+I can't reconcile that cleanly. What I can say is bounded: launchd exited on signal 11, one process held 29.1 GB on a 36 GB machine, and the log does not record what handed launchd a bad pointer. Memory exhaustion is the explanation that fits the workload I was running. It is a hypothesis, not a line in the file, and I am going to keep writing it that way.
+
+---
+
+## Recovery Was Paid For Before the Crash
+
+Two long runs had already finished. They survived on disk with their result hashes intact. The third was in flight and wrote nothing at all — the pipeline writes its result atomically at the end, so a killed run leaves no partial file to talk myself into trusting.
+
+Verifying that took minutes because of two habits that predate this incident by months. Every run's prediction is written down before the run starts, in a results log, so "did this run do what it was supposed to" is a comparison rather than a judgment call. And every approved input is pinned by a recorded SHA-256. So the check after the panic was mechanical: hash the lock file, compare it to the recorded digest, confirm the cycle is intact, relaunch.
+
+The artifacts survived because they live in a persistent research directory. Nothing about that is clever; it is the default that everyone knows and half of us skip anyway.
+
+Which I can prove, because I skipped it in one place. The launch script and its log were parked in `/tmp`. The reboot wiped `/tmp`, and both went with it. They were the only casualties, and they were the only things stored somewhere the operating system is allowed to delete without asking.
+
+---
+
+## One Heavy Job at a Time
+
+The rule I recorded is one sentence: model inference gets the machine to itself, and test suites and profiling wait for the run to finish.
+
+That rule would have prevented this. It is also the rule everybody already knows about production hardware and quietly suspends for a laptop, because a laptop is where you do everything at once. Running a 12B model locally makes scheduling an operational question on a machine that was never being scheduled.
+
+The profiling was worth something on its own, for what it's worth. A twenty-line harness found that the per-batch request builder revalidates the entire manifest on every call, so the cost grows with the square of the candidate count — 0.55 seconds per batch at 720 candidates, on a test that kept timing out at 240.
+
+I haven't fixed it. The fix waits until the queued runs finish, so that no run straddles a code change and I don't end up comparing results from two different pipelines.
+
+---
+
+## The Segfault Still Has No Cause
+
+I know which signal killed launchd. I don't know what handed it a bad pointer. The panic report doesn't record that, and I wasn't keeping anything that would.
