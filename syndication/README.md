@@ -384,7 +384,7 @@ signed-in composer inside `browser-box` rather than calling an API.
 ```bash
 browser-box start --profile social        # CDP on 9400; survives restarts
 
-node syndication/post-linkedin.mjs --dry --id blog/<slug>   # fill, screenshot, do not publish
+node syndication/post-linkedin.mjs --dry --id blog/<slug>   # check caption + session; composer never opens
 node syndication/post-linkedin.mjs --id blog/<slug>
 node syndication/post-substack.mjs --dry --id blog/<slug>   # fill a draft, no email
 node syndication/post-substack.mjs --id blog/<slug>
@@ -394,8 +394,13 @@ Both take `--due` for everything scheduled today or earlier. Both borrow
 `puppeteer-core` from `browse-tool` rather than adding a dependency here;
 `BROWSE_TOOL_HOME` overrides the path.
 
-**Run `--dry` first.** It fills the real composer and screenshots it without
-publishing, which is the only way to see what the platform did to the content.
+**Run `--dry` first**, but the two differ, and the difference is the whole
+lesson from 2026-08-10. LinkedIn's `--dry` never opens the composer: it checks
+the target list, the caption files, their length, and that the profile is still
+signed in, then exits. Filling a composer is itself capable of publishing — a
+`--dry` run put a real post on the account — so a dry flag that reaches the
+composer is not a dry flag. Substack's `--dry` does fill a draft and screenshot
+it, which is safe there because publishing is a separate step that sends email.
 Both refuse to publish if the editor received noticeably less than the source.
 
 Four things that are not obvious, each of which cost a debugging round:
