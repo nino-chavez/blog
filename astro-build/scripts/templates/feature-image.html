@@ -1,0 +1,112 @@
+<!-- viewport: 1200x675 -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  /* Inter ships with the site (@fontsource-variable/inter). Loaded from
+     node_modules by relative path so the render needs no network and produces
+     the same bytes offline. render-kit writes its temp HTML next to this
+     template, so this path resolves from scripts/templates/. */
+  @font-face {
+    font-family: 'Inter Local';
+    src: url('../../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2') format('woff2-variations');
+    font-weight: 100 900;
+    font-display: block;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1200px; height: 675px; overflow: hidden;
+    background: #0f1115;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* One light source, top-left, so the card has depth without ornament. */
+  body::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(120% 90% at 8% 0%, #1a1e26 0%, #0f1115 62%);
+  }
+
+  .card {
+    position: relative;
+    width: 100%; height: 100%;
+    padding: 86px 96px 76px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+
+  .overline {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 19px; font-weight: 500;
+    letter-spacing: 0.19em; text-transform: uppercase;
+    color: #8b93a1;
+  }
+
+  /* The single accent. DESIGN.md is a single-accent brand and the palette
+     audit concluded the fix for AI-generic design was rationing visual
+     markers, not adding them — so coral appears exactly once. */
+  .rule {
+    width: 76px; height: 5px;
+    background: #e86c5d;
+    margin-bottom: 34px;
+  }
+
+  .title {
+    font-family: 'Inter Local', Inter, system-ui, sans-serif;
+    font-weight: 700; font-size: 78px; line-height: 1.09;
+    letter-spacing: -0.022em;
+    color: #f4f6f9;
+    max-width: 15.5ch;
+  }
+
+  .foot {
+    display: flex; align-items: baseline; justify-content: space-between;
+  }
+
+  .brand {
+    font-family: 'Inter Local', Inter, system-ui, sans-serif;
+    font-size: 24px; font-weight: 600; letter-spacing: -0.01em;
+    color: #d7dbe2;
+  }
+
+  .domain {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 18px; color: #6d7482; letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="overline" id="overline">Field Notes</div>
+    <div>
+      <div class="rule"></div>
+      <h1 class="title" id="title">Untitled</h1>
+    </div>
+    <div class="foot">
+      <div class="brand">Signal Dispatch</div>
+      <div class="domain" id="domain">ninochavez.co</div>
+    </div>
+  </div>
+
+  <script>
+    if (window.RENDER_DATA) {
+      const { title, overline, domain } = window.RENDER_DATA;
+      if (title) document.getElementById('title').textContent = title;
+      if (overline) document.getElementById('overline').textContent = overline;
+      if (domain) document.getElementById('domain').textContent = domain;
+    }
+
+    // Long titles must not collide with the footer. Shrink until the whole
+    // card fits its own height rather than clipping silently — a clipped
+    // title still screenshots cleanly and looks correct to the harness.
+    const card = document.querySelector('.card');
+    const title = document.getElementById('title');
+    let size = 78;
+    while (card.scrollHeight > 675 && size > 40) {
+      size -= 2;
+      title.style.fontSize = size + 'px';
+    }
+  </script>
+</body>
+</html>
