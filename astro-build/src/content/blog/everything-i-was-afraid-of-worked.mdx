@@ -52,6 +52,25 @@ Nothing was corrupted. Nobody was protected from anything. A volunteer club admi
 
 I had specified safety. I had not specified truthfulness. Those are different properties, and I only knew to be afraid of one of them.
 
+## It Was a Workflow Wearing a Chat Box
+
+There is an axis this product sits on that the spec never once named, and naming it is what explains everything above.
+
+The question is who holds the loop.
+
+```
+workflow   code decides ──▶ model call (stateless, returns a value) ──▶ code decides ──▶ …
+agent      model decides ──▶ picks a tool ──▶ reads result ──▶ model decides ──▶ …
+```
+
+Anthropic's own guidance draws that line in those words: workflows are "systems where LLMs and tools are orchestrated through predefined code paths," and agents are "systems where LLMs dynamically direct their own processes and tool usage, maintaining control over how they accomplish tasks."
+
+The club's assistant is entirely the first one. PHP decides what to search, what the model may see, and what gets written. The model is a function that takes text and returns text. There is no loop, no tool use, no memory of the previous call. Control never transfers, which is precisely the property that makes the write path safe.
+
+The interface says otherwise. It is a text box you type a request into, and a text box you type a request into is the universal sign for the second thing — a system that will interpret, ask a follow-up, work it out. My mental model when I sat down to break it was the second one, and I built the first one.
+
+That gap is not decoration on this story. It is the mechanism. Because the spec never placed the product on the axis, there was nothing for the operational knowledge to attach to except resemblance — and only one component in the build resembled the diagrams.
+
 ## The Cap Existed. It Was Guarding the Wrong Thing.
 
 This is the part that changed how I think about where engineering knowledge actually goes.
@@ -74,7 +93,7 @@ They can differ. Each one individually passes every safety check I built, becaus
 
 Capping the loop would have made that bug faster and left it in place.
 
-The fan-out pattern has a name and a published shape, and the published shape includes a step where the results get reconciled before anything is used. I built the fan-out and skipped the reconciliation, without ever knowing I was implementing a named pattern. The fix is to let the model see all the matched text at once and decide the wording a single time. It also happens to collapse hundreds of calls into a handful, which is how I first mistook a correctness bug for a speed bug.
+This shape is named too, in the same catalogue as the workflow/agent split: parallelization by sectioning — "breaking a task into independent subtasks run in parallel." The published version does not stop there. Those subtasks "have their outputs aggregated programmatically." I built the fan-out and skipped the aggregation, never knowing there was a second half to skip. The fix is to let the model see all the matched text at once and decide the wording a single time. It also happens to collapse hundreds of calls into a handful, which is how I first mistook a correctness bug for a speed bug.
 
 ## The Process Was Not the Problem
 
