@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-15",
+ "generatedAt": "2026-08-16",
  "linkedinHistory": "harvested from the activity feed (115 link-shares read)",
  "cadence": {
   "linkedin": {
@@ -31,23 +31,23 @@
  "summary": {
   "linkedin": {
    "posted": 47,
-   "queued": 15,
+   "queued": 16,
    "skipped": 263,
    "firstSlot": "2026-08-18",
-   "lastSlot": "2026-10-06"
+   "lastSlot": "2026-10-08"
   },
   "substack": {
    "posted": 280,
-   "queued": 5,
+   "queued": 6,
    "backfill": 31,
    "skipped": 9,
-   "firstSlot": "2026-08-16",
-   "lastSlot": "2026-08-20"
+   "firstSlot": "2026-08-17",
+   "lastSlot": "2026-08-22"
   },
   "devto": {
    "posted": 2,
    "queued": 5,
-   "skipped": 318,
+   "skipped": 319,
    "firstSlot": "2026-08-26",
    "lastSlot": "2026-10-21"
   }
@@ -154,7 +154,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/demos--browse-tool.md",
      "postedAt": null,
-     "scheduledFor": "2026-08-27",
+     "scheduledFor": "2026-09-01",
      "url": null
     },
     "devto": {
@@ -3750,6 +3750,41 @@
    }
   },
   {
+   "id": "blog/everything-i-was-afraid-of-worked",
+   "title": "Everything I Was Afraid of Worked",
+   "url": "https://ninochavez.co/blog/everything-i-was-afraid-of-worked",
+   "publishedAt": "2026-08-17",
+   "collection": "blog",
+   "words": 1726,
+   "cluster": "everything-i-was-afraid-of-worked",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "caption": "captions/substack/blog--everything-i-was-afraid-of-worked.md",
+     "postedAt": null,
+     "scheduledFor": "2026-08-17",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "teaser",
+     "state": "eligible",
+     "caption": "captions/linkedin/blog--everything-i-was-afraid-of-worked.md",
+     "postedAt": null,
+     "scheduledFor": "2026-08-18",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
    "id": "blog/the-panic-log-says-signal-not-shortage",
    "title": "The Panic Log Says Signal, Not Shortage",
    "url": "https://ninochavez.co/blog/the-panic-log-says-signal-not-shortage",
@@ -3763,14 +3798,14 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-16",
+     "scheduledFor": "2026-08-18",
      "url": null
     },
     "linkedin": {
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-18",
+     "scheduledFor": "2026-08-27",
      "url": null
     },
     "devto": {
@@ -3838,7 +3873,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--the-guardrail-removed-the-storefront.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-01",
+     "scheduledFor": "2026-09-03",
      "url": null
     },
     "devto": {
@@ -3864,7 +3899,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-18",
+     "scheduledFor": "2026-08-20",
      "url": null
     },
     "linkedin": {
@@ -3966,7 +4001,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-19",
+     "scheduledFor": "2026-08-21",
      "url": null
     },
     "linkedin": {
@@ -4009,7 +4044,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--the-cut-youll-make-twice.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-03",
+     "scheduledFor": "2026-09-10",
      "url": null
     },
     "devto": {
@@ -4035,7 +4070,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-20",
+     "scheduledFor": "2026-08-22",
      "url": null
     },
     "linkedin": {
@@ -4043,7 +4078,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--the-style-guide-was-teaching-the-tells.md",
      "postedAt": null,
-     "scheduledFor": "2026-09-10",
+     "scheduledFor": "2026-09-17",
      "url": null
     },
     "devto": {
@@ -4077,7 +4112,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-17",
+     "scheduledFor": "2026-09-24",
      "url": null
     },
     "devto": {
@@ -4111,7 +4146,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-09-24",
+     "scheduledFor": "2026-10-01",
      "url": null
     },
     "devto": {
@@ -4145,7 +4180,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-01",
+     "scheduledFor": "2026-10-06",
      "url": null
     },
     "devto": {
@@ -4179,7 +4214,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-06",
+     "scheduledFor": "2026-10-08",
      "url": null
     },
     "devto": {
@@ -6409,7 +6444,7 @@
      "mode": "full",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-08-17",
+     "scheduledFor": "2026-08-19",
      "url": null
     },
     "linkedin": {

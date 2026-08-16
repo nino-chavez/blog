@@ -1,7 +1,7 @@
 {
   "_comment": [
     "The LinkedIn feed, by explicit selection. Membership in `picks` is the ONLY",
-    "thing that makes a piece eligible for LinkedIn \u2014 there is no window, no tier,",
+    "thing that makes a piece eligible for LinkedIn — there is no window, no tier,",
     "no word floor, no aging rule. Adding a line here is how a piece gets fed.",
     "",
     "This file exists because the alternatives failed. A 12-month horizon let 2025",
@@ -12,8 +12,8 @@
     "keeps re-deciding.",
     "",
     "`reviewed` records how far the source was actually read before picking:",
-    "  full    \u2014 source read end to end (demo deck, or the essay itself)",
-    "  summary \u2014 excerpt, takeaway, and opening read; not the full body",
+    "  full    — source read end to end (demo deck, or the essay itself)",
+    "  summary — excerpt, takeaway, and opening read; not the full body",
     "Do not upgrade a value without doing the reading. A pick marked `summary` is a",
     "defensible shortlist entry, not a verified judgment.",
     "",
@@ -24,7 +24,7 @@
     {
       "id": "blog/the-depth-penalty-is-gone",
       "reviewed": "full",
-      "why": "49 of 95 programs past their end date reported as live, 21 still taking signups; a consent near-miss nobody asked about; and it prices its own claim \u2014 proposals, not invoices"
+      "why": "49 of 95 programs past their end date reported as live, 21 still taking signups; a consent near-miss nobody asked about; and it prices its own claim — proposals, not invoices"
     },
     {
       "id": "whitepapers/the-sum-of-your-gaps",
@@ -39,7 +39,7 @@
     {
       "id": "blog/the-cut-youll-make-twice",
       "reviewed": "full",
-      "why": "three grades of constraint \u2014 rule, valve, jig \u2014 and the discovery that the one line enforcing the constraint is the same line that swallows the evidence"
+      "why": "three grades of constraint — rule, valve, jig — and the discovery that the one line enforcing the constraint is the same line that swallows the evidence"
     },
     {
       "id": "blog/the-style-guide-was-teaching-the-tells",
@@ -54,7 +54,7 @@
     {
       "id": "blog/one-component-i-didnt-already-have",
       "reviewed": "summary",
-      "why": "66,000 stars, eight components, seven already covered \u2014 the argument, stronger here than in its tutorial"
+      "why": "66,000 stars, eight components, seven already covered — the argument, stronger here than in its tutorial"
     },
     {
       "id": "blog/every-link-resolves-nothing-checks-the-number",
@@ -64,7 +64,7 @@
     {
       "id": "blog/nothing-broke-it-just-wasnt-there",
       "reviewed": "summary",
-      "why": "the tool ran, fixed two real problems, and was gone in four days \u2014 working and existing durably are different properties"
+      "why": "the tool ran, fixed two real problems, and was gone in four days — working and existing durably are different properties"
     },
     {
       "id": "demos/twelve-messages",
@@ -79,7 +79,7 @@
     {
       "id": "demos/enforced-forever",
       "reviewed": "full",
-      "why": "122 pkills, 553 permission questions, a 41x replay multiplier \u2014 every guard traced to a counted waste pattern"
+      "why": "122 pkills, 553 permission questions, a 41x replay multiplier — every guard traced to a counted waste pattern"
     },
     {
       "id": "blog/i-configured-my-agent-to-agree-with-me",
@@ -89,7 +89,7 @@
     {
       "id": "demos/said-it-checked",
       "reviewed": "summary",
-      "why": "\"verified\" is a sentence, not a fact \u2014 a migration passed its audit while production was broken"
+      "why": "\"verified\" is a sentence, not a fact — a migration passed its audit while production was broken"
     },
     {
       "id": "demos/agentic-gates",
@@ -99,7 +99,7 @@
     {
       "id": "blog/nine-rgb-points-from-claude-coral",
       "reviewed": "full",
-      "why": "the claudeish redesign retrospective \u2014 accent measured nine RGB points from Claude coral; the attractor traced to his own docs; ration beat coverage"
+      "why": "the claudeish redesign retrospective — accent measured nine RGB points from Claude coral; the attractor traced to his own docs; ration beat coverage"
     },
     {
       "id": "blog/the-guardrail-removed-the-storefront",
@@ -114,7 +114,12 @@
     {
       "id": "blog/the-panic-log-says-signal-not-shortage",
       "reviewed": "full",
-      "why": "the wrong reason for a crash cost more than the crash \u2014 namespace 2 is OS_REASON_SIGNAL and subcode 0xb is SIGSEGV, both read out of Apple's own reason.h, while jetsam is namespace 1 and never appears in the string; and it keeps memory exhaustion labelled a hypothesis because the report says memoryPressure false at the instant of the panic"
+      "why": "the wrong reason for a crash cost more than the crash — namespace 2 is OS_REASON_SIGNAL and subcode 0xb is SIGSEGV, both read out of Apple's own reason.h, while jetsam is namespace 1 and never appears in the string; and it keeps memory exhaustion labelled a hypothesis because the report says memoryPressure false at the instant of the panic"
+    },
+    {
+      "id": "blog/everything-i-was-afraid-of-worked",
+      "reviewed": "full",
+      "why": "the safety layer held and the product still failed — a resubmit was refused correctly and then reported as a failure for a change already live on the page; plus the spec's own six-turn model-call cap sitting on the component that resembled the agent diagrams while the unbounded fan-out next to it got nothing"
     }
   ],
   "considered_not_picked": {
