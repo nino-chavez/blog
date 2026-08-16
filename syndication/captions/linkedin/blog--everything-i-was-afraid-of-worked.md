@@ -8,6 +8,8 @@ And I still ended up staring at a screen that was lying to me. The refusal came 
 
 I had specified safety. I had not specified truthfulness. Those are different properties, and I only knew to be afraid of one of them.
 
+There is an axis this sat on that my spec never named: who holds the loop. In an agent, the model decides what happens next and which tool to reach for. In a workflow, code decides, and the model is a function it calls — no loop, no tools, nothing remembered between calls. Anthropic's guidance splits them in those exact terms. What I built is wholly the second kind. What a text box advertises is the first, and the mental model I brought to breaking my own tool was the wrong one.
+
 The wider version of that mistake is where the limits went. My spec does bound model calls — six turns, on the component that answers questions. The component that plans changes had no bound at all and could make hundreds of calls inside a single page load. Both call a model in a loop. Only one of them looked like a loop.
 
 The honest counter-argument is that this was sloppy work with process bolted on. It was not. There was a decision record with twelve acceptance conditions, a spec, an adversarial fact-check that caught real problems every time it ran, and over a thousand test assertions running clean on three versions of PHP while both failures were live. The review asked whether everything written down was true. Everything written down was true. No review that checks claims can fail on a claim nobody made.

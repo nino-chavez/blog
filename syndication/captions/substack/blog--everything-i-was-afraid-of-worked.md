@@ -6,6 +6,8 @@ Then I refreshed the page mid-apply. The resubmit was caught and rejected, becau
 
 Nothing was corrupted. Nobody was protected from anything. A volunteer was told their work had failed while looking straight at it, finished.
 
+Underneath all of it is a distinction the specification never drew: where control lives. Give it to the model and it picks its own next step, its own tools, its own stopping point. Keep it in code and each model call becomes a pure transformation — text in, text out, no recollection of the one before. This system is entirely the latter, while the thing a person types into promises the former.
+
 The broader pattern is about where the limits ended up. There is a cap on model calls in my own specification, sitting on the part that answers questions — the part that resembled every architecture diagram I had studied. The part that plans edits carried no ceiling and could fire hundreds of requests inside one page load. Two components, one underlying shape, and only the familiar-looking one got protected.
 
 What I take from it is a test rather than a rule. For each layer of something an agent helped you build, name the specific failure that layer was created in response to. The ones I could name came through an hour of abuse intact. The one I could not is where every problem I found had been waiting.
