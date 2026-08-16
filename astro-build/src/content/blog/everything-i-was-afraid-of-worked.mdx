@@ -67,6 +67,8 @@ Anthropic's own guidance draws that line in those words: workflows are "systems 
 
 The club's assistant is entirely the first one. PHP decides what to search, what the model may see, and what gets written. The model is a function that takes text and returns text. There is no loop, no tool use, no memory of the previous call. Control never transfers, which is precisely the property that makes the write path safe.
 
+The clearest way to see the inversion is to ask where the job lives. Working with an agent, it lives in the conversation — the model holds what has been done and what is left, which is why it can improvise and why you cannot unit-test it. Here the job lives in a database. Code holds the request, the queue, the proposals, and the record of what has already been applied; the model is handed one bounded question and forgets it immediately. Everything good about this design comes from that flip — a plan can be stored, resumed, audited, and tested deterministically. So does everything absent: no path exists that nobody wrote, which is why interpretation and cross-page coordination were missing rather than buggy.
+
 The interface says otherwise. It is a text box you type a request into, and a text box you type a request into is the universal sign for the second thing — a system that will interpret, ask a follow-up, work it out. My mental model when I sat down to break it was the second one, and I built the first one.
 
 That gap is not decoration on this story. It is the mechanism. Because the spec never placed the product on the axis, there was nothing for the operational knowledge to attach to except resemblance — and only one component in the build resembled the diagrams.
