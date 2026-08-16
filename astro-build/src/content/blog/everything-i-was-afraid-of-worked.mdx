@@ -1,0 +1,105 @@
+---
+title: "Everything I Was Afraid of Worked"
+publishedAt: "2026-08-17T14:00:00.000Z"
+author: "Nino Chavez"
+status: "published"
+excerpt: "Last October I published a post arguing that agent safety is an architecture problem: the model proposes, hard-coded code disposes, a human approves. Then I built exactly that for a youth sports club's website and used it for an hour. I found seven things wrong with it. None of them were in the part I had been afraid of."
+category: "AI & Automation"
+featureImage: "/images/generated/everything-i-was-afraid-of-worked.webp"
+tags: ["agentic-systems", "ai-development", "software-architecture"]
+takeaway: "Audit an AI-built system by tracing what each layer was derived from — a measured failure or an assumption — and rebuild only the assumed ones."
+---
+
+I spent an hour using a tool I had built for a youth volleyball club, trying to break it. I broke it seven times. Not one of those breaks was in the layer I had spent the entire design protecting.
+
+The tool lets a club administrator change copy across the site by describing the change in plain words. Everything dangerous about that — a language model writing to live pages — I had planned for in detail. That planning worked. What failed was the ordinary web plumbing underneath it: how many times one page load talks to a model, what happens when someone hits refresh, whether a change described once comes out the same on three different pages.
+
+Here is what the hour actually taught me, and it is not that agents need more discipline. **The discipline was there. It aimed at the layer that felt new, and the twenty-year-old layer got nothing, precisely because nothing about it was frightening.** Rigor is not a dial you turn up. It is a spotlight, and it points wherever the fear is.
+
+## In October I Told Everyone to Build a Cage
+
+I published a post last year arguing that the agent hype was aimed at the wrong problem. The interesting risk was not that a model would fail; it was that a model would succeed at something catastrophic and technically valid. The prescription was architectural:
+
+> The agent doesn't call RefundService directly. It proposes a refund, and a simple, hard-coded validation service—the cage—is the gatekeeper.
+
+And:
+
+> For any high-stakes system, the agent's primary output is a plan for approval, not an action to execute.
+
+I still believe both sentences. That is the problem with what happened next.
+
+## I Built Exactly That
+
+The club's assistant works the way that post prescribed. An administrator types what they want changed. Code — not a model — searches the site and decides which text is even eligible. A model proposes new wording for the text it is shown, and it is only ever shown the club's own words, never the page structure and never the fields that come from the league's registration system. Code that never consults a model decides whether the proposal can be written. A human approves it. Writes go in at exact byte positions with a content hash checked first, so a stale proposal cannot land on a page that changed underneath it.
+
+Every one of those decisions came from something that had already gone wrong. An earlier version of this feature sent whole pages to a model and asked for whole pages back; when I measured it, the round-trip corrupted 13 of the site's 39 pages. The byte-level writing exists because of those thirteen pages. The hash check exists because of them. The prescription and the implementation match, line for line.
+
+## The Part I Was Scared Of Never Broke
+
+Then I used it, adversarially, for an hour.
+
+Six code changes came out of that hour. Every one of them landed in how the tool plans a change, how it decides what the request meant, or how it shows the result for review. Zero landed in the code that writes to pages.
+
+The sharpest test was accidental. I hit refresh on a page that had just applied a change, which resubmitted the form. That is the oldest bug in web development and I walked straight into it. The write path caught it exactly as designed — the second attempt found the page bytes had changed since the proposal was made, and refused.
+
+So the gate held. The club's pages were never at risk. And I still ended up looking at a screen that was lying to me.
+
+## The Refusal Was Correct and the Receipt Was a Lie
+
+The refusal came back labeled *stale*. Which is true, mechanically: the proposal no longer matched the page. But the reason it no longer matched was that the change had already succeeded a second earlier. The system recorded a failure for a change that was, at that exact moment, live on the page the administrator was looking at.
+
+Nothing was corrupted. Nobody was protected from anything. A volunteer club administrator was told their work had failed while their work sat there, done.
+
+I had specified safety. I had not specified truthfulness. Those are different properties, and I only knew to be afraid of one of them.
+
+## The Cap Existed. It Was Guarding the Wrong Thing.
+
+This is the part that changed how I think about where engineering knowledge actually goes.
+
+The specification for this tool does contain a bound on model calls. It caps the question-answering path at six turns. Somebody — me — knew that letting a model loop without a limit is dangerous, wrote that knowledge down, and attached it to the component that answers questions.
+
+The component that plans changes has no such limit in the original design. It asks the model about every editable block of text, on every page that matched, one at a time. A request touching a dozen pages could make hundreds of model calls inside a single page load, which is why the browser hung. There is now a hard ceiling of 40 calls and a 40-second deadline, added after I hit it.
+
+Both components call a model in a loop. Only one of them *looked* like a loop. The question-answering path resembled the diagrams in every agent-architecture post I had read, so the knowledge attached to it. The planning path was a `foreach` over some text blocks — it looked like ordinary PHP, so it got ordinary PHP's attention, which is none.
+
+Knowledge does not attach to risks. It attaches to surfaces that resemble where you learned it.
+
+## The Bug Was Never About Speed
+
+I first filed the hang as a performance problem. It was not.
+
+Ask this tool to make the refund policy read the same way on three pages, and it sends each block of text to the model separately. Three independent calls, each asked to rewrite one paragraph. Three answers come back. Nothing in the system compares them.
+
+They can differ. Each one individually passes every safety check I built, because each one *is* safe — it touches only club-owned words, it splices at the right bytes, it verifies its hash. The administrator approves three correct-looking changes and ends up with three different versions of the wording they asked to make identical.
+
+Capping the loop would have made that bug faster and left it in place.
+
+The fan-out pattern has a name and a published shape, and the published shape includes a step where the results get reconciled before anything is used. I built the fan-out and skipped the reconciliation, without ever knowing I was implementing a named pattern. The fix is to let the model see all the matched text at once and decide the wording a single time. It also happens to collapse hundreds of calls into a handful, which is how I first mistook a correctness bug for a speed bug.
+
+## The Process Was Not the Problem
+
+The honest counter-argument is that this was sloppy work dressed up in process. It was not.
+
+This build had a written decision record with twelve acceptance conditions, a product spec, an implementation plan, an adversarial fact-check pass, and over a thousand test assertions running clean on three versions of PHP. The fact-check caught real problems every time it ran. The tests were green the entire time both of my failures were live.
+
+And that is the mechanism, not an excuse. The twelve acceptance conditions are all about truthfulness, scope, and boundaries — what the tool is allowed to touch and what it must not claim. Not one names a call budget, a response-time limit, or what happens on refresh. The review asked whether everything written down was true. Everything written down *was* true. No review that checks claims can fail on a claim nobody made.
+
+The test suite has the same shape. It never makes an HTTP request, by design, so it cannot see a redirect, a resubmit, or a wall clock. A thousand assertions measured the foundation carefully and could not see the building.
+
+One honest limit on all of this: it is one tool, one hour, one person. It shows that this failure happened and how. It does not prove that everyone building agents fails this way.
+
+## Pedigree Predicted Quality Better Than Reading the Code
+
+The reasonable reaction to finding seven problems in your own build is to throw it out. Same process produced all of it, so distrust all of it.
+
+I did not, and the reason is a test I would now run on anything an agent helped me build. Do not judge the code by reading it. Trace where each layer came from.
+
+The layers that came from something I had measured going wrong — the byte-level writes, the hash check, the restricted search — held under an hour of deliberate abuse. The layer that came from an assumption about how planning should work is where all seven problems lived. Those layers share an author and a process, but they do not share a pedigree, and pedigree is what predicted quality.
+
+That gives a keep-or-rebuild decision an actual basis. For each layer, name the specific failure it was built in response to. If you cannot name one, that layer is a guess wearing the same clothes as the rest of the system, and it is where you should look first.
+
+## The List Exists. Nothing Enforces It.
+
+I can now write down what this class of system needs regardless of what the model does: a ceiling on model calls per request, a deadline shorter than whatever times out first, long work that lives outside a single page load, mutations that survive being submitted twice, and a report to the human that is true rather than merely accurate. Six items. None of them are new. Most of them are older than my career.
+
+What I do not have is anything that fails a build when one is missing. My safety rules are enforced by code. My honesty rules are enforced by me remembering, at the end of an hour, that I got told my change failed while I was looking straight at the page where it had already worked.
