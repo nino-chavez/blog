@@ -311,6 +311,18 @@ function extractVisualConcept(title) {
 
 // Use LLM to generate a content-aware visual concept from the full post
 async function generateVisualConcept(title, excerpt, category, postBody) {
+  // The house style renders robots and circuitry into every frame. When the
+  // derived concept is abstract — "a soap bubble", "a pristine marble" — the
+  // render can't satisfy it and the QA judge correctly rejects the mismatch,
+  // three times, at full render cost each. Measured 2026-08-16: four posts
+  // attempted, three failed that way, $0.51 spent for one usable image.
+  //
+  // So a human can pin a concrete, renderable concept and skip the guessing:
+  //   VISUAL_CONCEPT="a heavy vault door standing intact while pipes burst"
+  if (process.env.VISUAL_CONCEPT) {
+    console.log(`              📌 Concept pinned via VISUAL_CONCEPT`);
+    return process.env.VISUAL_CONCEPT;
+  }
   try {
     const response = await openrouter.chat.completions.create({
       model: 'google/gemini-2.5-flash',

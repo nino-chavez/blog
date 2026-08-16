@@ -1,0 +1,218 @@
+---
+title: "Diff Your Spec Against Its System Class"
+slug: "diff-your-spec-against-its-system-class"
+publishedAt: "2026-08-17T15:00:00.000Z"
+author: "Nino Chavez"
+excerpt: "Four checks that run against a spec before anything gets built, and against code an agent already wrote. Name the system's class, diff the non-functional section against that class's published guidance, trace each layer to the failure it was built for, and make the omission mechanical next time. Companion workshop to Everything I Was Afraid of Worked."
+category: "Engineering"
+tags: ["agentic-systems", "tutorial", "engineering"]
+takeaway: "Diff your spec's non-functional section against its system class, then judge existing layers by whether each traces to a measured failure."
+duration: "45 min"
+difficulty: "intermediate"
+prerequisites:
+  - "A spec, PRD, or decision record for something you are about to build — or code an agent already wrote that you have to judge"
+  - "The ability to run the thing adversarially for an hour, not just read it"
+  - "Read the companion post: Everything I Was Afraid of Worked"
+objectives:
+  - "Name the class of system you are building and find its published reference guidance"
+  - "Diff your non-functional section against that guidance, adopting each element with a number or rejecting it with a reason"
+  - "Trace every layer to the specific failure it was built in response to, and treat the untraceable ones as suspect"
+  - "Convert the omission you found into a check that fails a build"
+companionOf:
+  type: blog
+  slug: everything-i-was-afraid-of-worked
+---
+
+import { Exercise } from '@/components/tutorials/Exercise';
+import { Template } from '@/components/tutorials/Template';
+import { Checkpoint } from '@/components/tutorials/Checkpoint';
+
+# Rigor Goes Where the Fear Is
+
+In [Everything I Was Afraid of Worked](/blog/everything-i-was-afraid-of-worked), a tool built to a careful spec shipped with two defects. The safety layer — the part the whole design existed to protect — held under an hour of deliberate abuse. Every defect was in the ordinary web plumbing underneath it.
+
+The spec had twelve acceptance conditions. All twelve concerned truthfulness, scope, and boundaries. Not one named a call budget, a response-time limit, or what happens when someone hits refresh.
+
+It did contain a limit on model calls: six turns, applied to the component that answers questions — the one that looked like the diagrams in every agent-architecture post. The component that planned changes called the model once per block of text with no bound at all. Both call a model in a loop. Only one of them looked like a loop.
+
+This workshop is the mechanical version of that lesson. It runs in both directions: forward against a spec you are writing, and backward against code an agent already produced.
+
+A few terms, defined once:
+
+- **System class** — the named category your thing belongs to, whether or not you named it. Agent, workflow, RAG pipeline, job queue, CRUD app.
+- **Non-functional section** — the part of a spec that carries budgets, deadlines, failure behavior, and concurrency. Usually the shortest section, usually written last.
+- **Pedigree** — what a layer of your system was derived from. Either a failure someone measured, or an assumption someone made.
+- **Omission-blind review** — a check that can only fail on what is written. It cannot fail on the thing nobody thought to write.
+
+---
+
+<Exercise number={1} title="Name the class and find its guidance" duration="10 min">
+
+## Why this matters
+
+You cannot diff against a reference you never located. The failure mode is not disagreeing with the canon — it is never meeting it, then discovering afterward that the pattern you improvised has a name, a published shape, and a documented list of parts.
+
+In the companion case, the planner was an instance of a named pattern: fan out work across items, then reconcile the results. The published version of that pattern includes the reconciliation step. The build had the fan-out and no reconciler, and nobody knew there was a second half to skip.
+
+## The structure
+
+Write one sentence describing what your system does mechanically, with no product language in it. Not "helps staff update copy" — instead "code retrieves candidate text, a model proposes replacements, code decides which land."
+
+Then find the published guidance for that shape. It exists more often than not:
+
+- Code orchestrates the model through fixed paths, versus the model choosing its own tools — that axis is **workflows versus agents**, and the pattern catalogue that goes with it names routing, sectioning, evaluator, and orchestrator.
+- Retrieve in code, generate once against what was retrieved — **RAG**, with two decades of published failure modes.
+- Work that outlives one request — **durable execution**, with an entire vocabulary of queues, ticks, and resumability.
+- Deciding who holds the turn and when the system may take one — **mixed-initiative interaction**, which is older than any of this.
+
+## Your turn
+
+Produce two artifacts: the mechanical sentence, and a link to the reference guidance for its class.
+
+<Checkpoint>
+
+You should be able to name your system's class in words someone else's documentation also uses. If the closest match feels wrong, that is a finding — either your design is genuinely novel, which is rare and worth stating explicitly, or you have not described it mechanically enough yet.
+
+</Checkpoint>
+
+</Exercise>
+
+---
+
+<Exercise number={2} title="Diff the non-functional section" duration="15 min">
+
+## Why this matters
+
+A review that asks "is everything written here true?" cannot fail on an absence. In the companion case the adversarial fact-check fired correctly every single time it ran — and no claim asserted an answer for long-running work, so nothing could fail on its missing.
+
+The diff is what converts an omission into a visible decision. You are not required to adopt anything. You are required to have answered.
+
+## The structure
+
+Take the reference guidance from Exercise 1 and walk its elements one at a time. For each, write one line: **adopted, with a number**, or **rejected, with a reason**. Silence is not an allowed answer.
+
+For an agent-shaped system the list is six:
+
+```
+retrieval-scoped generation   what the model sees is chosen by code, not the model
+per-request model-call budget a number, in the spec
+wall-clock deadline           a number, under the shortest timeout upstream
+async for over-cycle work     anything that can outlive a request leaves it
+idempotent mutations          survives being submitted twice
+observability per model call  count, latency, cost — recorded, not assumed
+```
+
+Your class will have a different list. The format is what transfers.
+
+<Template>
+
+```
+ELEMENT:  per-request model-call budget
+STATUS:   adopted
+VALUE:    40 calls, 40s deadline
+BECAUSE:  a request touching a dozen pages made hundreds of calls in one
+          page load and hung the browser
+
+ELEMENT:  async for over-cycle work
+STATUS:   rejected
+BECAUSE:  v1 scope is a single page of edits; revisit when cross-page
+          planning lands
+```
+
+</Template>
+
+## Your turn
+
+Run every element. Count how many you could not answer without going and looking something up. That count is the size of the gap between what you specified and what your system's class expects.
+
+<Checkpoint>
+
+Every element has a line. No element is blank. At least one should be a rejection with a real reason — a diff where everything is adopted usually means the list was rewritten to match the design rather than the design tested against the list.
+
+</Checkpoint>
+
+</Exercise>
+
+---
+
+<Exercise number={3} title="Trace each layer's pedigree" duration="15 min">
+
+## Why this matters
+
+This is the backward-facing half, and it answers the question everyone now has about code an agent wrote: how do I know any of this is good?
+
+Not by reading it. Reading rewards code that looks confident. In the companion case the test suite sat at over a thousand green assertions while both defects were live, because the suite never made an HTTP request and could not see a redirect, a resubmit, or a wall clock.
+
+What predicted quality was where each layer came from. The layers built in response to something measured — a serialization round-trip that corrupted 13 of 39 pages — held under deliberate abuse. The layer built from an assumption about how planning should work is where all seven problems lived. Same author, same process, different pedigree.
+
+## The structure
+
+List your system's layers. For each one, name the specific failure it was built in response to. Be concrete: a bug, an incident, a measurement, a corrupted record. "Best practice" is not a pedigree. "Seemed right" is not a pedigree.
+
+<Template>
+
+```
+LAYER:     write path (byte-offset splice, content hash)
+PEDIGREE:  measured — round-trip serialization corrupted 13 of 39 pages
+VERDICT:   keep
+
+LAYER:     planning (per-item model calls, request-lifetime execution)
+PEDIGREE:  assumption — nobody derived this from a job anyone observed
+VERDICT:   suspect; test first, expect to replace
+```
+
+</Template>
+
+## Your turn
+
+Sort your layers into traceable and untraceable. Then spend your testing time on the untraceable ones — that is where the defects concentrate, and it is a far better targeting signal than intuition about which code looks weakest.
+
+<Checkpoint>
+
+You have a list where every layer is either tied to a named failure or explicitly marked as an assumption. If everything traces to a measured failure, you were not honest about at least one layer — some part of every system is a guess, and the useful question is which part.
+
+</Checkpoint>
+
+</Exercise>
+
+---
+
+<Exercise number={4} title="Make the omission mechanical" duration="5 min">
+
+## Why this matters
+
+A written rule loses to an editor who believes they already checked. The diff you just ran was a rule, and rules decay — you will run this one carefully today and skip it in four months on a Friday.
+
+The only durable version is a check that fails a build.
+
+## The structure
+
+Pick the single element from Exercise 2 you were most surprised to find missing. Write the smallest gate that would have caught it.
+
+The gates are usually unglamorous, and that is the point:
+
+- A test that submits the same mutation twice and asserts the second is a no-op, not an error.
+- A counter on model calls per request that throws above a threshold, so exceeding it is a failure rather than a slow afternoon.
+- A required field in your spec template for each element on the class list, so an empty one blocks the merge.
+
+## Your turn
+
+Land one gate. One is enough — a gate that exists beats four you described.
+
+<Checkpoint>
+
+Something in your repository now fails when the omission recurs. If your answer is a paragraph in a document, you have written the rule again, not the check.
+
+</Checkpoint>
+
+</Exercise>
+
+---
+
+## What this does not do
+
+It will not tell you whether the reference guidance is right for your case. Published patterns come from other people's constraints, and a rejection with a real reason is a legitimate outcome of every element on the list.
+
+It also will not find defects in a layer whose pedigree is solid. That is the intended behavior — those layers earned the assumption — but it means this is a targeting tool, not a coverage tool. You still have to use the thing adversarially for an hour. In the companion case that hour, by one person, produced more signal about the product than the entire automated suite.
+
+The one thing it does reliably is convert "we never thought about that" into "we decided that, and here is the line where we wrote it down."
