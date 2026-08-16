@@ -27,14 +27,15 @@ draft exists, the caption becomes the working source of truth and every later
 edit is a copy of a copy. A written rule does not survive that, because the
 editor believes they already checked.
 
-**The afraid-of-worked caption files no longer match what is live, on either
-platform.** Both were posted 2026-08-16 and corrected the same day, after the
-source post gained a section naming the control-flow axis — workflow versus
-agent — which the captions had inherited the absence of. The addition is a
-gain, not a fix to something false: nothing published was wrong, it was
-incomplete. The live LinkedIn post and the sent Substack email both carry the
-shorter text. Substack's email cannot be recalled; its web version and the
-LinkedIn post are both editable, and that is the operator's call.
+**The afraid-of-worked Substack email does not match its caption file.** Both
+platforms were posted 2026-08-16, then the source post gained a section naming
+the control-flow axis — workflow versus agent — which both captions had
+inherited the absence of. The LinkedIn post was deleted and reposted from the
+rewritten caption, so that route is back in sync; its queue url is the second
+activity id, not the first. The Substack email had already gone out and cannot
+be recalled, so its subscribers have the shorter text. Its web version is
+editable and that is the operator's call. Nothing published was false — the
+addition is a gain, not a correction.
 
 **The 8/4 caption file no longer matches what is live on LinkedIn.** The file
 was corrected on 2026-08-03 (four fixes: the invented motive, the "I kept a
