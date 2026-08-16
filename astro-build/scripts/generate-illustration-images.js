@@ -29,6 +29,46 @@ if (!OPENROUTER_API_KEY) {
   process.exit(1);
 }
 
+// The render model is the whole bill. Measured on this account over the 16 days
+// to 2026-08-15: openai/gpt-5-image cost $0.2326 per image across 51 requests,
+// google/gemini-2.5-flash-image $0.0432 across 18. The gap is token count, not
+// rate — 6,947 output tokens per image against 1,460.
+//
+// Lifetime spend on the blog-images key when this was written: $85.77, read
+// off OpenRouter's key page because the script itself recorded nothing.
+//
+// Override per run:  IMAGE_MODEL=openai/gpt-5-image-mini node scripts/...
+const IMAGE_MODEL = process.env.IMAGE_MODEL || 'google/gemini-2.5-flash-image';
+
+// Nothing recorded what an image cost, so no savings claim about this script
+// was falsifiable — including the one that motivated switching models. Every
+// call now asks OpenRouter to return its own cost and adds it here.
+const ledger = {
+  calls: [],
+  add(model, usage) {
+    const cost = Number(usage?.cost ?? 0);
+    this.calls.push({ model, cost, tokens: usage?.completion_tokens ?? 0 });
+    return cost;
+  },
+  total() { return this.calls.reduce((a, c) => a + c.cost, 0); },
+  byModel() {
+    const m = {};
+    for (const c of this.calls) {
+      m[c.model] = m[c.model] || { cost: 0, calls: 0, tokens: 0 };
+      m[c.model].cost += c.cost; m[c.model].calls += 1; m[c.model].tokens += c.tokens;
+    }
+    return m;
+  },
+  report() {
+    if (!this.calls.length) return;
+    console.log('\n💵 Cost this run:');
+    for (const [model, v] of Object.entries(this.byModel()).sort((a, b) => b[1].cost - a[1].cost)) {
+      console.log(`   $${v.cost.toFixed(4).padStart(8)}  ${String(v.calls).padStart(3)} call(s)  ${String(v.tokens).padStart(6)} out-tok  ${model}`);
+    }
+    console.log(`   $${this.total().toFixed(4).padStart(8)}  total`);
+  }
+};
+
 // Parse --dir flag (blog or whitepapers, defaults to blog)
 const args = process.argv.slice(2);
 const dirFlagIndex = args.findIndex(a => a === '--dir');
@@ -274,6 +314,7 @@ async function generateVisualConcept(title, excerpt, category, postBody) {
   try {
     const response = await openrouter.chat.completions.create({
       model: 'google/gemini-2.5-flash',
+      usage: { include: true },
       messages: [
         {
           role: 'user',
@@ -330,6 +371,7 @@ async function regenerateVisualConcept(title, category, rejectedConcept, reason)
   try {
     const response = await openrouter.chat.completions.create({
       model: 'google/gemini-2.5-flash',
+      usage: { include: true },
       messages: [{
         role: 'user',
         content: `An illustration concept was rejected by a vision QA judge. Write a replacement.
@@ -463,10 +505,13 @@ function extractImageBase64(message) {
 // One render call. Throws on transport errors, empty responses, or missing image.
 async function fetchImageBuffer(prompt) {
   const response = await openrouter.chat.completions.create({
-    model: 'openai/gpt-5-image',
+    model: IMAGE_MODEL,
     modalities: ['text', 'image'],
-    messages: [{ role: 'user', content: prompt }]
+    messages: [{ role: 'user', content: prompt }],
+    usage: { include: true }
   });
+  const spent = ledger.add(IMAGE_MODEL, response.usage);
+  console.log(`              💵 render $${spent.toFixed(4)} (${response.usage?.completion_tokens ?? '?'} out-tok, ${IMAGE_MODEL})`);
 
   const base64Data = extractImageBase64(response.choices?.[0]?.message);
   const buffer = Buffer.from(base64Data, 'base64');
@@ -495,6 +540,7 @@ async function qaImage(outputPath, visualConcept) {
     const b64 = fs.readFileSync(outputPath).toString('base64');
     const response = await openrouter.chat.completions.create({
       model: 'google/gemini-2.5-flash',
+      usage: { include: true },
       max_tokens: 150,
       temperature: 0,
       messages: [{
@@ -812,6 +858,7 @@ async function main() {
     process.exitCode = 1;
   }
 
+  ledger.report();
   console.log('\n✨ Done!');
 }
 
