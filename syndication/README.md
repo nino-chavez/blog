@@ -27,15 +27,21 @@ draft exists, the caption becomes the working source of truth and every later
 edit is a copy of a copy. A written rule does not survive that, because the
 editor believes they already checked.
 
-**The afraid-of-worked Substack email does not match its caption file.** Both
-platforms were posted 2026-08-16, then the source post gained a section naming
-the control-flow axis — workflow versus agent — which both captions had
-inherited the absence of. The LinkedIn post was deleted and reposted from the
-rewritten caption, so that route is back in sync; its queue url is the second
-activity id, not the first. The Substack email had already gone out and cannot
-be recalled, so its subscribers have the shorter text. Its web version is
-editable and that is the operator's call. Nothing published was false — the
-addition is a gain, not a correction.
+**Both afraid-of-worked captions are ahead of what is live (2026-08-16).** The
+source post gained a section naming the control-flow inversion, and the captions
+were revised twice: first to add the workflow-versus-agent distinction, then
+again because that distinction was a taxonomy and not the inversion — it never
+said where the job lives or which direction the handoff runs. The LinkedIn post
+was deleted and reposted between those two revisions, so the live post
+(activity 7494885457839685632) carries the middle version, not the file. The
+Substack email carries the first and cannot be recalled. Nothing published is
+false; each revision is an addition. Reposting or editing is the operator's call.
+
+**A LinkedIn gotcha for anything that hardcodes a profile URL:**
+`linkedin.com/in/ninochavez` is a different person — an IS Operations Supervisor
+in Miami-Dade. Verification must go through `/in/me/`, which resolves to whoever
+the browser-box social profile is signed in as. A check against the vanity slug
+returns a confident false negative.
 
 **The 8/4 caption file no longer matches what is live on LinkedIn.** The file
 was corrected on 2026-08-03 (four fixes: the invented motive, the "I kept a
