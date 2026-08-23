@@ -1,0 +1,82 @@
+---
+title: "Nobody Owns What the Agent Leaves Running"
+publishedAt: "2026-08-23T13:00:00.000Z"
+author: "Nino Chavez"
+status: "draft"
+excerpt: "A day after an agent reported the resource cleanup finished, twenty-two connector process trees were still running on my machine, all of them from connectors marked disabled. The client would not touch another client's children. The sessions were four terminal tabs nobody had closed. The cleanup agent reported zero. Every participant behaved correctly and the remainder belonged to none of them."
+category: "AI & Automation"
+tags: ["agentic-systems", "ai-development", "ai-governance"]
+takeaway: "Before trusting a config flag, check what is still running: a disabled connector keeps its processes until the session that started them exits."
+---
+
+Twenty-two connector process trees were running on this machine at 07:23 in the morning. Twelve of them were Chrome DevTools. Five were Context7. Five were Playwright. Every one of those connectors reads `enabled = false` in config, and an agent had reported the cleanup finished the day before.
+
+I looked at Activity Monitor and did not believe the answer I was getting.
+
+The answer was right. The config was accurate too, which is the part worth sitting with. A flag governs what starts next. It does not reach what is already running, and nothing in the loop owns what is already running. Not the client. Not the session. Not the cleanup agent, which reported zero while twenty-seven processes held 1.14 GiB and twenty-four hours of uptime. Delegating work to an agent produces durable byproducts, and the loop that produces them has no step that ends them.
+
+## The Processes Predated the Fix and Outlived It
+
+The whole cohort started inside seventeen seconds, between 07:02:02 and 07:02:19 on the previous morning. The fix that was supposed to remove them completed roughly twenty minutes after that.
+
+So the sequence is not a cleanup that missed something. It is a cleanup that ran, changed the configuration, reported success, and left the running population untouched because nothing it changed applied to a process that already existed. Twenty-four hours and twenty-two minutes later they were all still there.
+
+## The Client Did Not Own Them, and It Was Right Not To
+
+Two of those trees belonged to the Codex app server, process 1425. The other twenty belonged to four Claude CLI sessions on ttys000 through ttys003.
+
+Neither client can clean up after the other, and neither should try. A tool that kills processes it did not start is a worse tool than one that leaves stray children behind. Codex leaving another client's sessions alone is correct behavior, not a bug, and it is also the reason the population never shrank. Correct scoping at every node produces an unowned remainder in the middle.
+
+## The Session Owned Them, and a Session Is a Tab Somebody Left Open
+
+None of those twenty trees were orphans. Each one had a live parent, still attached to a terminal, twenty-four hours old.
+
+That is the actual lifecycle rule, and it is not written down anywhere that a config file can express. A connector lives as long as the session that started it. A session lives as long as the terminal tab. Four tabs left open overnight is not a leak by any definition the system uses, and it is also the entire mechanism by which twenty-two connector trees survive a fix aimed at all of them.
+
+## The Audit Was True for About Five Minutes
+
+The prior audit's three load-bearing conclusions all failed a day later, and each failed for the same reason: a reading taken at one moment cannot say anything about what is still running at the next one.
+
+It reported:
+
+> every live connector is a descendant of Codex, not Claude
+
+A day later, twenty of twenty-two belonged to Claude. That measurement was taken minutes after a reboot, at a moment when Claude happened not to be running, and a snapshot of one moment became a claim about the system.
+
+It reported:
+
+> removed 17 leaked MCP process groups. They remain at zero.
+
+The 07:02 cohort survived and was still running. The removal may well have happened. "They remain at zero" is the part that could not be true, because it is a claim about the future made from a single reading.
+
+It reported disabling the Chrome DevTools connector. That connector was never in the plugin system at all. It is a per-project `mcpServers` entry under `/Users/nino` in `~/.claude.json`, and disabling the plugin could not reach it. Twelve trees were running from a config surface the fix never touched.
+
+## Four Surfaces Can Start a Connector, and Only One Was Pinned
+
+There is no single off switch here, and that is the structural finding underneath all three failures. A connector can be started by a global plugin setting, by that setting's copy in dotfiles, by a per-project `mcpServers` block, or by project settings. Turning it off in one leaves it running from another, and nothing reconciles the four.
+
+The Chrome DevTools surface got pinned exactly: one `mcpServers` entry, one file, one path. The Context7 surface did not. Five trees were running, and which of the four surfaces was starting them was never determined. That gap is not a footnote on the finding. It is the finding, demonstrated twice in one measurement, once by a surface that resolved and once by a surface that did not.
+
+## The One Fix That Held Removed the Mechanism
+
+`mcp-remote` is at zero, and stayed at zero.
+
+That fix was different in kind from the others. It did not flip a flag on a thing that starts processes. It replaced the thing: a local Node bridge swapped out for a native HTTP connection, so there is no longer a process to start, no surface that can start one, and nothing for a stale session to be holding. Every fix that changed a value left a running population behind. The one fix that changed a mechanism did not.
+
+## Worktrees and Browser Profiles Failed the Same Way
+
+This machine has produced the same shape twice before, and both times the byproduct was something an agent created on purpose.
+
+One repository accumulated fifty-two git worktrees holding 74 GB, sixty-eight of those gigabytes in Rust build directories. They were invisible for a specific reason: `.worktrees/` is ignored machine-wide, so none of them ever appeared in `git status`. The isolation rule that requires a worktree per parallel session has no matching rule that ends one, and none of the fifty-two had been merged.
+
+Browser automation profiles did the same thing. One hundred and two of them, 74 GB. A shared-profile default brought that to twenty-four profiles and 17 GB, which is a fix that changed what gets created rather than a pass that deleted what had accumulated.
+
+Each of the three was found the same way, which is to say not found at all until a resource ran out. A full disk. A machine that had to be rebooted. Only the worktrees got something that ends them, a reaper written after the wall had already been hit, which is a fix built at the point of pain rather than the point of creation. The profiles got a change to what gets created. The connectors got neither.
+
+## What the Config Says and What Is Running Are Two Different Questions
+
+Every mechanism in this story is behaving correctly. The flag disables. The client scopes its cleanup to its own children. The session holds its connectors for exactly as long as the session lasts. The isolation rule creates a worktree per session because that is what it is for.
+
+The gap is not in any of them. It sits between them, in the space where a byproduct outlives the task that created it and no participant has a claim on it. An agent finishing its work is not the same event as the work's residue ending, and only the first one is anything the loop can observe.
+
+Four terminal tabs sat open on that machine with nobody typing in any of them, each still holding its connectors alive a full day after the last prompt. The config said off. The tabs said otherwise, and the tabs are what runs.
