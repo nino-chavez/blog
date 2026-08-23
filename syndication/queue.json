@@ -3,51 +3,38 @@
   "linkedinHistory": "harvested from the activity feed (115 link-shares read)",
   "cadence": {
     "linkedin": {
-      "days": [
-        2,
-        4
-      ],
+      "days": [2, 4],
       "every": 1
     },
     "substack": {
-      "days": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6
-      ],
+      "days": [0, 1, 2, 3, 4, 5, 6],
       "every": 1
     },
     "devto": {
-      "days": [
-        3
-      ],
+      "days": [3],
       "every": 2
     }
   },
   "summary": {
     "linkedin": {
-      "posted": 49,
-      "queued": 15,
-      "skipped": 264,
-      "firstSlot": "2026-08-25",
+      "posted": 51,
+      "queued": 14,
+      "skipped": 265,
+      "firstSlot": "2026-08-27",
       "lastSlot": "2026-10-13"
     },
     "substack": {
-      "posted": 287,
+      "posted": 288,
       "queued": 3,
       "backfill": 29,
-      "skipped": 9,
+      "skipped": 10,
       "firstSlot": "2026-08-24",
       "lastSlot": "2026-08-26"
     },
     "devto": {
       "posted": 2,
       "queued": 6,
-      "skipped": 320,
+      "skipped": 322,
       "firstSlot": "2026-09-02",
       "lastSlot": "2026-11-11"
     }
@@ -1324,75 +1311,6 @@
       }
     },
     {
-      "id": "tutorials/multi-account-instagram-publishing-graph-api",
-      "title": "Multi-Account Instagram Publishing With the Graph API",
-      "url": "https://ninochavez.co/blog/tutorials/multi-account-instagram-publishing-graph-api",
-      "publishedAt": "2026-06-15",
-      "collection": "tutorials",
-      "words": 1966,
-      "cluster": "where-the-api-stops",
-      "tier": 1,
-      "routes": {
-        "substack": {
-          "mode": "full",
-          "state": "posted",
-          "postedAt": "2026-08-10",
-          "scheduledFor": null,
-          "url": "https://signaldispatch.substack.com/publish/posts/detail/210610524/share-center",
-          "backfill": true
-        },
-        "linkedin": {
-          "mode": "teaser",
-          "state": "posted",
-          "postedAt": "share-history",
-          "scheduledFor": null,
-          "url": null
-        },
-        "devto": {
-          "mode": "canonical",
-          "state": "eligible",
-          "postedAt": null,
-          "scheduledFor": "2026-09-30",
-          "url": null
-        }
-      }
-    },
-    {
-      "id": "blog/the-civil-war-inside-every-agent",
-      "title": "The Civil War Inside Every Agent",
-      "url": "https://ninochavez.co/blog/the-civil-war-inside-every-agent",
-      "publishedAt": "2026-03-01",
-      "collection": "blog",
-      "words": 1361,
-      "series": "the-bifurcation",
-      "seriesPos": 1,
-      "cluster": "the-civil-war-inside-every-agent",
-      "tier": 1,
-      "routes": {
-        "substack": {
-          "mode": "full",
-          "state": "posted",
-          "postedAt": "archive",
-          "scheduledFor": null,
-          "url": null
-        },
-        "linkedin": {
-          "mode": "native",
-          "state": "posted",
-          "postedAt": "share-history",
-          "scheduledFor": null,
-          "url": null
-        },
-        "devto": {
-          "mode": "skip",
-          "state": "skip",
-          "postedAt": null,
-          "scheduledFor": null,
-          "url": null
-        }
-      }
-    },
-    {
       "id": "blog/what-if-the-fork-is-the-problem",
       "title": "What If the Fork Is the Problem?",
       "url": "https://ninochavez.co/blog/what-if-the-fork-is-the-problem",
@@ -1454,6 +1372,75 @@
         },
         "linkedin": {
           "mode": "teaser",
+          "state": "posted",
+          "postedAt": "share-history",
+          "scheduledFor": null,
+          "url": null
+        },
+        "devto": {
+          "mode": "skip",
+          "state": "skip",
+          "postedAt": null,
+          "scheduledFor": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "id": "tutorials/multi-account-instagram-publishing-graph-api",
+      "title": "Multi-Account Instagram Publishing With the Graph API",
+      "url": "https://ninochavez.co/blog/tutorials/multi-account-instagram-publishing-graph-api",
+      "publishedAt": "2026-06-15",
+      "collection": "tutorials",
+      "words": 1966,
+      "cluster": "where-the-api-stops",
+      "tier": 1,
+      "routes": {
+        "substack": {
+          "mode": "full",
+          "state": "posted",
+          "postedAt": "2026-08-10",
+          "scheduledFor": null,
+          "url": "https://signaldispatch.substack.com/publish/posts/detail/210610524/share-center",
+          "backfill": true
+        },
+        "linkedin": {
+          "mode": "teaser",
+          "state": "posted",
+          "postedAt": "share-history",
+          "scheduledFor": null,
+          "url": null
+        },
+        "devto": {
+          "mode": "canonical",
+          "state": "eligible",
+          "postedAt": null,
+          "scheduledFor": "2026-09-30",
+          "url": null
+        }
+      }
+    },
+    {
+      "id": "blog/the-civil-war-inside-every-agent",
+      "title": "The Civil War Inside Every Agent",
+      "url": "https://ninochavez.co/blog/the-civil-war-inside-every-agent",
+      "publishedAt": "2026-03-01",
+      "collection": "blog",
+      "words": 1361,
+      "series": "the-bifurcation",
+      "seriesPos": 1,
+      "cluster": "the-civil-war-inside-every-agent",
+      "tier": 1,
+      "routes": {
+        "substack": {
+          "mode": "full",
+          "state": "posted",
+          "postedAt": "archive",
+          "scheduledFor": null,
+          "url": null
+        },
+        "linkedin": {
+          "mode": "native",
           "state": "posted",
           "postedAt": "share-history",
           "scheduledFor": null,
@@ -3808,6 +3795,40 @@
           "postedAt": "2026-08-23",
           "scheduledFor": "2026-08-25",
           "url": null
+        },
+        "devto": {
+          "mode": "skip",
+          "state": "skip",
+          "postedAt": null,
+          "scheduledFor": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "id": "blog/the-audit-reproduced-the-failure",
+      "title": "The Audit Reproduced the Failure",
+      "url": "https://ninochavez.co/blog/the-audit-reproduced-the-failure",
+      "publishedAt": "2026-08-23",
+      "collection": "blog",
+      "words": 1940,
+      "cluster": "the-audit-reproduced-the-failure",
+      "tier": 2,
+      "routes": {
+        "substack": {
+          "mode": "full",
+          "state": "eligible",
+          "postedAt": null,
+          "scheduledFor": "2026-08-24",
+          "url": null
+        },
+        "linkedin": {
+          "mode": "teaser",
+          "state": "posted",
+          "caption": "captions/linkedin/blog--the-audit-reproduced-the-failure.md",
+          "postedAt": "2026-08-23",
+          "scheduledFor": "2026-08-25",
+          "url": "https://www.linkedin.com/feed/update/urn:li:activity:7497411419676491776/"
         },
         "devto": {
           "mode": "skip",
@@ -6496,6 +6517,42 @@
         "devto": {
           "mode": "skip",
           "state": "skip",
+          "postedAt": null,
+          "scheduledFor": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "id": "research-notes/agent-fleet-self-audit-evidence",
+      "title": "Evidence Ledger: The Agent Fleet Self-Audit",
+      "url": "https://ninochavez.co/blog/research-notes/agent-fleet-self-audit-evidence",
+      "publishedAt": "2026-08-23",
+      "collection": "research-notes",
+      "words": 2001,
+      "cluster": "agent-fleet-self-audit-evidence",
+      "tier": 3,
+      "routes": {
+        "substack": {
+          "mode": "skip",
+          "state": "skip",
+          "reason": "not standalone reader content",
+          "postedAt": null,
+          "scheduledFor": null,
+          "url": null
+        },
+        "linkedin": {
+          "mode": "skip",
+          "state": "skip",
+          "reason": "not standalone reader content",
+          "postedAt": null,
+          "scheduledFor": null,
+          "url": null
+        },
+        "devto": {
+          "mode": "skip",
+          "state": "skip",
+          "reason": "not standalone reader content",
           "postedAt": null,
           "scheduledFor": null,
           "url": null

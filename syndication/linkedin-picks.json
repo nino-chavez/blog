@@ -125,6 +125,11 @@
       "id": "blog/nobody-owns-what-the-agent-leaves-running",
       "reviewed": "full",
       "why": "twenty-two connector processes at a day of uptime, every one of them reading enabled = false, and nothing had failed — the flag governs what starts next, not what is already running; third instance of the shape after 52 worktrees and 102 browser profiles, and it ships a one-line check the reader can run"
+    },
+    {
+      "id": "blog/the-audit-reproduced-the-failure",
+      "reviewed": "full",
+      "why": "the verifier fully audited the label it later compared against two quarter-sampled labels; the filter manufactured the rate, while the complete logs recorded 334 million tokens and an impossible 119-of-118 status"
     }
   ],
   "considered_not_picked": {
