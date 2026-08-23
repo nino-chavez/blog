@@ -18,7 +18,7 @@ A day later, twenty-two connector processes were still running. Twelve Chrome De
 
 I looked at Activity Monitor and did not believe what I was seeing.
 
-The answer was right, though. So was the config. Here is the thing worth knowing: a flag decides what starts next time, and it has no reach into what is already running. Nothing in the loop does. Not the client, not the session, not the cleanup agent that reported zero while those twenty-two processes sat there at a full day of uptime. Handing work to an agent leaves things behind, and no step in the loop is responsible for ending them.
+The answer was right, though. So was the config. A flag decides what starts next time. It has no reach into what is already running. Nothing in the loop does. Not the client, not the session, not the cleanup agent that reported zero while those twenty-two processes sat there at a full day of uptime. Handing work to an agent leaves things behind, and no step in the loop is responsible for ending them.
 
 ## The processes were already running before the fix ran
 

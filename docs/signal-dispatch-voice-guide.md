@@ -106,6 +106,7 @@ This section tracks patterns and phrases that have appeared in *recent* posts. E
 | "What I Still Don't Have"-shaped final H2 | 2026-07-31 | watch — 8/8 recent posts; vary the wording, keep the concrete-absence job |
 | Bold-lead-in enumeration blocks | 2026-07-30 | 2026-09-15 |
 | "I went and read the code / the predicate / the registry" phrasing | 2026-07-31 | 2026-09-15 — keep the re-derivation beat, vary the sentence |
+| "Here's the point, up front" / "Here's the claim up front" / "Here is the thing worth knowing" | 2026-08-23 | 2027-02-23 — GRADUATED: three uses in fifteen days (08-09, 08-13, 08-23), first appearance 2026-08-09. The Reader Payoff rule produced its own signpost two weeks after the rule. State the payoff; do not announce that you are about to. |
 
 *(Prior entries, all from 2026-03, removed per this section's own 60-day rule — the table had gone unmaintained for five months, which the 2026-08-03 audit flagged.)*
 
