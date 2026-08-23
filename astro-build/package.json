@@ -4,13 +4,14 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/check-feature-images.mjs && node scripts/check-takeaway.mjs && astro build && npx pagefind --site dist && node scripts/optimize-routes.mjs && node scripts/check-sitemap.mjs && npm run reader:check",
+    "build": "node scripts/check-feature-images.mjs && node scripts/check-takeaway.mjs && astro build && npx pagefind --site dist && node scripts/optimize-routes.mjs && node scripts/check-sitemap.mjs && npm run reader:check && npm run captions:check",
     "check:images": "node scripts/check-feature-images.mjs",
     "check:sitemap": "node scripts/check-sitemap.mjs",
     "reader:check": "node ../tools/lib/encounter-audit.mjs --root=.. --strict",
     "preview": "astro preview",
     "astro": "astro",
-    "takeaway:check": "node scripts/check-takeaway.mjs"
+    "takeaway:check": "node scripts/check-takeaway.mjs",
+    "captions:check": "node ../syndication/check-captions.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.12",

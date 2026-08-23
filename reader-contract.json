@@ -28,7 +28,11 @@
       ],
       "excludeRoots": [
         "astro-build/dist/blog/api",
-        "astro-build/dist/blog/fiction"
+        "astro-build/dist/blog/beyond-the-copilot-architecting-for-autonomy-with-claude-sonnet-45.html",
+        "astro-build/dist/blog/fiction",
+        "astro-build/dist/blog/from-gsd-to-just-handle-it.html",
+        "astro-build/dist/blog/presentations",
+        "astro-build/dist/blog/when-the-voice-guide-becomes-the-problem.html"
       ],
       "allowTerms": [
         "AI",
@@ -39,8 +43,70 @@
         "SvelteKit",
         "Astro"
       ],
-      "denyTerms": [],
-      "maxWordsPerText": 140
+      "denyTerms": [
+        {
+          "term": "Ask me again in six months",
+          "reason": "retired tell \u2014 signal-dispatch-voice-guide.md 'Phrases that have become tells'",
+          "replacement": "say the thing plainly"
+        },
+        {
+          "term": "Here's where I've landed\u2014for now",
+          "reason": "retired tell \u2014 signal-dispatch-voice-guide.md 'Phrases that have become tells'",
+          "replacement": "say the thing plainly"
+        },
+        {
+          "term": "Two different modes. Same instinct.",
+          "reason": "retired tell \u2014 signal-dispatch-voice-guide.md 'Phrases that have become tells'",
+          "replacement": "say the thing plainly"
+        },
+        {
+          "term": "This is what I think today",
+          "reason": "retired tell \u2014 signal-dispatch-voice-guide.md 'Phrases that have become tells'",
+          "replacement": "say the thing plainly"
+        },
+        {
+          "term": "Your mileage may vary",
+          "reason": "retired tell \u2014 signal-dispatch-voice-guide.md 'Phrases that have become tells'",
+          "replacement": "say the thing plainly"
+        },
+        {
+          "term": "That's the direction, anyway",
+          "reason": "retired tell \u2014 signal-dispatch-voice-guide.md 'Phrases that have become tells'",
+          "replacement": "say the thing plainly"
+        },
+        {
+          "term": "leverage our",
+          "reason": "retired tell \u2014 signal-dispatch-voice-guide.md 'Phrases that have become tells'",
+          "replacement": "say the thing plainly"
+        },
+        {
+          "term": "drive value",
+          "reason": "retired tell \u2014 signal-dispatch-voice-guide.md 'Phrases that have become tells'",
+          "replacement": "say the thing plainly"
+        },
+        {
+          "term": "synergize",
+          "reason": "retired tell \u2014 signal-dispatch-voice-guide.md 'Phrases that have become tells'",
+          "replacement": "say the thing plainly"
+        },
+        {
+          "term": "In this post, I'll explore",
+          "reason": "retired tell \u2014 signal-dispatch-voice-guide.md 'Phrases that have become tells'",
+          "replacement": "say the thing plainly"
+        },
+        {
+          "term": "In this essay, I will explore",
+          "reason": "retired tell \u2014 signal-dispatch-voice-guide.md 'Phrases that have become tells'",
+          "replacement": "say the thing plainly"
+        },
+        {
+          "term": "Today I want to talk about",
+          "reason": "retired tell \u2014 signal-dispatch-voice-guide.md 'Phrases that have become tells'",
+          "replacement": "say the thing plainly"
+        }
+      ],
+      "maxWordsPerText": 140,
+      "_denyTermsNote": "denyTerms mirrors signal-dispatch-voice-guide.md 'Phrases that have become tells'. The guide owns the list; this is the machine copy that enforces it. The excluded pages above published 2025-09 to 2026-01, before those phrases were retired \u2014 excluded rather than rewritten, matching check-takeaway.mjs's EFFECTIVE_DATE principle: nothing is retrofitted against a rule its author did not have. Retiring a phrase that already shipped adds a line here."
     },
     {
       "name": "fiction",

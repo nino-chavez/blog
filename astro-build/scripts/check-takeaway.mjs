@@ -22,6 +22,11 @@ const EFFECTIVE_DATE = '2026-08-08';
 const COLLECTIONS = ['blog', 'whitepapers', 'tutorials'];
 const ROOT = path.resolve(import.meta.dirname, '..', 'src', 'content');
 
+// Pairings are printed for pieces published within this window — the ones still
+// being edited. Older pieces are checked above but not re-surfaced for reading.
+const RECENT_DAYS = 7;
+const RECENT_SINCE = new Date(Date.now() - RECENT_DAYS * 864e5).toISOString().slice(0, 10);
+
 const MIN_WORDS = 6;
 const MAX_WORDS = 30;
 
@@ -43,6 +48,7 @@ function frontmatter(raw) {
 const norm = (s) => s.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
 
 const problems = [];
+const pairings = [];
 
 for (const collection of COLLECTIONS) {
   let entries = [];
@@ -88,6 +94,46 @@ for (const collection of COLLECTIONS) {
     if (fm.title && norm(takeaway) === norm(fm.title)) {
       problems.push(`${rel}\n    'takeaway' restates the title.`);
     }
+
+    const body = raw.slice(raw.indexOf('---', 3) + 3)
+      .replace(/```[\s\S]*?```/g, '')
+      .replace(/^#{1,6} .*$/gm, '')
+      .replace(/^>.*$/gm, '');
+    const opening = body.split(/\s+/).filter(Boolean).slice(0, 150).join(' ');
+    // Only pieces still in flight. Printing all eleven on every build turns a
+    // required read into wallpaper, which is how a worklist stops being read.
+    if (published >= RECENT_SINCE) {
+      pairings.push({ rel, takeaway, opening: opening.slice(0, 300) + '…' });
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Did the payoff reach the BODY? (required read, deliberately not a gate)
+//
+// The frontmatter check above proves a takeaway was written. It cannot prove the
+// author transcribed it into the first 150 words, which is where the reader
+// actually meets it. Measured 2026-08-23: nine-rgb-points-from-claude-coral
+// carries a valid takeaway and states its point at word 364.
+//
+// This is NOT a mechanical gate, and the failed attempt is worth recording so
+// nobody rebuilds it. Lexical overlap between takeaway and opening does not
+// discriminate: the-depth-penalty-is-gone, the corpus's model of compliance,
+// scores 0.19 while a known failure scores 0.13. That is not noise — the check
+// above REJECTS a takeaway contained in the excerpt, so a takeaway is by design a
+// paraphrase rather than a repetition. Word matching fights the rule's own intent,
+// and any threshold separating those two cases is fitted to one example.
+//
+// So it prints, like check-captions.mjs's first-person class: the pairing goes in
+// front of a human who can judge it in five seconds. A worklist that cannot be
+// skipped silently beats a gate that is wrong.
+if (pairings.length) {
+  console.log(`\n[check-takeaway] ${pairings.length} piece(s) — read each takeaway against its own opening.`);
+  console.log(`  Does the first 150 words carry that point? If the reader stops there, do they have it?\n`);
+  for (const { rel, takeaway, opening } of pairings) {
+    console.log(`  ${rel}`);
+    console.log(`    takeaway: ${takeaway}`);
+    console.log(`    opens:    ${opening}\n`);
   }
 }
 
