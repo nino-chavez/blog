@@ -13,7 +13,7 @@ Twenty-two connector process trees were running on this machine at 07:23 in the 
 
 I looked at Activity Monitor and did not believe the answer I was getting.
 
-The answer was right. The config was accurate too, which is the part worth sitting with. A flag governs what starts next. It does not reach what is already running, and nothing in the loop owns what is already running. Not the client. Not the session. Not the cleanup agent, which reported zero while twenty-seven processes held 1.14 GiB and twenty-four hours of uptime. Delegating work to an agent produces durable byproducts, and the loop that produces them has no step that ends them.
+The answer was right. The config was accurate too, which is the part worth sitting with. A flag governs what starts next. It does not reach what is already running, and nothing in the loop owns what is already running. Not the client. Not the session. Not the cleanup agent, which reported zero while twenty-two connector processes sat at twenty-four hours of uptime. Delegating work to an agent produces durable byproducts, and the loop that produces them has no step that ends them.
 
 ## The Processes Predated the Fix and Outlived It
 
