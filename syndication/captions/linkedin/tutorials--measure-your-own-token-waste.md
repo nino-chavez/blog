@@ -13,4 +13,6 @@ Two of the fixes stop needing thought once installed. A hook bounces an oversize
 The exercise that decides whether any of this mattered is the last one. Take the single largest number and change one habit. A measurement that changes no habit was a research exercise, not an audit.
 
 Twenty minutes, run against your own logs:
+
+--- first-comment ---
 https://ninochavez.co/blog/tutorials/measure-your-own-token-waste

@@ -12,4 +12,6 @@ Typesetters became designers. Webmasters became developers. Every one of those t
 
 The people least rattled seem to be the ones with the strongest sense of what good looks like. Which moves the question rather than answering it. What is taste, and what happens if we stop building it?
 
+
+--- first-comment ---
 https://ninochavez.co/blog/the-identity-crisis-of-the-prompter

@@ -15,4 +15,6 @@ The tempting justification is efficiency. An agent that reads a registry skips t
 The layer underneath resists all of it. Rationale has no verifier. You can date it and append to it. The source is one person's memory.
 
 The ranking, the knowledge-type table, and where the pattern frays:
+
+--- first-comment ---
 https://ninochavez.co/blog/whitepapers/lie-surface

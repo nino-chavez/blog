@@ -18,4 +18,6 @@ The practice that helps is small. Reject the first good output, not because it's
 
 Otherwise everything shipped is adequate and nothing is distinctive.
 
+
+--- first-comment ---
 https://ninochavez.co/blog/the-taste-gap

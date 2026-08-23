@@ -13,4 +13,6 @@ Two failure modes sit underneath, and conflating them is why single fixes underp
 The premise behind all of it is an asymmetry I don't think has landed. Producing a document became roughly free. Establishing that it's correct got no cheaper at all. The bottleneck moved from writing to reading. Nearly every tool built since aims at the writing.
 
 The taxonomy, and why the highest-stakes class gets mechanized last:
+
+--- first-comment ---
 https://ninochavez.co/blog/whitepapers/claim-classes

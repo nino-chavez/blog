@@ -19,4 +19,6 @@ The resolver throws loudly on a zone ID that doesn't exist. The line enforcing t
 Loud about the harmless failure, silent about the real one. A fence in the wrong place and a fence in the right place produce identical telemetry: clean.
 
 The full piece, including the measurement where my own README came out off by roughly three and a half times, in the direction that flattered my own tool:
+
+--- first-comment ---
 https://ninochavez.co/blog/the-cut-youll-make-twice

@@ -4,63 +4,36 @@ slug: "the-audit-reproduced-the-failure"
 publishedAt: "2026-08-23T18:00:00.000Z"
 author: "Nino Chavez"
 status: "published"
-excerpt: "An agent fleet was asked to audit re-steers and regressions. It found real patterns, then made the same evidence mistakes it was meant to expose."
+excerpt: "An agent audit declared 119 of 118 findings verified. The impossible count exposed a deeper problem: its verification filter had created the comparison it later reported as evidence."
 category: "AI & Automation"
 featureImage: "/images/generated/the-audit-reproduced-the-failure.webp"
 tags: ["agentic-systems", "ai-development", "ai-governance"]
-takeaway: "Agent output becomes trustworthy only after extraction, counting, and verification are owned separately."
+takeaway: "Separate extraction, counting, and verification before an agent audit can publish a rate or declare completion."
 seo:
   metaTitle: "The Audit Reproduced the Failure"
-  metaDescription: "An agent audit counted attempts as outcomes, manufactured a comparison with its verification filter, and burned 334 million recorded tokens."
+  metaDescription: "An agent audit counted attempts as outcomes and manufactured a comparison by auditing one label completely and the others at roughly a quarter."
 supportedBy:
   - slug: "agent-fleet-self-audit-evidence"
     relationship: "based-on"
 ---
 
-import { Callout } from '@/components/mdx/Callout';
 import { PullQuote } from '@/components/mdx/PullQuote';
 
 The audit announced that verification was complete: 119 of 118 findings.
 
-That sentence should have stopped the work cold. It did not. The system had counted lines in a journal, not distinct findings. Some lines were duplicates left by runs that had been stopped and restarted. The corrected count was lower, and verification was still running.
+That was not a typo. The workflow had counted rows in a journal instead of distinct findings. Stopped and restarted runs had written duplicate rows. Verification was still running.
 
-This was an audit of agents making mistakes: backtracks, regressions, claims that a site was live when the checked surface only proved a route returned. The audit found those patterns. Then its own workflow treated activity as state, its own labels as evidence, and its own final receipt as a complete history.
+I had asked a fleet of agents to read a project’s session history and find where the work had backtracked, regressed, or needed to be re-steered. The fleet found useful material. Then its own bookkeeping and verification rules reproduced the failure it was supposed to examine.
 
-The useful lesson is narrower than “don’t use agents for audits.” Agent fleets can extract a lot of material quickly. The dangerous move is letting the same process design the sample, grade the labels, and report the rate. Those jobs need separate owners.
-
----
-
-## The workflow had a reasonable shape
-
-The request was straightforward. Read a body of project sessions. Extract places where work was reversed, regressed, or re-steered. Map each one to the operating packet that was supposed to prevent it. Verify the important claims against the original transcript. Then synthesize the result.
-
-The intended shape looked like this:
-
-```text
-session transcripts
-        ↓
-candidate events
-        ↓
-verification against source
-        ↓
-findings and decisions
-```
-
-That sequence matters. Extraction creates candidates. Verification establishes what survives. Synthesis explains the survivors.
-
-The implementation quietly changed the sequence. Reader agents produced hundreds of candidate labels. Verifier agents were launched one finding at a time. The workflow was stopped, restarted with different model settings, narrowed, and restarted again. Cached reader work survived some of those changes. Verification work did not.
-
-By the time the reports arrived, the system had a great deal of material. It also had several incompatible ways to describe how much work had happened.
-
-The difference was not cosmetic. It changed the conclusions.
+The useful lesson is not “do not use agents for audits.” It is narrower: the same process cannot design the sample, grade the labels, and report the rate without an independent check. Extraction, counting, and verification are different jobs.
 
 ---
 
-## A journal row is not a verified event
+## The first bad number came from counting attempts as work
 
-The first failure was an accounting failure, but not a small one.
+The audit had a journal. Each agent attempt could append a row. When a run was stopped and restarted, the new attempt wrote another row for the same finding.
 
-The audit’s journal had more completion rows than the planned verification set. That was reported as progress: 119 of 118. The number sounded absurd only after someone asked why it was taking so long. The answer was that the journal contained duplicate rows from attempts that had been killed. It was an activity log, not a state table.
+The status report counted those rows as completed work. That is how the workflow reached 119 verified findings inside a set of 118.
 
 Those two things answer different questions.
 
@@ -71,43 +44,37 @@ Those two things answer different questions.
 | Tool exit code | A command returned successfully | The intended runtime property is true |
 | Verification record | A claim was checked against named source material | The entire workflow is complete |
 
-The system had records of all four types. It kept promoting each one into the next.
-
-This is the oldest kind of systems error. A queue message is not a completed job. A green HTTP response is not an authenticated request. A test that sees a button is not proof that a person can save their edit. The vocabulary changes with the stack. The mistake does not.
+The system had records of all four types. It kept promoting each one into the next. A row showing that an attempt ran became evidence that a finding had been verified.
 
 <PullQuote>
 Activity is evidence that work was attempted. It is not evidence that the work exists in the state you care about.
 </PullQuote>
 
-The agent fleet did not invent this distinction. It had already found it in the project sessions. A route check said a set of pages was healthy while the actual content on those pages was wrong. A deployment receipt said a release was verified while structured staff data had been replaced by an older database snapshot. The audit was looking for exactly this gap between the receipt and the surface.
-
-Then it crossed the same gap inside its own journal.
+The fix was mechanical. Count stable finding IDs, not journal rows. Keep the retries because they explain cost and failure history, but do not let them become extra findings.
 
 ---
 
-## The receipt described one run, not the work
+## The final receipt left out the abandoned work
 
-The second failure was subtler. When the workflow completed, it produced a neat receipt: a count of agents and a count of subagent tokens. It was accurate for the final logical run.
+When the workflow completed, it produced a neat receipt with an agent count and a token count. The receipt described the final logical run.
 
-It was not the cost of the investigation.
+It did not describe the investigation that produced that run.
 
-Before that receipt existed, reader and verifier work had been launched under different settings. Some attempts had been cancelled. Others had been re-run because a model or option change invalidated the cache key. A directory of agent transcripts recorded far more attempts than the final receipt named.
+Before that receipt existed, work had been launched, cancelled, and launched again under different model settings. Changing those settings changed the cache key, so some verification work ran again. The abandoned attempts still consumed time and quota. They simply disappeared from the final summary.
 
-This is why a clean final status can be actively misleading. The final run is a *view* of the system after its history has been compressed. It is not automatically the history.
+I went back to the raw parent and agent logs. After deduplicating cumulative usage rows by message ID, they record 334 million tokens. About 89% were cache reads. That number is not an API bill, and I cannot turn it into one honestly from these logs.
 
-That distinction matters most when the audit is expensive. The local logs record 334 million tokens after deduplicating cumulative usage rows by message ID. About 89% were cache reads, so that number is neither fresh input nor a dollar bill. The run still exhausted my intraday allowance, consumed about a fifth of my weekly allowance, and used 40% of my model-specific allowance. Those are plan impacts, not a pricing calculation. They describe the cost that mattered: the work displaced by a burned session window.
+The plan impact is concrete. The run exhausted my intraday allowance, consumed about a fifth of my weekly allowance, and used 40% of my model-specific allowance. The cost I could observe was the work displaced by a burned session window.
 
-The final receipt could not show that cost because it did not contain the abandoned branches that produced it.
-
-No model is going to infer a reliable cost ledger from prose status updates. A workflow needs an append-only attempt ledger with stable task IDs, explicit cache keys, model and effort settings, and a run-level status that is computed from those records. Otherwise “completed” means “the last visible branch stopped moving.”
+The receipt missed that because it only knew about the branch that finished. A reliable ledger has to keep every attempt, attach it to a stable finding ID, and derive completion from the findings rather than from the last visible run.
 
 ---
 
 ## The verification filter manufactured the finding
 
-The third failure was the one that changed the diagnosis.
+The accounting errors explained why the work looked complete when it was not. The sampling error changed what the audit claimed to have learned.
 
-The reader agents marked events with judgments like “not in the packet,” “the packet would partially have prevented this,” and “the packet would have prevented this.” Those labels were useful for triage. They were not measurements.
+Reader agents had labeled each candidate event: the operating packet would have prevented it, might have helped, or would not have helped. Those labels were useful for deciding where to look. They were not evidence yet.
 
 The synthesis later turned the label distribution into a rate: the packet named the principle, and the failure happened anyway. It was a compelling story. The verification filter had created it.
 
@@ -119,55 +86,25 @@ The filter selected regressions and rework, plus every event already labeled “
 | Would partially prevent | 248 | 70 | 28% |
 | Would not prevent | 217 | 55 | 25% |
 
-The fully audited bucket shrank from 44 candidates to 35. The two lightly sampled buckets kept most of their original labels. The synthesis then used the relative size of those buckets as evidence.
+The fully audited bucket shrank from 44 candidates to 35. The lightly sampled buckets kept most of their original labels. The synthesis then compared the sizes of all three buckets and reported the difference as a finding.
 
 That was not a weak sample. It was a comparison manufactured by the selection rule.
 
-What survives is a floor: 35 transcript-verified events where the packet would clearly have prevented the failure. No population rate survives. The other buckets would need comparable random sampling under the same decision rule before any “times in ten” claim becomes measurable.
+What survives is a floor: 35 transcript-verified events where the packet would clearly have prevented the failure. No population rate survives. The other buckets need comparable sampling under the same decision rule before any “times in ten” claim is measurable.
 
-The difference sounds fussy until it decides what gets changed next.
-
-An extracted label can tell us where to look. A deterministic count can tell us how many distinct items share that label. Independent verification can tell us whether the label fits the source. Comparable sampling can support a rate.
-
-<Callout type="warning" title="The missing boundary">
-Reader output is a candidate dataset. It becomes evidence only after the record is deduplicated and the sample, source, and decision rule are stated separately.
-</Callout>
-
-The same rule applies to the audit’s most interesting diagnosis. “Abstract rules failed to govern concrete actions” may be right. It is supported by examples. It is not established by a fleet assigning itself preventability scores and then counting them.
+The selection rule did not merely weaken the conclusion. It created the comparison the conclusion depended on.
 
 ---
 
-## The principle was true and the deployment still destroyed the work
+## The fleet found material, not a verdict
 
-One concrete pattern did survive the noise.
+The failed rate does not make the extraction useless.
 
-A site’s staff pages were represented in two places: a repository model and a WordPress database. An approved roster was restored, then destroyed by a page-model content push. Later, a different files-and-database push from a stale local snapshot destroyed it again. Route checks stayed green. The pages still loaded. The staff content was wrong.
+The fleet pulled a scattered session history into a dataset I could inspect. It surfaced real events. Thirty-five preventable failures survived direct transcript review. That is useful work.
 
-“One fact, one owner” is a good principle. It did not prevent either incident because it was too abstract at the point of action. Nobody had answered the operational question: which system owns page bodies and structured staff records, and which update is prohibited from overwriting the other?
+It is not a verdict on one model, either. This was not a controlled comparison between models, prompts, or orchestration systems. The same process extracted the candidates, designed the filter, interpreted the results, and reported the rate.
 
-That is the part I find most useful outside this one project. Agent instructions often read like values statements because values statements travel well:
-
-- Verify before claiming completion
-- One fact has one owner
-- Do not invent gates
-
-Each is true. None tells an agent what to do when it is about to run a database push, publish a status receipt, or treat a draft policy as a launch blocker.
-
-An executable constraint names the operation, the surface, and the forbidden transition. “Do not claim production content parity from route checks” is usable. “Before a database push, preserve and re-check the staff records named in the release receipt” is usable. “One fact, one owner” is a reminder until it becomes one of those.
-
-The goal is not to write a longer packet. It is to make the few rules that protect destructive boundaries impossible to misread.
-
----
-
-## The fleet was not useless
-
-It would be satisfying to say the experiment proved that one model is bad at this kind of work. It did not.
-
-The fleet found real candidate events. It surfaced the page-body ownership problem. It recognized that a route check can verify availability without verifying content. It pulled a scattered session history into a form a human could inspect. Those are valuable capabilities.
-
-Nor was this a controlled comparison between models, prompts, or orchestration systems. The same model family was used to extract, verify, synthesize, orchestrate, and account for the work. That creates correlated errors. An independent model might have caught some of them. It might have made different ones. This run cannot answer that question.
-
-What it does show is a boundary problem.
+That is the boundary the run can support:
 
 ```text
 agents        → extract candidates
@@ -175,13 +112,13 @@ code          → deduplicate and account for attempts
 independent review → verify source claims and decide what survives
 ```
 
-Those roles can be performed by people, programs, or different models. The important thing is that the process designing the verification filter cannot also report rates derived from it without an independent check.
+Those roles can be performed by people, programs, or different models. The important part is separation. The process that designs the verification filter does not get to certify the rate that filter produces.
 
 ---
 
-## The durable artifact is a receipt with three columns
+## The next audit gets a smaller receipt
 
-The next version of this workflow does not need a bigger panel. It needs a smaller receipt.
+The next version does not need more agents. It needs a receipt that makes the boundary visible.
 
 For every conclusion, the receipt should show three things:
 
@@ -191,6 +128,6 @@ For every conclusion, the receipt should show three things:
 
 If any cell is blank, the conclusion stays a candidate. It can still be useful. It cannot be a rate, a completion claim, or a deployment decision.
 
-That is a modest artifact: a row, a source link, a state transition. It is also more valuable than another beautiful report. The report was never the thing that needed trust.
+That is a modest artifact: a row, a source link, a state transition. It is more valuable than another synthesis report because it shows exactly where a candidate became evidence.
 
-The receipt was.
+The first audit produced 119 of 118. The next one should be unable to write that sentence.

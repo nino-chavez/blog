@@ -12,4 +12,6 @@ Recovery was cheap for unglamorous reasons that predate the crash by months. Eve
 
 The check that would have saved me is the boring one: when a log hands you a number, look the number up before you translate it. The plausible reading and the real one were two different readings, and nothing in the file flagged the difference.
 
+
+--- first-comment ---
 https://ninochavez.co/blog/the-panic-log-says-signal-not-shortage

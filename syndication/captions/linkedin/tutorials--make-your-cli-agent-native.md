@@ -15,4 +15,6 @@ My first AGENTS.md ran two hundred lines. I cut it to forty. The agent doesn't n
 The signal that it's working: two questions. Before anything runs. Not one. Not zero.
 
 Three files, thirty minutes:
+
+--- first-comment ---
 https://ninochavez.co/blog/tutorials/make-your-cli-agent-native

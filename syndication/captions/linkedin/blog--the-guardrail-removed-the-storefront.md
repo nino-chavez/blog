@@ -18,4 +18,7 @@ That is the commerce pattern worth building: live judgment inside a merchant-own
 
 The next demo should make the call visible. Fresh inference, cache hit, unchanged result, failure, and fallback should not collapse into one generic “AI” badge.
 
-Read the full argument: https://ninochavez.co/blog/the-guardrail-removed-the-storefront
+I put the longer version below.
+
+--- first-comment ---
+https://ninochavez.co/blog/the-guardrail-removed-the-storefront

@@ -84,11 +84,26 @@ for (const item of targets) {
 // that cannot publish. A dry run is not a test of the live path when the two
 // paths do not share the code.
 const FIRST_COMMENT_MARKER = /\n---\s*first-comment\s*---\s*(?:\n|$)/
+const BLOG_LINK_IN_BODY = /https:\/\/(?:www\.)?ninochavez\.co\/blog(?:\/|\b)/i
 function splitCaption(raw) {
   const text = raw.trim()
   if (!FIRST_COMMENT_MARKER.test(text)) return { body: text, firstComment: null }
   const [body, ...rest] = text.split(FIRST_COMMENT_MARKER)
   return { body: body.trim(), firstComment: rest.join('\n').trim() || null }
+}
+
+// The first-comment convention is an acceptance rule, not an optional caption
+// shape. Keep this check in the live publisher too: a build can be skipped, and
+// a syntactically valid body URL is exactly what slipped through on 2026-08-23.
+for (const item of targets) {
+  const p = resolve(HERE, item.routes.linkedin.caption)
+  const { body, firstComment } = splitCaption(readFileSync(p, 'utf8'))
+  if (BLOG_LINK_IN_BODY.test(body)) {
+    throw new Error(`${item.id}: blog link is in the LinkedIn body — move it below --- first-comment ---`)
+  }
+  if (firstComment && !BLOG_LINK_IN_BODY.test(firstComment)) {
+    throw new Error(`${item.id}: first comment exists but does not contain the blog link`)
+  }
 }
 
 const browserURL = `http://127.0.0.1:${PORT}`

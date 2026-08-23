@@ -36,7 +36,13 @@
 //   node syndication/check-captions.mjs            # all captions
 //   node syndication/check-captions.mjs <slug>     # one, by caption filename fragment
 //
-// Exit codes: 0 clean, 1 unverified figures, 2 missing source, 3 repeated phrasing.
+//   LINK PLACEMENT — mechanizable, added 2026-08-23. A LinkedIn caption that
+//                   links back to the blog puts that URL after the first-comment
+//                   marker. Accepting both shapes let a new caption bypass a
+//                   convention established hours earlier.
+//
+// Exit codes: 0 clean, 1 unverified figures, 2 missing source, 3 repeated phrasing,
+//             4 misplaced LinkedIn blog link.
 
 import { readFileSync, readdirSync, existsSync } from 'node:fs'
 import { join, dirname } from 'node:path'
@@ -45,6 +51,8 @@ import { homedir } from 'node:os'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const CAPTION_ROOT = join(HERE, 'captions')
+const FIRST_COMMENT_MARKER = /^---\s*first-comment\s*---\s*$/m
+const BLOG_LINK = /https:\/\/ninochavez\.co\/blog\/\S+/i
 
 // Every platform directory under captions/ is checked, not just linkedin.
 // build-queue.mjs resolves `captions/<platform>/<id>.md` for ANY platform
@@ -156,7 +164,14 @@ const SCOPE_CLAIM = /\b(you|your|you're|nobody|no one|everyone|everybody|anyone|
 const BOILERPLATE = /^Linked rather than sent in full[^\n]*$/gim
 
 const fiveGrams = (s) => {
-  const w = s.replace(BOILERPLATE, ' ').replace(/https?:\/\/\S+/g, ' ').toLowerCase().replace(/[^a-z0-9' ]/g, ' ').split(/\s+/).filter(Boolean)
+  const w = s
+    .replace(BOILERPLATE, ' ')
+    .replace(/^---\s*first-comment\s*---\s*$/gim, ' ')
+    .replace(/https?:\/\/\S+/g, ' ')
+    .toLowerCase()
+    .replace(/[^a-z0-9' ]/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean)
   const out = new Set()
   for (let i = 0; i + 5 <= w.length; i++) out.add(w.slice(i, i + 5).join(' '))
   return out
@@ -166,6 +181,7 @@ const grams = new Map()
 let unverified = 0
 let missing = 0
 let offRepoSkipped = 0
+let misplacedLinks = 0
 const worklist = []
 const scopelist = []
 
@@ -175,7 +191,16 @@ for (const platform of PLATFORMS) {
   for (const file of readdirSync(dir).filter((f) => f.endsWith('.md')).sort()) {
     total++
     if (filter && !file.includes(filter)) continue
-    const caption = readFileSync(join(dir, file), 'utf8').replace(/https?:\/\/\S+/g, '')
+    const rawCaption = readFileSync(join(dir, file), 'utf8')
+    if (platform === 'linkedin' && BLOG_LINK.test(rawCaption)) {
+      const markerAt = rawCaption.search(FIRST_COMMENT_MARKER)
+      const linkAt = rawCaption.search(BLOG_LINK)
+      if (markerAt < 0 || linkAt < markerAt) {
+        console.log(`✗ ${platform}/${file}\n    blog URL must appear after --- first-comment ---`)
+        misplacedLinks++
+      }
+    }
+    const caption = rawCaption.replace(/https?:\/\/\S+/g, '')
     grams.set(`${platform}/${file}`, fiveGrams(caption))
     const { path, text, offRepo } = sourceFor(file)
 
@@ -269,7 +294,7 @@ console.log(
     `${offRepoSkipped} skipped as off-repo, ` +
     `${worklist.reduce((n, w) => n + w.claims.length, 0)} first-person claim(s) and ` +
     `${scopelist.reduce((n, w) => n + w.claims.length, 0)} scope claim(s) needing a read, ` +
-    `${echoes.length} repeated-phrasing pair(s).`
+    `${echoes.length} repeated-phrasing pair(s), ${misplacedLinks} misplaced LinkedIn blog link(s).`
 )
 
-process.exit(missing ? 2 : unverified ? 1 : echoes.length ? 3 : 0)
+process.exit(missing ? 2 : unverified ? 1 : echoes.length ? 3 : misplacedLinks ? 4 : 0)

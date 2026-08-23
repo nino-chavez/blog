@@ -12,4 +12,6 @@ The fix that worked was a budget, not a bigger style guide. The clean reference 
 
 The full post covers the two-model bake-off (the rival conceded in writing), the two trips through sterile-and-back, and the check that hasn't run yet.
 
+
+--- first-comment ---
 https://ninochavez.co/blog/nine-rgb-points-from-claude-coral

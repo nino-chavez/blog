@@ -13,4 +13,6 @@ That's the claim, and also where the honesty has to sit. Three things never tran
 Every application has been solo. Whether the shape holds when two people turn the crank is untested.
 
 The eight fixes, and what doesn't compound:
+
+--- first-comment ---
 https://ninochavez.co/blog/whitepapers/big-blueprint-methodology

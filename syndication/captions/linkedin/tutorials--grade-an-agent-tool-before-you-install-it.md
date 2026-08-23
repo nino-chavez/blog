@@ -13,4 +13,6 @@ The two remaining checks are mechanical. A project's documentation describes wha
 The first exercise is the one that hurts, and not because it is difficult. It tends to raise a second question underneath the first: what is already loaded that I would not install today?
 
 Four checks, forty minutes, nothing touched:
+
+--- first-comment ---
 https://ninochavez.co/blog/tutorials/grade-an-agent-tool-before-you-install-it

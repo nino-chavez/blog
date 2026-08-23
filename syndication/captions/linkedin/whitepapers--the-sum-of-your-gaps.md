@@ -13,4 +13,6 @@ The formula is gone too. An earlier version defined gain as the sum of the gaps 
 What the record supports is that range expanded in one case. What it cannot support is that AI caused it, that the added work was good, or that it created value.
 
 The title names a question now instead of a formula:
+
+--- first-comment ---
 https://ninochavez.co/blog/whitepapers/the-sum-of-your-gaps

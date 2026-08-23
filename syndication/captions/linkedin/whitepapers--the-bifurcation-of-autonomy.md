@@ -15,4 +15,6 @@ Both are expanding, and neither is replacing the other.
 Four major protocols now compete for the same layer with no interoperability guarantee. That's an integration tax and an attack surface at once.
 
 The other four objections, and where the dual-track assumption stops holding:
+
+--- first-comment ---
 https://ninochavez.co/blog/whitepapers/the-bifurcation-of-autonomy

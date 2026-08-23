@@ -17,4 +17,6 @@ That isn't how most people describe using these tools. I don't ask quick questio
 Either the machine made that invisible work cheap. Or it was always there and nobody counted it. The data can't tell me which.
 
 The rest, including what I actually type to start:
+
+--- first-comment ---
 https://ninochavez.co/blog/what-223-sessions-taught-me-about-working-with-ai

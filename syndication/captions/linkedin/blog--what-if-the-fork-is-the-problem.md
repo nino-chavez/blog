@@ -18,4 +18,6 @@ Both are stuck. Native can't scale to the world that exists. Mimicry can't stabi
 
 I don't have a resolution and I'm not sure one exists yet. The harder question isn't which path wins. It's whether the split is what keeps both fragile.
 
+
+--- first-comment ---
 https://ninochavez.co/blog/what-if-the-fork-is-the-problem

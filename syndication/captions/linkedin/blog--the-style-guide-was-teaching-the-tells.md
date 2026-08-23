@@ -20,4 +20,6 @@ Then the adverse evidence, because a post like this owes one. We built the email
 
 One rule came out of that, and it now governs everything else I maintain. A style guide is an untested hypothesis until it beats a no-guide control.
 
+
+--- first-comment ---
 https://ninochavez.co/blog/the-style-guide-was-teaching-the-tells

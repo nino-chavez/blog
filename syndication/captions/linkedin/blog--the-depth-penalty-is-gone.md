@@ -14,4 +14,6 @@ Two places the machine was flat wrong, both caught by discipline rather than exp
 
 None of it is sold. There are proposals, not invoices. Producing in five days what used to take a quarter proves production, not value, which is why the sale is gated on a one-week measured trial.
 
+
+--- first-comment ---
 https://ninochavez.co/blog/the-depth-penalty-is-gone

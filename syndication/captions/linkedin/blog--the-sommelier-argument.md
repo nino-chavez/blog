@@ -16,4 +16,6 @@ The catch is what it costs to accept. Your value isn't in making things.
 
 Some days that reads as a demotion.
 
+
+--- first-comment ---
 https://ninochavez.co/blog/the-sommelier-argument

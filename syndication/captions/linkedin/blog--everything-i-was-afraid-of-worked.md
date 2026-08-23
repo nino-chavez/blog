@@ -18,4 +18,6 @@ None of this was process-free: twelve acceptance conditions, a spec, an adversar
 
 Here is the test I would now run on anything an agent helped build. Do not read the code to judge it. For each layer, name the specific failure it was built in response to. The layers that came from something I measured going wrong survived an hour of deliberate abuse. The layer that came from an assumption is where all seven problems lived. Same author, same process, different pedigree — and pedigree is what predicted quality.
 
+
+--- first-comment ---
 https://ninochavez.co/blog/everything-i-was-afraid-of-worked
