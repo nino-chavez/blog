@@ -63,6 +63,15 @@ const CONTENT = join(HERE, '..', 'astro-build', 'src', 'content')
 // point of this gate. Seven captions had been passing on an empty read.
 // build-queue.mjs already resolves the same directory this way (its line 20).
 const DEMOS = join(HERE, '..', '..', 'nc-demos')
+// nc-demos is a SIBLING repo, so it exists on this machine and does not exist in
+// a CI checkout of this one. Wiring this gate into `npm run build` therefore
+// broke every Cloudflare Pages deploy for seven hours on 2026-08-23 — the seven
+// demos/ and applied/ captions read as "no source", which exits 2, which fails
+// the build. Locally it passed the whole time. So the absence of the repo is
+// dormant (skip with a notice) while the absence of one piece inside a repo that
+// IS checked out stays a hard failure. Same shape as the dormant-gate rule for
+// workflows: gate on what is present, do not red-X on what was never here.
+const DEMOS_PRESENT = existsSync(DEMOS)
 
 const filter = process.argv[2]
 
@@ -77,6 +86,7 @@ function sourceFor(file) {
     return existsSync(p) ? { path: p, text: readFileSync(p, 'utf8') } : { path: p, text: null }
   }
   const dir = join(DEMOS, collection === 'demos' ? 'demos' : 'applied', slug)
+  if (!DEMOS_PRESENT) return { path: dir, text: null, offRepo: true }
   if (!existsSync(dir)) return { path: dir, text: null }
   let text = ''
   for (const f of ['meta.json', 'deck.html']) {
@@ -155,6 +165,7 @@ const grams = new Map()
 
 let unverified = 0
 let missing = 0
+let offRepoSkipped = 0
 const worklist = []
 const scopelist = []
 
@@ -166,8 +177,12 @@ for (const platform of PLATFORMS) {
     if (filter && !file.includes(filter)) continue
     const caption = readFileSync(join(dir, file), 'utf8').replace(/https?:\/\/\S+/g, '')
     grams.set(`${platform}/${file}`, fiveGrams(caption))
-    const { path, text } = sourceFor(file)
+    const { path, text, offRepo } = sourceFor(file)
 
+    if (offRepo) {
+      offRepoSkipped++
+      continue
+    }
     if (text === null) {
       console.log(`✗ ${platform}/${file}\n    no source at ${path}`)
       missing++
@@ -241,8 +256,17 @@ if (echoes.length) {
   }
 }
 
+if (offRepoSkipped) {
+  console.log(
+    `\nNOTICE — ${offRepoSkipped} caption(s) not checked: their source is the sibling` +
+      `\nnc-demos repo, which is not checked out here (${DEMOS}).` +
+      `\nRun this from a workspace that has it to check them.`
+  )
+}
+
 console.log(
   `${total} caption(s) across ${PLATFORMS.join(', ') || 'no platforms'}: ${unverified} with unverified figures, ${missing} with no source, ` +
+    `${offRepoSkipped} skipped as off-repo, ` +
     `${worklist.reduce((n, w) => n + w.claims.length, 0)} first-person claim(s) and ` +
     `${scopelist.reduce((n, w) => n + w.claims.length, 0)} scope claim(s) needing a read, ` +
     `${echoes.length} repeated-phrasing pair(s).`
