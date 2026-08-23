@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "receipts": {
+    "blog/the-audit-reproduced-the-failure": {
+      "reviewedAt": "2026-08-23T22:24:51.462Z",
+      "reviewedBy": "Codex editorial correction, verified with Nino reference",
+      "hashes": {
+        "caption": "22c9d15d49d51b6425e0d8c0e5c6f52134e11fc844ba0c51b4d0618b34ad8236",
+        "source": "dbcd224253512e120ab3421c83562276ad1a0501f7aee48ec00204dd20ed5cdf",
+        "voiceGuide": "e2604cf3e06b1adc3e56ea8a93f1ed027c46002af0796e410a83219f1fc02185",
+        "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
+        "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
+      }
+    }
+  }
+}

@@ -24,6 +24,7 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { homedir } from 'node:os'
+import { reviewMismatches } from './caption-review-lib.mjs'
 
 // puppeteer-core is not a dependency of this repo. browse-tool already owns the
 // browser side of this workflow (browser-box, BROWSE_PORT), so borrow its copy
@@ -38,6 +39,7 @@ const puppeteer = (await import(pathToFileURL(puppeteerPath).href)).default
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const QUEUE = resolve(HERE, 'queue.json')
+const REVIEW_RECEIPTS = resolve(HERE, 'caption-review-receipts.json')
 const PORT = process.env.BROWSE_PORT || 9400
 const today = new Date().toLocaleDateString('en-CA') // local date; toISOString is UTC and rolls over at 19:00 CDT
 
@@ -47,6 +49,7 @@ const val = (f) => { const i = argv.indexOf(f); return i >= 0 ? argv[i + 1] : nu
 const DRY = has('--dry')
 
 const queue = JSON.parse(readFileSync(QUEUE, 'utf8'))
+const reviewReceipts = JSON.parse(readFileSync(REVIEW_RECEIPTS, 'utf8'))
 
 const wantId = val('--id')
 const targets = queue.items.filter((i) => {
@@ -103,6 +106,14 @@ for (const item of targets) {
   }
   if (firstComment && !BLOG_LINK_IN_BODY.test(firstComment)) {
     throw new Error(`${item.id}: first comment exists but does not contain the blog link`)
+  }
+  const stale = reviewMismatches(item, reviewReceipts.receipts[item.id])
+  if (stale.length) {
+    throw new Error(
+      `${item.id}: editorial review is stale: ${stale.join(', ')}\n` +
+      `Review the current inputs, then run:\n` +
+      `node syndication/record-caption-review.mjs --id ${item.id} --reviewed-by <name> --confirm-reviewed`
+    )
   }
 }
 

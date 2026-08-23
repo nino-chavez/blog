@@ -406,6 +406,23 @@ node syndication/post-substack.mjs --dry --id blog/<slug>   # fill a draft, no e
 node syndication/post-substack.mjs --id blog/<slug>
 ```
 
+Before either LinkedIn command can reach the browser, the caption needs a current
+editorial review receipt:
+
+```bash
+node syndication/record-caption-review.mjs \
+  --id blog/<slug> \
+  --reviewed-by '<name>' \
+  --confirm-reviewed
+```
+
+That command records judgment; it does not perform it. Use it only after comparing
+the caption with its source, the voice guide, `reader-contract.json`, and the current
+reference caption. The receipt hashes all five inputs. If another session changes
+any of them, `post-linkedin.mjs` refuses both dry and live publication until the
+caption is reviewed again. Mechanically decidable rules remain separate hard gates
+in `check-captions.mjs` and the live publisher.
+
 Both take `--due` for everything scheduled today or earlier. Both borrow
 `puppeteer-core` from `browse-tool` rather than adding a dependency here;
 `BROWSE_TOOL_HOME` overrides the path.
