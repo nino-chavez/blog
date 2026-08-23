@@ -24,6 +24,7 @@ The check that would have caught it is cheap, and it is one line:
 
 ps -eo pid,etime,rss,command | grep -iE '(mcp|context7|playwright|chrome-devtools)'
 
-What is running, next to what the config claims. On my machine those two numbers had been disagreeing for a day, and nothing anywhere told me. I wrote a longer version that reports the ratio of connector processes to loaded sessions and redacts the API keys sitting in those command lines — it is linked from the post.
+What is running, next to what the config claims. On my machine those two numbers had been disagreeing for a day, and nothing anywhere told me. I wrote a longer version that reports the ratio of connector processes to loaded sessions and redacts the API keys sitting in those command lines — the link is in the first comment.
 
+--- first-comment ---
 https://ninochavez.co/blog/nobody-owns-what-the-agent-leaves-running
