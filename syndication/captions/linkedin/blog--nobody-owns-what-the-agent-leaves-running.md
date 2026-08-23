@@ -1,19 +1,25 @@
-I had to reboot my machine because it ran out of resources, so I handed an agent four screenshots of Activity Monitor and typed one word: fix.
+Something I ran into this week that I think is worth knowing about.
 
-It did. It traced the process tree, found connector processes that had outlived the clients that spawned them, rewrote the configs, and reported the cleanup complete with before-and-after numbers.
+My machine ran out of resources and I had to reboot it. So I took four screenshots of Activity Monitor, handed them to an agent, and typed one word: fix.
 
-A day later, twenty-two connector process trees were still running on that machine. Every one of them reads `enabled = false` in config.
+It did a good job. It traced the process tree, found connector processes that had outlived the clients that started them, rewrote the configs, and reported back with before-and-after numbers.
 
-Nothing had failed. That is the part worth sitting with.
+A day later, twenty-two of those connector processes were still running. Every one of them reads `enabled = false` in config.
 
-The flag did what a flag does — it governs what starts next. It has no reach into what is already running. The client would not kill another client's child processes, which is correct behavior, not a bug. The sessions holding those processes were four terminal tabs I had left open. And the audit itself was true when it was written, measured in a window right after a reboot when only one of the two clients happened to be running, then generalized from that snapshot into a claim that stopped being true within the hour.
+Here is the part I did not expect: nothing had failed.
 
-Every participant behaved correctly. The residue belonged to none of them.
+A config flag decides what starts next time. It has no reach into what is already running. That is all a flag is.
 
-This is the third time the same shape has shown up on this machine. Fifty-two git worktrees holding 74 GB, invisible because the directory is ignored so it never appears in `git status`. Then browser automation profiles, same story, same order of magnitude. Now connector processes. Each one found only when something ran out — a full disk, a reboot — never by anything watching.
+And every piece around it was behaving correctly too. One agent client will not kill another client's processes, which is the right call — a tool that kills things it did not start is a worse tool. The sessions holding those processes were four terminal tabs I had left open overnight, which is not a leak by any definition the system uses. It is just a tab.
 
-What connects them is not carelessness. It is that delegating work produces durable byproducts, and the loop has no step that ends them. An agent finishing its task and the task's residue ending are two different events, and only the first one is something the loop can see.
+So: correct behavior at every step, and a pile in the middle that belongs to nobody.
 
-The check that would have caught it is the boring one: count the processes actually running, not the config entries that say they are off. On this machine those two numbers had been disagreeing for a day.
+This is the third time I have hit this exact shape. First it was git worktrees — fifty-two of them, 74 GB, invisible because the directory is ignored so they never show up in `git status`. Then browser automation profiles, same story, same order of magnitude. Now connector processes.
+
+Each one I found the same way, which is to say I did not find it. Something ran out. A full disk. A reboot.
+
+What links them is not sloppiness. It is that handing work to an agent leaves things behind, and nothing in the loop is responsible for ending them. The agent finishing and the leftovers going away are two different events, and only the first one is visible.
+
+The check that would have caught it is cheap. Count what is actually running, not what the config says is off. On my machine those two numbers had been disagreeing for a day, and nothing anywhere told me.
 
 https://ninochavez.co/blog/nobody-owns-what-the-agent-leaves-running
