@@ -100,9 +100,24 @@ if (DRY) {
   await page.close().catch(() => {})
   await browser.disconnect()
 
-  let bad = 0
+  // A caption may carry its link below a marker instead of in the body. LinkedIn
+// demotes posts containing an external link, and the measurement that produced
+// this convention is blunt: 11 requests reached the site from LinkedIn in seven
+// days against roughly 1,600 impressions a week (2026-08-23). Body goes in the
+// composer; the marked remainder becomes the first comment.
+// Trailing newline is optional: splitCaption trims first, so requiring \n after
+// the marker let a marker with an empty tail survive into the post body.
+const FIRST_COMMENT_MARKER = /\n---\s*first-comment\s*---\s*(?:\n|$)/
+function splitCaption(raw) {
+  const text = raw.trim()
+  if (!FIRST_COMMENT_MARKER.test(text)) return { body: text, firstComment: null }
+  const [body, ...rest] = text.split(FIRST_COMMENT_MARKER)
+  return { body: body.trim(), firstComment: rest.join('\n').trim() || null }
+}
+
+let bad = 0
   for (const item of targets) {
-    const body = readFileSync(resolve(HERE, item.routes.linkedin.caption), 'utf8').trim()
+    const { body, firstComment } = splitCaption(readFileSync(resolve(HERE, item.routes.linkedin.caption), 'utf8'))
     const over = body.length > CHAR_LIMIT
     if (over) bad++
     console.log(
@@ -110,7 +125,8 @@ if (DRY) {
         `\n   scheduled ${item.routes.linkedin.scheduledFor ?? '(none)'}  mode ${item.routes.linkedin.mode}` +
         `\n   ${body.split(/\s+/).length} words, ${body.length}/${CHAR_LIMIT} chars${over ? '  OVER LIMIT' : ''}` +
         `\n   caption ${item.routes.linkedin.caption}` +
-        `\n   opens: ${body.split('\n')[0].slice(0, 78)}`,
+        `\n   opens: ${body.split('\n')[0].slice(0, 78)}` +
+        `\n   first comment: ${firstComment ?? '(none — link stays in the body)'}`,
     )
   }
   console.log(`\n${targets.length} would post, ${bad} over the limit. Composer never opened; nothing was typed.`)
@@ -118,7 +134,7 @@ if (DRY) {
 }
 
 for (const item of targets) {
-  const body = readFileSync(resolve(HERE, item.routes.linkedin.caption), 'utf8').trim()
+  const { body, firstComment } = splitCaption(readFileSync(resolve(HERE, item.routes.linkedin.caption), 'utf8'))
   console.log(`\npost  ${item.id}`)
   console.log(`   ${body.split(/\s+/).length} words, ${body.length}/${CHAR_LIMIT} chars`)
   if (body.length > CHAR_LIMIT) {
@@ -190,6 +206,72 @@ for (const item of targets) {
   if (!btnEl) throw new Error('Post button not found or still disabled')
   await btnEl.click()
   await new Promise((r) => setTimeout(r, 8000))
+
+  // ---- first comment -------------------------------------------------------
+  // The post is already public at this point. Everything below is additive and
+  // must fail closed: the only failure that matters here is commenting on the
+  // WRONG post, which is unrecoverable and visible. So the post is identified by
+  // its own opening text before a single key is typed, and anything short of a
+  // positive match skips the comment and tells the operator to add it by hand.
+  if (firstComment) {
+    try {
+      const fingerprint = body.slice(0, 60)
+      await page.goto('https://www.linkedin.com/in/me/recent-activity/all/', { waitUntil: 'domcontentloaded' })
+      await new Promise((r) => setTimeout(r, 6000))
+
+      const posts = await page.$$('>>> div.feed-shared-update-v2, >>> div[data-urn]')
+      let target = null
+      for (const el of posts) {
+        const txt = await el.evaluate((n) => (n.innerText || '').trim()).catch(() => '')
+        if (txt.includes(fingerprint)) { target = el; break }
+        if (target) break
+      }
+      if (!target) {
+        console.log('   first comment SKIPPED — could not positively identify the post just published.')
+        console.log(`   add it by hand: ${firstComment}`)
+      } else {
+        const btns = await target.$$('>>> button')
+        let commentBtn = null
+        for (const b of btns) {
+          const label = await b.evaluate((el) => ((el.getAttribute('aria-label') || el.innerText || '')).trim())
+          if (/^comment$/i.test(label)) { commentBtn = b; break }
+        }
+        if (!commentBtn) throw new Error('comment control not found on the identified post')
+        await commentBtn.click()
+        await new Promise((r) => setTimeout(r, 3000))
+
+        const box = await target.$('>>> div.ql-editor[contenteditable="true"]')
+        if (!box) throw new Error('comment editor not found')
+        await box.click()
+        await box.type(firstComment, { delay: 1 })
+        await new Promise((r) => setTimeout(r, 2000))
+
+        const shot2 = `/tmp/linkedin-${item.id.replace(/\W+/g, '-')}-comment.png`
+        await page.screenshot({ path: shot2 })
+        console.log(`   comment screenshot ${shot2}`)
+
+        const typedComment = await box.evaluate((el) => el.innerText.trim()).catch(() => null)
+        if (typedComment !== firstComment) {
+          throw new Error('comment box did not receive the exact text — not submitting')
+        }
+        const subs = await target.$$('>>> button')
+        let submit = null
+        for (const b of subs) {
+          const info = await b.evaluate((el) => ({ t: (el.innerText || '').trim(), d: el.disabled }))
+          if (/^(post|reply)$/i.test(info.t) && !info.d) { submit = b; break }
+        }
+        if (!submit) throw new Error('comment submit button not found or disabled')
+        await submit.click()
+        await new Promise((r) => setTimeout(r, 5000))
+        console.log('   first comment posted')
+      }
+    } catch (err) {
+      // Never rethrow: the post itself succeeded and must still be recorded as
+      // posted, or a retry would publish it twice.
+      console.log(`   first comment FAILED (${err.message}) — post is live; add the comment by hand:`)
+      console.log(`   ${firstComment}`)
+    }
+  }
 
   item.routes.linkedin.state = 'posted'
   item.routes.linkedin.postedAt = today
