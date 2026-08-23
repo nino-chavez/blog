@@ -3803,9 +3803,9 @@
     },
     "linkedin": {
      "mode": "native",
-     "state": "eligible",
+     "state": "posted",
      "caption": "captions/linkedin/blog--nobody-owns-what-the-agent-leaves-running.md",
-     "postedAt": null,
+     "postedAt": "2026-08-23",
      "scheduledFor": "2026-08-25",
      "url": null
     },

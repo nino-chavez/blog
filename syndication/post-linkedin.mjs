@@ -70,6 +70,27 @@ for (const item of targets) {
   if (!existsSync(p)) throw new Error(`${item.id}: caption file missing: ${cap}`)
 }
 
+// A caption may carry its link below a marker instead of in the body. LinkedIn
+// demotes posts containing an external link, and the measurement that produced
+// this convention is blunt: 11 requests reached the site from LinkedIn in seven
+// days against roughly 1,600 impressions a week (2026-08-23). Body goes in the
+// composer; the marked remainder becomes the first comment.
+// Trailing newline is optional: splitCaption trims first, so requiring \n after
+// the marker let a marker with an empty tail survive into the post body.
+//
+// Module scope, deliberately. This first lived inside the `if (DRY)` block, so
+// --dry exercised it and the live path threw ReferenceError on the line that
+// reads the caption — which is to say the feature only ever ran in the mode
+// that cannot publish. A dry run is not a test of the live path when the two
+// paths do not share the code.
+const FIRST_COMMENT_MARKER = /\n---\s*first-comment\s*---\s*(?:\n|$)/
+function splitCaption(raw) {
+  const text = raw.trim()
+  if (!FIRST_COMMENT_MARKER.test(text)) return { body: text, firstComment: null }
+  const [body, ...rest] = text.split(FIRST_COMMENT_MARKER)
+  return { body: body.trim(), firstComment: rest.join('\n').trim() || null }
+}
+
 const browserURL = `http://127.0.0.1:${PORT}`
 const browser = await puppeteer.connect({ browserURL, defaultViewport: null })
 
@@ -100,22 +121,7 @@ if (DRY) {
   await page.close().catch(() => {})
   await browser.disconnect()
 
-  // A caption may carry its link below a marker instead of in the body. LinkedIn
-// demotes posts containing an external link, and the measurement that produced
-// this convention is blunt: 11 requests reached the site from LinkedIn in seven
-// days against roughly 1,600 impressions a week (2026-08-23). Body goes in the
-// composer; the marked remainder becomes the first comment.
-// Trailing newline is optional: splitCaption trims first, so requiring \n after
-// the marker let a marker with an empty tail survive into the post body.
-const FIRST_COMMENT_MARKER = /\n---\s*first-comment\s*---\s*(?:\n|$)/
-function splitCaption(raw) {
-  const text = raw.trim()
-  if (!FIRST_COMMENT_MARKER.test(text)) return { body: text, firstComment: null }
-  const [body, ...rest] = text.split(FIRST_COMMENT_MARKER)
-  return { body: body.trim(), firstComment: rest.join('\n').trim() || null }
-}
-
-let bad = 0
+  let bad = 0
   for (const item of targets) {
     const { body, firstComment } = splitCaption(readFileSync(resolve(HERE, item.routes.linkedin.caption), 'utf8'))
     const over = body.length > CHAR_LIMIT
@@ -254,15 +260,44 @@ for (const item of targets) {
         if (typedComment !== firstComment) {
           throw new Error('comment box did not receive the exact text — not submitting')
         }
-        const subs = await target.$$('>>> button')
-        let submit = null
-        for (const b of subs) {
-          const info = await b.evaluate((el) => ({ t: (el.innerText || '').trim(), d: el.disabled }))
-          if (/^(post|reply)$/i.test(info.t) && !info.d) { submit = b; break }
-        }
-        if (!submit) throw new Error('comment submit button not found or disabled')
+        // Two things were wrong here on the first live run (2026-08-23), and
+        // only fixing both submits the comment.
+        //
+        // The label is "Comment". "Post"/"Reply" is what this was written for
+        // and neither string appears, so the scan found nothing and left the
+        // comment typed but unsubmitted under a post that was already public.
+        //
+        // And the scan has to be scoped to the comment FORM, not the post. The
+        // post's own action bar carries a "Comment" button — the toggle that
+        // opens the box — and it comes first in document order, so a
+        // whole-post scan clicks the toggle and reports success. Walk up from
+        // the editor instead and take the last enabled match inside the first
+        // ancestor that has one.
+        const found = await box.evaluate((el) => {
+          const ok = (b) => /^(comment|post|reply)$/i.test((b.innerText || '').trim()) && !b.disabled
+          let node = el
+          for (let i = 0; i < 8 && node; i++) {
+            node = node.parentElement
+            if (!node) break
+            const hits = [...node.querySelectorAll('button')].filter(ok)
+            if (hits.length) {
+              hits[hits.length - 1].setAttribute('data-lz-submit', '1')
+              return true
+            }
+          }
+          return false
+        })
+        if (!found) throw new Error('comment submit button not found inside the comment form')
+        const submit = await target.$('>>> button[data-lz-submit="1"]')
+        if (!submit) throw new Error('could not re-acquire the comment submit button')
         await submit.click()
-        await new Promise((r) => setTimeout(r, 5000))
+        await new Promise((r) => setTimeout(r, 6000))
+
+        // Verify rather than assume. Clicking the wrong control also "succeeds".
+        const landed = await target.evaluate((n) => (n.innerText || '')).catch(() => '')
+        if (!landed.includes(firstComment.slice(0, 40))) {
+          throw new Error('clicked submit but the comment is not visible under the post')
+        }
         console.log('   first comment posted')
       }
     } catch (err) {
