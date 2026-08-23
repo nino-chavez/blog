@@ -175,3 +175,79 @@ findings to a file as it goes**, so an idle agent leaves something behind.
 Not checked: anything about reader behaviour; the referential half of CTE mode;
 causal attribution of the 08-08 shift; rendered output beyond spot checks
 (`dist/` is stale, dated Aug 16).
+
+---
+
+## Addendum — distribution data, pulled 2026-08-23
+
+The audit above could not answer "is this reaching anyone." This addendum can.
+Two sources: LinkedIn's own analytics (platform-verified) and Cloudflare edge
+logs for the ninochavez.co zone (request counts, bots not separable on this plan).
+
+### LinkedIn, past 28 days
+
+| Metric | Value |
+|---|---|
+| Impressions | 6,505 (+501% vs prior 28) |
+| Members reached | 2,713 |
+| Social engagements | 115 |
+| Engagement rate | 1.8% |
+| In-network / out-of-network | 46% / 54% |
+
+Per post: 676 impressions (223-sessions), 566 (work-library-pattern),
+216 (panic-log).
+
+### Blog, edge requests, past 7 days
+
+Individual posts draw double-digit weekly requests: 80 `when-the-grid-goes-dark`,
+77 `everything-i-was-afraid-of-worked`, 73 `the-panic-log-says-signal-not-shortage`,
+then a flat 37–43 band across unrelated posts from different years. That flatness
+is the signature of crawler sweeps, not readers. Zone total for 28 days is 480,520
+page views, which is not readership by any reading.
+
+**Bot separation is unavailable on this plan.** Every blog number here is
+requests of unknown human fraction. Do not quote them as readers.
+
+### The link between the two, which is the finding
+
+Referrers to the zone, past 7 days:
+
+```
+   11,638  (none — direct or bot)
+    2,670  ninochavez.co/sitemap-0.xml     <- crawlers walking the sitemap
+      370  ninochavez.co (internal)
+       67  t.co
+       11  linkedin.com + lnkd.in          <- the entire social referral
+        0  substack
+        0  dev.to
+```
+
+**Eleven requests in seven days arrived from LinkedIn.** Against roughly 1,600
+impressions per week, that is a click-through near 0.7% — which is close to
+typical for LinkedIn external links, and is exactly why the absolute number
+matters more than the rate. The channel that reaches thousands delivers about a
+dozen visits a week to the artifact.
+
+### What this implies, and what it does not
+
+The caption is the read artifact. The post is the footnote. Roughly two orders of
+magnitude separate LinkedIn reach from blog arrival, and nothing in the current
+effort split reflects that: a 60KB voice guide, four framework layers and a build
+chain of gates govern the post, while the caption was governed by one checker that
+ran nowhere until 2026-08-23.
+
+It does NOT imply publishing less. Volume was not tested here. It implies the
+craft is being spent on the surface fewer people reach.
+
+Two things worth testing before changing cadence:
+1. Captions currently end with the blog URL. LinkedIn demotes posts carrying
+   external links; a link-in-first-comment variant is a cheap A/B.
+2. Whether any blog arrival converts to anything at all. Nothing downstream is
+   instrumented, so "a visit" is currently the terminal event.
+
+### Instrumentation gap
+
+The blog still has no client-side analytics. Everything above is edge data, which
+cannot distinguish a reader from a crawler. If the blog is going to be judged on
+readership, it needs a real analytics signal; if it is going to remain the artifact
+of record, it does not, and the effort should move to the caption.
