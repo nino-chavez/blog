@@ -1575,6 +1575,16 @@
   "date": "2026-08-10"
  },
  {
+  "slug": "the-depth-penalty-is-gone",
+  "title": "The Depth Penalty Is Gone",
+  "date": "2026-08-11"
+ },
+ {
+  "slug": "there-was-never-a-person-in-that",
+  "title": "There Was Never a Person in That Seat",
+  "date": "2026-08-12"
+ },
+ {
   "slug": "the-agent-needs-a-safety-label",
   "title": "The Agent Needs a Safety Label",
   "date": "2026-08-13"
@@ -1583,5 +1593,10 @@
   "slug": "the-guardrail-removed-the-storefront",
   "title": "The Guardrail Removed the Storefront",
   "date": "2026-08-14"
+ },
+ {
+  "slug": "everything-i-was-afraid-of-worked",
+  "title": "Everything I Was Afraid of Worked",
+  "date": "2026-08-16"
  }
 ]

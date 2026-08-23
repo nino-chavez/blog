@@ -120,6 +120,11 @@
       "id": "blog/everything-i-was-afraid-of-worked",
       "reviewed": "full",
       "why": "the safety layer held and the product still failed — a resubmit was refused correctly and then reported as a failure for a change already live on the page; plus the spec's own six-turn model-call cap sitting on the component that resembled the agent diagrams while the unbounded fan-out next to it got nothing"
+    },
+    {
+      "id": "blog/nobody-owns-what-the-agent-leaves-running",
+      "reviewed": "full",
+      "why": "twenty-two connector processes at a day of uptime, every one of them reading enabled = false, and nothing had failed — the flag governs what starts next, not what is already running; third instance of the shape after 52 worktrees and 102 browser profiles, and it ships a one-line check the reader can run"
     }
   ],
   "considered_not_picked": {

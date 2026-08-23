@@ -20,7 +20,7 @@ Each one I found the same way, which is to say I did not find it. Something ran 
 
 What links them is not sloppiness. It is that handing work to an agent leaves things behind, and nothing in the loop is responsible for ending them. The agent finishing and the leftovers going away are two different events, and only the first one is visible.
 
-The check that would have caught it is cheap, and it is one line:
+One command would have told me, and it fits on a line:
 
 ps -eo pid,etime,rss,command | grep -iE '(mcp|context7|playwright|chrome-devtools)'
 
