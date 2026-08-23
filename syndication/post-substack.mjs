@@ -122,6 +122,20 @@ for (const item of targets) {
       a.setAttribute('href', new URL(href, canonicalUrl).href)
     }
 
+    // Substack's paste handler drops an anchor that wraps inline <code>, and it
+    // drops it silently — the monospace survives, the link does not. Measured
+    // 2026-08-23: `<a href="github…/connector-reaper.py"><code>connector-reaper
+    // .py</code></a>` published with zero occurrences of "github" on the page,
+    // which killed the only thing that post asked the reader to go run.
+    // Flattening the code to plain text keeps the link. The link is the part
+    // that carries the reader somewhere; the monospace is decoration.
+    for (const a of clone.querySelectorAll('a[href]')) {
+      const kids = [...a.childNodes].filter((n) => n.nodeType !== 3 || n.textContent.trim())
+      if (kids.length === 1 && kids[0].nodeName === 'CODE') {
+        a.textContent = kids[0].textContent
+      }
+    }
+
     // Substack's paste handler discards table structure — a two-column table
     // arrives as "ServerToolschrome-devtools-mcp29", one unreadable run of text.
     // Code blocks survive intact, so render each table as aligned monospace text
