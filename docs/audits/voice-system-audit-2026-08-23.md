@@ -251,3 +251,76 @@ The blog still has no client-side analytics. Everything above is edge data, whic
 cannot distinguish a reader from a crawler. If the blog is going to be judged on
 readership, it needs a real analytics signal; if it is going to remain the artifact
 of record, it does not, and the effort should move to the caption.
+
+---
+
+## Correction — analytics existed the whole time, and the answer is worse
+
+The audit above states "there is no engagement data." **That was wrong.**
+`ninochavez.co` has a Cloudflare Web Analytics site (`670be050…`) with
+`auto_install: true`, collecting since before this window. The earlier claim came
+from grepping `astro-build/src` and one live page for a beacon — a source grep
+cannot see edge injection, and the one page checked happened to be a route the
+beacon does not cover. Enumerating the account's RUM sites is what settles it, and
+that is the check that should have run first.
+
+Same failure shape as everything else this week: the config file and the source
+tree are not evidence about the running system.
+
+### What the beacon actually recorded — 28 days, humans with JS
+
+Whole zone: **2,200 page loads across 64 distinct paths.**
+
+```
+  640  /
+  130  /work/browse-tool
+  110  /blog                <- the index
+  100  /work
+   90  /demos
+   80  /library
+   70  /photography
+```
+
+**Individual blog posts: zero paths, zero loads.** Not "low" — absent from the
+full 64-path list. Cloudflare rounds RUM counts to the nearest ten, so every post
+published in this window drew fewer than roughly ten human page loads in 28 days.
+
+### The three numbers, side by side
+
+| | 28 days |
+|---|---|
+| LinkedIn members reached | 2,713 |
+| LinkedIn engagements | 115 |
+| Human page loads, entire ninochavez.co | 2,200 |
+| Human page loads, `/blog` index | 110 |
+| Human page loads, any individual post | below the floor of 10 |
+| Requests to the site referred by LinkedIn (7d) | 11 |
+
+The blog index draws about 4 human loads a day. The posts themselves do not
+register. Meanwhile the captions reach thousands.
+
+### What this settles
+
+The caption is not the promotion for the essay. **The caption is the essay** —
+it is the only version of the argument that reaches a human audience at scale.
+The post is the citable artifact of record behind it, and it is read by almost
+nobody directly.
+
+That is a defensible thing for a blog to be. It is not defensible to spend a
+60KB voice guide, four framework layers and a six-gate build chain on the
+artifact nobody arrives at while the read artifact has one checker.
+
+### Revised recommendation
+
+The earlier addendum said "the craft is being spent on the surface fewer people
+reach" and stopped short of a cadence claim, correctly, because volume was not
+tested. That still holds. What the RUM data adds is that the gap is not two
+orders of magnitude — it is closer to total.
+
+1. Treat the caption as the primary artifact. It should get the voice guide, the
+   read-aloud test, and a gate that runs.
+2. Keep the post as the artifact of record. Its gates already work; do not add more.
+3. Test link-in-first-comment. LinkedIn demotes posts carrying external links,
+   and at 11 referred requests a week there is nothing to lose.
+4. Before any cadence change, run one month of the above and re-pull these
+   numbers. Volume is still untested and should not be cut on this evidence.
