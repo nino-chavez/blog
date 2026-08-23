@@ -80,6 +80,16 @@ Browser profiles went the same way. A hundred and two of them, 74 GB. Switching 
 
 All three I found the same way, which is to say I did not find them. Something ran out. A full disk. A reboot. Only the worktrees ended up with anything that ends them, a reaper I wrote after already hitting the wall — a fix built at the point of pain instead of the point of creation. The profiles got a change to what gets created. The connectors got neither.
 
+## The check is one command
+
+```
+ps -eo pid,etime,rss,command | grep -iE '(mcp|context7|playwright|chrome-devtools)' | grep -v grep
+```
+
+That is the whole diagnostic. What is running, next to what the config claims. If the two disagree, the config is describing the next session rather than this one, and the difference is measured in uptime.
+
+I ended up writing a longer version, [`connector-reaper.py`](https://github.com/nino-chavez/agentic-ways-of-working/blob/main/hooks/connector-reaper.py), for two reasons. It reports the ratio the one-liner cannot — connector processes against loaded sessions, which is where duplicate-spawn shows up. And it redacts credentials before printing, because one of those command lines carries an API key in its arguments, readable by anything on the machine that can run `ps`. It reports by default and reaps only processes whose owning client is gone, which is nearly none of them: on this machine, the count that is actually safe to kill is zero.
+
 ## What the config says and what is running are two questions
 
 Every mechanism here is doing its job. The flag disables. The client scopes cleanup to its own children. The session holds its connectors exactly as long as the session lasts. The isolation rule makes a worktree per session because that is the point of it.

@@ -20,6 +20,10 @@ Each one I found the same way, which is to say I did not find it. Something ran 
 
 What links them is not sloppiness. It is that handing work to an agent leaves things behind, and nothing in the loop is responsible for ending them. The agent finishing and the leftovers going away are two different events, and only the first one is visible.
 
-The check that would have caught it is cheap. Count what is actually running, not what the config says is off. On my machine those two numbers had been disagreeing for a day, and nothing anywhere told me.
+The check that would have caught it is cheap, and it is one line:
+
+ps -eo pid,etime,rss,command | grep -iE '(mcp|context7|playwright|chrome-devtools)'
+
+What is running, next to what the config claims. On my machine those two numbers had been disagreeing for a day, and nothing anywhere told me. I wrote a longer version that reports the ratio of connector processes to loaded sessions and redacts the API keys sitting in those command lines — it is linked from the post.
 
 https://ninochavez.co/blog/nobody-owns-what-the-agent-leaves-running
