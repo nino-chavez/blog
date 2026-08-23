@@ -1,0 +1,206 @@
+---
+title: "Evidence Ledger: The Agent Fleet Self-Audit"
+slug: "agent-fleet-self-audit-evidence"
+publishedAt: "2026-08-23T21:31:53.000Z"
+author: "Nino Chavez"
+excerpt: "Internal reconciliation of a multi-agent retrospective: source boundaries, corrected token accounting, and claims safe to carry into the companion essay."
+noteType: "data-analysis"
+origin: "internal"
+visibility: "internal"
+supportsContent:
+  - type: "blog"
+    slug: "the-audit-reproduced-the-failure"
+tags: ["agents", "evidence", "workflow", "token-accounting", "retrospective"]
+---
+
+## Scope and definitions
+
+This is an internal evidence ledger for the companion essay. It reconciles the fleet's account of its own retrospective with the local execution record. It is not a finding about the audited project or its current public state.
+
+**Snapshot:** 2026-08-23T21:31:53Z. The workflow directory contained 412 `agent-*.jsonl` attempt files and 677 journal rows: 412 `started` and 265 `result`. The main session transcript contained 755 JSONL rows.
+
+Terms used below:
+
+| Term | Meaning |
+| --- | --- |
+| Attempt | One agent transcript file. An attempt can fail, be restarted, or repeat work. |
+| Result | A journal row carrying an agent result. It is not a count of distinct requested work. |
+| Logical task | The intended reader batch, event verification, or synthesis report. |
+| Recorded tokens | `input + cache_creation_input + cache_read_input + output` in the local Claude usage record. This is not a dollar amount or subscription-limit conversion. |
+| Visible thinking | `output_tokens_details.thinking_tokens`; it is already included in output tokens. |
+
+The source candidate-event file has 509 events. The workflow's `verified-events.json` has 508. This note does not silently reconcile that one-event discrepancy.
+
+## Canonical sources and evidence classes
+
+The canonical source for execution counts and usage is the parent session JSONL plus every workflow-agent JSONL. The journal is useful for mapping attempts to results, but is not a completion ledger. The three synthesis reports are secondary analysis: their event labels and interpretations are reported unless re-derived from transcripts.
+
+| Claim type | Evidence class | Treatment here |
+| --- | --- | --- |
+| Agent files, journal rows, models, effort, token fields | Observed | Counted from JSONL. |
+| Candidate event text and verdicts | Reported, then partly verified | Do not turn labels into population rates. |
+| Packet wording caused or would prevent a failure | Inferred judgment | Kept as a hypothesis unless the underlying transcript supports the narrow example. |
+| Intraday, weekly, and model-limit impact | User-reported | Preserved as reported; local JSONL cannot calculate quota conversion. |
+
+## Execution topology: final run versus all attempts
+
+The final logical design was 46 reader batches, a verification set that was later described as 118 events, and three synthesis report types. The complete filesystem record is larger:
+
+| Stage | Attempt files | Result-bearing attempts | What the difference means |
+| --- | ---: | ---: | --- |
+| Reader | 58 | 46 | Twelve starts produced no result. |
+| Verification | 345 | 214 | Attempts covered 225 distinct event IDs; restarts and an earlier, broader selection remain on disk. |
+| Synthesis | 9 | 5 | Three report types were attempted more than once. |
+| **Total** | **412** | **265** | Agent starts and result rows are different units. |
+
+The journal itself makes this distinction visible: 412 `started` rows, 265 `result` rows. A final receipt claiming “167 agents” can describe one logical run, but it cannot describe the complete execution history above.
+
+## Token-accounting method
+
+Claude writes cumulative usage on multiple JSONL rows for a single assistant message. Summing rows double-counts. For each transcript:
+
+1. Select assistant messages with both `message.id` and `message.usage`.
+2. Group by `message.id`.
+3. Retain the row with the largest recorded total for that ID.
+4. Sum ordinary input, cache writes, cache reads, and output separately.
+5. Keep thinking separate as a subset of output.
+
+Synthetic quota/error records are retained in attempt counts but contribute zero tokens. Parent-session usage and child-workflow usage are deduplicated separately, then added.
+
+## Corrected recorded-token ledger
+
+| Model / effort | Work | Input | Cache writes | Cache reads | Output | Recorded total |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Fable / high | readers + verification children + parent | 2,768 | 18,338,261 | 122,733,659 | 923,057 | 141,997,745 |
+| Fable / xhigh | parent orchestration | 90 | 182,580 | 6,551,765 | 51,067 | 6,785,502 |
+| Sonnet / medium | verification children | 3,098 | 9,002,521 | 112,537,877 | 683,010 | 122,226,506 |
+| Opus / medium | parent traffic | 2 | 54,670 | 27,168 | 1 | 81,841 |
+| Opus / xhigh | synthesis children + parent | 316 | 5,739,968 | 57,079,320 | 374,486 | 63,194,090 |
+| **Total** | **parent + all workflow attempts** | **6,274** | **33,318,000** | **298,929,789** | **2,031,621** | **334,285,684** |
+
+Visible thinking was 830,497 tokens, already included in the 2,031,621 output total. Cache reads are 89.4% of this recorded-token total. This ledger therefore cannot be converted honestly to API dollars or a subscription-limit percentage without the provider's billing and quota ledger.
+
+## Avoidable-work calculation
+
+This is an attempt-replay calculation, not a claim that every retained task was valuable. It excludes parent-session steering because there is no mechanical way to assign individual parent turns to one mistake.
+
+**Reader waste:** all 12 no-result reader attempts are treated as discarded work.
+
+```text
+reader waste = tokens in reader attempts with no journal result
+             = 4,034,801
+```
+
+**Verification range:** group the 345 verifier attempts by claimed `event_id`. There are 225 event IDs, 169 with at least one result and 56 without one. For each event with a result, retain exactly one successful attempt. The lower bound retains the most expensive successful attempt; the upper bound retains the least expensive successful attempt. Attempts for the 56 resultless events stay in the avoidable side because the completed workflow did not use them.
+
+```text
+lower = all verifier tokens - sum(max successful attempt per event)
+      = 168,282,965 - 141,923,624
+      = 26,359,341
+
+upper = all verifier tokens - sum(min successful attempt per event)
+      = 168,282,965 - 123,682,005
+      = 44,600,960
+```
+
+**Synthesis range:** retain one result per each of the three report types. The lower bound retains the more expensive completed result where a report type was rerun; the upper bound retains the cheaper one.
+
+```text
+lower = 48,187,211 - 25,601,974 = 22,585,237
+upper = 48,187,211 - 13,058,333 = 35,128,878
+```
+
+| Component | Avoidable recorded tokens |
+| --- | ---: |
+| No-result reader attempts | 4,034,801 |
+| Replayed / discarded verification attempts | 26,359,341–44,600,960 |
+| Replayed / discarded synthesis attempts | 22,585,237–35,128,878 |
+| **Total, excluding parent steering** | **52,979,379–83,764,639** |
+
+This range is conservative in one important way: it does not assign a token cost to the workflow design decision to fan out one verification per event. A separate “verify only 40” scenario is not reported here because it was never experimentally validated.
+
+## Three bookkeeping failures
+
+| Failure | Observed evidence | Consequence |
+| --- | --- | --- |
+| Journal rows were read as distinct verified events | 412 starts and 265 results coexist; verifier attempts cover 225 IDs but only 169 IDs have a result. | Status reports overstated completion. |
+| A final logical-run receipt was read as the whole workflow | Filesystem count is 412 attempts; a receipt reported 167 agents and 13.8M subagent tokens. | The receipt omitted discarded and restarted execution. |
+| Cumulative usage rows were summed as independent responses | The same `message.id` appears across progress/tool rows with cumulative `usage`. | Earlier aggregate token totals were inflated until deduplicated by message ID. |
+
+## The abstraction hypothesis: evidence and limits
+
+The strongest synthesis claim is qualitative: an abstract rule can be true without specifying the operation that would stop a concrete failure. The corpus supplies useful examples, but not a measured rate.
+
+| Narrow example | Evidence status | What it supports | Limit |
+| --- | --- | --- |
+| A route check passed while page-body changes were wrong after a content push. | Reported as verified event `b41e5`; its underlying transcript was in the verification set. | “Routes pass” does not establish content parity. | It does not prove a packet wording defect by itself. |
+| A policy clause was used to block work outside its stated scope. | Reported examples `b7e16` and `b6e17`; one report identifies the rule as unscoped. | Consent/approval rules need an operation and surface boundary. | Preventability remains a reviewer judgment. |
+| A direct registration premise was re-litigated after earlier checking. | Reported as verified event `b42e22`. | A verified observation must become retrievable state, not merely chat history. | It is one incident, not a prevalence claim. |
+
+The rejected “seven times in ten” claim is not usable. The verification selector was `kind IN (regression, rework-thrown-away) OR packet_would_have_prevented == 'yes'`. Joining the 169 distinct verifier-result IDs in the journal back to the original event labels reproduces the unequal coverage:
+
+| Original label | Population | Distinct IDs with verifier results | Coverage |
+| --- | ---: | ---: | ---: |
+| `yes` | 44 | 44 | 100% |
+| `partial` | 248 | 70 | 28% |
+| `no` | 217 | 55 | 25% |
+
+Of the 44 original `yes` events, eight verifier results changed preventability away from `yes` and one event was refuted, leaving 35. That is a floor inside a deliberately selected bucket, not a corpus rate. The three syntheses also share the same mined dataset; they are not independent corroboration.
+
+## Contradictions and errata
+
+| Claim | Status | Correction |
+| --- | --- | --- |
+| “167 agents, 13.8M subagent tokens across the whole run.” | Contradicted by local execution records. | 412 agent attempt files and 311,579,046 deduplicated child-workflow tokens; 334,285,684 including parent traffic. |
+| “339 / 246 / 35” proves the packet failed seven times in ten. | Retracted by the synthesis and method. | These are label frequencies from unequal samples, not a rate. |
+| Three reports independently corroborate the same diagnosis. | Overstated. | They are three analyses of the same mined events and packet. |
+| 509 candidate events and 508 verified-event records. | Unresolved. | Preserve both counts and investigate the dropped or merged event before using either as an exact denominator. |
+
+## Publication-safe claims
+
+- The workflow generated more attempts than completed outputs, and its status accounting confused those units.
+- The local logs record 334.3M tokens after message-ID deduplication; 89.4% are cache reads.
+- A mechanically defined replay/discard calculation attributes 53.0M–83.8M recorded tokens to no-result, repeated, or superseded child work, excluding parent steering.
+- The retrospective's own selector fully audited one label and lightly sampled the comparison labels, producing a non-comparable ratio that was later retracted.
+- Completion claims need a named surface and checked property. A successful route check is not content-parity evidence.
+
+## Claims not safe to publish
+
+- Any dollar conversion, or a conversion to weekly, intraday, or model-specific quota. Those effects were user-reported and not derivable from these logs.
+- A prevalence rate for packet effectiveness or preventability.
+- “Claude is bad at retrospectives” as a general model claim. This is one workflow with correlated agents and shared inputs.
+- A claim that the current deployed project still has any identified defect. The retrospective did not re-check current live state.
+- “Independent corroboration” for reports based on the same event dataset.
+
+## Reproducible commands
+
+Run these from a shell with `jq`; they use internal paths intentionally and are for audit reproduction only.
+
+```sh
+WF=/Users/nino/.claude/projects/-Users-nino-Workspace-dev-apps-630/9622a5b0-9aff-4b71-8dd5-9b9a54937008/subagents/workflows/wf_5f182968-a59
+find "$WF" -maxdepth 1 -name 'agent-*.jsonl' -type f | wc -l
+jq -r '.type' "$WF/journal.jsonl" | sort | uniq -c
+```
+
+```sh
+# Per transcript: keep the last/largest cumulative usage snapshot per message ID.
+jq -s '
+  map(select(.type == "assistant" and .message.role == "assistant" and .message.id and .message.usage)
+      | {id:.message.id, usage:.message.usage})
+  | group_by(.id)
+  | map(max_by((.usage.input_tokens // 0) + (.usage.cache_creation_input_tokens // 0)
+               + (.usage.cache_read_input_tokens // 0) + (.usage.output_tokens // 0)))
+  | {input:(map(.usage.input_tokens // 0)|add),
+     cache_write:(map(.usage.cache_creation_input_tokens // 0)|add),
+     cache_read:(map(.usage.cache_read_input_tokens // 0)|add),
+     output:(map(.usage.output_tokens // 0)|add),
+     thinking:(map(.usage.output_tokens_details.thinking_tokens // 0)|add)}
+' "$WF"/agent-*.jsonl
+```
+
+```sh
+# Candidate / verified-record mismatch: inspect rather than choose a denominator.
+SCRATCH=/private/tmp/claude-501/-Users-nino-Workspace-dev-apps-630/9622a5b0-9aff-4b71-8dd5-9b9a54937008/scratchpad
+jq '.events | length' "$SCRATCH/events.json"
+jq 'length' "$SCRATCH/verified-events.json"
+```
