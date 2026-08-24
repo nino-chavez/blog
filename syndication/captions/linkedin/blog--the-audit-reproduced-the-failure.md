@@ -1,30 +1,21 @@
-An agent audit I commissioned declared verification complete: 119 of 118 findings.
+A small review of one Claude session burned through the available allowance before it answered its small question.
 
-That was not a typo. Stopped and restarted runs had written duplicate rows into a journal. The workflow counted those attempts as completed findings.
+It began as a request to look for work that had backtracked or needed re-steering. It became parallel work, restarts, more parallel work, and a report that declared 119 verified findings from 118.
 
-The impossible count exposed the bookkeeping error. The verification filter did something worse.
+That number was the alarm. The audit had counted restarts as new findings. It also reviewed the evidence unevenly: 35 cases survived direct review, but the rest of the comparison was not checked on equal terms. The 35 are real. A rate is not.
 
-Reader agents had already labeled candidate events according to whether an operating packet would have prevented them. The verification filter selected every event in the “would prevent” bucket. That bucket was audited at 100%. The comparison buckets were audited at 28% and 25%.
+So the report was not a reliable reason to have spent the work that produced it. It recorded activity, then promoted that activity into a verdict.
 
-The fully checked bucket shrank from 44 candidates to 35. The lightly checked buckets mostly kept their original labels. Then the relative size of all three buckets was reported as a finding.
+The stop rule is simple:
 
-The sample did not merely fail to support the rate. The filter manufactured the comparison.
+- Start with a small first pass that can answer the question on its own
+- Set a ceiling for parallel work and the available allowance
+- Stop at a checkpoint before expanding
+- Expand only when the first pass gives a clear reason to do so
 
-The local logs record 334 million tokens after cumulative usage rows are deduplicated. About 89% were cache reads. That is not an API bill. It is a record of a run that exhausted my intraday allowance before the sampling error was found.
+Parallel work can look like progress because it creates so much activity. The ceiling is what forces it to earn the next wave.
 
-Thirty-five directly verified events still survive. That is a floor, not a rate. The fleet produced useful candidates. It did not produce a trustworthy verdict.
-
-The next audit gets three separate owners:
-
-- Models extract candidates
-- Code deduplicates and counts attempts
-- An independent reviewer tests the sample and consequential claims
-
-The process that designs the verification filter does not get to certify the rate that filter produces.
-
-That is the part the first audit could not check about itself.
-
-The full evidence and the receipt shape are in the first comment.
+I put the evidence in the first comment.
 
 --- first-comment ---
 https://ninochavez.co/blog/the-audit-reproduced-the-failure
