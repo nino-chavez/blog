@@ -3826,9 +3826,9 @@
           "mode": "teaser",
           "state": "posted",
           "caption": "captions/linkedin/blog--the-audit-reproduced-the-failure.md",
-          "postedAt": "2026-08-23",
-          "scheduledFor": "2026-08-25",
-          "url": "https://www.linkedin.com/feed/update/urn:li:activity:7497411419676491776/"
+          "postedAt": "2026-08-24",
+          "scheduledFor": null,
+          "url": "https://www.linkedin.com/feed/update/urn:li:share:7497648434494218240/"
         },
         "devto": {
           "mode": "skip",
