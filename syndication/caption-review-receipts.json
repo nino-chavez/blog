@@ -11,6 +11,17 @@
         "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
         "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
       }
+    },
+    "demos/twelve-messages": {
+      "reviewedAt": "2026-08-29T18:52:58.552Z",
+      "reviewedBy": "Codex",
+      "hashes": {
+        "caption": "eecc03fa10d4cb7ffd5bd890816fe039f43a3a3df9245921977bab7eddf62be8",
+        "source": "e5b31a3a1333db6bbbc73e1ca704a7710d12fda2b251cac7fb3b2dae4d4173db",
+        "voiceGuide": "e2604cf3e06b1adc3e56ea8a93f1ed027c46002af0796e410a83219f1fc02185",
+        "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
+        "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
+      }
     }
   }
 }

@@ -3,15 +3,28 @@
   "linkedinHistory": "harvested from the activity feed (115 link-shares read)",
   "cadence": {
     "linkedin": {
-      "days": [2, 4],
+      "days": [
+        2,
+        4
+      ],
       "every": 1
     },
     "substack": {
-      "days": [0, 1, 2, 3, 4, 5, 6],
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
       "every": 1
     },
     "devto": {
-      "days": [3],
+      "days": [
+        3
+      ],
       "every": 2
     }
   },
@@ -135,9 +148,9 @@
         },
         "linkedin": {
           "mode": "native",
-          "state": "eligible",
+          "state": "posted",
           "caption": "captions/linkedin/demos--twelve-messages.md",
-          "postedAt": null,
+          "postedAt": "2026-08-29",
           "scheduledFor": "2026-08-27",
           "url": null
         },
@@ -3817,10 +3830,10 @@
       "routes": {
         "substack": {
           "mode": "full",
-          "state": "eligible",
-          "postedAt": null,
+          "state": "posted",
+          "postedAt": "2026-08-29",
           "scheduledFor": "2026-08-24",
-          "url": null
+          "url": "https://signaldispatch.substack.com/publish/posts/detail/213316254/share-center"
         },
         "linkedin": {
           "mode": "teaser",
@@ -3988,10 +4001,10 @@
       "routes": {
         "substack": {
           "mode": "full",
-          "state": "eligible",
-          "postedAt": null,
+          "state": "posted",
+          "postedAt": "2026-08-29",
           "scheduledFor": "2026-08-26",
-          "url": null
+          "url": "https://signaldispatch.substack.com/publish/posts/detail/213316331/share-center"
         },
         "linkedin": {
           "mode": "native",
@@ -6571,10 +6584,10 @@
       "routes": {
         "substack": {
           "mode": "full",
-          "state": "eligible",
-          "postedAt": null,
+          "state": "posted",
+          "postedAt": "2026-08-29",
           "scheduledFor": "2026-08-25",
-          "url": null
+          "url": "https://signaldispatch.substack.com/publish/posts/detail/213316400/share-center"
         },
         "linkedin": {
           "mode": "skip",
