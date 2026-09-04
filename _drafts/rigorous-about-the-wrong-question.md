@@ -16,7 +16,7 @@ Minder is a day planner I have been building for one person, Zoey, who runs a ho
 
 The first question is about process. The other three are about her. Call it a quarter governance and three quarters experience. The word "optimal" is a request for judgment, not an inventory.
 
-The session split the work across five reviewers. One mapped feature directories to the decision records that authorized them. One re-derived the design contract against source. One inventoried reuse and automation. One read the screenshots against the design contract. The fifth was named for the user, and its brief asked for tap counts and request traces. Four mechanical briefs, one proxy. Not one brief was holding the question I had actually asked.
+The session split the work across five reviewers. One mapped feature directories to the decision records that authorized them. One re-derived the design contract against source. One inventoried reuse and automation. One read the screenshots against the design contract. The fifth was named for the user, and its brief asked for tap counts and request traces. Four mechanical briefs, one proxy. Not one brief was holding the question I had asked.
 
 ## Everything in the first report was true
 
@@ -30,17 +30,17 @@ I read it and wrote one sentence back: "this report feels like it just audited t
 
 That sentence sent the session to the captures. It opened them itself, wrote down what it saw, and the frames are in the repository for anyone to check.
 
-Capture 02 is an upcoming gymnastics class. The card leads with a heading, "Destination needed for directions," three lines of policy about why the app wants a map location, and a large filled button to go choose one. Below all of that, in the smallest type on the card, is the child's name. Maya is the weakest element on her own card.
+Capture 02 is an upcoming gymnastics class. The card leads with a heading, "Destination needed for directions." Under it sit three lines of policy about why the app wants a map location, then a large filled button to go choose one. Below all of that, in the smallest type on the card, is the child's name. Maya is the weakest element on her own card.
 
 Capture 04 is a dense day, the state the product exists for. Between the thing happening now and the thing happening next sit two creation buttons, a date strip, a section heading, and a filter control. The next commitment starts at the bottom edge, its start time cut mid-line. The design contract says the screen must answer "what is now, what is next" in five seconds. It does not.
 
-Capture 06 shows a calendar that has silently gone missing. The notice that says so sits below the fold, its action rendered as plain bold text, under a half-screen card whose dominant button is, again, "Choose map place." The app inverts the stakes.
+Capture 06 shows a calendar that has silently gone missing. The notice that says so sits below the fold, its action rendered as plain bold text. Above it is a half-screen card whose dominant button is, again, "Choose map place." The app inverts the stakes.
 
 None of that needed a reviewer. It needed someone holding the question to look.
 
 ## A reviewer looks with its brief, not with your question
 
-The reviewer that read the captures did its job. Its brief said to judge the screens against the design contract, and it did that well. It was not carrying "is this what Zoey needs to see," so it did not report that a child's name had lost to a map prompt.
+The reviewer that read the captures did its job. Its brief said to judge the screens against the design contract, and it did that well. It was not carrying "is this what Zoey needs to see." So it did not report that a child's name had lost to a map prompt.
 
 Delegating a search works. An agent sweeps a hundred files, and the conclusion comes back intact. Delegating the looking does not, because what makes looking worth anything is that the person looking is holding the question. Hand the looking to someone with a narrower question and you get a narrower answer, delivered with full confidence.
 
@@ -62,7 +62,7 @@ The session's handoff ends on a line it wanted me to use:
 
 The counts are right. A recount gives 95,787 lines of Swift, 37,869 of them in test targets. The last clause is not. A signed debug build was installed on Zoey's phone on 2026-08-25, and the TestFlight receipt shows two of three external testers on build 8. The narrower claim survives and is still the point. Her only recorded verdict is the rejection of build 1, and every evidence rung added since then measures what the team could verify without her.
 
-One more thing the session cannot claim. Its second wave changed two things at once. The briefs were reorganized around Zoey's jobs, "get me and a child out the door on time, with the right stuff," and every reviewer was told to look at the captures before reading source. The findings improved. Which change did it is unmeasured.
+One more thing the session cannot claim. Its second wave changed two things at once. The briefs were reorganized around Zoey's jobs, such as "get me and a child out the door on time, with the right stuff." And every reviewer was told to look at the captures before reading source. The findings improved. Which change did it is unmeasured.
 
 ## Two rules, not six
 
@@ -70,8 +70,8 @@ The handoff proposed six rules. They are two.
 
 The first goes into my working rules next to the anti-circularity clause I already had. That clause said a verdict formed from another agent's summary is not a verdict until you pull a source yourself. The session honored it for every textual claim and lost the point: it pulled sources and delegated the looking. The new sentence says that when the claim is about what a person sees, the source-pull is opening the frame yourself.
 
-The second goes into the dispatch checklist. Before briefs go out, decompose the ask by kind, enumerate the repository's user jobs separately from its decision records, and compare the brief mix with the ask. Four mechanical briefs against an ask that is three-quarters about the user is visible in thirty seconds, and once the briefs go out it stops being cheap to fix.
+The second goes into the dispatch checklist. Before briefs go out, decompose the ask by kind. Enumerate the repository's user jobs separately from its decision records. Then compare the brief mix with the ask. Four mechanical briefs against an ask that is three-quarters about the user is visible in thirty seconds. Once the briefs go out, it stops being cheap to fix.
 
 The other four candidates were the same two rules seen from other angles. I declined them.
 
-Capture 04 is still on disk. Gymnastics starts at the bottom edge, mid-line, and the session that wrote the report had not seen it.
+Capture 04 is still on disk. Gymnastics starts at the bottom edge, mid-line.
