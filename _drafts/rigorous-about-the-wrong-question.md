@@ -44,7 +44,7 @@ The reviewer that read the captures did its job. Its brief said to judge the scr
 
 Delegating a search works. An agent sweeps a hundred files, and the conclusion comes back intact. Delegating the looking does not, because what makes looking worth anything is that the person looking is holding the question. Hand the looking to someone with a narrower question and you get a narrower answer, delivered with full confidence.
 
-There is a second cause underneath. Minder's repository publishes seventeen decision records, a traceability matrix, an evidence ladder, a definition of done, and a log of methodology amendments. That surface is enormously greppable, and grep rewards governance questions. The functional map was equally present: the requirements document names forty-three user jobs, FP-0 through FP-42, each with a status. One of them is "get out the door on time with the right things packed," which is the gymnastics card. The session found that list after the correction, not before. The briefs took the shape of what the repository made easy to find.
+There is a second cause underneath. Minder's repository publishes seventeen decision records, a traceability matrix, an evidence ladder, a definition of done, and a log of methodology amendments. That surface is enormously greppable, and grep rewards governance questions. The functional map was equally present: the requirements document names forty-three user jobs, FP-0 through FP-42, each with a status. Two of them, FP-3 "Open the destination" and FP-4 "Set a leave reminder," are the gymnastics card. The session found that list after the correction, not before. The briefs took the shape of what the repository made easy to find.
 
 ## The repository had already made the same mistake
 
@@ -60,7 +60,7 @@ The session's handoff ends on a line it wanted me to use:
 
 > Minder's team wrote 96,000 lines of Swift, 37,900 of them tests, built an evidence ladder stricter than most professional teams keep — and never put the product in front of the one person it was built for.
 
-The counts are right. I re-ran them: 95,787 lines of Swift, 37,869 in test targets. The last clause is not. A signed debug build was installed on Zoey's phone on 2026-08-25, and the TestFlight receipt shows two of three external testers on build 8. The narrower claim survives and is still the point. Her only recorded verdict is the rejection of build 1, and every evidence rung added since then measures what the team could verify without her.
+The counts are right. A recount gives 95,787 lines of Swift, 37,869 of them in test targets. The last clause is not. A signed debug build was installed on Zoey's phone on 2026-08-25, and the TestFlight receipt shows two of three external testers on build 8. The narrower claim survives and is still the point. Her only recorded verdict is the rejection of build 1, and every evidence rung added since then measures what the team could verify without her.
 
 One more thing the session cannot claim. Its second wave changed two things at once. The briefs were reorganized around Zoey's jobs, "get me and a child out the door on time, with the right stuff," and every reviewer was told to look at the captures before reading source. The findings improved. Which change did it is unmeasured.
 
