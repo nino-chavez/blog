@@ -2,77 +2,80 @@
 title: "Rigorous About the Wrong Question"
 slug: "rigorous-about-the-wrong-question"
 publishedAt: "2026-09-03T18:00:00.000Z"
+updatedAt: "2026-09-04T13:00:00.000Z"
 author: "Nino Chavez"
 status: "published"
-excerpt: "Five reviewers audited the app and none opened a screenshot of it. The report was careful, and it answered a question nobody asked."
+excerpt: "I asked an AI agent to audit my app for the person it was built for. It sent five sub-agents to check documents and none of them looked at the screen."
 category: "AI & Automation"
 tags: ["agentic-systems", "ai-governance", "ai-development"]
-takeaway: "Open the rendered screen yourself before briefing reviewers, and count the briefs against the ask before dispatch."
+takeaway: "Before AI reviewers judge a screen, look at the screen yourself, then check that their instructions ask your question and not an easier one."
 seo:
   metaTitle: "Rigorous About the Wrong Question"
-  metaDescription: "A five-reviewer product audit answered the governance question thoroughly and missed the user question entirely."
+  metaDescription: "An AI audit checked every document and never opened a screenshot. Two plain rules for reviewing work you delegate to agents."
 ---
 
-Five reviewers audited my app and none of them opened a screenshot of it. Eleven were in the repository, taken on a real phone. The report they produced was careful, every claim tagged with its evidence class, and it answered a question I had not asked.
+I asked an AI agent to audit my app. The agent split the job across five AI sub-agents. Each sub-agent got a written instruction sheet, which I will call its brief. Eleven screenshots of the app, taken on a real iPhone, were sitting in the code repository the whole time. None of the five briefs said "look at them and judge what you see." The report that came back was careful and well sourced, and it answered a question I had not asked.
 
-The rule that came out of it is short. If the question is about what a person sees, whoever forms the verdict looks first, before sending anyone else to look. And before reviewers are briefed, the briefs get counted against the ask. Four briefs about process against a question that was three-quarters about the user is visible in thirty seconds. After dispatch it costs a correction.
+Two rules came out of this.
 
-## Three of the four questions were about her
+First, when the question is about what a person sees on a screen, look at the screen yourself before you send anyone else to look. A reviewer only sees what its brief asks about.
 
-Minder is a day planner I have been building for one person. Zoey runs a household calendar she does not own and cannot edit. My message asking for the audit put four questions together. How far has the app drifted from its mission? Is every interaction right for what a user like Zoey needs to do, see, and know? What does she do often, and is that quick? What is repeatable, automatable, saved and reusable?
+Second, before the briefs go out, read them against your original question. If you asked mostly about the user and the briefs are mostly about documents, you can see the mismatch in thirty seconds. After the briefs go out, it takes a correction to find it.
 
-The first is a process question. The other three are about her. The word "right" is asking for a judgment, not an inventory.
+## What I asked, and what the reviewers were told
 
-The session dispatched five reviewers. One mapped feature directories to the decision records that authorized them. One re-derived the design contract against source. One inventoried reuse and automation. One read the screenshots against the design contract. The fifth was named for the user, and its brief asked for tap counts and request traces. None of the five was holding my question.
+Minder is a day planner I have been building for one person. Zoey manages a household calendar she does not own and cannot edit. Her day is the thing the app is supposed to make easier.
 
-## The report was right and beside the point
+I asked the agent four questions. How far has the app drifted from its mission? Is every interaction right for what Zoey needs to do, see, and know? What does she do often, and is that quick? What is repeatable, automatable, saved and reusable?
 
-Every finding survived. The only recorded verdict from Zoey is a rejection, from the first build, on 2026-08-23. Build 12 reports zero installs. One decision record, still marked Proposed, says not to enable a feature in production and declines to name a number for it. Twenty-seven hours later a commit named the number and turned it on. Five feature flags are enabled in the release build while three documents say all of them default off. Several of those block a release.
+One of those is about process. Three are about her. The word "right" asks for a judgment. It does not ask for an inventory.
+
+The agent wrote five briefs. One sub-agent mapped code folders to the decision records that authorized them. A decision record is a short document that says what was decided and why. One sub-agent compared the design rules against the code. One listed which features could be reused or automated. One read the screenshots, but only to check them against the design rules. The fifth was named "user fit," and its brief asked for tap counts. Not one brief asked whether the screen was right for Zoey.
+
+## The report was accurate
+
+Every finding held up on a second check. The only recorded verdict from Zoey was a rejection of the first build, on 2026-08-23. The newest build had zero installs. One decision record said not to turn on a feature in production and declined to set a timing value for it. A code change the next day set the value and turned the feature on. Five feature switches were on in the release build while three documents said they were all off.
+
+Those are real problems. Several of them block a release. They are also all about process.
 
 I read the report and sent back one sentence: "this report feels like it just audited the mechanical parts and none of the application functional parts for a user."
 
-That sentence sent the session to the captures. It opened them itself and wrote down what it saw. The frames are in the repository, and anyone can check the reading.
+## What the screenshot showed
 
-Capture 02 is an upcoming gymnastics class. The card opens with a heading, "Destination needed for directions." Under it, three lines of policy about why the app wants a map location, then a large filled button to go choose one. Below all of that, in the smallest type on the card, is the child's name. Maya is the weakest element on her own card.
+That sentence sent the agent to the screenshots. It opened them itself and wrote down what it saw.
 
-Capture 04 is a dense day, which is the day the product exists for. Between the thing happening now and the thing happening next sit two creation buttons, a date strip, a section heading, and a filter control. The next commitment starts at the bottom edge with its time cut mid-line. The design contract requires "what is now, what is next" inside five seconds.
+One screenshot shows a busy day. That is the day the app exists for. The screen has a card for what is happening now. Below that card sit two buttons for adding things, a strip of dates, a section heading, and a filter control. Only then comes the card for what is happening next. That card starts at the bottom edge of the screen. Its start time is cut off mid-line.
 
-Capture 06 shows a calendar that has silently gone missing. The notice sits below the fold, its action set as plain bold text. Above it is a half-screen card whose dominant button is, again, "Choose map place."
+The app's own design rule says the screen must answer "what is now, what is next" within five seconds. On the day that matters most, it does not answer the second half at all.
 
-Ten minutes of that produced more functional defects than five reviewers had. None of it needed a reviewer. It needed someone holding the question to look.
+Another screenshot shows an upcoming gymnastics class. Under the class name and its start time, the card asks for a map location, spends three lines explaining why, and offers a large button to go pick one. The child's name, Maya, comes after all of that, in small grey text.
 
-## A reviewer sees what its brief asks about
+None of that needed a specialist. It needed someone holding my question to look at the picture.
 
-The reviewer that read the captures did its job. Its brief said to judge the screens against the design contract, and it did. It was not carrying "is this what Zoey needs to see." So it had no reason to report that a child's name had lost to a map prompt.
+## Why a reviewer can look and still not see
 
-Delegating a search works. An agent sweeps a hundred files and the conclusion comes back intact. Delegating the looking does not, because looking is only worth something when the one doing it holds the question. Hand it to a narrower question and you get a narrower answer, delivered with full confidence.
+The sub-agent that read the screenshots did its job. Its brief said to check them against the design rules, and it did. Its brief did not say "is this what Zoey needs," so it had no reason to report that a child's name had lost to a map prompt.
 
-The briefs had been shaped by the repository rather than by the ask. Minder publishes seventeen decision records, a traceability matrix, an evidence ladder, a definition of done, and a log of methodology amendments. That surface is easy to grep, and grep rewards process questions. The functional map was there too. The requirements document names forty-three user jobs, FP-0 through FP-42, each with a status. Two of them, FP-3 "Open the destination" and FP-4 "Set a leave reminder," are the gymnastics card. The session found that list after my sentence, not before.
+Delegating a search works. An agent sweeps a hundred files and the answer comes back intact. Delegating the looking does not work the same way. Looking is only worth something when the one doing it holds the question.
 
-## The repository had already made the same mistake
+The briefs came out process-shaped because the repository is process-shaped. Minder has seventeen decision records, a table tracing every requirement to its evidence, and a written definition of done. All of that is easy to search, and searching rewards process questions. The user side was there too. The requirements document names forty-three things Zoey needs to do, numbered FP-0 through FP-42. "Open the destination" and "Set a leave reminder" are two of them, and they are the gymnastics card. The agent found that list after my sentence, not before.
 
-A screen review of the current build states, at line 162, that four captures "show 'Mark done' buttons on read-only calendar events." A decision record dated 2026-09-01 removed completion from imported calendar events, and the code landed the same day, before those captures were taken. Capture 01 is the imported calendar event. It has a "Choose map place" button, a "Details" button, and no completion control. The "Mark done" in capture 04 sits on an item whose provenance line reads "In Minder · My day · editable."
+## The app's own review had the same blind spot
 
-The review agreed with the design document, which still described the pre-fix defect as verified in source. Document and review confirm each other. Neither matches the frame. A reviewer can have a screenshot open and still be reading a stale document.
+Two days earlier, a separate review of the app's screens had reported that four screenshots showed a "Mark done" button on read-only calendar events. A decision record dated 2026-09-01 had already removed that button from calendar events, and the code change landed the same day, before those screenshots were taken. The screenshot of a calendar event shows a map button, a details button, and no "Mark done."
 
-It happened once more while the retrospective was being written, and that time the check ran correctly and still missed. One session corrected another on how many testers had installed build 8. The second session refused to take the claim on trust, pulled a traceability row dated 2026-08-28, and rejected half the correction. The TestFlight receipt from 2026-09-01 is the primary artifact, three days newer, and it supported the correction. Pulling a source is necessary. It is not sufficient. A dated prose row is a claim about a receipt, not the receipt.
+The review was quoting a design document that still described the old defect. The document and the review agreed with each other. Neither matched the picture. A reviewer can have a screenshot open and still be reading a stale document.
 
-## Where the story is weaker than it sounds
+## What I cannot claim
 
-The handoff closes on a line it wanted me to use:
+The agent's closing report offered me a line: the team wrote 96,000 lines of code and never put the product in front of the one person it was built for. The line count is right. The rest is not. A test build went onto Zoey's phone on 2026-08-25, and she has had a later build since. What is true is narrower. Her only recorded verdict is that first rejection, and every check added since then measures what the team could verify without her.
 
-> Minder's team wrote 96,000 lines of Swift, 37,900 of them tests, built an evidence ladder stricter than most professional teams keep — and never put the product in front of the one person it was built for.
+I also cannot say which fix worked. After my correction, the agent changed two things at once. It rewrote the briefs around Zoey's day instead of around the code, and it told every sub-agent to look at the screenshots before reading anything else. The second round found more problems of the same kind. I do not know which change did it.
 
-The counts hold. A recount gives 95,787 lines of Swift, 37,869 of them in test targets. The last clause does not. A signed debug build went onto Zoey's phone on 2026-08-25, and the receipt shows her on build 8. What is true is narrower. Her only recorded verdict is the build-1 rejection, and every evidence rung added since measures what the team could verify without her. Shipping became the loop. A verdict was never the gate.
+## The two rules, in the words I now use
 
-The second weakness is unmeasured. The session's second wave changed two things at once. The briefs were reorganized around Zoey's jobs, and every reviewer was told to look at the captures before reading source. The findings improved. Which change did it, nobody can say from this session.
+When the question is about what someone sees, the person or agent forming the verdict opens the screen first. Reading a summary of what a screen shows is not looking at it.
 
-## What changed
+Before sending briefs to reviewers, sort your question into kinds. Some parts are about process. Some are about what the user sees and does. Then read the briefs and count which kind each one serves. If the counts do not match your question, fix the briefs. That is the only cheap moment.
 
-The handoff proposed six rules. They collapse to two, and both are in my working rules now.
-
-The first extends a rule I already had. A verdict formed from another agent's summary is not a verdict until you pull a source yourself. The session honored that for every textual claim and lost the point, because it pulled sources and delegated the looking. The new sentence says that when the claim is about what a person sees, the source-pull is opening the frame.
-
-The second goes into the dispatch checklist. Decompose the ask by kind. List the repository's user jobs separately from its decision records. Compare the brief mix with the ask before anything goes out.
-
-The other four candidates were these two seen from other angles, and I declined them. The next audit of Minder starts with capture 04.
+The audit was rigorous. It was rigorous about the wrong question, and rigor did not tell anyone.
