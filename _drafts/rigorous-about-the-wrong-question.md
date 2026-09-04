@@ -12,7 +12,7 @@ The fix is one rule and one check. When the question is about what a person sees
 
 ## The ask was three-quarters about the user
 
-Minder is a day planner I have been building for one person, Zoey, who runs a household calendar that is not hers to edit. My message asking for the audit had more typos than I would like. Stripped of them, it asked four things. How far has the app drifted from its mission? Is every interaction optimal for what a user like Zoey needs to do, see, and know? What does she do often, and is that quick? What is repeatable, automatable, saved and reusable?
+Minder is a day planner I have been building for one person, Zoey, who runs a household calendar that is not hers to edit. My message asking for the audit put four questions in one paragraph. How far has the app drifted from its mission? Is every interaction optimal for what a user like Zoey needs to do, see, and know? What does she do often, and is that quick? What is repeatable, automatable, saved and reusable?
 
 The first question is about process. The other three are about her. Call it a quarter governance and three quarters experience. The word "optimal" is a request for judgment, not an inventory.
 
@@ -20,7 +20,7 @@ The session split the work across five reviewers. One mapped feature directories
 
 ## Everything in the first report was true
 
-The report is not the villain here. Its findings all held up, and several block a release.
+The report was not wrong. Its findings all held up, and several block a release.
 
 The only recorded verdict from Zoey is a rejection, from the first build, on 2026-08-23. Twelve builds later, the newest reports zero installs. One decision record, still marked Proposed, says not to enable a feature in production and refuses to name a number for it. Twenty-seven hours later a commit named the number and turned the feature on. Five feature flags are enabled in the release build while three documents say all of them default off. A contrast setting changes about a quarter of one percent of the screen, and a prior review had marked that state accepted.
 
@@ -28,7 +28,7 @@ I read it and wrote one sentence back: "this report feels like it just audited t
 
 ## The session then looked, and found more in ten minutes
 
-After the correction, the session opened the captures itself. The handoff records what it saw, and the frames are in the repository for anyone to check.
+That sentence sent the session to the captures. It opened them itself, wrote down what it saw, and the frames are in the repository for anyone to check.
 
 Capture 02 is an upcoming gymnastics class. The card leads with a heading, "Destination needed for directions," three lines of policy about why the app wants a map location, and a large filled button to go choose one. Below all of that, in the smallest type on the card, is the child's name. Maya is the weakest element on her own card.
 
@@ -42,9 +42,9 @@ None of that needed a reviewer. It needed someone holding the question to look.
 
 The reviewer that read the captures did its job. Its brief said to judge the screens against the design contract, and it did that well. It was not carrying "is this what Zoey needs to see," so it did not report that a child's name had lost to a map prompt.
 
-Delegation works for search. An agent sweeps a hundred files, and the conclusion comes back intact. It fails for perception, because the value of looking is that the looker is holding the ask. Hand the looking to someone with a narrower question and you get a narrower answer, delivered with full confidence.
+Delegating a search works. An agent sweeps a hundred files, and the conclusion comes back intact. Delegating the looking does not, because what makes looking worth anything is that the person looking is holding the question. Hand the looking to someone with a narrower question and you get a narrower answer, delivered with full confidence.
 
-There is a second cause underneath. Minder's repository publishes seventeen decision records, a traceability matrix, an evidence ladder, a definition of done, and a log of methodology amendments. That surface is enormously greppable, and grep rewards governance questions. The functional map was equally present: the requirements document names forty-three user jobs, FP-0 through FP-42, each with a status. The session found it after the correction, not before. The briefs took the shape of what the repository made easy to find.
+There is a second cause underneath. Minder's repository publishes seventeen decision records, a traceability matrix, an evidence ladder, a definition of done, and a log of methodology amendments. That surface is enormously greppable, and grep rewards governance questions. The functional map was equally present: the requirements document names forty-three user jobs, FP-0 through FP-42, each with a status. One of them is "get out the door on time with the right things packed," which is the gymnastics card. The session found that list after the correction, not before. The briefs took the shape of what the repository made easy to find.
 
 ## The repository had already made the same mistake
 
@@ -70,7 +70,7 @@ The handoff proposed six rules. They are two.
 
 The first goes into my working rules next to the anti-circularity clause I already had. That clause said a verdict formed from another agent's summary is not a verdict until you pull a source yourself. The session honored it for every textual claim and lost the point: it pulled sources and delegated the looking. The new sentence says that when the claim is about what a person sees, the source-pull is opening the frame yourself.
 
-The second goes into the dispatch checklist. Before briefs go out, decompose the ask by kind, enumerate the repository's user jobs separately from its decision records, and compare the brief mix with the ask. Four mechanical briefs against a three-quarters-experience ask is visible in thirty seconds, and dispatch is the last moment it is cheap to fix.
+The second goes into the dispatch checklist. Before briefs go out, decompose the ask by kind, enumerate the repository's user jobs separately from its decision records, and compare the brief mix with the ask. Four mechanical briefs against an ask that is three-quarters about the user is visible in thirty seconds, and once the briefs go out it stops being cheap to fix.
 
 The other four candidates were the same two rules seen from other angles. I declined them.
 

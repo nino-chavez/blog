@@ -36,6 +36,13 @@ order. A later layer may not override an earlier one.
    short blocks, and one idea per sentence when the material is difficult.
    “CTE-based writing” is local shorthand for this constraint, not an
    established writing framework and never a license for baby-talk.
+   The diagnosis behind this layer and the defect tests this guide does not
+   state (zombie nouns, professional narcissism, apologizing preambles,
+   hedge-as-tic, given-before-new, example-per-generalization, picturable
+   over parseable) are owned by the reader-clarity skill's
+   `references/classic-style-sources.md`, distilled 2026-09-01 from Pinker,
+   Orwell, and Thomas and Turner. Load it with this guide before drafting;
+   do not copy its rules here.
 5. **Signal Dispatch voice.** Add the composed, evidence-aware, provisional
    register described below without weakening the first four layers.
 6. **Surface mechanics.** Apply the rules for a post, whitepaper, tutorial,
