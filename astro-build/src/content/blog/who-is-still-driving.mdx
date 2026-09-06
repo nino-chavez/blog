@@ -7,68 +7,52 @@ category: "AI & Automation"
 featureImage: "/images/generated/who-is-still-driving.webp"
 tags: ["agentic-systems", "ai-development", "ai-governance"]
 takeaway: "Before trusting an AI tool, check what it handles for you and what you still need to know or do yourself."
-excerpt: "Using AI takes practice. But people should not need to become AI engineers to use a product that promises to do a job for them."
+excerpt: "Using AI takes practice, but a product that needs an expert to catch its mistakes should say so before someone relies on it."
 ---
 
-Using AI well is a skill worth learning. People need practice checking its work and knowing when to step in.
+Knowing how to catch an AI tool's mistakes doesn't tell me whether someone else could use it without that help. In my own work, a useful result can depend on me correcting the agent or changing its setup.
 
-But that doesn't mean everyone needs to become an AI engineer. A tool should do the job it promises. If it still needs the user to catch mistakes, it should make clear what they need to check.
+Using AI well takes practice, but people shouldn't have to become AI engineers to use a product that promises to do a job for them. The builder needs to be clear about what the user still has to do.
 
 ---
 
 ## Checking the work is part of using the tool
 
-I was testing a day-planning app. I wanted to know whether events from Google Calendar would reach the app on my phone. Screenshots of a pretend day couldn't show the whole path.
+I was testing whether events from Google Calendar would reach a day-planning app on my iPhone. Screenshots of a pretend day couldn't show that connection, so I asked an agent to create test events we could import. The appointments were made up, but we put them through Google Calendar and into the app on my phone.
 
-I asked an AI agent whether we could create test events and import them. It made the file. We put those events through Google Calendar and into the app on my iPhone. The appointments were made up, but we were testing the real connection.
+I asked an agent to test a volleyball app from the organizer, captain, player, and spectator screens. It found that the existing tests reused one account for several roles, so they couldn't show whether one captain was blocked from another captain's work.
 
-I also asked an agent to test an app for running volleyball tournaments. It needed to use the screens for organizers, captains, players, and spectators. The existing tests reused one account for several roles. The agent spotted that problem and built a test with separate accounts.
-
-Using one account cannot show whether one captain is blocked from another captain's work. We needed different accounts to check that.
-
-The practice tournament finished, but some steps needed workarounds. It wasn't a clean pass. The report kept the problems visible.
-
-These are skills people can practice. Give someone an unfinished task. See whether they can spot what's missing and find a way to check it. That tells us more than whether they can write a good request.
+The agent built a test with separate accounts, and the practice tournament finished with workarounds for failed steps. The report kept those failures visible rather than treating completion as a clean pass.
 
 ---
 
 ## Using a tool and building it are different jobs
 
-I keep coming back to driving. A driver needs to read the road and know when to stop. They don't need to design the car. A passenger can expect to get somewhere without learning either job.
+Driving is a useful comparison because operating a car and designing one are different jobs. A driver needs to read the road and know when to stop; a passenger can reasonably expect to get somewhere without learning either job.
 
-In my agent work, I do several of those jobs. I direct the agent. I also change its instructions, fix test setups, and add checks that should catch repeated mistakes.
+Much of what I do around agents is closer to working on the car. I change instructions, fix test setups, and add checks intended to catch repeated mistakes. Those are useful engineering skills, but they aren't prerequisites for everyone who wants to use the result.
 
-Comparing that whole setup with an app built for one task misses the point. The app's users may have no reason to learn how to build it.
-
-Codex itself is a product someone else built. I rely on their work to do mine.
+Someone choosing an app for one job may have no reason to learn how to build it. I'm already relying on a packaged product when I use Codex to build something else.
 
 ---
 
 ## A good tool can give people less to learn
 
-I'm helping friends who run a coffee trailer. The work is unpaid. It started with a review of their website and grew into work on a small app for posting stops and handling booking requests.
+I'm helping friends who run a coffee trailer with some unpaid work that started as a website review. It grew into work on a small app for posting stops and handling booking requests. They should be able to tell customers where they'll be without knowing how I instruct the AI, put the app online, or store its data.
 
-They should be able to tell customers where the trailer will be. They shouldn't need to know how I instruct the AI, put the app online, or store its data.
+Simple controls don't settle this for an AI product, either. If the user must still check whether the AI made something up or finished an action, the product has left them with that responsibility.
 
-For an AI product, making the controls simple is only part of the job. If the user still has to check whether the AI made something up or finished an action, that work is still theirs.
-
-In the tournament test, the person running it doesn't have to remember to turn off real emails and payments. The test setup does that. It also refuses to connect to the online app's database, where the app stores its data. We can try the tournament without contacting real participants.
-
-Building those protections requires a different skill from reading the result. Someone running the test still needs to notice the steps that failed.
+In the tournament test, the setup disables real emails and payments and refuses to connect to the online app's database. Whoever runs it can try the tournament without remembering those precautions, though they still have to notice the steps that fail.
 
 ---
 
 ## Some mistakes belong to the tool
 
-I've used the driving comparison before. In [“We Gave Everyone a Ferrari and Blamed the Engine”](https://ninochavez.co/blog/we-gave-everyone-a-ferrari), I called for instructors, roads, and rules.
+In [“We Gave Everyone a Ferrari and Blamed the Engine”](https://ninochavez.co/blog/we-gave-everyone-a-ferrari), I called for instructors, roads, and rules. But treating every failure as a training problem lets the tool off too easily.
 
-But training alone doesn't explain the failures in my own work.
+The agent I asked to [review my day planner](https://ninochavez.co/blog/rigorous-about-the-wrong-question) produced a careful report that answered the wrong question, and I had to point out the mismatch. In the coffee-app work, I also had to identify unfinished pages after earlier checks had reported success.
 
-I asked an agent to [review my day planner](https://ninochavez.co/blog/rigorous-about-the-wrong-question). It produced a careful report that answered the wrong question. I had to point that out. In the coffee-app work, I also had to point out unfinished pages after earlier checks had reported success.
-
-Catching those mistakes took work the tool had left to me. Being able to do that work doesn't prove the tool is ready for someone who can't.
-
-These sessions don't tell me whether an agent built for those tasks would have done better. We didn't run that comparison. They show what this way of working still asked of me.
+These sessions show what this way of working asks of me, not whether an agent built for those tasks would do better. We didn't run that comparison.
 
 ---
 
@@ -80,6 +64,6 @@ Before I rely on an agent, I want to know:
 - What can I do if something goes wrong?
 - How will I know the job is finished?
 
-The answers tell me what I need to learn. They also tell the builder which jobs still fall to the user. A product that needs an expert to catch its mistakes should say so before someone relies on it.
+A product that needs an expert to catch its mistakes should say so before someone relies on it.
 
 I can choose to spend time under the hood of my own systems. My friends should be able to publish a coffee stop and get back to serving coffee.
