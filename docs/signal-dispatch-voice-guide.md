@@ -1,11 +1,16 @@
 # Signal Dispatch: Voice & Tone Guide
 ## Copy Editor and Ghostwriter Touchstone
 
-**Version**: 1.7
-**Last Updated**: 2026-08-08
+**Version**: 1.8
+**Last Updated**: 2026-09-07
 **Source**: Empirical analysis of 156 blog posts, 15 deep-read corpus sample; adversarial audit against the 8 most recent posts (Jun–Jul 2026) plus a held-out generation test, 2026-08-03; v1.4 adds the relocated-claim rule, measured against seven violations in one caption batch, 2026-08-03; v1.5 generalises it to scope preservation in both directions, 2026-08-04; v1.6 adds the reader payoff and reconciles two divergent v1.4s, 2026-08-08; v1.7 separates evidence, reader job, argument, cognitive load, voice, and surface mechanics after a cross-register audit against Slack and email, 2026-08-08
 
 ---
+
+**Revision note (1.8):** reconciles opening and rhythm instructions with their
+existing exceptions and removes retired positive examples. This is a rule
+correction, not a new corpus calibration. General continuity tests remain owned
+by the reader-clarity reference linked below.
 
 ## Purpose
 
@@ -152,7 +157,10 @@ After analyzing the full corpus, the Signal Dispatch voice is characterized by:
 ### Opening Patterns
 
 **The Defect-in-Hand Cold Open** (current dominant — 8 of 8 recent posts, audited 2026-08-03)
-First or second sentence states a concrete thing that broke, was absent, or was wrong — in your own system, with the scale attached. The tension is the failure itself, not an interrogative:
+When a real failure carries the argument, the first or second sentence can name
+what broke, was absent, or was wrong in the author's system. Include scale when
+it helps establish the claim. This is an available opening, not a required event
+or a reason to invent a number:
 
 - ✅ "I rebuilt a database table and it silently deleted two columns I needed. No error."
 - ✅ "There's a file in my project whose only job is to stop me from making one specific mistake. Last week I made that exact mistake. Three times in a row."
@@ -174,7 +182,6 @@ hook earns attention; it may not delay the controlling point beyond the first
 State the thing most people don't say out loud:
 
 - ✅ "I didn't start with a grand strategy. I started with fear."
-- ✅ "Most of my day is spent navigating complex systems. After hours, I switch to capturing emotion through a lens. Two different modes. Same instinct."
 - ✅ "Sometimes I'm not writing for clarity. I'm writing to defend myself against a comment that hasn't been written yet."
 
 ### Structural Patterns
@@ -451,7 +458,10 @@ These phrases were once authentic. Through overuse, they've become tells. The sp
 
 Signal Dispatch has two registers. Pick one before drafting — a drafter who doesn't will reproduce the modal post and miss the tails.
 
-**Composed** (the default — technical and analytical posts): median sentence 8–11 words, prose paragraphs, first-person singular, one idea per paragraph. Everything else in this guide describes this register unless marked.
+**Composed** (the default — technical and analytical posts): prose paragraphs
+developing the author's argument and evidence. The observed sentence-length
+distribution is described below as a diagnostic, not a definition the draft
+must satisfy. Everything else in this guide describes this register unless marked.
 
 **Spoken** (short reflective pieces that began as something said out loud — e.g. "You Can't Engineer Growth"): median sentence ~6 words, single clauses stacked on consecutive lines inside one paragraph, heavy deliberate anaphora, collective "we" when writing about a team or club. The anti-tic warnings in the Freshness Check apply to the composed register only — in the spoken register, repeated sentence openers are the rhythmic engine, not a tic.
 
@@ -752,15 +762,15 @@ owner per rule.
 Before publishing, verify:
 
 ### Voice Authenticity
-- [ ] Opens with tension or question, not thesis
-- [ ] Shows the work, not just the conclusion
+- [ ] Opens with a concrete reason to care or the governing answer; the point lands within 150 words
+- [ ] Shows enough evidence to assess the conclusion; no mandatory counts or narrated investigation
 - [ ] Self-interrogation present when authentic (not forced)
-- [ ] Uses "I" not "you should"
-- [ ] Provisional conclusions (directional, not formulaic—varies by post)
+- [ ] Preserves the source's subject and first-person attribution; avoids universal prescriptions
+- [ ] Limits provisional language to what the evidence leaves unresolved
 
 ### Structural Integrity
-- [ ] Bold section headers for scannability
-- [ ] Mix of long and short sentences
+- [ ] Uses section headers where they help the reader follow the argument
+- [ ] Sentence rhythm serves the relationships between ideas; no length or fragment quota
 - [ ] Blockquotes used when they serve the content (not required)
 - [ ] Parallel structure in lists
 - [ ] Clear transitions between sections
@@ -853,14 +863,6 @@ When evaluating AI drafts:
 ---
 
 ## Revision Examples
-
-### Before (Too Corporate)
-> "Leveraging my extensive background in enterprise architecture, I deliver impactful solutions that drive value for stakeholders through strategic systems thinking."
-
-### After (Signal Dispatch Voice)
-> "I spend most of my day navigating complex systems—aligning business strategy with tech execution, solving problems when the blueprint doesn't fit. Two different modes. Same instinct: find the signal, act with purpose."
-
----
 
 ### Before (Too Academic)
 > "This essay examines the tension between professional evolution and authentic voice maintenance in the context of content creation."
