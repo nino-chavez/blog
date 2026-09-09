@@ -54,6 +54,41 @@
   },
   "items": [
     {
+      "id": "blog/give-your-ai-a-reason-for-every-design-reference",
+      "title": "Give Your AI a Reason for Every Design Reference",
+      "url": "https://ninochavez.co/blog/give-your-ai-a-reason-for-every-design-reference",
+      "publishedAt": "2026-09-09",
+      "collection": "blog",
+      "words": 827,
+      "cluster": "give-your-ai-a-reason-for-every-design-reference",
+      "tier": 2,
+      "routes": {
+        "substack": {
+          "mode": "full",
+          "state": "skip-manual",
+          "postedAt": null,
+          "scheduledFor": null,
+          "url": null
+        },
+        "linkedin": {
+          "mode": "native",
+          "state": "eligible",
+          "caption": "captions/linkedin/blog--give-your-ai-a-reason-for-every-design-reference.md",
+          "postedAt": null,
+          "scheduledFor": "2026-09-09",
+          "url": null,
+          "pinnedFor": "2026-09-09"
+        },
+        "devto": {
+          "mode": "skip",
+          "state": "skip",
+          "postedAt": null,
+          "scheduledFor": null,
+          "url": null
+        }
+      }
+    },
+    {
       "id": "tutorials/diff-your-spec-against-its-system-class",
       "title": "Diff Your Spec Against Its System Class",
       "url": "https://ninochavez.co/blog/tutorials/diff-your-spec-against-its-system-class",

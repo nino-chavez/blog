@@ -22,6 +22,11 @@
   ],
   "picks": [
     {
+      "id": "blog/give-your-ai-a-reason-for-every-design-reference",
+      "reviewed": "full",
+      "why": "Nino explicitly authorized publishing the article and LinkedIn companion on 2026-09-09. Explains how to choose design references and specify what an agent should borrow."
+    },
+    {
       "id": "blog/the-depth-penalty-is-gone",
       "reviewed": "full",
       "why": "49 of 95 programs past their end date reported as live, 21 still taking signups; a consent near-miss nobody asked about; and it prices its own claim — proposals, not invoices"

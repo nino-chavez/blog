@@ -22,6 +22,17 @@
         "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
         "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
       }
+    },
+    "blog/give-your-ai-a-reason-for-every-design-reference": {
+      "reviewedAt": "2026-09-09T19:13:26.724Z",
+      "reviewedBy": "Codex source and voice review, 2026-09-09",
+      "hashes": {
+        "caption": "e8974aa45481a77e63b570cfd42ab140057582b11c0d86252e0c30733631ca02",
+        "source": "9900f7e1678ab584a7d644170fa998cc85b07d376425f2015612aefc22852335",
+        "voiceGuide": "4c7b10893ff29dd0dbb34865d16b553f69149e56f97122a23071ce6ef7c9de55",
+        "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
+        "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
+      }
     }
   }
 }
