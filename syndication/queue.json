@@ -72,11 +72,11 @@
         },
         "linkedin": {
           "mode": "native",
-          "state": "eligible",
+          "state": "posted",
           "caption": "captions/linkedin/blog--give-your-ai-a-reason-for-every-design-reference.md",
-          "postedAt": null,
+          "postedAt": "2026-09-09",
           "scheduledFor": "2026-09-09",
-          "url": null,
+          "url": "https://www.linkedin.com/feed/update/urn:li:activity:7503532820355571712/",
           "pinnedFor": "2026-09-09"
         },
         "devto": {
