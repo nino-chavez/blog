@@ -23,12 +23,56 @@
         "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
       }
     },
-    "blog/give-your-ai-a-reason-for-every-design-reference": {
-      "reviewedAt": "2026-09-09T19:13:26.724Z",
-      "reviewedBy": "Codex source and voice review, 2026-09-09",
+    "whitepapers/the-sum-of-your-gaps": {
+      "reviewedAt": "2026-09-01T14:56:31.209Z",
+      "reviewedBy": "Codex",
       "hashes": {
-        "caption": "e8974aa45481a77e63b570cfd42ab140057582b11c0d86252e0c30733631ca02",
-        "source": "9900f7e1678ab584a7d644170fa998cc85b07d376425f2015612aefc22852335",
+        "caption": "9cf1cb271e6d6be2c88c378eb80e9e424ff54ffd6848eba9ba5f4622c737b232",
+        "source": "0da88c518047f862bbb426a10ecb8ea474cfcd6458a8483871b90b1e6c568eeb",
+        "voiceGuide": "e2604cf3e06b1adc3e56ea8a93f1ed027c46002af0796e410a83219f1fc02185",
+        "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
+        "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
+      }
+    },
+    "blog/the-guardrail-removed-the-storefront": {
+      "reviewedAt": "2026-09-03T16:02:11.470Z",
+      "reviewedBy": "Codex",
+      "hashes": {
+        "caption": "7ef57738691007519779ff919116e4c8fbe3597f0a0b182ee27d25629d66d810",
+        "source": "b47dd7e1efea60f42fc859ff2f9d3165b711ee19c7aa7ef1ef2feebefac49227",
+        "voiceGuide": "e2604cf3e06b1adc3e56ea8a93f1ed027c46002af0796e410a83219f1fc02185",
+        "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
+        "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
+      }
+    },
+    "blog/who-is-still-driving": {
+      "reviewedAt": "2026-09-06T22:19:28.313Z",
+      "reviewedBy": "Codex source and voice review; independent cold editorial read by Mendel",
+      "hashes": {
+        "caption": "8d5461ce13dfb3b8820f35de3cd3b71abb2ad500c34dd837b1ce7484464e782f",
+        "source": "1f0f7b6461f702c58cf86202e976a4c7af7b2acd66a1fc8e24080fc418831419",
+        "voiceGuide": "ff7aba030d46c9cf4d7c3e8a2c8dab90356fc25e41c82a13058b0393a18cb499",
+        "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
+        "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
+      }
+    },
+    "demos/browse-tool": {
+      "reviewedAt": "2026-09-08T14:01:20.200Z",
+      "reviewedBy": "Codex",
+      "hashes": {
+        "caption": "fea7adb369f35e6ea33e927aaa9895854818ce65dd4af468a8592a9af4085e40",
+        "source": "bd43fc73d38bb7f495c1eeafa7c094c3541b2dae3be0480a049d1a26b2152ac8",
+        "voiceGuide": "4c7b10893ff29dd0dbb34865d16b553f69149e56f97122a23071ce6ef7c9de55",
+        "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
+        "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
+      }
+    },
+    "blog/the-cut-youll-make-twice": {
+      "reviewedAt": "2026-09-10T18:13:13.526Z",
+      "reviewedBy": "Codex source and voice review, 2026-09-10",
+      "hashes": {
+        "caption": "f8bfbb117dcbe45a05e2520557403b2ab9085f5cabaa18d74f6f5b99d31588f4",
+        "source": "8cb139f5cc6b1cf01f0ce7402001881dbfb21f04803ad1a70bafcca6fefcdff0",
         "voiceGuide": "4c7b10893ff29dd0dbb34865d16b553f69149e56f97122a23071ce6ef7c9de55",
         "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
         "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"

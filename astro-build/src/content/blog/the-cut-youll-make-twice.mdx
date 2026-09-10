@@ -2,200 +2,111 @@
 title: "The Cut You'll Make Twice"
 slug: "the-cut-youll-make-twice"
 publishedAt: "2026-08-06T22:32:46.000Z"
-updatedAt: "2026-08-07T14:09:34.000Z"
+updatedAt: "2026-09-10T15:00:00.000Z"
 author: "Nino Chavez"
 status: "published"
-excerpt: "A guardrail that fires tells you it fired. A constraint built into the shape of what you hand a model tells you nothing, ever — including when you put it in the wrong place. I went looking for the line that would have logged it. There isn't one."
+excerpt: "A written rule is not a control until the system has a place to enforce it and a failure record that proves what happened."
 featureImage: "/images/generated/the-cut-youll-make-twice.webp"
 tags: ["agentic-systems", "ai-development", "architecture"]
 category: "AI & Automation"
 seo:
   metaTitle: "The Cut You'll Make Twice"
-  metaDescription: "Three ways to constrain a coding agent: a rule it can decline, a valve that trips and announces itself, and a surface with nowhere to put the bad instruction. Only one of them is silent when it's wrong."
+  metaDescription: "A written rule is not a control until the system has a place to enforce it and a failure record that proves what happened."
 ---
 
-There is a file in this blog's repo called `tags.ts`. Eight lines in, it says this:
+The rule was written down. The build still accepted the mistake it was meant to prevent.
 
-> IMPORTANT: Do not add new tags without updating this file.
-> Build validation will reject posts with unapproved tags.
+There is a file in this blog's repo called `tags.ts`. It tells every agent writing a post not to add a tag without updating the approved list. It also says build validation will reject unapproved tags.
 
-I wrote that. It's addressed to an agent, and every agent that writes a post here reads it.
-
-The schema that would do the rejecting is one line in a different file:
+The schema that would do that rejecting is one line in another file:
 
 ```ts
 tags: z.array(z.string()).optional(),
 ```
 
-Any array of any strings. It appears eight times, once per content collection. There is no validation anywhere that compares a post's tags against the approved list.
+That accepts any array of any strings. No validation compares a post's tags with the approved list.
 
-So I counted. Two hundred seventy-seven files carry tags. The approved list has eighteen entries. Forty-nine distinct tags are actually in use — thirty-two of them off-list, across sixty-four uses.
+So I counted. Two hundred seventy-seven files carry tags. The approved list has eighteen entries. Forty-nine distinct tags are actually in use — thirty-two of them off-list, across sixty-four uses. The build has been green the entire time.
 
-The worst one is instructive. `ai-development` declares a `replaces` array, a list of the sloppy tags it exists to absorb. `'AI'` is in that list by name. `AI` appears as a live tag on four posts.
+The rule did not fail noisily. It did not fail at all. It was a request written in the place where enforcement was supposed to be.
 
-The file names the exact mistake. The mistake is in the repo four times. The build has been green the entire time.
+## A warning is not a control
 
-## A Rule in a File Is a Request
+This is the easy mistake to make with coding agents. We put the desired behavior in `AGENTS.md`, `CLAUDE.md`, a system prompt, or a paragraph pasted into a session. The agent reads it and often follows it. That is useful. It is not the same as a control.
 
-That file is a warning label. It works by being read and agreed with.
+A control needs three things:
 
-Most of what any of us gives a coding agent is a warning label. `CLAUDE.md`, `AGENTS.md`, `.cursorrules`, the system prompt, the paragraph you paste at the top of a session. All of it is text the model reads and mostly honors. Mostly is the operative word, and mostly is worse than it sounds. When a rule gets skipped and the work still looks fine, what tells you? The green build told me my tags were clean for two hundred seventy-seven files.
+- a defined action it can allow or stop;
+- a place in the system where it can act;
+- a record that shows what happened when the condition was met.
 
-There are two other things you can build instead, and I had them filed under one name.
+The tag file had none of those. It named the desired state, but the schema accepted the undesired state, the build never checked it, and no failure could point to the missing comparison.
 
-## I Defined the Jig by Half
+That gives a simple audit question: if this rule is broken, what exact line is supposed to stop the work, and what evidence will I see?
 
-In March I reached for carpentry and defined the one I keep coming back to:
+If the answer is “the agent was told not to,” the rule may still be worth keeping. It is a warning label, not enforcement.
 
-> A master carpenter doesn't build every piece from scratch. They build *jigs*—custom tools that hold material at the right angle, guide a cut along a precise line, make a repeatable operation fast and accurate. The jig isn't the product. It's the thing that accelerates the real work of making the product.
+## The missing address
 
-Read the clauses. *Accelerates. Fast and accurate. Repeatable.* Every one is about speed.
+The same distinction appeared in a storefront where a model composes page layouts.
 
-Everything after that sentence was about proliferation — agents make jigs cheap, cheap jigs breed, you end up curating a drawer of one-off fixtures instead of doing the work. I still think that's right. Eleven weeks later I described asking an agent to extract a whole methodology into a reusable template, and called that a jig too. Same definition. Same direction.
+A catalog declares every named place where the model may write: twenty-eight zones across ten surfaces. The cart has three zones. Line items, order totals, promo entry, and the checkout button are not among them.
 
-A jig has two jobs. That definition covers one of them.
+No policy says the model may not change the cart total. Nobody had to write that sentence. The model receives a schema of writable places, and no address in that schema reaches the total.
 
-## Two Directions, and I Only Named One
+That is a different kind of boundary from a hook that interrupts a command. A hook sees an attempted action and can deny it. A missing zone removes the action from the model's available shape. The model cannot write to a place the system never named.
 
-In March, every jig I named was something an agent built for me. A script to reformat data. A workflow to pre-screen inputs. A template to scaffold a document. Agent makes the fixture, human does the work.
+That can be a good design. It can make an unsafe change impossible. But it creates a harder question: how do you know what you forgot to make possible?
 
-The other direction is the one I never defined. I build the fixture. The agent works inside it.
+In the storefront resolver, an unknown zone throws loudly. But when the engine produced content for a zone marked non-composable, the condition was simply false. Execution fell through to a static fallback. The page rendered. The merchant saw a normal page.
 
-Both kinds have been in my repos the whole time. Only one ever got a word. That's the tell — I had a name for the fixtures that save me time, and none for the fixtures that take away the agent's options.
+The resolver was loud about the harmless failure and silent about the meaningful one. The retrieval log recorded the things that succeeded. It had no field for a discarded write, its reason, or the surface the model had tried to reach.
 
-## The Catalog That Makes a Cut Impossible
+The missing address left no event behind.
 
-Before writing this I went and counted the second kind rather than trusting my memory of it.
+## Make the boundary inspectable
 
-It's a retail storefront where a model composes the page layout. A catalog file declares every named place that model may write. Twenty-eight zones across ten surfaces — home, product listing, product detail, cart, checkout, search, account, store locator, and two error states. Each entry carries two booleans: whether the composition engine may target it, and whether a merchant may author there by hand.
+The answer is not to turn every structural boundary into a noisy error. A model should not crash because a cart total is intentionally outside its composition surface.
 
-Twenty-seven are open to the engine. Twenty-seven are open to the merchant. They are not the same twenty-seven.
+The answer is to give the boundary an observable outcome.
 
-One zone under a product grid is open to the merchant and closed to the engine. One zone on the product page is open to the engine and closed to the merchant. Two booleans, two exceptions, and the reason each exception exists is that a person sat down and decided this one thing the model shouldn't touch, and this other thing the merchant shouldn't. The entire governance model for the surface is two flags in a config file that disagree exactly twice.
+For the storefront, that could be a discard record containing the surface, attempted zone, reason, and fallback. For the tag list, it could be an enum derived from the approved keys, with the build failing on the first off-list value.
 
-The cart has three zones. One above the checkout button. One below the fold, capped at two items. One empty state.
+The two systems need different behavior, but the same proof:
 
-Line items, order totals, promo entry, the checkout button itself — none of them are zones. There is no address for them.
-
-That catalog accelerates nothing. Composing a page through it is slower than letting the model emit whatever markup it wants. What it does is remove a cut.
-
-No policy in that system says the model may not change the cart total. Nobody wrote that sentence, and nobody has to. The model receives a schema of the places it may put things, and no address in that schema reaches the total. It isn't forbidden. There's nowhere to put the instruction.
-
-## A Hook Is Not a Jig
-
-Here is where my own filing was wrong, and it took someone else pointing at the paragraph to see it.
-
-I have two hooks on this laptop that I'd been calling jigs. One enforces a rule that parallel agent sessions work in separate git worktrees, because sessions sharing one checkout switch each other's branches underneath each other. It's a `PreToolUse` hook matched against `Bash`, `Write`, `Edit`, and `MultiEdit`. It reads a lock directory, checks whether another live session holds the repo, and returns `permissionDecision: "deny"` with a paste-ready command for making the worktree instead.
-
-The second guards reads. Images over 1400 pixels on the long edge get denied — it downscales a copy to 1000px, caches it, hands back the new path. Re-reading a file you already read inside a ten-minute window gets denied too, with a note to cite from context.
-
-Those aren't jigs. They're safety valves.
-
-A jig is shape. Nothing about the zone catalog detects a violation, because a violation has no representation — there is no cart-total address to attempt. A valve is the opposite: it senses a condition and interrupts. It needs the bad thing to be attemptable in order to catch it.
-
-The tell is a feature I'd written off as a footnote. Both hooks let the immediate retry through. In the read guard that's an explicit latch — deny once, set `pending_retry: True`, and clear it on the next call so the same read succeeds. Its own docstring says "fail-open by design" and calls itself "friction for the reflexive re-read, not a wall." There's an off switch: `touch ~/.claude/cache/read-guard/.guard-off`.
-
-Every one of those is valve behavior. A fixture has no reset, no fail-open, and no off switch, because there is nothing to switch off. You cannot retry your way past a shape.
-
-So there are three things, not two, and the ladder is: a rule the agent can decline, a valve that stops it and can be reset, and a surface with nowhere to put the bad instruction.
-
-The valves are the cheap ones. Five hundred fifty lines of Python for the worktree hook, 293 for the read guard, a few lines of JSON in `settings.json`. Anyone running a coding agent can add one this afternoon. Sort your own instructions file into the three columns sometime — mine has two valves, one jig at client scale, and everything else is labels.
-
-## A Working Jig Erases Its Own Evidence
-
-Here's what took me longest to see, and it's the reason the third column is harder than it looks.
-
-A valve announces itself. Every time one of my hooks trips, a denial message goes to the agent in-band, with a reason. The trip *is* the record. If I put the threshold in the wrong place — say 1400 pixels was too aggressive — I find out, because I watch the agent get stopped from doing something reasonable.
-
-A jig produces nothing. That's the point of it, and it's also the problem.
-
-Go back to the storefront resolver. It's 116 lines. When it's handed a zone ID that doesn't exist in the catalog, it throws:
-
-```ts
-throw new Error(`resolveZone: unknown zone instance "${opts.zoneId}"`);
+```text
+rule -> enforcement point -> observable result
 ```
 
-Loud, immediate, unmissable. Now here's the line that enforces the actual constraint, twelve lines further down:
+Without the middle term, the rule is advice. Without the last term, the control can fail silently. A clean page and a green build do not prove that the boundary worked. They only prove that the system found a path to an output.
 
-```ts
-if (engineRaw !== undefined && meta.engineComposable) {
-```
+## The control I left on paper
 
-If the engine produced content for a zone it isn't allowed to write, that condition is false. Execution falls to the next block, then to the static fallback. The page renders. Nothing throws, nothing warns, and the merchant sees a completely normal page with default content in it.
+There is a second version of this mistake in my own workflow.
 
-So the resolver is loud about the harmless failure and silent about the real one.
+The operator card I load into sessions points to a script that checks short-form captions against the longer posts they came from. The check exists because a summary can quietly change who made a claim or turn a hypothesis into a fact.
 
-I went looking for where the silent case gets recorded. There's a retrieval log next to it, and its entry type has fields for surface, seed entities, session, brand, and the products that got placed in each zone. Every field describes something that succeeded. There is no field for a discarded write, no source, no reason.
+But the script lives on a branch. The `syndication/` directory on the main branch has no copy of it. The instruction says a mechanical check exists, while the publication path does not run it.
 
-Then I grepped for `engineComposable` across the entire codebase. It appears in three places: the catalog that declares it, a test file, and line 71 of the resolver. The one line that enforces the constraint is the same line that swallows the evidence, and nothing else in the system ever reads the flag.
+That is the same failure as `tags.ts`, one level up. The first case had a rule without a mechanism. This one had a mechanism without an installed path. Both looked like enforcement from inside the instructions file.
 
-That's the second grade of invisibility. The third is worse, and it's the one that should actually worry me: a zone I never declared at all. The engine can't attempt it, so there's no branch to instrument, no discard to log, no line to grep for. The model simply never composes the thing I forgot to make a place for.
+An uninstalled control is indistinguishable from an installed one until the day it should have stopped something.
 
-How would I ever see that page? Not from an error, not from the log, not from the diff. The output that should have existed and doesn't leaves no trace anywhere in the system that excluded it.
+## The cut you make twice
 
-That's the asymmetry that makes jigs genuinely hard rather than just underrated. A fence in the wrong place and a fence in the right place produce identical telemetry: clean.
+The useful lesson is smaller than “build more guardrails.”
 
-The fix isn't cleverer geometry. It's putting a valve next to the jig — one `else` branch at line 71 that records the discard, so the thing the fixture ate leaves a mark on the way down. The catalog stays geometry. The valve makes it observable. That's four lines, and it isn't written.
+When a task is likely to recur, make the boundary real before the second attempt. Put the allowed action in a schema, hook, validator, or other enforcement point. Then decide what the system should record when it refuses, falls back, or has no place to act.
 
-## Build the Jig When You'll Make the Cut Twice
+For a one-off task, a warning may be enough. Measure twice. Read the output. Keep a human in the loop.
 
-The old post buried the rule in a warning box. You built a jig only when the task was worth the setup. Agents dropping the cost of building one to near zero is what killed that discipline.
+For the second attempt, the question changes:
 
-The rule survives intact. Nobody builds a jig for one cut. For one cut you clamp carefully, measure twice, go slow.
+- What exactly am I trying to prevent?
+- Where can the system enforce that boundary?
+- What should remain possible?
+- What record will show me that the boundary worked?
 
-The one I lean on hardest is ten shell commands that drive a real Chrome profile. Navigate, evaluate JavaScript in the page, screenshot, scrape to markdown, crawl, manage tabs. That's it. [The whole thing is public.](https://github.com/nino-chavez/browse-tool)
+If you cannot answer the last question, you have not finished building the control. You have written the label and started trusting the green result.
 
-I didn't build it for a project, and that's the part that matters. It's installed permanently, on `PATH` in every shell. Because it's already there, I start every integration reaching for a real interface — a CLI, an API — and driving a human interface stays the fallback it should be. That ordering only works if the fallback exists before I need it. Built per project, it doesn't. It's a detour I don't have time for at the moment I hit a system with no API, so I either skip the work or design the whole thing around mimicry from the start.
-
-Which raises the obvious question: why not use the MCP servers that already do this?
-
-My own config says to prefer the shell commands because of the token footprint. It doesn't say by how much, and the README for my own tool claims thirteen to eighteen thousand tokens with no method attached. So I measured: started each server over stdio, completed the handshake, called `tools/list`, and ran the result through a real tokenizer instead of dividing by four.
-
-| Server | Tools | Bytes of tool schema | Tokens |
-|---|---|---|---|
-| chrome-devtools-mcp | 29 | 23,244 | 4,968 |
-| @playwright/mcp | 24 | 18,502 | 3,928 |
-
-My own README is off by roughly three and a half times, in the direction that flatters my tool. It reads like a measurement and it was an assumption about characters per token — the real ratio here is 4.7, and somebody, probably me, used something near 1.3.
-
-So the honest number is smaller than I'd been telling people, and the size isn't the argument anyway. The argument is *when you pay*.
-
-Those bytes load at connection, in every session where the server is configured, whether or not the agent ever opens a page. The shell commands cost one sentence in my instructions file — a pointer to a README. Sessions that browse spend about 4,000 tokens reading it. Sessions that don't spend nothing.
-
-I have 3,711 session transcripts on this machine. Two hundred fifty of them made a real `browse-*` call. Sixty-eight made a real call to one of those MCP servers. Whatever the right denominator is, the shape is the same: a browser is a thing I need occasionally and pay for constantly.
-
-There's a second cost that doesn't show up in bytes. The agent already knows how to write JavaScript and read a DOM. A command that hands it a page and gets out of the way lets it use what it arrived with. A bespoke tool schema wrapping the same operations makes it learn a private vocabulary first, and that vocabulary is a fixture somebody else built for a cut I may not be making.
-
-None of which means don't use them. If you'll genuinely make the cut once, buy the assembled thing. That isn't a compromise; that's the rule working.
-
-## The Valve I Left on a Branch
-
-Here's the part that undercuts everything above.
-
-The operator card I load into every session cites one of my own scripts as a reference implementation — a mechanical check that verifies a short-form caption against the long-form post it was derived from, so a claim can't quietly change owners between the source and the summary. I wrote it because I'd watched exactly that failure happen and decided a rule wasn't enough.
-
-It lives on a branch called `caption-edits-0803`. Five commits of gate work, none of them on `main`. The `syndication/` directory on `main` has no gate script in it at all.
-
-So the file that tells agents "this rule is enforced mechanically, here's the implementation" points at a check that has never run against anything I've published.
-
-That's the same failure as `tags.ts`, one level up. The first wrote a rule and never built the mechanism. This one built the mechanism and never installed it. Both read as enforcement from inside the instructions file, and both are labels.
-
-An uninstalled valve is indistinguishable from an installed one until the day it should have tripped. Which is the same silence as before, arriving by a different route.
-
-## Nothing Here Demos
-
-I ran through a vendor capability questionnaire last week. It has a row for no-code agent builders, and two words after the row: *if available*. The next row down asks how you use AI to speed up your own development — writing code, configuring, testing, deploying.
-
-Two rows, opposite bets. One expects a finished product a buyer can score. The other only makes sense if the surface underneath is clean enough that a general-purpose agent can work it without a human translating.
-
-The form isn't badly designed. A rubric compares things that come out the same in every hand, and turnkey is the only category that does. A valve at least demos — you can trip it on a stage and watch it stop something. But there's no cell for *we made a class of mistake structurally impossible in this surface*, because that isn't a feature. It's an absence, and the better it works the less there is to see.
-
-## What I Still Don't Have
-
-I don't have an instrument for the third column. Nothing in that storefront can tell me what the engine tried to compose and wasn't allowed to, and nothing at all can tell me about the zone I never declared. That's the gap that matters, and it's four lines of `else` branch away from being half-closed.
-
-I also don't have a validator on the tag list. Read the canonical keys, refine the Zod schema from `z.string()` to an enum built from them, let the build fail. Small the entire time the file has been claiming it already exists.
-
-The drawer of snowflakes I warned about in March is still real. But that one's the cheerful failure — you trip over the clutter and clean it up. The other kind doesn't accumulate anywhere you can trip over it.
-
-The fallback rendered. The page looked right. Nothing asked what was missing.
+The tag validator is still missing. The storefront still has no record of the content it silently discarded. The post's point is not that either system is unsafe by definition. It is that a boundary you cannot observe is a boundary you can accidentally put in the wrong place.

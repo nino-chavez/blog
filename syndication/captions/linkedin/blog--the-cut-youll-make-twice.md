@@ -1,24 +1,20 @@
-There is a file in this blog's repo that tells every agent writing a post: do not add new tags without updating this file, because build validation will reject unapproved tags.
+The rule was written down. The build still accepted the mistake it was meant to prevent.
 
-The schema that would do the rejecting accepts any array of any strings. No validation anywhere compares a post's tags against the approved list.
+Two hundred seventy-seven files carry tags. The approved list has eighteen entries. Forty-nine distinct tags are actually in use, thirty-two of them off-list, across sixty-four uses. The build has been green the entire time.
 
-So I counted. Two hundred seventy-seven files carry tags. The approved list has eighteen entries. Forty-nine distinct tags are actually in use, thirty-two of them off-list, across sixty-four uses. One approved tag even declares a list of the sloppy tags it exists to absorb, names `AI` in that list by name, and `AI` is live on four posts.
+That is a useful distinction when an agent is changing a system: a warning is not a control. An instruction can be read, misunderstood, or skipped while the result still looks normal. A control has a real place to act, and a failure that tells you it acted.
 
-The file names the exact mistake. The mistake is in the repo four times. The build has been green the entire time.
+The same gap appeared in a model-driven storefront. The catalog named twenty-eight places where the model could write across ten surfaces. The cart had three. Line items, order totals, promo entry, and the checkout button were not among them. There was no rule saying the model could not change the cart total. There was simply nowhere to put that rule.
 
-That file is a warning label, and most of what any of us gives a coding agent is a warning label — the instructions file, the rules file, the paragraph pasted at the top of a session. Text that gets read and mostly honored. Mostly is worse than it sounds, because when a rule gets skipped and the work still looks fine, nothing tells you.
+The dangerous failure was quiet. A resolver rejected an unknown zone loudly. The condition enforcing the real constraint was false, so execution fell through to the static fallback. The page rendered. A merchant saw a normal page.
 
-There are three things here, not two. A rule the agent can decline. A valve that stops it and can be reset. And a surface with nowhere to put the bad instruction.
+That gives me a practical test for agent guardrails:
 
-The third is the one I never had a word for. In a retail storefront where a model composes the page layout, a catalog declares every named place that model may write — twenty-eight zones across ten surfaces. The cart has three. Line items, order totals, promo entry, the checkout button itself: none of them are zones. No policy says the model may not change the cart total. Nobody wrote that sentence and nobody has to. There is nowhere to put the instruction.
+What action does this rule control? Where does it act? What record proves it stopped or allowed the action? What happens when the governed surface is missing?
 
-Here is the part that took longest to see. A valve announces itself. The trip is the record, so when I set a threshold in the wrong place I find out, because I watch the agent get stopped from doing something reasonable. A jig produces nothing. That is the point of it, and it is also the problem.
+If the answer is “the agent was told not to,” you have a warning label. You may still need it, but it is not enforcement.
 
-The resolver throws loudly on a zone ID that doesn't exist. The line enforcing the actual constraint sits twelve lines further down, and when the engine writes somewhere it isn't allowed, that condition is simply false. Execution falls through to the static fallback. The page renders. Nothing throws, and a merchant sees a completely normal page.
-
-Loud about the harmless failure, silent about the real one. A fence in the wrong place and a fence in the right place produce identical telemetry: clean.
-
-The full piece, including the measurement where my own README came out off by roughly three and a half times, in the direction that flattered my own tool:
+The full piece, including the measurement where my own README came out roughly three and a half times too favorable to my own tool:
 
 --- first-comment ---
 https://ninochavez.co/blog/the-cut-youll-make-twice
