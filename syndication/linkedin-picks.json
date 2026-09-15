@@ -22,6 +22,16 @@
   ],
   "picks": [
     {
+      "id": "blog/the-connector-you-cant-oauth",
+      "reviewed": "full",
+      "why": "Explicitly selected by Nino for LinkedIn on 2026-09-15; available-vs-native on the phone, with a Siri Messages test as evidence that a life-OS pitch competes with the OS graph, not with other startups."
+    },
+    {
+      "id": "blog/who-is-still-driving",
+      "reviewed": "full",
+      "why": "Explicitly selected by Nino for LinkedIn on 2026-09-06; distinguishes learning to use AI from the engineering and error-checking a product still leaves to its user."
+    },
+    {
       "id": "blog/give-your-ai-a-reason-for-every-design-reference",
       "reviewed": "full",
       "why": "Nino explicitly authorized publishing the article and LinkedIn companion on 2026-09-09. Explains how to choose design references and specify what an agent should borrow."

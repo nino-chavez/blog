@@ -77,6 +77,17 @@
         "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
         "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
       }
+    },
+    "blog/the-connector-you-cant-oauth": {
+      "reviewedAt": "2026-09-15T23:22:43.957Z",
+      "reviewedBy": "Cursor session: compared caption to source, voice guide, reader-contract, and nobody-owns reference caption",
+      "hashes": {
+        "caption": "cd4555941457bc2eb10cfaad5959fbc1d68fa7562aaa9be486dc9558e573d797",
+        "source": "36332e23c0af736c05f9b9fdce641009b75a408287f70d84e8fd008eafb8ff3a",
+        "voiceGuide": "4c7b10893ff29dd0dbb34865d16b553f69149e56f97122a23071ce6ef7c9de55",
+        "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
+        "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
+      }
     }
   }
 }
