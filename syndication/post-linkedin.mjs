@@ -174,18 +174,33 @@ for (const item of targets) {
   }
 
   const page = await browser.newPage()
-  // Open the composer by URL. The "Start a post" control has no stable text or
-  // class (LinkedIn ships obfuscated class names), and shareActive=true is the
-  // documented deep link to the same modal.
-  await page.goto('https://www.linkedin.com/feed/?shareActive=true', { waitUntil: 'domcontentloaded' })
+  // Open the feed, then use the visible control. LinkedIn stopped honoring the
+  // old `shareActive=true` deep link while leaving the feed itself unchanged.
+  await page.goto('https://www.linkedin.com/feed/', { waitUntil: 'domcontentloaded' })
   await new Promise((r) => setTimeout(r, 8000))
 
-  // The editor lives inside a shadow root, so document.querySelector never sees
-  // it. `>>>` is puppeteer's deep (shadow-piercing) combinator.
-  const EDITOR_SEL = '>>> div.ql-editor[contenteditable="true"]'
+  let startPost = null
+  for (let i = 0; i < 20 && !startPost; i++) {
+    const buttons = await page.$$('div[role="button"]')
+    for (const button of buttons) {
+      const label = await button.evaluate((el) => (el.innerText || '').trim()).catch(() => '')
+      if (label === 'Start a post') {
+        startPost = button
+        break
+      }
+    }
+    if (!startPost) await new Promise((r) => setTimeout(r, 1000))
+  }
+  if (!startPost) throw new Error('Start a post control not found — is the box still signed in?')
+  await startPost.click()
+  await new Promise((r) => setTimeout(r, 2000))
+
+  // LinkedIn currently uses a normal TipTap textbox. Keep the older Quill
+  // shadow-root selector as a fallback for profile/page variants.
   let editor = null
   for (let i = 0; i < 20 && !editor; i++) {
-    editor = await page.$(EDITOR_SEL).catch(() => null)
+    editor = await page.$('div[contenteditable="true"][role="textbox"]').catch(() => null)
+    if (!editor) editor = await page.$('>>> div.ql-editor[contenteditable="true"]').catch(() => null)
     if (!editor) await new Promise((r) => setTimeout(r, 1000))
   }
   if (!editor) throw new Error('composer editor not found — is the box still signed in?')
