@@ -1,0 +1,20 @@
+[
+  {
+    "name": "desktop",
+    "width": 1280,
+    "scrollWidth": 1280,
+    "height": 6272,
+    "title": " Trying to teach an AI how I edit photos ",
+    "closing": true,
+    "images": []
+  },
+  {
+    "name": "mobile",
+    "width": 390,
+    "scrollWidth": 390,
+    "height": 9974,
+    "title": " Trying to teach an AI how I edit photos ",
+    "closing": true,
+    "images": []
+  }
+]

@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-15",
+ "generatedAt": "2026-09-28",
  "linkedinHistory": "harvested from the activity feed (115 link-shares read)",
  "cadence": {
   "linkedin": {
@@ -31,14 +31,14 @@
  "summary": {
   "linkedin": {
    "posted": 58,
-   "queued": 10,
+   "queued": 11,
    "skipped": 267,
    "firstSlot": "2026-09-17",
    "lastSlot": "2026-10-20"
   },
   "substack": {
    "posted": 291,
-   "queued": 4,
+   "queued": 5,
    "backfill": 30,
    "skipped": 10,
    "firstSlot": "2026-09-16",
@@ -47,12 +47,46 @@
   "devto": {
    "posted": 2,
    "queued": 6,
-   "skipped": 327,
+   "skipped": 328,
    "firstSlot": "2026-09-23",
    "lastSlot": "2026-12-02"
   }
  },
  "items": [
+  {
+   "id": "blog/trying-to-teach-an-ai-how-i-edit-photos",
+   "title": "Trying to teach an AI how I edit photos",
+   "url": "https://ninochavez.co/blog/trying-to-teach-an-ai-how-i-edit-photos",
+   "publishedAt": "2026-09-29",
+   "collection": "blog",
+   "words": 1156,
+   "cluster": "trying-to-teach-an-ai-how-i-edit-photos",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-09-29",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "caption": "captions/linkedin/blog--trying-to-teach-an-ai-how-i-edit-photos.md",
+     "postedAt": null,
+     "scheduledFor": "2026-09-28",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
   {
    "id": "applied/local-vs-frontier",
    "title": "The Home AI Server Question",
@@ -84,7 +118,7 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
+     "reason": "no markdown body \u2014 rendered deck, nothing to cross-post",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -156,7 +190,7 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
+     "reason": "no markdown body \u2014 rendered deck, nothing to cross-post",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -170,7 +204,7 @@
    "publishedAt": "2026-07-15",
    "collection": "demos",
    "words": 0,
-   "pitch": "Everything typed to take a live event from spreadsheet chaos to published social content — and the method that made the other 99% happen.",
+   "pitch": "Everything typed to take a live event from spreadsheet chaos to published social content \u2014 and the method that made the other 99% happen.",
    "series": "demos",
    "seriesPos": 1,
    "cluster": "twelve-messages",
@@ -208,7 +242,7 @@
    "publishedAt": "2026-07-15",
    "collection": "demos",
    "words": 0,
-   "pitch": "Replacing 18,000 tokens of always-loaded browser-automation schema with ten shell commands and a README — and why the agent gets sharper, not weaker.",
+   "pitch": "Replacing 18,000 tokens of always-loaded browser-automation schema with ten shell commands and a README \u2014 and why the agent gets sharper, not weaker.",
    "series": "demos",
    "seriesPos": 2,
    "cluster": "browse-tool",
@@ -246,7 +280,7 @@
    "publishedAt": "2026-07-15",
    "collection": "demos",
    "words": 0,
-   "pitch": "Corrections given in chat decay when the session ends. The fix is changing the agent's environment — helpers, deny-hooks, and CI ratchets that carry the rule forever.",
+   "pitch": "Corrections given in chat decay when the session ends. The fix is changing the agent's environment \u2014 helpers, deny-hooks, and CI ratchets that carry the rule forever.",
    "series": "demos",
    "seriesPos": 3,
    "cluster": "enforced-forever",
@@ -322,7 +356,7 @@
    "publishedAt": "2026-07-15",
    "collection": "demos",
    "words": 0,
-   "pitch": "End users file feedback, an LLM judge triages it into GitHub Issues, an agent implements the safe ones — with the autonomy boundary in deterministic code and a human holding the only merge key.",
+   "pitch": "End users file feedback, an LLM judge triages it into GitHub Issues, an agent implements the safe ones \u2014 with the autonomy boundary in deterministic code and a human holding the only merge key.",
    "series": "demos",
    "seriesPos": 5,
    "cluster": "feedback-loop",
@@ -360,7 +394,7 @@
    "publishedAt": "2026-07-15",
    "collection": "demos",
    "words": 0,
-   "pitch": "Some load-bearing facts are invisible to search — the code compiles and the behavior is still wrong. One registry file holds them, a derive catalog enforces them in CI, and a meta-test keeps the registry from lying about itself.",
+   "pitch": "Some load-bearing facts are invisible to search \u2014 the code compiles and the behavior is still wrong. One registry file holds them, a derive catalog enforces them in CI, and a meta-test keeps the registry from lying about itself.",
    "series": "demos",
    "seriesPos": 6,
    "cluster": "landmine-registry",
@@ -398,7 +432,7 @@
    "publishedAt": "2026-07-15",
    "collection": "demos",
    "words": 0,
-   "pitch": "\"Verified\" is a sentence, not a fact. A security migration passed its audit while production was broken — and the discipline that came out of it caught three more false claims building this very series.",
+   "pitch": "\"Verified\" is a sentence, not a fact. A security migration passed its audit while production was broken \u2014 and the discipline that came out of it caught three more false claims building this very series.",
    "series": "demos",
    "seriesPos": 7,
    "cluster": "said-it-checked",
@@ -435,7 +469,7 @@
    "publishedAt": "2026-07-15",
    "collection": "demos",
    "words": 0,
-   "pitch": "Agents are strong inside a stage and unreliable at the boundaries. A delivery methodology built on that: deterministic gates between agentic stages — 88 versioned revisions, 14 running initiatives, and the day production published fiction.",
+   "pitch": "Agents are strong inside a stage and unreliable at the boundaries. A delivery methodology built on that: deterministic gates between agentic stages \u2014 88 versioned revisions, 14 running initiatives, and the day production published fiction.",
    "series": "demos",
    "seriesPos": 8,
    "cluster": "agentic-gates",
@@ -510,7 +544,7 @@
    "publishedAt": "2026-07-17",
    "collection": "demos",
    "words": 0,
-   "pitch": "A sports chiropractor asked four plain questions about selling rehab programs from his website. The AI's answer was confident, tabulated, sourced — and its evidence was marketing all the way down. Twice.",
+   "pitch": "A sports chiropractor asked four plain questions about selling rehab programs from his website. The AI's answer was confident, tabulated, sourced \u2014 and its evidence was marketing all the way down. Twice.",
    "series": "demos",
    "seriesPos": 10,
    "cluster": "four-questions",
@@ -548,7 +582,7 @@
    "publishedAt": "2026-07-20",
    "collection": "demos",
    "words": 0,
-   "pitch": "A rival model reviewing my agent's work looked sharper — it demanded competing candidates and restraint. So my agent A/B tested its own harness: same model, same prompt, config on and off. The vanilla arm pushed back on me twice. The configured arm never did.",
+   "pitch": "A rival model reviewing my agent's work looked sharper \u2014 it demanded competing candidates and restraint. So my agent A/B tested its own harness: same model, same prompt, config on and off. The vanilla arm pushed back on me twice. The configured arm never did.",
    "series": "demos",
    "seriesPos": 11,
    "cluster": "config-probe",
@@ -624,7 +658,7 @@
    "publishedAt": "2026-08-08",
    "collection": "demos",
    "words": 0,
-   "pitch": "Three ways to make a meeting archive answer a question, three preregistered gates, three refusals in one day. Each gate was committed to git before the model weights finished downloading — so when the scores came back plausible, there was nothing left to negotiate with. The feature that shipped is the one the evidence admitted.",
+   "pitch": "Three ways to make a meeting archive answer a question, three preregistered gates, three refusals in one day. Each gate was committed to git before the model weights finished downloading \u2014 so when the scores came back plausible, there was nothing left to negotiate with. The feature that shipped is the one the evidence admitted.",
    "series": "demos",
    "seriesPos": 13,
    "cluster": "gate-first",
@@ -661,7 +695,7 @@
    "publishedAt": "2026-08-12",
    "collection": "demos",
    "words": 0,
-   "pitch": "A pet-supply storefront went live on a real BigCommerce sandbox, moving real Stripe-sandbox money through real dunning logic — and it exists only so a subscription-billing platform could be built against a genuine store instead of a slide deck. Five deployed apps, 94 ADRs, and a generated file that answers 'what's shipped' so nobody has to narrate it. The method is the point; the pet food is the test fixture.",
+   "pitch": "A pet-supply storefront went live on a real BigCommerce sandbox, moving real Stripe-sandbox money through real dunning logic \u2014 and it exists only so a subscription-billing platform could be built against a genuine store instead of a slide deck. Five deployed apps, 94 ADRs, and a generated file that answers 'what's shipped' so nobody has to narrate it. The method is the point; the pet food is the test fixture.",
    "series": "demos",
    "seriesPos": 14,
    "cluster": "kibble-and-co",
@@ -699,7 +733,7 @@
    "publishedAt": "2026-08-12",
    "collection": "demos",
    "words": 0,
-   "pitch": "A ten-document vendor bid package — the scoping and estimation kit a global systems integrator needs before it can bid on a BigCommerce-native subscriptions build — projected from a 28-epic, 218-story spec corpus in days, not weeks. A leakage lint hard-fails before a forbidden pattern ever reaches the export, and a bundling script freezes identical, name-stamped copies per vendor. Every document still carries status: draft-internal-review — the release checklist stayed a human's job.",
+   "pitch": "A ten-document vendor bid package \u2014 the scoping and estimation kit a global systems integrator needs before it can bid on a BigCommerce-native subscriptions build \u2014 projected from a 28-epic, 218-story spec corpus in days, not weeks. A leakage lint hard-fails before a forbidden pattern ever reaches the export, and a bundling script freezes identical, name-stamped copies per vendor. Every document still carries status: draft-internal-review \u2014 the release checklist stayed a human's job.",
    "series": "demos",
    "seriesPos": 15,
    "cluster": "bid-package",
@@ -737,7 +771,7 @@
    "publishedAt": "2026-08-12",
    "collection": "demos",
    "words": 0,
-   "pitch": "Ask BC is a production agent with 29 tools against a live commerce store — 22 that read, 7 that can change it — deployed split across a Next.js app and a Cloudflare Worker with a Durable Object per store. Every mutation needs two turns: a preview, then an explicit confirm. Months later, a sibling platform copied the runtime wholesale for its own merchant copilot — same Durable Object, same codemode sandbox, same two-turn writes — and pointed it at a different API entirely.",
+   "pitch": "Ask BC is a production agent with 29 tools against a live commerce store \u2014 22 that read, 7 that can change it \u2014 deployed split across a Next.js app and a Cloudflare Worker with a Durable Object per store. Every mutation needs two turns: a preview, then an explicit confirm. Months later, a sibling platform copied the runtime wholesale for its own merchant copilot \u2014 same Durable Object, same codemode sandbox, same two-turn writes \u2014 and pointed it at a different API entirely.",
    "series": "demos",
    "seriesPos": 16,
    "cluster": "asks-twice",
@@ -775,7 +809,7 @@
    "publishedAt": "2026-08-12",
    "collection": "demos",
    "words": 0,
-   "pitch": "Aisles is a headless storefront that decides its own layout per shopper — 31 weighted rules feed a Bayesian inference engine that picks one of four personas, then an AI model generates the category page from a four-component vocabulary a Zod schema won't let it leave. Same URL, same catalog, four schema-valid layouts. On 2026-08-12 it was pointed at a real BigCommerce store for the first time — a brand-config entry, two environment variables, a harvested palette with file-line citations, and one honest bug: a client-side lookup that silently rendered furniture navigation over a pet-supply catalog.",
+   "pitch": "Aisles is a headless storefront that decides its own layout per shopper \u2014 31 weighted rules feed a Bayesian inference engine that picks one of four personas, then an AI model generates the category page from a four-component vocabulary a Zod schema won't let it leave. Same URL, same catalog, four schema-valid layouts. On 2026-08-12 it was pointed at a real BigCommerce store for the first time \u2014 a brand-config entry, two environment variables, a harvested palette with file-line citations, and one honest bug: a client-side lookup that silently rendered furniture navigation over a pet-supply catalog.",
    "series": "demos",
    "seriesPos": 17,
    "cluster": "four-layouts",
@@ -813,7 +847,7 @@
    "publishedAt": "2026-08-13",
    "collection": "demos",
    "words": 0,
-   "pitch": "I asked one agent to make an AI storefront look as good as the real one, then handed the work to a second agent in four words: “pick up where Claude ended.” Nineteen commits later the AI was gone — and every commit message was a safety word. Nobody typed “remove the model.” The tests stayed green because they were rewritten to expect it. What caught it was remembering what the live site used to do.",
+   "pitch": "I asked one agent to make an AI storefront look as good as the real one, then handed the work to a second agent in four words: \u201cpick up where Claude ended.\u201d Nineteen commits later the AI was gone \u2014 and every commit message was a safety word. Nobody typed \u201cremove the model.\u201d The tests stayed green because they were rewritten to expect it. What caught it was remembering what the live site used to do.",
    "series": "demos",
    "seriesPos": 18,
    "cluster": "the-guardrail-removed-the-storefront",
@@ -911,7 +945,7 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
+     "reason": "no markdown body \u2014 rendered deck, nothing to cross-post",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -1059,7 +1093,7 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
+     "reason": "no markdown body \u2014 rendered deck, nothing to cross-post",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -1131,7 +1165,7 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
+     "reason": "no markdown body \u2014 rendered deck, nothing to cross-post",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -1168,7 +1202,7 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
+     "reason": "no markdown body \u2014 rendered deck, nothing to cross-post",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -1206,7 +1240,7 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
+     "reason": "no markdown body \u2014 rendered deck, nothing to cross-post",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -1220,7 +1254,7 @@
    "publishedAt": "2026-07-16",
    "collection": "applied",
    "words": 0,
-   "pitch": "An AI agent is strong inside a stage and weak at the seams between them. The fix is a deterministic gate on every hand-off — a non-AI check the agent can't talk its way past. The shape, and the day production published fiction.",
+   "pitch": "An AI agent is strong inside a stage and weak at the seams between them. The fix is a deterministic gate on every hand-off \u2014 a non-AI check the agent can't talk its way past. The shape, and the day production published fiction.",
    "cluster": "agentic-gates",
    "tier": 1,
    "routes": {
@@ -1243,7 +1277,7 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
+     "reason": "no markdown body \u2014 rendered deck, nothing to cross-post",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -1257,7 +1291,7 @@
    "publishedAt": "2026-07-16",
    "collection": "applied",
    "words": 0,
-   "pitch": "A correction you give an AI in chat dies with the session. The fix is changing its environment — a wrapper, a deny-hook, or a CI ratchet — so the rule holds forever. The three-rung ladder, with real deny-hooks firing.",
+   "pitch": "A correction you give an AI in chat dies with the session. The fix is changing its environment \u2014 a wrapper, a deny-hook, or a CI ratchet \u2014 so the rule holds forever. The three-rung ladder, with real deny-hooks firing.",
    "cluster": "enforced-forever",
    "tier": 1,
    "routes": {
@@ -1280,7 +1314,7 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
+     "reason": "no markdown body \u2014 rendered deck, nothing to cross-post",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -1294,7 +1328,7 @@
    "publishedAt": "2026-07-16",
    "collection": "applied",
    "words": 0,
-   "pitch": "Some load-bearing facts are invisible to search — the code compiles and the behavior is still wrong. Hold them in one registry, enforce the mechanical ones in CI, and split why / decided / currently-true. The technique, quoted from a real 25-entry registry.",
+   "pitch": "Some load-bearing facts are invisible to search \u2014 the code compiles and the behavior is still wrong. Hold them in one registry, enforce the mechanical ones in CI, and split why / decided / currently-true. The technique, quoted from a real 25-entry registry.",
    "cluster": "landmine-registry",
    "tier": 1,
    "routes": {
@@ -1317,7 +1351,7 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
+     "reason": "no markdown body \u2014 rendered deck, nothing to cross-post",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -1331,7 +1365,7 @@
    "publishedAt": "2026-07-15",
    "collection": "applied",
    "words": 0,
-   "pitch": "How an AI agent draws a technical diagram that looks like your project and doesn't go stale — hand-authored SVG vs themed Mermaid, chosen per diagram. The first Applied technique companion to the ways-of-working session demos.",
+   "pitch": "How an AI agent draws a technical diagram that looks like your project and doesn't go stale \u2014 hand-authored SVG vs themed Mermaid, chosen per diagram. The first Applied technique companion to the ways-of-working session demos.",
    "cluster": "two-ways",
    "tier": 1,
    "routes": {
@@ -1354,7 +1388,7 @@
     "devto": {
      "mode": "skip",
      "state": "skip",
-     "reason": "no markdown body — rendered deck, nothing to cross-post",
+     "reason": "no markdown body \u2014 rendered deck, nothing to cross-post",
      "postedAt": null,
      "scheduledFor": null,
      "url": null
@@ -1376,7 +1410,7 @@
     "substack": {
      "mode": "link",
      "state": "posted",
-     "reason": "6 MDX nodes — Substack renders neither, so the body cannot go across intact",
+     "reason": "6 MDX nodes \u2014 Substack renders neither, so the body cannot go across intact",
      "caption": "captions/substack/blog--what-if-the-fork-is-the-problem.md",
      "postedAt": "2026-08-04",
      "scheduledFor": null,
@@ -2666,7 +2700,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -2794,7 +2828,7 @@
   },
   {
    "id": "whitepapers/the-neuro-symbolic-convergence",
-   "title": "The Neuro-Symbolic Convergence: A Strategic Roadmap for Native AI Integration in Operating Systems (2025–2027)",
+   "title": "The Neuro-Symbolic Convergence: A Strategic Roadmap for Native AI Integration in Operating Systems (2025\u20132027)",
    "url": "https://ninochavez.co/blog/whitepapers/the-neuro-symbolic-convergence",
    "publishedAt": "2026-01-10",
    "collection": "whitepapers",
@@ -3616,7 +3650,7 @@
   },
   {
    "id": "blog/genai-os",
-   "title": "I’m Not Using GenAI. I’m Building a System Around It.",
+   "title": "I\u2019m Not Using GenAI. I\u2019m Building a System Around It.",
    "url": "https://ninochavez.co/blog/genai-os",
    "publishedAt": "2025-08-07",
    "collection": "blog",
@@ -3651,7 +3685,7 @@
   },
   {
    "id": "blog/the-paradox-of-velocity-in-ai-coding",
-   "title": "🌀 The Paradox of Velocity in AI Coding",
+   "title": "\ud83c\udf00 The Paradox of Velocity in AI Coding",
    "url": "https://ninochavez.co/blog/the-paradox-of-velocity-in-ai-coding",
    "publishedAt": "2025-08-03",
    "collection": "blog",
@@ -4282,7 +4316,7 @@
     "substack": {
      "mode": "link",
      "state": "posted",
-     "reason": "4 table rows — Substack renders neither, so the body cannot go across intact",
+     "reason": "4 table rows \u2014 Substack renders neither, so the body cannot go across intact",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -4533,7 +4567,7 @@
      "postedAt": null,
      "scheduledFor": null,
      "url": null,
-     "reason": "802w note from the 2026-06-16 batch — cut from the feed 2026-08-09, kept on Substack"
+     "reason": "802w note from the 2026-06-16 batch \u2014 cut from the feed 2026-08-09, kept on Substack"
     },
     "devto": {
      "mode": "skip",
@@ -4569,7 +4603,7 @@
      "postedAt": null,
      "scheduledFor": null,
      "url": null,
-     "reason": "967w note from the 2026-06-16 batch — cut from the feed 2026-08-09, kept on Substack"
+     "reason": "967w note from the 2026-06-16 batch \u2014 cut from the feed 2026-08-09, kept on Substack"
     },
     "devto": {
      "mode": "skip",
@@ -6245,7 +6279,7 @@
      "postedAt": null,
      "scheduledFor": null,
      "url": null,
-     "reason": "canonical 404s — blog slug drift, fix at the source"
+     "reason": "canonical 404s \u2014 blog slug drift, fix at the source"
     },
     "devto": {
      "mode": "skip",
@@ -6271,7 +6305,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -6308,7 +6342,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -6425,7 +6459,7 @@
      "postedAt": null,
      "scheduledFor": null,
      "url": null,
-     "reason": "canonical 404s — blog slug drift, fix at the source"
+     "reason": "canonical 404s \u2014 blog slug drift, fix at the source"
     },
     "devto": {
      "mode": "skip",
@@ -6587,7 +6621,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -6622,7 +6656,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -6657,7 +6691,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -6813,7 +6847,7 @@
      "postedAt": null,
      "scheduledFor": null,
      "url": null,
-     "reason": "677w note from the 2026-06-16 batch — cut from the feed 2026-08-09, kept on Substack"
+     "reason": "677w note from the 2026-06-16 batch \u2014 cut from the feed 2026-08-09, kept on Substack"
     },
     "devto": {
      "mode": "skip",
@@ -6849,7 +6883,7 @@
      "postedAt": null,
      "scheduledFor": null,
      "url": null,
-     "reason": "731w note from the 2026-06-16 batch — cut from the feed 2026-08-09, kept on Substack"
+     "reason": "731w note from the 2026-06-16 batch \u2014 cut from the feed 2026-08-09, kept on Substack"
     },
     "devto": {
      "mode": "skip",
@@ -7701,7 +7735,7 @@
   },
   {
    "id": "blog/designing-what-you-dont-build",
-   "title": "Designing What You Don't Build — And Building What You Can't Read",
+   "title": "Designing What You Don't Build \u2014 And Building What You Can't Read",
    "url": "https://ninochavez.co/blog/designing-what-you-dont-build",
    "publishedAt": "2025-08-05",
    "collection": "blog",
@@ -7911,7 +7945,7 @@
   },
   {
    "id": "blog/i-still-dont-really-know-jsx-and-i-dont-think-it-matters",
-   "title": "I Still Don’t Really Know JSX. And I Don't Think It Matters.",
+   "title": "I Still Don\u2019t Really Know JSX. And I Don't Think It Matters.",
    "url": "https://ninochavez.co/blog/i-still-dont-really-know-jsx-and-i-dont-think-it-matters",
    "publishedAt": "2025-08-02",
    "collection": "blog",
@@ -7922,7 +7956,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -8062,7 +8096,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -8132,7 +8166,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -8202,7 +8236,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -8237,7 +8271,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -8272,7 +8306,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -8377,7 +8411,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -8692,7 +8726,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -8727,7 +8761,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -8762,7 +8796,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -8786,7 +8820,7 @@
   },
   {
    "id": "blog/do-you-smell-smoke",
-   "title": "The Risk of Asking “Do You Smell That?” When There’s No Fire",
+   "title": "The Risk of Asking \u201cDo You Smell That?\u201d When There\u2019s No Fire",
    "url": "https://ninochavez.co/blog/do-you-smell-smoke",
    "publishedAt": "2025-07-09",
    "collection": "blog",
@@ -8797,7 +8831,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -8832,7 +8866,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -8867,7 +8901,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -8904,7 +8938,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -8941,7 +8975,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -8978,7 +9012,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9015,7 +9049,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9052,7 +9086,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9087,7 +9121,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9111,7 +9145,7 @@
   },
   {
    "id": "blog/the-lost-phone-test-for-ai-could-your-org-still-function-tomorrow",
-   "title": "The Lost‑Phone Test for AI: Could Your Org Still Function Tomorrow?",
+   "title": "The Lost\u2011Phone Test for AI: Could Your Org Still Function Tomorrow?",
    "url": "https://ninochavez.co/blog/the-lost-phone-test-for-ai-could-your-org-still-function-tomorrow",
    "publishedAt": "2025-06-28",
    "collection": "blog",
@@ -9122,7 +9156,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9146,7 +9180,7 @@
   },
   {
    "id": "blog/its-time-for-the-cio-2-0",
-   "title": "It’s Time for the CIO 2.0",
+   "title": "It\u2019s Time for the CIO 2.0",
    "url": "https://ninochavez.co/blog/its-time-for-the-cio-2-0",
    "publishedAt": "2025-06-27",
    "collection": "blog",
@@ -9157,7 +9191,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9181,7 +9215,7 @@
   },
   {
    "id": "blog/overnight-dev-from-rage-quit-to-release-in-72-hours-with-ai-riding-shotgun",
-   "title": "Overnight Dev: From Rage-Quit to Release in 72 Hours—With AI Riding Shotgun",
+   "title": "Overnight Dev: From Rage-Quit to Release in 72 Hours\u2014With AI Riding Shotgun",
    "url": "https://ninochavez.co/blog/overnight-dev-from-rage-quit-to-release-in-72-hours-with-ai-riding-shotgun",
    "publishedAt": "2025-06-27",
    "collection": "blog",
@@ -9192,7 +9226,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9227,7 +9261,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9262,7 +9296,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9297,7 +9331,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9332,7 +9366,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9356,7 +9390,7 @@
   },
   {
    "id": "blog/youre-sending-self-driving-cars-down-unmarked-roads",
-   "title": "You’re Sending Self-Driving Cars Down Unmarked Roads",
+   "title": "You\u2019re Sending Self-Driving Cars Down Unmarked Roads",
    "url": "https://ninochavez.co/blog/youre-sending-self-driving-cars-down-unmarked-roads",
    "publishedAt": "2025-06-23",
    "collection": "blog",
@@ -9367,7 +9401,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9402,7 +9436,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9437,7 +9471,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9461,7 +9495,7 @@
   },
   {
    "id": "blog/chatgpt-doesnt-eat-so-why-do-i-keep-asking-it-to-cook",
-   "title": "ChatGPT Doesn’t Eat—So Why Do I Keep Asking It to Cook?",
+   "title": "ChatGPT Doesn\u2019t Eat\u2014So Why Do I Keep Asking It to Cook?",
    "url": "https://ninochavez.co/blog/chatgpt-doesnt-eat-so-why-do-i-keep-asking-it-to-cook",
    "publishedAt": "2025-06-18",
    "collection": "blog",
@@ -9472,7 +9506,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9496,7 +9530,7 @@
   },
   {
    "id": "blog/experience-is-loud-turn-it-down-so-you-can-learn",
-   "title": "Experience Is Loud—Turn It Down So You Can Learn",
+   "title": "Experience Is Loud\u2014Turn It Down So You Can Learn",
    "url": "https://ninochavez.co/blog/experience-is-loud-turn-it-down-so-you-can-learn",
    "publishedAt": "2025-06-18",
    "collection": "blog",
@@ -9507,7 +9541,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9531,7 +9565,7 @@
   },
   {
    "id": "blog/the-cake-is-a-lie-why-ai-isnt-ready",
-   "title": "The Cake Is a Lie: Why AI Isn’t Ready",
+   "title": "The Cake Is a Lie: Why AI Isn\u2019t Ready",
    "url": "https://ninochavez.co/blog/the-cake-is-a-lie-why-ai-isnt-ready",
    "publishedAt": "2025-06-17",
    "collection": "blog",
@@ -9542,7 +9576,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9577,7 +9611,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9612,7 +9646,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9649,7 +9683,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9686,7 +9720,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9723,7 +9757,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9760,7 +9794,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9784,7 +9818,7 @@
   },
   {
    "id": "blog/signal-reflex-signal-dispatch",
-   "title": "Signal Reflex → Signal Dispatch",
+   "title": "Signal Reflex \u2192 Signal Dispatch",
    "url": "https://ninochavez.co/blog/signal-reflex-signal-dispatch",
    "publishedAt": "2025-06-16",
    "collection": "blog",
@@ -9797,7 +9831,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9832,7 +9866,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9867,7 +9901,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9902,7 +9936,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9939,7 +9973,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -9976,7 +10010,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10011,7 +10045,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10046,7 +10080,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10081,7 +10115,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10116,7 +10150,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10151,7 +10185,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10186,7 +10220,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10210,7 +10244,7 @@
   },
   {
    "id": "blog/the-spotlight-isnt-the-stage",
-   "title": "The Spotlight Isn’t the Stage",
+   "title": "The Spotlight Isn\u2019t the Stage",
    "url": "https://ninochavez.co/blog/the-spotlight-isnt-the-stage",
    "publishedAt": "2025-06-12",
    "collection": "blog",
@@ -10221,7 +10255,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10245,7 +10279,7 @@
   },
   {
    "id": "blog/we-dont-need-more-coders-we-need-early-stage-problem-solvers",
-   "title": "We Don’t Need More Coders. We Need Early-Stage Problem Solvers.",
+   "title": "We Don\u2019t Need More Coders. We Need Early-Stage Problem Solvers.",
    "url": "https://ninochavez.co/blog/we-dont-need-more-coders-we-need-early-stage-problem-solvers",
    "publishedAt": "2025-06-12",
    "collection": "blog",
@@ -10256,7 +10290,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10291,7 +10325,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10315,7 +10349,7 @@
   },
   {
    "id": "blog/the-gift-i-cant-give-myself",
-   "title": "The Gift I Can’t Give Myself",
+   "title": "The Gift I Can\u2019t Give Myself",
    "url": "https://ninochavez.co/blog/the-gift-i-cant-give-myself",
    "publishedAt": "2025-06-11",
    "collection": "blog",
@@ -10326,7 +10360,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10361,7 +10395,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10396,7 +10430,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10431,7 +10465,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10455,7 +10489,7 @@
   },
   {
    "id": "blog/when-youre-good-at-solving-problems-they-multiply",
-   "title": "When You’re Good at Solving Problems, They Multiply",
+   "title": "When You\u2019re Good at Solving Problems, They Multiply",
    "url": "https://ninochavez.co/blog/when-youre-good-at-solving-problems-they-multiply",
    "publishedAt": "2025-06-11",
    "collection": "blog",
@@ -10466,7 +10500,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10490,7 +10524,7 @@
   },
   {
    "id": "blog/how-i-wrote-living-in-the-comments",
-   "title": "How I Wrote “Living in the Comments”",
+   "title": "How I Wrote \u201cLiving in the Comments\u201d",
    "url": "https://ninochavez.co/blog/how-i-wrote-living-in-the-comments",
    "publishedAt": "2025-06-10",
    "collection": "blog",
@@ -10501,7 +10535,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10536,7 +10570,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10560,7 +10594,7 @@
   },
   {
    "id": "blog/when-custom-isnt-better-the-burden-of-bespoke",
-   "title": "When Custom Isn’t Better: The Burden of Bespoke",
+   "title": "When Custom Isn\u2019t Better: The Burden of Bespoke",
    "url": "https://ninochavez.co/blog/when-custom-isnt-better-the-burden-of-bespoke",
    "publishedAt": "2025-06-10",
    "collection": "blog",
@@ -10571,7 +10605,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10606,7 +10640,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10641,7 +10675,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10676,7 +10710,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10711,7 +10745,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10746,7 +10780,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10770,7 +10804,7 @@
   },
   {
    "id": "blog/sharpened-doesnt-mean-sterile",
-   "title": "Sharpened Doesn’t Mean Sterile",
+   "title": "Sharpened Doesn\u2019t Mean Sterile",
    "url": "https://ninochavez.co/blog/sharpened-doesnt-mean-sterile",
    "publishedAt": "2025-06-07",
    "collection": "blog",
@@ -10781,7 +10815,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10816,7 +10850,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10851,7 +10885,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10886,7 +10920,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10921,7 +10955,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10956,7 +10990,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -10991,7 +11025,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11026,7 +11060,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11061,7 +11095,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11096,7 +11130,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11131,7 +11165,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11166,7 +11200,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11190,7 +11224,7 @@
   },
   {
    "id": "blog/this-doesnt-work-for-me",
-   "title": "This Doesn’t Work for Me",
+   "title": "This Doesn\u2019t Work for Me",
    "url": "https://ninochavez.co/blog/this-doesnt-work-for-me",
    "publishedAt": "2025-06-05",
    "collection": "blog",
@@ -11201,7 +11235,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11225,7 +11259,7 @@
   },
   {
    "id": "blog/youre-not-broken-but-youre-not-off-the-hook",
-   "title": "You’re Not Broken, But You’re Not Off the Hook",
+   "title": "You\u2019re Not Broken, But You\u2019re Not Off the Hook",
    "url": "https://ninochavez.co/blog/youre-not-broken-but-youre-not-off-the-hook",
    "publishedAt": "2025-06-05",
    "collection": "blog",
@@ -11236,7 +11270,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11273,7 +11307,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11310,7 +11344,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11347,7 +11381,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11382,7 +11416,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11406,7 +11440,7 @@
   },
   {
    "id": "blog/the-bet-i-didnt-know-i-was-making",
-   "title": "The Bet I Didn’t Know I Was Making",
+   "title": "The Bet I Didn\u2019t Know I Was Making",
    "url": "https://ninochavez.co/blog/the-bet-i-didnt-know-i-was-making",
    "publishedAt": "2025-06-04",
    "collection": "blog",
@@ -11417,7 +11451,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11452,7 +11486,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11487,7 +11521,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11522,7 +11556,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11546,7 +11580,7 @@
   },
   {
    "id": "blog/wired-for-power-ai-is-the-grid-youre-the-architect",
-   "title": "Wired for Power: AI Is the Grid. You’re the Architect.",
+   "title": "Wired for Power: AI Is the Grid. You\u2019re the Architect.",
    "url": "https://ninochavez.co/blog/wired-for-power-ai-is-the-grid-youre-the-architect",
    "publishedAt": "2025-06-04",
    "collection": "blog",
@@ -11559,7 +11593,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11596,7 +11630,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11620,7 +11654,7 @@
   },
   {
    "id": "blog/you-cant-engineer-growth",
-   "title": "You Can’t Engineer Growth",
+   "title": "You Can\u2019t Engineer Growth",
    "url": "https://ninochavez.co/blog/you-cant-engineer-growth",
    "publishedAt": "2025-06-04",
    "collection": "blog",
@@ -11631,7 +11665,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11666,7 +11700,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11701,7 +11735,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11725,7 +11759,7 @@
   },
   {
    "id": "blog/why-i-keep-shooting-even-when-its-not-for-work",
-   "title": "Why I Keep Shooting, Even When It’s Not for Work",
+   "title": "Why I Keep Shooting, Even When It\u2019s Not for Work",
    "url": "https://ninochavez.co/blog/why-i-keep-shooting-even-when-its-not-for-work",
    "publishedAt": "2025-06-03",
    "collection": "blog",
@@ -11736,7 +11770,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11771,7 +11805,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11806,7 +11840,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11841,7 +11875,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null
@@ -11876,7 +11910,7 @@
     "substack": {
      "mode": "skip",
      "state": "posted",
-     "reason": "older than 12 months and not featured — archive, not drip",
+     "reason": "older than 12 months and not featured \u2014 archive, not drip",
      "postedAt": "archive",
      "scheduledFor": null,
      "url": null

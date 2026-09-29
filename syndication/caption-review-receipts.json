@@ -88,6 +88,17 @@
         "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
         "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
       }
+    },
+    "blog/trying-to-teach-an-ai-how-i-edit-photos": {
+      "reviewedAt": "2026-09-29T00:54:45.606Z",
+      "reviewedBy": "Codex: source, attribution, numbers, voice, reader contract and reference caption review",
+      "hashes": {
+        "caption": "61b7eecbfc0b17c260f1dd3d84e9a7299be831b1d6f68694d9b773384f6761c1",
+        "source": "b1ef5d99cdc87a98ec6dd150f2bae37da6aa85073835c2efa7d007f1a8bfd62e",
+        "voiceGuide": "4c7b10893ff29dd0dbb34865d16b553f69149e56f97122a23071ce6ef7c9de55",
+        "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
+        "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
+      }
     }
   }
 }
