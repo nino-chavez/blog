@@ -30,8 +30,8 @@
  },
  "summary": {
   "linkedin": {
-   "posted": 58,
-   "queued": 12,
+   "posted": 59,
+   "queued": 11,
    "skipped": 267,
    "firstSlot": "2026-09-17",
    "lastSlot": "2026-10-20"
@@ -73,11 +73,13 @@
     },
     "linkedin": {
      "mode": "native",
-     "state": "eligible",
+     "state": "posted",
      "caption": "captions/linkedin/blog--the-work-doesnt-end-at-send.md",
-     "postedAt": null,
-     "scheduledFor": "2026-10-01",
-     "url": null
+     "postedAt": "2026-09-29",
+     "scheduledFor": "2026-09-29",
+     "url": "https://www.linkedin.com/feed/update/urn:li:share:7510798923188355072/",
+     "firstComment": "https://ninochavez.co/blog/the-work-doesnt-end-at-send",
+     "firstCommentVerifiedAt": "2026-09-29T20:35:49Z"
     },
     "devto": {
      "mode": "skip",

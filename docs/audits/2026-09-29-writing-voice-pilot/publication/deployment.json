@@ -1,0 +1,19 @@
+{
+  "id": "3fde4a18-9801-47c3-b951-f674e25b66bb",
+  "url": "https://3fde4a18.ninochavez-blog.pages.dev",
+  "latest_stage": {
+    "name": "deploy",
+    "started_on": "2026-09-29T20:32:02.207017Z",
+    "ended_on": "2026-09-29T20:32:16.684711Z",
+    "status": "success"
+  },
+  "deployment_trigger": {
+    "type": "github:push",
+    "metadata": {
+      "branch": "main",
+      "commit_hash": "f0b6c894590b84035734144ba71cbf0a7b2870d1",
+      "commit_message": "content: publish The Work Doesnt End at Send",
+      "commit_dirty": false
+    }
+  }
+}
