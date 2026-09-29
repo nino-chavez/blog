@@ -1,8 +1,8 @@
 # Signal Dispatch: Voice & Tone Guide
 ## Copy Editor and Ghostwriter Touchstone
 
-**Version**: 1.8
-**Last Updated**: 2026-09-07
+**Version**: 1.9
+**Last Updated**: 2026-09-29
 **Source**: Empirical analysis of 156 blog posts, 15 deep-read corpus sample; adversarial audit against the 8 most recent posts (Jun–Jul 2026) plus a held-out generation test, 2026-08-03; v1.4 adds the relocated-claim rule, measured against seven violations in one caption batch, 2026-08-03; v1.5 generalises it to scope preservation in both directions, 2026-08-04; v1.6 adds the reader payoff and reconciles two divergent v1.4s, 2026-08-08; v1.7 separates evidence, reader job, argument, cognitive load, voice, and surface mechanics after a cross-register audit against Slack and email, 2026-08-08
 
 ---
@@ -11,6 +11,10 @@
 existing exceptions and removes retired positive examples. This is a rule
 correction, not a new corpus calibration. General continuity tests remain owned
 by the reader-clarity reference linked below.
+
+**Revision note (1.9):** preserves Nino's September 28 editorial corrections
+and September 29 choice of the provisional addendum. This records an author
+decision and its limits; it adds no corpus thresholds or phrase templates.
 
 ## Purpose
 
@@ -71,6 +75,48 @@ calibration failed: its guided drafts diverged more than the no-guide control.
 That is a standing warning against merging registers or turning every observed
 habit into a drafting rule. Corpus measurements in this guide are diagnostics.
 They describe the sample; they do not earn a sentence a place in a draft.
+
+### Editorial evidence and the chosen approach (2026-09-29)
+
+For comparable composed essays, carry forward the small editorial addendum
+Nino selected in the Jevons writing pilot:
+
+- Let his actual question and the practical consequence organize the argument.
+  Preserve the reasoning that connects them.
+- Explain how evidence was obtained before asking the reader to interpret its
+  results. A proposed comparison stays hypothetical.
+- Keep factual limits beside the claims they qualify. Ground an ending in an
+  actual action or an explicitly proposed decision.
+- Inspect symmetry, callbacks, and emphatic lines for whether they help the
+  reader. Keep useful rhetoric; never add it merely to perform the voice.
+
+These choices came from specific corrections in the photography essay:
+
+| Earlier draft | Nino's correction and its purpose |
+|---|---|
+| A packaged lesson under “The preset won. The agent kept working.” | The accepted title, “Trying to teach an AI how I edit photos,” names the actual attempt. His questions supply the account's shape. |
+| Blind-test win/loss counts without enough procedural explanation | Explain how he compared the photographs with the methods hidden before giving the results. The reader needs to know what the counts mean. |
+| A possible closing revelation | He asked for a paragraph about requesting the retrospective himself. That action grounds the ending; it does not require a revelation in every essay. |
+
+In the subsequent anonymous pair, Nino initially liked both drafts without a
+preference. After the conditions were disclosed, he chose A, which included
+this addendum: “one sample is not enough to dismiss it and it didn't make
+things worse.” Use the selected approach provisionally. The initial tie
+established neither superiority nor ineffectiveness. His later choice is an
+editorial decision, not a retroactive blind-test win. Resemblance and editing
+effort were not separately rated.
+
+Keep the evidence types distinct. Independently authored prose can supply a
+writing reference. AI-assisted work he accepts supplies editorial evidence.
+Texts and emails supply audience-specific behavior. Record date, audience,
+purpose, AI/editor involvement, and approval when known; leave unknowns explicit.
+The historical technical specification inspected after this pair was frozen
+did not inform either candidate and is now reference material, not an untouched
+evaluation sample.
+
+The [comparison record](audits/2026-09-29-writing-voice-pilot/STATUS.md) preserves
+the decision, candidate hashes, and limitations. Its frozen briefs document
+the experiment; this section owns the direction for future comparable work.
 
 ---
 
@@ -1213,7 +1259,11 @@ Posts maintain consistent voice even across different topics. Strongest consiste
 
 ---
 
-**Last Updated**: 2026-08-08 (v1.7 — establishes the writing decision stack; imports only cross-register invariants from Slack and email; records the email guide's failed control; makes payoff and evidentiary scope outrank narrative patterns; demotes corpus metrics, question counts, process beats, and open endings from gates to diagnostics; and prohibits presenting session steering as POV change without changed evidence.
+**Last Updated**: 2026-09-29 (v1.9 — records specific editorial corrections and Nino's provisional choice of the addendum, with the anonymous comparison's limits and separate evidence types.)
+
+Prior: v1.8, 2026-09-07 — reconciles opening and rhythm instructions with their existing exceptions and removes retired positive examples; a rule correction, not a new corpus calibration.
+
+Prior: v1.7, 2026-08-08 — establishes the writing decision stack; imports only cross-register invariants from Slack and email; records the email guide's failed control; makes payoff and evidentiary scope outrank narrative patterns; demotes corpus metrics, question counts, process beats, and open endings from gates to diagnostics; and prohibits presenting session steering as POV change without changed evidence.
 
 Prior: v1.6, 2026-08-08 — merges two lines of development that briefly both called themselves v1.4. One added §1b on a working branch: relocated claims, then scope preservation in both directions. The other added The Reader Payoff on `main`, unaware the branch existed, and reused the version number. Both are here; the numbering collision is recorded rather than tidied away, because a guide with two v1.4s is exactly the drift this guide's own "one owner per rule" discipline exists to prevent, and it happened anyway.
 

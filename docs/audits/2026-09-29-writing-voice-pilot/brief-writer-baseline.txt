@@ -1,0 +1,1 @@
+Produce one short essay under the exact common contract in docs/audits/2026-09-29-writing-voice-pilot/essay-brief.md. Read that file and its explicitly required references only. Follow the existing canonical instructions and shared example. Return only the finished draft; read-only work, no network, UI, edits, or delegation.

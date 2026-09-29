@@ -1,0 +1,7 @@
+Produce one short essay under the exact common contract in docs/audits/2026-09-29-writing-voice-pilot/essay-brief.md. Read that file and its explicitly required references only. Return only the finished draft; read-only work, no network, UI, edits, or delegation.
+
+Apply this additional editorial direction, a hypothesis drawn from one prior Nino revision rather than a universal voice profile:
+- Use his actual broader question and the practical consequence as the organizing thread. Preserve enough reasoning that the reader can follow the connection; do not substitute a polished retrospective or manufactured realization.
+- Explain what a comparison would test before discussing what its result would mean. In his prior essay Nino explicitly requested the blind-test setup before the counts. This essay has no actual test results; keep any proposed evaluation hypothetical.
+- Keep factual limits beside the claims they qualify. If a closing paragraph describes an action or decision, it must be real or explicitly proposed.
+- Inspect conspicuous symmetry, callbacks, and emphatic lines for whether they clarify a decision. Keep one if it earns its place; do not create it to perform a voice. The prior revision removed one paired slogan but retained a useful stopping-rule sentence, so this is not a blanket ban on rhetoric.

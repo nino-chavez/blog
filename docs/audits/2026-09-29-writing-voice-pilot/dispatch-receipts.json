@@ -1,0 +1,90 @@
+[
+  {
+    "role": "steering",
+    "dispatch_id": "4694e7bd-cdad-40f5-9490-1f0811206007",
+    "stage": "completed",
+    "selected_route": {
+      "model": "gpt-5.6-terra",
+      "reasoning_effort": "high",
+      "tier": "implementation"
+    },
+    "runtime_evidence": {
+      "child_thread_id": "01a0eea7-8480-7293-9d39-90940a083fe4",
+      "executable": "/Users/nino/.nvm/versions/node/v22.21.1/bin/codex",
+      "reported_model": null,
+      "reported_reasoning_effort": null,
+      "status": "completed"
+    },
+    "read_only": true,
+    "sandbox": {
+      "mode": "read-only",
+      "network": "off"
+    }
+  },
+  {
+    "role": "inventory",
+    "dispatch_id": "30c4adc1-5e6c-4a68-81db-f8a0fbb8f0e8",
+    "stage": "completed",
+    "selected_route": {
+      "model": "gpt-5.6-luna",
+      "reasoning_effort": "medium",
+      "tier": "fast"
+    },
+    "runtime_evidence": {
+      "child_thread_id": "01a0eea7-84ab-7bd3-8dbe-1d80292a16a1",
+      "executable": "/Users/nino/.nvm/versions/node/v22.21.1/bin/codex",
+      "reported_model": null,
+      "reported_reasoning_effort": null,
+      "status": "completed"
+    },
+    "read_only": true,
+    "sandbox": {
+      "mode": "read-only",
+      "network": "off"
+    }
+  },
+  {
+    "role": "writer-1",
+    "dispatch_id": "d29b5611-6197-44d2-a0b1-6f2f427f184a",
+    "stage": "completed",
+    "selected_route": {
+      "model": "gpt-5.6-terra",
+      "reasoning_effort": "medium",
+      "tier": "balanced"
+    },
+    "runtime_evidence": {
+      "child_thread_id": "01a0eeb0-7496-7512-bd4e-65bd843cb45c",
+      "executable": "/opt/homebrew/bin/codex",
+      "reported_model": null,
+      "reported_reasoning_effort": null,
+      "status": "completed"
+    },
+    "read_only": true,
+    "sandbox": {
+      "mode": "read-only",
+      "network": "off"
+    }
+  },
+  {
+    "role": "writer-2",
+    "dispatch_id": "ee35e156-3dad-43ca-a2bc-c14787318a1c",
+    "stage": "completed",
+    "selected_route": {
+      "model": "gpt-5.6-terra",
+      "reasoning_effort": "medium",
+      "tier": "balanced"
+    },
+    "runtime_evidence": {
+      "child_thread_id": "01a0eeb1-1ed0-77d2-8a3f-41c2b49e711b",
+      "executable": "/opt/homebrew/bin/codex",
+      "reported_model": null,
+      "reported_reasoning_effort": null,
+      "status": "completed"
+    },
+    "read_only": true,
+    "sandbox": {
+      "mode": "read-only",
+      "network": "off"
+    }
+  }
+]

@@ -1,0 +1,3 @@
+No publication blockers found.
+
+Independent readback: Both captures are readable, with no visible clipping or overlap. The article makes its central point early, keeps the assistant effects hypothetical, and explicitly says no result is claimed. The feature image is labeled as AI-generated. The caption preserves that scope: its first-person line frames the requested exploration, not a claimed personal outcome or observation.

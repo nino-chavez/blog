@@ -1,0 +1,22 @@
+{
+  "status": "Exploratory editorial comparison, not a controlled human-versus-AI trial",
+  "K": "New source-bound account assembled by assistant from actual user remarks and verified facts. Punctuation/spelling normalized; connecting prose is assistant-authored. Not an independent human-authored draft.",
+  "M": "Excerpt assembled from voice-guided draft, omitting sections and shortening one limitations paragraph. Not newly optimized to be a bad control.",
+  "confounds": [
+    "Different chronology and placement of thesis",
+    "K has more quoted questions; M has more explicit recommendations",
+    "Both written/assembled by same assistant with knowledge of hypothesis",
+    "One model reader cannot establish human preference or Nino voice fidelity"
+  ],
+  "original_draft": "/Users/nino/Workspace/dev/sites/nino/blog/docs/drafts/2026-09-28-the-preset-won.md",
+  "sources": "Original user turns on September 27 at 15:54, 19:57, 20:17 UTC; September 28 at 21:38, 23:24, 23:27, 23:44 UTC. Outcome and usage receipts: photo-previews/blueprint/research/2026-09-28-agent-economics/session-evidence.json.",
+  "fingerprints": {
+    "K": "cc8b5b7c0586cbd5f0903cc0cfef717c7981cad91a532eeb0c27ec8030a0fd76",
+    "M": "8a1abd1d9969f6af1ada093c332b6622ac448d3f2b5065c710113dcf67c58aa2"
+  },
+  "words": {
+    "K": 346,
+    "M": 376
+  },
+  "decision_rule": "Prefer neither if neither is convincing. Use exact passages and reader effects, not authorship detection or generic praise. Do not promote global rules on one comparison."
+}
