@@ -99,6 +99,17 @@
         "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
         "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
       }
+    },
+    "blog/the-work-doesnt-end-at-send": {
+      "reviewedAt": "2026-09-29T20:28:11.381Z",
+      "reviewedBy": "Codex",
+      "hashes": {
+        "caption": "1ef20ff9e2c083f1a2c01882d383122c97d1c569fd28234eeecf20994ac4ce9f",
+        "source": "0aa755f1d234bb40734e6b4cbfb8bd6225697ec3a5ad88fd23313b06358d9e4f",
+        "voiceGuide": "4c7b10893ff29dd0dbb34865d16b553f69149e56f97122a23071ce6ef7c9de55",
+        "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
+        "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
+      }
     }
   }
 }

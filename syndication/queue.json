@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-28",
+ "generatedAt": "2026-09-29",
  "linkedinHistory": "harvested from the activity feed (115 link-shares read)",
  "cadence": {
   "linkedin": {
@@ -31,7 +31,7 @@
  "summary": {
   "linkedin": {
    "posted": 58,
-   "queued": 11,
+   "queued": 12,
    "skipped": 267,
    "firstSlot": "2026-09-17",
    "lastSlot": "2026-10-20"
@@ -40,19 +40,55 @@
    "posted": 291,
    "queued": 5,
    "backfill": 30,
-   "skipped": 10,
+   "skipped": 11,
    "firstSlot": "2026-09-16",
    "lastSlot": "2026-09-19"
   },
   "devto": {
    "posted": 2,
    "queued": 6,
-   "skipped": 328,
+   "skipped": 329,
    "firstSlot": "2026-09-23",
    "lastSlot": "2026-12-02"
   }
  },
  "items": [
+  {
+   "id": "blog/the-work-doesnt-end-at-send",
+   "title": "The Work Doesn\u2019t End at Send",
+   "url": "https://ninochavez.co/blog/the-work-doesnt-end-at-send",
+   "publishedAt": "2026-09-29",
+   "collection": "blog",
+   "words": 1202,
+   "cluster": "the-work-doesnt-end-at-send",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "skip-manual",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "reason": "Publication authorized for the blog and LinkedIn only."
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "caption": "captions/linkedin/blog--the-work-doesnt-end-at-send.md",
+     "postedAt": null,
+     "scheduledFor": "2026-10-01",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip-manual",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null,
+     "reason": "Publication authorized for the blog and LinkedIn only."
+    }
+   }
+  },
   {
    "id": "blog/trying-to-teach-an-ai-how-i-edit-photos",
    "title": "Trying to teach an AI how I edit photos",
