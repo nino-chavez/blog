@@ -72,11 +72,13 @@
     },
     "linkedin": {
      "mode": "native",
-     "state": "eligible",
+     "state": "posted",
      "caption": "captions/linkedin/blog--trying-to-teach-an-ai-how-i-edit-photos.md",
-     "postedAt": null,
+     "postedAt": "2026-09-28",
      "scheduledFor": "2026-09-28",
-     "url": null
+     "url": "https://www.linkedin.com/feed/update/urn:li:share:7510504384657530880/",
+     "firstComment": "https://ninochavez.co/blog/trying-to-teach-an-ai-how-i-edit-photos",
+     "firstCommentVerifiedAt": "2026-09-29T01:06:00Z"
     },
     "devto": {
      "mode": "skip",
