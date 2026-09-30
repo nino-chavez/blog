@@ -127,6 +127,23 @@ html {
   width: min(100%, 42rem);
 }
 
+.article-title {
+  font-size: 2rem;
+  line-height: 1.15;
+}
+
+@media (min-width: 640px) {
+  .article-title { font-size: 2.25rem; }
+}
+
+@media (min-width: 768px) {
+  .article-title { font-size: 3rem; }
+}
+
+@media (min-width: 1024px) {
+  .article-title { font-size: 3.75rem; }
+}
+
 .article-reading-context {
   width: min(100%, 42rem);
   margin-inline: auto;

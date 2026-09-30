@@ -222,9 +222,9 @@ function publicationLinkClasses(id: string, base: string) {
     align-items: center;
     gap: 24px;
   }
-  .open-practice-shell a { color: inherit; font-size: 0.875rem; font-weight: 650; text-decoration: none; }
-  .open-practice-shell__identity { justify-self: start; }
-  .open-practice-shell__desktop { display: flex; align-self: stretch; align-items: center; gap: 34px; }
+  .open-practice-shell a { color: inherit; font-size: 0.85rem; font-weight: 620; text-decoration: none; }
+  .open-practice-shell__identity { justify-self: start; font-size: 0.95rem !important; font-weight: 800 !important; letter-spacing: -0.01em; }
+  .open-practice-shell__desktop { display: flex; align-self: stretch; align-items: center; gap: clamp(18px, 2.6vw, 36px); }
   .open-practice-shell__desktop a { display: inline-flex; height: 100%; align-items: center; border-bottom: 3px solid transparent; color: #5a6472; }
   .open-practice-shell__desktop a:hover,
   .open-practice-shell__desktop a:focus-visible,
@@ -236,23 +236,23 @@ function publicationLinkClasses(id: string, base: string) {
   .open-practice-shell__menu-button { display: none; }
   .open-practice-shell :focus-visible,
   .open-practice-shell__dialog :focus-visible { outline: none; box-shadow: 0 0 0 2px #f0f1f4, 0 0 0 4px #14679e; }
-  .open-practice-shell__dialog { width: 100%; max-width: none; height: 100dvh; max-height: none; margin: 0; border: 0; padding: 0; background: #f0f1f4; color: #14202e; }
-  .open-practice-shell__dialog::backdrop { background: rgb(14 25 40 / 0.42); }
-  .open-practice-shell__dialog-inner { width: min(100% - 32px, 34rem); margin: 0 auto; padding: 20px 0 48px; }
-  .open-practice-shell__dialog-heading { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #b9bec6; padding-bottom: 16px; }
-  .open-practice-shell__dialog-heading p { margin: 0; font-size: 0.875rem; font-weight: 750; }
-  .open-practice-shell__dialog button { min-height: 44px; border: 1px solid #b9bec6; border-radius: 2px; background: transparent; color: #14202e; font-size: 0.875rem; font-weight: 700; }
-  .open-practice-shell__dialog-search { display: grid; gap: 8px; padding: 24px 0; border-bottom: 1px solid #b9bec6; }
-  .open-practice-shell__dialog-search label { font-size: 0.875rem; font-weight: 700; }
+  .open-practice-shell__dialog { width: min(100% - 24px, 520px); max-width: none; max-height: calc(100dvh - 24px); margin: 12px 12px 12px auto; border: 1px solid #14202e; border-radius: 0; padding: 0; overflow: auto; background: #f7f8fa; color: #14202e; }
+  .open-practice-shell__dialog::backdrop { background: rgb(14 25 40 / 0.55); }
+  .open-practice-shell__dialog-inner { width: 100%; }
+  .open-practice-shell__dialog-heading { display: flex; min-height: 64px; padding: 12px 18px; align-items: center; justify-content: space-between; border-bottom: 1px solid #b9bec6; }
+  .open-practice-shell__dialog-heading p { margin: 0; font-size: 1rem; font-weight: 760; }
+  .open-practice-shell__dialog button { min-height: 42px; padding: 8px 13px; border: 1px solid #b9bec6; border-radius: 0; background: #f7f8fa; color: #14202e; font-size: 1rem; font-weight: 700; }
+  .open-practice-shell__dialog-search { display: grid; gap: 8px; padding: 20px 18px; border-bottom: 1px solid #b9bec6; }
+  .open-practice-shell__dialog-search label { color: #5a6472; font-size: 0.78rem; font-weight: 700; }
   .open-practice-shell__dialog-search > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
-  .open-practice-shell__dialog-search input { min-width: 0; min-height: 44px; border: 1px solid #b9bec6; border-radius: 2px; padding: 0 12px; background: #fff; color: #14202e; font-size: 1rem; }
-  .open-practice-shell__dialog-search button { padding: 0 14px; background: #14202e; color: #fff; }
-  .open-practice-shell__dialog-primary { display: grid; padding: 16px 0; border-bottom: 1px solid #b9bec6; }
+  .open-practice-shell__dialog-search input { min-width: 0; min-height: 46px; border: 1px solid #b9bec6; border-radius: 0; padding: 9px 11px; background: #f7f8fa; color: #14202e; font-size: 1rem; }
+  .open-practice-shell__dialog-primary { display: grid; }
   .open-practice-shell__dialog-primary a,
-  .open-practice-shell__dialog-secondary a { display: flex; align-items: center; justify-content: space-between; min-height: 48px; border-bottom: 1px solid rgb(185 190 198 / 0.7); color: #14202e; font-size: 1rem; font-weight: 700; text-decoration: none; }
-  .open-practice-shell__dialog-primary a[aria-current] { background: #d9e5ef; text-decoration: underline; text-decoration-color: #14679e; text-decoration-thickness: 3px; text-underline-offset: 5px; }
-  .open-practice-shell__dialog-primary small { color: #5a6472; font-size: 0.75rem; font-weight: 650; }
-  .open-practice-shell__dialog-secondary { display: grid; padding-top: 16px; }
+  .open-practice-shell__dialog-secondary a { display: flex; align-items: center; justify-content: space-between; min-height: 58px; padding: 14px 18px; border-bottom: 1px solid #b9bec6; color: #14202e; font-size: 1.05rem; font-weight: 680; text-decoration: none; }
+  .open-practice-shell__dialog-primary a[aria-current] { background: #0e1928; color: #f0f1f4; box-shadow: inset 4px 0 0 #14679e; }
+  .open-practice-shell__dialog-primary small { color: rgb(240 241 244 / 0.62); font-size: 0.72rem; font-weight: 500; }
+  .open-practice-shell__dialog-secondary { display: grid; grid-template-columns: repeat(2, 1fr); padding: 14px 18px; gap: 8px; }
+  .open-practice-shell__dialog-secondary a { min-height: 42px; padding: 8px; justify-content: center; border: 1px solid #b9bec6; font-size: 0.82rem; }
   .open-practice-shell__dialog-secondary a[aria-current] { color: #14202e; text-decoration: underline; text-decoration-color: #14679e; text-decoration-thickness: 3px; text-underline-offset: 5px; }
   .signal-dispatch-header button[data-search-trigger] { padding: 0; }
   .publication-sections-button { min-height: 40px; border: 1px solid #3f3f46; border-radius: 0.375rem; padding: 0 0.75rem; background: transparent; color: #d4d4d8; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
@@ -265,11 +265,16 @@ function publicationLinkClasses(id: string, base: string) {
   .more-dropdown[open] .more-caret { transform: rotate(180deg); }
 
   @media (max-width: 920px) {
-    .open-practice-shell { --practice-shell-height: 56px; }
+    .open-practice-shell { --practice-shell-height: 64px; }
     .open-practice-shell__inner { width: calc(100% - 32px); grid-template-columns: 1fr auto; }
     .open-practice-shell__desktop,
     .open-practice-shell__search { display: none; }
-    .open-practice-shell__menu-button { display: inline-flex; align-items: center; min-height: 44px; border: 1px solid #b9bec6; border-radius: 2px; padding: 10px 12px; background: transparent; color: #14202e; cursor: pointer; font-size: 0.82rem; font-weight: 700; }
+    .open-practice-shell__menu-button { display: inline-flex; align-items: center; min-height: 42px; border: 1px solid #b9bec6; border-radius: 3px; padding: 8px 13px; background: transparent; color: #14202e; cursor: pointer; font-size: 1rem; font-weight: 700; }
+  }
+  @media (max-width: 680px) {
+    .open-practice-shell { --practice-shell-height: 60px; }
+    .open-practice-shell__inner { width: calc(100% - 30px); }
+    .open-practice-shell__dialog-secondary { grid-template-columns: 1fr; }
   }
 </style>
 
@@ -281,17 +286,21 @@ function publicationLinkClasses(id: string, base: string) {
   const publicationSections = document.getElementById('publication-sections');
   const moreDropdown = document.querySelector('.more-dropdown') as HTMLDetailsElement | null;
 
-  let globalMenuHistoryState: unknown;
   let globalMenuHasHistoryState = false;
+  let pendingNavigation: string | null = null;
+  let bodyOverflow = '';
+  let rootOverflow = '';
 
   function lockBackground() {
+    rootOverflow = document.documentElement.style.overflow;
+    bodyOverflow = document.body.style.overflow;
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
   }
 
   function unlockBackground() {
-    document.documentElement.style.overflow = '';
-    document.body.style.overflow = '';
+    document.documentElement.style.overflow = rootOverflow;
+    document.body.style.overflow = bodyOverflow;
   }
 
   function setGlobalMenuOpen(isOpen: boolean) {
@@ -300,8 +309,8 @@ function publicationLinkClasses(id: string, base: string) {
 
   function removeGlobalMenuHistoryState() {
     if (!globalMenuHasHistoryState) return;
-    history.replaceState(globalMenuHistoryState ?? null, '', window.location.href);
     globalMenuHasHistoryState = false;
+    history.back();
   }
 
   function closeGlobalMenu({ restoreFocus = true, removeHistoryState = true } = {}) {
@@ -315,7 +324,6 @@ function publicationLinkClasses(id: string, base: string) {
 
   function openGlobalMenu() {
     if (!globalMenuDialog || globalMenuDialog.open) return;
-    globalMenuHistoryState = history.state;
     history.pushState({ ...(history.state ?? {}), siteNavigationDialog: true }, '', window.location.href);
     globalMenuHasHistoryState = true;
     globalMenuDialog.showModal();
@@ -343,6 +351,22 @@ function publicationLinkClasses(id: string, base: string) {
 
   globalMenuButton?.addEventListener('click', openGlobalMenu);
   globalMenuCloseButton?.addEventListener('click', () => closeGlobalMenu());
+
+  globalMenuDialog?.addEventListener('keydown', (event) => {
+    if (event.key !== 'Tab') return;
+    const controls = Array.from(globalMenuDialog.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), input:not([disabled])',
+    )).filter((element) => element.getClientRects().length > 0);
+    const first = controls[0];
+    const last = controls[controls.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last?.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first?.focus();
+    }
+  });
   publicationSectionsButton?.addEventListener('click', togglePublicationSections);
 
   globalMenuDialog?.addEventListener('cancel', (event) => {
@@ -356,16 +380,32 @@ function publicationLinkClasses(id: string, base: string) {
   });
 
   globalMenuDialog?.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => closeGlobalMenu({ restoreFocus: false }));
+    link.addEventListener('click', (event) => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      pendingNavigation = link.href;
+      closeGlobalMenu({ restoreFocus: false });
+    });
   });
-  globalMenuDialog?.querySelector('form')?.addEventListener('submit', () => closeGlobalMenu({ restoreFocus: false }));
+  globalMenuDialog?.querySelector('form')?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget as HTMLFormElement);
+    const query = form.get('q');
+    const destination = new URL('/search', window.location.origin);
+    if (typeof query === 'string' && query) destination.searchParams.set('q', query);
+    pendingNavigation = destination.href;
+    closeGlobalMenu({ restoreFocus: false });
+  });
   publicationSections?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => closePublicationSections()));
 
   window.addEventListener('popstate', () => {
+    const destination = pendingNavigation;
+    pendingNavigation = null;
+    globalMenuHasHistoryState = false;
     if (globalMenuDialog?.open) {
-      globalMenuHasHistoryState = false;
       closeGlobalMenu({ removeHistoryState: false });
     }
+    if (destination) window.location.assign(destination);
   });
 
   document.addEventListener('keydown', (event) => {
