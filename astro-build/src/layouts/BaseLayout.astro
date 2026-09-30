@@ -2,7 +2,8 @@
 import '../styles/global.css';
 import { featureImageSrcset, featureImageSizes } from '../utils/feature-image';
 
-// ANALYTICS: the Cloudflare beacon near the bottom of <body> is the only one.
+// ANALYTICS: Cloudflare provides cookieless traffic totals. The shared
+// first-party tracker records actions on public pages, honoring analytics choices.
 //
 // @vercel/analytics and @vercel/speed-insights used to sit beside it. Both
 // inject a script from /_vercel/…/script.js — a path served by Vercel's
@@ -159,7 +160,8 @@ const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
   <body class="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 text-zinc-100">
     <slot />
 
-    <!-- Cloudflare Web Analytics — the only analytics on this site; see above -->
+    <!-- Traffic totals and public-page actions use separate collectors. -->
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "24ecd813bb2d45798f0512e6beebc164"}'></script>
+    {!noIndex && <script is:inline defer src="/photography/site-activity.js?v=1"></script>}
   </body>
 </html>
