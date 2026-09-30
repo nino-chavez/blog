@@ -6,100 +6,137 @@ interface Props {
 }
 
 const { currentPage } = Astro.props;
+const pathname = Astro.url.pathname;
 
-// Primary sections — always visible at md+
 const primaryLinks = [
   { href: '/blog', label: 'Essays', id: 'blog' },
   { href: '/blog/series', label: 'Series', id: 'series' },
   { href: '/blog/fiction', label: 'Fiction', id: 'fiction' },
 ];
 
-// Everything else — behind "More" dropdown on desktop, own section in mobile drawer
 const moreLinks = [
   { href: '/blog/whitepapers', label: 'Whitepapers', id: 'whitepapers' },
   { href: '/blog/presentations', label: 'Presentations', id: 'presentations' },
   { href: '/blog/tutorials', label: 'Tutorials', id: 'tutorials' },
   { href: '/blog/counterpoints', label: 'Counterpoints', id: 'counterpoints' },
   { href: '/blog/tags', label: 'Tags', id: 'tags' },
-  { href: '/about', label: 'About', id: 'about' },
 ];
 
-// Highlight "More" when the current page is one of the demoted sections
-const moreIds = moreLinks.map((l) => l.id);
+const moreIds = moreLinks.map((link) => link.id);
 const moreActive = currentPage ? moreIds.includes(currentPage) : false;
-
-function linkClasses(id: string, base: string) {
-  return currentPage === id
-    ? `${base} text-white bg-zinc-800/60 font-medium`
-    : `${base} text-zinc-400 hover:text-white`;
-}
 
 const practiceLinks = [
   { href: '/work', label: 'Work' },
   { href: '/demos', label: 'Sessions' },
   { href: '/learn', label: 'Learn' },
-  { href: '/blog', label: 'Writing', current: true },
+  { href: '/blog', label: 'Writing' },
   { href: '/photography', label: 'Photography' },
   { href: '/about', label: 'About' },
 ];
+
+const practiceSecondaryLinks = [
+  { href: '/now', label: 'Now' },
+  { href: '/links', label: 'Links' },
+];
+
+function ownsPath(href: string) {
+  if (href === '/about') {
+    return pathname === '/about' || pathname === '/now' || pathname === '/links';
+  }
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+function globalAriaCurrent(href: string) {
+  if (!ownsPath(href)) return undefined;
+  return pathname === href ? 'page' : 'location';
+}
+
+function publicationLinkClasses(id: string, base: string) {
+  return currentPage === id
+    ? `${base} text-white bg-zinc-800/60 font-medium`
+    : `${base} text-zinc-400 hover:text-white`;
+}
 ---
 
 <div class="open-practice-shell">
   <div class="open-practice-shell__inner">
-    <a class="open-practice-shell__identity" href="/" aria-label="Nino Chavez, home">Nino Chavez</a>
-    <nav class="open-practice-shell__desktop" aria-label="Nino Chavez site">
+    <a
+      class="open-practice-shell__identity"
+      href="/"
+      aria-label="Nino Chavez, home"
+      aria-current={pathname === '/' ? 'page' : undefined}
+    >Nino Chavez</a>
+    <nav class="open-practice-shell__desktop" aria-label="Primary navigation">
       {practiceLinks.map((link) => (
-        <a href={link.href} aria-current={link.current ? 'location' : undefined}>{link.label}</a>
+        <a href={link.href} aria-current={globalAriaCurrent(link.href)}>{link.label}</a>
       ))}
     </nav>
-    <a class="open-practice-shell__search" href="/search">Search site</a>
-    <details class="open-practice-shell__mobile">
-      <summary>Menu</summary>
-      <nav aria-label="Nino Chavez site">
-        {practiceLinks.map((link) => (
-          <a href={link.href} aria-current={link.current ? 'location' : undefined}>{link.label}</a>
-        ))}
-        <a href="/search">Search site</a>
-      </nav>
-    </details>
+    <a class="open-practice-shell__search" href="/search" aria-current={pathname === '/search' ? 'page' : undefined}>Search site</a>
+    <button
+      id="site-navigation-menu-button"
+      class="open-practice-shell__menu-button"
+      type="button"
+      aria-haspopup="dialog"
+      aria-controls="site-navigation-dialog"
+      aria-expanded="false"
+    >Menu</button>
   </div>
 </div>
+
+<dialog id="site-navigation-dialog" class="open-practice-shell__dialog" aria-labelledby="site-navigation-dialog-title">
+  <div class="open-practice-shell__dialog-inner">
+    <div class="open-practice-shell__dialog-heading">
+      <p id="site-navigation-dialog-title">Navigate</p>
+      <button id="site-navigation-dialog-close" type="button" autofocus>Close</button>
+    </div>
+
+    <form class="open-practice-shell__dialog-search" action="/search" role="search">
+      <label for="site-navigation-query">Search this site</label>
+      <div>
+        <input id="site-navigation-query" name="q" type="search" placeholder="Project, topic, or page…" />
+        <button type="submit">Search</button>
+      </div>
+    </form>
+
+    <nav class="open-practice-shell__dialog-primary" aria-label="Mobile primary navigation">
+      {practiceLinks.map((link) => {
+        const current = globalAriaCurrent(link.href);
+        return (
+          <a href={link.href} aria-current={current}>
+            <span>{link.label}</span>
+            {current && <small>{current === 'page' ? 'Current page' : 'Current section'}</small>}
+          </a>
+        );
+      })}
+    </nav>
+
+    <nav class="open-practice-shell__dialog-secondary" aria-label="More pages">
+      {practiceSecondaryLinks.map((link) => (
+        <a href={link.href} aria-current={pathname === link.href ? 'page' : undefined}>{link.label}</a>
+      ))}
+    </nav>
+  </div>
+</dialog>
 
 <header class="signal-dispatch-header bg-zinc-950 border-b border-zinc-800/50">
   <nav class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8" aria-label="Signal Dispatch sections">
     <div class="flex items-center justify-between min-h-16 py-2 md:min-h-20">
-      <!-- Publication masthead -->
       <a href="/blog" class="flex flex-col items-start flex-shrink-0 leading-none">
-        <!-- Solid, not a gradient (DIRECTION.md#wordmark-gradient). A gradient
-             nameplate is the finished-insight look; this publication argues it
-             is thinking in progress. White also leaves the open question about
-             the violet untouched — see DIRECTION.md § Open. -->
-        <span class="font-serif text-xl sm:text-2xl font-bold text-white whitespace-nowrap">
-          Signal Dispatch
-        </span>
-        <span class="mt-1 text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-zinc-600">
-          Publication
-        </span>
+        <span class="font-serif text-xl sm:text-2xl font-bold text-white whitespace-nowrap">Signal Dispatch</span>
+        <span class="mt-1 text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-zinc-600">Publication</span>
       </a>
 
-      <!-- Desktop nav (md+) -->
       <div class="hidden md:flex items-center gap-1">
         {primaryLinks.map((link) => (
-          <a
-            href={link.href}
-            class={linkClasses(link.id, 'text-sm px-3 py-1.5 rounded-md transition-colors')}
-          >
+          <a href={link.href} class={publicationLinkClasses(link.id, 'text-sm px-3 py-1.5 rounded-md transition-colors')}>
             {link.label}
           </a>
         ))}
 
-        <!-- More dropdown (content sections only) -->
         <details class="relative more-dropdown">
           <summary
             class={`list-none cursor-pointer select-none text-sm px-3 py-1.5 rounded-md transition-colors flex items-center gap-1 ${
-              moreActive
-                ? 'text-white bg-zinc-800/60 font-medium'
-                : 'text-zinc-400 hover:text-white'
+              moreActive ? 'text-white bg-zinc-800/60 font-medium' : 'text-zinc-400 hover:text-white'
             }`}
             aria-haspopup="menu"
           >
@@ -108,157 +145,63 @@ const practiceLinks = [
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
-          <div
-            class="absolute right-0 mt-2 w-56 rounded-lg border border-zinc-800 bg-zinc-950/98 backdrop-blur-xl shadow-xl shadow-black/50 overflow-hidden py-1"
-            role="menu"
-          >
+          <div class="absolute right-0 mt-2 w-56 rounded-lg border border-zinc-800 bg-zinc-950/98 backdrop-blur-xl shadow-xl shadow-black/50 overflow-hidden py-1" role="menu">
             {moreLinks.map((link) => (
               <a
                 href={link.href}
                 role="menuitem"
                 class={`block px-4 py-2.5 text-sm transition-colors ${
-                  currentPage === link.id
-                    ? 'text-white bg-zinc-800/60 font-medium'
-                    : 'text-zinc-400 hover:text-white hover:bg-zinc-800/40'
+                  currentPage === link.id ? 'text-white bg-zinc-800/60 font-medium' : 'text-zinc-400 hover:text-white hover:bg-zinc-800/40'
                 }`}
-              >
-                {link.label}
-              </a>
+              >{link.label}</a>
             ))}
           </div>
         </details>
 
-        <!-- Utility cluster -->
         <div class="border-l border-zinc-800/50 h-5 mx-2"></div>
-        <button
-          type="button"
-          data-search-trigger
-          class="flex items-center justify-center w-8 h-8 p-0 rounded-md text-zinc-400 hover:text-white transition-colors"
-          title="Search Signal Dispatch (⌘K)"
-          aria-label="Search Signal Dispatch"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
+        <button type="button" data-search-trigger class="flex items-center justify-center w-8 h-8 p-0 rounded-md text-zinc-400 hover:text-white transition-colors" title="Search Signal Dispatch (⌘K)" aria-label="Search Signal Dispatch">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
         </button>
-        <a
-          href="/blog/rss.xml"
-          class="flex items-center justify-center w-8 h-8 rounded-md text-zinc-400 hover:text-white transition-colors"
-          title="RSS Feed"
-          aria-label="RSS Feed"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z" />
-          </svg>
+        <a href="/blog/rss.xml" class="flex items-center justify-center w-8 h-8 rounded-md text-zinc-400 hover:text-white transition-colors" title="RSS Feed" aria-label="RSS Feed">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z" /></svg>
         </a>
       </div>
 
-      <!-- Mobile utility (below md) -->
-      <div class="flex items-center gap-1 md:hidden">
-        <button
-          type="button"
-          data-search-trigger
-          class="flex items-center justify-center w-10 h-10 p-0 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800/50 transition-colors"
-          aria-label="Search Signal Dispatch"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
+      <div class="flex items-center gap-2 md:hidden">
+        <button type="button" data-search-trigger class="flex items-center justify-center w-10 h-10 p-0 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800/50 transition-colors" aria-label="Search Signal Dispatch">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
         </button>
-      <!-- Mobile hamburger button (below md) -->
-      <button
-        id="mobile-menu-btn"
-        type="button"
-        class="md:hidden flex items-center justify-center w-10 h-10 p-0 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800/50 transition-colors"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-      >
-        <span class="sr-only">Browse Signal Dispatch</span>
-        <svg id="menu-icon-open" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-        <svg id="menu-icon-close" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
+        <button id="publication-sections-button" type="button" class="publication-sections-button" aria-controls="publication-sections" aria-expanded="false">Sections</button>
       </div>
     </div>
   </nav>
 </header>
 
-<!-- Mobile menu overlay (outside header to avoid backdrop-filter containing block) -->
-<div
-  id="mobile-menu"
-  class="hidden fixed inset-0 top-14 z-[45] bg-zinc-950/98 backdrop-blur-xl md:hidden overflow-y-auto"
-  role="dialog"
-  aria-modal="true"
-  aria-label="Signal Dispatch navigation"
->
-  <nav class="max-w-7xl mx-auto px-6 py-8">
-    <!-- Primary sections -->
-    <div class="mb-8">
+<aside id="publication-sections" class="hidden fixed inset-x-0 top-[7.5rem] z-[45] border-b border-zinc-800 bg-zinc-950/98 backdrop-blur-xl md:hidden" aria-label="Signal Dispatch sections">
+  <nav class="max-w-7xl mx-auto px-6 py-6">
+    <div class="mb-6">
       <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">Signal Dispatch sections</h2>
       <div class="flex flex-col gap-1">
         {primaryLinks.map((link) => (
-          <a
-            href={link.href}
-            class={`py-3 px-3 text-lg rounded-lg transition-colors ${
-              currentPage === link.id
-                ? 'text-white bg-zinc-800/60 font-medium'
-                : 'text-zinc-300 hover:text-white hover:bg-zinc-800/30'
-            }`}
-          >
-            {link.label}
-          </a>
+          <a href={link.href} class={`py-3 px-3 text-lg rounded-lg transition-colors ${currentPage === link.id ? 'text-white bg-zinc-800/60 font-medium' : 'text-zinc-300 hover:text-white hover:bg-zinc-800/30'}`}>{link.label}</a>
         ))}
       </div>
     </div>
-
-    <!-- More sections -->
-    <div class="mb-8">
+    <div class="mb-6">
       <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">More sections</h2>
       <div class="flex flex-col gap-1">
         {moreLinks.map((link) => (
-          <a
-            href={link.href}
-            class={`py-3 px-3 text-lg rounded-lg transition-colors ${
-              currentPage === link.id
-                ? 'text-white bg-zinc-800/60 font-medium'
-                : 'text-zinc-300 hover:text-white hover:bg-zinc-800/30'
-            }`}
-          >
-            {link.label}
-          </a>
+          <a href={link.href} class={`py-3 px-3 text-lg rounded-lg transition-colors ${currentPage === link.id ? 'text-white bg-zinc-800/60 font-medium' : 'text-zinc-300 hover:text-white hover:bg-zinc-800/30'}`}>{link.label}</a>
         ))}
       </div>
     </div>
-
-    <!-- Utility -->
-    <div>
-      <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">Publication feeds</h2>
-      <div class="flex flex-col gap-1">
-        <a
-          href="/blog/rss.xml"
-          class="py-3 px-3 text-lg text-zinc-300 hover:text-white hover:bg-zinc-800/30 rounded-lg transition-colors"
-        >
-          RSS Feed
-        </a>
-      </div>
-    </div>
+    <a href="/blog/rss.xml" class="block py-3 px-3 text-lg text-zinc-300 hover:text-white hover:bg-zinc-800/30 rounded-lg transition-colors">RSS Feed</a>
   </nav>
-</div>
+</aside>
 
-<!-- Full-text search modal (outside header to avoid backdrop-filter containing block) -->
 <SearchModal />
 
 <style>
-  /* Shell chrome values are a machine copy of the parent site's contract —
-     website-nc docs/claude-design-system.md (2026-08-04 token table:
-     ground #f0f1f4, text #14202e, muted #5a6472, rule #b9bec6,
-     action #14679e, action-quiet #d9e5ef, ink #0e1928). This strip
-     impersonates the ninochavez.co shell, so it tracks that contract;
-     everything below the Signal Dispatch masthead is governed by this
-     repo's DESIGN.md instead. Update here when the parent tokens change. */
   .open-practice-shell {
     --practice-shell-height: 64px;
     position: sticky;
@@ -279,177 +222,164 @@ const practiceLinks = [
     align-items: center;
     gap: 24px;
   }
-  .open-practice-shell a {
-    color: inherit;
-    font-size: 0.875rem;
-    font-weight: 650;
-    text-decoration: none;
-  }
-  .open-practice-shell__identity {
-    justify-self: start;
-  }
-  .open-practice-shell__desktop {
-    display: flex;
-    align-self: stretch;
-    align-items: center;
-    gap: 34px;
-  }
-  .open-practice-shell__desktop a {
-    display: inline-flex;
-    height: 100%;
-    align-items: center;
-    border-bottom: 3px solid transparent;
-    color: #5a6472;
-  }
+  .open-practice-shell a { color: inherit; font-size: 0.875rem; font-weight: 650; text-decoration: none; }
+  .open-practice-shell__identity { justify-self: start; }
+  .open-practice-shell__desktop { display: flex; align-self: stretch; align-items: center; gap: 34px; }
+  .open-practice-shell__desktop a { display: inline-flex; height: 100%; align-items: center; border-bottom: 3px solid transparent; color: #5a6472; }
   .open-practice-shell__desktop a:hover,
   .open-practice-shell__desktop a:focus-visible,
-  .open-practice-shell__desktop a[aria-current] {
-    color: #14202e;
-  }
-  .open-practice-shell__desktop a[aria-current] {
-    border-bottom-color: #14679e;
-  }
-  .open-practice-shell__search {
-    justify-self: end;
-    color: #5a6472 !important;
-  }
+  .open-practice-shell__desktop a[aria-current] { color: #14202e; }
+  .open-practice-shell__desktop a[aria-current] { border-bottom-color: #14679e; }
+  .open-practice-shell__search { justify-self: end; color: #5a6472 !important; }
   .open-practice-shell__search:hover,
-  .open-practice-shell__search:focus-visible {
-    color: #14202e !important;
-  }
-  .open-practice-shell :focus-visible {
-    outline: none;
-    box-shadow:
-      0 0 0 2px #f0f1f4,
-      0 0 0 4px #14679e;
-  }
-  .open-practice-shell__mobile {
-    display: none;
-  }
-  .signal-dispatch-header button[data-search-trigger],
-  .signal-dispatch-header #mobile-menu-btn {
-    padding: 0;
-  }
-  /* Remove default marker on <details> summary */
-  .more-dropdown summary::-webkit-details-marker {
-    display: none;
-  }
-  .more-dropdown summary {
-    list-style: none;
-  }
-  /* Rotate caret when open */
-  .more-caret {
-    transition: transform 0.15s ease;
-  }
-  .more-dropdown[open] .more-caret {
-    transform: rotate(180deg);
-  }
+  .open-practice-shell__search:focus-visible { color: #14202e !important; }
+  .open-practice-shell__menu-button { display: none; }
+  .open-practice-shell :focus-visible,
+  .open-practice-shell__dialog :focus-visible { outline: none; box-shadow: 0 0 0 2px #f0f1f4, 0 0 0 4px #14679e; }
+  .open-practice-shell__dialog { width: 100%; max-width: none; height: 100dvh; max-height: none; margin: 0; border: 0; padding: 0; background: #f0f1f4; color: #14202e; }
+  .open-practice-shell__dialog::backdrop { background: rgb(14 25 40 / 0.42); }
+  .open-practice-shell__dialog-inner { width: min(100% - 32px, 34rem); margin: 0 auto; padding: 20px 0 48px; }
+  .open-practice-shell__dialog-heading { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #b9bec6; padding-bottom: 16px; }
+  .open-practice-shell__dialog-heading p { margin: 0; font-size: 0.875rem; font-weight: 750; }
+  .open-practice-shell__dialog button { min-height: 44px; border: 1px solid #b9bec6; border-radius: 2px; background: transparent; color: #14202e; font-size: 0.875rem; font-weight: 700; }
+  .open-practice-shell__dialog-search { display: grid; gap: 8px; padding: 24px 0; border-bottom: 1px solid #b9bec6; }
+  .open-practice-shell__dialog-search label { font-size: 0.875rem; font-weight: 700; }
+  .open-practice-shell__dialog-search > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+  .open-practice-shell__dialog-search input { min-width: 0; min-height: 44px; border: 1px solid #b9bec6; border-radius: 2px; padding: 0 12px; background: #fff; color: #14202e; font-size: 1rem; }
+  .open-practice-shell__dialog-search button { padding: 0 14px; background: #14202e; color: #fff; }
+  .open-practice-shell__dialog-primary { display: grid; padding: 16px 0; border-bottom: 1px solid #b9bec6; }
+  .open-practice-shell__dialog-primary a,
+  .open-practice-shell__dialog-secondary a { display: flex; align-items: center; justify-content: space-between; min-height: 48px; border-bottom: 1px solid rgb(185 190 198 / 0.7); color: #14202e; font-size: 1rem; font-weight: 700; text-decoration: none; }
+  .open-practice-shell__dialog-primary a[aria-current] { background: #d9e5ef; text-decoration: underline; text-decoration-color: #14679e; text-decoration-thickness: 3px; text-underline-offset: 5px; }
+  .open-practice-shell__dialog-primary small { color: #5a6472; font-size: 0.75rem; font-weight: 650; }
+  .open-practice-shell__dialog-secondary { display: grid; padding-top: 16px; }
+  .open-practice-shell__dialog-secondary a[aria-current] { color: #14202e; text-decoration: underline; text-decoration-color: #14679e; text-decoration-thickness: 3px; text-underline-offset: 5px; }
+  .signal-dispatch-header button[data-search-trigger] { padding: 0; }
+  .publication-sections-button { min-height: 40px; border: 1px solid #3f3f46; border-radius: 0.375rem; padding: 0 0.75rem; background: transparent; color: #d4d4d8; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  .publication-sections-button:hover,
+  .publication-sections-button[aria-expanded='true'] { border-color: var(--color-signal-coral); color: #fff; }
+  .publication-sections-button:focus-visible { outline: 3px solid var(--color-signal-coral); outline-offset: 2px; }
+  .more-dropdown summary::-webkit-details-marker { display: none; }
+  .more-dropdown summary { list-style: none; }
+  .more-caret { transition: transform 0.15s ease; }
+  .more-dropdown[open] .more-caret { transform: rotate(180deg); }
 
   @media (max-width: 920px) {
-    .open-practice-shell {
-      --practice-shell-height: 56px;
-    }
-    .open-practice-shell__inner {
-      width: calc(100% - 32px);
-      grid-template-columns: 1fr auto;
-    }
+    .open-practice-shell { --practice-shell-height: 56px; }
+    .open-practice-shell__inner { width: calc(100% - 32px); grid-template-columns: 1fr auto; }
     .open-practice-shell__desktop,
-    .open-practice-shell__search {
-      display: none;
-    }
-    .open-practice-shell__mobile {
-      position: relative;
-      display: block;
-      justify-self: end;
-    }
-    .open-practice-shell__mobile summary {
-      min-height: 44px;
-      padding: 10px 12px;
-      border: 1px solid #b9bec6;
-      border-radius: 2px;
-      cursor: pointer;
-      font-size: 0.82rem;
-      font-weight: 700;
-      list-style: none;
-    }
-    .open-practice-shell__mobile summary::-webkit-details-marker {
-      display: none;
-    }
-    .open-practice-shell__mobile nav {
-      position: absolute;
-      top: calc(100% + 6px);
-      right: 0;
-      display: grid;
-      width: min(270px, calc(100vw - 32px));
-      padding: 8px;
-      border: 1px solid #b9bec6;
-      background: #f0f1f4;
-      box-shadow: 0 20px 44px rgb(14 25 40 / 0.18);
-    }
-    .open-practice-shell__mobile nav a {
-      min-height: 44px;
-      padding: 10px 12px;
-      border-left: 3px solid transparent;
-    }
-    .open-practice-shell__mobile nav a[aria-current] {
-      border-left-color: #14679e;
-      background: #d9e5ef;
-    }
+    .open-practice-shell__search { display: none; }
+    .open-practice-shell__menu-button { display: inline-flex; align-items: center; min-height: 44px; border: 1px solid #b9bec6; border-radius: 2px; padding: 10px 12px; background: transparent; color: #14202e; cursor: pointer; font-size: 0.82rem; font-weight: 700; }
   }
 </style>
 
 <script>
-  const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  const iconOpen = document.getElementById('menu-icon-open');
-  const iconClose = document.getElementById('menu-icon-close');
+  const globalMenuButton = document.getElementById('site-navigation-menu-button') as HTMLButtonElement | null;
+  const globalMenuDialog = document.getElementById('site-navigation-dialog') as HTMLDialogElement | null;
+  const globalMenuCloseButton = document.getElementById('site-navigation-dialog-close') as HTMLButtonElement | null;
+  const publicationSectionsButton = document.getElementById('publication-sections-button') as HTMLButtonElement | null;
+  const publicationSections = document.getElementById('publication-sections');
+  const moreDropdown = document.querySelector('.more-dropdown') as HTMLDetailsElement | null;
 
-  function toggleMenu() {
-    const isOpen = menu?.classList.contains('hidden') === false;
-    if (isOpen) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
-  }
+  let globalMenuHistoryState: unknown;
+  let globalMenuHasHistoryState = false;
 
-  function openMenu() {
-    menu?.classList.remove('hidden');
-    iconOpen?.classList.add('hidden');
-    iconClose?.classList.remove('hidden');
-    btn?.setAttribute('aria-expanded', 'true');
+  function lockBackground() {
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
   }
 
-  function closeMenu() {
-    menu?.classList.add('hidden');
-    iconOpen?.classList.remove('hidden');
-    iconClose?.classList.add('hidden');
-    btn?.setAttribute('aria-expanded', 'false');
+  function unlockBackground() {
+    document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
   }
 
-  btn?.addEventListener('click', toggleMenu);
+  function setGlobalMenuOpen(isOpen: boolean) {
+    globalMenuButton?.setAttribute('aria-expanded', String(isOpen));
+  }
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      // Close mobile menu if open
-      if (menu && !menu.classList.contains('hidden')) {
-        closeMenu();
-      }
-      // Close desktop More dropdown if open
-      const more = document.querySelector('.more-dropdown') as HTMLDetailsElement | null;
-      if (more?.open) {
-        more.open = false;
-      }
+  function removeGlobalMenuHistoryState() {
+    if (!globalMenuHasHistoryState) return;
+    history.replaceState(globalMenuHistoryState ?? null, '', window.location.href);
+    globalMenuHasHistoryState = false;
+  }
+
+  function closeGlobalMenu({ restoreFocus = true, removeHistoryState = true } = {}) {
+    if (!globalMenuDialog?.open) return;
+    if (removeHistoryState) removeGlobalMenuHistoryState();
+    globalMenuDialog.close();
+    setGlobalMenuOpen(false);
+    unlockBackground();
+    if (restoreFocus) requestAnimationFrame(() => globalMenuButton?.focus());
+  }
+
+  function openGlobalMenu() {
+    if (!globalMenuDialog || globalMenuDialog.open) return;
+    globalMenuHistoryState = history.state;
+    history.pushState({ ...(history.state ?? {}), siteNavigationDialog: true }, '', window.location.href);
+    globalMenuHasHistoryState = true;
+    globalMenuDialog.showModal();
+    setGlobalMenuOpen(true);
+    lockBackground();
+  }
+
+  function closePublicationSections({ restoreFocus = false } = {}) {
+    if (!publicationSections || publicationSections.classList.contains('hidden')) return;
+    publicationSections.classList.add('hidden');
+    publicationSectionsButton?.setAttribute('aria-expanded', 'false');
+    if (restoreFocus) publicationSectionsButton?.focus();
+  }
+
+  function togglePublicationSections() {
+    if (!publicationSections) return;
+    const isOpen = !publicationSections.classList.contains('hidden');
+    if (isOpen) {
+      closePublicationSections({ restoreFocus: true });
+      return;
+    }
+    publicationSections.classList.remove('hidden');
+    publicationSectionsButton?.setAttribute('aria-expanded', 'true');
+  }
+
+  globalMenuButton?.addEventListener('click', openGlobalMenu);
+  globalMenuCloseButton?.addEventListener('click', () => closeGlobalMenu());
+  publicationSectionsButton?.addEventListener('click', togglePublicationSections);
+
+  globalMenuDialog?.addEventListener('cancel', (event) => {
+    event.preventDefault();
+    closeGlobalMenu();
+  });
+
+  globalMenuDialog?.addEventListener('close', () => {
+    setGlobalMenuOpen(false);
+    unlockBackground();
+  });
+
+  globalMenuDialog?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => closeGlobalMenu({ restoreFocus: false }));
+  });
+  globalMenuDialog?.querySelector('form')?.addEventListener('submit', () => closeGlobalMenu({ restoreFocus: false }));
+  publicationSections?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => closePublicationSections()));
+
+  window.addEventListener('popstate', () => {
+    if (globalMenuDialog?.open) {
+      globalMenuHasHistoryState = false;
+      closeGlobalMenu({ removeHistoryState: false });
     }
   });
 
-  // Close "More" dropdown on outside click
-  const moreDropdown = document.querySelector('.more-dropdown') as HTMLDetailsElement | null;
-  document.addEventListener('click', (e) => {
-    if (moreDropdown && moreDropdown.open && !moreDropdown.contains(e.target as Node)) {
-      moreDropdown.open = false;
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    if (publicationSections && !publicationSections.classList.contains('hidden')) {
+      closePublicationSections({ restoreFocus: true });
+    }
+    if (moreDropdown?.open) moreDropdown.open = false;
+  });
+
+  document.addEventListener('click', (event) => {
+    if (moreDropdown?.open && !moreDropdown.contains(event.target as Node)) moreDropdown.open = false;
+    if (publicationSections && !publicationSections.classList.contains('hidden') && !publicationSections.contains(event.target as Node) && !publicationSectionsButton?.contains(event.target as Node)) {
+      closePublicationSections();
     }
   });
 </script>

@@ -89,11 +89,11 @@ const challengingCounterpoint = counterpoints.find(
   <main class="min-h-screen">
     <SiteHeader currentPage="blog" />
 
-    <div class="max-w-3xl mx-auto px-4 py-12">
+    <div class="max-w-3xl mx-auto px-4 py-7 sm:py-12">
       <!-- Back link -->
       <a
         href="/blog/archive"
-        class="group inline-flex items-center gap-2 text-zinc-400 hover:text-signal-coral transition-all duration-150 font-medium mb-8 no-print"
+        class="group inline-flex items-center gap-2 text-zinc-400 hover:text-signal-coral transition-all duration-150 font-medium mb-5 sm:mb-8 no-print"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -102,30 +102,8 @@ const challengingCounterpoint = counterpoints.find(
       </a>
 
       <article class="space-y-6" data-pagefind-body>
-        <!-- Featured Image -->
-        {post.data.featureImage && (() => {
-          const src = post.data.featureImage;
-          return (
-            <div class="relative -mx-4 lg:mx-0 aspect-video overflow-hidden rounded-2xl border border-zinc-800">
-              <img
-                src={src}
-                srcset={featureImageSrcset(src)}
-                sizes={featureImageSizes(src)}
-                alt={post.data.title}
-                class="w-full h-full object-cover"
-                width="1200"
-                height="675"
-                loading="eager"
-                fetchpriority="high"
-                decoding="async"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
-            </div>
-          );
-        })()}
-
-        <!-- Article Header -->
-        <header class="space-y-3 pb-6 border-b border-zinc-800/50">
+        <!-- Title and context lead a referral reader into the essay. -->
+        <header class="space-y-3">
           <div class="flex items-center gap-3 text-sm flex-wrap">
             {post.data.category && (
               <span class={`font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border transition-colors ${colors.bg} ${colors.border} ${colors.text}`}>
@@ -145,7 +123,7 @@ const challengingCounterpoint = counterpoints.find(
             </span>
           </div>
 
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight">
+          <h1 class="text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight">
             {post.data.title}
           </h1>
 
@@ -155,8 +133,32 @@ const challengingCounterpoint = counterpoints.find(
             </p>
           )}
 
+        </header>
+
+        <!-- A contained feature image supports the essay after its title and context. -->
+        {post.data.featureImage && (() => {
+          const src = post.data.featureImage;
+          return (
+            <figure class="article-feature-image relative mx-auto aspect-[16/7] md:aspect-video overflow-hidden rounded-xl border border-zinc-800">
+              <img
+                src={src}
+                srcset={featureImageSrcset(src)}
+                sizes={featureImageSizes(src)}
+                alt={post.data.title}
+                class="w-full h-full object-cover"
+                width="1200"
+                height="675"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+            </figure>
+          );
+        })()}
+
+        <div class="article-reading-context border-y border-zinc-800/50 py-4" data-pagefind-ignore>
           {post.data.tags && post.data.tags.length > 0 && (
-            <div class="flex flex-wrap gap-2 pt-4">
+            <div class="flex flex-wrap gap-2">
               {post.data.tags.map((tag) => (
                 <a
                   href={`/blog/tags/${encodeURIComponent(tag)}`}
@@ -167,18 +169,14 @@ const challengingCounterpoint = counterpoints.find(
               ))}
             </div>
           )}
-
-          <!-- Author Info -->
-          <div class="flex items-center gap-4 pt-6 mt-2 border-t border-zinc-800/30" data-pagefind-ignore>
-            <div class="w-12 h-12 rounded-full bg-signal-coral flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-signal-coral/20">
-              NC
-            </div>
+          <div class="flex items-center gap-3 mt-4">
+            <div class="w-10 h-10 rounded-full bg-signal-coral flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-signal-coral/20">NC</div>
             <div>
               <p class="text-white font-semibold">{post.data.author || 'Nino Chavez'}</p>
               <p class="text-zinc-500 text-sm">Product Architect at commerce.com</p>
             </div>
           </div>
-        </header>
+        </div>
 
         <!-- Series Navigation (if post is part of a series) -->
         {post.data.series && (

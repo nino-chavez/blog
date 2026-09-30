@@ -114,6 +114,24 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+::selection {
+  background: rgb(232 108 93 / 0.45);
+  color: #ffffff;
+}
+
+html {
+  scrollbar-color: #52525b #0a0a0a;
+}
+
+.article-feature-image {
+  width: min(100%, 42rem);
+}
+
+.article-reading-context {
+  width: min(100%, 42rem);
+  margin-inline: auto;
+}
+
 /*
  * ============================================================================
  * Blog Post Prose Styling
