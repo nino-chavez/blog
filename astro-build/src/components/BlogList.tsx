@@ -1,9 +1,5 @@
 import { useMemo, useState } from "react";
 
-const CF_ACCOUNT_HASH = 'wg34HB28-JkySWVm5fW4kA';
-const cfUrl = (id: string, variant: string) => `https://imagedelivery.net/${CF_ACCOUNT_HASH}/${id}/${variant}`;
-const cfSrcSet = (id: string) => `${cfUrl(id, 'grid')} 400w, ${cfUrl(id, 'medium')} 800w, ${cfUrl(id, 'large')} 1600w`;
-
 interface Post {
   id: string;
   title: string;
@@ -19,631 +15,180 @@ interface BlogListProps {
   posts: Post[];
 }
 
-// Category colors.
-//
-// UNDECIDED, deliberately left in place. Eight categories, eight hues, none of
-// them declared in DESIGN.md — which declares a single accent. That is a real
-// tension and it has two honest resolutions: declare a category ramp in the
-// forge-brand preset so these become on-system, or drop to label-only and let
-// the pill text carry the taxonomy. Both are consistent with the thesis, and
-// DIRECTION.md records the choice as belonging to a person. It has not been
-// made, so nothing here changes. See DIRECTION.md ledger, `category-palette`.
-const getCategoryColors = (category: string) => {
-  const colors: Record<string, { bg: string; border: string; text: string }> = {
-    "AI & Automation": {
-      bg: "bg-violet-500/10",
-      border: "border-violet-500/30",
-      text: "text-violet-400",
-    },
-    Commerce: {
-      bg: "bg-orange-500/10",
-      border: "border-orange-500/30",
-      text: "text-orange-400",
-    },
-    Leadership: {
-      bg: "bg-blue-500/10",
-      border: "border-blue-500/30",
-      text: "text-blue-400",
-    },
-    Consulting: {
-      bg: "bg-emerald-500/10",
-      border: "border-emerald-500/30",
-      text: "text-emerald-400",
-    },
-    "Field Notes": {
-      bg: "bg-amber-500/10",
-      border: "border-amber-500/30",
-      text: "text-amber-400",
-    },
-    Meta: {
-      bg: "bg-pink-500/10",
-      border: "border-pink-500/30",
-      text: "text-pink-400",
-    },
-    Reflection: {
-      bg: "bg-cyan-500/10",
-      border: "border-cyan-500/30",
-      text: "text-cyan-400",
-    },
-    "Systems Thinking": {
-      bg: "bg-indigo-500/10",
-      border: "border-indigo-500/30",
-      text: "text-indigo-400",
-    },
-  };
-  return (
-    colors[category] || {
-      bg: "bg-zinc-800/50",
-      border: "border-zinc-700/50",
-      text: "text-zinc-400",
-    }
-  );
-};
-
-// Category to image slug mapping
-const getCategorySlug = (category: string): string => {
-  const slugs: Record<string, string> = {
-    "AI & Automation": "ai-automation",
-    "Systems Thinking": "systems-thinking",
-    Leadership: "leadership",
-    Consulting: "consulting",
-    Photography: "photography",
-    Meta: "meta",
-    "Field Notes": "field-notes",
-    Reflection: "reflections",
-    Commerce: "consulting",
-  };
-  return slugs[category] || "ai-automation";
-};
-
-// Get CF image ID for category-based post images
-const getCategoryImageId = (post: Post): string => {
-  const slug = getCategorySlug(post.category || "");
-  const variantCount: Record<string, number> = { "ai-automation": 5, photography: 2 };
-  const variants = variantCount[slug] || 3;
-  const hash = post.id
-    .split("")
-    .reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  const variant = (hash % variants) + 1;
-  return `blog-${slug}-${variant}`;
-};
-
-// Get image for post
-const getPostImage = (post: Post): string => {
-  if (post.featureImage) return post.featureImage;
-  return cfUrl(getCategoryImageId(post), 'medium');
-};
-
-// Fallback image handler
-const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-  e.currentTarget.src =
-    "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=450&fit=crop";
-};
-
 export default function BlogList({ posts }: BlogListProps) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [visibleCount, setVisibleCount] = useState(8);
+  const [visibleCount, setVisibleCount] = useState(12);
 
-  // Category stats
-  const { postCounts, topCategories, otherCategories } =
-    useMemo(() => {
-      const counts: Record<string, number> = {};
-      posts.forEach((post) => {
-        if (post.category) {
-          counts[post.category] = (counts[post.category] || 0) + 1;
-        }
-      });
-      const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-      const top = sorted.filter(([, count]) => count >= 10).map(([cat]) => cat);
-      const other = sorted
-        .filter(([, count]) => count < 10)
-        .map(([cat]) => cat);
-      const otherCount = other.reduce((sum, cat) => sum + counts[cat], 0);
-      if (other.length > 0) counts["Other"] = otherCount;
-
-      return {
-        postCounts: counts,
-        topCategories: top,
-        otherCategories: other,
-      };
-    }, [posts]);
-
-  // Filter posts
-  const filteredPosts = useMemo(() => {
-    return posts.filter((post) => {
-      if (selectedCategory) {
-        if (selectedCategory === "Other") {
-          if (!post.category || !otherCategories.includes(post.category))
-            return false;
-        } else if (post.category !== selectedCategory) {
-          return false;
-        }
-      }
-      if (selectedTag) {
-        if (!post.tags?.includes(selectedTag)) return false;
-      }
-      if (searchQuery) {
-        const q = searchQuery.toLowerCase();
-        const matches =
-          post.title.toLowerCase().includes(q) ||
-          post.excerpt?.toLowerCase().includes(q) ||
-          post.category?.toLowerCase().includes(q) ||
-          post.tags?.some((t) => t.toLowerCase().includes(q));
-        if (!matches) return false;
-      }
-      return true;
+  const { postCounts, categories } = useMemo(() => {
+    const counts: Record<string, number> = {};
+    posts.forEach((post) => {
+      if (post.category) counts[post.category] = (counts[post.category] || 0) + 1;
     });
-  }, [posts, selectedCategory, selectedTag, searchQuery, otherCategories]);
+    return {
+      postCounts: counts,
+      categories: Object.entries(counts)
+        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+        .map(([category]) => category),
+    };
+  }, [posts]);
 
-  // Split featured and regular
-  const featuredPosts = filteredPosts.filter((p) => p.featured).slice(0, 2);
-  const regularPosts = filteredPosts.filter((p) => !featuredPosts.includes(p));
+  const normalizedQuery = searchQuery.trim();
+  const filteredPosts = useMemo(() => {
+    const query = normalizedQuery.toLowerCase();
+    return posts.filter((post) => {
+      if (selectedCategory && post.category !== selectedCategory) return false;
+      if (selectedTag && !post.tags?.includes(selectedTag)) return false;
+      if (!query) return true;
+      return (
+        post.title.toLowerCase().includes(query) ||
+        post.excerpt?.toLowerCase().includes(query) ||
+        post.category?.toLowerCase().includes(query) ||
+        post.tags?.some((tag) => tag.toLowerCase().includes(query))
+      );
+    });
+  }, [posts, normalizedQuery, selectedCategory, selectedTag]);
+
+  const filtersActive = Boolean(normalizedQuery || selectedCategory || selectedTag);
+  const featuredPosts = filtersActive ? [] : filteredPosts.filter((post) => post.featured).slice(0, 2);
+  const regularPosts = filteredPosts.filter((post) => !featuredPosts.includes(post));
   const visiblePosts = regularPosts.slice(0, visibleCount);
   const hasMore = visibleCount < regularPosts.length;
-
-  const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString("en-US", {
+  const formatDate = (date: string) =>
+    new Date(date).toLocaleDateString("en-US", {
       month: "short",
       day: "numeric",
       year: "numeric",
     });
+
+  const resetFilters = () => {
+    setSelectedCategory(null);
+    setSelectedTag(null);
+    setSearchQuery("");
   };
 
-  return (
-    <div className="space-y-8">
-      {/* Sticky Filter Bar */}
-      <div className="sticky top-14 md:top-16 z-40 -mx-3 sm:-mx-4 px-3 sm:px-4 py-3 sm:py-4 bg-zinc-950/95 backdrop-blur-lg border-b border-zinc-800/50">
-        {/* Mobile: Stack search above filters */}
-        <div className="flex flex-col gap-3 sm:hidden">
-          {/* Search - Full width on mobile */}
-          <div className="relative">
-            <label className="sr-only" htmlFor="essay-search-mobile">
-              Search these essays
-            </label>
-            <svg
-              className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-            <input
-              id="essay-search-mobile"
-              type="text"
-              placeholder="Search these essays..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 text-sm bg-zinc-900/50 border border-zinc-800 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:border-signal-coral/50"
-            />
-          </div>
-
-          {/* Wrapping category filters */}
-          <div className="flex flex-wrap items-center gap-2">
-            {/* All Posts */}
-            <button
-              onClick={() => setSelectedCategory(null)}
-              className={`text-xs font-semibold px-3.5 py-1.5 rounded-full border transition-all whitespace-nowrap ${
-                !selectedCategory
-                  ? "bg-signal-coral text-white border-signal-coral"
-                  : "bg-zinc-900/50 text-zinc-400 border-zinc-800 active:bg-zinc-800"
-              }`}
-            >
-              All <span className="text-[0.65rem] opacity-60">{posts.length}</span>
-            </button>
-
-            {/* Top Categories */}
-            {topCategories.map((cat) => {
-              const colors = getCategoryColors(cat);
-              const isSelected = selectedCategory === cat;
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(isSelected ? null : cat)}
-                  className={`text-xs font-semibold px-3.5 py-1.5 rounded-full border transition-all whitespace-nowrap ${
-                    isSelected
-                      ? `${colors.bg} ${colors.border} ${colors.text}`
-                      : "bg-zinc-900/50 text-zinc-400 border-zinc-800 active:bg-zinc-800"
-                  }`}
-                >
-                  {cat} <span className="text-[0.65rem] opacity-60">{postCounts[cat]}</span>
-                </button>
-              );
-            })}
-
-            {/* Other dropdown */}
-            {otherCategories.length > 0 && (
-              <button
-                onClick={() =>
-                  setSelectedCategory(
-                    selectedCategory === "Other" ? null : "Other"
-                  )
-                }
-                className={`text-xs font-semibold px-3.5 py-1.5 rounded-full border transition-all whitespace-nowrap ${
-                  selectedCategory === "Other"
-                    ? "bg-zinc-700 text-white border-zinc-600"
-                    : "bg-zinc-900/50 text-zinc-400 border-zinc-800 active:bg-zinc-800"
-                }`}
-              >
-                Other <span className="text-[0.65rem] opacity-60">{postCounts["Other"]}</span>
-              </button>
-            )}
-
-            {/* Browse Topics Link (parity with desktop) */}
-            <a
-              href="/blog/tags"
-              className="text-xs font-medium px-3.5 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 active:bg-zinc-800 transition-all flex items-center gap-1.5 whitespace-nowrap"
-            >
-              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-              </svg>
-              Topics
-            </a>
-          </div>
+  const PostRow = ({ post, featured = false }: { post: Post; featured?: boolean }) => (
+    <article className={`publication-list-row${featured ? " publication-list-row--featured" : ""}`}>
+      <div className="publication-list-row__body">
+        <div className="publication-list-row__meta">
+          {post.category && <span>{post.category}</span>}
+          <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
         </div>
-
-        {/* Desktop: Inline layout */}
-        <div className="hidden sm:flex sm:flex-wrap sm:items-center sm:gap-3">
-          {/* All Posts */}
-          <button
-            onClick={() => setSelectedCategory(null)}
-            className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-all ${
-              !selectedCategory
-                ? "bg-signal-coral text-white border-signal-coral"
-                : "bg-zinc-900/50 text-zinc-400 border-zinc-800 hover:border-zinc-700"
-            }`}
-          >
-            All ({posts.length})
-          </button>
-
-          {/* Top Categories */}
-          {topCategories.map((cat) => {
-            const colors = getCategoryColors(cat);
-            const isSelected = selectedCategory === cat;
-            return (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(isSelected ? null : cat)}
-                className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-all ${
-                  isSelected
-                    ? `${colors.bg} ${colors.border} ${colors.text}`
-                    : "bg-zinc-900/50 text-zinc-400 border-zinc-800 hover:border-zinc-700"
-                }`}
-              >
-                {cat} ({postCounts[cat]})
+        <h3>
+          <a href={`/blog/${post.id}`}>{post.title}</a>
+        </h3>
+        {post.excerpt && <p>{post.excerpt}</p>}
+        {post.tags && post.tags.length > 0 && (
+          <div className="publication-list-row__tags" aria-label={`Topics for ${post.title}`}>
+            {post.tags.slice(0, 4).map((tag) => (
+              <button key={tag} type="button" onClick={() => setSelectedTag(tag)}>
+                {tag}
               </button>
-            );
-          })}
-
-          {/* Other dropdown */}
-          {otherCategories.length > 0 && (
-            <button
-              onClick={() =>
-                setSelectedCategory(
-                  selectedCategory === "Other" ? null : "Other"
-                )
-              }
-              className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-all ${
-                selectedCategory === "Other"
-                  ? "bg-zinc-700 text-white border-zinc-600"
-                  : "bg-zinc-900/50 text-zinc-400 border-zinc-800 hover:border-zinc-700"
-              }`}
-            >
-              Other ({postCounts["Other"]})
-            </button>
-          )}
-
-          {/* Browse Topics Link */}
-          <a
-            href="/blog/tags"
-            className="text-xs font-medium px-3 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 hover:border-signal-coral/50 hover:text-signal-coral transition-all flex items-center gap-1.5"
-          >
-            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-            </svg>
-            Topics
-          </a>
-
-          {/* Search */}
-          <div className="flex-1 min-w-[200px] max-w-xs ml-auto">
-            <div className="relative">
-              <label className="sr-only" htmlFor="essay-search-desktop">
-                Search these essays
-              </label>
-              <svg
-                className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-              <input
-                id="essay-search-desktop"
-                type="text"
-                placeholder="Search these essays..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-1.5 text-sm bg-zinc-900/50 border border-zinc-800 rounded-full text-white placeholder-zinc-500 focus:outline-none focus:border-signal-coral/50"
-              />
-            </div>
+            ))}
           </div>
-        </div>
+        )}
       </div>
+      {post.featureImage && (
+        <a className="publication-list-row__image" href={`/blog/${post.id}`} tabIndex={-1} aria-hidden="true">
+          <img
+            src={post.featureImage}
+            alt=""
+            width={560}
+            height={315}
+            loading={featured ? "eager" : "lazy"}
+            decoding="async"
+          />
+        </a>
+      )}
+    </article>
+  );
 
-      {/* Results info */}
-      {(searchQuery || selectedCategory || selectedTag) && (
-        <div className="flex items-center justify-between">
-          <p className="text-sm text-zinc-500">
-            Showing {filteredPosts.length} essays
-            {selectedCategory && (
-              <span>
-                {" "}
-                in <span className="text-white">{selectedCategory}</span>
-              </span>
-            )}
-            {selectedTag && (
-              <span>
-                {" "}
-                tagged <span className="text-signal-coral">{selectedTag}</span>
-              </span>
-            )}
-            {searchQuery && (
-              <span>
-                {" "}
-                matching "
-                <span className="text-signal-coral">{searchQuery}</span>"
-              </span>
-            )}
-          </p>
-          {selectedTag && (
+  return (
+    <div className="publication-list">
+      <section className="publication-filter" aria-label="Filter essays">
+        <label htmlFor="essay-search">Search these essays</label>
+        <div className="publication-filter__search">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input
+            id="essay-search"
+            type="search"
+            placeholder="Title, excerpt, or topic"
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+          />
+        </div>
+        <div className="publication-filter__categories" aria-label="Essay subjects">
+          <button
+            type="button"
+            aria-pressed={!selectedCategory}
+            onClick={() => setSelectedCategory(null)}
+          >
+            All <span>{posts.length}</span>
+          </button>
+          {categories.map((category) => (
             <button
-              onClick={() => setSelectedTag(null)}
-              className="text-xs text-zinc-400 hover:text-white transition-colors flex items-center gap-1"
+              key={category}
+              type="button"
+              aria-pressed={selectedCategory === category}
+              onClick={() => setSelectedCategory(selectedCategory === category ? null : category)}
             >
-              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-              Clear tag
+              {category} <span>{postCounts[category]}</span>
             </button>
-          )}
+          ))}
+          <a href="/blog/tags">Browse topics</a>
+        </div>
+      </section>
+
+      {filtersActive && (
+        <div className="publication-filter__status" aria-live="polite">
+          <p>
+            Showing {filteredPosts.length} {filteredPosts.length === 1 ? "essay" : "essays"}
+            {selectedCategory && <> in <strong>{selectedCategory}</strong></>}
+            {selectedTag && <> tagged <strong>{selectedTag}</strong></>}
+            {normalizedQuery && <> matching <strong>“{normalizedQuery}”</strong></>}
+          </p>
+          <button type="button" onClick={resetFilters}>Clear filters</button>
         </div>
       )}
 
-      {/* Featured Section */}
-      {featuredPosts.length > 0 && !searchQuery && !selectedCategory && !selectedTag && (
-        <section className="relative mx-0 sm:-mx-4 px-4 py-8 overflow-hidden rounded-3xl bg-gradient-to-b from-zinc-900/80 via-zinc-900/40 to-transparent">
-          {/* Subtle gradient orb background */}
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-signal-coral/5 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-signal-coral/5 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="relative flex items-center gap-3 mb-6">
-            <div className="h-1 w-10 bg-signal-coral rounded-full" />
-            <h2 className="text-xl font-bold text-white">Featured</h2>
-            <span className="text-xs text-zinc-500 bg-zinc-800/50 px-2 py-0.5 rounded-full">
-              Editor's picks
-            </span>
+      {featuredPosts.length > 0 && !filtersActive && (
+        <section className="publication-list__section" aria-labelledby="featured-essays">
+          <div className="publication-list__heading">
+            <h2 id="featured-essays">Featured</h2>
           </div>
-          <div className="relative grid md:grid-cols-2 gap-6">
-            {featuredPosts.map((post) => {
-              const colors = getCategoryColors(post.category || "");
-              return (
-                <a
-                  key={post.id}
-                  href={`/blog/${post.id}`}
-                  className="group block"
-                >
-                  {/* Hairline border, coral on hover */}
-                  <div className="relative p-[1px] rounded-2xl bg-signal-coral/40 group-hover:bg-signal-coral transition-colors duration-500">
-                    <article className="relative overflow-hidden rounded-2xl bg-zinc-900 group-hover:bg-zinc-900/90 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-2xl group-hover:shadow-signal-coral/20">
-                      {/* Featured badge */}
-                      <div className="absolute top-4 right-4 z-10">
-                        <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-signal-coral text-white shadow-lg">
-                          Featured
-                        </span>
-                      </div>
-
-                      {/* Image */}
-                      <div className="relative aspect-[16/9] overflow-hidden">
-                        <img
-                          src={getPostImage(post)}
-                          srcSet={!post.featureImage ? cfSrcSet(getCategoryImageId(post)) : undefined}
-                          sizes="(max-width: 768px) 100vw, 50vw"
-                          alt={post.title}
-                          width={800}
-                          height={450}
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          loading="eager"
-                          decoding="async"
-                          onError={handleImageError}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
-                      </div>
-
-                      {/* Content */}
-                      <div className="p-6 space-y-3">
-                        <div className="flex items-center gap-3 text-xs">
-                          {post.category && (
-                            <span
-                              className={`font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border ${colors.bg} ${colors.border} ${colors.text}`}
-                            >
-                              {post.category}
-                            </span>
-                          )}
-                          <span className="text-zinc-500">
-                            {formatDate(post.publishedAt)}
-                          </span>
-                        </div>
-                        <h3 className="text-xl font-bold text-white group-hover:text-signal-coral transition-colors line-clamp-2">
-                          {post.title}
-                        </h3>
-                        {post.excerpt && (
-                          <p className="text-zinc-400 text-sm line-clamp-2">
-                            {post.excerpt}
-                          </p>
-                        )}
-                        {post.tags && post.tags.length > 0 && (
-                          <div className="flex flex-wrap gap-1.5 pt-2">
-                            {post.tags.slice(0, 3).map((tag) => (
-                              <button
-                                key={tag}
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  setSelectedTag(tag);
-                                }}
-                                className="text-[10px] px-2 py-0.5 rounded bg-zinc-800/50 text-zinc-500 hover:bg-signal-coral/20 hover:text-signal-coral transition-colors"
-                              >
-                                {tag}
-                              </button>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </article>
-                  </div>
-                </a>
-              );
-            })}
+          <div className="publication-list__rows">
+            {featuredPosts.map((post) => <PostRow key={post.id} post={post} featured />)}
           </div>
         </section>
       )}
 
-      {/* Latest Section */}
       {visiblePosts.length > 0 && (
-        <section>
-          <div className="flex items-center gap-3 mb-6">
-            <div className="h-1 w-10 bg-signal-coral rounded-full" />
-            <h2 className="text-xl font-bold text-white">
-              {searchQuery || selectedCategory ? "Results" : "Latest"}
-            </h2>
-            <span className="text-sm text-zinc-500">
-              {visiblePosts.length} of {regularPosts.length}
-            </span>
+        <section className="publication-list__section" aria-labelledby="essay-results">
+          <div className="publication-list__heading">
+            <h2 id="essay-results">{filtersActive ? "Results" : "Latest"}</h2>
+            <span>{visiblePosts.length} of {regularPosts.length}</span>
           </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {visiblePosts.map((post) => {
-              const colors = getCategoryColors(post.category || "");
-              return (
-                <a
-                  key={post.id}
-                  href={`/blog/${post.id}`}
-                  className="group block"
-                >
-                  <article className="relative overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950/50 hover:border-zinc-700 transition-all duration-200 hover:bg-zinc-900/50">
-                    {/* Image */}
-                    <div className="relative aspect-[16/9] overflow-hidden">
-                      <img
-                        src={getPostImage(post)}
-                        srcSet={!post.featureImage ? cfSrcSet(getCategoryImageId(post)) : undefined}
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        alt={post.title}
-                        width={800}
-                        height={450}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                        loading="lazy"
-                        decoding="async"
-                        onError={handleImageError}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent" />
-                    </div>
-
-                    {/* Content */}
-                    <div className="p-5 space-y-2">
-                      <div className="flex items-center justify-between gap-2 text-xs">
-                        {post.category && (
-                          <span
-                            className={`font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full border ${colors.bg} ${colors.border} ${colors.text}`}
-                          >
-                            {post.category}
-                          </span>
-                        )}
-                        <span className="text-zinc-500">
-                          {formatDate(post.publishedAt)}
-                        </span>
-                      </div>
-                      <h3 className="text-lg font-bold text-white group-hover:text-signal-coral transition-colors line-clamp-2">
-                        {post.title}
-                      </h3>
-                      {post.excerpt && (
-                        <p className="text-zinc-400 text-sm line-clamp-2">
-                          {post.excerpt}
-                        </p>
-                      )}
-                      {post.tags && post.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5 pt-1">
-                          {post.tags.slice(0, 4).map((tag) => (
-                            <button
-                              key={tag}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                setSelectedTag(tag);
-                              }}
-                              className="text-[10px] px-2 py-0.5 rounded bg-zinc-800/50 text-zinc-500 hover:bg-signal-coral/20 hover:text-signal-coral transition-colors"
-                            >
-                              {tag}
-                            </button>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </article>
-                </a>
-              );
-            })}
+          <div className="publication-list__rows">
+            {visiblePosts.map((post) => <PostRow key={post.id} post={post} />)}
           </div>
-
-          {/* Load More */}
           {hasMore && (
-            <div className="flex justify-center pt-8">
-              <button
-                onClick={() => setVisibleCount((c) => c + 8)}
-                className="px-8 py-3 rounded-xl bg-zinc-900/50 text-signal-coral border border-zinc-800 hover:border-signal-coral/50 hover:bg-signal-coral/5 transition-all font-medium"
-              >
-                Load More
-                <span className="ml-2 text-zinc-500">
-                  ({regularPosts.length - visibleCount} remaining)
-                </span>
+            <div className="publication-list__more">
+              <button type="button" onClick={() => setVisibleCount((count) => count + 12)}>
+                Load more <span>({regularPosts.length - visibleCount} remaining)</span>
               </button>
             </div>
           )}
         </section>
       )}
 
-      {/* Empty State */}
       {filteredPosts.length === 0 && (
-        <div className="text-center py-16 space-y-4">
-          <p className="text-zinc-400 text-lg">No essays match these filters</p>
-          {searchQuery && (
-            <a
-              href={`/search?q=${encodeURIComponent(searchQuery)}`}
-              className="inline-flex text-sm text-zinc-400 hover:text-signal-coral transition-colors"
-            >
-              Search the whole site for “{searchQuery}”
-            </a>
-          )}
-          <button
-            onClick={() => {
-              setSelectedCategory(null);
-              setSelectedTag(null);
-              setSearchQuery("");
-            }}
-            className="px-4 py-2 rounded-lg bg-zinc-900 text-signal-coral hover:bg-zinc-800 transition-colors"
-          >
-            Clear filters
-          </button>
+        <div className="publication-list__empty">
+          <p>No essays match these filters.</p>
+          {normalizedQuery && <a href={`/search?q=${encodeURIComponent(normalizedQuery)}`}>Search the whole site instead</a>}
+          <button type="button" onClick={resetFilters}>Clear filters</button>
         </div>
       )}
     </div>

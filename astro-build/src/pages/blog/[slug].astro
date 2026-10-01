@@ -8,6 +8,7 @@ import ReadingProgress from '../../components/ReadingProgress';
 import SeriesNav from '../../components/SeriesNav.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 import { featureImageSrcset, featureImageSizes } from '../../utils/feature-image';
+import '../../styles/article.css';
 
 export const prerender = true;
 
@@ -43,19 +44,8 @@ const formattedDate = publishedDate.toLocaleDateString('en-US', {
 // Calculate reading time (rough estimate: 200 words per minute)
 const wordCount = post.body?.split(/\s+/).length || 0;
 const readingTime = Math.ceil(wordCount / 200);
-
-// Category colors
-const categoryColors: Record<string, { bg: string; border: string; text: string }> = {
-  'AI & Automation': { bg: 'bg-purple-500/10', border: 'border-purple-500/30', text: 'text-purple-400' },
-  'Commerce': { bg: 'bg-orange-500/10', border: 'border-orange-500/30', text: 'text-orange-400' },
-  'Leadership': { bg: 'bg-blue-500/10', border: 'border-blue-500/30', text: 'text-blue-400' },
-  'Meta': { bg: 'bg-zinc-500/10', border: 'border-zinc-500/30', text: 'text-zinc-400' },
-  'Field Notes': { bg: 'bg-green-500/10', border: 'border-green-500/30', text: 'text-green-400' },
-  'Consulting': { bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', text: 'text-cyan-400' },
-  'default': { bg: 'bg-signal-coral/10', border: 'border-signal-coral/30', text: 'text-signal-coral' },
-};
-
-const colors = categoryColors[post.data.category || ''] || categoryColors.default;
+// An existing source disclosure is image context, rather than the essay's opening argument.
+const startsWithImageCredit = /^\s*\*Feature image:/.test(post.body || '');
 
 // Get related posts (same category, excluding current)
 const allPosts = await getCollection('blog', ({ data }) => data.status === 'published');
@@ -82,154 +72,128 @@ const challengingCounterpoint = counterpoints.find(
   author={post.data.author}
   tags={post.data.tags}
   jsonLd={[articleSchema, breadcrumbSchema]}
+  theme="article"
 >
   <!-- Reading Progress Bar -->
-  <ReadingProgress client:idle />
+  <ReadingProgress client:idle variant="article" />
 
-  <main class="min-h-screen">
-    <SiteHeader currentPage="blog" />
+  <main class="article-page">
+    <SiteHeader currentPage="blog" variant="article" />
 
-    <div class="max-w-3xl mx-auto px-4 py-12">
-      <!-- Back link -->
-      <a
-        href="/blog/archive"
-        class="group inline-flex items-center gap-2 text-zinc-400 hover:text-signal-coral transition-all duration-150 font-medium mb-8 no-print"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-        </svg>
-        Back to all essays
-      </a>
-
-      <article class="space-y-6" data-pagefind-body>
-        <!-- Featured Image -->
-        {post.data.featureImage && (() => {
-          const src = post.data.featureImage;
-          return (
-            <div class="relative -mx-4 lg:mx-0 aspect-video overflow-hidden rounded-2xl border border-zinc-800">
-              <img
-                src={src}
-                srcset={featureImageSrcset(src)}
-                sizes={featureImageSizes(src)}
-                alt={post.data.title}
-                class="w-full h-full object-cover"
-                width="1200"
-                height="675"
-                loading="eager"
-                fetchpriority="high"
-                decoding="async"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60"></div>
-            </div>
-          );
-        })()}
-
-        <!-- Article Header -->
-        <header class="space-y-3 pb-6 border-b border-zinc-800/50">
-          <div class="flex items-center gap-3 text-sm flex-wrap">
-            {post.data.category && (
-              <span class={`font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border transition-colors ${colors.bg} ${colors.border} ${colors.text}`}>
-                {post.data.category}
-              </span>
-            )}
-            {post.data.category && <span class="text-zinc-700">•</span>}
-            <time datetime={publishedDate.toISOString()} class="text-zinc-500">
-              {formattedDate}
-            </time>
-            <span class="text-zinc-700">•</span>
-            <span class="flex items-center gap-1.5 text-zinc-500">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              {readingTime} min read
+    <article data-pagefind-body>
+      <header class="article-opening article-opening--reading">
+        <div class="article-intro">
+          {post.data.category && <p class="article-category">{post.data.category}</p>}
+          <h1 class="article-title">{post.data.title}</h1>
+          {post.data.excerpt && <p class="article-excerpt">{post.data.excerpt}</p>}
+          <div class="article-byline">
+            <span>
+              By{' '}
+              {post.data.author === 'Nino Chavez' ? (
+                <a href="/about">Nino Chavez</a>
+              ) : (
+                post.data.author
+              )}
             </span>
+            <time datetime={publishedDate.toISOString()}>{formattedDate}</time>
+            <span>{readingTime} min read</span>
           </div>
+        </div>
 
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight">
-            {post.data.title}
-          </h1>
 
-          {post.data.excerpt && (
-            <p class="excerpt text-xl text-zinc-400 leading-relaxed">
-              {post.data.excerpt}
-            </p>
-          )}
+      </header>
 
-          {post.data.tags && post.data.tags.length > 0 && (
-            <div class="flex flex-wrap gap-2 pt-4">
-              {post.data.tags.map((tag) => (
-                <a
-                  href={`/blog/tags/${encodeURIComponent(tag)}`}
-                  class="text-xs px-3 py-1.5 rounded-full bg-zinc-900/50 text-zinc-400 border border-zinc-800 hover:border-signal-coral/50 hover:text-signal-coral transition-all duration-150"
-                >
-                  {tag}
-                </a>
-              ))}
+      <div class="article-layout">
+        <aside class="article-margin">
+          {post.data.author === 'Nino Chavez' && (
+            <div class="article-margin-note">
+              <p>Signal Dispatch</p>
+              <span>By Nino Chavez</span>
+              <a href="/about">About Nino</a>
             </div>
           )}
+          <TableOfContents headings={headings} variant="article" />
+        </aside>
 
-          <!-- Author Info -->
-          <div class="flex items-center gap-4 pt-6 mt-2 border-t border-zinc-800/30" data-pagefind-ignore>
-            <div class="w-12 h-12 rounded-full bg-signal-coral flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-signal-coral/20">
-              NC
-            </div>
-            <div>
-              <p class="text-white font-semibold">{post.data.author || 'Nino Chavez'}</p>
-              <p class="text-zinc-500 text-sm">Product Architect at commerce.com</p>
-            </div>
-          </div>
-        </header>
+        <div>
+          <div class="article-before-reading" data-pagefind-ignore>
+            {post.data.series && (
+              <SeriesNav
+                seriesSlug={post.data.series.slug}
+                currentPosition={post.data.series.position}
+                variant="article"
+              />
+            )}
 
-        <!-- Series Navigation (if post is part of a series) -->
-        {post.data.series && (
-          <SeriesNav
-            seriesSlug={post.data.series.slug}
-            currentPosition={post.data.series.position}
-          />
-        )}
-
-        <!-- Counterpoint Banner -->
-        {challengingCounterpoint && (
-          <a href={`/blog/counterpoints/${challengingCounterpoint.id}`} class="group block p-4 rounded-xl border border-teal-600/30 bg-teal-600/5 hover:bg-teal-600/10 transition-colors no-print">
-            <div class="flex items-center gap-3">
+            {challengingCounterpoint && (
+              <a href={`/blog/counterpoints/${challengingCounterpoint.id}`} class="article-counterpoint group block p-4 rounded-xl border no-print">
+                <div class="flex items-center gap-3">
               <div class="flex-shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#14679e]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
                 </svg>
               </div>
               <div class="flex-1 min-w-0">
-                <p class="text-sm font-semibold text-teal-400">This post has been challenged</p>
-                <p class="text-xs text-zinc-500 mt-0.5">
+                <p class="text-sm font-semibold text-[#14202e]">This post has been challenged</p>
+                <p class="text-xs mt-0.5">
                   by {challengingCounterpoint.data.challengeSource.name}
                 </p>
               </div>
-              <span class="text-sm text-teal-400 group-hover:text-signal-coral transition-colors font-medium whitespace-nowrap flex items-center gap-1">
+              <span class="text-sm text-[#14679e] group-hover:text-[#0e1928] transition-colors font-medium whitespace-nowrap flex items-center gap-1">
                 Read the counterpoint
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </span>
-            </div>
-          </a>
-        )}
+                </div>
+              </a>
+            )}
 
-        <!-- Table of Contents -->
-        <TableOfContents headings={headings} />
+          </div>
 
-        <!-- Article Content -->
-        <div class="prose mx-auto text-lg">
-          <Content />
-        </div>
+          <div class:list={['article-content', 'prose', { 'article-content--image-credit': startsWithImageCredit }]}>
+            <Content />
+          </div>
 
-        <!-- Social Sharing -->
-        <div class="pt-8 pb-8 border-t border-zinc-800/50 no-print" data-pagefind-ignore>
+        {post.data.featureImage && (() => {
+          const src = post.data.featureImage;
+          return (
+            <figure class="article-feature">
+              <img
+                src={src}
+                srcset={featureImageSrcset(src)}
+                sizes={featureImageSizes(src)}
+                alt={post.data.title}
+                width="1200"
+                height="675"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          );
+        })()}
+
+          <div class="article-support" data-pagefind-ignore>
+            {post.data.tags && post.data.tags.length > 0 && (
+              <div class="article-context">
+                <div class="article-tags">
+                  {post.data.tags.map((tag) => (
+                    <a href={`/blog/tags/${encodeURIComponent(tag)}`}>
+                      {tag}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div class="article-share no-print">
           <div class="flex items-center gap-4">
-            <span class="text-zinc-500 text-sm font-medium">Share:</span>
+            <span class="article-share__label">Share:</span>
             <a
               href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.data.title)}&url=${encodeURIComponent(`https://ninochavez.co/blog/${post.id}`)}`}
               target="_blank"
               rel="noopener noreferrer"
-              class="text-zinc-400 hover:text-white transition-colors"
+              class="transition-colors"
               title="Share on Twitter"
             >
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -240,7 +204,7 @@ const challengingCounterpoint = counterpoints.find(
               href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://ninochavez.co/blog/${post.id}`)}`}
               target="_blank"
               rel="noopener noreferrer"
-              class="text-zinc-400 hover:text-[#0A66C2] transition-colors"
+              class="transition-colors"
               title="Share on LinkedIn"
             >
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -249,17 +213,16 @@ const challengingCounterpoint = counterpoints.find(
             </a>
             <button
               onclick={`navigator.clipboard.writeText('https://ninochavez.co/blog/${post.id}'); this.textContent = 'Copied!'`}
-              class="text-zinc-400 hover:text-signal-coral transition-colors text-sm"
+              class="transition-colors text-sm"
               title="Copy link"
             >
               Copy link
             </button>
           </div>
-        </div>
+            </div>
 
-        <!-- LinkedIn Attribution (if applicable) -->
-        {post.data.source === 'linkedin' && post.data.linkedinUrl && (
-          <div class="mt-8 p-6 rounded-xl border border-[#0A66C2]/20 bg-[#0A66C2]/5 no-print">
+            {post.data.source === 'linkedin' && post.data.linkedinUrl && (
+              <div class="article-linkedin p-6 rounded-xl border no-print">
             <div class="flex items-start gap-4">
               <div class="flex-shrink-0 mt-1">
                 <svg class="w-6 h-6 text-[#0A66C2]" fill="currentColor" viewBox="0 0 24 24">
@@ -267,17 +230,17 @@ const challengingCounterpoint = counterpoints.find(
                 </svg>
               </div>
               <div class="flex-1">
-                <h3 class="text-sm font-semibold text-[#0A66C2] mb-1">
+                <h3 class="text-sm font-semibold text-[#14679e] mb-1">
                   Originally Published on LinkedIn
                 </h3>
-                <p class="text-sm text-zinc-400 mb-3">
+                <p class="text-sm text-[#5a6472] mb-3">
                   This article was first published on my LinkedIn profile. Click below to view the original post and join the conversation.
                 </p>
                 <a
                   href={post.data.linkedinUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0A66C2] text-white text-sm font-medium hover:bg-[#004182] transition-colors"
+                  class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#14679e] text-white text-sm font-medium hover:bg-[#0e1928] transition-colors"
                 >
                   View on LinkedIn
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -286,27 +249,29 @@ const challengingCounterpoint = counterpoints.find(
                 </a>
               </div>
             </div>
+              </div>
+            )}
           </div>
-        )}
-      </article>
+        </div>
+      </div>
+    </article>
 
-      <!-- Related Posts -->
-      {relatedPosts.length > 0 && (
-        <section class="mt-16 pt-12 border-t border-zinc-800/50 no-print">
-          <h2 class="text-2xl font-bold text-white mb-8">More in {post.data.category}</h2>
+    {relatedPosts.length > 0 && (
+      <section class="article-related no-print">
+          <h2>More in {post.data.category}</h2>
           <div class="grid gap-6 md:grid-cols-3">
             {relatedPosts.map((related) => (
               <a href={`/blog/${related.id}`} class="group block">
-                <article class="h-full p-5 rounded-xl border border-zinc-800 hover:border-signal-coral/50 transition-all duration-200 bg-zinc-900/30 hover:bg-zinc-900/50 hover:shadow-lg hover:shadow-signal-coral/5 hover:-translate-y-1">
+                <article class="article-related-card h-full p-5 rounded-xl border transition-all duration-200">
                   <div class="space-y-3">
-                    <time class="text-xs text-zinc-500">
+                    <time class="text-xs">
                       {new Date(related.data.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
                     </time>
-                    <h3 class="text-base font-bold text-white group-hover:text-signal-coral transition-colors line-clamp-2">
+                    <h3 class="text-base font-bold transition-colors line-clamp-2">
                       {related.data.title}
                     </h3>
                     {related.data.excerpt && (
-                      <p class="text-zinc-400 text-sm leading-relaxed line-clamp-2">
+                      <p class="text-sm leading-relaxed line-clamp-2">
                         {related.data.excerpt}
                       </p>
                     )}
@@ -315,9 +280,8 @@ const challengingCounterpoint = counterpoints.find(
               </a>
             ))}
           </div>
-        </section>
-      )}
-    </div>
+      </section>
+    )}
 
     <SiteFooter />
   </main>

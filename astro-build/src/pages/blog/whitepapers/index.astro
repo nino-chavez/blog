@@ -21,14 +21,6 @@ const collectionSchema = generateCollectionSchema(
   sortedWhitepapers
 );
 
-// Default images for whitepapers without feature images
-const getWhitepaperImage = (whitepaper: typeof sortedWhitepapers[0]) => {
-  if (whitepaper.data.featureImage) return whitepaper.data.featureImage;
-  // Use AI-themed generated images
-  const hash = whitepaper.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  const variant = (hash % 5) + 1;
-  return `/generated/categories/ai-automation-${variant}.webp`;
-};
 ---
 
 <BaseLayout
@@ -77,14 +69,14 @@ const getWhitepaperImage = (whitepaper: typeof sortedWhitepapers[0]) => {
           const wordCount = whitepaper.body?.split(/\s+/).length || 0;
           const readingTime = Math.ceil(wordCount / 200);
           const isNew = (new Date().getTime() - new Date(whitepaper.data.publishedAt).getTime()) / (1000 * 60 * 60 * 24) <= 14;
-          const imageUrl = getWhitepaperImage(whitepaper);
+          const imageUrl = whitepaper.data.featureImage;
 
           return (
             <a href={`/blog/whitepapers/${whitepaper.id}`} class="group block">
               <article class={`relative overflow-hidden rounded-2xl border transition-all duration-300 hover:shadow-xl hover:shadow-signal-coral/10 ${index === 0 ? 'border-signal-coral/40 bg-gradient-to-br from-zinc-900/80 via-zinc-900/50 to-zinc-950' : 'border-zinc-800 bg-zinc-900/30 hover:border-signal-coral/50'}`}>
                 <div class="flex flex-col md:flex-row">
-                  {/* Image */}
-                  <div class="md:w-2/5 lg:w-1/3 relative">
+                  {/* Only content-owned imagery appears in the publication index. */}
+                  {imageUrl && <div class="md:w-2/5 lg:w-1/3 relative">
                     <div class="aspect-[16/9] md:aspect-auto md:absolute md:inset-0 overflow-hidden">
                       <img
                         src={imageUrl}
@@ -99,24 +91,13 @@ const getWhitepaperImage = (whitepaper: typeof sortedWhitepapers[0]) => {
                       <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-zinc-900/90 hidden md:block" />
                       <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent md:hidden" />
                     </div>
-                    {/* Badges on image */}
-                    <div class="absolute top-4 left-4 flex items-center gap-2">
-                      {isNew && (
-                        <span class="font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-signal-coral text-white text-[10px] shadow-lg">
-                          New
-                        </span>
-                      )}
-                      {index === 0 && (
-                        <span class="font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-signal-coral/90 text-white text-[10px] shadow-lg backdrop-blur-sm">
-                          Latest
-                        </span>
-                      )}
-                    </div>
-                  </div>
+                  </div>}
 
                   {/* Content */}
                   <div class="flex-1 p-6 md:p-8 flex flex-col justify-center">
                     <div class="flex items-center gap-3 text-xs mb-3 flex-wrap">
+                      {isNew && <span class="publication-status-label">New</span>}
+                      {index === 0 && <span class="publication-status-label">Latest</span>}
                       <span class="font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-signal-coral/10 border border-signal-coral/30 text-signal-coral">
                         Whitepaper
                       </span>

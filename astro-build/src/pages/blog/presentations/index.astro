@@ -24,7 +24,7 @@ const collectionSchema = generateCollectionSchema(
   sortedPresentations
 );
 
-// Get presentation image - check companion content first, then own featureImage, then fallback
+// Use presentation-owned or companion-owned imagery only.
 const getPresentationImage = (presentation: typeof sortedPresentations[0]) => {
   // 1. Check if presentation has its own feature image
   if (presentation.data.featureImage) return presentation.data.featureImage;
@@ -41,10 +41,7 @@ const getPresentationImage = (presentation: typeof sortedPresentations[0]) => {
     }
   }
 
-  // 3. Fallback to generated category image
-  const hash = presentation.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  const variant = (hash % 5) + 1;
-  return `/images/generated/categories/ai-automation-${variant}.webp`;
+  return undefined;
 };
 
 // Get companion content details
@@ -147,7 +144,7 @@ const modeColors = {
                 <a href={`/blog/presentations/${presentation.id}`} class="block">
                   <div class="flex flex-col lg:flex-row">
                     {/* Image Section */}
-                    <div class={`relative ${isFirst ? 'lg:w-3/5' : 'lg:w-2/5'}`}>
+                    {imageUrl && <div class={`relative ${isFirst ? 'lg:w-3/5' : 'lg:w-2/5'}`}>
                       <div class={`${isFirst ? 'aspect-[16/9] lg:aspect-[16/10]' : 'aspect-[16/9] lg:aspect-[4/3]'} overflow-hidden`}>
                         <img
                           src={imageUrl}
@@ -163,34 +160,14 @@ const modeColors = {
                         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-zinc-900/80 hidden lg:block" />
                       </div>
 
-                      {/* Badges */}
-                      <div class="absolute top-4 left-4 flex items-center gap-2">
-                        {isNew && (
-                          <span class="font-bold uppercase tracking-wider px-3 py-1.5 rounded-full bg-signal-coral text-white text-[10px] shadow-lg shadow-signal-coral/20">
-                            New
-                          </span>
-                        )}
-                        {isFirst && sortedPresentations.length > 1 && (
-                          <span class="font-bold uppercase tracking-wider px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-white text-[10px] border border-white/20">
-                            Latest
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Play button overlay */}
-                      <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-signal-coral/80 backdrop-blur-sm flex items-center justify-center shadow-2xl shadow-signal-coral/30 group-hover:scale-110 group-hover:bg-signal-coral transition-all duration-300">
-                          <svg class="w-7 h-7 lg:w-8 lg:h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M8 5v14l11-7z" />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
+                    </div>}
 
                     {/* Content Section */}
                     <div class={`flex-1 p-6 lg:p-8 flex flex-col justify-center ${isFirst ? 'lg:py-10' : ''}`}>
                       {/* Meta row */}
                       <div class="flex items-center gap-3 text-xs mb-4 flex-wrap">
+                        {isNew && <span class="publication-status-label">New</span>}
+                        {isFirst && sortedPresentations.length > 1 && <span class="publication-status-label">Latest</span>}
                         {mode && (
                           <span class={`font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full bg-gradient-to-r ${modeColors[mode]} text-white`}>
                             {modeLabels[mode]}

@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 
-export default function ReadingProgress() {
+interface Props {
+  variant?: 'article';
+}
+
+export default function ReadingProgress({ variant }: Props) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -32,11 +36,11 @@ export default function ReadingProgress() {
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 z-[100] h-1 bg-zinc-900/50 pointer-events-none"
+      className={`reading-progress fixed top-0 left-0 right-0 z-[100] h-1 bg-zinc-900/50 pointer-events-none${variant === 'article' ? ' reading-progress--article' : ''}`}
       style={{ contain: 'layout style paint', willChange: 'contents' }}
     >
       <div
-        className="h-full bg-signal-coral"
+        className="reading-progress__fill h-full bg-signal-coral"
         style={{
           width: `${progress}%`,
           transform: 'translateZ(0)',

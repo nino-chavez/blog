@@ -9,7 +9,7 @@ interface ExerciseProps {
 
 export function Exercise({ number, title, duration, children }: ExerciseProps) {
   return (
-    <div className="my-10 rounded-2xl border border-amber-500/30 bg-gradient-to-br from-amber-500/5 to-transparent overflow-hidden not-prose">
+    <div className="my-10 rounded-2xl border border-amber-500/30 bg-gradient-to-br from-amber-500/5 to-transparent overflow-hidden not-prose" data-tutorial-kind="exercise">
       <div className="flex items-center gap-3 px-6 py-4 bg-amber-500/10 border-b border-amber-500/20">
         <span className="flex-shrink-0 w-9 h-9 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-sm border border-amber-500/30">
           {number}
