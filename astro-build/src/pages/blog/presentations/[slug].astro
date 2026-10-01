@@ -57,6 +57,7 @@ const mode = presentation.data.mode as keyof typeof modeLabels | undefined;
   publishedTime={publishedDate.toISOString()}
   author={presentation.data.author}
   jsonLd={[articleSchema]}
+  theme="presentation"
 >
   <!-- Navigation -->
   <PresentationNavigation
@@ -1337,5 +1338,92 @@ const mode = presentation.data.mode as keyof typeof modeLabels | undefined;
     .presentation-container .slide[data-layout="table"] > div {
       max-width: 100%;
     }
+  }
+
+  /* Keep phone arrows visible inside the existing navigation buttons. */
+  .presentation-theme nav.fixed button[aria-label="Previous slide"],
+  .presentation-theme nav.fixed button[aria-label="Next slide"] {
+    min-width: 44px; min-height: 44px; padding: 8px !important;
+  }
+  .presentation-theme nav.fixed button svg { flex-shrink: 0; min-width: 16px; }
+  .presentation-theme nav.fixed button span { color: inherit !important; }
+
+  /* Light operating chrome; slide canvases keep their authored contrast. */
+  .presentation-theme nav.fixed {
+    border-color: #b9bec6 !important;
+    background: rgb(240 241 244 / 0.97) !important;
+    color: #14202e;
+    box-shadow: 0 8px 24px rgb(14 25 40 / 0.1);
+  }
+
+  .presentation-theme nav.fixed a,
+  .presentation-theme nav.fixed span,
+  .presentation-theme nav.fixed button {
+    color: #14202e !important;
+  }
+
+  .presentation-theme nav.fixed button {
+    border-color: #b9bec6 !important;
+    border-radius: 2px !important;
+    background: #f7f8fa !important;
+  }
+
+  .presentation-theme nav.fixed button:disabled {
+    color: #5a6472 !important;
+  }
+
+  .presentation-theme nav.fixed button[class*="bg-signal-coral"] {
+    border-color: #14679e !important;
+    background: #14679e !important;
+    color: #f0f1f4 !important;
+  }
+
+  .presentation-theme nav.fixed > div:last-child {
+    background: #dbdde2 !important;
+  }
+
+  .presentation-theme nav.fixed > div:last-child > div {
+    background: #14679e !important;
+  }
+
+  .presentation-theme nav.fixed :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px #f0f1f4, 0 0 0 4px #14679e;
+  }
+
+  .presentation-theme nav.fixed button[aria-label^="Go to slide"] {
+    width: 8px;
+    height: 8px;
+    min-width: 0;
+    min-height: 0;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    flex-shrink: 0;
+    background: #5a6472 !important;
+  }
+
+  .presentation-theme nav.fixed button[aria-label^="Go to slide"][class*="bg-signal-coral"] {
+    width: 24px;
+    background: #14679e !important;
+  }
+
+  .presentation-theme div.fixed[class*="bottom-"] {
+    border: 1px solid #b9bec6;
+    border-radius: 2px !important;
+    background: rgb(247 248 250 / 0.96) !important;
+    color: #5a6472 !important;
+    box-shadow: 0 8px 24px rgb(14 25 40 / 0.12);
+  }
+
+  .presentation-theme div.fixed[class*="bottom-"] kbd {
+    border: 1px solid #b9bec6;
+    border-radius: 2px !important;
+    background: #dbdde2 !important;
+    color: #14202e !important;
+  }
+
+  .presentation-theme {
+    color-scheme: dark;
   }
 </style>

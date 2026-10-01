@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import '../styles/publication.css';
 import { featureImageSrcset, featureImageSizes } from '../utils/feature-image';
 
 // ANALYTICS: Cloudflare provides cookieless traffic totals. The shared
@@ -28,6 +29,8 @@ interface Props {
   canonicalUrl?: string;
   jsonLd?: object | object[];
   noIndex?: boolean;
+  /** Route-owned surface treatment. Presentation keeps its authored deck contrast. */
+  theme?: 'article' | 'publication' | 'presentation';
 }
 
 const {
@@ -43,6 +46,7 @@ const {
   canonicalUrl,
   jsonLd,
   noIndex = false,
+  theme,
 } = Astro.props;
 
 const siteUrl = 'https://ninochavez.co';
@@ -60,8 +64,14 @@ const servedPath = Astro.url.pathname
   .replace(/\/index\.html$/, '')
   .replace(/\.html$/, '')
   .replace(/\/$/, '');
+const usesPublicationTheme = theme === 'publication' || (
+  !theme &&
+  (servedPath === '/about' || servedPath === '/research' || servedPath.startsWith('/research/') || servedPath === '/blog' || servedPath.startsWith('/blog/')) &&
+  servedPath !== '/blog/private' &&
+  !servedPath.startsWith('/blog/private/')
+);
 const canonical = canonicalUrl || `${siteUrl}${servedPath}`;
-const pageTitle = title === 'Signal Dispatch' ? title : `${title} - Signal Dispatch`;
+const pageTitle = title.endsWith('Signal Dispatch') ? title : `${title} - Signal Dispatch`;
 
 // Convert jsonLd to array if single object
 const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
@@ -157,7 +167,16 @@ const jsonLdArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <!-- Additional head content from pages -->
     <slot name="head" />
   </head>
-  <body class="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 text-zinc-100">
+  <body class:list={[
+    'min-h-screen',
+    theme === 'article'
+      ? 'article-theme'
+      : theme === 'presentation'
+        ? 'presentation-theme bg-zinc-950 text-zinc-100'
+        : usesPublicationTheme
+          ? 'publication-theme'
+          : 'bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 text-zinc-100',
+  ]} data-page-path={servedPath}>
     <slot />
 
     <!-- Traffic totals and public-page actions use separate collectors. -->
