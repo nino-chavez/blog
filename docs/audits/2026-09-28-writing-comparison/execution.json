@@ -1,0 +1,26 @@
+{
+  "dispatch_id": "83edeb5c-ad1c-4d8b-b16d-daf0e1cd6578",
+  "selected_route": {
+    "model": "gpt-5.6-terra",
+    "reasoning_effort": "high",
+    "tier": "implementation"
+  },
+  "runtime_evidence": {
+    "child_thread_id": "01a0ea80-15f5-77c1-acb3-ec45515acc32",
+    "executable": "/Users/nino/.nvm/versions/node/v22.21.1/bin/codex",
+    "reported_model": null,
+    "reported_reasoning_effort": null,
+    "status": "completed"
+  },
+  "observed_commands": [
+    "/bin/zsh -lc \"sed -n '1,\"'$p'\"' /Users/nino/Workspace/dev/sites/nino/blog/docs/audits/2026-09-28-writing-comparison/sample-m.md\"",
+    "/bin/zsh -lc \"sed -n '1,\"'$p'\"' /Users/nino/Workspace/dev/sites/nino/blog/docs/audits/2026-09-28-writing-comparison/sample-k.md\""
+  ],
+  "usage": {
+    "input_tokens": 107195,
+    "cached_input_tokens": 58880,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 951,
+    "reasoning_output_tokens": 315
+  }
+}

@@ -1,0 +1,63 @@
+# Trying to teach an AI how I edit photos
+
+*Draft for Signal Dispatch — September 28, 2026. Unpublished.*
+
+I wanted to see whether we could build something that learned how I edit photos and applied those edits in Lightroom. I already use presets. The point was to get a better starting point for the photos that still need work.
+
+Early in the session, I asked what we were actually training. Were we training a model, or just steering one? Would we need open weights? A small model or a large one?
+
+I also said development time and effort were negligible because coding agents were doing the work.
+
+---
+
+## Comparing the edits
+
+We got the Lightroom part working. The system could recover original photographs and their saved editing settings, propose new settings, apply them to isolated copies, and render the results for comparison. It could do that without changing the originals.
+
+We tried both approaches I had asked about. Vision models looked at images and suggested settings. Small trained models used examples of my saved edits to predict settings for another photograph. We had the actual Lightroom settings available, so we didn't have to infer every slider from the appearance of a finished JPEG.
+
+We ran blind, side-by-side tests. For each photograph, I saw two edited versions: one using settings the model predicted for that photo, the other using a fixed recipe derived from the training edits. The method names stayed hidden while I chose which version I preferred, with the option to call it a tie. We revealed the methods after I finished rating the set.
+
+In the first ten-photo test, my choices turned out to favor the fixed recipe six times, with four ties. We repeated the process with a simpler learned model on the same photos. That time I preferred the fixed recipe seven times and called three ties. I hadn't chosen the learned edit in either round.
+
+We also checked whether changing the Lightroom profile and HDR settings would affect the result. In that blind review, I preferred the fixed recipe on all three photographs we compared.
+
+These were small, overlapping development tests. They didn't tell us whether the training examples were too limited, the models were using the wrong information, or the rendering context was getting in the way. They also didn't measure finishing time against my normal preset-and-adjust workflow.
+
+During the session I asked, “Is this actually showing promise of accomplishing something with greater value and utility than, say, a batch preset in Lightroom?” Later I asked whether the fixed recipe was just a preset, which I was already using, and whether there was any point in continuing.
+
+The system could apply different edits to each photograph. That capability would only help me if those edits left less work to finish. The comparisons hadn't shown that, and we stopped tuning that predictor configuration. The result doesn't rule out personalized editing. It limits what we can claim about the approach we tested.
+
+---
+
+## What the session cost
+
+When I asked for a dollar estimate, the main chat's token record worked out to about $795 at standard API rates. It didn't include separately dispatched workers or the photo models' own API calls. The actual service tier and charge to my account were unverified.
+
+The research plan had proposed a $100 ceiling for inference, training, and diffusion trials. That didn't cover the coding conversation: the agent reading files, writing code, checking results, and supervising the experiment.
+
+At the snapshot used for the estimate, that conversation had processed about 592.8 million tokens across 3,682 recorded model responses. Most were cached input—previous material supplied again at a discounted rate. The median request included about 164,000 input tokens. Cached input accounted for roughly $577 of the estimate.
+
+Those numbers describe repeated processing, not that much new writing. They explain why shortening the conversation is worth considering. They don't tell us which work could have been avoided, or how much an earlier stop would have saved.
+
+My next question was what guardrails we could build: clearing context more often, recognizing diminishing returns, or something else. I called it “a lot of wasted value, time, effort, and token quota.”
+
+---
+
+## Changes to the next experiment
+
+The plan now calls for tracking the whole task, including the coding conversation and its workers. It also calls for limits on attempts and requested human reviews. Reusing an existing image can avoid another render, but it still takes my time to judge another comparison.
+
+Before another experiment runs, the agent should state what it expects to learn and what each result would change. If an export defect prevented a valid comparison, fixing that defect may be necessary. If the intended edits were applied correctly and I preferred the fixed recipe, another model or another round of tuning needs a specific reason. A negative result needs to be allowed to end the assignment.
+
+My setup already has a hook, a small program that runs when the agent tries to finish, which nudges it to take an obvious next action. Its code checks the closing sentence. It doesn't check whether another experiment is worthwhile. Only one injected message from that hook appears in the measured session, so I can't attribute the overall cost to it. The proposed change is to make it respect a recorded stopping decision and the remaining budget.
+
+A shorter conversation would also need to carry those decisions forward. The handoff should include what failed, where the evidence is, and how much of the allowance remains. Otherwise, starting fresh could mean trying an unsuccessful approach again.
+
+These controls are still proposed. They need to be tested on both cases: work that should stop and useful work that should continue. For now, we've kept the tools for recovering edits, applying them safely, and comparing the results. We haven't demonstrated that the learned editor saves me time finishing a gallery.
+
+Reviewing the photographs was only part of my involvement. I also had to ask whether the experiment was worth continuing, what it had cost, and what we should change after it failed to show an advantage. That retrospective happened because I asked for it. Keeping a human in the loop includes making room for those questions while the work is still going on.
+
+---
+
+*Evidence note: Results and usage come from the September 26–28, 2026 Lightroom experiment and its saved review records. The cost snapshot ends at 23:29:57 UTC on September 28, before this retrospective. It contains 13,813,667 uncached input tokens, 577,391,872 cached input tokens, and 1,595,367 output tokens. The estimate applies GPT-6 Astra standard short-context rates of $10, $1, and $50 per million respectively, from [OpenAI's pricing page](https://developers.openai.com/api/docs/pricing), checked September 28. That yields $795.30; Fast/priority rates would yield $1,590.59. The actual service tier and account charge are unverified. Worker costs, external photography API costs, and a dollar valuation of human time are excluded. No precise fraction of this cost has been established as avoidable.*

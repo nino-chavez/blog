@@ -1,0 +1,15 @@
+Read only these two files, in this order:
+/Users/nino/Workspace/dev/sites/nino/blog/docs/audits/2026-09-28-writing-comparison/sample-m.md
+/Users/nino/Workspace/dev/sites/nino/blog/docs/audits/2026-09-28-writing-comparison/sample-k.md
+
+You are a cold reader of a personal technology blog. You have not seen the author, prior article, session, or editorial guidance. Do not read other files, linked material, provenance, plans, voice guides, previous messages, or sources. Do not browse, change files, or launch workers. No runtime resources need cleanup.
+
+Compare the passages as writing. Which would you rather keep reading, and why? K, M, neither, or no preference are all valid. Do not infer human or AI authorship; that cannot be established from style. Do not presume a preferred answer. In at most 650 words:
+1. State each passage's actual point and what you learn about the writer's experience.
+2. Choose which passage you would keep reading. Quote at least two exact short passages explaining the choice.
+3. Identify any sentence in either passage that sounds posed, formulaic, or inserted to perform insight. Explain its effect; do not use a word blacklist.
+4. Identify what the preferred passage loses compared with the other. Would removing all rhetorical phrasing improve it, or remove something useful? Point to text.
+5. Check whether either implies a verified $795 invoice, demonstrated time savings, implemented controls, or that personal photo editing cannot work in general. Distinguish unclear language from clear limits.
+6. Give at most two specific editorial changes, without rewriting either passage. Say what this one reading cannot establish.
+
+You are a model reader, not a human participant. Return only your report. This is a read-only editorial task, not implementation.

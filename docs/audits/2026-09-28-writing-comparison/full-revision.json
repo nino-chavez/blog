@@ -1,0 +1,22 @@
+{
+  "draft_path": "/Users/nino/Workspace/dev/sites/nino/blog/docs/drafts/2026-09-28-the-preset-won.md",
+  "sha256": "d577627080e84a67bf1473c64934d5f86b903977e5317a903343e08e931a6be7",
+  "word_count": 1161,
+  "syntax": {
+    "mean_sentence_words": 14.51,
+    "share_15_words_or_less": 0.611
+  },
+  "lexicon": {
+    "Lightroom": 5,
+    "preset": 3,
+    "model": 6,
+    "API": 2,
+    "tokens": 2,
+    "training": 5,
+    "diffusion": 1,
+    "harnesses": 0
+  },
+  "verification": "Parent source/claim check and blog denied-phrase check. No new cold read or human acceptance of this full revision.",
+  "basis": "Nino preferred sample K and explicitly authorized the full revision; one-piece direction, not a global voice rule.",
+  "latest_change": "Added the user-requested connection between asking for the retrospective and the human review role; no claim of implemented safeguards."
+}

@@ -1,0 +1,35 @@
+{
+  "note": "Separate syntax and vocabulary diagnostics; not quality scores or causal attribution",
+  "samples": {
+    "K": {
+      "words": 346,
+      "mean_sentence_words": 14.42,
+      "short_sentence_share_15_or_less": 0.583,
+      "domain_terms": {
+        "Lightroom": 3,
+        "preset": 2,
+        "model": 6,
+        "API": 2,
+        "tokens": 0,
+        "training": 3,
+        "diffusion": 1,
+        "harnesses": 0
+      }
+    },
+    "M": {
+      "words": 376,
+      "mean_sentence_words": 12.53,
+      "short_sentence_share_15_or_less": 0.733,
+      "domain_terms": {
+        "Lightroom": 2,
+        "preset": 2,
+        "model": 1,
+        "API": 2,
+        "tokens": 1,
+        "training": 2,
+        "diffusion": 1,
+        "harnesses": 1
+      }
+    }
+  }
+}
