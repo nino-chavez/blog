@@ -47,7 +47,7 @@ The chat is the "Ask the substrate" affordance — borrowed from bc-subscription
 
 ## Model + cost
 
-- **Model:** `anthropic/claude-haiku-4.5` via OpenRouter.
+- **Model:** `anthropic/claude-haiku-5.5` via OpenRouter, with `reasoning: { enabled: false }`: reasoning tokens would count toward `max_tokens`, and a refusal (`finish_reason: content_filter`) returns a plain decline instead of an empty reply.
 - **Max tokens:** 800 (single-shot response, no streaming).
 - **System context size:** ~60KB of markdown (8 docs from `_docs/`).
 - **Typical request cost:** ~$0.0008 per call at Haiku pricing (~30K input + 200 output tokens average).
