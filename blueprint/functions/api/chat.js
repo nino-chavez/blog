@@ -126,7 +126,11 @@ export async function onRequestPost(context) {
         'X-Title': 'Signal Dispatch Blueprint'
       },
       body: JSON.stringify({
-        model: 'anthropic/claude-haiku-4.5',
+        model: 'anthropic/claude-haiku-5.5',
+        // Haiku 5.5 reasons by default and its reasoning tokens count toward
+        // max_tokens. This is document Q&A with no tools, which Haiku 4.5
+        // answered without reasoning; with reasoning off, 5.5 answers in ~2s.
+        reasoning: { enabled: false },
         max_tokens: 800,
         messages: [
           { role: 'system', content: system },
@@ -144,7 +148,12 @@ export async function onRequestPost(context) {
     }
 
     const data = await openrouterRes.json();
-    const reply = data.choices?.[0]?.message?.content || '(no response)';
+    const choice = data.choices?.[0] || {};
+    // Haiku 5.5's safety classifiers can decline a request (finish_reason
+    // content_filter). A retry usually declines again, so say so plainly.
+    const reply = choice.finish_reason === 'content_filter' || choice.native_finish_reason === 'refusal'
+      ? "I can't help with that request. Try rephrasing your question."
+      : choice.message?.content || '(no response)';
     return new Response(JSON.stringify({ reply }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
