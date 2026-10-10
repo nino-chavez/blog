@@ -969,11 +969,16 @@ function spaceClusters(list, spacing) {
 // its slot. Dropping it from the pool hands its date to the next item and
 // double-books the day it actually goes out — which is how marking one Substack
 // note `draft` put two `link` pieces on 2026-08-09 the first time this ran.
-// One predicate, three readers: the scheduler, the summary, and `--due`.
+// Native schedules still count as queued, but the platform owns their delivery.
 const isQueued = (r) => r?.state === 'eligible' || r?.state === 'draft'
+const isNativeScheduled = (r) => r?.state === 'draft' && r?.platformState === 'scheduled'
 
 for (const platform of Object.keys(CADENCE)) {
-  const all = items.filter((i) => isQueued(i.routes[platform]))
+  const nativeDates = new Set(
+    items.filter((i) => isNativeScheduled(i.routes[platform]))
+      .map((i) => i.routes[platform].scheduledFor).filter(Boolean)
+  )
+  const all = items.filter((i) => isQueued(i.routes[platform]) && !isNativeScheduled(i.routes[platform]))
   // Fresh blog posts skip the queue entirely — no interleaving, no cluster
   // spacing. Both exist to vary what a reader sees across a long drip, and a
   // mirror is not a drip: the whole point is that it lands while the piece is
@@ -1001,7 +1006,8 @@ for (const platform of Object.keys(CADENCE)) {
   // mirror set carries dates, because only those still have a send attached.
   // Everything else is `backfill`, counted by --due and worked through in a run.
   if (platform === 'substack' && SUBSTACK_BACKFILL) {
-    const dates = slots(platform, mirror.length, today)
+    const dates = slots(platform, mirror.length + nativeDates.size, today)
+      .filter((date) => !nativeDates.has(date)).slice(0, mirror.length)
     mirror.forEach((i, n) => {
       i.routes.substack.scheduledFor = dates[n]
     })
@@ -1118,7 +1124,8 @@ if (has('--due')) {
     // `draft` counts as owed, and more so than `eligible`. A drafted piece is
     // written, staged, and one click from live — leaving it out of the owed
     // list hides the cheapest thing on it, and hides it precisely because the
-    // work is nearly done. Worse, an invisible draft gets drafted twice.
+    // work is nearly done. Native schedules are different: the platform will
+    // deliver them, so they must not appear as manual publishing work.
     const backfill = items.filter(
       (i) => isQueued(i.routes[platform]) && i.routes[platform].backfill
     )
@@ -1129,7 +1136,7 @@ if (has('--due')) {
       )
     }
     const due = items
-      .filter((i) => isQueued(i.routes[platform]) && !i.routes[platform].backfill)
+      .filter((i) => isQueued(i.routes[platform]) && !isNativeScheduled(i.routes[platform]) && !i.routes[platform].backfill)
       .filter((i) => (i.routes[platform].scheduledFor ?? '9999') <= cutoff)
       .sort((a, b) => a.routes[platform].scheduledFor.localeCompare(b.routes[platform].scheduledFor))
     if (!due.length) continue
@@ -1145,7 +1152,7 @@ if (has('--due')) {
       n += 1
     }
   }
-  console.log(n ? `\n${n} due within ${horizon} days. Nothing posts on its own.` : `nothing due within ${horizon} days`)
+  console.log(n ? `\n${n} due within ${horizon} days. This report does not publish.` : `nothing due within ${horizon} days`)
   process.exit(0)
 }
 
