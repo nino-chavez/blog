@@ -81,7 +81,7 @@ test('an explicit LinkedIn pick admits an Applied piece without changing the def
     writeFileSync(join(content, 'imported.mdx'), '---\ntitle: "Imported LinkedIn fixture"\npublishedAt: "2026-10-10"\nstatus: "published"\nsource: "linkedin"\n---\nSynthetic fixture, not a publication.\n')
     writeFileSync(join(here, 'linkedin-picks.json'), JSON.stringify({ picks: [{ id: 'applied/picked' }, { id: 'blog/imported' }] }))
     writeFileSync(join(here, 'queue.json'), JSON.stringify({ items: [{ id: 'applied/picked', routes: {
-      linkedin: { mode: 'skip', state: 'skip', pinnedFor: '2026-11-03', scheduledFor: null },
+      linkedin: { mode: 'skip', state: 'skip', pinnedFor: '2026-11-01', scheduledFor: null },
       substack: { mode: 'link', state: 'draft', platformState: 'scheduled', scheduledFor: '2026-11-01', pinnedFor: '2026-11-01', postId: 42 },
     } }] }))
     execFileSync(process.execPath, [builder], { cwd: blog, env: { ...process.env, TZ: 'America/Chicago' }, encoding: 'utf8', input: '', timeout: 10000, stdio: ['pipe', 'pipe', 'pipe'] })
@@ -89,7 +89,7 @@ test('an explicit LinkedIn pick admits an Applied piece without changing the def
     const picked = queue.items.find((i) => i.id === 'applied/picked')
     assert.equal(picked.routes.linkedin.mode, 'native')
     assert.equal(picked.routes.linkedin.state, 'eligible')
-    assert.equal(picked.routes.linkedin.scheduledFor, '2026-11-03')
+    assert.equal(picked.routes.linkedin.scheduledFor, '2026-11-01')
     assert.equal(picked.routes.substack.scheduledFor, '2026-11-01')
     assert.equal(picked.routes.substack.postId, 42)
     assert.equal(queue.items.find((i) => i.id === 'applied/unpicked').routes.linkedin.mode, 'skip')
@@ -98,5 +98,25 @@ test('an explicit LinkedIn pick admits an Applied piece without changing the def
     assert.equal(imported.reason, 'originated on LinkedIn')
   } finally {
     rmSync(root, { recursive: true, force: true })
+  }
+})
+
+test('approved outcome pairs keep LinkedIn pinned to their Substack release day', () => {
+  const queue = JSON.parse(readFileSync(new URL('./queue.json', import.meta.url), 'utf8'))
+  const ids = [
+    'blog/making-club-videos-without-opening-an-editor',
+    'blog/a-product-prototype-someone-else-can-build',
+    'blog/photography-reports-that-help-me-choose',
+    'applied/one-capture-two-outputs',
+  ]
+  for (const id of ids) {
+    const item = queue.items.find((i) => i.id === id)
+    assert.ok(item, id)
+    const { linkedin, substack } = item.routes
+    if (linkedin.state !== 'eligible') continue
+    const releaseDay = substack.pinnedFor || substack.scheduledFor
+    assert.match(releaseDay, /^\d{4}-\d{2}-\d{2}$/, id)
+    assert.equal(linkedin.pinnedFor, releaseDay, `${id}: regeneration must keep the paired date`)
+    assert.equal(linkedin.scheduledFor, releaseDay, `${id}: the publisher must read the paired date`)
   }
 })
