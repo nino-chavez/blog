@@ -1,0 +1,72 @@
+---
+title: "A product prototype someone else can build"
+status: "published"
+publishedAt: "2026-10-10"
+author: "Nino Chavez"
+category: "AI & Automation"
+tags: ["product-development", "prototyping", "product-design", "implementation"]
+takeaway: "Build a prototype around decisions, then hand off the requirements, contracts, and setup needed to make it real."
+excerpt: "A wedding product proposal became a public walkthrough, an interactive fictional prototype, and a handoff another builder can use without inheriting the original conversation."
+---
+
+A prototype is portable when the next person can try its important decisions and find what they need to build the real thing.
+
+That is the outcome of [Gather Here](https://gather-here.pages.dev): a public walkthrough, an interactive fictional wedding-weekend prototype, and a build handoff for one couple running one wedding in accounts they control. It lets someone explore the guest and organizer sides, then find the requirements and setup information without inheriting the private conversation that started the work.
+
+That distinction matters. A screen recording can make a product look complete while leaving the next builder to reconstruct the model underneath it. A requirements document can name every rule while leaving a couple unable to picture the experience. This package makes both available, then states plainly what it does not prove: it is not a launched RSVP service.
+
+---
+
+## The prototype is built around one coherent weekend
+
+The proposal starts with a couple who manages their own wedding weekend. Guests need a personal schedule, travel guidance, and a clear answer to a basic question: what am I invited to, and what do I need to reply to?
+
+The organizer needs to see unanswered replies, correct a changed plan deliberately, and explain what each answer means for each event without maintaining another reconciliation spreadsheet.
+
+That sounds simple until the weekend has a real shape. The fictional case has six events across three days. A rehearsal is visible to the wedding party but needs no attendance answer. Dinner, welcome drinks, and brunch have their own questions. Ceremony and reception appear as two schedule events, but one person gives one answer that covers both.
+
+The case changed the underlying model. An event belongs on the weekend. An invitation decides who may see it. A question asks one person for an answer and can name the events that answer covers. They are not interchangeable things.
+
+Once those distinctions hold, the guest and organizer screens tell the same story. A guest sees an event once, with the people it concerns and the status of each answer. The organizer queue counts unanswered person-question requests rather than duplicate event rows. Ceremony and reception can each have an attendance total without asking the same person twice.
+
+The [public walkthrough](https://gather-here.pages.dev) makes that model visible. It also lets a reviewer try reply recovery, a correction, and the style controls using only fictional records in the current browser tab.
+
+---
+
+## Complete alternatives made the choice testable
+
+The design did not begin with a single polished screen. Three complete directions put different product ideas under pressure.
+
+**Overview** treated the work as a broad organizer dashboard, with a matrix and large colored fields. It was rejected. **Programme** gave guests a personal, chronological guide. **Studio** gave the organizer a persistent invitation list and focused editor with person and event context.
+
+The selected experience combines Programme and Studio rather than borrowing their visual details at random. Guests get the warm paper, chronological orientation, and readable wedding voice from Programme. Organizers get Studio's stable list-and-detail workspace, so narrowing unresolved invitations does not lose the context needed to make a correction.
+
+Each concept had to handle unequal invitations, explicit reply permission, a shared wedding answer, and an event with no reply control. The six-event weekend exposed whether an idea could explain the work, not merely decorate it.
+
+The selected direction also separates the guest site's personal style from the organizer's working surface. A couple can choose from curated visual starting points and bounded adjustments without changing invitation assignments or answers. That is a proposed product behavior in a browser-local prototype, not a claim that styling has been tested with real couples.
+
+---
+
+## The handoff carries the decisions forward
+
+An interactive prototype is useful for a conversation. It becomes reusable when the decisions behind it are available to the person who builds next.
+
+The [public source project](https://github.com/nino-chavez/gather-here) carries those decisions in several forms. Business requirements describe intended outcomes and evidence limits. Product requirements and user stories preserve expected behavior. The reply contract describes the first durable save, correction, and recovery path. Setup material maps the proposed application to SvelteKit, Cloudflare Workers, Supabase, and email delivery while keeping one wedding as the default operating model.
+
+That does not turn documents into running infrastructure. It gives the next builder a way to distinguish what already exists from what is proposed, and to preserve the choices that made the prototype coherent. They can see why ceremony and reception share an answer, why a rehearsal may need no reply, and why a preview must not change a real invitation or response.
+
+The public package also keeps its boundary visible. It excludes private conversations, real guest information, credentials, and review records. The walkthrough is a static site. The prototype keeps reply changes in the browser and style choices in local browser state. It is safe to explore precisely because it does not pretend to be the system that would hold a wedding's real information.
+
+---
+
+## The next build is one reliable reply path
+
+Production work begins where the prototype ends. The first useful implementation is not a broader set of screens. It is one private guest sign-in, one durable RSVP save, an organizer view that reads the same answer, a deliberate correction, and recovery when the result is uncertain or a response is lost.
+
+That work still needs authentication, authorization, database storage, email delivery, backup and restore procedures, concurrent-edit handling, and observed walkthroughs with a guest and organizer. It also needs to answer whether a connected product is necessary at all, or whether an existing provider or smaller companion solves the real job with less risk.
+
+The public artifact does not convert a browser demo into a service. It gives the next builder enough of the product's shape to make that conversion deliberate.
+
+---
+
+*Evidence note: This essay draws on the October 1, 2026 product definition, concept-selection, and fictional-weekend audit, plus the October 2 public walkthrough and handoff package. The public materials demonstrate a hosted static walkthrough and browser-local fictional prototype. They do not demonstrate customer acceptance, real guest use, durable storage, authentication, email delivery, backup and restore, or a production wedding application.*
