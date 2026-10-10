@@ -12,6 +12,26 @@ export const REVIEW_INPUTS = {
   referenceCaption: resolve(HERE, 'captions/linkedin/blog--nobody-owns-what-the-agent-leaves-running.md'),
 }
 
+// Compare the URL's actual destination, not a substring inside another URL.
+// Tracking parameters, fragments and a trailing slash still name the source.
+export function commentLinksToSource(text, sourceUrl) {
+  let source
+  try {
+    source = new URL(sourceUrl)
+  } catch {
+    return false
+  }
+  const path = (url) => url.pathname.replace(/\/$/, '')
+  return (text.match(/https?:\/\/\S+/gi) || []).some((candidate) => {
+    try {
+      const link = new URL(candidate)
+      return link.origin === source.origin && path(link) === path(source)
+    } catch {
+      return false
+    }
+  })
+}
+
 const digest = (parts) => {
   const hash = createHash('sha256')
   for (const path of parts) {

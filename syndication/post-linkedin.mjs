@@ -24,7 +24,7 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { homedir } from 'node:os'
-import { reviewMismatches } from './caption-review-lib.mjs'
+import { commentLinksToSource, reviewMismatches } from './caption-review-lib.mjs'
 
 // puppeteer-core is not a dependency of this repo. browse-tool already owns the
 // browser side of this workflow (browser-box, BROWSE_PORT), so borrow its copy
@@ -88,9 +88,6 @@ for (const item of targets) {
 // paths do not share the code.
 const FIRST_COMMENT_MARKER = /\n---\s*first-comment\s*---\s*(?:\n|$)/
 const BLOG_LINK_IN_BODY = /https:\/\/(?:www\.)?ninochavez\.co\/blog(?:\/|\b)/i
-// A source-bound demo can use the same first-comment placement as an essay.
-// Keep the existing blog-body ban; unrelated first-comment links still fail.
-const SOURCE_LINK_IN_COMMENT = /https:\/\/(?:www\.)?ninochavez\.co\/(?:blog|demos)(?:\/|\b)/i
 function splitCaption(raw) {
   const text = raw.trim()
   if (!FIRST_COMMENT_MARKER.test(text)) return { body: text, firstComment: null }
@@ -107,7 +104,7 @@ for (const item of targets) {
   if (BLOG_LINK_IN_BODY.test(body)) {
     throw new Error(`${item.id}: blog link is in the LinkedIn body — move it below --- first-comment ---`)
   }
-  if (firstComment && !SOURCE_LINK_IN_COMMENT.test(firstComment)) {
+  if (firstComment && !commentLinksToSource(firstComment, item.url)) {
     throw new Error(`${item.id}: first comment exists but does not contain the source link`)
   }
   const stale = reviewMismatches(item, reviewReceipts.receipts[item.id])

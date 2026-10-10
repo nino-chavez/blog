@@ -184,7 +184,7 @@
     "tutorials/grade-an-agent-tool-before-you-install-it": "workshop register; its argument is picked as the blog post instead",
     "tutorials/measure-your-own-token-waste": "workshop register; companion to nothing-broke, which is picked",
     "tutorials/audit-your-ai-coding-harness": "workshop register; second companion to nothing-broke",
-    "applied/*": "each is a distillation of a demo already picked or available; on a feed that is one subject twice"
+    "applied/*": "Unselected Applied companions stay out of LinkedIn by default to avoid repeating their demo. An explicit pick above is an editorial exception; a standalone Applied example need not duplicate a parent session."
   },
   "unreviewed_candidates": {
     "_comment": "In the 30-day window on corrected dates, NOT read beyond the meta.json hook, so deliberately not ranked. Read one before promoting it.",
