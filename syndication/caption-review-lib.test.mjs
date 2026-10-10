@@ -20,6 +20,25 @@ test('a first comment links to its selected canonical source, not another articl
   assert.equal(commentLinksToSource(demo, 'not a source URL'), false)
 })
 
+test('prose punctuation and the verified www redirect still link to the selected source', () => {
+  const source = 'https://ninochavez.co/demos/applied/one-capture-two-outputs'
+  for (const comment of [
+    `Read it here: ${source}.`,
+    `(${source})`,
+    `[post](${source})`,
+    `"${source}"`,
+    `{${source}}`,
+    `${source}.,;:!?`,
+    source.replace('ninochavez.co', 'www.ninochavez.co'),
+  ]) {
+    assert.equal(commentLinksToSource(comment, source), true, comment)
+  }
+  assert.equal(commentLinksToSource(source, source.replace('ninochavez.co', 'www.ninochavez.co')), true)
+  assert.equal(commentLinksToSource(source.replace('https:', 'http:'), source), false)
+  assert.equal(commentLinksToSource(source.replace('ninochavez.co', 'www.ninochavez.co.example.test'), source), false)
+  assert.equal(commentLinksToSource('https://www.example.test/post', 'https://example.test/post'), false)
+})
+
 test('existing queued first-comment captions keep their valid source links', () => {
   const queue = JSON.parse(readFileSync(new URL('./queue.json', import.meta.url), 'utf8'))
   let checked = 0

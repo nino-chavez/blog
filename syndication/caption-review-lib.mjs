@@ -14,6 +14,7 @@ export const REVIEW_INPUTS = {
 
 // Compare the URL's actual destination, not a substring inside another URL.
 // Tracking parameters, fragments and a trailing slash still name the source.
+// Accept prose punctuation and ninochavez.co's verified HTTPS www redirect.
 export function commentLinksToSource(text, sourceUrl) {
   let source
   try {
@@ -22,10 +23,11 @@ export function commentLinksToSource(text, sourceUrl) {
     return false
   }
   const path = (url) => url.pathname.replace(/\/$/, '')
-  return (text.match(/https?:\/\/\S+/gi) || []).some((candidate) => {
+  const origin = (url) => url.origin.replace(/^https:\/\/www\.ninochavez\.co$/, 'https://ninochavez.co')
+  return (text.match(/https?:\/\/[^\s<>()\[\]"'`]+/gi) || []).some((candidate) => {
     try {
-      const link = new URL(candidate)
-      return link.origin === source.origin && path(link) === path(source)
+      const link = new URL(candidate.replace(/[.,;:!?}]+$/, ''))
+      return origin(link) === origin(source) && path(link) === path(source)
     } catch {
       return false
     }
