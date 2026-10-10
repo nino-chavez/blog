@@ -5,7 +5,8 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { test } from 'node:test'
 
-test('native Substack schedules retain their dates and are not manual publishing work', () => {
+for (const platform of ['substack', 'linkedin']) {
+test(`native ${platform} schedules retain their receipts and are not manual publishing work`, () => {
   const root = mkdtempSync(join(tmpdir(), 'syndication-native-schedule-test-'))
   try {
     const blog = join(root, 'blog')
@@ -31,9 +32,11 @@ test('native Substack schedules retain their dates and are not manual publishing
     }
     const items = fixtures.filter((f) => f[3]).map(([slug, title, , date, native]) => ({
       id: `blog/${slug}`, title, routes: {
-        substack: { mode: 'full', state: 'draft', scheduledFor: date, pinnedFor: date,
+        [platform]: { mode: platform === 'substack' ? 'full' : 'native', state: 'draft', scheduledFor: date, pinnedFor: date,
           postId: 42, url: 'https://example.test/draft',
-          ...(native ? { platformState: 'scheduled', scheduledAt: `${date}T14:00:00Z` } : {}) },
+          ...(native ? { platformState: 'scheduled', scheduledAt: `${date}T14:00:00Z`,
+            ...(platform === 'linkedin' ? { postUrn: 'urn:li:share:42', linkPlacement: 'body',
+              linkPlacementApproval: 'Synthetic approval fixture', submittedBodySha256: 'synthetic-hash' } : {}) } : {}) },
       },
     }))
     writeFileSync(join(here, 'queue.json'), JSON.stringify({ items }))
@@ -44,23 +47,33 @@ test('native Substack schedules retain their dates and are not manual publishing
     run()
     const queue = JSON.parse(readFileSync(join(here, 'queue.json'), 'utf8'))
     for (const [slug, , , date] of fixtures.filter((f) => f[4])) {
-      const route = queue.items.find((i) => i.id === `blog/${slug}`).routes.substack
+      const route = queue.items.find((i) => i.id === `blog/${slug}`).routes[platform]
       assert.equal(route.state, 'draft')
       assert.equal(route.platformState, 'scheduled')
       assert.equal(route.scheduledFor, date)
+      assert.equal(route.scheduledAt, `${date}T14:00:00Z`)
       assert.equal(route.backfill, undefined)
+      for (const [key, value] of Object.entries(items.find((i) => i.id === `blog/${slug}`).routes[platform])) {
+        assert.equal(route[key], value, `the native ${platform} receipt retains ${key}`)
+      }
     }
-    const freshSlots = queue.items.filter((i) => !i.routes.substack.platformState).map((i) => i.routes.substack.scheduledFor)
+    const freshSlots = queue.items.filter((i) => !i.routes[platform].platformState).map((i) => i.routes[platform].scheduledFor)
     assert.ok(!freshSlots.includes('2026-10-11'), 'the native release reserves its date')
     const before = readFileSync(join(here, 'queue.json'), 'utf8')
-    const due = run('--due', '--days', '40')
+    const forPlatform = (output) => output.split(`\n${platform.toUpperCase()}\n`)[1]?.split('\n\n')[0] || ''
+    const due = forPlatform(run('--due', '--days', '40'))
     assert.doesNotMatch(due, /Native fresh fixture|Native older fixture/)
     assert.match(due, /Manual draft fixture.*\[drafted — publish it\]/)
     assert.equal(readFileSync(join(here, 'queue.json'), 'utf8'), before, '--due remains read-only')
+    // The same receipt without a native schedule must remain visible as manual work.
+    delete queue.items.find((i) => i.id === 'blog/scheduled-fresh').routes[platform].platformState
+    writeFileSync(join(here, 'queue.json'), JSON.stringify(queue))
+    assert.match(forPlatform(run('--due', '--days', '40')), /Native fresh fixture.*\[drafted — publish it\]/)
   } finally {
     rmSync(root, { recursive: true, force: true })
   }
 })
+}
 
 test('an explicit LinkedIn pick admits an Applied piece without changing the default or origin guard', () => {
   const root = mkdtempSync(join(tmpdir(), 'syndication-applied-pick-test-'))
@@ -113,10 +126,21 @@ test('approved outcome pairs keep LinkedIn pinned to their Substack release day'
     const item = queue.items.find((i) => i.id === id)
     assert.ok(item, id)
     const { linkedin, substack } = item.routes
-    if (linkedin.state !== 'eligible') continue
+    const native = linkedin.state === 'draft' && linkedin.platformState === 'scheduled'
+    if (linkedin.state !== 'eligible' && !native) continue
     const releaseDay = substack.pinnedFor || substack.scheduledFor
     assert.match(releaseDay, /^\d{4}-\d{2}-\d{2}$/, id)
     assert.equal(linkedin.pinnedFor, releaseDay, `${id}: regeneration must keep the paired date`)
     assert.equal(linkedin.scheduledFor, releaseDay, `${id}: the publisher must read the paired date`)
+    if (native) {
+      const parts = Object.fromEntries(new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Chicago', year: 'numeric', month: '2-digit', day: '2-digit',
+        hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
+      }).formatToParts(new Date(linkedin.scheduledAt)).map(({ type, value }) => [type, value]))
+      assert.equal(`${parts.year}-${parts.month}-${parts.day}`, releaseDay, id)
+      assert.equal(`${parts.hour}:${parts.minute}`, '09:00', `${id}: native release is at 9am Chicago`)
+      assert.equal(linkedin.timeZone, 'America/Chicago', id)
+      assert.match(linkedin.postUrn, /^urn:li:share:\d+$/, `${id}: actual native receipt is required`)
+    }
   }
 })
