@@ -8,6 +8,8 @@ The first job is to compare an album launch with earlier launches at the same ag
 
 The second job is narrower: help choose what to look at next. The photo explorer can sort activity, filter the gallery, keep a shortlist, and export it. That creates a working set for a share or a review. It does not tell a photographer which image is good.
 
+Agents built the shared comparison rules and the screens that use them. Synthetic tests checked the calculations; cold screen reviews checked whether the result explained the next choice.
+
 The safeguards are part of the result:
 
 - New work is marked as not yet published for an earlier period, not as zero

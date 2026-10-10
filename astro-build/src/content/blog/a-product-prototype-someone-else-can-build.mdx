@@ -1,12 +1,12 @@
 ---
-title: "A product prototype someone else can build"
+title: "A product prototype that carries its decisions"
 status: "published"
-publishedAt: "2026-10-10"
+publishedAt: "2026-10-10T00:00:00-05:00"
 author: "Nino Chavez"
 category: "AI & Automation"
-tags: ["product-development", "prototyping", "product-design", "implementation"]
+tags: ["ai-development", "architecture", "field-notes"]
 takeaway: "Build a prototype around decisions, then hand off the requirements, contracts, and setup needed to make it real."
-excerpt: "A wedding product proposal became a public walkthrough, an interactive fictional prototype, and a handoff another builder can use without inheriting the original conversation."
+excerpt: "A wedding product proposal became a public walkthrough, an interactive fictional prototype, and a planning handoff that carries the product decisions without exposing the original conversation."
 ---
 
 A prototype is portable when the next person can try its important decisions and find what they need to build the real thing.
@@ -49,11 +49,15 @@ The selected direction also separates the guest site's personal style from the o
 
 ## The handoff carries the decisions forward
 
-An interactive prototype is useful for a conversation. It becomes reusable when the decisions behind it are available to the person who builds next.
+An interactive prototype is useful for a conversation. The handoff becomes more useful when the decisions behind it are available to the person who plans the next build.
 
 The [public source project](https://github.com/nino-chavez/gather-here) carries those decisions in several forms. Business requirements describe intended outcomes and evidence limits. Product requirements and user stories preserve expected behavior. The reply contract describes the first durable save, correction, and recovery path. Setup material maps the proposed application to SvelteKit, Cloudflare Workers, Supabase, and email delivery while keeping one wedding as the default operating model.
 
 That does not turn documents into running infrastructure. It gives the next builder a way to distinguish what already exists from what is proposed, and to preserve the choices that made the prototype coherent. They can see why ceremony and reception share an answer, why a rehearsal may need no reply, and why a preview must not change a real invitation or response.
+
+The agent handoff supplies a reading order and one bounded first assignment. It tells the receiving agent to inspect what runs before treating a requirement as implemented. That lets the next conversation start from the product decisions rather than depend on access to the private research. The packet exists; a second builder completing that assignment has not yet been observed.
+
+The repository is public for inspection, but no source-code license has been selected. Public access is not a grant to reuse its code. This is a requirements and prototype handoff; permission to reuse the implementation remains a separate decision.
 
 The public package also keeps its boundary visible. It excludes private conversations, real guest information, credentials, and review records. The walkthrough is a static site. The prototype keeps reply changes in the browser and style choices in local browser state. It is safe to explore precisely because it does not pretend to be the system that would hold a wedding's real information.
 
