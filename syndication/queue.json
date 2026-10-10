@@ -34,7 +34,7 @@
    "queued": 13,
    "skipped": 267,
    "firstSlot": "2026-09-22",
-   "lastSlot": "2026-11-03"
+   "lastSlot": "2026-11-01"
   },
   "substack": {
    "posted": 291,
@@ -84,8 +84,8 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--making-club-videos-without-opening-an-editor.md",
      "postedAt": null,
-     "scheduledFor": "2026-10-22",
-     "pinnedFor": "2026-10-22",
+     "scheduledFor": "2026-10-11",
+     "pinnedFor": "2026-10-11",
      "url": null
     },
     "devto": {
@@ -128,8 +128,8 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--a-product-prototype-someone-else-can-build.md",
      "postedAt": null,
-     "scheduledFor": "2026-10-27",
-     "pinnedFor": "2026-10-27",
+     "scheduledFor": "2026-10-18",
+     "pinnedFor": "2026-10-18",
      "url": null
     },
     "devto": {
@@ -172,8 +172,8 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--photography-reports-that-help-me-choose.md",
      "postedAt": null,
-     "scheduledFor": "2026-10-29",
-     "pinnedFor": "2026-10-29",
+     "scheduledFor": "2026-10-25",
+     "pinnedFor": "2026-10-25",
      "url": null
     },
     "devto": {
@@ -218,8 +218,8 @@
      "state": "eligible",
      "caption": "captions/linkedin/applied--one-capture-two-outputs.md",
      "postedAt": null,
-     "scheduledFor": "2026-11-03",
-     "pinnedFor": "2026-11-03",
+     "scheduledFor": "2026-11-01",
+     "pinnedFor": "2026-11-01",
      "url": null
     },
     "devto": {
