@@ -110,6 +110,39 @@
         "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
         "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
       }
+    },
+    "blog/making-club-videos-without-opening-an-editor": {
+      "reviewedAt": "2026-10-10T15:30:50.632Z",
+      "reviewedBy": "codex-outcome-editor",
+      "hashes": {
+        "caption": "cb63e543656af4dbc5aa2a6ee64bb5fc00a4785a52f23684bb77ba30ab0409f7",
+        "source": "6824e842f812d3139ee0bafd4b1e8c6f6cfa123fb5ffca6e2129c47fdc7c9898",
+        "voiceGuide": "009458279b9e0b6c3390bf69cb4b39afebf4c6a79ac34a64d89b091070524823",
+        "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
+        "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
+      }
+    },
+    "blog/a-product-prototype-someone-else-can-build": {
+      "reviewedAt": "2026-10-10T15:30:50.930Z",
+      "reviewedBy": "codex-outcome-editor",
+      "hashes": {
+        "caption": "0eb4874abcd5d315d0b3dbcaef8b288468fc1c6407801391c2c4247548fa43ee",
+        "source": "83af34f7a946c0da3cbceb8a68bf825b1e59a8086180d7261673ef680c51da9a",
+        "voiceGuide": "009458279b9e0b6c3390bf69cb4b39afebf4c6a79ac34a64d89b091070524823",
+        "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
+        "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
+      }
+    },
+    "blog/photography-reports-that-help-me-choose": {
+      "reviewedAt": "2026-10-10T15:30:51.228Z",
+      "reviewedBy": "codex-outcome-editor",
+      "hashes": {
+        "caption": "98ba0579e896b8346d69cb50e90c605f5d678494e0eb229fe1123f7a54a67e50",
+        "source": "46db30cb0fe3727e9bc8a50644990c6becd84219bd733183a53a4a273d65f5dd",
+        "voiceGuide": "009458279b9e0b6c3390bf69cb4b39afebf4c6a79ac34a64d89b091070524823",
+        "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
+        "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
+      }
     }
   }
 }
