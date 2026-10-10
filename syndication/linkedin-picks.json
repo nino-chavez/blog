@@ -155,6 +155,21 @@
       "id": "blog/the-audit-reproduced-the-failure",
       "reviewed": "full",
       "why": "the verifier fully audited the label it later compared against two quarter-sampled labels; the filter manufactured the rate, while the complete logs recorded 334 million tokens and an impossible 119-of-118 status"
+    },
+    {
+      "id": "blog/making-club-videos-without-opening-an-editor",
+      "reviewed": "full",
+      "why": "Nino selected this outcome story on October 10: a real 630 campaign moved from manual CapCut editing to agent-authored compositions and repeatable renders, while creative approval stayed human"
+    },
+    {
+      "id": "blog/a-product-prototype-someone-else-can-build",
+      "reviewed": "full",
+      "why": "Nino selected this outcome story on October 10: Gather Here combines a fictional working prototype with a public build handoff, without claiming a production wedding service"
+    },
+    {
+      "id": "blog/photography-reports-that-help-me-choose",
+      "reviewed": "full",
+      "why": "Nino selected this outcome story on October 10: equal-age launch comparisons and photo shortlist/export support a concrete next choice without treating recorded actions as people or photo quality"
     }
   ],
   "considered_not_picked": {
