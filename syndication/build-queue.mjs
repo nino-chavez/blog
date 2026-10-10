@@ -498,6 +498,11 @@ function routeWithGuards(p, now, picks) {
   const id = `${p.collection}/${p.slug}`
   if (p.origin === 'linkedin') {
     out.routes.linkedin = { mode: 'skip', reason: 'originated on LinkedIn' }
+  } else if (p.collection === 'applied' && picks.has(id)) {
+    // An explicit pick is an editorial exception to the companion default.
+    // It must survive regeneration without admitting unselected companions
+    // or returning material that originated on LinkedIn.
+    out.routes.linkedin = { mode: 'native' }
   }
   // The only LinkedIn gate. A piece is fed because it was picked, or not at all.
   if (out.routes.linkedin.mode !== 'skip' && !picks.has(id)) {

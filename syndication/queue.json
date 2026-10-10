@@ -31,10 +31,10 @@
  "summary": {
   "linkedin": {
    "posted": 61,
-   "queued": 12,
-   "skipped": 268,
+   "queued": 13,
+   "skipped": 267,
    "firstSlot": "2026-09-22",
-   "lastSlot": "2026-10-29"
+   "lastSlot": "2026-11-03"
   },
   "substack": {
    "posted": 291,
@@ -214,11 +214,12 @@
      "scheduleReceipt": "Reopened Substack editor: Nov 1 at 3:00 pm UTC"
     },
     "linkedin": {
-     "mode": "skip",
-     "state": "skip",
-     "reason": "companion duplicates its demo on a feed; the demo carries the incident",
+     "mode": "native",
+     "state": "eligible",
+     "caption": "captions/linkedin/applied--one-capture-two-outputs.md",
      "postedAt": null,
-     "scheduledFor": null,
+     "scheduledFor": "2026-11-03",
+     "pinnedFor": "2026-11-03",
      "url": null
     },
     "devto": {

@@ -143,6 +143,17 @@
         "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
         "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
       }
+    },
+    "applied/one-capture-two-outputs": {
+      "reviewedAt": "2026-10-10T18:04:23.457Z",
+      "reviewedBy": "codex — source, voice guide v1.9, reader contract, and reference caption read",
+      "hashes": {
+        "caption": "058aea8f67eb73d06ad637b6266da29a81c4b02a883e4dbb98ad5119fa701cca",
+        "source": "e656bef34bcd192f1fff317ec89da59142d9a1c7bdae751900e60b784aa4c37c",
+        "voiceGuide": "009458279b9e0b6c3390bf69cb4b39afebf4c6a79ac34a64d89b091070524823",
+        "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
+        "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
+      }
     }
   }
 }

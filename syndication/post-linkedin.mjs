@@ -88,6 +88,9 @@ for (const item of targets) {
 // paths do not share the code.
 const FIRST_COMMENT_MARKER = /\n---\s*first-comment\s*---\s*(?:\n|$)/
 const BLOG_LINK_IN_BODY = /https:\/\/(?:www\.)?ninochavez\.co\/blog(?:\/|\b)/i
+// A source-bound demo can use the same first-comment placement as an essay.
+// Keep the existing blog-body ban; unrelated first-comment links still fail.
+const SOURCE_LINK_IN_COMMENT = /https:\/\/(?:www\.)?ninochavez\.co\/(?:blog|demos)(?:\/|\b)/i
 function splitCaption(raw) {
   const text = raw.trim()
   if (!FIRST_COMMENT_MARKER.test(text)) return { body: text, firstComment: null }
@@ -104,8 +107,8 @@ for (const item of targets) {
   if (BLOG_LINK_IN_BODY.test(body)) {
     throw new Error(`${item.id}: blog link is in the LinkedIn body — move it below --- first-comment ---`)
   }
-  if (firstComment && !BLOG_LINK_IN_BODY.test(firstComment)) {
-    throw new Error(`${item.id}: first comment exists but does not contain the blog link`)
+  if (firstComment && !SOURCE_LINK_IN_COMMENT.test(firstComment)) {
+    throw new Error(`${item.id}: first comment exists but does not contain the source link`)
   }
   const stale = reviewMismatches(item, reviewReceipts.receipts[item.id])
   if (stale.length) {
