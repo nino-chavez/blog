@@ -24,7 +24,7 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { homedir } from 'node:os'
-import { reviewMismatches } from './caption-review-lib.mjs'
+import { commentLinksToSource, reviewMismatches } from './caption-review-lib.mjs'
 
 // puppeteer-core is not a dependency of this repo. browse-tool already owns the
 // browser side of this workflow (browser-box, BROWSE_PORT), so borrow its copy
@@ -104,8 +104,8 @@ for (const item of targets) {
   if (BLOG_LINK_IN_BODY.test(body)) {
     throw new Error(`${item.id}: blog link is in the LinkedIn body — move it below --- first-comment ---`)
   }
-  if (firstComment && !BLOG_LINK_IN_BODY.test(firstComment)) {
-    throw new Error(`${item.id}: first comment exists but does not contain the blog link`)
+  if (firstComment && !commentLinksToSource(firstComment, item.url)) {
+    throw new Error(`${item.id}: first comment exists but does not contain the source link`)
   }
   const stale = reviewMismatches(item, reviewReceipts.receipts[item.id])
   if (stale.length) {

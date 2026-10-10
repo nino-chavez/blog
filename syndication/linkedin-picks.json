@@ -170,6 +170,11 @@
       "id": "blog/photography-reports-that-help-me-choose",
       "reviewed": "full",
       "why": "Nino selected this outcome story on October 10: equal-age launch comparisons and photo shortlist/export support a concrete next choice without treating recorded actions as people or photo quality"
+    },
+    {
+      "id": "applied/one-capture-two-outputs",
+      "reviewed": "full",
+      "why": "Nino explicitly selected all four outcome stories for LinkedIn on October 10, including Rally HQ. This standalone Applied example has no linked parent session: one captured product journey supplies a click-through guide and silent video, without claiming measured learning or time savings."
     }
   ],
   "considered_not_picked": {
@@ -179,7 +184,7 @@
     "tutorials/grade-an-agent-tool-before-you-install-it": "workshop register; its argument is picked as the blog post instead",
     "tutorials/measure-your-own-token-waste": "workshop register; companion to nothing-broke, which is picked",
     "tutorials/audit-your-ai-coding-harness": "workshop register; second companion to nothing-broke",
-    "applied/*": "each is a distillation of a demo already picked or available; on a feed that is one subject twice"
+    "applied/*": "Unselected Applied companions stay out of LinkedIn by default to avoid repeating their demo. An explicit pick above is an editorial exception; a standalone Applied example need not duplicate a parent session."
   },
   "unreviewed_candidates": {
     "_comment": "In the 30-day window on corrected dates, NOT read beyond the meta.json hook, so deliberately not ranked. Read one before promoting it.",

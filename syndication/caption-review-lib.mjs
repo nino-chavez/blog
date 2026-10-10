@@ -12,6 +12,28 @@ export const REVIEW_INPUTS = {
   referenceCaption: resolve(HERE, 'captions/linkedin/blog--nobody-owns-what-the-agent-leaves-running.md'),
 }
 
+// Compare the URL's actual destination, not a substring inside another URL.
+// Tracking parameters, fragments and a trailing slash still name the source.
+// Accept prose punctuation and ninochavez.co's verified HTTPS www redirect.
+export function commentLinksToSource(text, sourceUrl) {
+  let source
+  try {
+    source = new URL(sourceUrl)
+  } catch {
+    return false
+  }
+  const path = (url) => url.pathname.replace(/\/$/, '')
+  const origin = (url) => url.origin.replace(/^https:\/\/www\.ninochavez\.co$/, 'https://ninochavez.co')
+  return (text.match(/https?:\/\/[^\s<>()\[\]"'`]+/gi) || []).some((candidate) => {
+    try {
+      const link = new URL(candidate.replace(/[.,;:!?}]+$/, ''))
+      return origin(link) === origin(source) && path(link) === path(source)
+    } catch {
+      return false
+    }
+  })
+}
+
 const digest = (parts) => {
   const hash = createHash('sha256')
   for (const path of parts) {

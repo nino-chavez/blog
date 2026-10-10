@@ -61,3 +61,42 @@ test('native Substack schedules retain their dates and are not manual publishing
     rmSync(root, { recursive: true, force: true })
   }
 })
+
+test('an explicit LinkedIn pick admits an Applied piece without changing the default or origin guard', () => {
+  const root = mkdtempSync(join(tmpdir(), 'syndication-applied-pick-test-'))
+  try {
+    const blog = join(root, 'blog')
+    const here = join(blog, 'syndication')
+    const content = join(blog, 'astro-build/src/content/blog')
+    mkdirSync(here, { recursive: true })
+    mkdirSync(content, { recursive: true })
+    const builder = join(here, 'build-queue.mjs')
+    copyFileSync(new URL('./build-queue.mjs', import.meta.url), builder)
+    for (const slug of ['picked', 'unpicked']) {
+      const dir = join(root, 'nc-demos/applied', slug)
+      mkdirSync(dir, { recursive: true })
+      writeFileSync(join(dir, 'meta.json'), JSON.stringify({ title: `${slug} Applied fixture`, date: '2026-10', relatedSessionSlugs: [] }))
+      writeFileSync(join(dir, 'deck.html'), '<p>Synthetic fixture, not a publication.</p>')
+    }
+    writeFileSync(join(content, 'imported.mdx'), '---\ntitle: "Imported LinkedIn fixture"\npublishedAt: "2026-10-10"\nstatus: "published"\nsource: "linkedin"\n---\nSynthetic fixture, not a publication.\n')
+    writeFileSync(join(here, 'linkedin-picks.json'), JSON.stringify({ picks: [{ id: 'applied/picked' }, { id: 'blog/imported' }] }))
+    writeFileSync(join(here, 'queue.json'), JSON.stringify({ items: [{ id: 'applied/picked', routes: {
+      linkedin: { mode: 'skip', state: 'skip', pinnedFor: '2026-11-03', scheduledFor: null },
+      substack: { mode: 'link', state: 'draft', platformState: 'scheduled', scheduledFor: '2026-11-01', pinnedFor: '2026-11-01', postId: 42 },
+    } }] }))
+    execFileSync(process.execPath, [builder], { cwd: blog, env: { ...process.env, TZ: 'America/Chicago' }, encoding: 'utf8', input: '', timeout: 10000, stdio: ['pipe', 'pipe', 'pipe'] })
+    const queue = JSON.parse(readFileSync(join(here, 'queue.json'), 'utf8'))
+    const picked = queue.items.find((i) => i.id === 'applied/picked')
+    assert.equal(picked.routes.linkedin.mode, 'native')
+    assert.equal(picked.routes.linkedin.state, 'eligible')
+    assert.equal(picked.routes.linkedin.scheduledFor, '2026-11-03')
+    assert.equal(picked.routes.substack.scheduledFor, '2026-11-01')
+    assert.equal(picked.routes.substack.postId, 42)
+    assert.equal(queue.items.find((i) => i.id === 'applied/unpicked').routes.linkedin.mode, 'skip')
+    const imported = queue.items.find((i) => i.id === 'blog/imported').routes.linkedin
+    assert.equal(imported.mode, 'skip')
+    assert.equal(imported.reason, 'originated on LinkedIn')
+  } finally {
+    rmSync(root, { recursive: true, force: true })
+  }
+})
