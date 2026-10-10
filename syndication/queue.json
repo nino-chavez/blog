@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-29",
+ "generatedAt": "2026-10-10",
  "linkedinHistory": "harvested from the activity feed (115 link-shares read)",
  "cadence": {
   "linkedin": {
@@ -30,29 +30,207 @@
  },
  "summary": {
   "linkedin": {
-   "posted": 59,
-   "queued": 11,
-   "skipped": 267,
-   "firstSlot": "2026-09-17",
-   "lastSlot": "2026-10-20"
+   "posted": 61,
+   "queued": 12,
+   "skipped": 268,
+   "firstSlot": "2026-09-22",
+   "lastSlot": "2026-10-29"
   },
   "substack": {
    "posted": 291,
-   "queued": 5,
+   "queued": 9,
    "backfill": 30,
    "skipped": 11,
    "firstSlot": "2026-09-16",
-   "lastSlot": "2026-09-19"
+   "lastSlot": "2026-11-01"
   },
   "devto": {
    "posted": 2,
    "queued": 6,
-   "skipped": 329,
+   "skipped": 333,
    "firstSlot": "2026-09-23",
    "lastSlot": "2026-12-02"
   }
  },
  "items": [
+  {
+   "id": "blog/making-club-videos-without-opening-an-editor",
+   "title": "Making club videos without opening a video editor",
+   "url": "https://ninochavez.co/blog/making-club-videos-without-opening-an-editor",
+   "publishedAt": "2026-10-10",
+   "collection": "blog",
+   "words": 1123,
+   "cluster": "making-club-videos-without-opening-an-editor",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "draft",
+     "postedAt": null,
+     "scheduledFor": "2026-10-11",
+     "pinnedFor": "2026-10-11",
+     "url": "https://signaldispatch.substack.com/publish/post/219752502",
+     "postId": 219752502,
+     "platformState": "scheduled",
+     "scheduledAt": "2026-10-11T14:00:00Z",
+     "timeZone": "America/Chicago",
+     "sendEmail": true,
+     "audience": "everyone",
+     "verifiedAt": "2026-10-10",
+     "scheduleReceipt": "Substack Scheduled list plus reopened editor: Oct 11 at 2:00 pm UTC"
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "caption": "captions/linkedin/blog--making-club-videos-without-opening-an-editor.md",
+     "postedAt": null,
+     "scheduledFor": "2026-10-22",
+     "pinnedFor": "2026-10-22",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/a-product-prototype-someone-else-can-build",
+   "title": "A product prototype that carries its decisions",
+   "url": "https://ninochavez.co/blog/a-product-prototype-someone-else-can-build",
+   "publishedAt": "2026-10-10",
+   "collection": "blog",
+   "words": 1125,
+   "cluster": "a-product-prototype-someone-else-can-build",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "draft",
+     "postedAt": null,
+     "scheduledFor": "2026-10-18",
+     "pinnedFor": "2026-10-18",
+     "url": "https://signaldispatch.substack.com/publish/post/219752563",
+     "postId": 219752563,
+     "platformState": "scheduled",
+     "scheduledAt": "2026-10-18T14:00:00Z",
+     "timeZone": "America/Chicago",
+     "sendEmail": true,
+     "audience": "everyone",
+     "verifiedAt": "2026-10-10",
+     "scheduleReceipt": "Reopened Substack editor: Oct 18 at 2:00 pm UTC"
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "caption": "captions/linkedin/blog--a-product-prototype-someone-else-can-build.md",
+     "postedAt": null,
+     "scheduledFor": "2026-10-27",
+     "pinnedFor": "2026-10-27",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/photography-reports-that-help-me-choose",
+   "title": "Photography reports that help me choose",
+   "url": "https://ninochavez.co/blog/photography-reports-that-help-me-choose",
+   "publishedAt": "2026-10-10",
+   "collection": "blog",
+   "words": 1130,
+   "cluster": "photography-reports-that-help-me-choose",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "draft",
+     "postedAt": null,
+     "scheduledFor": "2026-10-25",
+     "pinnedFor": "2026-10-25",
+     "url": "https://signaldispatch.substack.com/publish/post/219752656",
+     "postId": 219752656,
+     "platformState": "scheduled",
+     "scheduledAt": "2026-10-25T14:00:00Z",
+     "timeZone": "America/Chicago",
+     "sendEmail": true,
+     "audience": "everyone",
+     "verifiedAt": "2026-10-10",
+     "scheduleReceipt": "Reopened Substack editor: Oct 25 at 2:00 pm UTC"
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "caption": "captions/linkedin/blog--photography-reports-that-help-me-choose.md",
+     "postedAt": null,
+     "scheduledFor": "2026-10-29",
+     "pinnedFor": "2026-10-29",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "applied/one-capture-two-outputs",
+   "title": "One Capture, Two Ways to Teach the Product",
+   "url": "https://ninochavez.co/demos/applied/one-capture-two-outputs",
+   "publishedAt": "2026-10-10",
+   "collection": "applied",
+   "words": 0,
+   "pitch": "A staged Rally HQ tournament journey becomes both a click-through guide and a playable video. The useful part is not the file conversion; it is keeping the teaching surface attached to real product state and one shared catalogue of reader journeys.",
+   "cluster": "one-capture-two-outputs",
+   "tier": 1,
+   "routes": {
+    "substack": {
+     "mode": "link",
+     "state": "draft",
+     "caption": "captions/substack/applied--one-capture-two-outputs.md",
+     "postedAt": null,
+     "scheduledFor": "2026-11-01",
+     "pinnedFor": "2026-11-01",
+     "url": "https://signaldispatch.substack.com/publish/post/219753134",
+     "postId": 219753134,
+     "platformState": "scheduled",
+     "scheduledAt": "2026-11-01T15:00:00Z",
+     "timeZone": "America/Chicago",
+     "sendEmail": true,
+     "audience": "everyone",
+     "verifiedAt": "2026-10-10",
+     "scheduleReceipt": "Reopened Substack editor: Nov 1 at 3:00 pm UTC"
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "companion duplicates its demo on a feed; the demo carries the incident",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "no markdown body — rendered deck, nothing to cross-post",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
   {
    "id": "blog/the-work-doesnt-end-at-send",
    "title": "The Work Doesn\u2019t End at Send",
