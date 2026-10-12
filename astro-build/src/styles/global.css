@@ -1,13 +1,6 @@
 @import '@fontsource-variable/inter/wght.css';
 @import "tailwindcss";
 
-/* Ensure font-display: swap for Inter Variable */
-@font-face {
-  font-family: 'Inter Variable';
-  font-display: swap;
-  src: local('Inter Variable');
-}
-
 /* Signal Dispatch accent — see DESIGN.md and DIRECTION.md */
 @source "inline(bg-signal-coral/10 bg-signal-coral/5)";
 @source "inline(border-signal-coral border-signal-coral/30 border-signal-coral/50)";
