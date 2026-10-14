@@ -202,13 +202,53 @@ export async function findPostUrl(page, fingerprint, { exclude = [], timeoutMs =
 // used, and the post container is found through that box. So when no container
 // shows, click the toggle once and look again. Opening the box types nothing
 // and publishes nothing, which is why the read-only functions may do it.
+//
+// The toggle must be the target post's own: walking up from the post's text,
+// the first ancestor holding a button labelled exactly "Comment" that is not
+// itself inside a comment form (an open form's submit button carries the same
+// label and would post). It is clicked only when exactly one such button is
+// found; otherwise nothing is clicked and the caller fails closed.
+function markToggleInPage(fingerprint, editorSelector) {
+  const norm = (s) => (s || '').replace(/\s+/g, ' ').trim()
+  const up = (n) => n.parentElement || (n.getRootNode && n.getRootNode().host) || null
+  const all = []
+  const visit = (root) => {
+    for (const el of root.querySelectorAll('*')) {
+      all.push(el)
+      if (el.shadowRoot) visit(el.shadowRoot)
+    }
+  }
+  visit(document)
+  const t = norm(fingerprint)
+  const hits = all.filter((el) => norm(el.textContent).includes(t))
+  const innermost = hits.filter((el) => ![...el.children].some((c) => hits.includes(c)))
+  const inCommentForm = (b) => {
+    let x = b
+    for (let i = 0; i < 10 && x; i++) { x = up(x); if (x && x.querySelector && x.querySelector(editorSelector)) return true }
+    return false
+  }
+  const toggles = new Set()
+  for (const el of innermost) {
+    for (let node = el, i = 0; i < 40 && node; i++, node = up(node)) {
+      if (!node.querySelectorAll) continue
+      const found = [...node.querySelectorAll('button')].filter((b) =>
+        /^comment$/i.test((b.getAttribute('aria-label') || b.innerText || '').trim()) && !inCommentForm(b))
+      if (found.length) { found.forEach((b) => toggles.add(b)); break }
+    }
+  }
+  for (const b of document.querySelectorAll('[data-lz-toggle]')) b.removeAttribute('data-lz-toggle')
+  if (toggles.size !== 1) return toggles.size
+  ;[...toggles][0].setAttribute('data-lz-toggle', '1')
+  return 1
+}
+
 async function postShownOnce(page, fingerprint) {
   let posts = await scan(page, fingerprint, null, 'posts')
   if (posts === 0) {
-    for (const b of await page.$$('>>> button')) {
-      const label = await b.evaluate((el) => (el.getAttribute('aria-label') || el.innerText || '').trim())
-      if (/^comment$/i.test(label)) { await b.click(); break }
-    }
+    const n = await page.evaluate(markToggleInPage, fingerprint, COMMENT_EDITOR)
+    const toggle = n === 1 ? await page.$('>>> button[data-lz-toggle="1"]') : null
+    if (!toggle) return 0
+    await toggle.click()
     await sleep(3000)
     posts = await scan(page, fingerprint, null, 'posts')
   }
@@ -272,18 +312,26 @@ export async function submitComment(page, fingerprint, text, { screenshot } = {}
   const submit = await page.$('>>> button[data-lz-submit="1"]')
   if (!submit) throw new Error('could not re-acquire the comment submit button')
   await submit.click()
-  await sleep(7000)
 
-  // Verify rather than assume: clicking the wrong control also "succeeds". Keep
-  // "not there" apart from "could not look": after a submit, telling someone to
-  // add the comment by hand when it may already be live invites a duplicate.
-  await page.reload({ waitUntil: 'domcontentloaded' })
-  await sleep(9000)
-  const has = (await postShownOnce(page, fingerprint)) === 1 ? await scan(page, fingerprint, text, 'has') : -1
+  // From here the comment may be live. Verify rather than assume (clicking the
+  // wrong control also "succeeds"), but anything short of seeing it is
+  // UNVERIFIED, never a plain failure: a comment that renders late, a reload
+  // that times out, or a post that cannot be found again all leave a comment
+  // that may already exist, and advice to add it by hand would duplicate it.
+  let has = -1
+  let why = ''
+  try {
+    await sleep(7000)
+    await page.reload({ waitUntil: 'domcontentloaded' })
+    await sleep(9000)
+    has = (await postShownOnce(page, fingerprint)) === 1 ? await scan(page, fingerprint, text, 'has') : -1
+  } catch (e) {
+    why = ` (${e.message})`
+  }
   if (has === 1) return true
   const err = new Error(has === 0
-    ? 'clicked submit but the comment is not visible under the post after reload'
-    : 'clicked submit, but the post could not be found again to confirm the comment')
-  err.code = has === 0 ? 'NOT_VISIBLE' : 'UNVERIFIED'
+    ? 'clicked submit; the comment did not show on the first look after reload'
+    : `clicked submit; could not look again to confirm the comment${why}`)
+  err.code = 'UNVERIFIED'
   throw err
 }
