@@ -18,7 +18,7 @@ I teased her: "Well, if it can't do 100% of it, then you're acting like it shoul
 
 All-or-nothing is the right bar for a Star Trek replicator: ask for dinner and it appears exactly as you meant it. Nothing I use with AI works like that yet, and the machines change by the day.
 
-Until the replicator exists, someone has to know how to cook. Here, cooking means judging what the machine missed and deciding whether the rest was worth keeping. The stretch before the replicator is the in-between we're in now.
+Until the replicator exists, someone has to know how to cook. Here, cooking means judging what the machine missed and deciding whether the rest was worth keeping.
 
 ---
 
@@ -29,13 +29,13 @@ Short of a replicator, there are four ways to get dinner, from no cooking to all
 | | What you do | The AI version |
 |---|---|---|
 | **Microwave dinner** | Heat it and eat what comes out | Someone else sets it up; you press go and take what comes back |
-| **Factor** (ready-made meals delivered) | Pick from a menu of meals cooked to a plan | You pick a ready-made AI assistant built for jobs like yours and use it as delivered |
+| **Factor** (ready-made meals delivered) | Pick from a menu of meals cooked to a plan | You pick a ready-made AI tool built for one kind of job, like a meeting note-taker, and use it as delivered |
 | **HelloFresh** (meal kits) | Cook from the recipe card with the ingredients in the box | You get the tools installed and the steps written down, then run them and fix what comes out wrong |
 | **Homemade** | Choose the ingredients, taste, adjust | You decide what to hand over, check the result, and change your approach when the model changes |
 
 Most people around me need the first row. My family member is still on it.
 
-Installing the agent didn't move her. What moves someone down the table is judging what the machine hands back. She nearly threw out the whole result over one or two missed items.
+Installing the agent didn't move her. She judged the result by the replicator's bar, all or nothing. Moving toward the last row means judging whether the rest is worth keeping.
 
 I've done this kind of setup many times over at a volleyball club where I do photo and media work. [TK: one concrete instance from the club, or cut this paragraph.]
 
@@ -43,9 +43,9 @@ I can cook with these tools, up to a point. Even the agent I build with is a pac
 
 ---
 
-## A New Model Can Change the Recipe Overnight
+## Swapping the Model Changes What Comes Out
 
-The machine itself keeps changing. When a new model ships, a cook notices whether the food comes out different. Someone using the tool ready-made doesn't see the swap.
+New models ship constantly, and swapping one in can change the result. A cook tests the swap before trusting it. Someone using the tool ready-made doesn't see the swap.
 
 I use AI agents to write code. At the end of a working session, I run a check on the session's transcript. Among other things, it looks for passwords and keys that ended up in the transcript by mistake.
 
@@ -73,7 +73,7 @@ Deciding when 99% is good enough is the cook's job.
 
 ---
 
-## The Cook Is Optional Once the Tool Can Say What It Missed
+## Less Cooking, Once the Tool Can Say What It Missed
 
 In [Who Is Still Driving?](https://ninochavez.co/blog/who-is-still-driving), I wrote that a product needing an expert to catch its mistakes should say so. I listed three things I want to know before I rely on an agent:
 
@@ -81,9 +81,9 @@ In [Who Is Still Driving?](https://ninochavez.co/blog/who-is-still-driving), I w
 - What can I do if something goes wrong?
 - How will I know the job is finished?
 
-Those questions also mark where the in-between ends. When a tool can answer them for itself, and tell my family member which items it skipped, she won't need anyone in the house who can cook.
+Those questions also mark how much cooking a tool still leaves you. When a tool can answer them for itself, and tell my family member which items it skipped, her only job will be deciding whether the misses matter.
 
-Until then, a result that comes back mostly done needs two numbers. One is the time it saved, minus the time it took to find and fix what it missed. The other is what a miss nobody found would cost.
+Until then, a result that comes back mostly done needs two checks. One is the time it saved, minus the time it took to find and fix what it missed. The other is what a miss nobody found would cost.
 
 <!--
 EDITORIAL NOTES — private source record; excluded from any published article.
@@ -110,10 +110,12 @@ Evidence and attribution (guide §1b; every first-person claim traced to Nino sp
 - Revision 3 attribution recheck: "I'm on the last row" reverted to "I can cook with these tools, up to a point" (his words place him only "to a point", not on a row); "I'm not grading the model on it" replaced with an evidence-scope statement, since the stance was not his.
 - Three questions: quoted from the published Who Is Still Driving?
 
-Cold read, 2026-10-14: a general-purpose agent read only the body, not the conversation or these notes. It placed the point at about word 170 and flagged: the replicator appearing once, an ending that made the microwave dinner the goal after the opening called that bar mistaken, "the in-between" undefined, unclear referents ("Until they don't", "that choice", "said as much"), vague Factor and HelloFresh rows, no stated row for the author, metaphor-label headings, transcript jargon, and two section-end morals. All addressed in this revision. Declined: holding the thesis back past word 170 (the guide requires it within 150). Its flag that the volleyball line might be invented is wrong on the facts (Nino said it), but the paragraph now carries a TK for one instance because a reader has nothing to picture.
+Cold read, 2026-10-14: a general-purpose agent read only the body, not the conversation or these notes. It placed the point at about word 170 and flagged: the replicator appearing once, an ending that made the microwave dinner the goal after the opening called that bar mistaken, "the in-between" undefined, unclear referents ("Until they don't", "that choice", "said as much"), vague Factor and HelloFresh rows, no stated row for the author, metaphor-label headings, transcript jargon, and two section-end morals. All addressed in revision 2. Second cold read (revision 3) confirmed the ending now fits the 100% section and flagged: the cook-optional claim outrunning the argument, a heading that claimed models change under a user when the evidence shows a swap changing the result, a line implying she did not judge at all, no example in the Factor row, and a repeated in-between sentence. All addressed in revision 4; the term "in-between" is now used only in these notes. Declined: holding the thesis back past word 170 (the guide requires it within 150). Its flag that the volleyball line might be invented is wrong on the facts (Nino said it), but the paragraph now carries a TK for one instance because a reader has nothing to picture.
 
 Open before publishing:
 - [TK] One concrete volleyball-club instance, or cut that paragraph.
+- Cold reader asked which row the author is on; the draft keeps Nino's own "up to a point" rather than assigning him a row. Name one if he wants.
+- "New models ship constantly" stands on Nino's "the machine is changing daily" plus the single October 7 release; it is his characterization, not a measured rate.
 - [TK] How the missing items were found. If checking every entry was needed, keep the comparison paragraph; if they were obvious, shorten it.
 - Confirm the key in the October 7 replay has been rotated before publishing. The draft does not name it.
 - "If those forms had moved money" is a labeled hypothetical, not a claim about her forms. Confirm the forms did not move money, or cut the line.
