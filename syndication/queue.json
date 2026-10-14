@@ -31,16 +31,16 @@
  "summary": {
   "linkedin": {
    "posted": 62,
-   "queued": 11,
-   "skipped": 269,
+   "queued": 10,
+   "skipped": 270,
    "firstSlot": "2026-10-11",
-   "lastSlot": "2026-11-05"
+   "lastSlot": "2026-11-03"
   },
   "substack": {
    "posted": 291,
    "queued": 5,
-   "backfill": 35,
-   "skipped": 11,
+   "backfill": 34,
+   "skipped": 12,
    "firstSlot": "2026-10-11",
    "lastSlot": "2026-11-01"
   },
@@ -464,18 +464,20 @@
    "tier": 1,
    "routes": {
     "substack": {
-     "mode": "link",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip-manual",
+     "reason": "dismissed",
      "postedAt": null,
      "scheduledFor": null,
      "url": null,
      "backfill": true
     },
     "linkedin": {
-     "mode": "native",
-     "state": "eligible",
+     "mode": "skip",
+     "state": "skip-manual",
+     "reason": "dismissed",
      "postedAt": null,
-     "scheduledFor": "2026-10-27",
+     "scheduledFor": null,
      "url": null
     },
     "devto": {
@@ -702,7 +704,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-03",
+     "scheduledFor": "2026-10-27",
      "url": null
     },
     "devto": {
@@ -3888,7 +3890,7 @@
    "url": "https://ninochavez.co/blog/theres-no-replicator-yet",
    "publishedAt": "2026-10-14",
    "collection": "blog",
-   "words": 1009,
+   "words": 1011,
    "cluster": "theres-no-replicator-yet",
    "tier": 2,
    "routes": {
@@ -4805,7 +4807,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-05",
+     "scheduledFor": "2026-11-03",
      "url": null
     },
     "devto": {
