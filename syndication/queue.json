@@ -3903,11 +3903,16 @@
     },
     "linkedin": {
      "mode": "native",
-     "state": "eligible",
+     "state": "posted",
      "caption": "captions/linkedin/blog--theres-no-replicator-yet.md",
-     "postedAt": null,
+     "postedAt": "2026-10-14",
      "scheduledFor": "2026-10-15",
-     "url": null
+     "url": "https://www.linkedin.com/feed/update/urn:li:activity:7516185954521505794/",
+     "deliveryMethod": "post-linkedin.mjs via browser-box social profile (CDP 9400); first comment added separately",
+     "firstCommentState": "posted",
+     "firstCommentText": "https://ninochavez.co/blog/theres-no-replicator-yet",
+     "verifiedAt": "2026-10-14 17:35 UTC",
+     "verification": "Live post matched all eight caption paragraphs under Nino Chavez; one Author comment shows the article URL. The publisher skipped the first comment (its /recent-activity/all/ scan rendered empty, and its .ql-editor selector no longer matches LinkedIn's TipTap comment editor); the comment was added on the post page with the same exact-text and visible-after-reload checks."
     },
     "devto": {
      "mode": "skip",
