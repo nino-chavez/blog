@@ -154,6 +154,17 @@
         "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
         "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
       }
+    },
+    "demos/agentic-gates": {
+      "reviewedAt": "2026-10-08T14:52:34.702Z",
+      "reviewedBy": "codex",
+      "hashes": {
+        "caption": "4081ee2afae21916ca8c958e8bc944a92bf3dd70214f986fc0ec7a69ac1053af",
+        "source": "eedd0facc1b0fb30954ee61b19daf2d8a2510b39215ef837534257d2e3f8ccf4",
+        "voiceGuide": "009458279b9e0b6c3390bf69cb4b39afebf4c6a79ac34a64d89b091070524823",
+        "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
+        "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
+      }
     }
   }
 }
