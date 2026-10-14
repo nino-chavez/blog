@@ -4,7 +4,7 @@ status: "draft"
 author: "Nino Chavez"
 category: "AI & Automation"
 tags: ["ai-development", "agentic-systems", "reflection"]
-takeaway: "When an AI tool gets most of a task right, judge it by the time it saved minus the time spent finding and fixing what it missed."
+takeaway: "When an AI tool gets most of a task right, weigh the time it saved against finding and fixing its misses, and what an unfound miss would cost."
 excerpt: "An AI agent did nearly all of a family member's data entry, missed one or two items, and almost got written off. All-or-nothing is a replicator's bar, and nothing I use with AI clears it yet."
 ---
 
@@ -39,7 +39,7 @@ Installing the agent didn't move her. What moves someone down the table is judgi
 
 I've done this kind of setup many times over at a volleyball club where I do photo and media work. [TK: one concrete instance from the club, or cut this paragraph.]
 
-I'm on the last row, up to a point. Even the agent I build with is a packaged product I didn't make, which I wrote about in [Who Is Still Driving?](https://ninochavez.co/blog/who-is-still-driving)
+I can cook with these tools, up to a point. Even the agent I build with is a packaged product I didn't make, which I wrote about in [Who Is Still Driving?](https://ninochavez.co/blog/who-is-still-driving)
 
 ---
 
@@ -53,7 +53,7 @@ On October 7, a smaller, cheaper model came out. I wanted to know whether it cou
 
 In one transcript, a key had been printed into the output of a command. The larger model flagged it and said to replace it. The cheaper model missed it on both of its runs.
 
-One case is a small sample, and I'm not grading the model on it. It was enough to keep the check on the larger model.
+One case says little about the model in general. It was enough to keep the check on the larger model.
 
 Then I added a plain scan for anything shaped like a key, so catching a leak no longer depends on which model is paying attention.
 
@@ -83,7 +83,7 @@ In [Who Is Still Driving?](https://ninochavez.co/blog/who-is-still-driving), I w
 
 Those questions also mark where the in-between ends. When a tool can answer them for itself, and tell my family member which items it skipped, she won't need anyone in the house who can cook.
 
-Until then, a result that comes back mostly done has one fair test. Count the time it saved, then subtract the time it took to find and fix what it missed.
+Until then, a result that comes back mostly done needs two numbers. One is the time it saved, minus the time it took to find and fix what it missed. The other is what a miss nobody found would cost.
 
 <!--
 EDITORIAL NOTES — private source record; excluded from any published article.
@@ -106,7 +106,8 @@ Evidence and attribution (guide §1b; every first-person claim traced to Nino sp
 - "Up to a point": Nino's "i know how to drive the new 'ai' car to a point." Packaged-product line: the published Who Is Still Driving? ("I'm already relying on a packaged product when I use Codex to build something else").
 - October 7 model test: Nino asked whether the closeout check should always run on the newly released smaller model and said "run the haiku comparison on 5 past sessions," then "add the secret scan step to the closeout skill" (Claude session a53a1c25, 2026-10-07). Results from memory note project_closeout_haiku_55_verdict.md: in one replayed session a token had been printed into a tool result; Opus made rotating it the next action; both Haiku runs missed it; verdict kept closeout on the session model; mechanical secret-scan merged the same day. n=1 on the deciding case, stated in the draft. Model and product names kept generic per the guide.
 - "The machines change by the day": Nino's "the machine is changing daily." Replicator: Nino's "there is no 'universal replicator' yet"; the Star Trek gloss is added for the reader.
-- Closing test ("time it saved minus the time it took to find and fix what it missed") comes from the Codex thread's point that checking time belongs in the comparison. It is stated as the essay's test, not as Nino's described practice; confirm he endorses it.
+- Closing test ("time it saved minus the time it took to find and fix what it missed") comes from the Codex thread's point that checking time belongs in the comparison. Revision 3 adds the cost of a miss nobody finds, because the money-moving case in "Sometimes 100% Is the Right Bar" is exactly that miss. Stated as the essay's test, not as Nino's described practice; confirm he endorses it.
+- Revision 3 attribution recheck: "I'm on the last row" reverted to "I can cook with these tools, up to a point" (his words place him only "to a point", not on a row); "I'm not grading the model on it" replaced with an evidence-scope statement, since the stance was not his.
 - Three questions: quoted from the published Who Is Still Driving?
 
 Cold read, 2026-10-14: a general-purpose agent read only the body, not the conversation or these notes. It placed the point at about word 170 and flagged: the replicator appearing once, an ending that made the microwave dinner the goal after the opening called that bar mistaken, "the in-between" undefined, unclear referents ("Until they don't", "that choice", "said as much"), vague Factor and HelloFresh rows, no stated row for the author, metaphor-label headings, transcript jargon, and two section-end morals. All addressed in this revision. Declined: holding the thesis back past word 170 (the guide requires it within 150). Its flag that the volleyball line might be invented is wrong on the facts (Nino said it), but the paragraph now carries a TK for one instance because a reader has nothing to picture.
@@ -114,7 +115,7 @@ Cold read, 2026-10-14: a general-purpose agent read only the body, not the conve
 Open before publishing:
 - [TK] One concrete volleyball-club instance, or cut that paragraph.
 - [TK] How the missing items were found. If checking every entry was needed, keep the comparison paragraph; if they were obvious, shorten it.
-- Confirm the leaked key from the October 7 replay has been rotated; the memory note recorded it as still live on 2026-10-07. The draft does not name it.
+- Confirm the key in the October 7 replay has been rotated before publishing. The draft does not name it.
 - "If those forms had moved money" is a labeled hypothetical, not a claim about her forms. Confirm the forms did not move money, or cut the line.
 - Factor and HelloFresh descriptions are general product knowledge (ready-made meals from a menu; meal kits with recipe cards), not fetched this session.
 -->
