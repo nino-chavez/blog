@@ -16,15 +16,17 @@
 // profile inside browser-box so nothing takes over the screen:
 //   browser-box start --profile social      # CDP on 9400
 //
-// The composer is a Quill editor. Setting .textContent or .innerHTML leaves
-// Quill's internal model empty and the Post button disabled, so text goes in
-// through real CDP keyboard input via page.type().
+// The composer and the comment box are TipTap editors (they were Quill until
+// 2026). Setting .textContent or .innerHTML leaves the editor's own model empty
+// and the Post button disabled, so text goes in through real CDP keyboard input
+// via page.type().
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { homedir } from 'node:os'
 import { commentLinksToSource, reviewMismatches } from './caption-review-lib.mjs'
+import { splitCaption, fingerprintOf, findPostUrl, commentPresent, submitComment } from './linkedin-post-lib.mjs'
 
 // puppeteer-core is not a dependency of this repo. browse-tool already owns the
 // browser side of this workflow (browser-box, BROWSE_PORT), so borrow its copy
@@ -78,23 +80,9 @@ for (const item of targets) {
 // this convention is blunt: 11 requests reached the site from LinkedIn in seven
 // days against roughly 1,600 impressions a week (2026-08-23). Body goes in the
 // composer; the marked remainder becomes the first comment.
-// Trailing newline is optional: splitCaption trims first, so requiring \n after
-// the marker let a marker with an empty tail survive into the post body.
-//
-// Module scope, deliberately. This first lived inside the `if (DRY)` block, so
-// --dry exercised it and the live path threw ReferenceError on the line that
-// reads the caption — which is to say the feature only ever ran in the mode
-// that cannot publish. A dry run is not a test of the live path when the two
-// paths do not share the code.
-const FIRST_COMMENT_MARKER = /\n---\s*first-comment\s*---\s*(?:\n|$)/
 const BLOG_LINK_IN_BODY = /https:\/\/(?:www\.)?ninochavez\.co\/blog(?:\/|\b)/i
-function splitCaption(raw) {
-  const text = raw.trim()
-  if (!FIRST_COMMENT_MARKER.test(text)) return { body: text, firstComment: null }
-  const [body, ...rest] = text.split(FIRST_COMMENT_MARKER)
-  return { body: body.trim(), firstComment: rest.join('\n').trim() || null }
-}
-
+// splitCaption and the --- first-comment --- marker live in linkedin-post-lib.mjs,
+// shared with check-linkedin-post.mjs.
 // The first-comment convention is an acceptance rule, not an optional caption
 // shape. Keep this check in the live publisher too: a build can be skipped, and
 // a syntactically valid body URL is exactly what slipped through on 2026-08-23.
@@ -254,98 +242,53 @@ for (const item of targets) {
   await btnEl.click()
   await new Promise((r) => setTimeout(r, 8000))
 
-  // ---- first comment -------------------------------------------------------
+  // ---- post URL and first comment ------------------------------------------
   // The post is already public at this point. Everything below is additive and
   // must fail closed: the only failure that matters here is commenting on the
   // WRONG post, which is unrecoverable and visible. So the post is identified by
-  // its own opening text before a single key is typed, and anything short of a
-  // positive match skips the comment and tells the operator to add it by hand.
+  // its own opening text, by exactly one /feed/update/ link, before a single key
+  // is typed, and anything short of that skips the comment and says where to
+  // add it by hand. See linkedin-post-lib.mjs for why the lookup moved from the
+  // activity page to the profile page (2026-10-14).
+  const route = item.routes.linkedin
+  const fingerprint = fingerprintOf(body)
+  let postUrl = null
+  try {
+    postUrl = await findPostUrl(page, fingerprint, { log: (m) => console.log(`   ${m}`) })
+  } catch (err) {
+    console.log(`   post lookup FAILED (${err.message})`)
+  }
+  if (postUrl) {
+    route.url = postUrl
+    console.log(`   post ${postUrl}`)
+  } else {
+    console.log('   post URL not identified; queue.json url stays empty')
+  }
+
   if (firstComment) {
-    try {
-      const fingerprint = body.slice(0, 60)
-      await page.goto('https://www.linkedin.com/in/me/recent-activity/all/', { waitUntil: 'domcontentloaded' })
-      await new Promise((r) => setTimeout(r, 6000))
-
-      const posts = await page.$$('>>> div.feed-shared-update-v2, >>> div[data-urn]')
-      let target = null
-      for (const el of posts) {
-        const txt = await el.evaluate((n) => (n.innerText || '').trim()).catch(() => '')
-        if (txt.includes(fingerprint)) { target = el; break }
-        if (target) break
+    const shot2 = `/tmp/linkedin-${item.id.replace(/\W+/g, '-')}-comment.png`
+    if (!postUrl) {
+      route.firstCommentState = 'skipped'
+      console.log('   first comment SKIPPED: could not positively identify the post just published.')
+      console.log(`   find it under https://www.linkedin.com/in/me/ and add by hand: ${firstComment}`)
+    } else {
+      try {
+        if (await commentPresent(page, postUrl, fingerprint, firstComment)) {
+          console.log('   first comment already present')
+        } else {
+          await submitComment(page, fingerprint, firstComment, { screenshot: shot2 })
+          console.log(`   first comment posted (screenshot ${shot2})`)
+        }
+        route.firstCommentState = 'posted'
+        route.firstCommentText = firstComment
+      } catch (err) {
+        // Never rethrow: the post itself succeeded and must still be recorded as
+        // posted, or a retry would publish it twice.
+        route.firstCommentState = 'failed'
+        console.log(`   first comment FAILED (${err.message}). The post is live; add the comment by hand:`)
+        console.log(`   ${postUrl}`)
+        console.log(`   ${firstComment}`)
       }
-      if (!target) {
-        console.log('   first comment SKIPPED — could not positively identify the post just published.')
-        console.log(`   add it by hand: ${firstComment}`)
-      } else {
-        const btns = await target.$$('>>> button')
-        let commentBtn = null
-        for (const b of btns) {
-          const label = await b.evaluate((el) => ((el.getAttribute('aria-label') || el.innerText || '')).trim())
-          if (/^comment$/i.test(label)) { commentBtn = b; break }
-        }
-        if (!commentBtn) throw new Error('comment control not found on the identified post')
-        await commentBtn.click()
-        await new Promise((r) => setTimeout(r, 3000))
-
-        const box = await target.$('>>> div.ql-editor[contenteditable="true"]')
-        if (!box) throw new Error('comment editor not found')
-        await box.click()
-        await box.type(firstComment, { delay: 1 })
-        await new Promise((r) => setTimeout(r, 2000))
-
-        const shot2 = `/tmp/linkedin-${item.id.replace(/\W+/g, '-')}-comment.png`
-        await page.screenshot({ path: shot2 })
-        console.log(`   comment screenshot ${shot2}`)
-
-        const typedComment = await box.evaluate((el) => el.innerText.trim()).catch(() => null)
-        if (typedComment !== firstComment) {
-          throw new Error('comment box did not receive the exact text — not submitting')
-        }
-        // Two things were wrong here on the first live run (2026-08-23), and
-        // only fixing both submits the comment.
-        //
-        // The label is "Comment". "Post"/"Reply" is what this was written for
-        // and neither string appears, so the scan found nothing and left the
-        // comment typed but unsubmitted under a post that was already public.
-        //
-        // And the scan has to be scoped to the comment FORM, not the post. The
-        // post's own action bar carries a "Comment" button — the toggle that
-        // opens the box — and it comes first in document order, so a
-        // whole-post scan clicks the toggle and reports success. Walk up from
-        // the editor instead and take the last enabled match inside the first
-        // ancestor that has one.
-        const found = await box.evaluate((el) => {
-          const ok = (b) => /^(comment|post|reply)$/i.test((b.innerText || '').trim()) && !b.disabled
-          let node = el
-          for (let i = 0; i < 8 && node; i++) {
-            node = node.parentElement
-            if (!node) break
-            const hits = [...node.querySelectorAll('button')].filter(ok)
-            if (hits.length) {
-              hits[hits.length - 1].setAttribute('data-lz-submit', '1')
-              return true
-            }
-          }
-          return false
-        })
-        if (!found) throw new Error('comment submit button not found inside the comment form')
-        const submit = await target.$('>>> button[data-lz-submit="1"]')
-        if (!submit) throw new Error('could not re-acquire the comment submit button')
-        await submit.click()
-        await new Promise((r) => setTimeout(r, 6000))
-
-        // Verify rather than assume. Clicking the wrong control also "succeeds".
-        const landed = await target.evaluate((n) => (n.innerText || '')).catch(() => '')
-        if (!landed.includes(firstComment.slice(0, 40))) {
-          throw new Error('clicked submit but the comment is not visible under the post')
-        }
-        console.log('   first comment posted')
-      }
-    } catch (err) {
-      // Never rethrow: the post itself succeeded and must still be recorded as
-      // posted, or a retry would publish it twice.
-      console.log(`   first comment FAILED (${err.message}) — post is live; add the comment by hand:`)
-      console.log(`   ${firstComment}`)
     }
   }
 

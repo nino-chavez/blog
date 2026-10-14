@@ -438,15 +438,27 @@ Both refuse to publish if the editor received noticeably less than the source.
 
 Four things that are not obvious, each of which cost a debugging round:
 
-**LinkedIn's editor is inside a shadow root.** `document.querySelector` never
-finds it, and neither does an iframe walk — the composer is a `.ql-editor` under
-a shadow host, so the selector needs puppeteer's `>>>` piercing combinator. The
-"Start a post" button has no stable text or class either (LinkedIn ships
-obfuscated class names like `_4c6efdeb`), so the composer opens by deep link:
-`/feed/?shareActive=true`.
+**LinkedIn's editors moved, and so did the post.** Until 2026 the composer was a
+Quill `.ql-editor` inside a shadow root, reachable only through puppeteer's `>>>`
+piercing combinator, and it opened by the `/feed/?shareActive=true` deep link.
+Now the feed's visible "Start a post" control opens a TipTap textbox
+(`div[role="textbox"]`), and the comment box on a post's own page is
+`div[role="textbox"][aria-label="Text editor for creating comment"]`. Finding the
+post just published moved too. On 2026-10-14, `/in/me/recent-activity/all/`
+rendered "Nothing to see for now" inside the box, so the first comment was
+skipped. The post was on `/in/me/`, with its own `/feed/update/urn:li:activity:<id>/`
+link a few ancestors above its text. `linkedin-post-lib.mjs` holds that lookup: it
+needs exactly one matching post URL and otherwise skips the comment. The
+publisher writes the URL to `queue.json` and records `firstCommentState`
+(`posted`, `skipped` or `failed`). When a comment is skipped or fails, this
+read-only check finds the post and says whether the comment is on it:
+
+```bash
+node syndication/check-linkedin-post.mjs --id blog/<slug>
+```
 
 **Text must arrive as real keystrokes.** Both editors keep their own document
-model — Quill on LinkedIn, TipTap/ProseMirror on Substack. Assigning
+model — TipTap on LinkedIn (Quill until 2026), TipTap/ProseMirror on Substack. Assigning
 `textContent` or `innerHTML` leaves that model empty and the publish button
 disabled, so LinkedIn goes through `type()` and Substack through a synthetic
 `ClipboardEvent` carrying `text/html`.
