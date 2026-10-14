@@ -4,6 +4,7 @@
 //
 //   node syndication/check-linkedin-post.mjs --id <queue-id>
 //   node syndication/check-linkedin-post.mjs --fingerprint "<first line of the post>"
+//   add --comment "<text>" to check for that text instead of the caption's comment
 //
 // Use it when post-linkedin.mjs reports the comment SKIPPED or FAILED, to get
 // the post URL for the ledger and to confirm a hand-added comment landed.
@@ -14,7 +15,7 @@ import { readFileSync, existsSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { homedir } from 'node:os'
-import { splitCaption, fingerprintOf, findPostUrl, openPost, commentPresent } from './linkedin-post-lib.mjs'
+import { splitCaption, fingerprintOf, findPostUrl, openPost, commentAlsoInBody, commentPresent } from './linkedin-post-lib.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const argv = process.argv.slice(2)
@@ -22,6 +23,7 @@ const val = (f) => { const i = argv.indexOf(f); return i >= 0 ? argv[i + 1] : nu
 
 let fingerprint = val('--fingerprint')
 let firstComment = null
+let body = ''
 const id = val('--id')
 if (id) {
   const queue = JSON.parse(readFileSync(resolve(HERE, 'queue.json'), 'utf8'))
@@ -31,7 +33,9 @@ if (id) {
   const split = splitCaption(readFileSync(resolve(HERE, cap), 'utf8'))
   fingerprint = fingerprintOf(split.body)
   firstComment = split.firstComment
+  body = split.body
 }
+if (val('--comment')) firstComment = val('--comment')
 if (!fingerprint) {
   console.log('pass --id <queue-id> or --fingerprint "<first line of the post>"')
   process.exit(2)
@@ -53,7 +57,10 @@ try {
     await openPost(page, url, fingerprint)
     console.log('post page shows the fingerprint: yes')
   }
-  if (url && firstComment) {
+  if (url && firstComment && commentAlsoInBody(body, firstComment)) {
+    console.log('first comment: cannot check, its text is also in the post body')
+    code = 1
+  } else if (url && firstComment) {
     const present = await commentPresent(page, url, fingerprint, firstComment)
     console.log(`first comment: ${present ? 'present' : 'MISSING'} (${firstComment})`)
     if (!present) code = 1

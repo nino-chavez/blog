@@ -26,7 +26,7 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { homedir } from 'node:os'
 import { commentLinksToSource, reviewMismatches } from './caption-review-lib.mjs'
-import { splitCaption, fingerprintOf, findPostUrl, commentPresent, submitComment } from './linkedin-post-lib.mjs'
+import { splitCaption, fingerprintOf, existingPostUrls, findPostUrl, commentAlsoInBody, commentPresent, submitComment } from './linkedin-post-lib.mjs'
 
 // puppeteer-core is not a dependency of this repo. browse-tool already owns the
 // browser side of this workflow (browser-box, BROWSE_PORT), so borrow its copy
@@ -162,6 +162,20 @@ for (const item of targets) {
   }
 
   const page = await browser.newPage()
+
+  // Posts that already open with the same line, taken before this one exists,
+  // so the lookup after Post cannot settle on an older post while the new one
+  // has not appeared yet. If this read fails, the post still goes out, but the
+  // URL lookup and first comment are skipped rather than guessed.
+  const fingerprint = fingerprintOf(body)
+  let knownBefore = null
+  try {
+    knownBefore = await existingPostUrls(page, fingerprint)
+    if (knownBefore.length) console.log(`   ${knownBefore.length} existing post(s) open with this line; excluded from the lookup`)
+  } catch (err) {
+    console.log(`   pre-post lookup FAILED (${err.message}); post URL and first comment will be skipped`)
+  }
+
   // Open the feed, then use the visible control. LinkedIn stopped honoring the
   // old `shareActive=true` deep link while leaving the feed itself unchanged.
   await page.goto('https://www.linkedin.com/feed/', { waitUntil: 'domcontentloaded' })
@@ -251,12 +265,13 @@ for (const item of targets) {
   // add it by hand. See linkedin-post-lib.mjs for why the lookup moved from the
   // activity page to the profile page (2026-10-14).
   const route = item.routes.linkedin
-  const fingerprint = fingerprintOf(body)
   let postUrl = null
-  try {
-    postUrl = await findPostUrl(page, fingerprint, { log: (m) => console.log(`   ${m}`) })
-  } catch (err) {
-    console.log(`   post lookup FAILED (${err.message})`)
+  if (knownBefore) {
+    try {
+      postUrl = await findPostUrl(page, fingerprint, { exclude: knownBefore, log: (m) => console.log(`   ${m}`) })
+    } catch (err) {
+      console.log(`   post lookup FAILED (${err.message})`)
+    }
   }
   if (postUrl) {
     route.url = postUrl
@@ -271,6 +286,10 @@ for (const item of targets) {
       route.firstCommentState = 'skipped'
       console.log('   first comment SKIPPED: could not positively identify the post just published.')
       console.log(`   find it under https://www.linkedin.com/in/me/ and add by hand: ${firstComment}`)
+    } else if (commentAlsoInBody(body, firstComment)) {
+      route.firstCommentState = 'skipped'
+      console.log('   first comment SKIPPED: its text is also in the post body, so whether it landed cannot be checked.')
+      console.log(`   ${postUrl}`)
     } else {
       try {
         if (await commentPresent(page, postUrl, fingerprint, firstComment)) {

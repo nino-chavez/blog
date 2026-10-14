@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { fingerprintOf, pickPostUrl } from './linkedin-post-lib.mjs'
+import { fingerprintOf, pickPostUrl, newPostUrl, commentAlsoInBody } from './linkedin-post-lib.mjs'
 
 test('the fingerprint is the first line only, even when that line is short', () => {
   const body = 'People shouldn\'t have to learn this.\n\nSecond paragraph starts here and is long.'
@@ -29,4 +29,23 @@ test('no URL, or two different posts, is no answer', () => {
   assert.equal(pickPostUrl([]), null)
   assert.equal(pickPostUrl([a, b]), null)
   assert.equal(pickPostUrl([b, a, a]), null)
+})
+
+test('a post that existed before is never the new post', () => {
+  const old = 'https://www.linkedin.com/feed/update/urn:li:activity:1/'
+  const fresh = 'https://www.linkedin.com/feed/update/urn:li:activity:2/'
+  // The new post has not appeared yet; only the old one carries the line.
+  assert.equal(newPostUrl([old], [old]), null)
+  // Both visible: the old one is excluded, the new one is the answer.
+  assert.equal(newPostUrl([old, fresh + '?x=1'], [old]), fresh)
+  // Nothing excluded and two candidates: still no answer.
+  assert.equal(newPostUrl([old, fresh], []), null)
+})
+
+test('a comment whose text is also in the body cannot be verified, whitespace aside', () => {
+  const link = 'https://ninochavez.co/blog/x'
+  assert.equal(commentAlsoInBody(`Read it here:\n${link}`, link), true)
+  assert.equal(commentAlsoInBody('A body with no link.', link), false)
+  assert.equal(commentAlsoInBody('Two   lines\nof comment', 'Two lines of comment'), true)
+  assert.equal(commentAlsoInBody('Anything', null), false)
 })

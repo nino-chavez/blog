@@ -54,23 +54,56 @@ export function fingerprintOf(body) {
   return first.replace(/\s+/g, ' ').slice(0, 60).trim()
 }
 
+const norm = (s) => String(s ?? '').replace(/\s+/g, ' ').trim()
+const bare = (u) => String(u).split('?')[0]
+
 // Fail closed: exactly one distinct post URL identifies the post. None, or two
 // different posts carrying the same text (a repost, a duplicate), is no answer.
 export function pickPostUrl(urls) {
-  const unique = [...new Set(urls.map((u) => String(u).split('?')[0]))]
+  const unique = [...new Set(urls.map(bare))]
   return unique.length === 1 ? unique[0] : null
 }
 
+// The post just published, from the links found after posting, minus every
+// post that already carried the same opening before it. Without the exclusion,
+// an older post with the same first line is the only match while the new one
+// has not appeared yet, and the comment lands on the old post.
+export function newPostUrl(links, exclude = []) {
+  const known = new Set(exclude.map(bare))
+  return pickPostUrl(links.filter((u) => !known.has(bare(u))))
+}
+
+// When the comment text also sits in the post body, "is the comment there?"
+// cannot be answered by looking for the text, so the comment step is skipped.
+export function commentAlsoInBody(body, comment) {
+  return Boolean(comment) && norm(body).includes(norm(comment))
+}
+
 // Runs in the page, so it must be self-contained (puppeteer ships its source,
-// and LinkedIn's CSP rules out rebuilding helpers with eval there). Finds every
-// element across open shadow roots whose collapsed text contains `needle`,
-// keeping only the innermost matches. mode 'count' returns how many. mode
-// 'links' walks up from each match (crossing shadow hosts) to the first
-// ancestor holding a /feed/update/ link and returns every distinct link there,
-// so a container holding several posts reports all of them and pickPostUrl
-// refuses it.
-function scanInPage(needle, mode) {
+// and LinkedIn's CSP rules out rebuilding helpers with eval there). Text is
+// compared whitespace-collapsed on both sides, across open shadow roots.
+//
+//   'links' — from each innermost element carrying `fingerprint`, walk up
+//             (crossing shadow hosts) to the first ancestor holding a
+//             /feed/update/ link and return every distinct link there, so a
+//             container holding several posts reports all of them.
+//   'posts' — how many distinct post containers carry `fingerprint`, where a
+//             post container is the first ancestor that also holds the comment
+//             editor. On a post's own page this must be exactly 1; sidebars and
+//             recommended posts have no editor and do not count.
+//   'has'   — 1 if `needle` shows in that post's own region, 0 if not, -1 if
+//             there is not exactly one post container to start from. The
+//             region is wider than the container: on 2026-10-14 the comment
+//             editor sat inside the post's listitem, four levels above its
+//             text, but the comments rendered in a sibling block that joins
+//             the post only ten levels further up (section "Primary content").
+//             Scoping to the container read an existing comment as missing,
+//             which would have posted a duplicate. So the region grows from
+//             the container while each ancestor still holds exactly one post
+//             link and no <aside>, and stops before the sidebars.
+function scanInPage(fingerprint, needle, mode, editorSelector) {
   const norm = (s) => (s || '').replace(/\s+/g, ' ').trim()
+  const up = (n) => n.parentElement || (n.getRootNode && n.getRootNode().host) || null
   const all = []
   const visit = (root) => {
     for (const el of root.querySelectorAll('*')) {
@@ -79,82 +112,119 @@ function scanInPage(needle, mode) {
     }
   }
   visit(document)
-  const hits = all.filter((el) => norm(el.textContent).includes(needle))
-  const innermost = hits.filter((el) => ![...el.children].some((c) => hits.includes(c)))
-  if (mode === 'count') return innermost.length
-  const out = []
-  for (const el of innermost) {
+  const innermost = (text) => {
+    const t = norm(text)
+    const hits = all.filter((el) => norm(el.textContent).includes(t))
+    return hits.filter((el) => ![...el.children].some((c) => hits.includes(c)))
+  }
+  const matches = innermost(fingerprint)
+  if (mode === 'links') {
+    const out = []
+    for (const el of matches) {
+      let node = el
+      for (let i = 0; i < 40 && node; i++) {
+        if (node.querySelectorAll) {
+          const links = [...node.querySelectorAll('a[href*="/feed/update/urn:li:"]')].map((a) => a.href.split('?')[0])
+          if (links.length) { out.push(...new Set(links)); break }
+        }
+        node = up(node)
+      }
+    }
+    return out
+  }
+  const containers = []
+  for (const el of matches) {
     let node = el
     for (let i = 0; i < 40 && node; i++) {
-      if (node.querySelectorAll) {
-        const links = [...node.querySelectorAll('a[href*="/feed/update/urn:li:"]')].map((a) => a.href.split('?')[0])
-        if (links.length) { out.push(...new Set(links)); break }
+      if (node.querySelector && node.querySelector(editorSelector)) {
+        if (!containers.includes(node)) containers.push(node)
+        break
       }
-      node = node.parentElement || (node.getRootNode && node.getRootNode().host) || null
+      node = up(node)
     }
   }
-  return out
+  if (mode === 'posts') return containers.length
+  if (containers.length !== 1) return -1
+  const postLinks = (n) => new Set([...n.querySelectorAll('a[href*="/feed/update/urn:li:"]')].map((a) => a.href.split('?')[0])).size
+  let scope = containers[0]
+  for (let next = up(scope); next && next.querySelectorAll; next = up(next)) {
+    if (postLinks(next) !== 1 || next.querySelector('aside')) break
+    scope = next
+  }
+  const inside = (el) => { for (let x = el; x; x = up(x)) if (x === scope) return true; return false }
+  const n = norm(needle)
+  return all.some((el) => inside(el) && norm(el.textContent).includes(n)) ? 1 : 0
 }
 
-const linksForText = (page, needle) => page.evaluate(scanInPage, needle, 'links')
-const pageHasText = async (page, needle) => (await page.evaluate(scanInPage, needle, 'count')) > 0
+const scan = (page, fingerprint, needle, mode) => page.evaluate(scanInPage, fingerprint, needle, mode, COMMENT_EDITOR)
+
+async function profileLinks(page, url, fingerprint) {
+  await page.goto(url, { waitUntil: 'domcontentloaded' })
+  await sleep(8000)
+  for (let i = 0; i < 3; i++) { await page.evaluate(() => window.scrollBy(0, 900)); await sleep(2000) }
+  return scan(page, fingerprint, null, 'links')
+}
+
+// Read-only. Every post on the profile pages that already opens with this
+// fingerprint. post-linkedin.mjs takes this before posting and passes it to
+// findPostUrl as `exclude`.
+export async function existingPostUrls(page, fingerprint) {
+  const out = []
+  for (const url of PROFILE_PAGES) out.push(...(await profileLinks(page, url, fingerprint)))
+  return [...new Set(out.map(bare))]
+}
 
 // Read-only. Returns the post's /feed/update/ URL, or null. Retries with
 // reloads until the deadline, because a post can take a while to appear on the
-// profile: the old six-second look missed it.
-export async function findPostUrl(page, fingerprint, { timeoutMs = 90000, log = () => {} } = {}) {
+// profile: the old six-second look missed it. Links in `exclude` (posts that
+// existed before this one) never count.
+export async function findPostUrl(page, fingerprint, { exclude = [], timeoutMs = 90000, log = () => {} } = {}) {
   if (!fingerprint || fingerprint.length < 20) throw new Error('fingerprint too short to identify a post')
+  const known = new Set(exclude.map(bare))
   const deadline = Date.now() + timeoutMs
   let attempt = 0
   while (Date.now() < deadline) {
     for (const url of PROFILE_PAGES) {
       attempt++
-      await page.goto(url, { waitUntil: 'domcontentloaded' })
-      await sleep(8000)
-      for (let i = 0; i < 3; i++) { await page.evaluate(() => window.scrollBy(0, 900)); await sleep(2000) }
-      const links = await linksForText(page, fingerprint)
-      const picked = pickPostUrl(links)
-      log(`lookup ${attempt} ${url.replace('https://www.linkedin.com', '')}: ${links.length} link(s)${picked ? ' -> ' + picked : ''}`)
+      const links = await profileLinks(page, url, fingerprint)
+      const fresh = [...new Set(links.map(bare))].filter((u) => !known.has(u))
+      const picked = newPostUrl(links, exclude)
+      log(`lookup ${attempt} ${url.replace('https://www.linkedin.com', '')}: ${links.length} link(s), ${fresh.length} new${picked ? ' -> ' + picked : ''}`)
       if (picked) return picked
-      if (links.length > 1) return null // ambiguous now; waiting will not make it less so
+      if (fresh.length > 1) return null // ambiguous now; waiting will not make it less so
       if (Date.now() >= deadline) break
     }
   }
   return null
 }
 
-// Read-only. openPost opens the post and throws if the page does not carry the
-// post's own text, so a wrong URL can never read as "comment missing" and lead
-// to a comment on the wrong post. commentPresent then reports whether `text`
-// already shows on it.
+// Read-only. openPost opens the post and throws unless the page shows the post
+// exactly once with its comment editor beside it, so a wrong URL can never read
+// as "comment missing" and lead to a comment on the wrong post. commentPresent
+// then reports whether `text` shows inside that post (not anywhere on the page,
+// where a sidebar or a recommended post could carry it).
 export async function openPost(page, postUrl, fingerprint) {
   await page.goto(postUrl, { waitUntil: 'domcontentloaded' })
   await sleep(9000)
-  if (!(await pageHasText(page, fingerprint))) throw new Error(`post text not found at ${postUrl}`)
+  const posts = await scan(page, fingerprint, null, 'posts')
+  if (posts !== 1) throw new Error(`expected the post once, with its comment box, at ${postUrl}; found ${posts}`)
 }
 
 export async function commentPresent(page, postUrl, fingerprint, text) {
   await openPost(page, postUrl, fingerprint)
-  return pageHasText(page, text)
+  const has = await scan(page, fingerprint, text, 'has')
+  if (has < 0) throw new Error('could not scope the check to the post')
+  return has === 1
 }
 
 // Writes. Call only after commentPresent returned false for the same page.
 // Every step fails closed; the one thing that cannot be undone is a comment on
 // the wrong post or a half-typed one.
 export async function submitComment(page, fingerprint, text, { screenshot } = {}) {
-  if (!(await pageHasText(page, fingerprint))) throw new Error('post text not on the current page; not commenting')
+  const posts = await scan(page, fingerprint, null, 'posts')
+  if (posts !== 1) throw new Error(`post not shown exactly once on the current page (found ${posts}); not commenting`)
 
-  let boxes = await page.$$(`>>> ${COMMENT_EDITOR}`)
-  if (boxes.length === 0) {
-    // Some layouts keep the box closed until the post's Comment toggle is used.
-    for (const b of await page.$$('>>> button')) {
-      const label = await b.evaluate((el) => (el.getAttribute('aria-label') || el.innerText || '').trim())
-      if (/^comment$/i.test(label)) { await b.click(); break }
-    }
-    await sleep(3000)
-    boxes = await page.$$(`>>> ${COMMENT_EDITOR}`)
-    if (boxes.length === 0) boxes = await page.$$('>>> div.ql-editor[contenteditable="true"]')
-  }
+  const boxes = await page.$$(`>>> ${COMMENT_EDITOR}`)
   if (boxes.length !== 1) throw new Error(`expected one comment editor, found ${boxes.length}`)
   const box = boxes[0]
 
@@ -163,8 +233,8 @@ export async function submitComment(page, fingerprint, text, { screenshot } = {}
   await box.type(text, { delay: 5 })
   await sleep(2500)
   if (screenshot) await page.screenshot({ path: screenshot })
-  const typed = await box.evaluate((el) => el.innerText.trim()).catch(() => null)
-  if (typed !== text) throw new Error('comment box did not receive the exact text; not submitting')
+  const typed = await box.evaluate((el) => el.innerText).catch(() => null)
+  if (typed === null || norm(typed) !== norm(text)) throw new Error('comment box did not receive the exact text; not submitting')
 
   // Scope the submit to the comment form: the post's action bar has its own
   // "Comment" toggle that comes first in document order. Walk up from the editor
@@ -189,6 +259,6 @@ export async function submitComment(page, fingerprint, text, { screenshot } = {}
   // Verify rather than assume: clicking the wrong control also "succeeds".
   await page.reload({ waitUntil: 'domcontentloaded' })
   await sleep(9000)
-  if (!(await pageHasText(page, text))) throw new Error('clicked submit but the comment is not visible after reload')
+  if ((await scan(page, fingerprint, text, 'has')) !== 1) throw new Error('clicked submit but the comment is not visible under the post after reload')
   return true
 }
