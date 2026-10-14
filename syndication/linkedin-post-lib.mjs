@@ -198,15 +198,33 @@ export async function findPostUrl(page, fingerprint, { exclude = [], timeoutMs =
   return null
 }
 
-// Read-only. openPost opens the post and throws unless the page shows the post
-// exactly once with its comment editor beside it, so a wrong URL can never read
-// as "comment missing" and lead to a comment on the wrong post. commentPresent
-// then reports whether `text` shows inside that post (not anywhere on the page,
-// where a sidebar or a recommended post could carry it).
+// Some layouts keep the comment box closed until the post's Comment toggle is
+// used, and the post container is found through that box. So when no container
+// shows, click the toggle once and look again. Opening the box types nothing
+// and publishes nothing, which is why the read-only functions may do it.
+async function postShownOnce(page, fingerprint) {
+  let posts = await scan(page, fingerprint, null, 'posts')
+  if (posts === 0) {
+    for (const b of await page.$$('>>> button')) {
+      const label = await b.evaluate((el) => (el.getAttribute('aria-label') || el.innerText || '').trim())
+      if (/^comment$/i.test(label)) { await b.click(); break }
+    }
+    await sleep(3000)
+    posts = await scan(page, fingerprint, null, 'posts')
+  }
+  return posts
+}
+
+// Read-only (it may open the comment box, never type in it). openPost opens the
+// post and throws unless the page shows the post exactly once with its comment
+// box beside it, so a wrong URL can never read as "comment missing" and lead to
+// a comment on the wrong post. commentPresent then reports whether `text` shows
+// in that post's own region (not anywhere on the page, where a sidebar or a
+// recommended post could carry it).
 export async function openPost(page, postUrl, fingerprint) {
   await page.goto(postUrl, { waitUntil: 'domcontentloaded' })
   await sleep(9000)
-  const posts = await scan(page, fingerprint, null, 'posts')
+  const posts = await postShownOnce(page, fingerprint)
   if (posts !== 1) throw new Error(`expected the post once, with its comment box, at ${postUrl}; found ${posts}`)
 }
 
@@ -221,7 +239,7 @@ export async function commentPresent(page, postUrl, fingerprint, text) {
 // Every step fails closed; the one thing that cannot be undone is a comment on
 // the wrong post or a half-typed one.
 export async function submitComment(page, fingerprint, text, { screenshot } = {}) {
-  const posts = await scan(page, fingerprint, null, 'posts')
+  const posts = await postShownOnce(page, fingerprint)
   if (posts !== 1) throw new Error(`post not shown exactly once on the current page (found ${posts}); not commenting`)
 
   const boxes = await page.$$(`>>> ${COMMENT_EDITOR}`)
@@ -256,9 +274,16 @@ export async function submitComment(page, fingerprint, text, { screenshot } = {}
   await submit.click()
   await sleep(7000)
 
-  // Verify rather than assume: clicking the wrong control also "succeeds".
+  // Verify rather than assume: clicking the wrong control also "succeeds". Keep
+  // "not there" apart from "could not look": after a submit, telling someone to
+  // add the comment by hand when it may already be live invites a duplicate.
   await page.reload({ waitUntil: 'domcontentloaded' })
   await sleep(9000)
-  if ((await scan(page, fingerprint, text, 'has')) !== 1) throw new Error('clicked submit but the comment is not visible under the post after reload')
-  return true
+  const has = (await postShownOnce(page, fingerprint)) === 1 ? await scan(page, fingerprint, text, 'has') : -1
+  if (has === 1) return true
+  const err = new Error(has === 0
+    ? 'clicked submit but the comment is not visible under the post after reload'
+    : 'clicked submit, but the post could not be found again to confirm the comment')
+  err.code = has === 0 ? 'NOT_VISIBLE' : 'UNVERIFIED'
+  throw err
 }

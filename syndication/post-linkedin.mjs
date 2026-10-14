@@ -303,10 +303,18 @@ for (const item of targets) {
       } catch (err) {
         // Never rethrow: the post itself succeeded and must still be recorded as
         // posted, or a retry would publish it twice.
-        route.firstCommentState = 'failed'
-        console.log(`   first comment FAILED (${err.message}). The post is live; add the comment by hand:`)
-        console.log(`   ${postUrl}`)
-        console.log(`   ${firstComment}`)
+        if (err.code === 'UNVERIFIED') {
+          // The submit was clicked; the comment may be live. Do not invite a
+          // second one before someone looks.
+          route.firstCommentState = 'unverified'
+          console.log(`   first comment UNVERIFIED (${err.message}). Check before re-adding:`)
+          console.log(`   node syndication/check-linkedin-post.mjs --id ${item.id}`)
+        } else {
+          route.firstCommentState = 'failed'
+          console.log(`   first comment FAILED (${err.message}). The post is live; add the comment by hand:`)
+          console.log(`   ${postUrl}`)
+          console.log(`   ${firstComment}`)
+        }
       }
     }
   }

@@ -450,7 +450,7 @@ skipped. The post was on `/in/me/`, with its own `/feed/update/urn:li:activity:<
 link a few ancestors above its text. `linkedin-post-lib.mjs` holds that lookup: it
 needs exactly one matching post URL and otherwise skips the comment. The
 publisher writes the URL to `queue.json` and records `firstCommentState`
-(`posted`, `skipped` or `failed`). When a comment is skipped or fails, this
+(`posted`, `skipped`, `failed`, or `unverified` when the submit was clicked but the post could not be found again to confirm it). When a comment is skipped or fails, this
 read-only check finds the post and says whether the comment is on it:
 
 ```bash
