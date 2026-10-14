@@ -167,11 +167,11 @@
       }
     },
     "blog/theres-no-replicator-yet": {
-      "reviewedAt": "2026-10-14T17:13:51.411Z",
+      "reviewedAt": "2026-10-14T17:14:16.828Z",
       "reviewedBy": "Claude Opus 5.5 (session 16ce6368), at Nino's request to ship",
       "hashes": {
         "caption": "1f9f1b63cf757b29bea6fbb9ac7cb15fcfb47e4f7640ed03298ad2e83141e952",
-        "source": "6e2fb22bb8e91626a155d4088a71be83e5d7646ae7e72dd89a796c2dc1744443",
+        "source": "04cd787cfc620aeebf81fc5e3c930762eebd00b1cdb74d98a0d2d6c1af665667",
         "voiceGuide": "009458279b9e0b6c3390bf69cb4b39afebf4c6a79ac34a64d89b091070524823",
         "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
         "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
