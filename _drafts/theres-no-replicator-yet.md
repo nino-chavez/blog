@@ -65,9 +65,9 @@ Deciding which model to trust with which job is part of cooking. Someone using a
 
 Her instinct isn't always wrong. If those forms had moved money, one or two missed items could have cost more than everything the agent saved.
 
-My 99% is also an estimate, and it leaves something out. Finding the missed items is work too. [TK: How did she find them? Were they obvious at a glance, or did she have to check every entry?]
+My 99% is also an estimate. Here the missed items were obvious at a glance, and she didn't have to check every entry to find them. That made the trade easy.
 
-If she had to check every entry, that checking belongs in the comparison. The agent could still come out well ahead, but only a count that includes the checking shows it.
+When misses are harder to spot, finding them is work too, and that checking belongs in the comparison.
 
 Deciding when 99% is good enough is the cook's job.
 
@@ -101,6 +101,7 @@ Origin and author decisions, 2026-10-14 (Claude Code session 16ce6368; Codex thr
 Evidence and attribution (guide §1b; every first-person claim traced to Nino specifically):
 - Two tabs, sheet to forms, installing the agent and browser extension, asking it to do the data entry: Nino, both sessions, 2026-10-14.
 - "Amazed and creeped out," missed "one or two items," "almost became dismissive," the teasing line (quoted with light punctuation), "saved her 99% of the work": Nino's answer in the Codex thread, 2026-10-14. 99% is his estimate, labeled as such.
+- Missed items "obvious at a glance, she didn't check every row": Nino, 2026-10-14, closing the earlier TK. The comparison paragraph was shortened accordingly.
 - "Still on microwave dinner": Nino, 2026-10-14. "Installing the agent didn't move her" follows from his account (he showed her how to install it) plus that answer. "What moves someone down the table is judging what the machine hands back" is the essay's argument, not a reported fact.
 - Volleyball club: Nino, "i've lived this scenario many times over helping with 630 volleyball." Club unnamed per the guide's sanitization rule. The draft claims only that he did the setup many times, not how those people reacted.
 - "Up to a point": Nino's "i know how to drive the new 'ai' car to a point." Packaged-product line: the published Who Is Still Driving? ("I'm already relying on a packaged product when I use Codex to build something else").
@@ -116,7 +117,6 @@ Open before publishing:
 - [TK] One concrete volleyball-club instance, or cut that paragraph.
 - Cold reader asked which row the author is on; the draft keeps Nino's own "up to a point" rather than assigning him a row. Name one if he wants.
 - "New models ship constantly" stands on Nino's "the machine is changing daily" plus the single October 7 release; it is his characterization, not a measured rate.
-- [TK] How the missing items were found. If checking every entry was needed, keep the comparison paragraph; if they were obvious, shorten it.
 - Confirm the key in the October 7 replay has been rotated before publishing. The draft does not name it.
 - "If those forms had moved money" is a labeled hypothetical, not a claim about her forms. Confirm the forms did not move money, or cut the line.
 - Factor and HelloFresh descriptions are general product knowledge (ready-made meals from a menu; meal kits with recipe cards), not fetched this session.
