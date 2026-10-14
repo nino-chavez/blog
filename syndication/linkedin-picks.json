@@ -175,6 +175,11 @@
       "id": "applied/one-capture-two-outputs",
       "reviewed": "full",
       "why": "Nino explicitly selected all four outcome stories for LinkedIn on October 10, including Rally HQ. This standalone Applied example has no linked parent session: one captured product journey supplies a click-through guide and silent video, without claiming measured learning or time savings."
+    },
+    {
+      "id": "blog/theres-no-replicator-yet",
+      "reviewed": "full",
+      "why": "Nino asked on October 14 to ship this post and cross-post it to LinkedIn now. Companion to Who Is Still Driving?: no AI tool returns exactly what you meant yet, so someone has to judge what it missed, with two checked 630 examples."
     }
   ],
   "considered_not_picked": {
