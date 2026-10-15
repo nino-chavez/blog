@@ -3896,10 +3896,10 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
+     "state": "posted",
+     "postedAt": "2026-10-15",
      "scheduledFor": "2026-10-15",
-     "url": null
+     "url": "https://signaldispatch.substack.com/publish/posts/detail/220536134/share-center"
     },
     "linkedin": {
      "mode": "native",
