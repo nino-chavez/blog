@@ -319,7 +319,7 @@ for (const item of targets) {
   item.routes.substack.state = 'posted'
   item.routes.substack.postedAt = today
   item.routes.substack.url = page.url()
-  writeFileSync(QUEUE, JSON.stringify(queue, null, 2))
+  writeFileSync(QUEUE, JSON.stringify(queue, null, 1) + '\n')
   console.log('   published, recorded in queue.json')
   // Close the editor tab. A single-item run could leak it harmlessly; a 53-item
   // backfill leaks 53 live ProseMirror editors into one container and degrades
