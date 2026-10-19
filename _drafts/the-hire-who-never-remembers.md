@@ -18,7 +18,7 @@ That's my answer to a question I keep hearing: what kind of person is good at AI
 
 The practical version is one move. When an agent keeps making the same mistake, change what it reads instead of correcting it again in conversation. When it ignores what it reads, add a check that stops it.
 
-[TK: one or two of the actual temperament guesses you've heard in these conversations (curiosity? patience? comfort with ambiguity?), with the people kept generic.]
+[TK, placeholder to fill before publishing: one or two of the actual temperament guesses you've heard in these conversations (curiosity? patience? comfort with ambiguity?), with the people kept generic.]
 
 ---
 
@@ -126,7 +126,7 @@ If the written half is the skill, the people who already have it are the ones wh
 
 They should do well with agents early, whether or not they've managed anyone. And strong people-managers who led by being in the room should struggle until they start writing things down.
 
-[TK: Have the conversations you've been in turned up either kind? One real example of each would carry this section. If they turned up the opposite, say so; that's the falsifier landing.]
+[TK, placeholder to fill before publishing: Have the conversations you've been in turned up either kind? One real example of each would carry this section. If they turned up the opposite, say so; that's the falsifier landing.]
 
 If great coaches do well with agents without any of the written half, the argument is wrong, and temperament deserves another look.
 
