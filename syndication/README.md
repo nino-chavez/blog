@@ -10,6 +10,17 @@ node syndication/build-queue.mjs --refresh   # re-pull the Substack archive firs
 node syndication/check-captions.mjs          # source-fidelity gate — run before posting
 ```
 
+**In a linked worktree, `build-queue.mjs` silently drops the nc-demos pieces.**
+It reads demos from `../../nc-demos` relative to this directory, which from
+`<repo>/.worktrees/<dir>/<name>/` points at `<repo>/.worktrees/<dir>/nc-demos`.
+On 2026-10-19 that rewrote `queue.json` with about 1,300 lines missing and no
+error. Link the sibling first, check that the queue diff is small, and remove the
+link afterwards:
+
+```bash
+ln -s ~/Workspace/dev/sites/nino/nc-demos <repo>/.worktrees/<dir>/nc-demos
+```
+
 ## Run the fidelity gate before a caption ships
 
 `check-captions.mjs` compares every caption against the piece it points at, across every platform directory under `captions/`. It
@@ -103,6 +114,14 @@ restating because a file full of future dates reads like a schedule.
 The one durable piece is the browser-box container (`restart=unless-stopped`),
 which returns whenever Docker Desktop runs. Docker itself does not auto-start
 here, so nothing survives a reboot unattended.
+
+On the personal Mac the `browser-box` command is not on `PATH` (verified
+2026-10-19), so `browser-box start` below fails. `open -a Docker` is enough: the
+`browser-box-social` container comes back on its own with CDP on 9400 (check with
+`curl -s http://127.0.0.1:9400/json/version`). Docker also restarts every other
+container with a restart policy, about two dozen Supabase stacks that day, so
+quit it again afterwards if it was off. Quitting and immediately reopening it
+once left the VM unreachable for minutes; a second clean quit and reopen fixed it.
 
 `--due` exists because of that. A queue you have to remember to open is the same
 as no queue, so it answers "what do I owe" in one command and flags any LinkedIn
@@ -456,6 +475,17 @@ read-only check finds the post and says whether the comment is on it:
 ```bash
 node syndication/check-linkedin-post.mjs --id blog/<slug>
 ```
+
+**Until 2026-10-19 that check read a link-only comment as missing.** The post's
+own page no longer carries any `/feed/update/` link, and the scan only widened its
+search from the post to the comments while each ancestor held exactly one such
+link, so it never reached the comments block. Both the October 14 and October 19
+comments were on the posts while the publisher said `unverified` and the check
+said `MISSING`. A missing verdict from that period was not evidence, and a second
+comment based on it would have been a duplicate. The scan now widens while an
+ancestor holds at most one post link, exactly one comment editor and no
+`<aside>`. Fixture tests in `linkedin-post-lib.test.mjs` cover the found, missing,
+sidebar and second-post cases; each bound has a test that fails without it.
 
 **Text must arrive as real keystrokes.** Both editors keep their own document
 model — TipTap on LinkedIn (Quill until 2026), TipTap/ProseMirror on Substack. Assigning
