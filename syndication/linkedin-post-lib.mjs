@@ -99,9 +99,15 @@ export function commentAlsoInBody(body, comment) {
 //             the post only ten levels further up (section "Primary content").
 //             Scoping to the container read an existing comment as missing,
 //             which would have posted a duplicate. So the region grows from
-//             the container while each ancestor still holds exactly one post
-//             link and no <aside>, and stops before the sidebars.
-function scanInPage(fingerprint, needle, mode, editorSelector) {
+//             the container while each ancestor holds at most one post link,
+//             exactly one comment editor, and no <aside>, and stops before the
+//             sidebars or a second post. "At most one" link, not "exactly
+//             one": on 2026-10-19 the post's own page carried no
+//             /feed/update/ link at all, so the old exactly-one rule stopped
+//             at the container and read the comment (four levels up, inside
+//             "Primary content") as missing, twice. The editor count is what
+//             keeps a second post out now that the link count can be zero.
+export function scanInPage(fingerprint, needle, mode, editorSelector) {
   const norm = (s) => (s || '').replace(/\s+/g, ' ').trim()
   const up = (n) => n.parentElement || (n.getRootNode && n.getRootNode().host) || null
   const all = []
@@ -146,9 +152,10 @@ function scanInPage(fingerprint, needle, mode, editorSelector) {
   if (mode === 'posts') return containers.length
   if (containers.length !== 1) return -1
   const postLinks = (n) => new Set([...n.querySelectorAll('a[href*="/feed/update/urn:li:"]')].map((a) => a.href.split('?')[0])).size
+  const editors = (n) => n.querySelectorAll(editorSelector).length
   let scope = containers[0]
   for (let next = up(scope); next && next.querySelectorAll; next = up(next)) {
-    if (postLinks(next) !== 1 || next.querySelector('aside')) break
+    if (postLinks(next) > 1 || editors(next) !== 1 || next.querySelector('aside')) break
     scope = next
   }
   const inside = (el) => { for (let x = el; x; x = up(x)) if (x === scope) return true; return false }

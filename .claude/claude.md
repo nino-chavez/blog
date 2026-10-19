@@ -109,8 +109,13 @@ The private route renders the post with a visible amber "unlisted" banner so the
 cd astro-build
 npm run dev      # Dev server
 npm run build    # Production build
-npm run preview  # Preview build
 ```
+
+`npm run preview` does not work: the `@astrojs/cloudflare` adapter does not
+support `astro preview`. To review a build, serve `astro-build/dist` statically
+(for example `python3 -m http.server 4329 --bind 127.0.0.1 --directory dist`) and
+open the page by its `.html` path, such as
+`/blog/private/<token>/<slug>.html` for an unlisted post (verified 2026-10-19).
 
 ## Off-Limits
 
