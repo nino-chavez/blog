@@ -5,7 +5,7 @@ author: "Nino Chavez"
 category: "AI & Automation"
 tags: ["leadership", "agentic-systems", "ai-development"]
 takeaway: "When an agent repeats a mistake, change what it reads at the start of every session, and add a check for the rules it still ignores."
-excerpt: "People keep asking what kind of person is good at AI. My own sessions point to a skill instead: the written half of management, the only half an agent can keep."
+excerpt: "People keep asking what kind of person is good at AI. My own sessions point to a skill instead: the written half of management, the only half that reaches an agent's next session."
 ---
 
 # The Hire Who Never Remembers
@@ -14,7 +14,7 @@ Over two weeks this fall, I typed "merge it" to my coding agents 42 times. In al
 
 The agents weren't timid. Every session, meaning every new conversation with an agent, starts by reading a file of standing instructions. One line in mine said "Push after commit when asked." The agents never forgot that line. They forgot everything I'd said the session before.
 
-That's my answer to a question I keep hearing: what kind of person is good at AI? My own sessions point to a skill, not a temperament. It's the written half of management: writing down what a newcomer needs, saying what done looks like, and checking for what the writing misses. The other half, coaching people and earning their trust, has nothing to hold onto. An agent keeps what's written and loses what's said.
+That's my answer to a question I keep hearing: what kind of person is good at AI? My own sessions point to a skill, not a temperament. It's the written half of management: writing down what a newcomer needs, saying what done looks like, and checking for what the writing misses. The other half, coaching people and earning their trust, has nothing to hold onto. Every session sees what's written. What's said is gone by the next one.
 
 The practical version is one move. When an agent keeps making the same mistake, change what it reads instead of correcting it again in conversation. When it ignores what it reads, add a check that stops it.
 
@@ -75,20 +75,23 @@ Split by whether a skill needs the other person to remember, the management skil
 
 ## A Correction in Conversation Lasts One Session
 
-I counted the 201 with a small script that reads my agent transcripts. It picks out nudges, the short messages I typed only to move an agent past a stop: "merge it," "next," "keep going." Then it sorts them by where the agent stopped: before a push, before a merge, before cleanup.
+I counted the 201 with a small script that reads my agent transcripts. It picks out nudges, the short messages I typed only to move an agent past a stop: "merge it," "next," "keep going." Then it sorts them by where the agent stopped: before a push, before a merge, before cleanup. A stop that came right after something refused the agent goes in a separate pile.
 
 On October 9, I replaced the line. The new instruction says the work isn't finished until it's committed, pushed, merged, and cleaned up, and to do those steps without being asked.
 
-The same day, I also changed a permission setting that had been blocking agents from merging their own pull requests. That muddies the merge numbers. It didn't touch pushing or opening a pull request, so those nudges isolate the rewritten line best:
+In the ten days after, ship nudges fell from about one message in seven to about one in thirty: 8 of 241, against 201 of 1,422.
 
-- **Before, over two weeks:** 75 nudges to push or open a pull request, about five a day
-- **After, over ten days:** 4, and two of those were really new instructions
+The same day, I also changed the permission settings. Agents could now merge their own pull requests, and the permission checker was told that opening one is routine. So the merge and pull request numbers can't all be credited to the line.
 
-Counting merges too, ship nudges went from 201 in two weeks to 8 in ten days.
+Pushes are the cleaner case. Nothing had been blocking them before the change. Nudges asking for a push went from about 30 in two weeks to none, apart from two that were really new instructions. At the old rate, the second window would still have produced about five.
 
-The limits stay next to the numbers. I typed far less overall in the second window, about 25 messages a day against about 100, so a lighter workload explains some of the drop. The script sorts by rules of thumb. And this is one person's sessions, before and after, not a study.
+The other limits stay next to the numbers:
 
-What it does show is the gap between saying and writing. Each nudge reached one session. The rewritten line reached every session after it.
+- I typed far less overall in the second window, about 25 messages a day against about 100
+- The script sorts by rules of thumb
+- It's one person's sessions, before and after, not a study
+
+What holds either way is the mechanism. Each nudge reached one session. The rewritten line reached every session after it.
 
 ---
 
@@ -140,7 +143,7 @@ The written line behind those 201 messages was five words long.
 <!--
 EDITORIAL NOTES — private source record; excluded from any published article.
 
-Status: draft, not published, no feature image, no social or newsletter send. Lives in _drafts/ so the site build never routes it. Revision 2.
+Status: draft, not published, no feature image, no social or newsletter send. Lives in _drafts/ so the site build never routes it. Revision 3.
 
 Reader: the reader-contract default (technically curious product, engineering, or business leader); plainness practitioner. Job: understand why "good at AI" looks like a learnable skill rather than a temperament, see which half of management carries over to agents, and leave with a concrete move (change what the agent reads; add a check for what it still ignores). Mode: Thought Leadership, composed register. Closest to the Leadership Insight template, with an adverse-evidence section.
 
@@ -154,7 +157,7 @@ Evidence and attribution (guide §1b; every first-person claim traced to Nino sp
 - 42 "merge it", 201 of 1,422: `stop-scan --since 2026-09-25 --until 2026-10-09T18:41`, re-run 2026-10-19 (A1 ship 201; most common: 'close out the session' 56, 'merge it' 42). The memory note project_task_finish_line.md says "130 of them 'merge it'"; the tool lists 42 exact. A regex split of the 201 found 126 mentioning "merg", which is likely the note's figure; the draft uses only the exact 42.
 - "Push after commit when asked": verbatim in ~/.dotfiles/ways-of-working/working-style.md from the initial commit c1970da until 7e5e64c. "The agents weren't timid": the finish-line memory note ("the stops were caused by instructions, not timidity"). The tool's own default ("commit or push only when the user asks", quoted in the new working-style text) said the same; the draft does not mention it, so the five-word close says "the written line behind those 201 messages", not "the only cause". A1 excludes stops after a classifier refusal (bucket B).
 - "I replaced the line" on October 9: commit 7e5e64c, authored by Nino, 2026-10-09, replaces it with "Finish the work without being asked" and the five-step finish line.
-- Push/PR split (revision 2, answering both cold readers' confound flag): `stop-scan --samples 5000` for both windows, A1 messages split by regex: mentions "merg" vs. push/pr/pull request/commit/ship without "merg". Before 126 / 75; after 4 / 4. The four after: 'Ship it', 'ship it', "Yes: add an MIT LICENSE to codex-cu-bridge, push it, ..." and "Push the rewritten main now, then I'll send the Support request ..."; the last two are new instructions, not nudges. The permission change (autoMode.allow own-PR merge, same day) affected merges only; the classifier's default deny was on merges.
+- Confound and push split (revisions 2-3, answering both cold readers' flag): commit 7e5e64c changed more than the line. settings.json gained autoMode.allow entries (own-PR merge, own worktree cleanup, own-branch force-with-lease) and an autoMode.environment entry saying pushing a session's own branch and opening a PR "is routine"; its message also says this Mac's machine-local `Bash(git push:*)` allow rule was removed, so pushes reach the classifier only after the change, and that blast-radius (which mostly held deletes of scratch files) was turned off. Revision 2 claimed push+PR nudges isolated the line; that was wrong because the environment entry touched PRs. Revision 3 uses pushes only: before the change pushes were allowed by rule (nothing to refuse them), so permissions cannot explain a drop. `stop-scan --samples 5000`, A1 messages mentioning "push" and not "merg", "pr" or "pull request": before 31 (regex noise: one includes "open the PRs"), after 2, both new instructions ("Yes: add an MIT LICENSE to codex-cu-bridge, push it, ..." and "Push the rewritten main now, then I'll send the Support request ..."). Expected at the old share: 31 × 241 / 1,422 ≈ 5.3. The allow-rule removal rests on the commit message; the rule lived in a machine-local file not in git. Merge split for reference: before 126 mentioning "merg", 75 not; after 4 and 4.
 - After window: `stop-scan --since 2026-10-10`, run 2026-10-19: 41 of 241 nudges, A1 ship 8. Per day: 1,422 over about 14.8 days ≈ 96; 241 over about 9.6 days ≈ 25. 75/14.8 ≈ 5.1 a day.
 - Rules-of-thumb caveat: stop-scan --help says lever buckets C-E are regex heuristics; the --samples output showed A1 entries that were new instructions.
 - Orientation brief: project_orientation_hook_pilot.md (orient-brief.py shipped 2026-08-17; measured 2026-08-27; 17/272 vs 14/194; 9 of 17 "written globally, then ignored", examples include verify-don't-guess and don't-over-engineer). "A hand count" names no counter, because the note says only "hand-classified, single rater".
@@ -168,7 +171,8 @@ Evidence and attribution (guide §1b; every first-person claim traced to Nino sp
 Cold read, revision 1 (2026-10-19): two general-purpose agents (practitioner, skeptical peer) read only the body. Both understood the argument (4/5). Converging flags and dispositions:
 - "Half" used several ways ("second half", "that half", "different halves") → now "the written half" and "the relationship half", defined in the Mollick/Curlewis section and the opening.
 - Heading "an Agent Is a Coach-Out" contradicted "doesn't fit either side" → retitled "My Coaching Rubric Has No Box for an Agent".
-- The permission-setting confound was the weakest link; heading "One Changed Line Did What 201 Messages Didn't" was causal → push/PR split added; heading now "A Correction in Conversation Lasts One Session"; "every session after" now says "reached", not "obeyed".
+- The permission-setting confound was the weakest link; heading "One Changed Line Did What 201 Messages Didn't" was causal → heading now "A Correction in Conversation Lasts One Session"; the confound is named in full; the only isolated comparison is pushes; the section's claim rests on the mechanism ("reached"), not on crediting the drop to the line.
+- Advisor review before the PR (revision 3): the opening's "An agent keeps what's written" and the excerpt's "the only half an agent can keep" contradicted the 9-of-17 finding → now "sees" / "reaches". Shares are given alongside counts because typing volume fell about fourfold.
 - Skeptic: the agents obeyed a line rather than forgot a correction, so "coaching a hire who forgets" mismatched → opening now says the agents kept the line and lost what was said, which is what the evidence shows.
 - Undefined: session, the instruction file, the brief vs. that file, nudge, the mechanical check, "that list" → each defined at first use.
 - "It isn't a temperament. It's a skill" asserted on n=1 → scoped to "my own sessions point to"; the falsifier section opens by naming the n=1.
@@ -183,7 +187,7 @@ Open before publishing:
 - [TK] One real example of each kind of person in "What Would Prove This Wrong", or a note that the conversations ran the other way.
 - Confirm the title.
 - Confirm "daily" in "I ship real work with it daily".
-- Re-run stop-scan and the push/PR split for the after window on the publish date; the numbers above stop at 2026-10-19.
+- Re-run stop-scan and the push split for the after window on the publish date; the numbers above stop at 2026-10-19.
 - A second cold read after the TKs are filled.
 - Convert to .mdx in astro-build/src/content/blog/ with publishedAt, generate the feature image, and run the build gates (check-takeaway, encounter audit) when it moves out of _drafts.
 -->
