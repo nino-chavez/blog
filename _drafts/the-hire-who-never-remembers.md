@@ -18,8 +18,6 @@ That's my answer to a question I keep hearing: what kind of person is good at AI
 
 The practical version is one move. When an agent keeps making the same mistake, change what it reads instead of correcting it again in conversation. When it ignores what it reads, add a check that stops it.
 
-[TK, placeholder to fill before publishing: one or two of the actual temperament guesses you've heard in these conversations (curiosity? patience? comfort with ambiguity?), with the people kept generic.]
-
 ---
 
 ## Management Is Half the Answer
@@ -126,8 +124,6 @@ If the written half is the skill, the people who already have it are the ones wh
 
 They should do well with agents early, whether or not they've managed anyone. And strong people-managers who led by being in the room should struggle until they start writing things down.
 
-[TK, placeholder to fill before publishing: Have the conversations you've been in turned up either kind? One real example of each would carry this section. If they turned up the opposite, say so; that's the falsifier landing.]
-
 If great coaches do well with agents without any of the written half, the argument is wrong, and temperament deserves another look.
 
 ---
@@ -149,7 +145,7 @@ Reader: the reader-contract default (technically curious product, engineering, o
 
 Origin and author decisions, 2026-10-19 (Claude Code session 46bbdd2e):
 - Nino's pitch: "several conversations where people are trying to determine the psyche of individuals that are 'good' at using AI... perhaps it's not a psyche but a skillset or experience. if we see agents as 'junior developers' or entry level really smart but inexperienced and forgetful human resources then is it a skill in management and managing teams that leads to amplification?"
-- Vet in the same session found the base thesis already published: Mollick (2026-01-27), LeadDev (May 2026, search snippet only, not opened, not cited), Curlewis (2026-05-22), and Nino's own What 223 Sessions Taught Me (2026-03-20, "a team member who needs onboarding"). The unclaimed angle proposed: his word "forgetful" plus his own Coach Up or Coach Out rubric, so only the written-down half of management carries over. Nino approved: "Go. Draft it from the institutional-memory angle." He said he will add real examples from his conversations; those are the TKs.
+- Vet in the same session found the base thesis already published: Mollick (2026-01-27), LeadDev (May 2026, search snippet only, not opened, not cited), Curlewis (2026-05-22), and Nino's own What 223 Sessions Taught Me (2026-03-20, "a team member who needs onboarding"). The unclaimed angle proposed: his word "forgetful" plus his own Coach Up or Coach Out rubric, so only the written-down half of management carries over. Nino approved: "Go. Draft it from the institutional-memory angle." He first planned to add real examples from his conversations; later the same day, with none top of mind, he decided: "lets just skip these TKs and go without them." Both placeholders are removed; the opening rests on his own data, and the falsifier section states predictions without examples.
 - Title "The Hire Who Never Remembers": proposed in the vet, confirmed by Nino 2026-10-19 ("Keep the title") over the alternative "Five Words Long".
 - The thesis is presented as argued from evidence, not as a narrated change of mind; the move from "management" to "half of management" came from the session's vet, and the guide forbids presenting session steering as POV movement.
 
@@ -163,7 +159,7 @@ Evidence and attribution (guide §1b; every first-person claim traced to Nino sp
 - Orientation brief: project_orientation_hook_pilot.md (orient-brief.py shipped 2026-08-17; measured 2026-08-27; 17/272 vs 14/194; 9 of 17 "written globally, then ignored", examples include verify-don't-guess and don't-over-engineer). "A hand count" names no counter, because the note says only "hand-classified, single rater".
 - Mechanical check for social posts: meta-publish-guard.py, dotfiles ecb06bd, 2026-10-06; it checks the skill's route_reason against its table (same memory note). "I haven't measured whether the checks work": the re-measure is due and not yet run.
 - Coach Up or Coach Out (published 2025-06-12): the four signals verbatim as its headings; self-correction ("I don't have to say it twice"); coach-out "repeat the same misstep because they never actually reflected"; "I'd rather coach up the ones who are close… Than keep covering for the ones who never will be." "Last year" is accurate as of 2026.
-- "I ship real work with it daily": What 223 Sessions ("Shipping real products ... all of it running through the same CLI tool"). Confirm "daily".
+- "I ship real work with it daily": What 223 Sessions ("Shipping real products ... all of it running through the same CLI tool"). "Daily" checked 2026-10-19 against this Mac's Claude Code transcripts: human-typed messages on 87 of the last 90 days and all of the last 30 (a floor; Codex and the other machine not counted).
 - "Team member who needs onboarding" / onboarding doc: What 223 Sessions, published 2026-03-20.
 - Mollick: page fetched 2026-10-19; quote verbatim; Penn class, executive MBA, "Few had ever coded", four days, "scope problems in their fields of expertise, define deliverables", "those frameworks became their prompts". Curlewis: page fetched 2026-10-19; paraphrased (career growth over years, motivation, trust built over years; "None of this applies to your fleet of AI agents"), not quoted, to keep to one third-party quote.
 - The "who already has the written half" list sits in the falsifier section as predictions. It is the essay's hypothesis, not anything Nino reported.
@@ -183,10 +179,7 @@ Cold read, revision 1 (2026-10-19): two general-purpose agents (practitioner, sk
 - Declined: cutting the March self-citation (now two sentences; it is the piece's own prior claim being extended).
 
 Open before publishing:
-- [TK] The temperament guesses from Nino's conversations (opening).
-- [TK] One real example of each kind of person in "What Would Prove This Wrong", or a note that the conversations ran the other way.
-- Confirm "daily" in "I ship real work with it daily".
 - Re-run stop-scan and the push split for the after window on the publish date; the numbers above stop at 2026-10-19.
-- A second cold read after the TKs are filled.
+- A cold read of the final text before publishing.
 - Convert to .mdx in astro-build/src/content/blog/ with publishedAt, generate the feature image, and run the build gates (check-takeaway, encounter audit) when it moves out of _drafts.
 -->
