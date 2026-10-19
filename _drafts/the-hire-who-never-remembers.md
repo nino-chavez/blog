@@ -139,7 +139,7 @@ The written line behind those 201 messages was five words long.
 <!--
 EDITORIAL NOTES — private source record; excluded from any published article.
 
-Status: revision 4, prepared for publishing 2026-10-19 as astro-build/src/content/blog/the-hire-who-never-remembers.mdx (unlisted with a private token until Nino approves the rendered page; then published). Feature image generated. No social or newsletter send planned. This file stays as the source record.
+Publication: https://ninochavez.co/blog/the-hire-who-never-remembers, published 2026-10-19 at Nino's instruction ("Publish it: flip to published with today's date, rebuild, merge to main, and confirm the live URL.") from astro-build/src/content/blog/the-hire-who-never-remembers.mdx after he reviewed the rendered unlisted page. Feature image generated. No social or newsletter send. This file stays as the source record.
 
 Reader: the reader-contract default (technically curious product, engineering, or business leader); plainness practitioner. Job: understand why "good at AI" looks like a learnable skill rather than a temperament, see which half of management carries over to agents, and leave with a concrete move (change what the agent reads; add a check for what it still ignores). Mode: Thought Leadership, composed register. Closest to the Leadership Insight template, with an adverse-evidence section.
 
@@ -196,6 +196,6 @@ Prep for publishing, 2026-10-19 (Nino: "Prep it for publishing: final cold read,
   - Declined: cutting the coaching section (manager) — it is the piece's distinctive argument; cutting the four-signal list (practitioner) — kept as context for "small wins".
 - Build: full `npm run build` (feature images, takeaway, astro, pagefind, sitemap, reader:check, captions:check) passed on revision 3 and is re-run on revision 4 before Nino's review.
 
-Open before publishing:
-- Nino's approval of the rendered page. On approval: remove privateToken, set status "published" and publishedAt to the publish time, rebuild, merge to main (Cloudflare Pages deploys on push), then curl the live URL for a 200.
+Open after publishing:
+- None required. LinkedIn and Substack syndication were not requested.
 -->

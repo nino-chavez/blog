@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-14",
+ "generatedAt": "2026-10-19",
  "linkedinHistory": "harvested from the activity feed (115 link-shares read)",
  "cadence": {
   "linkedin": {
@@ -30,14 +30,14 @@
  },
  "summary": {
   "linkedin": {
-   "posted": 62,
+   "posted": 63,
    "queued": 10,
    "skipped": 270,
    "firstSlot": "2026-10-11",
-   "lastSlot": "2026-11-03"
+   "lastSlot": "2026-11-05"
   },
   "substack": {
-   "posted": 291,
+   "posted": 292,
    "queued": 5,
    "backfill": 34,
    "skipped": 12,
@@ -47,7 +47,7 @@
   "devto": {
    "posted": 2,
    "queued": 6,
-   "skipped": 334,
+   "skipped": 335,
    "firstSlot": "2026-10-28",
    "lastSlot": "2027-01-06"
   }
@@ -324,7 +324,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/demos--enforced-forever.md",
      "postedAt": null,
-     "scheduledFor": "2026-10-20",
+     "scheduledFor": "2026-10-22",
      "url": null
     },
     "devto": {
@@ -704,7 +704,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-27",
+     "scheduledFor": "2026-10-29",
      "url": null
     },
     "devto": {
@@ -3885,6 +3885,40 @@
    }
   },
   {
+   "id": "blog/the-hire-who-never-remembers",
+   "title": "The Hire Who Never Remembers",
+   "url": "https://ninochavez.co/blog/the-hire-who-never-remembers",
+   "publishedAt": "2026-10-19",
+   "collection": "blog",
+   "words": 1585,
+   "cluster": "the-hire-who-never-remembers",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-10-20",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "teaser",
+     "state": "eligible",
+     "caption": "captions/linkedin/blog--the-hire-who-never-remembers.md",
+     "postedAt": null,
+     "scheduledFor": "2026-10-20",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
    "id": "blog/theres-no-replicator-yet",
    "title": "There's No Replicator Yet",
    "url": "https://ninochavez.co/blog/theres-no-replicator-yet",
@@ -4674,7 +4708,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--the-style-guide-was-teaching-the-tells.md",
      "postedAt": null,
-     "scheduledFor": "2026-10-22",
+     "scheduledFor": "2026-10-27",
      "url": null
     },
     "devto": {
@@ -4778,7 +4812,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-10-29",
+     "scheduledFor": "2026-11-03",
      "url": null
     },
     "devto": {
@@ -4812,7 +4846,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-03",
+     "scheduledFor": "2026-11-05",
      "url": null
     },
     "devto": {
