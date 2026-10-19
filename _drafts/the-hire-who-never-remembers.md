@@ -150,7 +150,7 @@ Reader: the reader-contract default (technically curious product, engineering, o
 Origin and author decisions, 2026-10-19 (Claude Code session 46bbdd2e):
 - Nino's pitch: "several conversations where people are trying to determine the psyche of individuals that are 'good' at using AI... perhaps it's not a psyche but a skillset or experience. if we see agents as 'junior developers' or entry level really smart but inexperienced and forgetful human resources then is it a skill in management and managing teams that leads to amplification?"
 - Vet in the same session found the base thesis already published: Mollick (2026-01-27), LeadDev (May 2026, search snippet only, not opened, not cited), Curlewis (2026-05-22), and Nino's own What 223 Sessions Taught Me (2026-03-20, "a team member who needs onboarding"). The unclaimed angle proposed: his word "forgetful" plus his own Coach Up or Coach Out rubric, so only the written-down half of management carries over. Nino approved: "Go. Draft it from the institutional-memory angle." He said he will add real examples from his conversations; those are the TKs.
-- Title "The Hire Who Never Remembers" was proposed in the vet; not separately confirmed. Alternative: "Five Words Long" (after the revised close) or "The Written Half".
+- Title "The Hire Who Never Remembers": proposed in the vet, confirmed by Nino 2026-10-19 ("Keep the title") over the alternative "Five Words Long".
 - The thesis is presented as argued from evidence, not as a narrated change of mind; the move from "management" to "half of management" came from the session's vet, and the guide forbids presenting session steering as POV movement.
 
 Evidence and attribution (guide §1b; every first-person claim traced to Nino specifically):
@@ -185,7 +185,6 @@ Cold read, revision 1 (2026-10-19): two general-purpose agents (practitioner, sk
 Open before publishing:
 - [TK] The temperament guesses from Nino's conversations (opening).
 - [TK] One real example of each kind of person in "What Would Prove This Wrong", or a note that the conversations ran the other way.
-- Confirm the title.
 - Confirm "daily" in "I ship real work with it daily".
 - Re-run stop-scan and the push split for the after window on the publish date; the numbers above stop at 2026-10-19.
 - A second cold read after the TKs are filled.
