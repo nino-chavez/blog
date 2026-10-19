@@ -176,6 +176,17 @@
         "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
         "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
       }
+    },
+    "blog/the-hire-who-never-remembers": {
+      "reviewedAt": "2026-10-19T21:17:04.739Z",
+      "reviewedBy": "Claude Opus 5.5 (session 46bbdd2e), at Nino's request to run the LinkedIn cross-post and caption flow: source, voice guide v1.9, reader contract, and reference caption read; all 11 worklist claims traced to the post",
+      "hashes": {
+        "caption": "f7d318a4418f12fedecd9ada09da28d2357ac6e8ef954ae03e25191f53e8fc61",
+        "source": "282e719cd872e85711bf1187568f4ac0dc831b2ace5a6b51a2c143daf2041cae",
+        "voiceGuide": "009458279b9e0b6c3390bf69cb4b39afebf4c6a79ac34a64d89b091070524823",
+        "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
+        "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
+      }
     }
   }
 }

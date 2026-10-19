@@ -5,18 +5,18 @@ author: "Nino Chavez"
 category: "AI & Automation"
 tags: ["leadership", "agentic-systems", "ai-development"]
 takeaway: "When an agent repeats a mistake, change what it reads at the start of every session, and add a check for the rules it still ignores."
-excerpt: "People keep asking what kind of person is good at AI. My own sessions point to a skill instead: the written half of management, the only half that reaches an agent's next session."
+excerpt: "People keep asking what kind of person is good at AI. My bet is a skill instead: the written half of management, the only half that reaches an agent's next session."
 ---
 
 # The Hire Who Never Remembers
 
-Over two weeks this fall, I typed "merge it" to my coding agents 42 times. In all, 201 of my 1,422 messages had one job: getting an agent to push, open a pull request, or merge work it had already finished.
+Over two weeks this fall, I typed "merge it" to my coding agents 42 times. Counting every version of it, 201 of my 1,422 messages were nudges: their only job was getting an agent to push, open a pull request, or merge work it had already finished. Those are the steps that hand finished code back to the shared project.
 
-The agents weren't timid. Every session, meaning every new conversation with an agent, starts by reading a file of standing instructions. One line in mine said "Push after commit when asked." The agents never forgot that line. They forgot everything I'd said the session before.
+Every session, meaning every new conversation with an agent, starts by reading a file of standing instructions. One line in mine said "Push after commit when asked." So every session finished the work, then waited for me to ask. Each "merge it" fixed one session. The next one read the same line and waited again.
 
-That's my answer to a question I keep hearing: what kind of person is good at AI? My own sessions point to a skill, not a temperament. It's the written half of management: writing down what a newcomer needs, saying what done looks like, and checking for what the writing misses. The other half, coaching people and earning their trust, has nothing to hold onto. Every session sees what's written. What's said is gone by the next one.
+That's my answer to a question I keep hearing: what kind of person is good at AI? My bet is a skill, not a temperament: the written half of management. That means writing down what a newcomer needs, saying what done looks like, and checking for what the writing misses. The other half, coaching people and earning their trust, has nothing to carry it from one session to the next. What's written reaches every session. What's said doesn't.
 
-The practical version is one move. When an agent keeps making the same mistake, change what it reads instead of correcting it again in conversation. When it ignores what it reads, add a check that stops it.
+The practical version is one move, plus a second I'm still testing. When an agent keeps making the same mistake, change what it reads instead of correcting it again in conversation. When it ignores what it reads, add a check that stops it.
 
 ---
 
@@ -24,17 +24,17 @@ The practical version is one move. When an agent keeps making the same mistake, 
 
 The obvious answer to "who is good at AI" is managers, and that case has already been made well.
 
-Ethan Mollick's [Management as AI superpower](https://www.oneusefulthing.org/p/management-as-ai-superpower) (January 2026) describes an experimental class at the University of Pennsylvania. Executive MBA students, few of whom had ever coded, built working startup prototypes in four days. His explanation:
+Ethan Mollick's [Management as AI superpower](https://www.oneusefulthing.org/p/management-as-ai-superpower) (January 2026) describes an experimental class at the University of Pennsylvania. Executive MBA students, few of whom had ever coded, built working startup prototypes in four days. Mollick's explanation:
 
 > "What's scarce is knowing what to ask for."
 
-His students had spent years scoping problems and defining deliverables in their own fields. Those habits became their prompts.
+The students had spent years scoping problems and defining deliverables in their own fields. Those habits became their prompts.
 
-In May, David Curlewis [argued that the analogy breaks](https://curlewis.co.nz/posts/is-coordinating-a-fleet-of-ai-agents-the-same-as-managing-a-team-of-people-yes-but-mostly-no/) where managing gets hard. The hard parts of leading people, he writes, are the long ones: careers grown over years, motivation that sags, trust that takes years to earn. None of that applies to a fleet of agents.
+In May, David Curlewis [argued that the analogy breaks](https://curlewis.co.nz/posts/is-coordinating-a-fleet-of-ai-agents-the-same-as-managing-a-team-of-people-yes-but-mostly-no/) where managing gets hard. The hard parts of leading people, in Curlewis's account, are the long ones: careers grown over years, motivation that sags, trust that takes years to earn. None of that applies to a fleet of agents.
 
-Both are right. Mollick is describing the half of management that can be written down: the scope, the deliverable, the standard for good. Curlewis is describing the half that lives in a relationship.
+Mollick is describing the half of management that can be written down: the scope, the deliverable, the standard for good. Curlewis is describing the half that lives in a relationship.
 
-Only the relationship half needs the other person to grow. An agent doesn't.
+Only the relationship half needs the other person to grow, and an agent doesn't grow.
 
 ---
 
@@ -44,7 +44,7 @@ Last year I wrote [Coach Up or Coach Out](/blog/coach-up-or-coach-out-what-i-loo
 
 The four signals I invest in are curiosity without panic, self-correction, situational awareness, and small wins. Self-correction is the one that matters here: they miss something, and I don't have to say it twice. One of the coach-out signs is the opposite. They repeat the same misstep because they never reflected on it.
 
-An agent fails self-correction every session, unless the correction is written somewhere it reads. It does fine on small wins. I ship real work with it daily.
+Across sessions, an agent fails self-correction unless the correction is written somewhere it reads. It does fine on small wins. I ship real work with it daily.
 
 That post ends with a choice: coach up the people who are close, and stop covering for the ones who never will be. An agent fits neither side. It doesn't get closer on its own, because it keeps nothing it's told. And it's too useful to coach out.
 
@@ -56,14 +56,14 @@ So the coaching goes somewhere else: into what the agent reads.
 
 In March I wrote that I'd [stopped treating the agent like a tool](/blog/what-223-sessions-taught-me-about-working-with-ai) and started treating it like "a team member who needs onboarding," with the instruction file as the onboarding doc.
 
-The onboarding just never ends. Every session is day one, so the onboarding doc is most of the relationship.
+That onboarding happens again every session, so the onboarding doc is most of the relationship.
 
-Split by whether a skill needs the other person to remember, the management skills sort cleanly:
+Split by whether a skill can be written down and handed over, the management skills sort cleanly:
 
 | Management skill | Carries over to agents? | Why |
 |---|---|---|
-| Coaching and growing people | No | The agent starts fresh every session |
-| Motivation, trust, psychological safety | No | There's no one to motivate |
+| Coaching and growing people | No | It builds a person over time, and the agent starts fresh every session |
+| Motivation, trust, psychological safety | No | They live in a relationship, and nothing carries one over |
 | Writing the brief | Yes | Same job: give context the reader lacks |
 | Defining done | Yes | Done has to be stated, not assumed |
 | Checking the work | Yes | A report of done is a claim until someone checks it |
@@ -73,23 +73,23 @@ Split by whether a skill needs the other person to remember, the management skil
 
 ## A Correction in Conversation Lasts One Session
 
-I counted the 201 with a small script that reads my agent transcripts. It picks out nudges, the short messages I typed only to move an agent past a stop: "merge it," "next," "keep going." Then it sorts them by where the agent stopped: before a push, before a merge, before cleanup. A stop that came right after something refused the agent goes in a separate pile.
+I counted the 201 with a small script that reads my agent transcripts. It picks out the nudges by their shape: short messages like "merge it," "next," "keep going." Then it sorts them by where the agent stopped: before a push, before a merge, before cleanup. A stop that came right after a permission check refused the agent goes in a separate pile, because there the agent had no choice.
 
 On October 9, I replaced the line. The new instruction says the work isn't finished until it's committed, pushed, merged, and cleaned up, and to do those steps without being asked.
 
-In the ten days after, ship nudges fell from about one message in seven to about one in thirty: 8 of 241, against 201 of 1,422.
+In the ten days after, nudges to push, open a pull request, or merge fell from about one message in seven to about one in thirty: 8 of 246, against 201 of 1,422.
 
-The same day, I also changed the permission settings. Agents could now merge their own pull requests, and the permission checker was told that opening one is routine. So the merge and pull request numbers can't all be credited to the line.
+The same day, I also changed the permission settings, the rules that decide which actions an agent can take without asking me. I let agents merge their own pull requests, and I described opening one as routine to the system that reviews agent actions. So the merge and pull request numbers can't all be credited to the line.
 
-Pushes are the cleaner case. Nothing had been blocking them before the change. Nudges asking for a push went from about 30 in two weeks to none, apart from two that were really new instructions. At the old rate, the second window would still have produced about five.
+Pushes are the cleaner case. A standing permission already let agents push without asking before the change, so permissions can't explain a drop there. Nudges asking for a push went from about 30 in two weeks to none, apart from two that were really new instructions. At the old share of my messages, the second window would still have had about five.
 
 The other limits stay next to the numbers:
 
 - I typed far less overall in the second window, about 25 messages a day against about 100
-- The script sorts by rules of thumb
+- The script sorts messages by pattern, so some land in the wrong pile
 - It's one person's sessions, before and after, not a study
 
-What holds either way is the mechanism. Each nudge reached one session. The rewritten line reached every session after it.
+So the push numbers are the ones I'd lean on. About thirty corrections typed in conversation never changed what the next session did. One changed line did.
 
 ---
 
@@ -97,18 +97,18 @@ What holds either way is the mechanism. Each nudge reached one session. The rewr
 
 The written half has its own failure.
 
-In August I added a short brief that loads at the start of every session, alongside the standing instructions, to orient the agent. Ten days later, a hand count of the corrections in my messages had barely moved: 17 corrections in 272 typed messages, against 14 in 194 before. That's too few to show an effect either way.
+An earlier test, in August, showed it. I added a short brief that loads at the start of every session, alongside the standing instructions, to orient the agent. Ten days later, a hand count of the corrections in my messages had barely moved: 17 corrections in 272 messages, against 14 in 194 before. That's too few to show an effect either way.
 
-The useful number was underneath. Of those 17 corrections, 9 were about a rule already written into the standing instructions:
+The more useful number was in what those corrections were about. Of the 17, 9 concerned a rule already written into the standing instructions:
 
 - Verify before you claim something works
 - Don't over-engineer
 
-The agent had the rule in front of it and did the other thing anyway. So the agents followed an outdated instruction faithfully and current ones unevenly. The data doesn't say why.
+The agent had the rule in front of it and did the other thing anyway. Reaching an agent isn't the same as being followed. My agents followed "Push after commit when asked" to the letter and the rules I cared about unevenly, and the data doesn't say why.
 
-For a rule that keeps getting ignored, I've started adding a mechanical check: a small program that runs before a risky action and refuses it when the rule isn't met. One stops an agent from publishing a social post unless it has named the publishing route my rules require. I haven't measured whether the checks work.
+For a rule that keeps getting ignored, I've started adding a mechanical check: a small program that runs before a risky action and refuses it when the rule isn't met. The first covers the tool correction I'd repeated most: it stops an agent from publishing a social post unless it has named the publishing route my rules require. I haven't measured whether the checks work.
 
-So the skill isn't only writing things down. It's writing things down, then building the inspection for what the writing doesn't hold.
+So the written half has two parts: the instructions, and a check for each rule the instructions alone don't hold.
 
 ---
 
@@ -118,7 +118,7 @@ This argument rests on one person's sessions, so it should make predictions othe
 
 If the written half is the skill, the people who already have it are the ones who've had to write for a reader who wasn't in the room:
 
-- Delivery leads who inherit a team mid-project
+- Leads who write handoff notes before they rotate off a project
 - Consultants who write the scope before anyone is staffed
 - Tech leads who write the runbook for whoever is on call next
 
@@ -130,7 +130,7 @@ If great coaches do well with agents without any of the written half, the argume
 
 ## No Numbers for the Checks Yet
 
-I don't have results for the mechanical checks yet, and I don't have anyone's data but my own.
+Those are the next counts: whether the checks hold, and whether anyone else's sessions look like mine.
 
 What I do have is a place to look when an agent keeps doing the wrong thing: what it reads first, and what stops it when it ignores that.
 
@@ -139,7 +139,7 @@ The written line behind those 201 messages was five words long.
 <!--
 EDITORIAL NOTES — private source record; excluded from any published article.
 
-Status: draft, not published, no feature image, no social or newsletter send. Lives in _drafts/ so the site build never routes it. Revision 3.
+Publication: https://ninochavez.co/blog/the-hire-who-never-remembers, published 2026-10-19 at Nino's instruction ("Publish it: flip to published with today's date, rebuild, merge to main, and confirm the live URL.") from astro-build/src/content/blog/the-hire-who-never-remembers.mdx after he reviewed the rendered unlisted page. Feature image generated. LinkedIn: Nino asked the same day to "run the cross post and caption flow for linkedin"; the teaser caption is syndication/captions/linkedin/blog--the-hire-who-never-remembers.md, and its post URL and first-comment state are recorded in syndication/queue.json. Substack: the default routing queues a full Substack send for 2026-10-20; nothing sends until someone runs post-substack.mjs, and this session was not asked to. This file stays as the source record.
 
 Reader: the reader-contract default (technically curious product, engineering, or business leader); plainness practitioner. Job: understand why "good at AI" looks like a learnable skill rather than a temperament, see which half of management carries over to agents, and leave with a concrete move (change what the agent reads; add a check for what it still ignores). Mode: Thought Leadership, composed register. Closest to the Leadership Insight template, with an adverse-evidence section.
 
@@ -178,8 +178,24 @@ Cold read, revision 1 (2026-10-19): two general-purpose agents (practitioner, sk
 - The action landed about 60% in → the practical move now sits right after the thesis, before the first section break.
 - Declined: cutting the March self-citation (now two sentences; it is the piece's own prior claim being extended).
 
-Open before publishing:
-- Re-run stop-scan and the push split for the after window on the publish date; the numbers above stop at 2026-10-19.
-- A cold read of the final text before publishing.
-- Convert to .mdx in astro-build/src/content/blog/ with publishedAt, generate the feature image, and run the build gates (check-takeaway, encounter audit) when it moves out of _drafts.
+Prep for publishing, 2026-10-19 (Nino: "Prep it for publishing: final cold read, re-run the counts, convert to .mdx with a feature image, run the build gates, then show me before it goes live."):
+- Counts re-run: stop-scan --since 2026-10-10 now reads 41 of 246 (was 241); ship nudges still 8; push split unchanged (2, both new instructions). Body updated to "8 of 246".
+- Feature image: scripts/generate-illustration-images.js with a pinned style-aligned VISUAL_CONCEPT (lesson from the replicator post, whose unpinned concepts drew robots): "One open three-ring binder lying on an otherwise empty desk, drawn in electric cyan blueprint linework on a deep navy background, centered with lots of empty space. The binder's pages glow warm with plain ruled lines and no lettering. A coffee mug sits beside it, and an empty office chair is pushed up to the desk, waiting for someone. Faint flowing connection lines and a few glowing nodes drift around the desk as background accents." QA passed first render, $0.0389 (google/gemini-2.5-flash-image). Viewed before use: glowing binder, steaming mug, empty chair, no text, no robots. 600w sibling made with magick per check-feature-images.mjs.
+- Final cold read, four readers on the title, excerpt and body only: practitioner, non-practitioner manager, skeptical peer (Claude Sonnet subagents) and Codex (gpt-5.6-terra, read-only, operator dispatch d0fdcef9). Confidence 4, 4, 4 (3 on the people claim), 5. All placed the takeaway in the opening. Converging flags and revision-4 fixes:
+  - "What holds either way is the mechanism" was true by construction (Codex, practitioner, skeptic) → replaced with the push result: about thirty conversational corrections never changed the next session; one changed line did.
+  - The opening never said "when asked" caused the waiting (manager, practitioner, skeptic) → now says so; "The agents weren't timid" cut; "forgot everything I'd said" replaced by "Each 'merge it' fixed one session. The next one read the same line and waited again."
+  - "Every session sees what's written" vs. the 9-of-17 finding (skeptic; Codex called it a tension) → "reaches", plus "Reaching an agent isn't the same as being followed" in section 5.
+  - Undefined: nudges at first use, ship nudges, the permission checker, the refused-stop pile, "rules of thumb", "old rate" (all four) → each defined or reworded; push/PR/merge glossed once for non-developers.
+  - "outdated instruction" unnamed (all four) → names "Push after commit when asked".
+  - "My own sessions point to a skill, not a temperament" untested (practitioner, skeptic) → "My bet is a skill"; the falsifier section carries the test. The check half is thin and unmeasured (skeptic, practitioner) → the practical move says "a second I'm still testing"; the example is now identified as the tool-choice correction Nino repeated most (orientation-pilot memory note: meta-publish-guard "targets the most-repeated tool-choice correction").
+  - Table criterion did not fit its rows; "There's no one to motivate" overreached (skeptic, Codex) → criterion is now "can be written down and handed over"; motivation row reworded.
+  - "Delivery leads who inherit a team" read others' notes rather than write them (practitioner) → "Leads who write handoff notes before they rotate off a project".
+  - Generic lines ("Both are right", "The onboarding just never ends", the "inspection" sentence) → rewritten. Close no longer repeats "I haven't measured".
+  - Pronouns: "he writes" and "His explanation/students" for Curlewis and Mollick removed; no source consulted states their pronouns.
+  - Push permission claim ("A standing permission already let agents push without asking") rests on the 7e5e64c commit message about the machine-local `Bash(git push:*)` allow rule.
+  - Declined: cutting the coaching section (manager) — it is the piece's distinctive argument; cutting the four-signal list (practitioner) — kept as context for "small wins".
+- Build: full `npm run build` (feature images, takeaway, astro, pagefind, sitemap, reader:check, captions:check) passed on revision 3 and is re-run on revision 4 before Nino's review.
+
+Open after publishing:
+- The Substack send queued for 2026-10-20 by default routing: Nino's call (send it, or set the route to skip-manual).
 -->
