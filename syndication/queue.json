@@ -3903,11 +3903,16 @@
     },
     "linkedin": {
      "mode": "teaser",
-     "state": "eligible",
+     "state": "posted",
      "caption": "captions/linkedin/blog--the-hire-who-never-remembers.md",
-     "postedAt": null,
+     "postedAt": "2026-10-19",
      "scheduledFor": "2026-10-20",
-     "url": null
+     "url": "https://www.linkedin.com/feed/update/urn:li:activity:7518060086099881984/",
+     "firstCommentState": "posted",
+     "deliveryMethod": "post-linkedin.mjs via browser-box social profile (CDP 9400)",
+     "firstCommentText": "https://ninochavez.co/blog/the-hire-who-never-remembers",
+     "verifiedAt": "2026-10-19 21:30 UTC",
+     "verification": "Live post shows all nine caption paragraphs under Nino Chavez, and one Author comment with the article URL (screenshot and page text read after reload; comment count 1). The publisher reported the comment UNVERIFIED and check-linkedin-post.mjs reported it MISSING twice; both scans miss a link-only comment, so the page was read directly. No second comment was added."
     },
     "devto": {
      "mode": "skip",
