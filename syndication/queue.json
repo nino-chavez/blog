@@ -30,17 +30,17 @@
  },
  "summary": {
   "linkedin": {
-   "posted": 63,
-   "queued": 10,
+   "posted": 64,
+   "queued": 9,
    "skipped": 270,
    "firstSlot": "2026-10-11",
-   "lastSlot": "2026-11-05"
+   "lastSlot": "2026-11-03"
   },
   "substack": {
    "posted": 292,
-   "queued": 5,
+   "queued": 4,
    "backfill": 34,
-   "skipped": 12,
+   "skipped": 13,
    "firstSlot": "2026-10-11",
    "lastSlot": "2026-11-01"
   },
@@ -3896,10 +3896,11 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
+     "state": "skip-manual",
      "postedAt": null,
-     "scheduledFor": "2026-10-20",
-     "url": null
+     "scheduledFor": null,
+     "url": null,
+     "reason": "Nino, 2026-10-19: skip Substack for this one. Published to the blog and LinkedIn only."
     },
     "linkedin": {
      "mode": "teaser",
@@ -4713,7 +4714,7 @@
      "state": "eligible",
      "caption": "captions/linkedin/blog--the-style-guide-was-teaching-the-tells.md",
      "postedAt": null,
-     "scheduledFor": "2026-10-27",
+     "scheduledFor": "2026-10-20",
      "url": null
     },
     "devto": {
@@ -4817,7 +4818,7 @@
      "mode": "teaser",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-03",
+     "scheduledFor": "2026-10-27",
      "url": null
     },
     "devto": {
@@ -4851,7 +4852,7 @@
      "mode": "native",
      "state": "eligible",
      "postedAt": null,
-     "scheduledFor": "2026-11-05",
+     "scheduledFor": "2026-11-03",
      "url": null
     },
     "devto": {
