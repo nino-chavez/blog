@@ -139,7 +139,7 @@ The written line behind those 201 messages was five words long.
 <!--
 EDITORIAL NOTES — private source record; excluded from any published article.
 
-Publication: https://ninochavez.co/blog/the-hire-who-never-remembers, published 2026-10-19 at Nino's instruction ("Publish it: flip to published with today's date, rebuild, merge to main, and confirm the live URL.") from astro-build/src/content/blog/the-hire-who-never-remembers.mdx after he reviewed the rendered unlisted page. Feature image generated. LinkedIn: Nino asked the same day to "run the cross post and caption flow for linkedin"; the teaser caption is syndication/captions/linkedin/blog--the-hire-who-never-remembers.md, and its post URL and first-comment state are recorded in syndication/queue.json. Substack: the default routing queues a full Substack send for 2026-10-20; nothing sends until someone runs post-substack.mjs, and this session was not asked to. This file stays as the source record.
+Publication: https://ninochavez.co/blog/the-hire-who-never-remembers, published 2026-10-19 at Nino's instruction ("Publish it: flip to published with today's date, rebuild, merge to main, and confirm the live URL.") from astro-build/src/content/blog/the-hire-who-never-remembers.mdx after he reviewed the rendered unlisted page. Feature image generated. LinkedIn: Nino asked the same day to "run the cross post and caption flow for linkedin"; the teaser caption is syndication/captions/linkedin/blog--the-hire-who-never-remembers.md, and its post URL and first-comment state are recorded in syndication/queue.json. Substack: skipped at Nino's call on 2026-10-19 ("Skip Substack for this one"); the route is skip-manual in syndication/queue.json, which regeneration preserves. This file stays as the source record.
 
 Reader: the reader-contract default (technically curious product, engineering, or business leader); plainness practitioner. Job: understand why "good at AI" looks like a learnable skill rather than a temperament, see which half of management carries over to agents, and leave with a concrete move (change what the agent reads; add a check for what it still ignores). Mode: Thought Leadership, composed register. Closest to the Leadership Insight template, with an adverse-evidence section.
 
@@ -197,5 +197,5 @@ Prep for publishing, 2026-10-19 (Nino: "Prep it for publishing: final cold read,
 - Build: full `npm run build` (feature images, takeaway, astro, pagefind, sitemap, reader:check, captions:check) passed on revision 3 and is re-run on revision 4 before Nino's review.
 
 Open after publishing:
-- The Substack send queued for 2026-10-20 by default routing: Nino's call (send it, or set the route to skip-manual).
+- None.
 -->
