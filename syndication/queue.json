@@ -30,15 +30,15 @@
  },
  "summary": {
   "linkedin": {
-   "posted": 64,
-   "queued": 10,
+   "posted": 65,
+   "queued": 9,
    "skipped": 270,
    "firstSlot": "2026-10-11",
    "lastSlot": "2026-11-03"
   },
   "substack": {
-   "posted": 292,
-   "queued": 5,
+   "posted": 293,
+   "queued": 4,
    "backfill": 34,
    "skipped": 13,
    "firstSlot": "2026-10-11",
@@ -66,18 +66,28 @@
    "routes": {
     "substack": {
      "mode": "full",
-     "state": "eligible",
-     "postedAt": null,
+     "state": "posted",
+     "postedAt": "2026-10-21",
      "scheduledFor": "2026-10-21",
-     "url": null
+     "url": "https://signaldispatch.substack.com/p/the-rules-of-the-road-still-apply",
+     "postId": 221514293,
+     "sendEmail": true,
+     "audience": "everyone",
+     "verifiedAt": "2026-10-21",
+     "verification": "Published confirmation for post 221514293; live public page contains all 39 source text blocks and all five citation links. Delivery was checked, scheduling unchecked, and Send to everyone now was used."
     },
     "linkedin": {
      "mode": "native",
-     "state": "eligible",
+     "state": "posted",
      "caption": "captions/linkedin/blog--the-rules-of-the-road-still-apply.md",
-     "postedAt": null,
+     "postedAt": "2026-10-21",
      "scheduledFor": "2026-10-21",
-     "url": null
+     "url": "https://www.linkedin.com/feed/update/urn:li:activity:7518717812425711616/",
+     "platformState": "published",
+     "firstCommentState": "posted",
+     "firstCommentText": "https://ninochavez.co/blog/the-rules-of-the-road-still-apply",
+     "verifiedAt": "2026-10-21",
+     "deliveryReceipt": "Resumed the same empty composer after a publisher timeout; no matching post existed before recovery. Live post 7518717812425711616 is under Nino Chavez and matches the full caption after whitespace normalization. The canonical source-link comment was submitted once and verified in the post's own comment region after reload."
     },
     "devto": {
      "mode": "skip",
