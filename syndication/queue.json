@@ -31,14 +31,14 @@
  "summary": {
   "linkedin": {
    "posted": 64,
-   "queued": 9,
+   "queued": 10,
    "skipped": 270,
    "firstSlot": "2026-10-11",
    "lastSlot": "2026-11-03"
   },
   "substack": {
    "posted": 292,
-   "queued": 4,
+   "queued": 5,
    "backfill": 34,
    "skipped": 13,
    "firstSlot": "2026-10-11",
@@ -47,12 +47,48 @@
   "devto": {
    "posted": 2,
    "queued": 6,
-   "skipped": 335,
+   "skipped": 336,
    "firstSlot": "2026-10-28",
    "lastSlot": "2027-01-06"
   }
  },
  "items": [
+  {
+   "id": "blog/the-rules-of-the-road-still-apply",
+   "title": "The Rules of the Road Still Apply",
+   "url": "https://ninochavez.co/blog/the-rules-of-the-road-still-apply",
+   "publishedAt": "2026-10-21",
+   "collection": "blog",
+   "words": 1428,
+   "pitch": "AI gives people new capabilities, but deciding who can be trusted to use them is a familiar problem. Authority should follow demonstrated competence, under rules that bind users and builders alike.",
+   "cluster": "the-rules-of-the-road-still-apply",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-10-21",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "caption": "captions/linkedin/blog--the-rules-of-the-road-still-apply.md",
+     "postedAt": null,
+     "scheduledFor": "2026-10-21",
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "reason": "essay, not a practitioner tutorial",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
   {
    "id": "applied/one-capture-two-outputs",
    "title": "One Capture, Two Ways to Teach the Product",
