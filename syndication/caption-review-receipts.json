@@ -187,6 +187,17 @@
         "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
         "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
       }
+    },
+    "blog/the-rules-of-the-road-still-apply": {
+      "reviewedAt": "2026-10-21T16:41:04.920Z",
+      "reviewedBy": "Codex: source, voice, reader-contract and reference comparison",
+      "hashes": {
+        "caption": "8a03e617c72372d62190d7b7a1435d17441cb4a1b9675877f2dd313eb7d9675a",
+        "source": "42ccb1bb62e75ce7e238bbe1cc2d82c40b8797712452d0d5f5f34ac2e3f5fafc",
+        "voiceGuide": "009458279b9e0b6c3390bf69cb4b39afebf4c6a79ac34a64d89b091070524823",
+        "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
+        "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
+      }
     }
   }
 }
