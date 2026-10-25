@@ -1,14 +1,8 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 
-export const prerender = true;
-
-export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => data.status === 'published');
-  return posts.map((post) => ({
-    params: { slug: post.id },
-  }));
-}
+// Check publication before Pages can serve a retained static JSON asset.
+export const prerender = false;
 
 export const GET: APIRoute = async ({ params }) => {
   const posts = await getCollection('blog', ({ data }) => data.status === 'published');
@@ -22,6 +16,7 @@ export const GET: APIRoute = async ({ params }) => {
       status: 404,
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
+        'Cache-Control': 'no-store',
         'Access-Control-Allow-Origin': '*',
       },
     });
@@ -48,7 +43,7 @@ export const GET: APIRoute = async ({ params }) => {
   }, null, 2), {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
-      'Cache-Control': 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
+      'Cache-Control': 'no-store',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET',
     },

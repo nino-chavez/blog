@@ -1,14 +1,11 @@
 #!/usr/bin/env node
-// Astro's @astrojs/cloudflare adapter generates _routes.json with one entry
-// per static page plus the user-extended wildcards. Cloudflare Pages rejects
-// (a) any single rule >100 chars and (b) overlapping splat rules.
-//
-// This script runs after `astro build` and rewrites dist/_routes.json so
-// that broader wildcards absorb the rules they cover. The output is the
-// minimal equivalent rule set.
+// Invoke the Worker only for Astro's runtime routes. Broad static exclusions
+// such as /blog/* would bypass a runtime endpoint nested under that path.
+// Static pages and Pagefind assets remain on the Pages asset server.
 
-import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
+import { pathToFileURL } from "node:url";
 
 const routesPath = resolve("dist/_routes.json");
 
@@ -19,13 +16,14 @@ if (!existsSync(routesPath)) {
 
 const data = JSON.parse(readFileSync(routesPath, "utf8"));
 
-// Pagefind writes its index + UI bundle to dist/pagefind/ AFTER astro build,
-// so the adapter never sees those files when it generates _routes.json. Left
-// alone they route to the SSR worker (which 404s them). Exclude the whole
-// directory so the static layer serves the search assets.
-if (Array.isArray(data.exclude) && !data.exclude.includes("/pagefind/*")) {
-  data.exclude.push("/pagefind/*");
-}
+const worker = resolve("dist/_worker.js");
+const manifests = readdirSync(worker).filter((name) => /^manifest_.*\.mjs$/.test(name));
+if (manifests.length !== 1) throw new Error("Expected one Astro server manifest");
+const { manifest } = await import(pathToFileURL(resolve(worker, manifests[0])).href);
+data.include = manifest.routes
+  .filter(({ routeData }) => !routeData.prerender)
+  .map(({ routeData }) => routeData.route.replace(/\[.*$/, "*"));
+data.exclude = [];
 
 function coveredByWildcard(rule, wildcards, allowSelf = false) {
   for (const wc of wildcards) {
@@ -61,6 +59,9 @@ for (const key of ["include", "exclude"]) {
 const over = [...(data.include ?? []), ...(data.exclude ?? [])].filter(
   (r) => r.length > 100
 );
+if (data.include.length === 0 || data.include.length + data.exclude.length > 100) {
+  throw new Error("[optimize-routes] Invalid Cloudflare Pages rule count");
+}
 if (over.length > 0) {
   console.error(
     `[optimize-routes] FAIL — ${over.length} rule(s) still over 100 chars:`
