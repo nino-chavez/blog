@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/check-feature-images.mjs && node scripts/check-takeaway.mjs && astro build && npx pagefind --site dist && node scripts/optimize-routes.mjs && node scripts/check-sitemap.mjs && npm run reader:check && npm run captions:check",
+    "build": "node scripts/check-feature-images.mjs && node scripts/check-takeaway.mjs && astro build && node scripts/check-post-api.mjs && npx pagefind --site dist && node scripts/optimize-routes.mjs && node scripts/check-sitemap.mjs && npm run reader:check && npm run captions:check",
+    "test:post-api": "node --test scripts/check-post-api.test.mjs",
     "check:images": "node scripts/check-feature-images.mjs",
     "check:sitemap": "node scripts/check-sitemap.mjs",
     "reader:check": "node ../tools/lib/encounter-audit.mjs --root=.. --strict",
