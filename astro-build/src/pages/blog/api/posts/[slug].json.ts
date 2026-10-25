@@ -4,14 +4,14 @@ import { getCollection } from 'astro:content';
 export const prerender = true;
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await getCollection('blog', ({ data }) => data.status === 'published');
   return posts.map((post) => ({
     params: { slug: post.id },
   }));
 }
 
 export const GET: APIRoute = async ({ params }) => {
-  const posts = await getCollection('blog');
+  const posts = await getCollection('blog', ({ data }) => data.status === 'published');
   const post = posts.find((p) => p.id === params.slug);
 
   if (!post) {
