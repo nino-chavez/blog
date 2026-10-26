@@ -1,12 +1,18 @@
 <footer class="signal-dispatch-footer">
   <p>Signal Dispatch · Writing by <a href="/about">Nino Chavez</a></p>
-  <nav aria-label="Publication utilities"><a href="/blog/archive">All posts</a><a href="/blog/rss.xml">RSS</a><a href="/privacy">Privacy</a></nav>
+  <nav aria-label="Publication utilities">
+    <a href="/blog/archive">All posts</a>
+    <details><summary>Feeds and data</summary><div><a href="/blog/rss.xml">RSS</a><a href="/blog/full-content-rss.xml">Full RSS</a><a href="/blog/api/posts.json">Post data</a><a href="/blog/llms.txt">Text index</a></div></details>
+    <a href="/privacy">Privacy</a>
+  </nav>
 </footer>
 
 <style>
   .signal-dispatch-footer { width: min(1360px, calc(100% - 64px)); margin: 4rem auto 0; padding: 1.25rem 0 2.25rem; border-top: 1px solid rgb(18 42 60 / .24); display: flex; justify-content: space-between; gap: 1rem; color: #536373; font: .75rem/1.5 'Inter Variable', Inter, system-ui, sans-serif; }
   .signal-dispatch-footer p { margin: 0; }
   .signal-dispatch-footer nav { display: flex; flex-wrap: wrap; gap: 1rem; }
+  .signal-dispatch-footer summary { color: #122a3c; cursor: pointer; }
+  .signal-dispatch-footer details div { display: flex; flex-direction: column; gap: .6rem; padding-top: .6rem; }
   .signal-dispatch-footer a { color: #122a3c; }
   .signal-dispatch-footer a:hover { color: #0d5a93; }
   @media (max-width: 640px) { .signal-dispatch-footer { width: min(100% - 32px, 600px); display: block; } .signal-dispatch-footer nav { margin-top: .75rem; } }

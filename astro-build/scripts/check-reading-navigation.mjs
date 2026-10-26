@@ -113,6 +113,23 @@ try {
     assert.equal(await utilities.locator('.signal-dispatch-header').count(), 1);
   }
   results.push({ searchAndCanonical: 'pass', localArticleAnchor: 'pass', otherWritingFormats: '7 routes pass' });
+  for (const width of [390, 320]) {
+    await utilities.setViewportSize({ width, height: 900 });
+    await utilities.goto(`${baseURL}/blog/tags`);
+    await utilities.locator('.signal-dispatch-header summary').click();
+    assert.equal(await utilities.locator('.signal-dispatch-header__more a:visible').count(), 8, 'all sections are reachable on a phone');
+    assert.equal(await utilities.evaluate(() => document.documentElement.scrollWidth), width);
+    await utilities.screenshot({ path: `${output}/sections-${width}.png` });
+    await utilities.locator('.signal-dispatch-header__more a[href="/blog/fiction"]').click();
+    assert.equal(new URL(utilities.url()).pathname, '/blog/fiction');
+    await utilities.locator('.signal-dispatch-footer').scrollIntoViewIfNeeded();
+    await utilities.locator('.signal-dispatch-footer summary').click();
+    assert.equal(await utilities.locator('.signal-dispatch-footer details a:visible').count(), 4);
+    await utilities.locator('.signal-dispatch-footer details a').last().scrollIntoViewIfNeeded();
+    await utilities.waitForFunction(() => document.querySelector('.signal-dispatch-footer').getBoundingClientRect().bottom <= innerHeight + 1);
+    await utilities.screenshot({ path: `${output}/footer-${width}.png` });
+  }
+  results.push({ mobileSectionsAndFeeds: '390 and 320 px pass' });
   await utilities.close();
   const noJS = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 900 } });
   const page = await noJS.newPage();

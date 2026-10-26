@@ -27,8 +27,9 @@ const more = [
     <div class="signal-dispatch-header__links">
       {primary.map((link) => <a href={link.href} aria-current={currentPage === link.id ? 'page' : undefined}>{link.label}</a>)}
       <details>
-        <summary>More writing</summary>
+        <summary><span class="desktop-label">More writing</span><span class="mobile-label">Sections</span></summary>
         <div class="signal-dispatch-header__more">
+          {primary.map((link) => <a class="mobile-section" href={link.href} aria-current={currentPage === link.id ? 'page' : undefined}>{link.label}</a>)}
           {more.map((link) => <a href={link.href} aria-current={currentPage === link.id ? 'page' : undefined}>{link.label}</a>)}
         </div>
       </details>
@@ -55,6 +56,17 @@ const more = [
   .signal-dispatch-header summary::-webkit-details-marker { display: none; }
   .signal-dispatch-header__more { position: absolute; z-index: 10; right: 0; top: calc(100% - 4px); width: 160px; padding: .45rem; border: 1px solid rgb(18 42 60 / .24); background: #fbf8f1; box-shadow: 0 8px 18px rgb(18 42 60 / .12); }
   .signal-dispatch-header__more a { display: block; padding: .55rem .65rem; }
+  .signal-dispatch-header .mobile-label, .signal-dispatch-header__more .mobile-section { display: none; }
   .signal-dispatch-header :focus-visible { outline: 2px solid #0d5a93; outline-offset: 3px; }
-  @media (max-width: 760px) { .signal-dispatch-header__inner { width: min(100% - 32px, 600px); min-height: 58px; } .signal-dispatch-header__links { gap: .75rem; } .signal-dispatch-header__links > a:not(:last-child), .signal-dispatch-header details { display: none; } .signal-dispatch-header__links button { font-size: .72rem; } .signal-dispatch-header__name { font-size: 1.13rem !important; } }
+  @media (max-width: 760px) {
+    .signal-dispatch-header__inner { width: min(100% - 32px, 600px); min-height: 88px; display: grid; grid-template-columns: 1fr auto; gap: 0 1rem; }
+    .signal-dispatch-header__name { grid-area: 1 / 1; font-size: 1.13rem !important; }
+    .signal-dispatch-header__links { display: contents; }
+    .signal-dispatch-header__links > a:not(:last-child), .signal-dispatch-header .desktop-label { display: none; }
+    .signal-dispatch-header__links button { grid-area: 1 / 2; font-size: .72rem; }
+    .signal-dispatch-header__links details { grid-area: 2 / 1; }
+    .signal-dispatch-header__links > a:last-child { grid-area: 2 / 2; justify-self: end; }
+    .signal-dispatch-header .mobile-label, .signal-dispatch-header__more .mobile-section { display: block; }
+    .signal-dispatch-header__more { left: 0; right: auto; }
+  }
 </style>
