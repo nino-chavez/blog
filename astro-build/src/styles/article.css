@@ -276,7 +276,7 @@ body.article-theme {
   .article-theme .reading-progress,
   .article-theme .article-support,
   .article-theme .article-related,
-  .article-theme .practice-footer { display: none !important; }
+  .article-theme .signal-dispatch-footer { display: none !important; }
   .article-theme .article-opening,
   .article-theme .article-layout { display: block; width: auto; }
   .article-theme .article-opening { padding: 0 0 1rem; }
@@ -291,13 +291,9 @@ body.article-theme {
 /* Preserve context a referred reader needs before starting the argument. */
 .article-before-reading:empty { display: none; }
 .article-before-reading .article-counterpoint { margin-bottom: 28px; }
-.article-theme .signal-dispatch-header :focus-visible,
-.article-theme #publication-sections :focus-visible { outline: 2px solid #0d5a93; outline-offset: 3px; }
-.article-theme #publication-sections a { color: #122a3c; }
-#publication-sections { max-height: calc(100dvh - 7.5rem); overflow-y: auto; }
+.article-theme .signal-dispatch-header :focus-visible { outline: 2px solid #0d5a93; outline-offset: 3px; }
 
 .article-theme .signal-dispatch-header button { background: #fbf8f1; min-height: 44px; min-width: 44px; color: #122a3c !important; }
-.article-theme #publication-sections a[class*="bg-zinc"] { background: #e4edf2; border-radius: 0; }
 
 /* Selected A: begin reading before the feature illustration. */
 .article-opening.article-opening--reading {

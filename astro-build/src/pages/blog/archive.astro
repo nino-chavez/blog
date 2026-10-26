@@ -1,73 +1,52 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import BlogList from '../../components/BlogList';
 import SiteHeader from '../../components/SiteHeader.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
-import { generateWebsiteSchema, generateBlogSchema, generatePersonSchema } from '../../utils/schema';
+import ReadingList from '../../components/ReadingList.astro';
+import ReadingNavigation from '../../components/ReadingNavigation.astro';
+import { generateBlogSchema, generateWebsiteSchema } from '../../utils/schema';
+import '../../styles/article.css';
+import '../../styles/reading-list.css';
 
 export const prerender = true;
 
-// Get all published posts sorted by date
-const posts = await getCollection('blog', ({ data }) => data.status === 'published');
-const sortedPosts = posts.sort(
-  (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime()
-);
-
-// Prepare posts data for BlogList component
-const postsData = sortedPosts.map((post) => ({
-  id: post.id,
-  title: post.data.title,
-  excerpt: post.data.excerpt || '',
-  publishedAt: typeof post.data.publishedAt === 'string'
-    ? post.data.publishedAt
-    : post.data.publishedAt.toISOString(),
-  category: post.data.category,
-  tags: post.data.tags,
-  featured: post.data.featured,
-  featureImage: post.data.featureImage,
-}));
-
-// Generate JSON-LD schemas
-const websiteSchema = generateWebsiteSchema();
-const blogSchema = generateBlogSchema(sortedPosts);
-const personSchema = generatePersonSchema();
+const posts = (await getCollection('blog', ({ data }) => data.status === 'published'))
+  .filter((post) => post.id !== 'archive')
+  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
+const current = posts[0];
+const { Content } = await render(current);
+const publishedDate = new Date(current.data.publishedAt);
 ---
 
 <BaseLayout
   title="Essays — Signal Dispatch"
-  description="Browse every Signal Dispatch essay by subject or search the full archive."
-  jsonLd={[websiteSchema, blogSchema, personSchema]}
+  description="Browse Signal Dispatch essays by title, description, or tag while reading the latest post."
+  jsonLd={[generateWebsiteSchema(), generateBlogSchema(posts)]}
+  theme="article"
 >
-  <main class="min-h-screen">
-    <SiteHeader currentPage="blog" />
-
-    <!-- Page Header -->
-    <section class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-8 sm:pt-12 pb-2">
-      <div class="max-w-3xl">
-        <a
-          href="/blog"
-          class="group inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-signal-coral transition-colors mb-4 no-print"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          Signal Dispatch home
-        </a>
-        <h1 class="font-serif text-4xl md:text-5xl text-white leading-tight tracking-tight mb-3">
-          Essays
-        </h1>
-        <p class="font-serif italic text-lg text-zinc-500">
-          All {sortedPosts.length} essays, filterable by subject and searchable by text.
-        </p>
+  <main class="article-page reading-page">
+    <SiteHeader currentPage="blog" variant="article" />
+    <div class="reading-shell">
+      <aside class="reading-sidebar"><ReadingList posts={posts} currentId={current.id} /></aside>
+      <div class="reading-stage">
+        <!-- Search indexes the article at its own URL, without duplicate archive results. -->
+        <article>
+          <header class="article-opening article-opening--reading">
+            <div class="article-intro">
+              <p class="article-category">Latest essay</p>
+              <h1 class="article-title">{current.data.title}</h1>
+              {current.data.excerpt && <p class="article-excerpt">{current.data.excerpt}</p>}
+              <div class="article-byline"><span>By <a href="/about">Nino Chavez</a></span><time datetime={publishedDate.toISOString()}>{publishedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time></div>
+            </div>
+          </header>
+          <ReadingNavigation posts={posts} currentId={current.id} label="Read another post" />
+          <div class="article-layout"><aside class="article-margin"><p class="article-margin-note"><a href="/blog">Signal Dispatch</a></p></aside><div class="article-content prose"><Content /></div></div>
+          <ReadingNavigation posts={posts} currentId={current.id} label="Continue reading" />
+        </article>
+        <details class="writing-more"><summary>More writing</summary><ul><li><a href="/blog/series">Series</a></li><li><a href="/blog/fiction">Fiction</a></li><li><a href="/blog/tutorials">Tutorials</a></li><li><a href="/blog/whitepapers">Whitepapers</a></li><li><a href="/blog/presentations">Presentations</a></li><li><a href="/blog/counterpoints">Counterpoints</a></li><li><a href="/blog/tags">Tags</a></li></ul></details>
       </div>
-    </section>
-
-    <!-- Blog Content -->
-    <section class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8">
-      <BlogList posts={postsData} client:idle />
-    </section>
-
+    </div>
     <SiteFooter />
   </main>
 </BaseLayout>

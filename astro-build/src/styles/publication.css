@@ -301,18 +301,6 @@
   box-shadow: 0 14px 34px rgb(14 25 40 / 0.14) !important;
 }
 
-:is(.publication-theme, .article-theme) #publication-sections {
-  border-color: var(--publication-rule) !important;
-  background: var(--publication-surface) !important;
-  color: var(--publication-text);
-}
-
-:is(.publication-theme, .article-theme) #publication-sections h2 {
-  color: var(--publication-muted) !important;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-}
-
 /* Compact collection openings. */
 .publication-theme main > section:first-of-type {
   border-bottom-color: var(--publication-rule) !important;
@@ -855,9 +843,8 @@ body[data-page-path="/blog/tags"] main section a[class*="rounded"] {
     background: white;
   }
 
-  .publication-theme .open-practice-shell,
   .publication-theme .signal-dispatch-header,
-  .publication-theme .practice-footer {
+  .publication-theme .signal-dispatch-footer {
     display: none;
   }
 }
