@@ -3,426 +3,58 @@ import SearchModal from './SearchModal.astro';
 
 interface Props {
   currentPage?: 'blog' | 'series' | 'tags' | 'whitepapers' | 'presentations' | 'tutorials' | 'fiction' | 'counterpoints' | 'research' | 'about';
-  /** Article pages supply their own compact Signal Dispatch masthead. */
   variant?: 'article';
 }
 
-const { currentPage, variant } = Astro.props;
-const pathname = Astro.url.pathname;
-
-const primaryLinks = [
-  { href: '/blog/archive', label: 'Essays', id: 'blog' },
+const { currentPage } = Astro.props;
+const primary = [
+  { href: '/blog/archive', label: 'All posts', id: 'blog' },
   { href: '/blog/series', label: 'Series', id: 'series' },
   { href: '/blog/fiction', label: 'Fiction', id: 'fiction' },
 ];
-
-const moreLinks = [
+const more = [
   { href: '/blog/whitepapers', label: 'Whitepapers', id: 'whitepapers' },
   { href: '/blog/presentations', label: 'Presentations', id: 'presentations' },
   { href: '/blog/tutorials', label: 'Tutorials', id: 'tutorials' },
   { href: '/blog/counterpoints', label: 'Counterpoints', id: 'counterpoints' },
   { href: '/blog/tags', label: 'Tags', id: 'tags' },
 ];
-
-const moreIds = moreLinks.map((link) => link.id);
-const moreActive = currentPage ? moreIds.includes(currentPage) : false;
-
-const practiceLinks = [
-  { href: '/blog', label: 'Writing' },
-  { href: '/work', label: 'Building' },
-  { href: '/photography', label: 'Photography' },
-  { href: '/about', label: 'About' },
-];
-
-const practiceSecondaryLinks = [
-  { href: '/now', label: 'Now' },
-  { href: '/links', label: 'Links' },
-];
-
-function ownsPath(href: string) {
-  if (href === '/work') {
-    return ['/work', '/demos', '/learn'].some((path) => pathname === path || pathname.startsWith(`${path}/`));
-  }
-  if (href === '/about') {
-    return pathname === '/about' || pathname === '/now' || pathname === '/links';
-  }
-  return pathname === href || pathname.startsWith(`${href}/`);
-}
-
-function globalAriaCurrent(href: string) {
-  if (!ownsPath(href)) return undefined;
-  return pathname === href ? 'page' : 'location';
-}
-
-function publicationLinkClasses(id: string, base: string) {
-  return currentPage === id
-    ? `${base} text-white bg-zinc-800/60 font-medium`
-    : `${base} text-zinc-400 hover:text-white`;
-}
 ---
 
-<div class="open-practice-shell">
-  <div class="open-practice-shell__inner">
-    <a
-      class="open-practice-shell__identity"
-      href="/"
-      aria-label="Nino Chavez, home"
-      aria-current={pathname === '/' ? 'page' : undefined}
-    >Nino Chavez</a>
-    <nav class="open-practice-shell__desktop" aria-label="Primary navigation">
-      {practiceLinks.map((link) => (
-        <a href={link.href} aria-current={globalAriaCurrent(link.href)}>{link.label}</a>
-      ))}
-    </nav>
-    <a class="open-practice-shell__search" href="/search" aria-current={pathname === '/search' ? 'page' : undefined}>Search site</a>
-    <button
-      id="site-navigation-menu-button"
-      class="open-practice-shell__menu-button"
-      type="button"
-      aria-haspopup="dialog"
-      aria-controls="site-navigation-dialog"
-      aria-expanded="false"
-    >Menu</button>
-  </div>
-</div>
-
-<dialog id="site-navigation-dialog" class="open-practice-shell__dialog" aria-labelledby="site-navigation-dialog-title">
-  <div class="open-practice-shell__dialog-inner">
-    <div class="open-practice-shell__dialog-heading">
-      <p id="site-navigation-dialog-title">Navigate</p>
-      <button id="site-navigation-dialog-close" type="button" autofocus>Close</button>
-    </div>
-
-    <form class="open-practice-shell__dialog-search" action="/search" role="search">
-      <label for="site-navigation-query">Search this site</label>
-      <div>
-        <input id="site-navigation-query" name="q" type="search" placeholder="Project, topic, or page…" />
-        <button type="submit">Search</button>
-      </div>
-    </form>
-
-    <nav class="open-practice-shell__dialog-primary" aria-label="Mobile primary navigation">
-      {practiceLinks.map((link) => {
-        const current = globalAriaCurrent(link.href);
-        return (
-          <a href={link.href} aria-current={current}>
-            <span>{link.label}</span>
-            {current && <small>{current === 'page' ? 'Current page' : 'Current section'}</small>}
-          </a>
-        );
-      })}
-    </nav>
-
-    <nav class="open-practice-shell__dialog-secondary" aria-label="More pages">
-      {practiceSecondaryLinks.map((link) => (
-        <a href={link.href} aria-current={pathname === link.href ? 'page' : undefined}>{link.label}</a>
-      ))}
-    </nav>
-  </div>
-</dialog>
-
-<header class="signal-dispatch-header bg-zinc-950 border-b border-zinc-800/50">
-  <nav class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8" aria-label="Signal Dispatch sections">
-    <div class="flex items-center justify-between min-h-16 py-2 md:min-h-20">
-      <a href="/blog" class="flex flex-col items-start flex-shrink-0 leading-none">
-        <span class="font-serif text-xl sm:text-2xl font-bold text-white whitespace-nowrap">Signal Dispatch</span>
-        <span class="mt-1 text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-zinc-600">Publication</span>
-      </a>
-
-      <div class="hidden md:flex items-center gap-1">
-        {primaryLinks.map((link) => (
-          <a href={link.href} class={publicationLinkClasses(link.id, 'text-sm px-3 py-1.5 rounded-md transition-colors')}>
-            {link.label}
-          </a>
-        ))}
-
-        <details class="relative more-dropdown">
-          <summary
-            class={`list-none cursor-pointer select-none text-sm px-3 py-1.5 rounded-md transition-colors flex items-center gap-1 ${
-              moreActive ? 'text-white bg-zinc-800/60 font-medium' : 'text-zinc-400 hover:text-white'
-            }`}
-            aria-haspopup="menu"
-          >
-            More
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 more-caret" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-          </summary>
-          <div class="absolute right-0 mt-2 w-56 rounded-lg border border-zinc-800 bg-zinc-950/98 backdrop-blur-xl shadow-xl shadow-black/50 overflow-hidden py-1" role="menu">
-            {moreLinks.map((link) => (
-              <a
-                href={link.href}
-                role="menuitem"
-                class={`block px-4 py-2.5 text-sm transition-colors ${
-                  currentPage === link.id ? 'text-white bg-zinc-800/60 font-medium' : 'text-zinc-400 hover:text-white hover:bg-zinc-800/40'
-                }`}
-              >{link.label}</a>
-            ))}
-          </div>
-        </details>
-
-        <div class="border-l border-zinc-800/50 h-5 mx-2"></div>
-        <button type="button" data-search-trigger class="flex items-center justify-center w-8 h-8 p-0 rounded-md text-zinc-400 hover:text-white transition-colors" title="Search Signal Dispatch (⌘K)" aria-label="Search Signal Dispatch">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-        </button>
-        <a href="/blog/rss.xml" class="flex items-center justify-center w-8 h-8 rounded-md text-zinc-400 hover:text-white transition-colors" title="RSS Feed" aria-label="RSS Feed">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z" /></svg>
-        </a>
-      </div>
-
-      <div class="flex items-center gap-2 md:hidden">
-        <button type="button" data-search-trigger class="flex items-center justify-center w-10 h-10 p-0 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800/50 transition-colors" aria-label="Search Signal Dispatch">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-        </button>
-        <button id="publication-sections-button" type="button" class="publication-sections-button" aria-controls="publication-sections" aria-expanded="false">Sections</button>
-      </div>
+<header class="signal-dispatch-header">
+  <nav class="signal-dispatch-header__inner" aria-label="Signal Dispatch">
+    <a href="/blog" class="signal-dispatch-header__name" aria-current={currentPage === 'blog' ? 'page' : undefined}>Signal Dispatch</a>
+    <div class="signal-dispatch-header__links">
+      {primary.map((link) => <a href={link.href} aria-current={currentPage === link.id ? 'page' : undefined}>{link.label}</a>)}
+      <details>
+        <summary>More writing</summary>
+        <div class="signal-dispatch-header__more">
+          {more.map((link) => <a href={link.href} aria-current={currentPage === link.id ? 'page' : undefined}>{link.label}</a>)}
+        </div>
+      </details>
+      <button type="button" data-search-trigger>Search all writing</button>
+      <a href="/blog/rss.xml">RSS</a>
     </div>
   </nav>
 </header>
 
-<aside id="publication-sections" class="hidden fixed inset-x-0 top-[7.5rem] z-[45] border-b border-zinc-800 bg-zinc-950/98 backdrop-blur-xl md:hidden" aria-label="Signal Dispatch sections">
-  <nav class="max-w-7xl mx-auto px-6 py-6">
-    <div class="mb-6">
-      <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">Signal Dispatch sections</h2>
-      <div class="flex flex-col gap-1">
-        {primaryLinks.map((link) => (
-          <a href={link.href} class={`py-3 px-3 text-lg rounded-lg transition-colors ${currentPage === link.id ? 'text-white bg-zinc-800/60 font-medium' : 'text-zinc-300 hover:text-white hover:bg-zinc-800/30'}`}>{link.label}</a>
-        ))}
-      </div>
-    </div>
-    <div class="mb-6">
-      <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-3">More sections</h2>
-      <div class="flex flex-col gap-1">
-        {moreLinks.map((link) => (
-          <a href={link.href} class={`py-3 px-3 text-lg rounded-lg transition-colors ${currentPage === link.id ? 'text-white bg-zinc-800/60 font-medium' : 'text-zinc-300 hover:text-white hover:bg-zinc-800/30'}`}>{link.label}</a>
-        ))}
-      </div>
-    </div>
-    <a href="/blog/rss.xml" class="block py-3 px-3 text-lg text-zinc-300 hover:text-white hover:bg-zinc-800/30 rounded-lg transition-colors">RSS Feed</a>
-  </nav>
-</aside>
-
 <SearchModal />
 
 <style>
-  .open-practice-shell {
-    --practice-shell-height: 64px;
-    position: sticky;
-    top: 0;
-    z-index: 60;
-    height: var(--practice-shell-height);
-    border-bottom: 1px solid rgb(18 42 60 / 0.24);
-    background: rgb(244 240 232 / 0.96);
-    color: #122a3c;
-    backdrop-filter: blur(12px);
-  }
-  .open-practice-shell__inner {
-    display: grid;
-    width: min(1320px, calc(100% - 48px));
-    height: 100%;
-    margin: 0 auto;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: 24px;
-  }
-  .open-practice-shell a { color: inherit; font-size: 0.85rem; font-weight: 620; text-decoration: none; }
-  .open-practice-shell__identity { justify-self: start; font-size: 0.95rem !important; font-weight: 800 !important; letter-spacing: -0.01em; }
-  .open-practice-shell__desktop { display: flex; align-self: stretch; align-items: center; gap: clamp(18px, 2.6vw, 36px); }
-  .open-practice-shell__desktop a { display: inline-flex; height: 100%; align-items: center; border-bottom: 2px solid transparent; color: #536373; }
-  .open-practice-shell__desktop a:hover,
-  .open-practice-shell__desktop a:focus-visible,
-  .open-practice-shell__desktop a[aria-current] { color: #122a3c; }
-  .open-practice-shell__desktop a[aria-current] { border-bottom-color: #0d5a93; }
-  .open-practice-shell__search { justify-self: end; color: #536373 !important; }
-  .open-practice-shell__search:hover,
-  .open-practice-shell__search:focus-visible { color: #122a3c !important; }
-  .open-practice-shell__menu-button { display: none; }
-  .open-practice-shell :focus-visible,
-  .open-practice-shell__dialog :focus-visible { outline: none; box-shadow: 0 0 0 2px #f4f0e8, 0 0 0 4px #0d5a93; }
-  .open-practice-shell__dialog { width: min(100% - 24px, 520px); max-width: none; max-height: calc(100dvh - 24px); margin: 12px 12px 12px auto; border: 1px solid #122a3c; border-radius: 0; padding: 0; overflow: auto; background: #f4f0e8; color: #122a3c; }
-  .open-practice-shell__dialog::backdrop { background: rgb(14 25 40 / 0.55); }
-  .open-practice-shell__dialog-inner { width: 100%; }
-  .open-practice-shell__dialog-heading { display: flex; min-height: 64px; padding: 12px 18px; align-items: center; justify-content: space-between; border-bottom: 1px solid rgb(18 42 60 / 0.24); }
-  .open-practice-shell__dialog-heading p { margin: 0; font-size: 1rem; font-weight: 760; }
-  .open-practice-shell__dialog button { min-height: 42px; padding: 8px 13px; border: 1px solid rgb(18 42 60 / 0.24); border-radius: 0; background: #f4f0e8; color: #122a3c; font-size: 1rem; font-weight: 700; }
-  .open-practice-shell__dialog-search { display: grid; gap: 8px; padding: 20px 18px; border-bottom: 1px solid rgb(18 42 60 / 0.24); }
-  .open-practice-shell__dialog-search label { color: #536373; font-size: 0.78rem; font-weight: 700; }
-  .open-practice-shell__dialog-search > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
-  .open-practice-shell__dialog-search input { min-width: 0; min-height: 46px; border: 1px solid rgb(18 42 60 / 0.24); border-radius: 0; padding: 9px 11px; background: #f4f0e8; color: #122a3c; font-size: 1rem; }
-  .open-practice-shell__dialog-primary { display: grid; }
-  .open-practice-shell__dialog-primary a,
-  .open-practice-shell__dialog-secondary a { display: flex; align-items: center; justify-content: space-between; min-height: 58px; padding: 14px 18px; border-bottom: 1px solid rgb(18 42 60 / 0.24); color: #122a3c; font-size: 1.05rem; font-weight: 680; text-decoration: none; }
-  .open-practice-shell__dialog-primary a[aria-current] { background: #122a3c; color: #f4f0e8; box-shadow: inset 4px 0 0 #0d5a93; }
-  .open-practice-shell__dialog-primary small { color: rgb(244 240 232 / 0.72); font-size: 0.72rem; font-weight: 500; }
-  .open-practice-shell__dialog-secondary { display: grid; grid-template-columns: repeat(2, 1fr); padding: 14px 18px; gap: 8px; }
-  .open-practice-shell__dialog-secondary a { min-height: 42px; padding: 8px; justify-content: center; border: 1px solid rgb(18 42 60 / 0.24); font-size: 0.82rem; }
-  .open-practice-shell__dialog-secondary a[aria-current] { color: #122a3c; text-decoration: underline; text-decoration-color: #0d5a93; text-decoration-thickness: 2px; text-underline-offset: 5px; }
-  .signal-dispatch-header button[data-search-trigger] { padding: 0; }
-  .publication-sections-button { min-height: 40px; border: 1px solid #3f3f46; border-radius: 0.375rem; padding: 0 0.75rem; background: transparent; color: #d4d4d8; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-  .publication-sections-button:hover,
-  .publication-sections-button[aria-expanded='true'] { border-color: var(--color-signal-coral); color: #fff; }
-  .publication-sections-button:focus-visible { outline: 3px solid var(--color-signal-coral); outline-offset: 2px; }
-  .more-dropdown summary::-webkit-details-marker { display: none; }
-  .more-dropdown summary { list-style: none; }
-  .more-caret { transition: transform 0.15s ease; }
-  .more-dropdown[open] .more-caret { transform: rotate(180deg); }
-
-  @media (max-width: 920px) {
-    .open-practice-shell { --practice-shell-height: 64px; }
-    .open-practice-shell__inner { width: calc(100% - 32px); grid-template-columns: 1fr auto; }
-    .open-practice-shell__desktop,
-    .open-practice-shell__search { display: none; }
-    .open-practice-shell__menu-button { display: inline-flex; align-items: center; min-height: 42px; border: 1px solid rgb(18 42 60 / 0.24); border-radius: 0; padding: 8px 13px; background: transparent; color: #122a3c; cursor: pointer; font-size: 1rem; font-weight: 700; }
-  }
-  @media (max-width: 680px) {
-    .open-practice-shell { --practice-shell-height: 60px; }
-    .open-practice-shell__inner { width: calc(100% - 30px); }
-    .open-practice-shell__dialog-secondary { grid-template-columns: 1fr; }
-  }
+  .signal-dispatch-header { border-bottom: 1px solid rgb(18 42 60 / .24); background: #f4f0e8; color: #122a3c; }
+  .signal-dispatch-header__inner { width: min(1360px, calc(100% - 64px)); min-height: 72px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .signal-dispatch-header a, .signal-dispatch-header button, .signal-dispatch-header summary { color: #122a3c; font: 600 .78rem/1.4 'Inter Variable', Inter, system-ui, sans-serif; text-decoration: none; }
+  .signal-dispatch-header__name { font-family: Georgia, 'Times New Roman', serif !important; font-size: 1.3rem !important; font-weight: 700 !important; letter-spacing: -.03em; }
+  .signal-dispatch-header__links { display: flex; align-items: center; gap: 1.15rem; }
+  .signal-dispatch-header__links > a, .signal-dispatch-header button, .signal-dispatch-header summary { min-height: 44px; display: inline-flex; align-items: center; cursor: pointer; }
+  .signal-dispatch-header button { padding: 0; border: 0; background: transparent; }
+  .signal-dispatch-header a:hover, .signal-dispatch-header button:hover, .signal-dispatch-header summary:hover { color: #0d5a93; }
+  .signal-dispatch-header a[aria-current] { text-decoration: underline; text-underline-offset: .28em; }
+  .signal-dispatch-header details { position: relative; }
+  .signal-dispatch-header summary { list-style: none; }
+  .signal-dispatch-header summary::-webkit-details-marker { display: none; }
+  .signal-dispatch-header__more { position: absolute; z-index: 10; right: 0; top: calc(100% - 4px); width: 160px; padding: .45rem; border: 1px solid rgb(18 42 60 / .24); background: #fbf8f1; box-shadow: 0 8px 18px rgb(18 42 60 / .12); }
+  .signal-dispatch-header__more a { display: block; padding: .55rem .65rem; }
+  .signal-dispatch-header :focus-visible { outline: 2px solid #0d5a93; outline-offset: 3px; }
+  @media (max-width: 760px) { .signal-dispatch-header__inner { width: min(100% - 32px, 600px); min-height: 58px; } .signal-dispatch-header__links { gap: .75rem; } .signal-dispatch-header__links > a:not(:last-child), .signal-dispatch-header details { display: none; } .signal-dispatch-header__links button { font-size: .72rem; } .signal-dispatch-header__name { font-size: 1.13rem !important; } }
 </style>
-
-<script>
-  const globalMenuButton = document.getElementById('site-navigation-menu-button') as HTMLButtonElement | null;
-  const globalMenuDialog = document.getElementById('site-navigation-dialog') as HTMLDialogElement | null;
-  const globalMenuCloseButton = document.getElementById('site-navigation-dialog-close') as HTMLButtonElement | null;
-  const publicationSectionsButton = document.getElementById('publication-sections-button') as HTMLButtonElement | null;
-  const publicationSections = document.getElementById('publication-sections');
-  const moreDropdown = document.querySelector('.more-dropdown') as HTMLDetailsElement | null;
-
-  let globalMenuHasHistoryState = false;
-  let pendingNavigation: string | null = null;
-  let bodyOverflow = '';
-  let rootOverflow = '';
-
-  function lockBackground() {
-    rootOverflow = document.documentElement.style.overflow;
-    bodyOverflow = document.body.style.overflow;
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
-  }
-
-  function unlockBackground() {
-    document.documentElement.style.overflow = rootOverflow;
-    document.body.style.overflow = bodyOverflow;
-  }
-
-  function setGlobalMenuOpen(isOpen: boolean) {
-    globalMenuButton?.setAttribute('aria-expanded', String(isOpen));
-  }
-
-  function removeGlobalMenuHistoryState() {
-    if (!globalMenuHasHistoryState) return;
-    globalMenuHasHistoryState = false;
-    history.back();
-  }
-
-  function closeGlobalMenu({ restoreFocus = true, removeHistoryState = true } = {}) {
-    if (!globalMenuDialog?.open) return;
-    if (removeHistoryState) removeGlobalMenuHistoryState();
-    globalMenuDialog.close();
-    setGlobalMenuOpen(false);
-    unlockBackground();
-    if (restoreFocus) requestAnimationFrame(() => globalMenuButton?.focus());
-  }
-
-  function openGlobalMenu() {
-    if (!globalMenuDialog || globalMenuDialog.open) return;
-    history.pushState({ ...(history.state ?? {}), siteNavigationDialog: true }, '', window.location.href);
-    globalMenuHasHistoryState = true;
-    globalMenuDialog.showModal();
-    setGlobalMenuOpen(true);
-    lockBackground();
-  }
-
-  function closePublicationSections({ restoreFocus = false } = {}) {
-    if (!publicationSections || publicationSections.classList.contains('hidden')) return;
-    publicationSections.classList.add('hidden');
-    publicationSectionsButton?.setAttribute('aria-expanded', 'false');
-    if (restoreFocus) publicationSectionsButton?.focus();
-  }
-
-  function togglePublicationSections() {
-    if (!publicationSections) return;
-    const isOpen = !publicationSections.classList.contains('hidden');
-    if (isOpen) {
-      closePublicationSections({ restoreFocus: true });
-      return;
-    }
-    publicationSections.classList.remove('hidden');
-    publicationSectionsButton?.setAttribute('aria-expanded', 'true');
-  }
-
-  globalMenuButton?.addEventListener('click', openGlobalMenu);
-  globalMenuCloseButton?.addEventListener('click', () => closeGlobalMenu());
-
-  globalMenuDialog?.addEventListener('keydown', (event) => {
-    if (event.key !== 'Tab') return;
-    const controls = Array.from(globalMenuDialog.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), input:not([disabled])',
-    )).filter((element) => element.getClientRects().length > 0);
-    const first = controls[0];
-    const last = controls[controls.length - 1];
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last?.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first?.focus();
-    }
-  });
-  publicationSectionsButton?.addEventListener('click', togglePublicationSections);
-
-  globalMenuDialog?.addEventListener('cancel', (event) => {
-    event.preventDefault();
-    closeGlobalMenu();
-  });
-
-  globalMenuDialog?.addEventListener('close', () => {
-    setGlobalMenuOpen(false);
-    unlockBackground();
-  });
-
-  globalMenuDialog?.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', (event) => {
-      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      event.preventDefault();
-      pendingNavigation = link.href;
-      closeGlobalMenu({ restoreFocus: false });
-    });
-  });
-  globalMenuDialog?.querySelector('form')?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget as HTMLFormElement);
-    const query = form.get('q');
-    const destination = new URL('/search', window.location.origin);
-    if (typeof query === 'string' && query) destination.searchParams.set('q', query);
-    pendingNavigation = destination.href;
-    closeGlobalMenu({ restoreFocus: false });
-  });
-  publicationSections?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => closePublicationSections()));
-
-  window.addEventListener('popstate', () => {
-    const destination = pendingNavigation;
-    pendingNavigation = null;
-    globalMenuHasHistoryState = false;
-    if (globalMenuDialog?.open) {
-      closeGlobalMenu({ removeHistoryState: false });
-    }
-    if (destination) window.location.assign(destination);
-  });
-
-  document.addEventListener('keydown', (event) => {
-    if (event.key !== 'Escape') return;
-    if (publicationSections && !publicationSections.classList.contains('hidden')) {
-      closePublicationSections({ restoreFocus: true });
-    }
-    if (moreDropdown?.open) moreDropdown.open = false;
-  });
-
-  document.addEventListener('click', (event) => {
-    if (moreDropdown?.open && !moreDropdown.contains(event.target as Node)) moreDropdown.open = false;
-    if (publicationSections && !publicationSections.classList.contains('hidden') && !publicationSections.contains(event.target as Node) && !publicationSectionsButton?.contains(event.target as Node)) {
-      closePublicationSections();
-    }
-  });
-</script>

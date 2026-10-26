@@ -9,9 +9,10 @@ interface Props {
   headings: Heading[];
   minHeadings?: number;
   variant?: 'article';
+  collapsed?: boolean;
 }
 
-const { headings, minHeadings = 3, variant } = Astro.props;
+const { headings, minHeadings = 3, variant, collapsed = false } = Astro.props;
 
 // Filter to H2 and H3 only (skip H1)
 const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
@@ -28,7 +29,7 @@ const shouldRender = tocHeadings.length >= minHeadings;
       ? 'article-toc'
       : 'rounded-xl border border-zinc-700/50 bg-zinc-900/50 p-5 mb-8',
   ]} aria-label="On this page">
-    <details class:list={['group', variant === 'article' && 'article-toc__details']} open>
+    <details class:list={['group', variant === 'article' && 'article-toc__details']} data-default-collapsed={collapsed || undefined} open={!collapsed}>
       <summary class="flex items-center justify-between cursor-pointer list-none">
         <h2 class:list={[
           'text-sm font-semibold flex items-center gap-2',
@@ -91,7 +92,7 @@ const shouldRender = tocHeadings.length >= minHeadings;
     const compactToc = window.matchMedia('(max-width: 640px)');
     const setTocState = () => {
       if (!articleTocDetails) return;
-      articleTocDetails.open = !compactToc.matches;
+      articleTocDetails.open = !articleTocDetails.dataset.defaultCollapsed && !compactToc.matches;
     };
     setTocState();
     compactToc.addEventListener('change', setTocState);
