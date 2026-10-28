@@ -54,6 +54,40 @@
  },
  "items": [
   {
+   "id": "blog/because-i-can-is-only-half-the-answer",
+   "title": "Because I Can Is Only Half the Answer",
+   "url": "https://ninochavez.co/blog/because-i-can-is-only-half-the-answer",
+   "publishedAt": "2026-10-27",
+   "collection": "blog",
+   "words": 695,
+   "cluster": "because-i-can-is-only-half-the-answer",
+   "tier": 3,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "linkedin": {
+     "mode": "skip",
+     "state": "skip-manual",
+     "reason": "Nino explicitly requested publication on Signal Dispatch without another LinkedIn post. The related LinkedIn post already exists: https://www.linkedin.com/feed/update/urn:li:activity:7521057266167357441/",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
    "id": "blog/the-rules-of-the-road-still-apply",
    "title": "The Rules of the Road Still Apply",
    "url": "https://ninochavez.co/blog/the-rules-of-the-road-still-apply",
