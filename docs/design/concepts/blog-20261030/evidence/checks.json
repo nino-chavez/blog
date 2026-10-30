@@ -1,0 +1,833 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "engine": "chromium",
+      "device": "desktop",
+      "concept": "a",
+      "state": "home",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Essays by Nino Chavez"
+      ],
+      "articleStart": null,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 0
+    },
+    {
+      "engine": "chromium",
+      "device": "desktop",
+      "concept": "a",
+      "state": "essay",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Because I Can Is Only Half the Answer"
+      ],
+      "articleStart": 462.109375,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 15
+    },
+    {
+      "engine": "chromium",
+      "device": "desktop",
+      "concept": "a",
+      "state": "technical",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Setting Up an AI-Native Dev Environment"
+      ],
+      "articleStart": 592.890625,
+      "brokenImages": [],
+      "codeFontSize": 13,
+      "codeBlocks": 12,
+      "paragraphs": 48,
+      "codeContrast": 13.902030638718562
+    },
+    {
+      "engine": "chromium",
+      "device": "desktop",
+      "concept": "a",
+      "state": "series",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Spec-Driven Development with Multi-Agent Orchestration"
+      ],
+      "articleStart": 637,
+      "brokenImages": [],
+      "codeFontSize": 13,
+      "codeBlocks": 1,
+      "paragraphs": 43
+    },
+    {
+      "engine": "chromium",
+      "device": "desktop",
+      "concept": "b",
+      "state": "home",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Because I Can Is Only Half the Answer"
+      ],
+      "articleStart": null,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 0
+    },
+    {
+      "engine": "chromium",
+      "device": "desktop",
+      "concept": "b",
+      "state": "essay",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Because I Can Is Only Half the Answer"
+      ],
+      "articleStart": 408.234375,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 15
+    },
+    {
+      "engine": "chromium",
+      "device": "desktop",
+      "concept": "b",
+      "state": "technical",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Setting Up an AI-Native Dev Environment"
+      ],
+      "articleStart": 587.171875,
+      "brokenImages": [],
+      "codeFontSize": 13,
+      "codeBlocks": 12,
+      "paragraphs": 48,
+      "codeContrast": 13.902030638718562
+    },
+    {
+      "engine": "chromium",
+      "device": "desktop",
+      "concept": "b",
+      "state": "series",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Spec-Driven Development with Multi-Agent Orchestration"
+      ],
+      "articleStart": 631.28125,
+      "brokenImages": [],
+      "codeFontSize": 13,
+      "codeBlocks": 1,
+      "paragraphs": 43
+    },
+    {
+      "engine": "chromium",
+      "device": "desktop",
+      "concept": "c",
+      "state": "home",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Explore the writing"
+      ],
+      "articleStart": null,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 0
+    },
+    {
+      "engine": "chromium",
+      "device": "desktop",
+      "concept": "c",
+      "state": "essay",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Because I Can Is Only Half the Answer"
+      ],
+      "articleStart": 421.359375,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 15
+    },
+    {
+      "engine": "chromium",
+      "device": "desktop",
+      "concept": "c",
+      "state": "technical",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Setting Up an AI-Native Dev Environment"
+      ],
+      "articleStart": 477.140625,
+      "brokenImages": [],
+      "codeFontSize": 13,
+      "codeBlocks": 12,
+      "paragraphs": 48,
+      "codeContrast": 13.902030638718562
+    },
+    {
+      "engine": "chromium",
+      "device": "desktop",
+      "concept": "c",
+      "state": "series",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Spec-Driven Development with Multi-Agent Orchestration"
+      ],
+      "articleStart": 521.25,
+      "brokenImages": [],
+      "codeFontSize": 13,
+      "codeBlocks": 1,
+      "paragraphs": 43
+    },
+    {
+      "engine": "chromium",
+      "device": "phone",
+      "concept": "a",
+      "state": "home",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Essays by Nino Chavez"
+      ],
+      "articleStart": null,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 0
+    },
+    {
+      "engine": "chromium",
+      "device": "phone",
+      "concept": "a",
+      "state": "essay",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Because I Can Is Only Half the Answer"
+      ],
+      "articleStart": 444.296875,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 15
+    },
+    {
+      "engine": "chromium",
+      "device": "phone",
+      "concept": "a",
+      "state": "technical",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Setting Up an AI-Native Dev Environment"
+      ],
+      "articleStart": 634,
+      "brokenImages": [],
+      "codeFontSize": 12,
+      "codeBlocks": 12,
+      "paragraphs": 48,
+      "codeContrast": 13.902030638718562
+    },
+    {
+      "engine": "chromium",
+      "device": "phone",
+      "concept": "a",
+      "state": "series",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Spec-Driven Development with Multi-Agent Orchestration"
+      ],
+      "articleStart": 768.3125,
+      "brokenImages": [],
+      "codeFontSize": 12,
+      "codeBlocks": 1,
+      "paragraphs": 43
+    },
+    {
+      "engine": "chromium",
+      "device": "phone",
+      "concept": "b",
+      "state": "home",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Because I Can Is Only Half the Answer"
+      ],
+      "articleStart": null,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 0
+    },
+    {
+      "engine": "chromium",
+      "device": "phone",
+      "concept": "b",
+      "state": "essay",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Because I Can Is Only Half the Answer"
+      ],
+      "articleStart": 444.296875,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 15
+    },
+    {
+      "engine": "chromium",
+      "device": "phone",
+      "concept": "b",
+      "state": "technical",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Setting Up an AI-Native Dev Environment"
+      ],
+      "articleStart": 634,
+      "brokenImages": [],
+      "codeFontSize": 12,
+      "codeBlocks": 12,
+      "paragraphs": 48,
+      "codeContrast": 13.902030638718562
+    },
+    {
+      "engine": "chromium",
+      "device": "phone",
+      "concept": "b",
+      "state": "series",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Spec-Driven Development with Multi-Agent Orchestration"
+      ],
+      "articleStart": 768.3125,
+      "brokenImages": [],
+      "codeFontSize": 12,
+      "codeBlocks": 1,
+      "paragraphs": 43
+    },
+    {
+      "engine": "chromium",
+      "device": "phone",
+      "concept": "c",
+      "state": "home",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Explore the writing"
+      ],
+      "articleStart": null,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 0
+    },
+    {
+      "engine": "chromium",
+      "device": "phone",
+      "concept": "c",
+      "state": "essay",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Because I Can Is Only Half the Answer"
+      ],
+      "articleStart": 443.296875,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 15
+    },
+    {
+      "engine": "chromium",
+      "device": "phone",
+      "concept": "c",
+      "state": "technical",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Setting Up an AI-Native Dev Environment"
+      ],
+      "articleStart": 627,
+      "brokenImages": [],
+      "codeFontSize": 12,
+      "codeBlocks": 12,
+      "paragraphs": 48,
+      "codeContrast": 13.902030638718562
+    },
+    {
+      "engine": "chromium",
+      "device": "phone",
+      "concept": "c",
+      "state": "series",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Spec-Driven Development with Multi-Agent Orchestration"
+      ],
+      "articleStart": 761.3125,
+      "brokenImages": [],
+      "codeFontSize": 12,
+      "codeBlocks": 1,
+      "paragraphs": 43
+    },
+    {
+      "engine": "webkit",
+      "device": "desktop",
+      "concept": "a",
+      "state": "home",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Essays by Nino Chavez"
+      ],
+      "articleStart": null,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 0
+    },
+    {
+      "engine": "webkit",
+      "device": "desktop",
+      "concept": "a",
+      "state": "essay",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Because I Can Is Only Half the Answer"
+      ],
+      "articleStart": 462.109375,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 15
+    },
+    {
+      "engine": "webkit",
+      "device": "desktop",
+      "concept": "a",
+      "state": "technical",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Setting Up an AI-Native Dev Environment"
+      ],
+      "articleStart": 592.890625,
+      "brokenImages": [],
+      "codeFontSize": 13,
+      "codeBlocks": 12,
+      "paragraphs": 48,
+      "codeContrast": 13.902030638718562
+    },
+    {
+      "engine": "webkit",
+      "device": "desktop",
+      "concept": "a",
+      "state": "series",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Spec-Driven Development with Multi-Agent Orchestration"
+      ],
+      "articleStart": 637,
+      "brokenImages": [],
+      "codeFontSize": 13,
+      "codeBlocks": 1,
+      "paragraphs": 43
+    },
+    {
+      "engine": "webkit",
+      "device": "desktop",
+      "concept": "b",
+      "state": "home",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Because I Can Is Only Half the Answer"
+      ],
+      "articleStart": null,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 0
+    },
+    {
+      "engine": "webkit",
+      "device": "desktop",
+      "concept": "b",
+      "state": "essay",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Because I Can Is Only Half the Answer"
+      ],
+      "articleStart": 408.234375,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 15
+    },
+    {
+      "engine": "webkit",
+      "device": "desktop",
+      "concept": "b",
+      "state": "technical",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Setting Up an AI-Native Dev Environment"
+      ],
+      "articleStart": 587.171875,
+      "brokenImages": [],
+      "codeFontSize": 13,
+      "codeBlocks": 12,
+      "paragraphs": 48,
+      "codeContrast": 13.902030638718562
+    },
+    {
+      "engine": "webkit",
+      "device": "desktop",
+      "concept": "b",
+      "state": "series",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Spec-Driven Development with Multi-Agent Orchestration"
+      ],
+      "articleStart": 631.28125,
+      "brokenImages": [],
+      "codeFontSize": 13,
+      "codeBlocks": 1,
+      "paragraphs": 43
+    },
+    {
+      "engine": "webkit",
+      "device": "desktop",
+      "concept": "c",
+      "state": "home",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Explore the writing"
+      ],
+      "articleStart": null,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 0
+    },
+    {
+      "engine": "webkit",
+      "device": "desktop",
+      "concept": "c",
+      "state": "essay",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Because I Can Is Only Half the Answer"
+      ],
+      "articleStart": 421.359375,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 15
+    },
+    {
+      "engine": "webkit",
+      "device": "desktop",
+      "concept": "c",
+      "state": "technical",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Setting Up an AI-Native Dev Environment"
+      ],
+      "articleStart": 477.140625,
+      "brokenImages": [],
+      "codeFontSize": 13,
+      "codeBlocks": 12,
+      "paragraphs": 48,
+      "codeContrast": 13.902030638718562
+    },
+    {
+      "engine": "webkit",
+      "device": "desktop",
+      "concept": "c",
+      "state": "series",
+      "width": 1440,
+      "height": 960,
+      "overflow": 0,
+      "h1": [
+        "Spec-Driven Development with Multi-Agent Orchestration"
+      ],
+      "articleStart": 521.25,
+      "brokenImages": [],
+      "codeFontSize": 13,
+      "codeBlocks": 1,
+      "paragraphs": 43
+    },
+    {
+      "engine": "webkit",
+      "device": "phone",
+      "concept": "a",
+      "state": "home",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Essays by Nino Chavez"
+      ],
+      "articleStart": null,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 0
+    },
+    {
+      "engine": "webkit",
+      "device": "phone",
+      "concept": "a",
+      "state": "essay",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Because I Can Is Only Half the Answer"
+      ],
+      "articleStart": 444.296875,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 15
+    },
+    {
+      "engine": "webkit",
+      "device": "phone",
+      "concept": "a",
+      "state": "technical",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Setting Up an AI-Native Dev Environment"
+      ],
+      "articleStart": 634,
+      "brokenImages": [],
+      "codeFontSize": 12,
+      "codeBlocks": 12,
+      "paragraphs": 48,
+      "codeContrast": 13.902030638718562
+    },
+    {
+      "engine": "webkit",
+      "device": "phone",
+      "concept": "a",
+      "state": "series",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Spec-Driven Development with Multi-Agent Orchestration"
+      ],
+      "articleStart": 768.3125,
+      "brokenImages": [],
+      "codeFontSize": 12,
+      "codeBlocks": 1,
+      "paragraphs": 43
+    },
+    {
+      "engine": "webkit",
+      "device": "phone",
+      "concept": "b",
+      "state": "home",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Because I Can Is Only Half the Answer"
+      ],
+      "articleStart": null,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 0
+    },
+    {
+      "engine": "webkit",
+      "device": "phone",
+      "concept": "b",
+      "state": "essay",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Because I Can Is Only Half the Answer"
+      ],
+      "articleStart": 444.296875,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 15
+    },
+    {
+      "engine": "webkit",
+      "device": "phone",
+      "concept": "b",
+      "state": "technical",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Setting Up an AI-Native Dev Environment"
+      ],
+      "articleStart": 634,
+      "brokenImages": [],
+      "codeFontSize": 12,
+      "codeBlocks": 12,
+      "paragraphs": 48,
+      "codeContrast": 13.902030638718562
+    },
+    {
+      "engine": "webkit",
+      "device": "phone",
+      "concept": "b",
+      "state": "series",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Spec-Driven Development with Multi-Agent Orchestration"
+      ],
+      "articleStart": 768.3125,
+      "brokenImages": [],
+      "codeFontSize": 12,
+      "codeBlocks": 1,
+      "paragraphs": 43
+    },
+    {
+      "engine": "webkit",
+      "device": "phone",
+      "concept": "c",
+      "state": "home",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Explore the writing"
+      ],
+      "articleStart": null,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 0
+    },
+    {
+      "engine": "webkit",
+      "device": "phone",
+      "concept": "c",
+      "state": "essay",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Because I Can Is Only Half the Answer"
+      ],
+      "articleStart": 443.296875,
+      "brokenImages": [],
+      "codeFontSize": null,
+      "codeBlocks": 0,
+      "paragraphs": 15
+    },
+    {
+      "engine": "webkit",
+      "device": "phone",
+      "concept": "c",
+      "state": "technical",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Setting Up an AI-Native Dev Environment"
+      ],
+      "articleStart": 627,
+      "brokenImages": [],
+      "codeFontSize": 12,
+      "codeBlocks": 12,
+      "paragraphs": 48,
+      "codeContrast": 13.902030638718562
+    },
+    {
+      "engine": "webkit",
+      "device": "phone",
+      "concept": "c",
+      "state": "series",
+      "width": 390,
+      "height": 844,
+      "overflow": 0,
+      "h1": [
+        "Spec-Driven Development with Multi-Agent Orchestration"
+      ],
+      "articleStart": 761.3125,
+      "brokenImages": [],
+      "codeFontSize": 12,
+      "codeBlocks": 1,
+      "paragraphs": 43
+    }
+  ]
+}

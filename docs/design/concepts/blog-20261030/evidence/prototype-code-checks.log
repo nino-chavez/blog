@@ -1,0 +1,13 @@
+PASS chromium desktop a: readable code and subject-query reset
+PASS chromium desktop b: readable code and subject-query reset
+PASS chromium desktop c: readable code and subject-query reset
+PASS chromium phone a: readable code and subject-query reset
+PASS chromium phone b: readable code and subject-query reset
+PASS chromium phone c: readable code and subject-query reset
+PASS webkit desktop a: readable code and subject-query reset
+PASS webkit desktop b: readable code and subject-query reset
+PASS webkit desktop c: readable code and subject-query reset
+PASS webkit phone a: readable code and subject-query reset
+PASS webkit phone b: readable code and subject-query reset
+PASS webkit phone c: readable code and subject-query reset
+PASS 12 rendered states across Chromium and WebKit, with readable-code and subject checks for all three concepts.

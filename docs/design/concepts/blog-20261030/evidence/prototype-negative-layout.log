@@ -1,0 +1,17 @@
+node:internal/modules/run_main:111
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: chromium desktop a home: overflow 560
+    at file:///Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/docs/design/concepts/blog-20261030/check-prototype.mjs:31:18
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at process.processImmediate (node:internal/timers:541:9) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v26.10.0

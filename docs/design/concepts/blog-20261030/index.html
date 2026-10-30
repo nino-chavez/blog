@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Signal Dispatch — design comparison</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="data.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="comparison" aria-label="Design comparison">
+    <a class="comparison-title" href="?concept=a&view=home">Blog directions</a>
+    <nav class="concept-choices" aria-label="Choose a design">
+      <a href="?concept=a" data-concept="a">A <span>Journal</span></a>
+      <a href="?concept=b" data-concept="b">B <span>Reading index</span></a>
+      <a href="?concept=c" data-concept="c">C <span>Subject library</span></a>
+    </nav>
+    <label class="state-label">View <select id="review-state"><option value="home">Browse</option><option value="essay">Essay</option><option value="technical">Technical article</option><option value="series">Series article</option></select></label>
+  </div>
+  <p class="comparison-note" id="comparison-note"></p>
+  <div id="app"></div>
+  <div id="announcer" class="sr-only" aria-live="polite"></div>
+</body>
+</html>
