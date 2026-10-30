@@ -1,0 +1,30 @@
+{
+  "dispatch_id": "4d74a920-7b7a-4607-b687-45d3e1535f43",
+  "selected_route": {
+    "model": "gpt-5.6-terra",
+    "reasoning_effort": "high",
+    "tier": "implementation"
+  },
+  "runtime_evidence": {
+    "child_thread_id": "01a18e3f-36f6-74e2-990a-dccf81f78cc3",
+    "event_conflicts": {
+      "child_thread_id": [],
+      "model": [],
+      "reasoning_effort": []
+    },
+    "event_status": "found",
+    "executable": "/opt/homebrew/bin/codex",
+    "metadata_paths": [
+      "/Users/nino/.codex/sessions/2026/10/30/rollout-2026-10-30T14-17-49-01a18e3f-36f6-74e2-990a-dccf81f78cc3.jsonl"
+    ],
+    "metadata_status": "bounded_prefix",
+    "reported_model": "gpt-5.6-terra",
+    "reported_reasoning_effort": "high",
+    "status": "completed"
+  },
+  "output_capture": {
+    "bytes": 3644,
+    "sha256": "1b56ac8a49eddc0e46418b4a707069e5322f2d0cc90a901b1575d144019fe76b",
+    "status": "present"
+  }
+}

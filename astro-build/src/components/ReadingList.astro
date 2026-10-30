@@ -1,77 +1,33 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-
-interface Props {
-  posts: CollectionEntry<'blog'>[];
-  currentId?: string;
-}
-
-const { posts, currentId } = Astro.props;
-const PAGE_SIZE = 12;
-const currentIndex = posts.findIndex((post) => post.id === currentId);
-const initialPage = currentIndex >= 0 ? Math.floor(currentIndex / PAGE_SIZE) + 1 : 1;
-const formatDate = (date: Date | string) => new Date(date).toLocaleDateString('en-US', {
-  month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC',
-});
-const pageCount = Math.max(1, Math.ceil(posts.length / PAGE_SIZE));
+import { CANONICAL_TAGS } from '../config/tags';
+interface Props { posts: CollectionEntry<'blog'>[]; subject?: string; }
+const { posts, subject = '' } = Astro.props;
+const initial = subject ? posts.filter(post => post.data.tags?.includes(subject)) : posts;
+const formatDate = (date: Date | string) => new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const labels = Object.fromEntries(Object.entries(CANONICAL_TAGS).map(([key, value]) => [key, value.label]));
 ---
-
-<details class="reading-list" id="choose-another-post" data-current-id={currentId} open>
-  <summary>
-    <span>Choose another post</span>
-    <small>{posts.length} titles · search and archive pages</small>
-  </summary>
-  <div class="reading-list__panel">
-    <div class="reading-list__heading">
-      <h2>All posts</h2>
-      <span data-reading-count>{posts.length} posts</span>
-    </div>
-    <form class="reading-list__search" action="/blog/archive" method="get">
-      <label for="reading-list-query">Search titles, descriptions, and tags</label>
-      <div>
-        <input id="reading-list-query" name="q" type="search" autocomplete="off" />
-        <button type="submit">Search</button>
-      </div>
-      <p data-reading-filter hidden></p>
-    </form>
-    <ol data-reading-rows>
-      {posts.map((post, index) => (
-        <li
-          data-reading-row
-          data-slug={post.id}
-          id={`post-${post.id}`}
-          data-title={post.data.title.toLowerCase()}
-          data-description={(post.data.excerpt || '').toLowerCase()}
-          data-tags={(post.data.tags || []).join(' ').toLowerCase()}
-          data-index={index}
-          class:list={{ 'is-current': post.id === currentId }}
-        >
-          <time datetime={new Date(post.data.publishedAt).toISOString()}>{formatDate(post.data.publishedAt)}</time>
-          <a
-            href={`/blog/${post.id}?from=${encodeURIComponent(post.id)}&page=${Math.floor(index / PAGE_SIZE) + 1}`}
-            aria-current={post.id === currentId ? 'page' : undefined}
-            data-reading-link
-            data-slug={post.id}
-          >{post.data.title}</a>
-          {post.id === currentId && <span class="reading-list__current">Reading now</span>}
-        </li>
-      ))}
-    </ol>
-    <p class="reading-list__empty" data-reading-empty hidden>No posts match this search. <a href="/blog/archive#choose-another-post">Show all posts</a>.</p>
-    <nav class="reading-list__pages" aria-label="Archive pages" data-reading-pages>
-      <a href={`/blog/archive?page=${Math.max(1, initialPage - 1)}#choose-another-post`} data-reading-previous hidden={initialPage <= 1}>← Previous page</a>
-      <span data-reading-page-status>Page {initialPage} of {pageCount}</span>
-      <a href={`/blog/archive?page=${Math.min(initialPage + 1, pageCount)}#choose-another-post`} data-reading-next hidden={initialPage >= pageCount}>Next page →</a>
-    </nav>
-    <p class="reading-list__utility"><button type="button" data-search-trigger>Search all writing</button></p>
-  </div>
-</details>
-
-<noscript>
-  <p>All posts are available in the list. Use your browser’s Find command to search their titles.</p>
-  <style is:inline>.reading-list__search, .reading-list__pages, .reading-list__utility { display: none; }</style>
-</noscript>
-
-<script>
-  import '../scripts/reading-list';
-</script>
+<section class="reading-list" id="choose-another-post" data-reading-list data-subject={subject} data-subject-labels={JSON.stringify(labels)} aria-label="Essay archive">
+  <form class="reading-list__search" action="/blog/archive" method="get" role="search">
+    <label for="reading-list-query">Search essays</label>
+    <div><input id="reading-list-query" name="q" type="search" placeholder="Title, subject, or phrase" autocomplete="off" /><button type="submit">Search</button></div>
+    <input type="hidden" name="subject" value={subject} data-reading-subject />
+  </form>
+  <div class="reading-list__heading"><p data-reading-count role="status">{initial.length} essays</p><p data-reading-filter hidden></p></div>
+  <ol data-reading-rows>
+    {posts.map((post, index) => <li data-reading-row data-slug={post.id} id={`post-${post.id}`} data-title={post.data.title.toLowerCase()} data-description={(post.data.excerpt || '').toLowerCase()} data-tags={JSON.stringify(post.data.tags || [])} hidden={subject ? !post.data.tags?.includes(subject) : false}>
+      <h2><a href={`/blog/${post.id}?from=${encodeURIComponent(post.id)}&page=${Math.floor(index / 12) + 1}${subject ? `&subject=${encodeURIComponent(subject)}` : ''}`} data-reading-link data-slug={post.id}>{post.data.title}</a></h2>
+      {post.data.excerpt && <p class="reading-list__excerpt">{post.data.excerpt}</p>}
+      <div class="essay-meta"><time datetime={new Date(post.data.publishedAt).toISOString()}>{formatDate(post.data.publishedAt)}</time><span>{Math.max(1, Math.ceil((post.body?.split(/\s+/).length || 0) / 200))} min read</span></div>
+    </li>)}
+  </ol>
+  <div class="reading-list__empty" data-reading-empty hidden><h2>No essays found</h2><p>Try a different word, or return to all essays.</p><a href="/blog/archive#choose-another-post">Clear filters</a></div>
+  <nav class="reading-list__pages" aria-label="Archive pages" data-reading-pages>
+    <a href="/blog/archive?page=1#choose-another-post" data-reading-previous hidden>Previous page</a>
+    <span data-reading-page-status>Page 1 of {Math.max(1, Math.ceil(initial.length / 12))}</span>
+    <a href="/blog/archive?page=2#choose-another-post" data-reading-next hidden={initial.length <= 12}>Next page</a>
+  </nav>
+  <p class="reading-list__utility">Looking beyond essays? <button type="button" data-search-trigger>Search all writing</button></p>
+</section>
+<noscript><p>All essays in this subject are listed. Use your browser’s Find command to search them.</p><style is:inline>.reading-list__search,.reading-list__pages,.reading-list__utility{display:none}</style></noscript>
+<script>import '../scripts/reading-list';</script>

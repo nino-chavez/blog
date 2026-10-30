@@ -1,0 +1,18 @@
+
+> astro-build@0.0.1 test:post-api
+> node --test scripts/check-post-api.test.mjs
+
+✔ accepts runtime routing without static JSON (105.6ms)
+✔ rejects retained static JSON without logging private names or content (105.736834ms)
+✔ rejects a broad static exclusion overriding the runtime route (101.078333ms)
+✔ rejects missing routes (98.28325ms)
+✔ rejects a route that never invokes the post endpoint (100.2185ms)
+✔ routing keeps static pages out of the Worker without excluding the JSON endpoint (104.063167ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 724.120541

@@ -252,54 +252,7 @@
   display: block;
 }
 
-/* Publication masthead: compact and usable, with no ornamental subtitle. */
-:is(.publication-theme, .article-theme) .signal-dispatch-header {
-  border-color: var(--publication-rule) !important;
-  background: var(--publication-ground) !important;
-}
-
-:is(.publication-theme, .article-theme) .signal-dispatch-header nav > div {
-  min-height: 68px;
-}
-
-:is(.publication-theme, .article-theme) .signal-dispatch-header a > span:first-child {
-  color: var(--publication-action) !important;
-  font-family: 'Inter Variable', Inter, system-ui, sans-serif;
-  font-size: 1.05rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-}
-
-:is(.publication-theme, .article-theme) .signal-dispatch-header a > span:last-child {
-  display: none;
-}
-
-:is(.publication-theme, .article-theme) .signal-dispatch-header a,
-:is(.publication-theme, .article-theme) .signal-dispatch-header summary,
-:is(.publication-theme, .article-theme) .signal-dispatch-header button {
-  border-radius: 0 !important;
-  color: var(--publication-muted) !important;
-}
-
-:is(.publication-theme, .article-theme) .signal-dispatch-header a:hover,
-:is(.publication-theme, .article-theme) .signal-dispatch-header a:focus-visible,
-:is(.publication-theme, .article-theme) .signal-dispatch-header summary:hover,
-:is(.publication-theme, .article-theme) .signal-dispatch-header summary:focus-visible {
-  color: var(--publication-text) !important;
-}
-
-:is(.publication-theme, .article-theme) .signal-dispatch-header a[class*="bg-zinc"],
-:is(.publication-theme, .article-theme) .signal-dispatch-header summary[class*="bg-zinc"] {
-  border-bottom: 2px solid var(--publication-action);
-  background: transparent !important;
-}
-
-:is(.publication-theme, .article-theme) .more-dropdown > div {
-  border: 1px solid var(--publication-rule) !important;
-  border-radius: 0 !important;
-  background: var(--publication-surface) !important;
-  box-shadow: 0 14px 34px rgb(14 25 40 / 0.14) !important;
-}
+/* The shared masthead is styled by SiteHeader.astro. */
 
 /* Compact collection openings. */
 .publication-theme main > section:first-of-type {

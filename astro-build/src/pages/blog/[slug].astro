@@ -7,8 +7,9 @@ import { generateArticleSchema, generateBreadcrumbSchema } from '../../utils/sch
 import ReadingProgress from '../../components/ReadingProgress';
 import SeriesNav from '../../components/SeriesNav.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
-import ReadingList from '../../components/ReadingList.astro';
+import ArticleCode from '../../components/ArticleCode.astro';
 import ReadingNavigation from '../../components/ReadingNavigation.astro';
+import { CANONICAL_TAGS, type CanonicalTag } from '../../config/tags';
 import { featureImageSrcset, featureImageSizes } from '../../utils/feature-image';
 import '../../styles/article.css';
 import '../../styles/reading-list.css';
@@ -58,7 +59,10 @@ const readingPosts = allPosts
 const relatedPosts = readingPosts
   .filter((p) => p.id !== post.id && p.data.category === post.data.category)
   .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime())
-  .slice(0, 3);
+  .slice(0, 2);
+
+const seriesInfo = post.data.series ? (await getCollection('series')).find(entry => entry.id === post.data.series!.slug) : undefined;
+const seriesLength = post.data.series ? readingPosts.filter(entry => entry.data.series?.slug === post.data.series!.slug).length : 0;
 
 // Check if this post has been challenged by a counterpoint
 const counterpoints = await getCollection('counterpoints');
@@ -83,11 +87,11 @@ const challengingCounterpoint = counterpoints.find(
   <!-- Reading Progress Bar -->
   <ReadingProgress client:idle variant="article" />
 
-  <main class="article-page">
-    <SiteHeader currentPage="blog" variant="article" />
-    <div class="reading-shell">
-      <aside class="reading-sidebar"><ReadingList posts={readingPosts} currentId={post.id} /></aside>
-      <div class="reading-stage">
+  <a class="skip-publication" href="#main">Skip to content</a>
+  <SiteHeader currentPage="blog" variant="article" />
+  <main id="main" class="article-page" tabindex="-1">
+    <div class="essay-reader">
+      <p class="reading-back"><a href={`/blog/archive?page=${Math.floor(readingPosts.findIndex(entry => entry.id === post.id) / 12) + 1}&from=${encodeURIComponent(post.id)}#post-${post.id}`} data-reading-back>All essays</a></p>
     <article data-pagefind-body>
       <header class="article-opening article-opening--reading">
         <div class="article-intro">
@@ -98,7 +102,7 @@ const challengingCounterpoint = counterpoints.find(
             <span>
               By{' '}
               {post.data.author === 'Nino Chavez' ? (
-                <a href="/about">Nino Chavez</a>
+                <a href="/about" target="_blank" rel="noopener noreferrer">Nino Chavez<span class="sr-only"> (opens in a new tab)</span></a>
               ) : (
                 post.data.author
               )}
@@ -111,29 +115,15 @@ const challengingCounterpoint = counterpoints.find(
 
       </header>
 
-      <ReadingNavigation posts={readingPosts} currentId={post.id} label="Read another post" />
 
       <div class="article-layout">
         <aside class="article-margin">
-          {post.data.author === 'Nino Chavez' && (
-            <div class="article-margin-note">
-              <p>Signal Dispatch</p>
-              <span>By Nino Chavez</span>
-              <a href="/about">About Nino</a>
-            </div>
-          )}
           <TableOfContents headings={headings} variant="article" collapsed />
         </aside>
 
         <div>
           <div class="article-before-reading" data-pagefind-ignore>
-            {post.data.series && (
-              <SeriesNav
-                seriesSlug={post.data.series.slug}
-                currentPosition={post.data.series.position}
-                variant="article"
-              />
-            )}
+            {post.data.series && seriesInfo && <aside class="article-series-context"><span>Part {post.data.series.position} of {seriesLength}</span><a href={`/blog/series/${post.data.series.slug}`}>{seriesInfo.data.title}</a></aside>}
 
             {challengingCounterpoint && (
               <a href={`/blog/counterpoints/${challengingCounterpoint.id}`} class="article-counterpoint group block p-4 rounded-xl border no-print">
@@ -162,7 +152,7 @@ const challengingCounterpoint = counterpoints.find(
           </div>
 
           <div class:list={['article-content', 'prose', { 'article-content--image-credit': startsWithImageCredit }]}>
-            <Content />
+            <Content components={{ pre: ArticleCode }} />
           </div>
 
         {post.data.featureImage && (() => {
@@ -184,12 +174,13 @@ const challengingCounterpoint = counterpoints.find(
         })()}
 
           <div class="article-support" data-pagefind-ignore>
+            {post.data.series && <SeriesNav seriesSlug={post.data.series.slug} currentPosition={post.data.series.position} variant="article" />}
             {post.data.tags && post.data.tags.length > 0 && (
               <div class="article-context">
                 <div class="article-tags">
                   {post.data.tags.map((tag) => (
                     <a href={`/blog/tags/${encodeURIComponent(tag)}`}>
-                      {tag}
+                      {CANONICAL_TAGS[tag as CanonicalTag]?.label || tag}
                     </a>
                   ))}
                 </div>
@@ -265,7 +256,7 @@ const challengingCounterpoint = counterpoints.find(
         </div>
       </div>
       <div class="reading-end">
-        <p>Continue reading</p>
+        <h2>Continue reading</h2>
         <ReadingNavigation posts={readingPosts} currentId={post.id} label="Continue reading" />
 
       </div>
@@ -274,7 +265,7 @@ const challengingCounterpoint = counterpoints.find(
     {relatedPosts.length > 0 && (
       <section class="article-related no-print">
           <h2>More in {post.data.category}</h2>
-          <div class="grid gap-6 md:grid-cols-3">
+          <div class="grid gap-6 md:grid-cols-2">
             {relatedPosts.map((related) => (
               <a href={`/blog/${related.id}`} class="group block">
                 <article class="article-related-card h-full p-5 rounded-xl border transition-all duration-200">
@@ -298,10 +289,7 @@ const challengingCounterpoint = counterpoints.find(
       </section>
     )}
 
-        <details class="writing-more"><summary>More writing</summary><ul><li><a href="/blog/series">Series</a></li><li><a href="/blog/fiction">Fiction</a></li><li><a href="/blog/tutorials">Tutorials</a></li><li><a href="/blog/whitepapers">Whitepapers</a></li><li><a href="/blog/presentations">Presentations</a></li><li><a href="/blog/counterpoints">Counterpoints</a></li><li><a href="/blog/tags">Tags</a></li></ul></details>
-      </div>
     </div>
-
-    <SiteFooter />
   </main>
+  <SiteFooter />
 </BaseLayout>

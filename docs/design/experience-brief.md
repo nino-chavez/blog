@@ -80,4 +80,10 @@ Draft and unlisted content is excluded. No subscription, account, saved-post sys
 
 ## Decision and implementation boundary
 
-Render and inspect all three concepts before asking Nino to choose. Record his selection by name, preserve rejected candidates, and review them for useful details to carry into the winner. Production implementation follows that selection. No selection has been made yet.
+Nino selected **A + C** on October 30, 2026: “combine a and c.” This resolves the direction choice and authorizes production implementation.
+
+The combined direction uses A's editorial lead and focused article, with C's subject-based discovery. Recent writing appears first. Below it, illustrated article choices sit beside links to existing subjects; the archive supports a visible subject selection alongside search. Articles retain a quiet route back to the same list and query. Subject and contents context must not compete with the opening argument.
+
+Retain A's bounded reading measure, compact metadata, and related reading after the essay. Retain C's recognizable topic links, original artwork, dates, and grouped title/excerpt. Retain B's useful behavior—clear selection and reliable return state—without its persistent post index. All three original concepts remain available as the decision record.
+
+The native Astro implementation preserves every published route, all writing formats, publication status, canonical metadata, Pagefind, feeds, the content API, and reading without JavaScript. Profile and photography links open in new tabs. The existing October 26 navigation document will be updated to distinguish these retained contracts from the superseded split layout.

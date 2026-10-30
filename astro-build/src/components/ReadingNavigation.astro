@@ -1,19 +1,18 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-interface Props {
-  posts: CollectionEntry<'blog'>[];
-  currentId: string;
-  label: string;
-}
+interface Props { posts: CollectionEntry<'blog'>[]; currentId: string; label: string; }
 const { posts, currentId, label } = Astro.props;
-const index = posts.findIndex((post) => post.id === currentId);
+const index = posts.findIndex(post => post.id === currentId);
 const page = Math.floor(Math.max(0, index) / 12) + 1;
 const newer = index > 0 ? posts[index - 1] : undefined;
 const older = index >= 0 ? posts[index + 1] : undefined;
 const href = (post: CollectionEntry<'blog'>) => `/blog/${post.id}?from=${encodeURIComponent(currentId)}&page=${page}`;
+const entries = posts.map(post => ({ slug: post.id, title: post.data.title, description: post.data.excerpt || '', tags: post.data.tags || [] }));
 ---
-<p class="reading-back"><a href={`/blog/archive?page=${page}&from=${encodeURIComponent(currentId)}#post-${currentId}`} data-reading-back>Back to all posts</a></p>
-<nav class="reading-neighbors" aria-label={label}>
-  <div data-reading-neighbor="newer" hidden={!newer}>{newer && <><span>Newer post</span><a href={href(newer)}>{newer.data.title}</a></>}</div>
-  <div data-reading-neighbor="older" hidden={!older}>{older && <><span>Older post</span><a href={href(older)}>{older.data.title}</a></>}</div>
+<p class="reading-back"><a href={`/blog/archive?page=${page}&from=${encodeURIComponent(currentId)}#post-${currentId}`} data-reading-back>All essays</a></p>
+<nav class="reading-neighbors" aria-label={label} data-reading-context data-current-id={currentId}>
+  <div data-reading-neighbor="newer" hidden={!newer}>{newer && <><span>Newer essay</span><a href={href(newer)}>{newer.data.title}</a></>}</div>
+  <div data-reading-neighbor="older" hidden={!older}>{older && <><span>Older essay</span><a href={href(older)}>{older.data.title}</a></>}</div>
+  <script is:inline type="application/json" data-reading-index set:html={JSON.stringify(entries).replaceAll('<', '\\u003c')} />
 </nav>
+<script>import '../scripts/reading-list';</script>

@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content';
+import { CANONICAL_TAGS, type CanonicalTag } from '../config/tags';
+interface Props { active?: string; all?: boolean; }
+const { active = '', all = false } = Astro.props;
+const used = new Set((await getCollection('blog', ({ data }) => data.status === 'published')).filter(post => post.id !== 'archive').flatMap(post => post.data.tags || []));
+const featured = (['ai-development', 'agentic-systems', 'leadership', 'architecture', 'commerce', 'photography'] as CanonicalTag[]).filter(tag => used.has(tag));
+const remaining = (Object.keys(CANONICAL_TAGS) as CanonicalTag[]).filter(tag => used.has(tag) && !featured.includes(tag));
+---
+<nav class="subject-nav" aria-label="Browse by subject">
+  <h2>Browse by subject</h2>
+  <div class="subject-nav__links">
+    <a href="/blog/archive" aria-current={!active && all ? 'page' : undefined}>All essays</a>
+    {featured.map(tag => <a href={`/blog/tags/${tag}`} data-subject={tag} aria-current={active === tag ? 'page' : undefined}>{CANONICAL_TAGS[tag].label}</a>)}
+  </div>
+  {all ? <details class="subject-nav__more" open={remaining.includes(active as CanonicalTag)}><summary>More subjects</summary><div class="subject-nav__links">{remaining.map(tag => <a href={`/blog/tags/${tag}`} data-subject={tag} aria-current={active === tag ? 'page' : undefined}>{CANONICAL_TAGS[tag].label}</a>)}</div></details> : <a class="subject-nav__all" href="/blog/tags">All subjects</a>}
+</nav>

@@ -1,6 +1,6 @@
 # Signal Dispatch: three structures to choose from
 
-**Decision pending.** Nino requested the same rethink used for the profile site. These are working concepts, not a production redesign. The recommended direction is **A — Journal**: show enough writing to make a choice, then give the chosen essay a focused reading page.
+**Selected: A + C.** Nino chose “combine a and c” on October 30, 2026. The combined direction is recorded in the experience brief. These original concepts remain the comparison record. The initial recommendation was **A — Journal**: show enough writing to make a choice, then give the chosen essay a focused reading page.
 
 | Direction | Reader's path | Main tradeoff |
 | --- | --- | --- |
@@ -14,7 +14,7 @@ The same source writing, current publication palette, and existing article artwo
 
 ## What the screens support
 
-The live archive places the latest full essay beside the post chooser. It combines two jobs: finding something to read and reading it. The live article also places an older-post promotion before the opening paragraph. The concepts separate or reduce those competing elements while retaining the publication identity, dates, search, and a clear route to more writing.
+The October 30 baseline archive places the latest full essay beside the post chooser. It combines two jobs: finding something to read and reading it. The baseline article also places an older-post promotion before the opening paragraph. The concepts separate or reduce those competing elements while retaining the publication identity, dates, search, and a clear route to more writing.
 
 The recommendation is a design judgment, not a measured usability result. A provides a clear entrance for a new visitor and a focused page for a shared article. B is useful for readers repeatedly moving through a known archive. C supports interest-led discovery. If A is selected, C's subject discovery is worth carrying into the archive; B's explicit selected-post and return-state behavior should survive in every direction.
 
@@ -39,12 +39,20 @@ The parent personally inspected the baseline and all twelve home/article concept
 
 ## Verification and limits
 
-- The unchanged production Astro build passed, including its normal content, Pagefind, route, sitemap, and caption checks. It reports existing review notices; this does not mean every historical essay or caption was editorially reviewed in this task.
+- Before the production port, the unchanged Astro build passed, including its normal content, Pagefind, route, sitemap, and caption checks. It reports existing review notices; this does not mean every historical essay or caption was editorially reviewed in this task.
 - The prototype passed 48 rendered states: three directions, four content states, two viewport sizes, and Chromium plus WebKit. Reading checks cover filtered return with the original row focused, no-results recovery, pagination, browser Back, and phone access to Fiction.
 - The post-commit code review passed and identified two minor direct-link defects. Both were fixed: out-of-range pages use the displayed page for pagination, and uncaptured essays show their own title and live destination. Unknown essays now show an explicit recovery state. Focused checks cover these cases in all twelve browser, viewport, and direction combinations.
 - Technical checks cover all twelve source code blocks, a minimum 12px code font, and at least 4.5:1 code contrast. A focused rerun covers code rendering and clearing a hidden search query when changing subjects.
 - The overflow check was deliberately made to fail by injecting a 2000px minimum page width. The contrast check first failed at 1.22:1 before the fix. Passing checks therefore have observed failure cases.
 - Captures are 1440 × 960 and 390 × 844 browser viewports. They are browser evidence, not a claim of physical-phone testing. Product captures hide only the comparison toolbar and its explanatory note.
-- The prototype is JavaScript rendered. The production port must preserve native Astro articles and existing no-JavaScript reading, all writing formats, search integration, metadata, and canonical routes. Those contracts have not been ported or revalidated yet.
+- The prototype is JavaScript rendered. The production port must preserve native Astro articles and existing no-JavaScript reading, all writing formats, search integration, metadata, and canonical routes. Those contracts are retained in the native production port described below.
 
-The accepted direction still needs to be named by Nino. After selection, record it in the experience brief, carry over useful details from the rejected concepts, implement the native Astro pages, and obtain a new cold review of the finished production build before merging.
+## Native A + C implementation
+
+The selected combination is implemented in native Astro. The home page leads with a recent essay and illustrated choices; subjects lead to the existing tag routes. The archive is dedicated to choosing a piece. Original article URLs open complete essays in a focused column, with a compact series link above the text and full series navigation after it.
+
+The production checks cover Chromium and WebKit at 1440, 390 and 320px widths: filtered reading, subject search, original-result return and keyboard focus, reload and browser Back, empty results, page boundaries, code, series, original canonical URLs, Pagefind, seven writing-format routes, phone menus, feeds, and no-JavaScript reading. All twelve code blocks in the technical reference pass the normal-text contrast check. Six rendered reference article texts match the baseline, excluding the new code-scroll UI captions; no content source file changed. The home, archive and subject directory expose 316 publication destinations that resolve in the build.
+
+A fresh cold reviewer passed the home, archive, essay openings and series screens, and identified three smaller defects. The parent confirmed each one: missing code-scroll affordance, a lone continuation link stranded in the right column, and page status remaining in an empty result. `native-review.md` preserves the findings and dispositions. The corresponding code, end-of-essay and empty-result captures in `evidence/combined/` show the corrections.
+
+The original three concepts remain a comparison record. The production direction and navigation contracts are owned by `DIRECTION.md` and `docs/site-navigation.md`. Local browser checks and cold model review do not claim physical-device or screen-reader testing.

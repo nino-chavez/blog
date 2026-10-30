@@ -1,0 +1,7 @@
+PASS chromium 1440: browsing, focused reading, filters, return focus, code and series
+PASS chromium 390: browsing, focused reading, filters, return focus, code and series
+PASS chromium 320: browsing, focused reading, filters, return focus, code and series
+PASS webkit 1440: browsing, focused reading, filters, return focus, code and series
+PASS webkit 390: browsing, focused reading, filters, return focus, code and series
+PASS webkit 320: browsing, focused reading, filters, return focus, code and series
+PASS all publication reading checks.

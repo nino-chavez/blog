@@ -1,0 +1,36 @@
+{
+  "sourceContentFilesChanged": 0,
+  "comparison": "Whitespace-normalized article text; excludes the new code-scroll UI captions, not the code itself.",
+  "nativeRenderedText": [
+    {
+      "slug": "because-i-can-is-only-half-the-answer",
+      "articleText": "identical",
+      "characters": 4138
+    },
+    {
+      "slug": "setting-up-an-ai-native-dev-environment",
+      "articleText": "identical",
+      "characters": 10434
+    },
+    {
+      "slug": "spec-driven-development-with-multi-agent-orchestration",
+      "articleText": "identical",
+      "characters": 7765
+    },
+    {
+      "slug": "the-hire-who-never-remembers",
+      "articleText": "identical",
+      "characters": 8690
+    },
+    {
+      "slug": "the-rules-of-the-road-still-apply",
+      "articleText": "identical",
+      "characters": 8818
+    },
+    {
+      "slug": "trying-to-teach-an-ai-how-i-edit-photos",
+      "articleText": "identical",
+      "characters": 7093
+    }
+  ]
+}
