@@ -10,6 +10,7 @@ const out = path.resolve(process.argv[4] ?? 'outputs/blog-rethink-20261030/conce
 fs.mkdirSync(out, { recursive: true });
 const results = [];
 const codeOnly = process.argv.includes('--code-only');
+const edgeOnly = process.argv.includes('--edge-only');
 const latest = 'because-i-can-is-only-half-the-answer';
 const technical = 'setting-up-an-ai-native-dev-environment';
 const series = 'spec-driven-development-with-multi-agent-orchestration';
@@ -22,6 +23,27 @@ for (const [engineName, engine] of [['chromium', chromium], ['webkit', webkit]])
       const errors = [];
       page.on('pageerror', error => errors.push(error.message));
       for (const concept of ['a', 'b', 'c']) {
+        if (edgeOnly) {
+          await page.goto(`${base}/?concept=${concept}&view=archive&page=999`, { waitUntil: 'networkidle' });
+          const totalPages = await page.evaluate(() => Math.ceil(window.BLOG_DATA.posts.length / 12));
+          assert.match(await page.getByRole('navigation', { name: 'Archive pages' }).innerText(), new RegExp(`Page ${totalPages} of ${totalPages}`));
+          assert.ok((await page.getByRole('link', { name: 'Previous page', exact: true }).getAttribute('href')).includes(`page=${totalPages - 1}`));
+          assert.equal(await page.getByRole('link', { name: 'Next page', exact: true }).count(), 0);
+          const uncaptured = await page.evaluate(() => { const p = window.BLOG_DATA.posts.find(p => !p.html); return { slug: p.slug, title: p.title, url: p.url }; });
+          await page.goto(`${base}/?concept=${concept}&view=article&post=${uncaptured.slug}`);
+          assert.equal(await page.locator('#main h1').innerText(), uncaptured.title);
+          assert.ok((await page.title()).endsWith(uncaptured.title));
+          const liveLink = page.getByRole('link', { name: 'Read this essay on the current site', exact: false });
+          assert.equal(await liveLink.getAttribute('href'), uncaptured.url);
+          assert.equal(await liveLink.getAttribute('target'), '_blank');
+          assert.equal(await page.locator('.article-prose').count(), 0);
+          await page.goto(`${base}/?concept=${concept}&view=article&post=no-such-essay`);
+          assert.equal(await page.getByRole('heading', { name: 'Essay not found', exact: true }).count(), 1);
+          assert.equal(await page.locator('.article-prose').count(), 0);
+          results.push({ engine: engineName, device, concept, state: 'direct-link recovery' });
+          console.log(`PASS ${engineName} ${device} ${concept}: archive bounds, uncaptured essay, unknown essay`);
+          continue;
+        }
         for (const [view, suffix] of [['home', 'view=home'], ['essay', `view=article&post=${latest}`], ['technical', `view=article&post=${technical}`], ['series', `view=article&post=${series}`]]) {
           if (codeOnly && view !== 'technical') continue;
           await page.goto(`${base}/?concept=${concept}&${suffix}`, { waitUntil: 'networkidle' });
@@ -95,5 +117,5 @@ for (const [engineName, engine] of [['chromium', chromium], ['webkit', webkit]])
     }
   } finally { await browser.close(); }
 }
-fs.writeFileSync(path.join(out, codeOnly ? 'code-checks.json' : 'checks.json'), JSON.stringify({ passed: true, cases: results }, null, 2));
-console.log(`PASS ${results.length} rendered states across Chromium and WebKit, with ${codeOnly ? 'readable-code and subject checks' : 'reading-loop checks'} for all three concepts.`);
+fs.writeFileSync(path.join(out, edgeOnly ? 'edge-checks.json' : codeOnly ? 'code-checks.json' : 'checks.json'), JSON.stringify({ passed: true, cases: results }, null, 2));
+console.log(`PASS ${results.length} ${edgeOnly ? 'direct-link configurations' : 'rendered states'} across Chromium and WebKit, with ${edgeOnly ? 'archive-bound and article-recovery checks' : codeOnly ? 'readable-code and subject checks' : 'reading-loop checks'} for all three concepts.`);
