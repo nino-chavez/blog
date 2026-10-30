@@ -1,0 +1,66 @@
+{
+  "testAudio": "8-second quiet synthetic tone, not narration",
+  "results": [
+    {
+      "engine": "chromium",
+      "width": 1440,
+      "state": "play, pause, seek; no overflow; no autoplay"
+    },
+    {
+      "engine": "chromium",
+      "width": 1440,
+      "state": "failed audio leaves transcript and direct link usable"
+    },
+    {
+      "engine": "chromium",
+      "width": 390,
+      "state": "play, pause, seek; no overflow; no autoplay"
+    },
+    {
+      "engine": "chromium",
+      "width": 390,
+      "state": "failed audio leaves transcript and direct link usable"
+    },
+    {
+      "engine": "chromium",
+      "width": 320,
+      "state": "play, pause, seek; no overflow; no autoplay"
+    },
+    {
+      "engine": "chromium",
+      "width": 320,
+      "state": "failed audio leaves transcript and direct link usable"
+    },
+    {
+      "engine": "webkit",
+      "width": 1440,
+      "state": "play, pause, seek; no overflow; no autoplay"
+    },
+    {
+      "engine": "webkit",
+      "width": 1440,
+      "state": "failed audio leaves transcript and direct link usable"
+    },
+    {
+      "engine": "webkit",
+      "width": 390,
+      "state": "play, pause, seek; no overflow; no autoplay"
+    },
+    {
+      "engine": "webkit",
+      "width": 390,
+      "state": "failed audio leaves transcript and direct link usable"
+    },
+    {
+      "engine": "webkit",
+      "width": 320,
+      "state": "play, pause, seek; no overflow; no autoplay"
+    },
+    {
+      "engine": "webkit",
+      "width": 320,
+      "state": "failed audio leaves transcript and direct link usable"
+    }
+  ],
+  "staleSourceAndReplacedAudio": "rejected"
+}

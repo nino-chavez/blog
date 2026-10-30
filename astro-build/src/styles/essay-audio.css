@@ -1,0 +1,17 @@
+.essay-audio {
+  margin: 0 0 28px;
+  padding: 0 0 24px;
+  border-bottom: 1px solid rgb(18 42 60 / .22);
+  color: #122a3c;
+  font: 13px/1.55 'Inter Variable', system-ui, sans-serif;
+}
+.essay-audio__heading { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.essay-audio__heading h2 { margin: 0; font: 600 15px/1.5 'Inter Variable', system-ui, sans-serif; }
+.essay-audio__heading span { color: #536373; font-variant-numeric: tabular-nums; }
+.essay-audio p { margin: 5px 0 14px; color: #536373; }
+.essay-audio [hidden] { display: none; }
+.essay-audio audio { display: block; width: 100%; min-width: 0; height: 44px; color-scheme: light; }
+.essay-audio__footer { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0 16px; margin-top: 5px; color: #536373; font-size: 12px; }
+.essay-audio a { display: inline-flex; align-items: center; min-height: 44px; color: #0d5a93; text-decoration: underline; text-underline-offset: 3px; }
+.essay-audio :focus-visible { outline: 2px solid #0d5a93; outline-offset: 3px; }
+@media print { .essay-audio { display: none; } }

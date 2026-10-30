@@ -28,6 +28,16 @@ const blogCollection = defineCollection({
     category: z.string().optional(),
     featured: z.boolean().default(false),
     featureImage: z.string().optional(),
+    // Add only after the author has heard and approved this exact recording.
+    // scripts/check-listen-audio.mjs checks the file and source fingerprints.
+    audio: z.object({
+      status: z.literal('approved'),
+      src: z.string().regex(/^\/blog\/audio\/[a-z0-9-]+\.mp3$/),
+      durationSeconds: z.number().positive(),
+      narrator: z.string().min(1),
+      sha256: z.string().regex(/^[a-f0-9]{64}$/),
+      sourceSha256: z.string().regex(/^[a-f0-9]{64}$/),
+    }).optional(),
     // Reader payoff — one plain sentence naming what the reader can do, decide, or
     // check afterward. Required for content published on/after the reader-contract
     // effective date; enforced by scripts/check-takeaway.mjs, not by this schema,

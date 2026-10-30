@@ -36,3 +36,9 @@ The profile and photography site retain their own styles and navigation. Their l
 The July 2026 rail, coral treatment and category-palette discussion described an older rendered site. The October 26 split reading layout is also superseded for the surfaces above. Their historical records remain in Git history; they do not authorize rebuilding those devices into this direction. Specialized content outside the scoped pages is not adjudicated by this record.
 
 Review the rendered page, not this document, when judging hierarchy, readability or completion. Test evidence and cold-review dispositions are recorded beside the comparison artifacts.
+
+## Listen feature — preserve the reading surface
+
+The affected surfaces are the native essay opening on desktop and phone, its optional audio controls, and a local listening room for author review. Keep the selected Journal typography, column width, byline and article prose. An approved recording sits below the byline and before the contents and opening paragraph. Native controls support play, pause and seeking without JavaScript or autoplay. State that the narration uses an AI version of the author's voice; the essay supplies the transcript.
+
+Unapproved recordings remain outside Astro's source and public directories. The local listening room is bound to this computer and is never a published route. Only the author's approval of the actual recording permits adding public audio metadata and assets.

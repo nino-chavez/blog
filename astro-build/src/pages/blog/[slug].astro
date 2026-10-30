@@ -9,6 +9,7 @@ import SeriesNav from '../../components/SeriesNav.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 import ArticleCode from '../../components/ArticleCode.astro';
 import ReadingNavigation from '../../components/ReadingNavigation.astro';
+import EssayAudio from '../../components/EssayAudio.astro';
 import { CANONICAL_TAGS, type CanonicalTag } from '../../config/tags';
 import { featureImageSrcset, featureImageSizes } from '../../utils/feature-image';
 import '../../styles/article.css';
@@ -50,6 +51,11 @@ const wordCount = post.body?.split(/\s+/).length || 0;
 const readingTime = Math.ceil(wordCount / 200);
 // An existing source disclosure is image context, rather than the essay's opening argument.
 const startsWithImageCredit = /^\s*\*Feature image:/.test(post.body || '');
+// The private listening room verifies that its transcript is this exact build.
+const essayDigest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify({
+  title: post.data.title, author: post.data.author, body: (post.body || '').trim(),
+})));
+const essaySourceSha256 = Array.from(new Uint8Array(essayDigest), (byte) => byte.toString(16).padStart(2, '0')).join('');
 
 // Get related posts (same category, excluding current)
 const allPosts = await getCollection('blog', ({ data }) => data.status === 'published');
@@ -114,7 +120,7 @@ const challengingCounterpoint = counterpoints.find(
 
 
       </header>
-
+      <div data-essay-audio-slot data-essay-source={essaySourceSha256}>{post.data.audio && <EssayAudio audio={post.data.audio} title={post.data.title} />}</div>
 
       <div class="article-layout">
         <aside class="article-margin">
