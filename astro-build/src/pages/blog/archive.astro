@@ -1,52 +1,22 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
+import SubjectNav from '../../components/SubjectNav.astro';
 import ReadingList from '../../components/ReadingList.astro';
-import ReadingNavigation from '../../components/ReadingNavigation.astro';
 import { generateBlogSchema, generateWebsiteSchema } from '../../utils/schema';
 import '../../styles/article.css';
 import '../../styles/reading-list.css';
-
 export const prerender = true;
-
-const posts = (await getCollection('blog', ({ data }) => data.status === 'published'))
-  .filter((post) => post.id !== 'archive')
-  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
-const current = posts[0];
-const { Content } = await render(current);
-const publishedDate = new Date(current.data.publishedAt);
+const posts = (await getCollection('blog', ({ data }) => data.status === 'published')).filter(post => post.id !== 'archive').sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
 ---
-
-<BaseLayout
-  title="Essays — Signal Dispatch"
-  description="Browse Signal Dispatch essays by title, description, or tag while reading the latest post."
-  jsonLd={[generateWebsiteSchema(), generateBlogSchema(posts)]}
-  theme="article"
->
-  <main class="article-page reading-page">
-    <SiteHeader currentPage="blog" variant="article" />
-    <div class="reading-shell">
-      <aside class="reading-sidebar"><ReadingList posts={posts} currentId={current.id} /></aside>
-      <div class="reading-stage">
-        <!-- Search indexes the article at its own URL, without duplicate archive results. -->
-        <article>
-          <header class="article-opening article-opening--reading">
-            <div class="article-intro">
-              <p class="article-category">Latest essay</p>
-              <h1 class="article-title">{current.data.title}</h1>
-              {current.data.excerpt && <p class="article-excerpt">{current.data.excerpt}</p>}
-              <div class="article-byline"><span>By <a href="/about">Nino Chavez</a></span><time datetime={publishedDate.toISOString()}>{publishedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time></div>
-            </div>
-          </header>
-          <ReadingNavigation posts={posts} currentId={current.id} label="Read another post" />
-          <div class="article-layout"><aside class="article-margin"><p class="article-margin-note"><a href="/blog">Signal Dispatch</a></p></aside><div class="article-content prose"><Content /></div></div>
-          <ReadingNavigation posts={posts} currentId={current.id} label="Continue reading" />
-        </article>
-        <details class="writing-more"><summary>More writing</summary><ul><li><a href="/blog/series">Series</a></li><li><a href="/blog/fiction">Fiction</a></li><li><a href="/blog/tutorials">Tutorials</a></li><li><a href="/blog/whitepapers">Whitepapers</a></li><li><a href="/blog/presentations">Presentations</a></li><li><a href="/blog/counterpoints">Counterpoints</a></li><li><a href="/blog/tags">Tags</a></li></ul></details>
-      </div>
-    </div>
-    <SiteFooter />
+<BaseLayout title="All essays — Signal Dispatch" description="Browse recent essays, explore a subject, or find a post you remember." jsonLd={[generateWebsiteSchema(), generateBlogSchema(posts)]} theme="article">
+  <a class="skip-publication" href="#main">Skip to content</a>
+  <SiteHeader currentPage="blog" variant="article" />
+  <main id="main" class="essay-archive" tabindex="-1">
+    <header class="archive-opening"><h1>All essays</h1><p>Browse the writing, or find a post you remember.</p></header>
+    <div class="archive-layout"><aside><SubjectNav all /></aside><ReadingList posts={posts} /></div>
   </main>
+  <SiteFooter />
 </BaseLayout>

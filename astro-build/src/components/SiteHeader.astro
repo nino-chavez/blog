@@ -1,72 +1,51 @@
 ---
 import SearchModal from './SearchModal.astro';
-
 interface Props {
   currentPage?: 'blog' | 'series' | 'tags' | 'whitepapers' | 'presentations' | 'tutorials' | 'fiction' | 'counterpoints' | 'research' | 'about';
   variant?: 'article';
 }
-
 const { currentPage } = Astro.props;
-const primary = [
-  { href: '/blog/archive', label: 'All posts', id: 'blog' },
-  { href: '/blog/series', label: 'Series', id: 'series' },
-  { href: '/blog/fiction', label: 'Fiction', id: 'fiction' },
-];
-const more = [
-  { href: '/blog/whitepapers', label: 'Whitepapers', id: 'whitepapers' },
-  { href: '/blog/presentations', label: 'Presentations', id: 'presentations' },
-  { href: '/blog/tutorials', label: 'Tutorials', id: 'tutorials' },
-  { href: '/blog/counterpoints', label: 'Counterpoints', id: 'counterpoints' },
-  { href: '/blog/tags', label: 'Tags', id: 'tags' },
-];
+const path = Astro.url.pathname.replace(/\/index\.html$/, '').replace(/\.html$/, '').replace(/\/$/, '');
+const primary = [{ href: '/blog/archive', label: 'All essays', id: 'blog' }, { href: '/blog/series', label: 'Series', id: 'series' }, { href: '/blog/fiction', label: 'Fiction', id: 'fiction' }];
+const more = [{ href: '/blog/tutorials', label: 'Tutorials', id: 'tutorials' }, { href: '/blog/whitepapers', label: 'Whitepapers', id: 'whitepapers' }, { href: '/blog/presentations', label: 'Presentations', id: 'presentations' }, { href: '/blog/counterpoints', label: 'Counterpoints', id: 'counterpoints' }, { href: '/blog/tags', label: 'All subjects', id: 'tags' }];
 ---
-
 <header class="signal-dispatch-header">
   <nav class="signal-dispatch-header__inner" aria-label="Signal Dispatch">
-    <a href="/blog" class="signal-dispatch-header__name" aria-current={currentPage === 'blog' ? 'page' : undefined}>Signal Dispatch</a>
+    <a href="/blog" class="signal-dispatch-header__name" aria-current={path === '/blog' ? 'page' : undefined}>Signal Dispatch</a>
     <div class="signal-dispatch-header__links">
-      {primary.map((link) => <a href={link.href} aria-current={currentPage === link.id ? 'page' : undefined}>{link.label}</a>)}
-      <details>
-        <summary><span class="desktop-label">More writing</span><span class="mobile-label">Sections</span></summary>
-        <div class="signal-dispatch-header__more">
-          {primary.map((link) => <a class="mobile-section" href={link.href} aria-current={currentPage === link.id ? 'page' : undefined}>{link.label}</a>)}
-          {more.map((link) => <a href={link.href} aria-current={currentPage === link.id ? 'page' : undefined}>{link.label}</a>)}
-        </div>
-      </details>
-      <button type="button" data-search-trigger>Search all writing</button>
-      <a href="/blog/rss.xml">RSS</a>
+      {primary.map(link => <a class:list={{ 'desktop-fiction': link.id === 'fiction' }} href={link.href} aria-current={currentPage === link.id && (link.id !== 'blog' || path === '/blog/archive') ? 'page' : undefined}>{link.label}</a>)}
+      <details><summary>More writing <span aria-hidden="true">⌄</span></summary><div class="signal-dispatch-header__more"><a class="mobile-fiction" href="/blog/fiction">Fiction</a>{more.map(link => <a href={link.href} aria-current={currentPage === link.id ? 'page' : undefined}>{link.label}</a>)}</div></details>
+      <button type="button" data-search-trigger><svg width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.75" stroke="currentColor" stroke-width="1.6"/><path d="m13 13 4.5 4.5" stroke="currentColor" stroke-width="1.6"/></svg>Search</button>
     </div>
   </nav>
 </header>
-
 <SearchModal />
-
 <style>
-  .signal-dispatch-header { border-bottom: 1px solid rgb(18 42 60 / .24); background: #f4f0e8; color: #122a3c; }
-  .signal-dispatch-header__inner { width: min(1360px, calc(100% - 64px)); min-height: 72px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-  .signal-dispatch-header a, .signal-dispatch-header button, .signal-dispatch-header summary { color: #122a3c; font: 600 .78rem/1.4 'Inter Variable', Inter, system-ui, sans-serif; text-decoration: none; }
-  .signal-dispatch-header__name { font-family: Georgia, 'Times New Roman', serif !important; font-size: 1.3rem !important; font-weight: 700 !important; letter-spacing: -.03em; }
-  .signal-dispatch-header__links { display: flex; align-items: center; gap: 1.15rem; }
-  .signal-dispatch-header__links > a, .signal-dispatch-header button, .signal-dispatch-header summary { min-height: 44px; display: inline-flex; align-items: center; cursor: pointer; }
-  .signal-dispatch-header button { padding: 0; border: 0; background: transparent; }
-  .signal-dispatch-header a:hover, .signal-dispatch-header button:hover, .signal-dispatch-header summary:hover { color: #0d5a93; }
-  .signal-dispatch-header a[aria-current] { text-decoration: underline; text-underline-offset: .28em; }
-  .signal-dispatch-header details { position: relative; }
-  .signal-dispatch-header summary { list-style: none; }
-  .signal-dispatch-header summary::-webkit-details-marker { display: none; }
-  .signal-dispatch-header__more { position: absolute; z-index: 10; right: 0; top: calc(100% - 4px); width: 160px; padding: .45rem; border: 1px solid rgb(18 42 60 / .24); background: #fbf8f1; box-shadow: 0 8px 18px rgb(18 42 60 / .12); }
-  .signal-dispatch-header__more a { display: block; padding: .55rem .65rem; }
-  .signal-dispatch-header .mobile-label, .signal-dispatch-header__more .mobile-section { display: none; }
-  .signal-dispatch-header :focus-visible { outline: 2px solid #0d5a93; outline-offset: 3px; }
-  @media (max-width: 760px) {
-    .signal-dispatch-header__inner { width: min(100% - 32px, 600px); min-height: 88px; display: grid; grid-template-columns: 1fr auto; gap: 0 1rem; }
-    .signal-dispatch-header__name { grid-area: 1 / 1; font-size: 1.13rem !important; }
-    .signal-dispatch-header__links { display: contents; }
-    .signal-dispatch-header__links > a:not(:last-child), .signal-dispatch-header .desktop-label { display: none; }
-    .signal-dispatch-header__links button { grid-area: 1 / 2; font-size: .72rem; }
-    .signal-dispatch-header__links details { grid-area: 2 / 1; }
-    .signal-dispatch-header__links > a:last-child { grid-area: 2 / 2; justify-self: end; }
-    .signal-dispatch-header .mobile-label, .signal-dispatch-header__more .mobile-section { display: block; }
-    .signal-dispatch-header__more { left: 0; right: auto; }
+  .signal-dispatch-header { border-bottom:1px solid rgb(18 42 60 / .22); background:#fbf8f1; color:#122a3c; }
+  .signal-dispatch-header__inner { width:min(1180px,calc(100% - 80px)); min-height:86px; margin:auto; display:flex; align-items:center; justify-content:space-between; gap:28px; }
+  .signal-dispatch-header a,.signal-dispatch-header button,.signal-dispatch-header summary { color:#122a3c; font:400 14px/1.4 'Inter Variable',system-ui,sans-serif; text-decoration:none; }
+  .signal-dispatch-header .signal-dispatch-header__name { font:700 30px/1.05 Georgia,serif; letter-spacing:-1.1px; white-space:nowrap; }
+  .signal-dispatch-header__links { display:flex; align-items:center; gap:26px; }
+  .signal-dispatch-header__links>a,.signal-dispatch-header button,.signal-dispatch-header summary { display:inline-flex; align-items:center; min-height:44px; padding:8px 0; cursor:pointer; }
+  .signal-dispatch-header button { gap:7px; border:0; background:transparent; color:#0d5a93; }
+  .signal-dispatch-header a:hover,.signal-dispatch-header summary:hover { color:#0d5a93; }
+  .signal-dispatch-header__links a[aria-current] { color:#0d5a93; text-decoration:underline; text-underline-offset:6px; }
+  .signal-dispatch-header details { position:relative; }
+  .signal-dispatch-header summary { list-style:none; gap:7px; }
+  .signal-dispatch-header summary::-webkit-details-marker { display:none; }
+  .signal-dispatch-header__more { position:absolute; z-index:50; right:0; top:100%; min-width:185px; padding:8px; border:1px solid rgb(18 42 60 / .22); background:#fbf8f1; box-shadow:0 5px 18px rgb(18 42 60 / .08); }
+  .signal-dispatch-header__more a { display:flex; align-items:center; min-height:44px; padding:9px 12px; }
+  .signal-dispatch-header__more .mobile-fiction { display:none; }
+  .signal-dispatch-header :focus-visible { outline:2px solid #0d5a93; outline-offset:3px; }
+  @media(max-width:1000px) { .signal-dispatch-header__inner { width:calc(100% - 56px); } .signal-dispatch-header__links { gap:18px; } }
+  @media(max-width:760px) {
+    .signal-dispatch-header__inner { width:calc(100% - 44px); padding:18px 0 5px; display:block; }
+    .signal-dispatch-header .signal-dispatch-header__name { font-size:28px; }
+    .signal-dispatch-header__links { justify-content:space-between; gap:12px; margin-top:9px; }
+    .signal-dispatch-header__links>a,.signal-dispatch-header button,.signal-dispatch-header summary { font-size:12px; }
+    .signal-dispatch-header__links>.desktop-fiction { display:none; }
+    .signal-dispatch-header__more .mobile-fiction { display:flex; }
+    .signal-dispatch-header button svg { width:14px; }
   }
+  @media(max-width:370px) { .signal-dispatch-header__inner { width:calc(100% - 36px); } }
 </style>

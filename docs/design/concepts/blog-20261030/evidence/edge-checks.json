@@ -1,0 +1,77 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "engine": "chromium",
+      "device": "desktop",
+      "concept": "a",
+      "state": "direct-link recovery"
+    },
+    {
+      "engine": "chromium",
+      "device": "desktop",
+      "concept": "b",
+      "state": "direct-link recovery"
+    },
+    {
+      "engine": "chromium",
+      "device": "desktop",
+      "concept": "c",
+      "state": "direct-link recovery"
+    },
+    {
+      "engine": "chromium",
+      "device": "phone",
+      "concept": "a",
+      "state": "direct-link recovery"
+    },
+    {
+      "engine": "chromium",
+      "device": "phone",
+      "concept": "b",
+      "state": "direct-link recovery"
+    },
+    {
+      "engine": "chromium",
+      "device": "phone",
+      "concept": "c",
+      "state": "direct-link recovery"
+    },
+    {
+      "engine": "webkit",
+      "device": "desktop",
+      "concept": "a",
+      "state": "direct-link recovery"
+    },
+    {
+      "engine": "webkit",
+      "device": "desktop",
+      "concept": "b",
+      "state": "direct-link recovery"
+    },
+    {
+      "engine": "webkit",
+      "device": "desktop",
+      "concept": "c",
+      "state": "direct-link recovery"
+    },
+    {
+      "engine": "webkit",
+      "device": "phone",
+      "concept": "a",
+      "state": "direct-link recovery"
+    },
+    {
+      "engine": "webkit",
+      "device": "phone",
+      "concept": "b",
+      "state": "direct-link recovery"
+    },
+    {
+      "engine": "webkit",
+      "device": "phone",
+      "concept": "c",
+      "state": "direct-link recovery"
+    }
+  ]
+}

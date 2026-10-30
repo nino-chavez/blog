@@ -1,0 +1,16 @@
+---
+const props = Astro.props;
+---
+<figure class="article-code-block">
+  <figcaption data-pagefind-ignore><span>Code</span><span>Scroll sideways if needed</span></figcaption>
+  <pre {...props} tabindex="0" role="region" aria-label="Code example"><slot /></pre>
+</figure>
+<script>
+  document.querySelectorAll<HTMLPreElement>('.article-code-block pre').forEach(block => {
+    block.addEventListener('keydown', event => {
+      if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || !['ArrowLeft', 'ArrowRight'].includes(event.key) || block.scrollWidth <= block.clientWidth) return;
+      event.preventDefault();
+      block.scrollLeft += event.key === 'ArrowRight' ? 64 : -64;
+    });
+  });
+</script>

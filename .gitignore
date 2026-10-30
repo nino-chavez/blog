@@ -63,3 +63,6 @@ Thumbs.db
 
 # Blueprint smoke-test screenshots — dev artifacts, regenerable
 /blueprint/_design/smoke-tests/
+
+# Blog rethink run logs and generated captures; selected evidence lives in docs/design
+/outputs/blog-rethink-20261030/

@@ -1,0 +1,1313 @@
+
+> astro-build@0.0.1 build
+> node scripts/check-feature-images.mjs && node scripts/check-takeaway.mjs && astro build && npx pagefind --site dist && node scripts/optimize-routes.mjs && node scripts/check-post-api.mjs && node scripts/check-sitemap.mjs && npm run reader:check && npm run captions:check
+
+[check-feature-images] 286 referenced images, all have a 600w sibling
+
+[check-takeaway] 1 piece(s) — read each takeaway against its own opening.
+  Does the first 150 words carry that point? If the reader stops there, do they have it?
+
+  src/content/blog/because-i-can-is-only-half-the-answer.mdx
+    takeaway: Expanded ability gives you more ways to contribute; desire and judgment help you choose where to put it.
+    opens:    I’ve described a lot of what I do at 630 Volleyball as “because I can.” It’s a useful shorthand, but it leaves out the choice. I want to put my time and ability into the club, and I make a judgment about where they can be useful. It’s a calculated decision about where desire and ability meet. Genera…
+
+[check-takeaway] ok
+(node:76089) [DEP0205] DeprecationWarning: `module.register()` is deprecated. Use `module.registerHooks()` instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+14:25:00 [@astrojs/cloudflare] Enabling sessions with Cloudflare KV with the "SESSION" KV binding.
+14:25:00 [@astrojs/cloudflare] If you see the error "Invalid binding `SESSION`" in your build output, you need to add the binding to your wrangler config file.
+14:25:00 [WARN] [adapter] Cloudflare does not support sharp at runtime. However, you can configure `imageService: "compile"` to optimize images with sharp on prerendered pages during build time.
+14:25:00 [content] Syncing content
+14:25:00 [content] Synced content
+14:25:00 [types] Generated 242ms
+14:25:00 [build] output: "server"
+14:25:00 [build] mode: "server"
+14:25:00 [build] directory: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/dist/
+14:25:00 [build] adapter: @astrojs/cloudflare
+14:25:00 [build] Collecting build info...
+14:25:00 [build] ✓ Completed in 263ms.
+14:25:00 [build] Building server entrypoints...
+14:25:00 [WARN] [vite] [plugin vite:resolve] Automatically externalized node built-in module "node:fs" imported from "src/lib/og-card.ts". Consider adding it to environments.ssr.external if it is intended.
+14:25:00 [WARN] [vite] [plugin vite:resolve] Automatically externalized node built-in module "node:path" imported from "src/lib/og-card.ts". Consider adding it to environments.ssr.external if it is intended.
+14:25:08 [vite] ✓ built in 8.14s
+14:25:08 [build] ✓ Completed in 8.16s.
+
+ building client (vite) 
+14:25:08 [vite] transforming...
+14:25:08 [vite] ✓ 49 modules transformed.
+14:25:09 [vite] rendering chunks...
+14:25:09 [vite] computing gzip size...
+14:25:09 [vite] dist/_astro/ReadingNavigation.astro_astro_type_script_index_0_lang.BpiP2y18.js    0.07 kB │ gzip:  0.09 kB
+14:25:09 [vite] dist/_astro/jsx-runtime.D_zvdyIk.js                                               0.73 kB │ gzip:  0.46 kB
+14:25:09 [vite] dist/_astro/ReadingProgress.NDnAxkQT.js                                           0.91 kB │ gzip:  0.58 kB
+14:25:09 [vite] dist/_astro/ReadingList.astro_astro_type_script_index_0_lang.D-z1iJGJ.js          3.39 kB │ gzip:  1.41 kB
+14:25:09 [vite] dist/_astro/presentations.Cf5HkJ4F.js                                             7.41 kB │ gzip:  2.41 kB
+14:25:09 [vite] dist/_astro/index.Cd_vQiNd.js                                                     7.85 kB │ gzip:  3.05 kB
+14:25:09 [vite] dist/_astro/client.BLUn-lwI.js                                                  186.62 kB │ gzip: 58.46 kB
+14:25:09 [vite] ✓ built in 520ms
+
+ prerendering static routes 
+14:25:09 ▶ src/pages/about.astro
+14:25:09   └─ /about.html (+6ms) 
+14:25:09 λ src/pages/blog/api/content-index.json.ts
+14:25:09   └─ /blog/api/content-index.json (+15ms) 
+14:25:09 λ src/pages/blog/api/posts.json.ts
+14:25:09   └─ /blog/api/posts.json (+5ms) 
+14:25:09 ▶ src/pages/blog/archive.astro
+14:25:09   └─ /blog/archive.html (+27ms) 
+14:25:09 ▶ src/pages/blog/counterpoints/[slug].astro
+14:25:09   ├─ /blog/counterpoints/process-beats-inspection.html (+8ms) 
+14:25:09   ├─ /blog/counterpoints/structural-discontinuities-metering-phase.html (+4ms) 
+14:25:09   ├─ /blog/counterpoints/five-months-later-the-evidence-showed-up.html (+4ms) 
+14:25:09   └─ /blog/counterpoints/the-bifurcation-under-stress.html (+6ms) 
+14:25:09 ▶ src/pages/blog/counterpoints/index.astro
+14:25:09   └─ /blog/counterpoints.html (+2ms) 
+14:25:09 ▶ src/pages/blog/fiction/[slug].astro
+14:25:09   ├─ /blog/fiction/the-cup.html (+2ms) 
+14:25:09   ├─ /blog/fiction/the-neck.html (+2ms) 
+14:25:09   ├─ /blog/fiction/the-bell.html (+2ms) 
+14:25:09   ├─ /blog/fiction/the-fig.html (+1ms) 
+14:25:09   ├─ /blog/fiction/the-room.html (+1ms) 
+14:25:09   ├─ /blog/fiction/the-song.html (+2ms) 
+14:25:09   ├─ /blog/fiction/the-supper.html (+2ms) 
+14:25:09   ├─ /blog/fiction/the-page.html (+1ms) 
+14:25:09   ├─ /blog/fiction/the-window.html (+1ms) 
+14:25:09   └─ /blog/fiction/the-word.html (+1ms) 
+14:25:09 ▶ src/pages/blog/fiction/index.astro
+14:25:09   └─ /blog/fiction.html (+1ms) 
+14:25:09 λ src/pages/blog/full-content-rss.xml.ts
+14:25:09   └─ /blog/full-content-rss.xml (+3ms) 
+14:25:09 λ src/pages/blog/llms.txt.ts
+14:25:09   └─ /blog/llms.txt (+3ms) 
+14:25:09 ▶ src/pages/blog/presentations/[slug].astro
+14:25:09   ├─ /blog/presentations/beyond-chat-agentic-workflows.html (+9ms) 
+14:25:09   ├─ /blog/presentations/anatomy-of-ai-native-development.html (+5ms) 
+14:25:09   ├─ /blog/presentations/neuro-symbolic-convergence.html (+6ms) 
+14:25:09   ├─ /blog/presentations/investing-101-zoey.html (+7ms) 
+14:25:09   ├─ /blog/presentations/the-7-10-year-evolution-of-the-web.html (+6ms) 
+14:25:09   ├─ /blog/presentations/the-agentic-student.html (+6ms) 
+14:25:09   ├─ /blog/presentations/the-ai-analyst.html (+5ms) 
+14:25:09   ├─ /blog/presentations/the-cognitive-foundry.html (+4ms) 
+14:25:09   └─ /blog/presentations/the-cognitive-foundry-part-2.html (+5ms) 
+14:25:09 ▶ src/pages/blog/presentations/index.astro
+14:25:09   └─ /blog/presentations.html (+3ms) 
+14:25:09 ▶ src/pages/blog/private/[token]/[slug].astro
+14:25:09   └─ /blog/private/41fb78245d2b3f19/the-muscle-memory-of-expensive-things.html (+4ms) 
+14:25:09 λ src/pages/blog/rss.xml.ts
+14:25:09   └─ /blog/rss.xml (+13ms) 
+14:25:09 ▶ src/pages/blog/series/[slug].astro
+14:25:09   ├─ /blog/series/agentic-workflows-in-practice.html (+3ms) 
+14:25:09   ├─ /blog/series/from-prompt-to-pattern.html (+3ms) 
+14:25:09   ├─ /blog/series/grid-level-thinking.html (+3ms) 
+14:25:09   ├─ /blog/series/signal-reflex-launch.html (+2ms) 
+14:25:09   ├─ /blog/series/the-bifurcation.html (+2ms) 
+14:25:09   ├─ /blog/series/the-storefront.html (+2ms) 
+14:25:09   ├─ /blog/series/the-loom.html (+3ms) 
+14:25:09   ├─ /blog/series/the-talent-engine.html (+2ms) 
+14:25:09   └─ /blog/series/the-taste-test.html (+2ms) 
+14:25:09 ▶ src/pages/blog/series/index.astro
+14:25:09   └─ /blog/series.html (+2ms) 
+14:25:09 ▶ src/pages/blog/tags/[tag].astro
+14:25:09   ├─ /blog/tags/ai-development.html (+23ms) 
+14:25:09   ├─ /blog/tags/engineering.html (+22ms) 
+14:25:09   ├─ /blog/tags/ai-governance.html (+22ms) 
+14:25:09   ├─ /blog/tags/architecture.html (+21ms) 
+14:25:09   ├─ /blog/tags/consulting.html (+21ms) 
+14:25:09   ├─ /blog/tags/field-notes.html (+21ms) 
+14:25:09   ├─ /blog/tags/ai-workflows.html (+21ms) 
+14:25:09   ├─ /blog/tags/craft.html (+21ms) 
+14:25:09   ├─ /blog/tags/reflection.html (+21ms) 
+14:25:09   ├─ /blog/tags/agentic-systems.html (+21ms) 
+14:25:09   ├─ /blog/tags/leadership.html (+21ms) 
+14:25:09   ├─ /blog/tags/signal-dispatch.html (+21ms) 
+14:25:09   ├─ /blog/tags/deep-dive.html (+21ms) 
+14:25:09   ├─ /blog/tags/commerce.html (+21ms) 
+14:25:09   ├─ /blog/tags/career.html (+21ms) 
+14:25:09   ├─ /blog/tags/communication.html (+20ms) 
+14:25:09   ├─ /blog/tags/product-strategy.html (+21ms) 
+14:25:09   ├─ /blog/tags/change.html (+21ms) 
+14:25:09   ├─ /blog/tags/systems-thinking.html (+21ms) 
+14:25:09   ├─ /blog/tags/Consulting.html (+21ms) 
+14:25:09   ├─ /blog/tags/photography.html (+21ms) 
+14:25:09   ├─ /blog/tags/agentic-ai.html (+21ms) 
+14:25:09   ├─ /blog/tags/consulting-practice.html (+21ms) 
+14:25:09   ├─ /blog/tags/design-systems.html (+21ms) 
+14:25:10   ├─ /blog/tags/taste.html (+26ms) 
+14:25:10   ├─ /blog/tags/product-design.html (+21ms) 
+14:25:10   ├─ /blog/tags/local-first.html (+21ms) 
+14:25:10   ├─ /blog/tags/software-architecture.html (+21ms) 
+14:25:10   ├─ /blog/tags/ai-assisted-development.html (+21ms) 
+14:25:10   ├─ /blog/tags/design-references.html (+20ms) 
+14:25:10   ├─ /blog/tags/experimentation.html (+21ms) 
+14:25:10   ├─ /blog/tags/ai.html (+21ms) 
+14:25:10   ├─ /blog/tags/productivity.html (+21ms) 
+14:25:10   └─ /blog/tags/ai-agents.html (+21ms) 
+14:25:10 ▶ src/pages/blog/tags/index.astro
+14:25:10   └─ /blog/tags.html (+2ms) 
+14:25:10 ▶ src/pages/blog/tutorials/[slug].astro
+14:25:10   ├─ /blog/tutorials/ai-native-dev-environment.html (+6ms) 
+14:25:10   ├─ /blog/tutorials/audit-your-ai-coding-harness.html (+4ms) 
+14:25:10   ├─ /blog/tutorials/grade-an-agent-tool-before-you-install-it.html (+4ms) 
+14:25:10   ├─ /blog/tutorials/beyond-chat-workshop.html (+7ms) 
+14:25:10   ├─ /blog/tutorials/make-your-cli-agent-native.html (+8ms) 
+14:25:10   ├─ /blog/tutorials/measure-your-own-token-waste.html (+4ms) 
+14:25:10   ├─ /blog/tutorials/multi-account-instagram-publishing-graph-api.html (+6ms) 
+14:25:10   └─ /blog/tutorials/diff-your-spec-against-its-system-class.html (+3ms) 
+14:25:10 ▶ src/pages/blog/tutorials/index.astro
+14:25:10   └─ /blog/tutorials.html (+3ms) 
+14:25:10 ▶ src/pages/blog/whitepapers/[slug].astro
+14:25:10   ├─ /blog/whitepapers/big-blueprint-methodology.html (+3ms) 
+14:25:10   ├─ /blog/whitepapers/claim-classes.html (+3ms) 
+14:25:10   ├─ /blog/whitepapers/lie-surface.html (+3ms) 
+14:25:10   ├─ /blog/whitepapers/the-agentic-shift.html (+3ms) 
+14:25:10   ├─ /blog/whitepapers/the-agentic-student.html (+4ms) 
+14:25:10   ├─ /blog/whitepapers/the-ai-analyst-curriculum.html (+3ms) 
+14:25:10   ├─ /blog/whitepapers/the-algorithmic-consumer.html (+2ms) 
+14:25:10   ├─ /blog/whitepapers/the-amplified-mind.html (+3ms) 
+14:25:10   ├─ /blog/whitepapers/the-bifurcation-of-autonomy.html (+4ms) 
+14:25:10   ├─ /blog/whitepapers/the-cognitive-foundry-part-2.html (+4ms) 
+14:25:10   ├─ /blog/whitepapers/the-cognitive-foundry.html (+4ms) 
+14:25:10   ├─ /blog/whitepapers/the-dissolution-of-syntax.html (+4ms) 
+14:25:10   ├─ /blog/whitepapers/the-fourth-channel.html (+3ms) 
+14:25:10   ├─ /blog/whitepapers/the-neuro-symbolic-convergence.html (+4ms) 
+14:25:10   └─ /blog/whitepapers/the-sum-of-your-gaps.html (+2ms) 
+14:25:10 ▶ src/pages/blog/whitepapers/index.astro
+14:25:10   └─ /blog/whitepapers.html (+3ms) 
+14:25:10 ▶ src/pages/blog/[slug].astro
+14:25:10   ├─ /blog/50-of-ai-later-lessons-from-burning-credits-fast.html (+7ms) 
+14:25:10   ├─ /blog/aegis-framework-constitutional-crisis-we-declared-martial-law-on-ourselves.html (+4ms) 
+14:25:10   ├─ /blog/ai-ops-docs-as-contracts.html (+5ms) 
+14:25:10   ├─ /blog/agentic-software-isn-t-magic-it-s-a-new-interface-for-an-old-problem.html (+4ms) 
+14:25:10   ├─ /blog/22gb-to-2gb-video-compression-as-agentic-collaboration.html (+7ms) 
+14:25:10   ├─ /blog/am-i-ever-not-working.html (+4ms) 
+14:25:10   ├─ /blog/ai-wont-take-your-job-it-will-redefine-it-your-reskilling-starts-now.html (+5ms) 
+14:25:10   ├─ /blog/almost-flickday.html (+4ms) 
+14:25:10   ├─ /blog/ai-agents-need-a-cop.html (+4ms) 
+14:25:10   ├─ /blog/ai-isnt-a-bubble-its-infrastructure.html (+5ms) 
+14:25:10   ├─ /blog/becoming-the-copilot.html (+6ms) 
+14:25:10   ├─ /blog/beyond-the-copilot-architecting-for-autonomy-with-claude-sonnet-45.html (+4ms) 
+14:25:10   ├─ /blog/bts-why-we-had-to-slow-down-to-speed-up.html (+5ms) 
+14:25:10   ├─ /blog/bubble-vs-build-out-understanding-the-ai-moment.html (+5ms) 
+14:25:10   ├─ /blog/building-cages-for-ai-agents.html (+4ms) 
+14:25:10   ├─ /blog/can-vs-should.html (+5ms) 
+14:25:10   ├─ /blog/chatgpt-doesnt-eat-so-why-do-i-keep-asking-it-to-cook.html (+5ms) 
+14:25:10   ├─ /blog/coach-up-or-coach-out-what-i-look-for-early.html (+4ms) 
+14:25:10   ├─ /blog/coaching-without-coddling-how-i-support-high-potential-people-without-micromanaging.html (+5ms) 
+14:25:10   ├─ /blog/curation-is-not-composition.html (+5ms) 
+14:25:10   ├─ /blog/debunking-the-svelte-ai-myth-69-production-components-dont-lie.html (+7ms) 
+14:25:10   ├─ /blog/describe-the-pear.html (+4ms) 
+14:25:10   ├─ /blog/designing-for-environments-not-just-themes-a-volleyball-app-ux-case-study.html (+4ms) 
+14:25:10   ├─ /blog/designing-what-you-dont-build.html (+4ms) 
+14:25:10   ├─ /blog/did-you-hear-something.html (+4ms) 
+14:25:10   ├─ /blog/do-i-still-sound-like-me.html (+4ms) 
+14:25:10   ├─ /blog/do-you-smell-smoke.html (+5ms) 
+14:25:10   ├─ /blog/docs-as-code-isnt-enough-how-ai-ready-knowledge-layers-compress-weeks-of-work-into-hours.html (+4ms) 
+14:25:10   ├─ /blog/driving-while-not-driving.html (+5ms) 
+14:25:10   ├─ /blog/even-the-ai-is-confused.html (+4ms) 
+14:25:10   ├─ /blog/every-link-resolves-nothing-checks-the-number.html (+6ms) 
+14:25:10   ├─ /blog/experience-is-loud-turn-it-down-so-you-can-learn.html (+4ms) 
+14:25:10   ├─ /blog/field-notes-real-patterns-and-next-moves.html (+6ms) 
+14:25:10   ├─ /blog/fix-it-once-prevent-it-forever-how-i-made-a-dropdown-bug-impossible-to-reintroduce.html (+4ms) 
+14:25:10   ├─ /blog/from-aegis-to-specchain-when-governance-meets-reality.html (+7ms) 
+14:25:10   ├─ /blog/from-ai-copilot-to-ai-enforcer.html (+4ms) 
+14:25:10   ├─ /blog/from-fear-to-flow-my-accidental-journey-into-ai-powered-development.html (+4ms) 
+14:25:10   ├─ /blog/from-fear-to-flow.html (+4ms) 
+14:25:10   ├─ /blog/from-gsd-to-just-handle-it.html (+5ms) 
+14:25:10   ├─ /blog/from-pattern-to-people.html (+4ms) 
+14:25:10   ├─ /blog/from-prompt-to-product-building-demo-mode-in-week-2.html (+5ms) 
+14:25:10   ├─ /blog/from-qa-bottleneck-to-autonomous-confidence-how-i-built-a-fully-ai-driven-e2e-testing-framework.html (+4ms) 
+14:25:10   ├─ /blog/from-prompt-to-pattern.html (+5ms) 
+14:25:10   ├─ /blog/from-research-paper-to-working-toolkit-in-one-session.html (+6ms) 
+14:25:10   ├─ /blog/from-shutdown-to-speedrun.html (+5ms) 
+14:25:10   ├─ /blog/genai-os.html (+4ms) 
+14:25:10   ├─ /blog/grid-level-thinking-wasnt-the-plan.html (+6ms) 
+14:25:10   ├─ /blog/help-me-help-you-help-me.html (+5ms) 
+14:25:10   ├─ /blog/how-content-and-commerce-actually-connect-now.html (+5ms) 
+14:25:10   ├─ /blog/how-i-built-signal-reflex-in-a-week.html (+5ms) 
+14:25:10   ├─ /blog/how-i-structure-my-ai-workflows-to-support-real-thinking.html (+5ms) 
+14:25:10   ├─ /blog/how-i-use-ai-in-consulting-for-real.html (+4ms) 
+14:25:10   ├─ /blog/how-i-work-with-ais-and-why.html (+6ms) 
+14:25:10   ├─ /blog/how-i-wrote-living-in-the-comments.html (+4ms) 
+14:25:10   ├─ /blog/how-we-find-the-ones-who-just-get-it.html (+5ms) 
+14:25:10   ├─ /blog/i-built-a-site-just-to-see-if-i-still-could.html (+4ms) 
+14:25:10   ├─ /blog/i-configured-my-agent-to-agree-with-me.html (+5ms) 
+14:25:10   ├─ /blog/i-didnt-write-a-test-i-asked-the-system-to-reflect.html (+4ms) 
+14:25:10   ├─ /blog/i-dont-believe-the-agentic-ai-hype-and-heres-why-thats-not-ignorance.html (+5ms) 
+14:25:10   ├─ /blog/i-dont-want-to-be-a-10-person-team-of-one.html (+4ms) 
+14:25:10   ├─ /blog/i-dont-write-any-code.html (+5ms) 
+14:25:10   ├─ /blog/i-let-a-bunch-of-ai-agents-rebuild-my-app-heres-what-actually-worked.html (+4ms) 
+14:25:10   ├─ /blog/i-still-dont-really-know-jsx-and-i-dont-think-it-matters.html (+4ms) 
+14:25:10   ├─ /blog/i-wrote-the-rule-down-i-broke-it-anyway.html (+4ms) 
+14:25:10   ├─ /blog/if-the-storefront-is-dead-where-do-you-compete-now.html (+5ms) 
+14:25:10   ├─ /blog/intent-driven-engineering-by-the-numbers.html (+5ms) 
+14:25:10   ├─ /blog/is-chatgpt-doing-my-thinking-for-me.html (+4ms) 
+14:25:10   ├─ /blog/is-composable-just-ikea-for-commerce.html (+5ms) 
+14:25:10   ├─ /blog/is-python-the-new-assembly.html (+5ms) 
+14:25:10   ├─ /blog/is-resilience-a-systems-problem.html (+4ms) 
+14:25:10   ├─ /blog/its-the-artist-not-the-pen.html (+5ms) 
+14:25:10   ├─ /blog/its-time-for-the-cio-2-0.html (+4ms) 
+14:25:10   ├─ /blog/ive-been-doing-ai-coding-wrong-sort-of.html (+4ms) 
+14:25:10   ├─ /blog/just-in-time-software.html (+4ms) 
+14:25:10   ├─ /blog/leadership-reflection.html (+5ms) 
+14:25:10   ├─ /blog/living-in-the-comments.html (+4ms) 
+14:25:10   ├─ /blog/living-in-the-gap.html (+5ms) 
+14:25:10   ├─ /blog/llm-codegen-and-the-three-little-pigs.html (+4ms) 
+14:25:10   ├─ /blog/m-ai-engineering-team.html (+4ms) 
+14:25:10   ├─ /blog/moores-law-is-sputtering-so-whats-really-next-for-tech.html (+4ms) 
+14:25:10   ├─ /blog/muscle-memory-and-mental-atrophy.html (+4ms) 
+14:25:10   ├─ /blog/not-just-fast-but-together.html (+4ms) 
+14:25:10   ├─ /blog/no-room-for-tourists.html (+5ms) 
+14:25:10   ├─ /blog/nothing-broke-it-just-wasnt-there.html (+5ms) 
+14:25:10   ├─ /blog/observability-for-agent-commerce.html (+7ms) 
+14:25:10   ├─ /blog/on-clocks-and-truth.html (+4ms) 
+14:25:10   ├─ /blog/one-component-i-didnt-already-have.html (+5ms) 
+14:25:10   ├─ /blog/one-more-version.html (+4ms) 
+14:25:10   ├─ /blog/one-week-one-developer-one-production-system-how-i-used-ai-to-build-and-harden-the-lpo-bracket-manag.html (+5ms) 
+14:25:10   ├─ /blog/open-kitchen.html (+4ms) 
+14:25:10   ├─ /blog/overnight-dev-from-rage-quit-to-release-in-72-hours-with-ai-riding-shotgun.html (+5ms) 
+14:25:10   ├─ /blog/pay-no-attention-to-the-man-behind-the-curtain.html (+4ms) 
+14:25:10   ├─ /blog/personal-trainer-energy.html (+5ms) 
+14:25:10   ├─ /blog/please-only-apply-if-youre-an-agent.html (+4ms) 
+14:25:10   ├─ /blog/plug-in-then-rethink-the-system.html (+6ms) 
+14:25:10   ├─ /blog/power-without-purpose-is-just-a-bill.html (+5ms) 
+14:25:10   ├─ /blog/prompt-strategists-agent-orchestras-and-what-comes-next.html (+6ms) 
+14:25:10   ├─ /blog/put-the-camera-down.html (+4ms) 
+14:25:10   ├─ /blog/putting-my-money-where-my-mouth-is.html (+4ms) 
+14:25:10   ├─ /blog/q1-2026-the-integration-quarter.html (+4ms) 
+14:25:10   ├─ /blog/quiet-was-armor.html (+4ms) 
+14:25:10   ├─ /blog/red-is-the-good-news.html (+4ms) 
+14:25:10   ├─ /blog/reading-the-road.html (+4ms) 
+14:25:10   ├─ /blog/red-teaming-the-metering-phase.html (+4ms) 
+14:25:10   ├─ /blog/reinvention-transformation.html (+5ms) 
+14:25:10   ├─ /blog/same-game-different-sand.html (+4ms) 
+14:25:10   ├─ /blog/self-service-paradox.html (+4ms) 
+14:25:10   ├─ /blog/setting-up-an-ai-native-dev-environment.html (+6ms) 
+14:25:10   ├─ /blog/sharpened-doesnt-mean-sterile.html (+4ms) 
+14:25:10   ├─ /blog/shipping-with-ai.html (+4ms) 
+14:25:10   ├─ /blog/show-your-work-designing-ai-enforced-safeguards.html (+5ms) 
+14:25:10   ├─ /blog/show-your-work.html (+4ms) 
+14:25:10   ├─ /blog/signal-in-the-noise-my-personal-philosophy.html (+5ms) 
+14:25:10   ├─ /blog/signal-or-spectacle.html (+4ms) 
+14:25:10   ├─ /blog/signal-reflex-signal-dispatch.html (+5ms) 
+14:25:10   ├─ /blog/six-months-after-the-horizon.html (+4ms) 
+14:25:10   ├─ /blog/skip-the-api-building-a-local-chatgpt-bridge-for-vs-code.html (+5ms) 
+14:25:10   ├─ /blog/skip-the-steps.html (+5ms) 
+14:25:10   ├─ /blog/spec-driven-development-with-multi-agent-orchestration.html (+7ms) 
+14:25:10   ├─ /blog/standing-in-the-rain.html (+4ms) 
+14:25:10   ├─ /blog/start-here-why-signal-reflex-exists.html (+5ms) 
+14:25:10   ├─ /blog/start-smart-not-perfect.html (+4ms) 
+14:25:10   ├─ /blog/start-with-a-sketch.html (+4ms) 
+14:25:10   ├─ /blog/still-your-car-still-your-wrench.html (+4ms) 
+14:25:10   ├─ /blog/strength-through-repetition.html (+4ms) 
+14:25:10   ├─ /blog/thankful-for-my-robot-army.html (+4ms) 
+14:25:10   ├─ /blog/the-48-hour-artifact.html (+6ms) 
+14:25:10   ├─ /blog/the-710-year-evolution-of-the-web.html (+4ms) 
+14:25:10   ├─ /blog/the-agentic-student.html (+6ms) 
+14:25:10   ├─ /blog/the-ai-analyst.html (+5ms) 
+14:25:10   ├─ /blog/the-ai-approach-reset.html (+5ms) 
+14:25:10   ├─ /blog/the-ai-engineer-has-joined-the-team.html (+4ms) 
+14:25:10   ├─ /blog/the-backport-i-didnt-make.html (+5ms) 
+14:25:10   ├─ /blog/the-bet-i-didnt-know-i-was-making.html (+4ms) 
+14:25:10   ├─ /blog/the-cake-is-a-lie-why-ai-isnt-ready.html (+5ms) 
+14:25:10   ├─ /blog/the-calculator-effect.html (+4ms) 
+14:25:10   ├─ /blog/the-cart-is-a-protocol-now.html (+6ms) 
+14:25:10   ├─ /blog/the-civil-war-inside-every-agent.html (+6ms) 
+14:25:10   ├─ /blog/the-cleanup-economy.html (+5ms) 
+14:25:10   ├─ /blog/the-cognitive-foundry-part-2.html (+6ms) 
+14:25:10   ├─ /blog/the-cognitive-foundry.html (+6ms) 
+14:25:11   ├─ /blog/the-coming-code-why-ai-native-software-needs-standards-and-how-to-prepare.html (+4ms) 
+14:25:11   ├─ /blog/the-consultants-dilemma-the-tax-of-many-hats.html (+4ms) 
+14:25:11   ├─ /blog/the-cost-of-sophistication.html (+4ms) 
+14:25:11   ├─ /blog/the-cost-of-staying-dry.html (+5ms) 
+14:25:11   ├─ /blog/the-cowork-moment-when-agentic-ai-goes-mainstream.html (+5ms) 
+14:25:11   ├─ /blog/the-cut-youll-make-twice.html (+5ms) 
+14:25:11   ├─ /blog/the-do-more-with-less-paradox.html (+4ms) 
+14:25:11   ├─ /blog/the-drift-beneath-the-velocity.html (+5ms) 
+14:25:11   ├─ /blog/the-elitist-trap.html (+14ms) 
+14:25:11   ├─ /blog/the-emperor-has-no-rag-why-your-genai-strategy-is-built-on-sand-unless-you-ask-these-questions.html (+17ms) 
+14:25:11   ├─ /blog/the-entry-level-developer-evolution-not-extinction.html (+19ms) 
+14:25:11   ├─ /blog/the-gate-verifies-the-work-not-the-plan.html (+22ms) 
+14:25:11   ├─ /blog/the-gift-i-cant-give-myself.html (+26ms) 
+14:25:11   ├─ /blog/the-graveyard.html (+27ms) 
+14:25:11   ├─ /blog/the-human-loom.html (+11ms) 
+14:25:11   ├─ /blog/the-identity-crisis-of-the-prompter.html (+12ms) 
+14:25:11   ├─ /blog/the-infinite-concierge.html (+8ms) 
+14:25:11   ├─ /blog/the-jevons-trap.html (+6ms) 
+14:25:11   ├─ /blog/the-kitchen-i-am-looking-for.html (+5ms) 
+14:25:11   ├─ /blog/the-lost-phone-test-for-ai-could-your-org-still-function-tomorrow.html (+4ms) 
+14:25:11   ├─ /blog/the-loudest-voice-in-my-voice-corpus-isnt-mine.html (+5ms) 
+14:25:11   ├─ /blog/the-machine-loom.html (+6ms) 
+14:25:11   ├─ /blog/the-masterchef-problem.html (+6ms) 
+14:25:11   ├─ /blog/the-metering-phase.html (+5ms) 
+14:25:11   ├─ /blog/the-migration-that-ate-two-columns.html (+5ms) 
+14:25:11   ├─ /blog/the-modern-js-stack-is-a-masterpiece-of-power-and-a-catastrophe-of-experience.html (+4ms) 
+14:25:11   ├─ /blog/the-mvp-mirage.html (+5ms) 
+14:25:11   ├─ /blog/the-netflix-paradox-why-shopping-isnt-streaming-yet.html (+4ms) 
+14:25:11   ├─ /blog/the-new-consulting-model-adapt-or-die.html (+5ms) 
+14:25:11   ├─ /blog/the-neuro-symbolic-convergence.html (+5ms) 
+14:25:11   ├─ /blog/the-next-chapter-scaling-intent-driven-engineering.html (+6ms) 
+14:25:11   ├─ /blog/the-next-compiler-is-semantic.html (+4ms) 
+14:25:11   ├─ /blog/the-only-thing-that-cant-lie.html (+5ms) 
+14:25:11   ├─ /blog/the-paradox-of-velocity-in-ai-coding.html (+4ms) 
+14:25:11   ├─ /blog/the-playbook-tactical-moves-for-the-ai-era.html (+5ms) 
+14:25:11   ├─ /blog/the-posture-problem.html (+4ms) 
+14:25:11   ├─ /blog/the-question-that-isnt-a-question.html (+5ms) 
+14:25:11   ├─ /blog/the-real-work-is-reading-the-signal.html (+4ms) 
+14:25:11   ├─ /blog/the-role-of-self-awareness-in-every-tool-i-use.html (+5ms) 
+14:25:11   ├─ /blog/the-role-that-doesnt-have-a-title.html (+4ms) 
+14:25:11   ├─ /blog/the-rules-i-actually-follow.html (+4ms) 
+14:25:11   ├─ /blog/the-scaffolding-the-agent-doesnt-build.html (+4ms) 
+14:25:11   ├─ /blog/the-seven-stages-of-ai-adoption.html (+5ms) 
+14:25:11   ├─ /blog/the-side-of-agentic-commerce-were-not-talking-about.html (+5ms) 
+14:25:11   ├─ /blog/the-side-project-is-pottery.html (+5ms) 
+14:25:11   ├─ /blog/the-signal-forge-method-agentic-document-generation.html (+6ms) 
+14:25:11   ├─ /blog/the-sky-is-not-falling.html (+5ms) 
+14:25:11   ├─ /blog/the-sommelier-argument.html (+5ms) 
+14:25:11   ├─ /blog/the-source-of-their-intelligence.html (+5ms) 
+14:25:11   ├─ /blog/the-spotlight-isnt-the-stage.html (+4ms) 
+14:25:11   ├─ /blog/the-storefront-is-dead.html (+6ms) 
+14:25:11   ├─ /blog/the-storefront-isnt-dead-its-becoming-an-ai-optimized-validation-engine-in-a-shifting-commerce-lands.html (+4ms) 
+14:25:11   ├─ /blog/the-storefront-that-builds-itself.html (+6ms) 
+14:25:11   ├─ /blog/the-stranger-with-my-name.html (+4ms) 
+14:25:11   ├─ /blog/the-style-guide-was-teaching-the-tells.html (+4ms) 
+14:25:11   ├─ /blog/the-taste-gap.html (+5ms) 
+14:25:11   ├─ /blog/the-third-race-to-the-bottom.html (+5ms) 
+14:25:11   ├─ /blog/the-tragedy-of-the-timesheet.html (+4ms) 
+14:25:11   ├─ /blog/the-work-before-the-words.html (+5ms) 
+14:25:11   ├─ /blog/the-walk-in-is-full.html (+4ms) 
+14:25:11   ├─ /blog/there-was-never-a-person-in-that-seat.html (+5ms) 
+14:25:11   ├─ /blog/this-doesnt-work-for-me.html (+4ms) 
+14:25:11   ├─ /blog/tokens-are-dev-hours.html (+4ms) 
+14:25:11   ├─ /blog/tool-and-die-thinking-for-the-ai-age.html (+4ms) 
+14:25:11   ├─ /blog/tool-assistant-or-crutch.html (+4ms) 
+14:25:11   ├─ /blog/toolmaker-or-tool-user-finding-your-true-nature-in-the-ai-age.html (+4ms) 
+14:25:11   ├─ /blog/two-doors-for-agents.html (+5ms) 
+14:25:11   ├─ /blog/we-dont-need-more-coders-we-need-early-stage-problem-solvers.html (+4ms) 
+14:25:11   ├─ /blog/we-gave-everyone-a-ferrari.html (+4ms) 
+14:25:11   ├─ /blog/what-223-sessions-taught-me-about-working-with-ai.html (+5ms) 
+14:25:11   ├─ /blog/what-coaching-teaches-me-about-consulting.html (+5ms) 
+14:25:11   ├─ /blog/what-if-the-fork-is-the-problem.html (+5ms) 
+14:25:11   ├─ /blog/what-my-jsx-free-react-app-really-taught-me-about-ai-coding.html (+4ms) 
+14:25:11   ├─ /blog/what-the-grind-was-for.html (+4ms) 
+14:25:11   ├─ /blog/when-control-matters-behind-the-decision-to-build-feature-toggles-into-the-bracket-app.html (+5ms) 
+14:25:11   ├─ /blog/when-custom-isnt-better-the-burden-of-bespoke.html (+4ms) 
+14:25:11   ├─ /blog/when-fast-isnt-fast-enough-the-shift-from-ai-coding-to-ai-concurrency.html (+5ms) 
+14:25:11   ├─ /blog/when-meta-conversations-start-to-sound-like-sermons.html (+4ms) 
+14:25:11   ├─ /blog/when-one-ai-rewrites-for-another.html (+6ms) 
+14:25:11   ├─ /blog/when-the-grid-goes-dark.html (+5ms) 
+14:25:11   ├─ /blog/when-the-tools-get-in-the-way.html (+5ms) 
+14:25:11   ├─ /blog/when-the-voice-guide-becomes-the-problem.html (+5ms) 
+14:25:11   ├─ /blog/when-you-start-to-hear-the-music.html (+5ms) 
+14:25:11   ├─ /blog/when-your-framework-outgrows-your-ability-to-explain-it.html (+4ms) 
+14:25:11   ├─ /blog/when-your-lawyer-tells-you-to-use-chatgpt.html (+5ms) 
+14:25:11   ├─ /blog/who-reviewed-the-reviewer.html (+4ms) 
+14:25:11   ├─ /blog/when-youre-good-at-solving-problems-they-multiply.html (+5ms) 
+14:25:11   ├─ /blog/who-checks-the-foundation.html (+4ms) 
+14:25:11   ├─ /blog/where-the-api-stops.html (+6ms) 
+14:25:11   ├─ /blog/why-friction-matters.html (+4ms) 
+14:25:11   ├─ /blog/why-i-keep-shooting-even-when-its-not-for-work.html (+5ms) 
+14:25:11   ├─ /blog/why-i-shoot-senior-nights.html (+4ms) 
+14:25:11   ├─ /blog/why-i-started-signal-reflex.html (+6ms) 
+14:25:11   ├─ /blog/why-i-use-ai-every-day-and-why-i-started-writing-about-it.html (+4ms) 
+14:25:11   ├─ /blog/why-my-react-app-doesnt-use-jsx-and-what-that-taught-me-about-building-with-ai.html (+5ms) 
+14:25:11   ├─ /blog/why-they-call-me-uncle-nino-an-evolving-leadership-style.html (+4ms) 
+14:25:11   ├─ /blog/why-this-made-you-ask.html (+4ms) 
+14:25:11   ├─ /blog/wired-for-power-ai-is-the-grid-youre-the-architect.html (+5ms) 
+14:25:11   ├─ /blog/writing-helped-me-notice-i-was-seeing-differently.html (+5ms) 
+14:25:11   ├─ /blog/wired-for-power-everyone-got-the-current-not-everyone-built-the-city.html (+5ms) 
+14:25:11   ├─ /blog/you-cant-engineer-growth.html (+5ms) 
+14:25:11   ├─ /blog/youre-not-broken-but-youre-not-off-the-hook.html (+4ms) 
+14:25:11   ├─ /blog/youre-sending-self-driving-cars-down-unmarked-roads.html (+5ms) 
+14:25:11   ├─ /blog/the-depth-penalty-is-gone.html (+4ms) 
+14:25:11   ├─ /blog/nine-rgb-points-from-claude-coral.html (+5ms) 
+14:25:11   ├─ /blog/product-facts-not-fine-print.html (+4ms) 
+14:25:11   ├─ /blog/the-agent-needs-a-safety-label.html (+5ms) 
+14:25:11   ├─ /blog/everything-i-was-afraid-of-worked.html (+4ms) 
+14:25:11   ├─ /blog/the-guardrail-removed-the-storefront.html (+5ms) 
+14:25:11   ├─ /blog/the-panic-log-says-signal-not-shortage.html (+5ms) 
+14:25:11   ├─ /blog/nobody-owns-what-the-agent-leaves-running.html (+5ms) 
+14:25:11   ├─ /blog/the-audit-reproduced-the-failure.html (+4ms) 
+14:25:11   ├─ /blog/rigorous-about-the-wrong-question.html (+5ms) 
+14:25:11   ├─ /blog/who-is-still-driving.html (+4ms) 
+14:25:11   ├─ /blog/give-your-ai-a-reason-for-every-design-reference.html (+5ms) 
+14:25:11   ├─ /blog/the-connector-you-cant-oauth.html (+4ms) 
+14:25:11   ├─ /blog/trying-to-teach-an-ai-how-i-edit-photos.html (+5ms) 
+14:25:11   ├─ /blog/the-work-doesnt-end-at-send.html (+4ms) 
+14:25:11   ├─ /blog/a-product-prototype-someone-else-can-build.html (+5ms) 
+14:25:11   ├─ /blog/making-club-videos-without-opening-an-editor.html (+4ms) 
+14:25:11   ├─ /blog/photography-reports-that-help-me-choose.html (+4ms) 
+14:25:11   ├─ /blog/theres-no-replicator-yet.html (+4ms) 
+14:25:11   ├─ /blog/because-i-can-is-only-half-the-answer.html (+5ms) 
+14:25:11   ├─ /blog/the-hire-who-never-remembers.html (+4ms) 
+14:25:11   └─ /blog/the-rules-of-the-road-still-apply.html (+5ms) 
+14:25:11 ▶ src/pages/blog/index.astro
+14:25:11   └─ /blog.html (+3ms) 
+14:25:11 λ src/pages/og/[slug].png.ts
+14:25:11   ├─ /og/50-of-ai-later-lessons-from-burning-credits-fast.png (+165ms) 
+14:25:11   ├─ /og/aegis-framework-constitutional-crisis-we-declared-martial-law-on-ourselves.png (+109ms) 
+14:25:12   ├─ /og/ai-ops-docs-as-contracts.png (+110ms) 
+14:25:12   ├─ /og/agentic-software-isn-t-magic-it-s-a-new-interface-for-an-old-problem.png (+108ms) 
+14:25:12   ├─ /og/22gb-to-2gb-video-compression-as-agentic-collaboration.png (+109ms) 
+14:25:12   ├─ /og/am-i-ever-not-working.png (+102ms) 
+14:25:12   ├─ /og/ai-wont-take-your-job-it-will-redefine-it-your-reskilling-starts-now.png (+111ms) 
+14:25:12   ├─ /og/almost-flickday.png (+99ms) 
+14:25:12   ├─ /og/ai-agents-need-a-cop.png (+107ms) 
+14:25:12   ├─ /og/ai-isnt-a-bubble-its-infrastructure.png (+103ms) 
+14:25:12   ├─ /og/archive.png (+96ms) 
+14:25:13   ├─ /og/becoming-the-copilot.png (+101ms) 
+14:25:13   ├─ /og/beyond-the-copilot-architecting-for-autonomy-with-claude-sonnet-45.png (+105ms) 
+14:25:13   ├─ /og/bts-why-we-had-to-slow-down-to-speed-up.png (+106ms) 
+14:25:13   ├─ /og/bubble-vs-build-out-understanding-the-ai-moment.png (+106ms) 
+14:25:13   ├─ /og/building-cages-for-ai-agents.png (+106ms) 
+14:25:13   ├─ /og/can-vs-should.png (+97ms) 
+14:25:13   ├─ /og/chatgpt-doesnt-eat-so-why-do-i-keep-asking-it-to-cook.png (+107ms) 
+14:25:13   ├─ /og/coach-up-or-coach-out-what-i-look-for-early.png (+107ms) 
+14:25:13   ├─ /og/coaching-without-coddling-how-i-support-high-potential-people-without-micromanaging.png (+114ms) 
+14:25:13   ├─ /og/curation-is-not-composition.png (+102ms) 
+14:25:14   ├─ /og/debunking-the-svelte-ai-myth-69-production-components-dont-lie.png (+109ms) 
+14:25:14   ├─ /og/describe-the-pear.png (+103ms) 
+14:25:14   ├─ /og/designing-for-environments-not-just-themes-a-volleyball-app-ux-case-study.png (+109ms) 
+14:25:14   ├─ /og/designing-what-you-dont-build.png (+108ms) 
+14:25:14   ├─ /og/did-you-hear-something.png (+103ms) 
+14:25:14   ├─ /og/do-i-still-sound-like-me.png (+100ms) 
+14:25:14   ├─ /og/do-you-smell-smoke.png (+106ms) 
+14:25:14   ├─ /og/docs-as-code-isnt-enough-how-ai-ready-knowledge-layers-compress-weeks-of-work-into-hours.png (+114ms) 
+14:25:14   ├─ /og/driving-while-not-driving.png (+106ms) 
+14:25:15   ├─ /og/even-the-ai-is-confused.png (+104ms) 
+14:25:15   ├─ /og/every-link-resolves-nothing-checks-the-number.png (+109ms) 
+14:25:15   ├─ /og/experience-is-loud-turn-it-down-so-you-can-learn.png (+109ms) 
+14:25:15   ├─ /og/field-notes-real-patterns-and-next-moves.png (+112ms) 
+14:25:15   ├─ /og/fix-it-once-prevent-it-forever-how-i-made-a-dropdown-bug-impossible-to-reintroduce.png (+106ms) 
+14:25:15   ├─ /og/from-aegis-to-specchain-when-governance-meets-reality.png (+106ms) 
+14:25:15   ├─ /og/from-ai-copilot-to-ai-enforcer.png (+106ms) 
+14:25:15   ├─ /og/from-fear-to-flow-my-accidental-journey-into-ai-powered-development.png (+105ms) 
+14:25:15   ├─ /og/from-fear-to-flow.png (+108ms) 
+14:25:15   ├─ /og/from-gsd-to-just-handle-it.png (+106ms) 
+14:25:16   ├─ /og/from-pattern-to-people.png (+99ms) 
+14:25:16   ├─ /og/from-prompt-to-product-building-demo-mode-in-week-2.png (+106ms) 
+14:25:16   ├─ /og/from-qa-bottleneck-to-autonomous-confidence-how-i-built-a-fully-ai-driven-e2e-testing-framework.png (+105ms) 
+14:25:16   ├─ /og/from-prompt-to-pattern.png (+99ms) 
+14:25:16   ├─ /og/from-research-paper-to-working-toolkit-in-one-session.png (+105ms) 
+14:25:16   ├─ /og/from-shutdown-to-speedrun.png (+105ms) 
+14:25:16   ├─ /og/genai-os.png (+105ms) 
+14:25:16   ├─ /og/grid-level-thinking-wasnt-the-plan.png (+105ms) 
+14:25:16   ├─ /og/help-me-help-you-help-me.png (+107ms) 
+14:25:17   ├─ /og/how-content-and-commerce-actually-connect-now.png (+106ms) 
+14:25:17   ├─ /og/how-i-built-signal-reflex-in-a-week.png (+108ms) 
+14:25:17   ├─ /og/how-i-structure-my-ai-workflows-to-support-real-thinking.png (+110ms) 
+14:25:17   ├─ /og/how-i-use-ai-in-consulting-for-real.png (+107ms) 
+14:25:17   ├─ /og/how-i-work-with-ais-and-why.png (+105ms) 
+14:25:17   ├─ /og/how-i-wrote-living-in-the-comments.png (+111ms) 
+14:25:17   ├─ /og/how-we-find-the-ones-who-just-get-it.png (+106ms) 
+14:25:17   ├─ /og/i-built-a-site-just-to-see-if-i-still-could.png (+106ms) 
+14:25:17   ├─ /og/i-configured-my-agent-to-agree-with-me.png (+106ms) 
+14:25:17   ├─ /og/i-didnt-write-a-test-i-asked-the-system-to-reflect.png (+104ms) 
+14:25:18   ├─ /og/i-dont-believe-the-agentic-ai-hype-and-heres-why-thats-not-ignorance.png (+107ms) 
+14:25:18   ├─ /og/i-dont-want-to-be-a-10-person-team-of-one.png (+111ms) 
+14:25:18   ├─ /og/i-dont-write-any-code.png (+105ms) 
+14:25:18   ├─ /og/i-let-a-bunch-of-ai-agents-rebuild-my-app-heres-what-actually-worked.png (+111ms) 
+14:25:18   ├─ /og/i-still-dont-really-know-jsx-and-i-dont-think-it-matters.png (+112ms) 
+14:25:18   ├─ /og/i-wrote-the-rule-down-i-broke-it-anyway.png (+113ms) 
+14:25:18   ├─ /og/if-the-storefront-is-dead-where-do-you-compete-now.png (+110ms) 
+14:25:18   ├─ /og/intent-driven-engineering-by-the-numbers.png (+112ms) 
+14:25:18   ├─ /og/is-chatgpt-doing-my-thinking-for-me.png (+113ms) 
+14:25:19   ├─ /og/is-composable-just-ikea-for-commerce.png (+111ms) 
+14:25:19   ├─ /og/is-python-the-new-assembly.png (+107ms) 
+14:25:19   ├─ /og/is-resilience-a-systems-problem.png (+108ms) 
+14:25:19   ├─ /og/its-the-artist-not-the-pen.png (+104ms) 
+14:25:19   ├─ /og/its-time-for-the-cio-2-0.png (+106ms) 
+14:25:19   ├─ /og/ive-been-doing-ai-coding-wrong-sort-of.png (+117ms) 
+14:25:19   ├─ /og/just-in-time-software.png (+106ms) 
+14:25:19   ├─ /og/leadership-reflection.png (+105ms) 
+14:25:19   ├─ /og/living-in-the-comments.png (+105ms) 
+14:25:20   ├─ /og/living-in-the-gap.png (+103ms) 
+14:25:20   ├─ /og/llm-codegen-and-the-three-little-pigs.png (+112ms) 
+14:25:20   ├─ /og/m-ai-engineering-team.png (+106ms) 
+14:25:20   ├─ /og/moores-law-is-sputtering-so-whats-really-next-for-tech.png (+111ms) 
+14:25:20   ├─ /og/muscle-memory-and-mental-atrophy.png (+112ms) 
+14:25:20   ├─ /og/not-just-fast-but-together.png (+104ms) 
+14:25:20   ├─ /og/no-room-for-tourists.png (+104ms) 
+14:25:20   ├─ /og/nothing-broke-it-just-wasnt-there.png (+111ms) 
+14:25:20   ├─ /og/observability-for-agent-commerce.png (+111ms) 
+14:25:21   ├─ /og/on-clocks-and-truth.png (+102ms) 
+14:25:21   ├─ /og/one-component-i-didnt-already-have.png (+111ms) 
+14:25:21   ├─ /og/one-more-version.png (+103ms) 
+14:25:21   ├─ /og/one-week-one-developer-one-production-system-how-i-used-ai-to-build-and-harden-the-lpo-bracket-manag.png (+111ms) 
+14:25:21   ├─ /og/open-kitchen.png (+103ms) 
+14:25:21   ├─ /og/overnight-dev-from-rage-quit-to-release-in-72-hours-with-ai-riding-shotgun.png (+110ms) 
+14:25:21   ├─ /og/pay-no-attention-to-the-man-behind-the-curtain.png (+111ms) 
+14:25:21   ├─ /og/personal-trainer-energy.png (+106ms) 
+14:25:21   ├─ /og/please-only-apply-if-youre-an-agent.png (+113ms) 
+14:25:21   ├─ /og/plug-in-then-rethink-the-system.png (+110ms) 
+14:25:22   ├─ /og/power-without-purpose-is-just-a-bill.png (+111ms) 
+14:25:22   ├─ /og/prompt-strategists-agent-orchestras-and-what-comes-next.png (+111ms) 
+14:25:22   ├─ /og/put-the-camera-down.png (+102ms) 
+14:25:22   ├─ /og/putting-my-money-where-my-mouth-is.png (+109ms) 
+14:25:22   ├─ /og/q1-2026-the-integration-quarter.png (+104ms) 
+14:25:22   ├─ /og/quiet-was-armor.png (+101ms) 
+14:25:22   ├─ /og/red-is-the-good-news.png (+100ms) 
+14:25:22   ├─ /og/reading-the-road.png (+98ms) 
+14:25:22   ├─ /og/red-teaming-the-metering-phase.png (+105ms) 
+14:25:23   ├─ /og/reinvention-transformation.png (+99ms) 
+14:25:23   ├─ /og/same-game-different-sand.png (+105ms) 
+14:25:23   ├─ /og/self-service-paradox.png (+104ms) 
+14:25:23   ├─ /og/setting-up-an-ai-native-dev-environment.png (+106ms) 
+14:25:23   ├─ /og/sharpened-doesnt-mean-sterile.png (+102ms) 
+14:25:23   ├─ /og/shipping-with-ai.png (+107ms) 
+14:25:23   ├─ /og/show-your-work-designing-ai-enforced-safeguards.png (+106ms) 
+14:25:23   ├─ /og/show-your-work.png (+96ms) 
+14:25:23   ├─ /og/signal-in-the-noise-my-personal-philosophy.png (+112ms) 
+14:25:23   ├─ /og/signal-or-spectacle.png (+103ms) 
+14:25:24   ├─ /og/signal-reflex-signal-dispatch.png (+349ms) 
+14:25:24   ├─ /og/six-months-after-the-horizon.png (+100ms) 
+14:25:24   ├─ /og/skip-the-api-building-a-local-chatgpt-bridge-for-vs-code.png (+105ms) 
+14:25:24   ├─ /og/skip-the-steps.png (+97ms) 
+14:25:24   ├─ /og/spec-driven-development-with-multi-agent-orchestration.png (+104ms) 
+14:25:24   ├─ /og/standing-in-the-rain.png (+99ms) 
+14:25:24   ├─ /og/start-here-why-signal-reflex-exists.png (+105ms) 
+14:25:25   ├─ /og/start-smart-not-perfect.png (+100ms) 
+14:25:25   ├─ /og/start-with-a-sketch.png (+109ms) 
+14:25:25   ├─ /og/still-your-car-still-your-wrench.png (+108ms) 
+14:25:25   ├─ /og/strength-through-repetition.png (+104ms) 
+14:25:25   ├─ /og/thankful-for-my-robot-army.png (+113ms) 
+14:25:25   ├─ /og/the-48-hour-artifact.png (+103ms) 
+14:25:25   ├─ /og/the-710-year-evolution-of-the-web.png (+110ms) 
+14:25:25   ├─ /og/the-agentic-student.png (+105ms) 
+14:25:25   ├─ /og/the-ai-analyst.png (+102ms) 
+14:25:25   ├─ /og/the-ai-approach-reset.png (+115ms) 
+14:25:26   ├─ /og/the-ai-engineer-has-joined-the-team.png (+111ms) 
+14:25:26   ├─ /og/the-backport-i-didnt-make.png (+109ms) 
+14:25:26   ├─ /og/the-bet-i-didnt-know-i-was-making.png (+111ms) 
+14:25:26   ├─ /og/the-cake-is-a-lie-why-ai-isnt-ready.png (+115ms) 
+14:25:26   ├─ /og/the-calculator-effect.png (+104ms) 
+14:25:26   ├─ /og/the-cart-is-a-protocol-now.png (+107ms) 
+14:25:26   ├─ /og/the-civil-war-inside-every-agent.png (+116ms) 
+14:25:26   ├─ /og/the-cleanup-economy.png (+107ms) 
+14:25:26   ├─ /og/the-cognitive-foundry-part-2.png (+113ms) 
+14:25:27   ├─ /og/the-cognitive-foundry.png (+105ms) 
+14:25:27   ├─ /og/the-coming-code-why-ai-native-software-needs-standards-and-how-to-prepare.png (+112ms) 
+14:25:27   ├─ /og/the-consultants-dilemma-the-tax-of-many-hats.png (+108ms) 
+14:25:27   ├─ /og/the-cost-of-sophistication.png (+106ms) 
+14:25:27   ├─ /og/the-cost-of-staying-dry.png (+104ms) 
+14:25:27   ├─ /og/the-cowork-moment-when-agentic-ai-goes-mainstream.png (+110ms) 
+14:25:27   ├─ /og/the-cut-youll-make-twice.png (+109ms) 
+14:25:27   ├─ /og/the-do-more-with-less-paradox.png (+108ms) 
+14:25:27   ├─ /og/the-drift-beneath-the-velocity.png (+105ms) 
+14:25:28   ├─ /og/the-elitist-trap.png (+102ms) 
+14:25:28   ├─ /og/the-emperor-has-no-rag-why-your-genai-strategy-is-built-on-sand-unless-you-ask-these-questions.png (+110ms) 
+14:25:28   ├─ /og/the-entry-level-developer-evolution-not-extinction.png (+108ms) 
+14:25:28   ├─ /og/the-gate-verifies-the-work-not-the-plan.png (+110ms) 
+14:25:28   ├─ /og/the-gift-i-cant-give-myself.png (+103ms) 
+14:25:28   ├─ /og/the-graveyard.png (+103ms) 
+14:25:28   ├─ /og/the-human-loom.png (+101ms) 
+14:25:28   ├─ /og/the-identity-crisis-of-the-prompter.png (+109ms) 
+14:25:28   ├─ /og/the-infinite-concierge.png (+114ms) 
+14:25:29   ├─ /og/the-jevons-trap.png (+103ms) 
+14:25:29   ├─ /og/the-kitchen-i-am-looking-for.png (+104ms) 
+14:25:29   ├─ /og/the-lost-phone-test-for-ai-could-your-org-still-function-tomorrow.png (+365ms) 
+14:25:29   ├─ /og/the-loudest-voice-in-my-voice-corpus-isnt-mine.png (+110ms) 
+14:25:29   ├─ /og/the-machine-loom.png (+103ms) 
+14:25:29   ├─ /og/the-masterchef-problem.png (+104ms) 
+14:25:29   ├─ /og/the-metering-phase.png (+105ms) 
+14:25:30   ├─ /og/the-migration-that-ate-two-columns.png (+110ms) 
+14:25:30   ├─ /og/the-modern-js-stack-is-a-masterpiece-of-power-and-a-catastrophe-of-experience.png (+109ms) 
+14:25:30   ├─ /og/the-mvp-mirage.png (+103ms) 
+14:25:30   ├─ /og/the-netflix-paradox-why-shopping-isnt-streaming-yet.png (+111ms) 
+14:25:30   ├─ /og/the-new-consulting-model-adapt-or-die.png (+110ms) 
+14:25:30   ├─ /og/the-neuro-symbolic-convergence.png (+109ms) 
+14:25:30   ├─ /og/the-next-chapter-scaling-intent-driven-engineering.png (+110ms) 
+14:25:30   ├─ /og/the-next-compiler-is-semantic.png (+109ms) 
+14:25:30   ├─ /og/the-only-thing-that-cant-lie.png (+109ms) 
+14:25:31   ├─ /og/the-paradox-of-velocity-in-ai-coding.png (+224ms) 
+14:25:31   ├─ /og/the-playbook-tactical-moves-for-the-ai-era.png (+111ms) 
+14:25:31   ├─ /og/the-posture-problem.png (+102ms) 
+14:25:31   ├─ /og/the-question-that-isnt-a-question.png (+108ms) 
+14:25:31   ├─ /og/the-real-work-is-reading-the-signal.png (+111ms) 
+14:25:31   ├─ /og/the-role-of-self-awareness-in-every-tool-i-use.png (+113ms) 
+14:25:31   ├─ /og/the-role-that-doesnt-have-a-title.png (+109ms) 
+14:25:31   ├─ /og/the-rules-i-actually-follow.png (+103ms) 
+14:25:31   ├─ /og/the-scaffolding-the-agent-doesnt-build.png (+110ms) 
+14:25:32   ├─ /og/the-seven-stages-of-ai-adoption.png (+108ms) 
+14:25:32   ├─ /og/the-side-of-agentic-commerce-were-not-talking-about.png (+109ms) 
+14:25:32   ├─ /og/the-side-project-is-pottery.png (+105ms) 
+14:25:32   ├─ /og/the-signal-forge-method-agentic-document-generation.png (+109ms) 
+14:25:32   ├─ /og/the-sky-is-not-falling.png (+104ms) 
+14:25:32   ├─ /og/the-sommelier-argument.png (+103ms) 
+14:25:32   ├─ /og/the-source-of-their-intelligence.png (+102ms) 
+14:25:32   ├─ /og/the-spotlight-isnt-the-stage.png (+99ms) 
+14:25:32   ├─ /og/the-storefront-is-dead.png (+99ms) 
+14:25:33   ├─ /og/the-storefront-isnt-dead-its-becoming-an-ai-optimized-validation-engine-in-a-shifting-commerce-lands.png (+106ms) 
+14:25:33   ├─ /og/the-storefront-that-builds-itself.png (+104ms) 
+14:25:33   ├─ /og/the-stranger-with-my-name.png (+105ms) 
+14:25:33   ├─ /og/the-style-guide-was-teaching-the-tells.png (+106ms) 
+14:25:33   ├─ /og/the-taste-gap.png (+97ms) 
+14:25:33   ├─ /og/the-third-race-to-the-bottom.png (+99ms) 
+14:25:33   ├─ /og/the-tragedy-of-the-timesheet.png (+100ms) 
+14:25:33   ├─ /og/the-work-before-the-words.png (+103ms) 
+14:25:33   ├─ /og/the-walk-in-is-full.png (+102ms) 
+14:25:33   ├─ /og/there-was-never-a-person-in-that-seat.png (+108ms) 
+14:25:34   ├─ /og/this-doesnt-work-for-me.png (+99ms) 
+14:25:34   ├─ /og/tokens-are-dev-hours.png (+105ms) 
+14:25:34   ├─ /og/tool-and-die-thinking-for-the-ai-age.png (+108ms) 
+14:25:34   ├─ /og/tool-assistant-or-crutch.png (+101ms) 
+14:25:34   ├─ /og/toolmaker-or-tool-user-finding-your-true-nature-in-the-ai-age.png (+107ms) 
+14:25:34   ├─ /og/two-doors-for-agents.png (+101ms) 
+14:25:34   ├─ /og/we-dont-need-more-coders-we-need-early-stage-problem-solvers.png (+105ms) 
+14:25:34   ├─ /og/we-gave-everyone-a-ferrari.png (+105ms) 
+14:25:34   ├─ /og/what-223-sessions-taught-me-about-working-with-ai.png (+104ms) 
+14:25:35   ├─ /og/what-coaching-teaches-me-about-consulting.png (+106ms) 
+14:25:35   ├─ /og/what-if-the-fork-is-the-problem.png (+103ms) 
+14:25:35   ├─ /og/what-my-jsx-free-react-app-really-taught-me-about-ai-coding.png (+108ms) 
+14:25:35   ├─ /og/what-the-grind-was-for.png (+98ms) 
+14:25:35   ├─ /og/when-control-matters-behind-the-decision-to-build-feature-toggles-into-the-bracket-app.png (+105ms) 
+14:25:35   ├─ /og/when-custom-isnt-better-the-burden-of-bespoke.png (+103ms) 
+14:25:35   ├─ /og/when-fast-isnt-fast-enough-the-shift-from-ai-coding-to-ai-concurrency.png (+105ms) 
+14:25:35   ├─ /og/when-meta-conversations-start-to-sound-like-sermons.png (+104ms) 
+14:25:35   ├─ /og/when-one-ai-rewrites-for-another.png (+103ms) 
+14:25:35   ├─ /og/when-the-grid-goes-dark.png (+99ms) 
+14:25:36   ├─ /og/when-the-tools-get-in-the-way.png (+100ms) 
+14:25:36   ├─ /og/when-the-voice-guide-becomes-the-problem.png (+103ms) 
+14:25:36   ├─ /og/when-you-start-to-hear-the-music.png (+103ms) 
+14:25:36   ├─ /og/when-your-framework-outgrows-your-ability-to-explain-it.png (+106ms) 
+14:25:36   ├─ /og/when-your-lawyer-tells-you-to-use-chatgpt.png (+110ms) 
+14:25:36   ├─ /og/who-reviewed-the-reviewer.png (+107ms) 
+14:25:36   ├─ /og/when-youre-good-at-solving-problems-they-multiply.png (+107ms) 
+14:25:36   ├─ /og/who-checks-the-foundation.png (+102ms) 
+14:25:36   ├─ /og/where-the-api-stops.png (+99ms) 
+14:25:36   ├─ /og/why-friction-matters.png (+100ms) 
+14:25:37   ├─ /og/why-i-keep-shooting-even-when-its-not-for-work.png (+103ms) 
+14:25:37   ├─ /og/why-i-shoot-senior-nights.png (+100ms) 
+14:25:37   ├─ /og/why-i-started-signal-reflex.png (+102ms) 
+14:25:37   ├─ /og/why-i-use-ai-every-day-and-why-i-started-writing-about-it.png (+107ms) 
+14:25:37   ├─ /og/why-my-react-app-doesnt-use-jsx-and-what-that-taught-me-about-building-with-ai.png (+105ms) 
+14:25:37   ├─ /og/why-they-call-me-uncle-nino-an-evolving-leadership-style.png (+100ms) 
+14:25:37   ├─ /og/why-this-made-you-ask.png (+100ms) 
+14:25:37   ├─ /og/wired-for-power-ai-is-the-grid-youre-the-architect.png (+102ms) 
+14:25:37   ├─ /og/writing-helped-me-notice-i-was-seeing-differently.png (+103ms) 
+14:25:37   ├─ /og/wired-for-power-everyone-got-the-current-not-everyone-built-the-city.png (+106ms) 
+14:25:38   ├─ /og/you-cant-engineer-growth.png (+106ms) 
+14:25:38   ├─ /og/youre-not-broken-but-youre-not-off-the-hook.png (+106ms) 
+14:25:38   ├─ /og/youre-sending-self-driving-cars-down-unmarked-roads.png (+104ms) 
+14:25:38   ├─ /og/the-depth-penalty-is-gone.png (+101ms) 
+14:25:38   ├─ /og/nine-rgb-points-from-claude-coral.png (+106ms) 
+14:25:38   ├─ /og/product-facts-not-fine-print.png (+102ms) 
+14:25:38   ├─ /og/the-agent-needs-a-safety-label.png (+106ms) 
+14:25:38   ├─ /og/everything-i-was-afraid-of-worked.png (+104ms) 
+14:25:38   ├─ /og/the-guardrail-removed-the-storefront.png (+104ms) 
+14:25:39   ├─ /og/the-panic-log-says-signal-not-shortage.png (+107ms) 
+14:25:39   ├─ /og/nobody-owns-what-the-agent-leaves-running.png (+108ms) 
+14:25:39   ├─ /og/the-audit-reproduced-the-failure.png (+106ms) 
+14:25:39   ├─ /og/rigorous-about-the-wrong-question.png (+106ms) 
+14:25:39   ├─ /og/who-is-still-driving.png (+102ms) 
+14:25:39   ├─ /og/give-your-ai-a-reason-for-every-design-reference.png (+121ms) 
+14:25:39   ├─ /og/the-connector-you-cant-oauth.png (+105ms) 
+14:25:39   ├─ /og/trying-to-teach-an-ai-how-i-edit-photos.png (+109ms) 
+14:25:39   ├─ /og/the-work-doesnt-end-at-send.png (+101ms) 
+14:25:40   ├─ /og/a-product-prototype-someone-else-can-build.png (+104ms) 
+14:25:40   ├─ /og/making-club-videos-without-opening-an-editor.png (+105ms) 
+14:25:40   ├─ /og/photography-reports-that-help-me-choose.png (+106ms) 
+14:25:40   ├─ /og/theres-no-replicator-yet.png (+100ms) 
+14:25:40   ├─ /og/because-i-can-is-only-half-the-answer.png (+105ms) 
+14:25:40   ├─ /og/the-hire-who-never-remembers.png (+103ms) 
+14:25:40   └─ /og/the-rules-of-the-road-still-apply.png (+105ms) 
+14:25:40 ▶ src/pages/research/[slug].astro
+14:25:40   └─ /research/cognitive-foundry-red-team-analysis.html (+4ms) 
+14:25:40 ▶ src/pages/research/index.astro
+14:25:40   └─ /research.html (+1ms) 
+14:25:40 ✓ Completed in 31.46s.
+
+14:25:40 [build] Rearranging server assets...
+14:25:40 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+14:25:40 [build] Server built in 40.59s
+14:25:40 [build] Complete!
+
+Running Pagefind v1.5.2 (Extended)
+Running from: "/Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build"
+Source:       "dist"
+Output:       "dist/pagefind"
+
+[Walking source directory]
+Found 371 files matching **/*.{html}
+
+[Parsing files]
+Found a data-pagefind-body element on the site.
+↳ Ignoring pages without this tag.
+
+[Reading languages]
+Discovered 1 language: en
+
+[Building search indexes]
+Total: 
+  Indexed 1 language
+  Indexed 303 pages
+  Indexed 17104 words
+  Indexed 0 filters
+  Indexed 0 sorts
+
+Finished in 0.360 seconds
+[optimize-routes] include: 3 -> 3
+[optimize-routes] exclude: 0 -> 0
+[optimize-routes] dist/_routes.json optimized
+[check-post-api] Post JSON uses the runtime publication check; no static artifacts
+[check-sitemap] 366 sitemap URLs, all served by dist
+
+> astro-build@0.0.1 reader:check
+> node ../tools/lib/encounter-audit.mjs --root=.. --strict
+
+encounter audit: PASS
+Signal Dispatch — 353 rendered file(s), 0 finding(s)
+
+> astro-build@0.0.1 captions:check
+> node ../syndication/check-captions.mjs
+
+
+FIRST-PERSON CLAIMS — verify each against its source by reading.
+For each one, find the sentence in the source that attributes it to Nino
+SPECIFICALLY — not one that supports the idea, one that assigns it to him.
+If the source states it generally, the caption must state it generally.
+Past-tense claims sort first; they are likelier, not the only risk.
+
+  linkedin/applied--corpus.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/nc-demos/applied/corpus
+    ! One of mine was that I want interactive HTML demos rather than video.
+    ! I never had to say it again.
+
+  linkedin/applied--session-closeout.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/nc-demos/applied/session-closeout
+    · The closeout receipt I use at the end of an agent session has seven fields.
+
+  linkedin/blog--everything-i-was-afraid-of-worked.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/everything-i-was-afraid-of-worked.mdx
+    ! I spent an hour trying to break a tool I had built for a youth volleyball club.
+    ! Not one of those breaks was in the layer I had spent the entire design protecting.
+    ! Then I built exactly that — writes land at exact byte positions behind a content hash, and nothing a model says reaches a page without code agreeing.
+    ! And I was still staring at a screen that lied to me.
+    ! It reported failure for work that was live in front of me.
+    ! I had specified safety.
+    ! I had not specified truthfulness.
+    ! The mental model I brought to breaking my own tool was the wrong one.
+    ! With the inversion unnamed, my operational knowledge had nothing to attach to but resemblance.
+    ! The spec does bound model calls — six turns, on the component that answers questions, the one that looked like the diagrams I had studied.
+    ! The layers that came from something I measured going wrong survived an hour of deliberate abuse.
+    · I broke it seven times.
+    · Last October I published a post arguing that agent safety is an architecture problem: the model proposes, hard-coded code disposes, a human approves.
+    · I hit refresh mid-apply — the oldest bug in web development — and the write path caught the resubmit precisely as designed.
+    · What let me miss it is an inversion my spec never named.
+    · Mine runs the opposite direction.
+    · Everything good about mine comes from that flip — a plan can be stored, resumed, audited, unit-tested.
+    · Here is the test I would now run on anything an agent helped build.
+
+  linkedin/blog--making-club-videos-without-opening-an-editor.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/making-club-videos-without-opening-an-editor.mdx
+    ! I never had to build either edit on a timeline.
+    ! A few months earlier, I was still bringing agents footage I had already edited in CapCut.
+    ! I asked for the opening wordmark to be more visible.
+    · Automating something after my export left the assembly work with me.
+    · The change worth describing is already concrete: I can direct a revision without doing the assembly myself.
+
+  linkedin/blog--nine-rgb-points-from-claude-coral.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/nine-rgb-points-from-claude-coral.mdx
+    ! A colleague looked at my freshly redesigned site and typed one line into Slack: "feels very Claudeish, which may be completely intentional." It wasn't intentional.
+    ! My accent was, within a glance's error, another company's brand color.
+    ! My reply at the time was "it's so hard to prompt for taste." That was the wrong diagnosis.
+    ! Five days before the feedback arrived, a different model had already traced the sameness to inputs I own: my design docs authorized the mono labels and the giant display type, and my own site-generation archetype defaulted to dark mode and loud typography.
+    ! The clean reference site I was chasing runs 402 lines of CSS and 13 design tokens with no style guide at all; mine ran 10,615 lines and 42 tokens.
+    · Swapping the palette — for colors harvested from my own photography — changed almost nothing.
+
+  linkedin/blog--nobody-owns-what-the-agent-leaves-running.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/nobody-owns-what-the-agent-leaves-running.mdx
+    ! Something I ran into this week that I think is worth knowing about.
+    ! My machine ran out of resources and I had to reboot it.
+    ! So I took four screenshots of Activity Monitor, handed them to an agent, and typed one word: fix.
+    ! Here is the part I did not expect: nothing had failed.
+    ! The sessions holding those processes were four terminal tabs I had left open overnight, which is not a leak by any definition the system uses.
+    ! Each one I found the same way, which is to say I did not find it.
+    ! On my machine those two numbers had been disagreeing for a day, and nothing anywhere told me.
+    ! I wrote a longer version that reports the ratio of connector processes to loaded sessions and redacts the API keys sitting in those command lines — the link is in the first comment.
+    · This is the third time I have hit this exact shape.
+    · One command would have told me, and it fits on a line: ps -eo pid,etime,rss,command | grep -iE '(mcp|context7|playwright|chrome-devtools)' What is running, next to what the config claims.
+
+  linkedin/blog--the-audit-reproduced-the-failure.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-audit-reproduced-the-failure.mdx
+    · I put the evidence in the first comment.
+
+  linkedin/blog--the-connector-you-cant-oauth.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-connector-you-cant-oauth.mdx
+    ! This week I asked Apple's updated Siri one voice prompt: what can you infer about me from my text messages over the last week.
+    ! I asked a voice assistant a question I would have asked a personal-agent demo.
+    · I am not treating one prompt as category death.
+    · The fool's errand is the horizontal product whose pitch is connectors plus memory plus "I know you." That product is competing with the phone, not with the other startups pitching the same list.
+    · The demo would have shown me a connector screen.
+
+  linkedin/blog--the-cut-youll-make-twice.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-cut-youll-make-twice.mdx
+    · That gives me a practical test for agent guardrails: What action does this rule control?
+    · The full piece, including the measurement where my own README came out roughly three and a half times too favorable to my own tool: --- first-comment ---
+
+  linkedin/blog--the-depth-penalty-is-gone.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-depth-penalty-is-gone.mdx
+    ! I found that in the first week of an engagement I had no conventional business taking.
+    · My day job is enterprise commerce architecture.
+
+  linkedin/blog--the-guardrail-removed-the-storefront.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-guardrail-removed-the-storefront.mdx
+    · I put the longer version below.
+
+  linkedin/blog--the-hire-who-never-remembers.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-hire-who-never-remembers.mdx
+    ! Over two weeks this fall, I typed "merge it" to my coding agents 42 times.
+    ! Counting every version of it, 201 of my 1,422 messages had one job: getting an agent to push, open a pull request, or merge work it had already finished.
+    ! One line in mine said "Push after commit when asked." So every session finished the work, then waited for me to ask.
+    ! At my old share of messages, there would have been about five.
+    ! In an earlier count, 9 of 17 corrections I made were about a rule already written into those instructions.
+    ! I haven't measured those yet.
+    · That's my answer to a question I keep hearing: what kind of person is good at AI?
+    · My bet is a skill, not a temperament.
+    · On October 9, I replaced the line.
+    · So I've started adding checks that refuse the wrong action outright.
+
+  linkedin/blog--the-identity-crisis-of-the-prompter.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-identity-crisis-of-the-prompter.mdx
+    ! I typed four words into a prompt and got back something that would have taken me a full day to write from scratch.
+    ! They feel better than the alternative, which is that I typed a sentence and a machine did the thing.
+    ! And I've always been slightly suspicious of people whose primary skill is judgment without production.
+    · My first reaction wasn't relief.
+    · I've used most of these myself.
+    · If prompting is a craft then I'm still a craftsperson.
+
+  linkedin/blog--the-loudest-voice-in-my-voice-corpus-isnt-mine.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-loudest-voice-in-my-voice-corpus-isnt-mine.mdx
+    ! The top entry in my agent's character sheet is a sentence I never typed.
+    ! The line is a deny message from a hook I installed months ago.
+    · It sits at position one under "red lines — what Nino rejects," which is the section a model reads to learn what I push back on.
+    · The pipeline behind that file reads my own agent transcripts and distills them.
+    · Structurally it is indistinguishable from me talking, and the miner cannot tell them apart.
+    · Half the record of me correcting an agent is the harness correcting itself.
+    · It stays loaded for one reason, which is that I can check it.
+    · The red lines still open with a hook quoting my own rule back at me.
+
+  linkedin/blog--the-panic-log-says-signal-not-shortage.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-panic-log-says-signal-not-shortage.mdx
+    ! My laptop died at 10:55 in the morning, in the middle of a run, with three heavy jobs going at once that I had started myself.
+    ! I wrote that the machine ran out of memory and that the crash log proved it.
+    ! The mechanism I had named — the one that kills processes when memory runs short — is not in the log at all.
+    ! So the note sitting in my research log was a hypothesis wearing the clothes of a finding.
+    ! The only real casualties were a launch script and its log, which I had parked in /tmp — the one place I put anything the operating system is allowed to erase without asking.
+    · Something else took the machine down, and I still can't say what caused it.
+    · The confident sentence about the crash, sitting in the log I rely on to tell me what happened.
+    · The check that would have saved me is the boring one: when a log hands you a number, look the number up before you translate it.
+
+  linkedin/blog--the-sommelier-argument.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-sommelier-argument.mdx
+    · Half the bad AI implementations I've seen came from matching a problem to a capability that doesn't exist yet.
+
+  linkedin/blog--the-source-of-their-intelligence.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-source-of-their-intelligence.mdx
+    ! My first instinct was to defend the craft.
+    ! I've spent years making architectural calls that took judgment rather than search skills.
+    ! Then I thought about teams where three of five developers couldn't explain why the code they wrote worked.
+    ! I've had seasons like that myself.
+    ! Stretches where I moved fast enough that understanding took a back seat to shipping, and "it works" was the only bar I cleared.
+    · Which should tell me something.
+    · I wanted that to count for more than the argument allows.
+    · I have a partial answer.
+
+  linkedin/blog--the-style-guide-was-teaching-the-tells.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-style-guide-was-teaching-the-tells.mdx
+    ! The plan was a voice fingerprint pulled from my Gmail, so agents drafting as me would work from evidence instead of vibes.
+    ! I added one condition before any of it started: audit the guides I already had, adversarially, and assume they were wrong until they proved otherwise.
+    ! Recomputing meant going back to 4,534 raw user messages, and 684 of them weren't mine — automated commit reviews, agent-to-agent chatter, template text, all injected into the transcript as "the user." Fifteen percent of the corpus was machine-written.
+    ! The card had been averaging me with the robots, and the robots are more polite than I am.
+    ! We built the email guide anyway and scored four drafting arms on deviation from my real replies.
+    · There's a checker in my content pipeline whose job is to keep AI drafts sounding like me.
+    · I read its source this week.
+    · It docks a draft a full point for not containing a phrase my own voice guide bans.
+    · The card that tells agents how I type claimed I hedge in 11% of messages.
+    · A post written the way I actually write now would have failed.
+    · Harvesting my Drive for writing samples returned 35 documents I own.
+    · One rule came out of that, and it now governs everything else I maintain.
+
+  linkedin/blog--the-taste-gap.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-taste-gap.mdx
+    ! I asked for twelve variations of a component layout.
+    · I keep landing on three parts.
+    · I can describe outcomes and show examples.
+    · I skip the step more than I'd like to admit.
+
+  linkedin/blog--the-work-doesnt-end-at-send.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-work-doesnt-end-at-send.mdx
+    · That’s the possibility I wanted to explore beyond coding agents.
+
+  linkedin/blog--theres-no-replicator-yet.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/theres-no-replicator-yet.mdx
+    ! I showed her how to install an AI agent and its browser extension, and we asked it to do the data entry.
+    ! By my estimate, it had done 99% of the work.
+    ! In October, one of the club's directors picked two of three AI-built tryout videos four minutes after I sent them, and asked for different photos in one.
+    ! The cooking behind that menu was mine.
+    · Nothing I use with AI works like that yet, and the machines change by the day.
+    · Most people around me need AI handed to them ready-made.
+    · I've done that setup many times at a volleyball club where I do photo and media work.
+
+  linkedin/blog--trying-to-teach-an-ai-how-i-edit-photos.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/trying-to-teach-an-ai-how-i-edit-photos.mdx
+    ! We got the mechanics working: recover my saved edits, propose new settings, apply them to isolated copies, and compare the results without changing the originals.
+    ! They also didn't show that our approach would save time against my normal preset-and-adjust workflow.
+    ! During the work, I asked whether this was offering anything better than a batch preset.
+    ! Then I asked what the session had cost.
+    ! Asking for the retrospective was part of my involvement, too.
+    ! Reviewing outputs wasn't enough; I had to question whether the experiment was worth continuing.
+    · I wanted to build something that learned how I edit photos and gave me a better starting point in Lightroom.
+    · I already use presets, so applying settings automatically wasn't enough to make it useful.
+    · I chose between two versions of each photograph without knowing which method produced either one.
+    · The other used a fixed recipe derived from my training edits.
+    · On ten photos, I preferred the fixed recipe six times and called four ties.
+    · I hadn't picked the learned edit in either round.
+    · I've written up the experiment and the changes we're proposing: count the whole task, limit attempts, and say what a result would change before running another test.
+    · I added the article link below.
+
+  linkedin/blog--two-doors-for-agents.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/two-doors-for-agents.mdx
+    ! I've been building for the tight side almost reflexively — cages, constraints, narrow views.
+    · I don't think that's the real distinction.
+    · I'm no longer sure that's right.
+
+  linkedin/blog--what-223-sessions-taught-me-about-working-with-ai.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/what-223-sessions-taught-me-about-working-with-ai.mdx
+    ! For thirty days, the tool logged everything I typed to an AI assistant.
+    ! The biggest thing I work on was in its hardest stretch.
+    ! Twenty-one percent of everything I typed went to work that isn't part of any project.
+    ! Taking something I figured out in one place and writing it down where it was needed somewhere else.
+    ! Forty-two percent of my conversations ran between 51 and 150 messages.
+    · Then I read the logs.
+    · I wanted to see what the work looked like from the outside.
+    · The second-biggest category is the one I keep thinking about.
+    · Cleaning up my own files.
+    · Here's the part I keep turning over.
+    · A lot of that work now runs without me asking.
+    · A checker fires when I edit a component.
+    · The voice guide loads itself when I open a post.
+    · One more number changed how I think.
+    · I don't ask quick questions.
+    · I open one conversation inside one project and stay there, sometimes for days.
+    · So I rarely re-explain.
+    · The data can't tell me which.
+    · The rest, including what I actually type to start: --- first-comment ---
+
+  linkedin/blog--what-if-the-fork-is-the-problem.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/what-if-the-fork-is-the-problem.mdx
+    ! I ran the numbers on my own monitoring setup last month.
+    · I don't have a resolution and I'm not sure one exists yet.
+
+  linkedin/blog--who-is-still-driving.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/who-is-still-driving.mdx
+    ! In work on a coffee-trailer app for friends, I had to point out unfinished pages after earlier checks reported success.
+    ! I wrote about that boundary in "Who Is Still Driving?" Link in the first comment.
+    · In my own work, I spend time changing an agent's instructions, fixing test setups, and checking whether a successful report matches what actually happened.
+    · That work can make the agent useful to me, but it doesn't show that someone else could rely on it without my help.
+    · An agent reviewing my day-planning app gave me a careful report that answered the wrong question.
+    · My friends need to tell customers where they'll be serving coffee.
+    · They shouldn't need to understand how I instruct an AI or store the app's data to publish a stop.
+
+  linkedin/demos--agentic-gates.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/nc-demos/demos/agentic-gates
+    · That is the shape I keep finding in reliable agentic work: let the agent operate inside a stage, then make the boundary mechanical.
+
+  linkedin/demos--enforced-forever.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/nc-demos/demos/enforced-forever
+    ! A mining pass over my full session corpus found 122 `pkill` invocations across 16 projects.
+
+  linkedin/demos--guardrail-removed.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/nc-demos/demos/guardrail-removed
+    ! I went looking for who had decided it: no surviving instruction asks for it, and the session that made the commits left no transcript.
+    ! The direction I gave was the opposite.
+    ! The generated storefront looked worse than the hand-built one beside it, so I asked for visual parity — showcase the power of inference without losing the fidelity of a production-grade commerce experience.
+    ! Twenty-seven agent sessions in that repository tree in a single day, and counting the turns mechanically, not one of them contains an instruction I typed.
+    ! Every turn of mine was an auto-generated approval request asking whether the next action should proceed.
+    ! I was approving steps for eighteen hours.
+    ! What caught it was remembering, a day later, that a site I had used no longer did the thing I remembered it doing.
+    · Nineteen commits over seventeen hours, every message a safety word — clarify, classify, inventory, harden, close, enforce, bind, gate — and at the end my AI storefront could no longer call a model.
+    · Then I handed the work to a second agent in four words: pick up where Claude ended.
+    · Then the agent I sent to fix the mistake proposed the same one, and needed to be told twice.
+
+  linkedin/demos--twelve-messages.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/nc-demos/demos/twelve-messages
+    ! I typed twelve messages.
+
+  linkedin/tutorials--grade-an-agent-tool-before-you-install-it.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/tutorials/grade-an-agent-tool-before-you-install-it.mdx
+    · "I think I have something like that" is not coverage.
+    · It tends to raise a second question underneath the first: what is already loaded that I would not install today?
+
+  linkedin/tutorials--make-your-cli-agent-native.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/tutorials/make-your-cli-agent-native.mdx
+    ! I pointed an agent at a CLI tool I maintain and watched it waste four steps landing on the wrong brand.
+    ! My first AGENTS.md ran two hundred lines.
+    · So I added three layers, each with one job.
+    · I cut it to forty.
+
+  linkedin/whitepapers--big-blueprint-methodology.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/whitepapers/big-blueprint-methodology.mdx
+    · That ratio is the part I keep coming back to.
+    · So the question at hour eighteen: could any of that correcting happen without me?
+    · I pulled the methodology into a template.
+
+  linkedin/whitepapers--claim-classes.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/whitepapers/claim-classes.mdx
+    ! I built a pipeline to check the documents I was generating.
+    · Then I went looking for a hole in it on purpose.
+    · It wasn't checking anything I cared about.
+    · So I sorted what an agent writes into a business document into four kinds of claim.
+    · The premise behind all of it is an asymmetry I don't think has landed.
+
+  linkedin/whitepapers--lie-surface.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/whitepapers/lie-surface.mdx
+    ! That session turned up five artifacts I'd been trusting.
+    ! I've been calling that lie-surface.
+    · A unit suite in one of my products reported 970 of 970 passing.
+
+  linkedin/whitepapers--the-bifurcation-of-autonomy.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/whitepapers/the-bifurcation-of-autonomy.mdx
+    · That's one of five objections I ended up stress-testing against my own argument.
+    · It's the one I can't design around.
+
+  linkedin/whitepapers--the-sum-of-your-gaps.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/whitepapers/the-sum-of-your-gaps.mdx
+    ! That census produced a false result, and it pointed in the direction of my own argument.
+    · So I went looking in my own repository history for what that boundary hides.
+
+  substack/blog--everything-i-was-afraid-of-worked.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/everything-i-was-afraid-of-worked.mdx
+    ! There is a cap on model calls in my own specification, sitting on the part that answers questions — the part that resembled every architecture diagram I had studied.
+    ! The one I could not is where every problem I found had been waiting.
+    · That is the failure this piece turns on, and writing it down never occurred to me.
+    · Everything genuinely risky about that, I planned for in detail: the suggestion comes from a language model, but the decision to write is made by code that never talks to one, and each edit is spliced in at known offsets behind a content hash.
+    · Then I refreshed the page mid-apply.
+    · What I take from it is a test rather than a rule.
+    · The ones I could name came through an hour of abuse intact.
+
+
+SCOPE CLAIMS — claims about the reader, or about people in general.
+Same test, other direction: find the source sentence that makes this claim
+about PEOPLE. If the source only says it about Nino's own system, the
+caption must say it about his system. A reader who does the thing you said
+nobody does will answer the premise instead of the idea.
+
+  linkedin/applied--adopt-or-skip.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/nc-demos/applied/adopt-or-skip
+    ? Fifty-four hooks is fifty-four only against zero, and almost nobody is at zero.
+    ? Against a year of accumulated helpers the real figure is whatever survives subtraction, and that operand lives on your own machine where no project page can see it.
+    ? The check that pays permanently is the unglamorous one: get everything your agent loads at startup into a list you can actually read, then say what each item does in one sentence without looking it up.
+    ? The tracker describes behavior on other people's machines, written by users, and it cannot be quietly pruned without the absence showing.
+    ? Then the query hardly anyone runs: search that tracker for the uninstall.
+    ? What comes out is a count rather than a verdict, and the count belongs to you.
+
+  linkedin/applied--corpus.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/nc-demos/applied/corpus
+    ? A correction you gave.
+    ? An irritation you meant to do something about.
+    ? It re-derives what you already learned.
+    ? "The agent keeps leaving stray servers running" is a shrug you make and then forget.
+    ? One discipline holds the rest together: re-derive the number when you use it.
+    ? Quoting it is how a useful record becomes the next thing that lies to you.
+
+  linkedin/applied--session-closeout.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/nc-demos/applied/session-closeout
+    ? Delete it blind and you can erase the only copy of a decision that was never written down anywhere else.
+    ? A worktree's directory modification time is not evidence that nobody is using it — writing to a file inside it may never touch the root.
+
+  linkedin/blog--everything-i-was-afraid-of-worked.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/everything-i-was-afraid-of-worked.mdx
+    ? When you work with an AI assistant, you begin inside the model and stay there — it holds the state of the job and reaches for tools when it wants one.
+    ? So does everything missing: no path exists that nobody wrote.
+    ? No such check can fail on a claim nobody made.
+
+  linkedin/blog--give-your-ai-a-reason-for-every-design-reference.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/give-your-ai-a-reason-for-every-design-reference.mdx
+    ? The practical takeaway is a more specific assignment for the next attempt: give each reference a job you can inspect.
+
+  linkedin/blog--nobody-owns-what-the-agent-leaves-running.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/nobody-owns-what-the-agent-leaves-running.mdx
+    ? So: correct behavior at every step, and a pile in the middle that belongs to nobody.
+
+  linkedin/blog--photography-reports-that-help-me-choose.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/photography-reports-that-help-me-choose.mdx
+    ? The safeguards are part of the result: - New work is marked as not yet published for an earlier period, not as zero - Rising is unavailable when either comparison window has incomplete coverage - Browser actions remain actions, not people - Missing collection is not presented as no activity The point is not to make a photo dashboard feel more authoritative.
+
+  linkedin/blog--the-connector-you-cant-oauth.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-connector-you-cant-oauth.mdx
+    ? A personal agent that has to ask you for Gmail and Calendar is already losing to the system that already has iMessage.
+    ? A ChatGPT with plugins can claim the same connectors anyone else can OAuth.
+    ? It cannot claim last week's texts unless you paste them.
+    ? Anyone can claim Gmail and Calendar.
+    ? If you are building or backing the horizontal version of that demo, you are not in a race with other chat apps.
+    ? You are in a race with the operating system that already has the messages.
+
+  linkedin/blog--the-cut-youll-make-twice.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-cut-youll-make-twice.mdx
+    ? A control has a real place to act, and a failure that tells you it acted.
+    ? If the answer is “the agent was told not to,” you have a warning label.
+    ? You may still need it, but it is not enforcement.
+
+  linkedin/blog--the-depth-penalty-is-gone.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-depth-penalty-is-gone.mdx
+    ? The sharpest find was one nobody had the vocabulary to ask for.
+
+  linkedin/blog--the-hire-who-never-remembers.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-hire-who-never-remembers.mdx
+    ? The other half, coaching people and earning their trust, has nothing to carry it from one session to the next.
+
+  linkedin/blog--the-identity-crisis-of-the-prompter.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-identity-crisis-of-the-prompter.mdx
+    ? The floor shifted a couple of inches to the left and nobody else noticed.
+    ? Watch how people talk about prompting and the reaching is impossible to miss.
+    ? Being straight about what it involves: knowing what you want, which is harder than it sounds.
+    ? In the middle, where most of us live, the output is almost what you'd have made.
+    ? The people least rattled seem to be the ones with the strongest sense of what good looks like.
+
+  linkedin/blog--the-loudest-voice-in-my-voice-corpus-isnt-mine.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-loudest-voice-in-my-voice-corpus-isnt-mine.mdx
+    ? The contamination was findable in an afternoon by a query anyone could write.
+
+  linkedin/blog--the-rules-of-the-road-still-apply.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-rules-of-the-road-still-apply.mdx
+    ? Imagine your navigation app quietly adding a detour because businesses along the route paid to be seen.
+    ? You obey the signs and arrive safely.
+    ? You're a competent driver, but the route serves someone else's interests.
+    ? More driving lessons wouldn't tell you who paid for it.
+    ? AI gives people new capabilities.
+    ? Shared rules need to bind the people building the systems, too.
+
+  linkedin/blog--the-sommelier-argument.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-sommelier-argument.mdx
+    ? There's a role at every good restaurant that most people overlook.
+    ? Not the critic, who shows up afterward and tells you what you already felt.
+    ? The one who listens to what you think you want, maps it against what's actually available, and hands you something better than you'd have chosen.
+    ? What's the budget nobody states out loud.
+    ? Skip the inventory and you're guessing with confidence.
+    ? Your value isn't in making things.
+
+  linkedin/blog--the-source-of-their-intelligence.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-source-of-their-intelligence.mdx
+    ? The reasoning underneath was borrowed from somewhere nobody could name anymore.
+    ? Before language models it lived on Stack Overflow, in documentation, in the one senior engineer everyone pinged.
+    ? You chose which external answer to reach for, then fit it to a context nobody else could see.
+
+  linkedin/blog--the-style-guide-was-teaching-the-tells.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-style-guide-was-teaching-the-tells.mdx
+    ? Drafters copy that example, because copying one is cheaper than finding your own.
+    ? Ownership is not authorship, and feeding those 33 into a fingerprint gets you an imitation of an imitation.
+
+  linkedin/blog--the-taste-gap.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-taste-gap.mdx
+    ? Like a meal where every ingredient is fresh and nobody seasoned anything.
+    ? The bottleneck moved to taste, and most people haven't noticed yet.
+    ? Not aesthetic preference, and not whether you like serif fonts.
+    ? Most people aren't building theirs either.
+
+  linkedin/blog--the-work-doesnt-end-at-send.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/the-work-doesnt-end-at-send.mdx
+    ? The people receiving those requests may still have decisions to make and commitments to carry out.
+    ? The useful comparison is whether the assistant helped finish the work, including the effort it asked of everyone else.
+
+  linkedin/blog--theres-no-replicator-yet.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/theres-no-replicator-yet.mdx
+    ? Ask for dinner and it appears exactly as you meant it.
+    ? The other is what a miss nobody found would cost.
+
+  linkedin/blog--two-doors-for-agents.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/two-doors-for-agents.mdx
+    ? Don't make the agent squint at your DOM; give it a typed interface and get out of the way.
+    ? A payment gateway is not that, and you don't want an agent exploring checkout.
+    ? You want one function called with exactly the right parameters.
+
+  linkedin/blog--what-223-sessions-taught-me-about-working-with-ai.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/what-223-sessions-taught-me-about-working-with-ai.mdx
+    ? The obvious numbers came out about how you'd guess.
+    ? Nobody assigns that work and nothing tracks it.
+    ? That isn't how most people describe using these tools.
+    ? Or it was always there and nobody counted it.
+
+  linkedin/blog--what-if-the-fork-is-the-problem.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/what-if-the-fork-is-the-problem.mdx
+    ? Teach machines to drive interfaces built for people, or build new ones aimed at machines.
+
+  linkedin/blog--who-is-still-driving.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/who-is-still-driving.mdx
+    ? People shouldn't have to become AI engineers to use a product that promises to do a job for them.
+
+  linkedin/demos--browse-tool.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/nc-demos/demos/browse-tool
+    ? MCP still wins where you cannot put a binary on a PATH, or where a team needs managed auth and central policy.
+    ? This bet assumes you own the machine.
+
+  linkedin/demos--enforced-forever.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/nc-demos/demos/enforced-forever
+    ? Nobody decided to spend context on process janitoring.
+    ? Compliance happens because it is the path of least resistance, not because anyone was persuaded.
+
+  linkedin/demos--guardrail-removed.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/nc-demos/demos/guardrail-removed
+    ? Nobody typed that instruction.
+    ? That is the strongest thing the evidence supports, not proof that nobody asked.
+    ? The lesson is narrower than "watch your agents." The failure was a ratchet: a direction that only moves one way, each step justified by the step before it rather than by the goal.
+    ? Nobody was holding the goal.
+
+  linkedin/demos--twelve-messages.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/nc-demos/demos/twelve-messages
+    ? A team drops out, the number changes everywhere, and nobody opens an image editor.
+    ? The credit request was impossible at publish time, so it moved down a layer into the template pixels, where every future asset carries it whether or not anyone remembers to ask.
+
+  linkedin/tutorials--grade-an-agent-tool-before-you-install-it.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/tutorials/grade-an-agent-tool-before-you-install-it.mdx
+    ? The other half sits on your own machine, and nobody publishes that half for you.
+    ? Which is why the first check is the one that gets skipped: write down what your agent already loads at startup.
+    ? Native — your setup already does this.
+    ? Blocked — new but unusable for a reason unrelated to quality: wrong platform, a subscription you don't hold, patching something you don't control.
+    ? For every row marked Native, name the specific thing on your side that covers it.
+    ? A project's documentation describes what it does when it works; its issue tracker describes what it does on other people's machines, and a maintainer cannot curate that without the gap being obvious.
+    ? Bare generic names and rewrites of sections you already use are not.
+    ? Search the tracker for the uninstall itself while you're there — "it's cheap to try" is a claim about uninstalling, not installing, and the exit is the part nobody tests.
+
+  linkedin/tutorials--make-your-cli-agent-native.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/tutorials/make-your-cli-agent-native.mdx
+    ? "Exporters are pure" survives because you can grep the directory for a network call.
+    ? It needs what this is, what you want, and what can go wrong.
+
+  linkedin/tutorials--measure-your-own-token-waste.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/tutorials/measure-your-own-token-waste.mdx
+    ? A statusline puts context usage in front of you rather than leaving it to be discovered three tool calls later.
+    ? Twenty minutes, run against your own logs: --- first-comment ---
+
+  linkedin/whitepapers--big-blueprint-methodology.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/whitepapers/big-blueprint-methodology.mdx
+    ? It also did something nobody asked for.
+    ? Whether the shape holds when two people turn the crank is untested.
+
+  linkedin/whitepapers--claim-classes.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/whitepapers/claim-classes.mdx
+    ? And derived figures, the numbers you get by doing arithmetic on other numbers.
+    ? Nearly every tool built since aims at the writing.
+
+  linkedin/whitepapers--lie-surface.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/whitepapers/lie-surface.mdx
+    ? Nobody had sabotaged it.
+    ? The polished architecture document carries the most — the one that reads as most authoritative, the one you'd hand a new hire.
+    ? You can date it and append to it.
+
+  linkedin/whitepapers--the-sum-of-your-gaps.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/whitepapers/the-sum-of-your-gaps.mdx
+    ? Two studies get cited constantly on whether AI makes people more productive, and they point opposite ways.
+
+  substack/blog--everything-i-was-afraid-of-worked.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/everything-i-was-afraid-of-worked.mdx
+    ? Nobody was protected from anything.
+    ? For each layer of something an agent helped you build, name the specific failure that layer was created in response to.
+
+  substack/blog--what-if-the-fork-is-the-problem.md
+  source: /Users/nino/Workspace/dev/sites/nino/blog/.worktrees/codex/blog-rethink-20261030/astro-build/src/content/blog/what-if-the-fork-is-the-problem.mdx
+    ? The standard story about agentic automation says people move from executors to shepherds.
+    ? You stop doing the work and start overseeing the agents that do it.
+    ? It's a subtle one, approved, compounding for hours before anyone notices.
+    ? You can always build them.
+
+50 caption(s) across linkedin, substack: 0 with unverified figures, 0 with no source, 0 skipped as off-repo, 204 first-person claim(s) and 107 scope claim(s) needing a read, 0 repeated-phrasing pair(s), 0 misplaced LinkedIn blog link(s).

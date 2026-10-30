@@ -1,52 +1,39 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
-import ReadingList from '../../components/ReadingList.astro';
-import ReadingNavigation from '../../components/ReadingNavigation.astro';
+import SubjectNav from '../../components/SubjectNav.astro';
 import { generateBlogSchema, generatePersonSchema, generateWebsiteSchema } from '../../utils/schema';
+import { featureImageSrcset } from '../../utils/feature-image';
 import '../../styles/article.css';
 import '../../styles/reading-list.css';
-
 export const prerender = true;
-
-const posts = (await getCollection('blog', ({ data }) => data.status === 'published'))
-  .filter((post) => post.id !== 'archive')
-  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
-const current = posts[0];
-const { Content } = await render(current);
-const publishedDate = new Date(current.data.publishedAt);
+const posts = (await getCollection('blog', ({ data }) => data.status === 'published')).filter(post => post.id !== 'archive').sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
+const latest = posts[0];
+const recent = posts.slice(1, 5);
+const date = (post: typeof latest) => new Date(post.data.publishedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const readingTime = (post: typeof latest) => Math.max(1, Math.ceil((post.body?.split(/\s+/).length || 0) / 200));
 ---
-
-<BaseLayout
-  title="Signal Dispatch"
-  description="Essays, fiction, tutorials, and research on architecture, commerce, and AI-assisted work."
-  jsonLd={[generateWebsiteSchema(), generateBlogSchema(posts), generatePersonSchema()]}
-  theme="article"
->
-  <main class="article-page reading-page">
-    <SiteHeader currentPage="blog" variant="article" />
-    <div class="reading-shell">
-      <aside class="reading-sidebar"><ReadingList posts={posts} currentId={current.id} /></aside>
-      <div class="reading-stage">
-        <!-- Search indexes the article at its own URL, without duplicate home results. -->
-        <article>
-          <header class="article-opening article-opening--reading">
-            <div class="article-intro">
-              <p class="article-category">Signal Dispatch</p>
-              <h1 class="article-title">{current.data.title}</h1>
-              {current.data.excerpt && <p class="article-excerpt">{current.data.excerpt}</p>}
-              <div class="article-byline"><span>By <a href="/about">Nino Chavez</a></span><time datetime={publishedDate.toISOString()}>{publishedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time></div>
-            </div>
-          </header>
-          <ReadingNavigation posts={posts} currentId={current.id} label="Read another post" />
-          <div class="article-layout"><aside class="article-margin"><p class="article-margin-note"><a href="/blog/archive">All posts</a></p></aside><div class="article-content prose"><Content /></div></div>
-          <ReadingNavigation posts={posts} currentId={current.id} label="Continue reading" />
-        </article>
-        <details class="writing-more"><summary>More writing</summary><ul><li><a href="/blog/series">Series</a></li><li><a href="/blog/fiction">Fiction</a></li><li><a href="/blog/tutorials">Tutorials</a></li><li><a href="/blog/whitepapers">Whitepapers</a></li><li><a href="/blog/presentations">Presentations</a></li><li><a href="/blog/counterpoints">Counterpoints</a></li><li><a href="/blog/tags">Tags</a></li></ul></details>
-      </div>
+<BaseLayout title="Signal Dispatch" description="Essays, fiction, tutorials, and research on architecture, commerce, and AI-assisted work." jsonLd={[generateWebsiteSchema(), generateBlogSchema(posts), generatePersonSchema()]} theme="article">
+  <a class="skip-publication" href="#main">Skip to content</a>
+  <SiteHeader currentPage="blog" variant="article" />
+  <main id="main" class="journal-home" tabindex="-1">
+    <div class="journal-intro"><h1>Essays by Nino Chavez</h1><p>On building with AI, leading teams, and learning through the work.</p></div>
+    {latest && <section aria-label="Latest essay"><a class="journal-lead" href={`/blog/${latest.id}`}>
+      <div class="journal-lead__copy"><div class="essay-meta"><span class="latest-label">Latest essay</span><time datetime={new Date(latest.data.publishedAt).toISOString()}>{date(latest)}</time></div><h2>{latest.data.title}</h2><p>{latest.data.excerpt}</p><span class="read-essay">Read essay <span aria-hidden="true">→</span></span></div>
+      {latest.data.featureImage && <img src={latest.data.featureImage} srcset={featureImageSrcset(latest.data.featureImage)} sizes="(max-width: 760px) calc(100vw - 44px), 540px" width="1200" height="675" alt="" fetchpriority="high" decoding="async" />}
+    </a></section>}
+    <div class="journal-discovery">
+      <aside><SubjectNav /></aside>
+      <section aria-labelledby="more-to-read"><div class="journal-section-heading"><h2 id="more-to-read">More to read</h2><a href="/blog/archive">All essays</a></div>
+        <div class="journal-grid">{recent.map(post => <article class="journal-card"><a href={`/blog/${post.id}`}>
+          {post.data.featureImage && <img src={post.data.featureImage} srcset={featureImageSrcset(post.data.featureImage)} sizes="(max-width: 760px) calc(100vw - 44px), 460px" width="1200" height="675" alt="" loading="lazy" decoding="async" />}
+          <div class="essay-meta"><time datetime={new Date(post.data.publishedAt).toISOString()}>{date(post)}</time><span>{readingTime(post)} min read</span></div>
+          <h3>{post.data.title}</h3><p>{post.data.excerpt}</p>
+        </a></article>)}</div>
+      </section>
     </div>
-    <SiteFooter />
   </main>
+  <SiteFooter />
 </BaseLayout>
