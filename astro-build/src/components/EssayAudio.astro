@@ -1,0 +1,14 @@
+---
+import { renderEssayAudio } from '../utils/essay-audio.mjs';
+import '../styles/essay-audio.css';
+
+interface Props {
+  audio: { src: string; durationSeconds: number; narrator: string };
+  title: string;
+}
+const { audio, title } = Astro.props;
+---
+<Fragment set:html={renderEssayAudio(audio, { title })} />
+<script>
+  import '../scripts/essay-audio.js';
+</script>
