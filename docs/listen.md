@@ -1,10 +1,10 @@
 # Listen: hear the recording before publishing it
 
-The first trial uses **Because I Can Is Only Half the Answer** and **The Rules of the Road Still Apply**. Both private recordings were generated on October 30, 2026 (Chicago time): **3:36** and **7:25**, respectively. Nino rejected the **Nino Casual** clone's muffled, hollow tone and requested cleanup of its source recording. A separate **Nino Casual - cleaned test** clone now has a short comparison awaiting listening review. The original clone and both full recordings are preserved. No essay has public audio metadata, and no MP3 has been added to the site.
+The first trial uses **Because I Can Is Only Half the Answer** and **The Rules of the Road Still Apply**. Nino selected **Nino Casual - cleaned test** after hearing the short comparison and requested further refinement. Both essays now have private recordings using that voice, gentle EQ, compression and volume leveling: **3:46** and **7:52**, respectively. Pitch and timing are unchanged. The original clone, earlier recordings and unprocessed new takes are preserved. These final candidates still require Nino's listening approval. No essay has public audio metadata, and no MP3 has been added to the site.
 
 ## Set up the voice once
 
-The trial retains both **Nino Casual** and **Nino Casual - cleaned test** for comparison. For a future replacement, record about two minutes alone in a quiet, furnished room with little echo, at a consistent microphone distance. Use normal conversational volume and the delivery you want the essays to use. Read the opening of an existing essay naturally. Use a name containing **Nino** and complete ElevenLabs' voice-rights confirmation yourself.
+The trial uses **Nino Casual - cleaned test** and retains **Nino Casual** as the original. For a future replacement, record about two minutes alone in a quiet, furnished room with little echo, at a consistent microphone distance. Use normal conversational volume and the delivery you want the essays to use. Read the opening of an existing essay naturally. Use a name containing **Nino** and complete ElevenLabs' voice-rights confirmation yourself.
 
 ElevenLabs recommends one to two minutes of clean, consistent speech; its current recording screen suggests three minutes. More than three minutes is not needed for this trial. See the [official recording guidance](https://elevenlabs.io/docs/eleven-creative/voices/voice-cloning/instant-voice-cloning).
 
@@ -20,7 +20,9 @@ The authoring command reads the existing ElevenLabs credential from 1Password in
 
 Generation is split at paragraph boundaries. A chunk is reused only when its script, voice ID, model, voice settings, neighboring text and output format match and its saved bytes pass a checksum. There are no automatic paid retries. After an uncertain network failure, inspect ElevenLabs history before rerunning. If the clone's samples change under the same voice ID, preserve the old review and prepare a new review directory before generating again; cached takes are not evidence of the revised voice.
 
-Local review state and audio stay under `.tmp`, outside Astro's source and public directories. The manifest records source/script hashes, settings, durations, request IDs and audio hashes. Keep this review directory until the recording is approved and promoted; removing it loses the local recordings and cache.
+Local review state and audio stay under `.tmp`, outside Astro's source and public directories. The manifest records source/script hashes, settings, durations and audio hashes; chunk receipts record request IDs. Keep this review directory until the recording is approved and promoted; removing it loses the local recordings and cache.
+
+Keep previously shared MP3 paths unchanged when revising. Archive the prior manifest and assign new `audioFile` names before generation; the generator writes to those destinations. The current refined files end in `-cleaned-refined-v2.mp3`, while their unprocessed takes end in `-cleaned-raw-v2.mp3`. Do not rerun generation against the finished manifest without first assigning new raw-output names. Local EQ revisions can reuse the unprocessed recordings without another ElevenLabs generation. Each essay's `postProcessing` record and `.tmp/listen-preview/refinement-review.json` retain the exact source hash, filters, finishing gain, final hash and measured levels.
 
 ## Listen locally
 

@@ -38,4 +38,17 @@ Nino rejected the initial voice as muffled, hollow and lacking warmth, and repor
 
 The reference was processed once with ElevenLabs Voice Isolator, then raised 2.5 dB without EQ, compression, pitch or rate changes. A separate private clone, **Nino Casual - cleaned test**, preserves the original clone. Both voices generated the same 357-character essay opening with identical Multilingual v2 settings. The 18-second original and 20-second cleanup comparisons use linear gain to match their listening levels within 0.2 LU. Full decoding succeeded; local transcription retained all passages, with only number formatting and “want to”/“wanna” differences. The API reported character-cost values of 677 for isolation and 143 for each short generation; these are response receipts, not a billing-statement reconciliation.
 
-Source audio, cleaned reference, exact settings, returned voice IDs, response receipts and comparison checks stay in `astro-build/.tmp/listen-preview/voice-cleanup/` in the locked worktree. The full essays have not been regenerated. Cleanup quality and warmth await Nino's hearing; the candidate is not approved. If cleanup does not resolve the sound, use a fresh recording at normal conversational volume in a furnished room with little echo, following [ElevenLabs' recording guidance](https://elevenlabs.io/docs/eleven-creative/voices/voice-cloning/instant-voice-cloning).
+Source audio, cleaned reference, exact settings, returned voice IDs, response receipts and comparison checks stay in `astro-build/.tmp/listen-preview/voice-cleanup/` in the locked worktree. Nino subsequently selected the cleaned voice and requested further refinement for both full essays. If processing still does not resolve the sound, use a fresh recording at normal conversational volume in a furnished room with little echo, following [ElevenLabs' recording guidance](https://elevenlabs.io/docs/eleven-creative/voices/voice-cloning/instant-voice-cloning).
+
+## Refined full-essay candidates
+
+Both essays were regenerated with the selected cleaned clone and the existing Multilingual v2 settings. The original MP3 paths and earlier manifest remain preserved; new raw and refined versions have distinct filenames. Local processing applies a 50 Hz high-pass filter, small EQ moves at 160 Hz (+1.2 dB), 450 Hz (-1.3 dB) and 2.6 kHz (+1 dB), 1.6:1 compression, loudness normalization and a final gain adjustment. No pitch correction or time stretching was applied. Unprocessed takes remain available for further EQ changes without new paid generation.
+
+| Essay | Duration | Final loudness | True peak |
+|---|---|---|---|
+| Because I Can Is Only Half the Answer | 3:46 | -19.26 LUFS | -2.76 dBTP |
+| The Rules of the Road Still Apply | 7:52 | -19.26 LUFS | -2.67 dBTP |
+
+Both MP3s decode fully, preserve their generated duration and match the hashes recorded in the manifest. Local transcription comparisons found no missing passages. Remaining differences were number/name formatting, “want to”/“wanna,” and one “improved”/“improve” discrepancy. These may be transcription errors; final subjective sound quality and pronunciation still require Nino's listening review. Nothing is approved for publication.
+
+A local acoustic assessment of the reference was also requested. Its measurements, method and dependency verification remain private in `voice-cleanup/voice-assessment.json`; the reference transcript is not committed. This assessment describes the available recording rather than a clinical or singing-voice classification. The complete finishing settings, raw/final hashes, level checks and transcript comparisons are recorded in `.tmp/listen-preview/refinement-review.json`.
