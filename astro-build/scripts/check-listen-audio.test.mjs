@@ -47,8 +47,8 @@ test('spoken script preserves prose and normalizes links and 630', () => {
   assert.throws(() => narrationScript({ data: { title: 'Complex' }, content: '```js\ncode\n```' }), /complex MDX/);
 });
 test('narration headings retain existing punctuation', () => {
-  const script = narrationScript({ data: { title: 'A title' }, content: '## What matters?\n\n## Next steps:\n\n## A statement.' });
-  assert.ok(script.endsWith('What matters?\n\nNext steps:\n\nA statement.\n'));
+  const script = narrationScript({ data: { title: 'A title' }, content: '## What matters?\n\n## Next steps:\n\n## A statement.\n\n## *Already done.*\n\n## **Question?**\n\n##\n\nText after blank heading.' });
+  assert.ok(script.endsWith('What matters?\n\nNext steps:\n\nA statement.\n\nAlready done.\n\nQuestion?\n\nText after blank heading.\n'));
 });
 test('invalid generation speed is rejected before reading review files or calling ElevenLabs', () => {
   for (const speed of ['0.69', '1.21', 'NaN', 'Infinity']) {

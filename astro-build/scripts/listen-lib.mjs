@@ -43,12 +43,15 @@ export function narrationScript(essay) {
   body = body
     .replace(/\[Read the letter\.\]\([^\s]+\)/g, '')
     .replace(/\[([^\]]+)\]\((?:[^()]|\([^()]*\))*\)/g, '$1')
-    .replace(/^#{1,6}[ \t]+(.+)$/gm, (_, heading) => /[.!?:…]["”’']?$/.test(heading.trim()) ? heading.trim() : `${heading.trim()}.`)
     .replace(/^\s*(?:---+|\*\*\*+|___+)\s*$/gm, '')
     .replace(/^>\s?/gm, '')
     .replace(/\*\*([^*]+)\*\*/g, '$1')
     .replace(/\*([^*\n]+)\*/g, '$1')
     .replace(/`([^`]+)`/g, '$1')
+    .replace(/^#{1,6}(?:[ \t]+(.*))?$/gm, (_, heading = '') => {
+      const label = heading.trim();
+      return !label || /[.!?:…]["”’']?$/.test(label) ? label : `${label}.`;
+    })
     .replace(/\b630\b/g, 'Six-three-oh')
     .replace(/ +$/gm, '')
     .replace(/\n{3,}/g, '\n\n');
