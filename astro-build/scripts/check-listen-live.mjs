@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import matter from 'gray-matter';
 import { checkAudio } from './check-listen-audio.mjs';
 import { files, sha256 } from './listen-lib.mjs';
+import { essayAudioPlaybackSrc } from '../src/utils/essay-audio.mjs';
 
 // Exercise the deployed delivery path: local preview range support is not proof
 // that the production host supports seeking.
@@ -23,14 +24,15 @@ const results = await Promise.all(essays.map(async ({ file, data }) => {
   const { audio } = data;
   const slug = file.split('/').at(-1).replace(/\.mdx$/, '');
   const url = new URL(`/blog/${slug}`, origin);
-  const audioUrl = new URL(audio.src, origin);
+  const playbackSrc = essayAudioPlaybackSrc(audio.src);
+  const audioUrl = new URL(playbackSrc, origin);
   const result = { slug, url: url.href, audioUrl: audioUrl.href, checks: [] };
   try {
     const page = await fetchChecked(url);
     assert.equal(page.status, 200, 'Article status');
     const html = await page.text();
     assert.equal((html.match(/<audio\b/g) || []).length, 1, 'One player per article');
-    assert.ok(html.includes(audio.src), 'Approved recording linked');
+    assert.ok(html.includes(`src="${playbackSrc}"`), 'Approved recording linked');
     assert.ok(html.includes(`AI narration · ${audio.narrator}.`), 'Narrator disclosure');
     result.checks.push('article player and disclosure');
 

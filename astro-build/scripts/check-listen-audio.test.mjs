@@ -83,7 +83,8 @@ test('designed narrator disclosure does not imply Nino recorded the voice', () =
 });
 test('player escapes text, supplies a fallback, and never autoplays', () => {
   const html = renderEssayAudio({ src: '/blog/audio/example.mp3', durationSeconds: 125, narrator: '<Nino>' }, { title: '"Title" <script>' });
-  assert.ok(html.includes('controls src="/blog/audio/example.mp3" preload="none"'));
+  assert.ok(html.includes('controls src="/blog/listen/example.mp3" preload="none"'));
+  assert.ok(html.includes('href="/blog/audio/example.mp3" download'));
   assert.ok(html.includes('data-pagefind-ignore'));
   assert.ok(html.includes('2:05'));
   assert.ok(html.includes('Download audio'));
