@@ -71,8 +71,14 @@ const server = createServer((request, response) => {
         return `href="${selected ? `/essay/${selected.slug}` : `https://ninochavez.co${href}`}"`;
       });
       const notice = `<p style="font:13px/1.5 system-ui;color:#536373;margin:0 0 20px"><a href="/" style="color:#0d5a93;text-decoration:underline;text-underline-offset:3px">Private listening review</a> · ${manifest.testFixture ? 'Test tone — not a voice recording' : 'Not published'}</p>`;
-      html = html.replace(slot, `${slot}${notice}${ready(article) ? player(article) : '<p>Waiting for a narration recording.</p>'}`)
-        .replace('</head>', '<meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="/listen.css"><script type="module" src="/listen.js"></script></head>');
+      const contentStart = html.indexOf(slot) + slot.length;
+      const contentEnd = html.indexOf('<!-- essay-audio-slot-end -->', contentStart);
+      if (contentEnd < 0) throw new Error('The audio preview slot is out of date. Rebuild the site before reviewing audio.');
+      // Replace a previously approved player as well as an empty slot, so a
+      // revised recording is the only audio presented for review.
+      html = html.slice(0, contentStart) + notice +
+        (ready(article) ? player(article) : '<p>Waiting for a narration recording.</p>') + html.slice(contentEnd);
+      html = html.replace('</head>', '<meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="/listen.css"><script type="module" src="/listen.js"></script></head>');
       response.setHeader('Content-Type', 'text/html; charset=utf-8'); response.end(request.method === 'HEAD' ? undefined : html); return;
     }
     // Only built static resources, never Worker code, content JSON or local files.

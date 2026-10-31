@@ -84,3 +84,18 @@ Both essays were generated with Eleven v3 at speed 1 and stability 0.5, matching
 Both finished files decode fully, preserve generated duration and match their manifest hashes. Local Whisper small.en comparisons against the raw takes found no missing passages. Differences were British/American spelling, `30`/`30th`, `the`/`a` and `reward`/`rewards`; recognition is not proof of exact pronunciation. The complete settings, raw/final hashes and transcript comparisons are in `.tmp/listen-preview/british-v1-review.json`.
 
 Read-only dispatch `81b57882-e411-4305-8a3d-b3f3540354fa` identified downstream author-voice assumptions; its requested and reported runtime matched. The parent checked the affected sources and updated the generation guard, shared disclosure, review copy, direction and operating guide without adding unnecessary public metadata fields. All 18 focused tests and all 12 rendered checks pass. The parent opened the updated desktop and phone captures directly. The browser checks use a labelled synthetic tone and establish controls, labels and layout, not acceptance of the new narration. The full site build passes, and production output contains no audio or private-review markers. Human approval of both actual full recordings remains open; the draft stays unmerged.
+
+## Listening approval and publication
+
+On October 30, 2026, Nino heard the two complete British-narrator recordings and said, “these sound good. publish the Listen feature with both recordings.” This approves the actual files as well as the narrator choice.
+
+Only those two finished MP3s were copied into `astro-build/public/blog/audio/`. Their hashes were checked against the previously delivered files, and the current source hashes matched the recorded essays. Publication adds audio frontmatter without changing article prose, author, dates or existing distribution metadata.
+
+| Essay | Approved asset | SHA-256 |
+|---|---|---|
+| Because I Can Is Only Half the Answer | `because-i-can-is-only-half-the-answer-fe8503ae93e1.mp3` | `fe8503ae93e17668f44398f1efb2acf16b85eb457d394d815737bb0eb081183b` |
+| The Rules of the Road Still Apply | `the-rules-of-the-road-still-apply-e3cc010e6cb5.mp3` | `e3cc010e6cb570ecc5d2cd7a4fb71c0b06219f01aa00e6d883ae89d66742ad0d` |
+
+The public audio guard accepts both approved recordings. The 18 focused tests pass. Cloudflare Pages deployment follows the existing push-to-main integration in `DEPLOY.md`; source approval and a successful build are not, by themselves, proof of live playback. Live article responses, exact asset hashes, range requests and browser playback must be checked after the merge. This release does not authorize new LinkedIn distribution.
+
+The publication-stage browser run caught two players in a private essay preview after its approved player entered the built page. The preview now replaces the entire marked audio slot, including any previously approved player, before inserting the recording under review. The production page remains a single approved player. This keeps future revisions reviewable after an essay already has public audio. All 12 rendered checks pass against the approved-source build after this fix, and both built MP3 hashes match the approved files.

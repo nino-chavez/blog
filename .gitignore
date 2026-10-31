@@ -47,6 +47,7 @@ lerna-debug.log*
 .cache
 .temp
 .tmp
+/.artifacts/listen/
 
 # OS files
 Thumbs.db
