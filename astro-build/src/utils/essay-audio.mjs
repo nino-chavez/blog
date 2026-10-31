@@ -3,7 +3,12 @@ export const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (characte
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[character]);
 
+// Use a distinct runtime URL: Astro serves a matching public asset before
+// consulting endpoint routes. Local-only review URLs already support ranges.
+export const essayAudioPlaybackSrc = (src) => src.replace(/^\/blog\/audio\//, '/blog/listen/');
+
 export function renderEssayAudio({ src, durationSeconds, narrator }, { title, id = 'essay-audio' }) {
+  const playbackSrc = essayAudioPlaybackSrc(src);
   const rounded = Math.round(durationSeconds);
   const minutes = Math.floor(rounded / 60);
   const seconds = String(rounded % 60).padStart(2, '0');
@@ -14,7 +19,7 @@ export function renderEssayAudio({ src, durationSeconds, narrator }, { title, id
       <span aria-label="${minutes} minutes ${Number(seconds)} seconds">${minutes}:${seconds}</span>
     </div>
     <p id="${label}-description">AI narration · ${escapeHtml(narrator)}.</p>
-    <audio controls src="${escapeHtml(src)}" preload="none" tabindex="0" aria-label="Listen to ${escapeHtml(title)}" aria-describedby="${label}-description">
+    <audio controls src="${escapeHtml(playbackSrc)}" preload="none" tabindex="0" aria-label="Listen to ${escapeHtml(title)}" aria-describedby="${label}-description">
       Your browser does not support audio playback.
     </audio>
     <p class="essay-audio__error" data-audio-error role="status" hidden>Audio is unavailable. You can still read the essay below.</p>

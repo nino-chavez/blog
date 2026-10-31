@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import { files, sha256, sourceHash } from './listen-lib.mjs';
 
-export function checkAudio(root) {
+export function checkAudio(root, { manifest } = {}) {
   const approved = new Set();
   for (const path of files(join(root, 'src/content/blog')).filter((path) => path.endsWith('.mdx'))) {
     const essay = matter(readFileSync(path, 'utf8'));
@@ -23,7 +23,9 @@ export function checkAudio(root) {
     const asset = join(root, 'public', audio.src);
     if (approved.has(asset)) throw new Error('An approved recording must belong to one essay.');
     if (!existsSync(asset)) throw new Error('An approved recording is missing.');
-    if (audio.sha256 !== sha256(readFileSync(asset))) throw new Error('Recording bytes changed after approval.');
+    const bytes = readFileSync(asset);
+    if (audio.sha256 !== sha256(bytes)) throw new Error('Recording bytes changed after approval.');
+    if (manifest) manifest[audio.src] = bytes.length;
     if (audio.sourceSha256 !== sourceHash(essay)) throw new Error('Essay changed after recording approval.');
     approved.add(asset);
   }
@@ -34,7 +36,11 @@ export function checkAudio(root) {
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {
-    console.log(`[check-listen-audio] ${checkAudio(process.cwd())} approved recordings; no unapproved public audio`);
+    const manifest = {};
+    const count = checkAudio(process.cwd(), { manifest });
+    mkdirSync('.tmp', { recursive: true });
+    writeFileSync('.tmp/listen-assets.json', JSON.stringify(manifest) + '\n');
+    console.log(`[check-listen-audio] ${count} approved recordings; no unapproved public audio`);
   } catch (error) {
     console.error(`[check-listen-audio] FAIL: ${error.message}`);
     process.exitCode = 1;
