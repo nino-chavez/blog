@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "node scripts/check-listen-audio.mjs && node scripts/check-feature-images.mjs && node scripts/check-takeaway.mjs && astro build && npx pagefind --site dist && node scripts/optimize-routes.mjs && node scripts/check-post-api.mjs && node scripts/check-sitemap.mjs && npm run reader:check && npm run captions:check",
-    "test:listen": "node --test scripts/check-listen-audio.test.mjs",
+    "test:listen": "node --test scripts/check-listen-audio.test.mjs scripts/serve-essay-audio.test.mjs",
+    "listen:check-live": "node scripts/check-listen-live.mjs",
     "listen:prepare": "node scripts/prepare-listen.mjs",
     "listen:generate": "node scripts/generate-listen.mjs",
     "listen:preview": "node scripts/preview-listen.mjs",
