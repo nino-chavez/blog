@@ -1,10 +1,10 @@
 # Listen: hear the recording before publishing it
 
-The first trial uses **Because I Can Is Only Half the Answer** and **The Rules of the Road Still Apply**. Nino saved his personal clone as **Nino Casual**. Both private recordings were generated on October 30, 2026 (Chicago time): **3:36** and **7:25**, respectively. The player and narration tools are implemented; Nino's listening approval is still pending. No essay has public audio metadata, and no MP3 has been added to the site.
+The first trial uses **Because I Can Is Only Half the Answer** and **The Rules of the Road Still Apply**. Both private recordings were generated on October 30, 2026 (Chicago time): **3:36** and **7:25**, respectively. Nino rejected the **Nino Casual** clone's muffled, hollow tone and requested cleanup of its source recording. A separate **Nino Casual - cleaned test** clone now has a short comparison awaiting listening review. The original clone and both full recordings are preserved. No essay has public audio metadata, and no MP3 has been added to the site.
 
 ## Set up the voice once
 
-The trial uses the saved **Nino Casual** Instant Voice Clone. For a future replacement, record about two minutes alone in a quiet room, at a consistent microphone distance and in the voice you want the essays to use. Read the opening of an existing essay naturally. Use a name containing **Nino** and complete ElevenLabs' voice-rights confirmation yourself.
+The trial retains both **Nino Casual** and **Nino Casual - cleaned test** for comparison. For a future replacement, record about two minutes alone in a quiet, furnished room with little echo, at a consistent microphone distance. Use normal conversational volume and the delivery you want the essays to use. Read the opening of an existing essay naturally. Use a name containing **Nino** and complete ElevenLabs' voice-rights confirmation yourself.
 
 ElevenLabs recommends one to two minutes of clean, consistent speech; its current recording screen suggests three minutes. More than three minutes is not needed for this trial. See the [official recording guidance](https://elevenlabs.io/docs/eleven-creative/voices/voice-cloning/instant-voice-cloning).
 
