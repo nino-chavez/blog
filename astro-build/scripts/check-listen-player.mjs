@@ -16,10 +16,10 @@ const manifest = readManifest(REVIEW_DIR);
 manifest.testFixture = true;
 for (const essay of manifest.essays) {
   execFileSync('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', '-f', 'lavfi', '-i', 'sine=frequency=440:duration=8', '-af', 'volume=0.01', '-c:a', 'libmp3lame', '-b:a', '128k', path.join(directory, essay.audioFile)], { stdio: ['ignore', 'ignore', 'pipe'], timeout: 10000 });
-  Object.assign(essay, { status: 'ready-for-review', durationSeconds: 8, sha256: sha256(fs.readFileSync(path.join(directory, essay.audioFile))) });
+  Object.assign(essay, { narrator: 'Original British narrator', status: 'ready-for-review', durationSeconds: 8, sha256: sha256(fs.readFileSync(path.join(directory, essay.audioFile))) });
 }
 fs.writeFileSync(path.join(directory, 'manifest.json'), JSON.stringify(manifest));
-const server = spawn(process.execPath, [path.join(ROOT, 'scripts/preview-listen.mjs'), '--directory', directory, '--port', '4329'], { stdio: ['ignore', 'pipe', 'pipe'] });
+const server = spawn(process.execPath, [path.join(ROOT, 'scripts/preview-listen.mjs'), '--directory', directory, '--port', '4329'], { stdio: ['ignore', 'pipe', 'pipe'], timeout: 180000 });
 await new Promise((resolve, reject) => {
   const timer = setTimeout(() => reject(new Error('Preview startup timeout')), 10000);
   server.stdout.once('data', () => { clearTimeout(timer); resolve(); });
@@ -45,7 +45,7 @@ try {
         assert.match(await page.locator('.article-title').evaluate((element) => getComputedStyle(element).fontFamily), /Georgia/);
         assert.equal(await page.locator('body').evaluate((element) => getComputedStyle(element).backgroundColor), 'rgb(244, 240, 232)');
         assert.equal(await page.locator('audio').count(), 1);
-        assert.match(await page.locator('.essay-audio').innerText(), /AI narration using Nino Chavez/);
+        assert.match(await page.locator('.essay-audio').innerText(), /AI narration · Original British narrator/);
         assert.equal(await page.locator('audio').getAttribute('autoplay'), null);
         assert.equal(await page.locator('audio').getAttribute('preload'), 'none');
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
@@ -70,6 +70,8 @@ try {
         results.push({ engine: engineName, width, state: 'play, pause, seek; no overflow; no autoplay' });
         await page.goto(base, { waitUntil: 'networkidle' });
         assert.equal(await page.locator('audio').count(), 2);
+        assert.ok(!(await page.locator('body').innerText()).includes('AI version of your voice'));
+        assert.match(await page.locator('.essay-audio').first().innerText(), /AI narration · Original British narrator/);
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
         if (width === 390) await page.screenshot({ path: path.join(evidence, `${engineName}-review-${width}.png`) });
         // Missing-file behavior retains the transcript and direct download link.

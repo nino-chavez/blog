@@ -13,7 +13,7 @@ export function renderEssayAudio({ src, durationSeconds, narrator }, { title, id
       <h2 id="${label}-heading">Listen to this essay</h2>
       <span aria-label="${minutes} minutes ${Number(seconds)} seconds">${minutes}:${seconds}</span>
     </div>
-    <p id="${label}-description">AI narration using ${escapeHtml(narrator)}’s voice.</p>
+    <p id="${label}-description">AI narration · ${escapeHtml(narrator)}.</p>
     <audio controls src="${escapeHtml(src)}" preload="none" tabindex="0" aria-label="Listen to ${escapeHtml(title)}" aria-describedby="${label}-description">
       Your browser does not support audio playback.
     </audio>

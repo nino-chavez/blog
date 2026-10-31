@@ -4,22 +4,27 @@ import { mkdirSync, readFileSync, writeFileSync, existsSync, copyFileSync } from
 import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { parseArgs } from 'node:util';
-import { REVIEW_DIR, readManifest, readEssay, sourceHash, sha256, splitScript, localFile } from './listen-lib.mjs';
+import { REVIEW_DIR, readManifest, readEssay, sourceHash, sha256, splitScript, localFile, assertSelectedVoice } from './listen-lib.mjs';
 
 const { values } = parseArgs({ options: {
   'voice-id': { type: 'string' }, generate: { type: 'boolean', default: false },
   'max-characters': { type: 'string', default: '18000' },
   speed: { type: 'string', default: '1' },
+  'model-id': { type: 'string', default: 'eleven_multilingual_v2' },
 } });
-if (!values['voice-id'] || !/^[a-zA-Z0-9]+$/.test(values['voice-id'])) throw new Error('Provide the saved personal clone with --voice-id.');
+if (!values['voice-id'] || !/^[a-zA-Z0-9]+$/.test(values['voice-id'])) throw new Error('Provide the selected saved narrator with --voice-id.');
 const budget = Number(values['max-characters']);
 if (!Number.isSafeInteger(budget) || budget < 1) throw new Error('Invalid character limit.');
 const speed = Number(values.speed);
 if (!Number.isFinite(speed) || speed < 0.7 || speed > 1.2) throw new Error('Speed must be between 0.7 and 1.2.');
+const modelId = values['model-id'];
+if (!['eleven_multilingual_v2', 'eleven_v3'].includes(modelId)) throw new Error('Unsupported narration model.');
 const manifest = readManifest();
+if (manifest.voiceSelection?.voiceId !== values['voice-id']) throw new Error('Voice ID must match the reviewed narrator selection.');
 const settings = {
-  voiceId: values['voice-id'], modelId: 'eleven_multilingual_v2', outputFormat: 'mp3_44100_128',
-  voiceSettings: { stability: 0.6, similarity_boost: 0.75, style: 0, use_speaker_boost: true, speed },
+  voiceId: values['voice-id'], modelId, outputFormat: 'mp3_44100_128',
+  voiceSettings: modelId === 'eleven_v3' ? { stability: 0.5, speed } :
+    { stability: 0.6, similarity_boost: 0.75, style: 0, use_speaker_boost: true, speed },
 };
 const cacheDir = join(REVIEW_DIR, 'cache');
 mkdirSync(cacheDir, { recursive: true });
@@ -27,9 +32,12 @@ const jobs = manifest.essays.map((essay) => {
   if (sourceHash(readEssay(essay.slug)) !== essay.sourceSha256) throw new Error('Essay changed; review the narration script again.');
   const text = readFileSync(localFile(REVIEW_DIR, essay.scriptFile), 'utf8');
   if (sha256(text) !== essay.scriptSha256) throw new Error('Script changed; review and update its fingerprint before generation.');
+  if (modelId === 'eleven_v3' && /<break\b/i.test(text)) throw new Error('Eleven v3 does not support SSML breaks. Review a v3 narration script first.');
   const parts = splitScript(text);
   const chunks = parts.map((text, index) => {
-    const input = { ...settings, text, previousText: parts[index - 1] || '', nextText: parts[index + 1] || '' };
+    const input = { ...settings, text,
+      previousText: modelId === 'eleven_multilingual_v2' ? parts[index - 1] || '' : '',
+      nextText: modelId === 'eleven_multilingual_v2' ? parts[index + 1] || '' : '' };
     const fingerprint = sha256(JSON.stringify(input));
     const path = join(cacheDir, `${fingerprint}.mp3`);
     const receiptPath = join(cacheDir, `${fingerprint}.json`);
@@ -46,7 +54,7 @@ const characters = jobs.flatMap((job) => job.chunks).filter((chunk) => !chunk.ca
 console.log(`${manifest.essays.length} essays; ${characters} uncached text characters; maximum ${budget}.`);
 if (characters > budget) throw new Error('Character allowance exceeded. No requests sent.');
 if (!values.generate) {
-  console.log('Dry run only. Add --generate after the personal voice is saved and scripts are reviewed.');
+  console.log('Dry run only. Add --generate after the selected voice is saved and scripts are reviewed.');
   process.exit(0);
 }
 // Check local prerequisites before spending credits. 1Password output stays in memory.
@@ -59,9 +67,7 @@ const voiceResponse = await fetch(`https://api.elevenlabs.io/v1/voices/${setting
 });
 if (!voiceResponse.ok) throw new Error(`Cannot verify the selected voice (HTTP ${voiceResponse.status}).`);
 const voice = await voiceResponse.json();
-if (voice.category !== 'cloned' || !/nino/i.test(voice.name)) {
-  throw new Error('This trial requires Nino’s saved Instant Voice Clone. No speech generated.');
-}
+assertSelectedVoice(voice, manifest.voiceSelection);
 
 for (const { essay, chunks } of jobs) {
   for (const chunk of chunks) {
@@ -97,7 +103,7 @@ for (const { essay, chunks } of jobs) {
   const duration = Number(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration',
     '-of', 'default=noprint_wrappers=1:nokey=1', destination], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], timeout: 10000 }).trim());
   if (!Number.isFinite(duration) || duration <= 0) throw new Error('Generated recording has no valid duration.');
-  Object.assign(essay, { status: 'ready-for-review', durationSeconds: duration, sha256: sha256(readFileSync(destination)),
+  Object.assign(essay, { narrator: manifest.voiceSelection.narrator, status: 'ready-for-review', durationSeconds: duration, sha256: sha256(readFileSync(destination)),
     generation: settings, generatedAt: new Date().toISOString() });
   writeFileSync(join(REVIEW_DIR, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
 }

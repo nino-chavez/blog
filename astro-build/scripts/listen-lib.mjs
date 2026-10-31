@@ -33,6 +33,17 @@ export function localFile(directory, name) {
   return resolve(directory, name);
 }
 
+export function assertSelectedVoice(voice, selection) {
+  if (selection?.selectedBy !== 'Nino' || !selection.voiceId || !selection.name ||
+      typeof selection.narrator !== 'string' || !selection.narrator.trim() ||
+      !['cloned', 'generated'].includes(selection.category)) {
+    throw new Error('Record Nino’s selected voice ID, name, category and narrator label in the review manifest before generation.');
+  }
+  if (voice.voice_id !== selection.voiceId || voice.name !== selection.name || voice.category !== selection.category) {
+    throw new Error('The provider voice does not match the selected narrator. No speech generated.');
+  }
+}
+
 // Deliberately limited to prose essays. Unsupported MDX needs a human-authored
 // narration script; silently dropping a table or code block changes the essay.
 export function narrationScript(essay) {

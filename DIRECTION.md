@@ -39,6 +39,6 @@ Review the rendered page, not this document, when judging hierarchy, readability
 
 ## Listen feature — preserve the reading surface
 
-The affected surfaces are the native essay opening on desktop and phone, its optional audio controls, and a local listening room for author review. Keep the selected Journal typography, column width, byline and article prose. An approved recording sits below the byline and before the contents and opening paragraph. Native controls support play, pause and seeking without JavaScript or autoplay. State that the narration uses an AI version of the author's voice; the essay supplies the transcript.
+The affected surfaces are the native essay opening on desktop and phone, its optional audio controls, and a local listening room for author review. Keep the selected Journal typography, column width, byline and article prose. An approved recording sits below the byline and before the contents and opening paragraph. Native controls support play, pause and seeking without JavaScript or autoplay. Identify the selected narrator and disclose AI narration; the essay supplies the transcript. Nino selected an original British narrator after reviewing both his clone and three designed-voice auditions. The author byline remains separate from narrator identity.
 
 Unapproved recordings remain outside Astro's source and public directories. The local listening room is bound to this computer and is never a published route. Only the author's approval of the actual recording permits adding public audio metadata and assets.

@@ -67,3 +67,20 @@ A 381-character pilot decoded fully and retained the opening in local transcript
 Both final MP3s decode fully, retain their generated durations and match their saved hashes. Local Whisper small.en comparisons found no missing passages after normalizing number/name formatting and contractions. Two differences remain: `30`/`30th` and `conflict`/`conflicts`; these may be recognition errors. Transcription and timing checks do not establish natural cadence or exact pronunciation. Nino's listening approval remains required.
 
 All 16 approval/script/player tests pass, including the pronunciation correction, heading punctuation and rejection of invalid speed values before any provider request. The full site build passes. Production output contains no MP3s or private-review markers. Earlier rendered player checks remain applicable because player code did not change. Exact audio checks and processing settings are in `.tmp/listen-preview/cadence-v3-review.json`. The draft stays unmerged and the recordings unpublished.
+
+## Selected original British narrator
+
+Nino requested an original theatrical British narrator audition and chose **candidate 1** from three readings of the same 359-character opening. The selected Voice Design preview was saved as **Signal Dispatch - British Narrator** and verified by an API readback. The three auditions and the selection receipt stay private under `british-narrator-audition/`. No performer recording was used to design this voice.
+
+The generator now checks the exact selected voice ID, name and category against the private manifest, and copies the selected narrator label to each completed essay. It accepts selected personal clones and designed voices without a fallback. The shared player says **AI narration · Original British narrator.** The private review introduction no longer claims this is the author's voice. The author byline and public metadata schema are unchanged.
+
+Both essays were generated with Eleven v3 at speed 1 and stability 0.5, matching the audition's model family and retaining the designed voice's native pacing. The scripts use punctuated headings, paragraph breaks and **six-three-oh**; they contain no SSML breaks or acting tags. Three requests used 13,128 text characters without retries. Local finishing applied only linear volume reductions, without EQ, compression, pitch correction or time stretching. Earlier delivered MP3s remain unchanged.
+
+| Essay | Duration | Final loudness | True peak |
+|---|---|---|---|
+| Because I Can Is Only Half the Answer | 5:08 | -22.19 LUFS | -5.18 dBTP |
+| The Rules of the Road Still Apply | 10:20 | -22.19 LUFS | -5.07 dBTP |
+
+Both finished files decode fully, preserve generated duration and match their manifest hashes. Local Whisper small.en comparisons against the raw takes found no missing passages. Differences were British/American spelling, `30`/`30th`, `the`/`a` and `reward`/`rewards`; recognition is not proof of exact pronunciation. The complete settings, raw/final hashes and transcript comparisons are in `.tmp/listen-preview/british-v1-review.json`.
+
+Read-only dispatch `81b57882-e411-4305-8a3d-b3f3540354fa` identified downstream author-voice assumptions; its requested and reported runtime matched. The parent checked the affected sources and updated the generation guard, shared disclosure, review copy, direction and operating guide without adding unnecessary public metadata fields. All 18 focused tests and all 12 rendered checks pass. The parent opened the updated desktop and phone captures directly. The browser checks use a labelled synthetic tone and establish controls, labels and layout, not acceptance of the new narration. The full site build passes, and production output contains no audio or private-review markers. Human approval of both actual full recordings remains open; the draft stays unmerged.

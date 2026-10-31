@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import matter from 'gray-matter';
 import { checkAudio } from './check-listen-audio.mjs';
-import { sourceHash, sha256, narrationScript, splitScript, localFile } from './listen-lib.mjs';
+import { sourceHash, sha256, narrationScript, splitScript, localFile, assertSelectedVoice } from './listen-lib.mjs';
 import { renderEssayAudio } from '../src/utils/essay-audio.mjs';
 
 function fixture(t, { status = 'published', withAudio = true, withFile = true, audio = {}, body = 'A source paragraph.', recordedBody = body } = {}) {
@@ -62,6 +62,24 @@ test('chunking preserves paragraph order and text', () => {
   assert.ok(chunks.length > 1);
   assert.ok(chunks.every((chunk) => chunk.length <= 35));
   assert.equal(chunks.join('\n\n'), text);
+});
+test('generation accepts only the exact selected clone or designed voice', () => {
+  for (const category of ['cloned', 'generated']) {
+    const voice = { voice_id: 'SelectedVoice', name: 'Selected narrator', category };
+    const selection = { voiceId: voice.voice_id, name: voice.name, category, narrator: 'Selected narrator', selectedBy: 'Nino' };
+    assert.doesNotThrow(() => assertSelectedVoice(voice, selection));
+    for (const other of [{ ...voice, voice_id: 'OtherVoice' }, { ...voice, name: 'Other narrator' }, { ...voice, category: 'premade' }]) {
+      assert.throws(() => assertSelectedVoice(other, selection), /does not match/);
+    }
+    assert.throws(() => assertSelectedVoice(voice), /Record Nino/);
+    assert.throws(() => assertSelectedVoice(voice, { ...selection, selectedBy: 'agent' }), /Record Nino/);
+    assert.throws(() => assertSelectedVoice(voice, { ...selection, narrator: '' }), /narrator label/);
+  }
+});
+test('designed narrator disclosure does not imply Nino recorded the voice', () => {
+  const html = renderEssayAudio({ src: '/blog/audio/example.mp3', durationSeconds: 125, narrator: 'Original British narrator' }, { title: 'An essay' });
+  assert.ok(html.includes('AI narration · Original British narrator.'));
+  assert.ok(!html.includes('Nino') && !html.includes('’s voice'));
 });
 test('player escapes text, supplies a fallback, and never autoplays', () => {
   const html = renderEssayAudio({ src: '/blog/audio/example.mp3', durationSeconds: 125, narrator: '<Nino>' }, { title: '"Title" <script>' });
