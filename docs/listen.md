@@ -1,10 +1,10 @@
 # Listen: hear the recording before publishing it
 
-The first trial uses **Because I Can Is Only Half the Answer** and **The Rules of the Road Still Apply**. Nino chose his own voice. The player and narration tools are implemented; the voice sample, real recordings and listening approval are still pending. No essay has public audio metadata, and no MP3 has been added to the site.
+The first trial uses **Because I Can Is Only Half the Answer** and **The Rules of the Road Still Apply**. Nino saved his personal clone as **Nino Casual**. Both private recordings were generated on October 30, 2026 (Chicago time): **3:36** and **7:25**, respectively. The player and narration tools are implemented; Nino's listening approval is still pending. No essay has public audio metadata, and no MP3 has been added to the site.
 
 ## Set up the voice once
 
-Use ElevenLabs Instant Voice Cloning, included in the current Starter account. Record about two minutes alone in a quiet room, at a consistent microphone distance and in the voice you want the essays to use. Read the opening of an existing essay naturally. Name the clone **Nino Chavez — Signal Dispatch** and complete ElevenLabs' voice-rights confirmation yourself.
+The trial uses the saved **Nino Casual** Instant Voice Clone. For a future replacement, record about two minutes alone in a quiet room, at a consistent microphone distance and in the voice you want the essays to use. Read the opening of an existing essay naturally. Use a name containing **Nino** and complete ElevenLabs' voice-rights confirmation yourself.
 
 ElevenLabs recommends one to two minutes of clean, consistent speech; its current recording screen suggests three minutes. More than three minutes is not needed for this trial. See the [official recording guidance](https://elevenlabs.io/docs/eleven-creative/voices/voice-cloning/instant-voice-cloning).
 

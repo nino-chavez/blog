@@ -19,4 +19,15 @@ All 14 approval tests pass, exercising accepted and rejected ownership, changed 
 
 The keyboard test exposed a difference between native browser controls. The player now handles Space at capture phase, prevents a second native toggle and initializes only once. Error checks use a real missing file and a user playback action. The WebKit test did not receive a reliable failure event from a nested `source` element; assigning the single MP3 directly to the audio element fixed the failure and simplified the markup.
 
-Final selected captures and the test receipt belong in `docs/design/listen/`. The local review and its generated audio stay in the ignored `astro-build/.tmp/listen-preview/` directory. Actual ElevenLabs generation, voice fidelity, pronunciation, audio joins, physical-device behavior and Nino's listening approval remain unverified until his personal clone is saved and the real recordings are reviewed. No approval metadata or public MP3 has been added.
+Final selected captures and the test receipt belong in `docs/design/listen/`. The local review and its generated audio stay in the ignored `astro-build/.tmp/listen-preview/` directory. No approval metadata or public MP3 has been added.
+
+## First personal-voice recordings
+
+On October 30, 2026 (Chicago time), the ElevenLabs personal-voice API confirmed Nino's saved **Nino Casual** clone. Multilingual v2 generated the two private recordings from 13,117 text characters, without retries. The manifest records the exact source, script and MP3 hashes and generation settings. The provider's billed credit count has not been independently checked.
+
+| Essay | Duration | File checks |
+|---|---|---|
+| Because I Can Is Only Half the Answer | 3:36 | MP3 checksum matches; full decode succeeds; 44.1 kHz, mono, 128 kbps. |
+| The Rules of the Road Still Apply | 7:25 | MP3 checksum matches; full decode succeeds; 44.1 kHz, mono, 128 kbps. |
+
+A local Whisper small.en transcription was compared against each prepared script. It found no missing passages, including across the longer essay's paragraph-boundary join. Remaining transcript differences were number/name formatting and four single-word substitutions; these may be recognition errors and are not proof of exact pronunciation. The transcript comparisons and logs stay with the private recordings. Both real MP3s started playback in the in-app browser and were left paused. This establishes file integrity, broad completeness and basic playback, not human listening quality. Voice fidelity, pacing, pronunciation, the audible join, physical-device behavior and Nino's listening approval remain open.
