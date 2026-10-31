@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { execFileSync } from 'node:child_process';
 import matter from 'gray-matter';
 import { checkAudio } from './check-listen-audio.mjs';
 import { sourceHash, sha256, narrationScript, splitScript, localFile } from './listen-lib.mjs';
@@ -42,8 +43,18 @@ test('local review cannot request arbitrary files', () => {
 });
 test('spoken script preserves prose and normalizes links and 630', () => {
   const script = narrationScript({ data: { title: 'A title', author: 'Nino Chavez' }, content: 'At 630, [evidence](https://example.com/a_(b)) matters.\n\n## A heading\n\nStill true.' });
-  assert.equal(script, 'A title.\n\nBy Nino Chavez.\n\nAt Six Thirty, evidence matters.\n\nA heading\n\nStill true.\n');
+  assert.equal(script, 'A title.\n\nBy Nino Chavez.\n\nAt Six-three-oh, evidence matters.\n\nA heading.\n\nStill true.\n');
   assert.throws(() => narrationScript({ data: { title: 'Complex' }, content: '```js\ncode\n```' }), /complex MDX/);
+});
+test('narration headings retain existing punctuation', () => {
+  const script = narrationScript({ data: { title: 'A title' }, content: '## What matters?\n\n## Next steps:\n\n## A statement.' });
+  assert.ok(script.endsWith('What matters?\n\nNext steps:\n\nA statement.\n'));
+});
+test('invalid generation speed is rejected before reading review files or calling ElevenLabs', () => {
+  for (const speed of ['0.69', '1.21', 'NaN', 'Infinity']) {
+    assert.throws(() => execFileSync(process.execPath, [new URL('./generate-listen.mjs', import.meta.url).pathname,
+      '--voice-id', 'test', '--speed', speed], { stdio: ['ignore', 'pipe', 'pipe'], timeout: 10000 }), /Speed must be between 0.7 and 1.2/);
+  }
 });
 test('chunking preserves paragraph order and text', () => {
   const text = 'First paragraph.\n\nSecond paragraph.\n\nThird paragraph.';

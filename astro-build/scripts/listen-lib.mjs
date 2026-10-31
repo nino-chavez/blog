@@ -43,13 +43,13 @@ export function narrationScript(essay) {
   body = body
     .replace(/\[Read the letter\.\]\([^\s]+\)/g, '')
     .replace(/\[([^\]]+)\]\((?:[^()]|\([^()]*\))*\)/g, '$1')
-    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/^#{1,6}[ \t]+(.+)$/gm, (_, heading) => /[.!?:…]["”’']?$/.test(heading.trim()) ? heading.trim() : `${heading.trim()}.`)
     .replace(/^\s*(?:---+|\*\*\*+|___+)\s*$/gm, '')
     .replace(/^>\s?/gm, '')
     .replace(/\*\*([^*]+)\*\*/g, '$1')
     .replace(/\*([^*\n]+)\*/g, '$1')
     .replace(/`([^`]+)`/g, '$1')
-    .replace(/\b630\b/g, 'Six Thirty')
+    .replace(/\b630\b/g, 'Six-three-oh')
     .replace(/ +$/gm, '')
     .replace(/\n{3,}/g, '\n\n');
   if (/\]\(|\[\^|^\s*[-*+]\s/m.test(body)) throw new Error('Review unresolved Markdown before narration.');

@@ -52,3 +52,18 @@ Both essays were regenerated with the selected cleaned clone and the existing Mu
 Both MP3s decode fully, preserve their generated duration and match the hashes recorded in the manifest. Local transcription comparisons found no missing passages. Remaining differences were number/name formatting, “want to”/“wanna,” and one “improved”/“improve” discrepancy. These may be transcription errors; final subjective sound quality and pronunciation still require Nino's listening review. Nothing is approved for publication.
 
 A local acoustic assessment of the reference was also requested. Its measurements, method and dependency verification remain private in `voice-cleanup/voice-assessment.json`; the reference transcript is not committed. This assessment describes the available recording rather than a clinical or singing-voice classification. The complete finishing settings, raw/final hashes, level checks and transcript comparisons are recorded in `.tmp/listen-preview/refinement-review.json`.
+
+## Slower cadence and corrected club pronunciation
+
+Nino found the refined voice better but its cadence rushed and unnatural. He specified that `630` is pronounced **six-three-oh**. The reusable script preparation now spells it that way and adds terminal punctuation to spoken headings. Generation accepts a validated `--speed` option; this review uses **0.92** with the other voice settings unchanged. Four sparse pauses in the first script and three in the second mark selected thought transitions, including a pause after each byline. Public essay prose is unchanged.
+
+A 381-character pilot decoded fully and retained the opening in local transcription, which rendered the club name as `6-3-0`. Both full essays then generated from 13,282 text characters without retries. The v2 manifest and delivered MP3s are preserved unchanged. New scripts, raw takes and finished recordings use distinct `-cadence-v3` filenames. The same local EQ, compression and loudness treatment was applied; no local pitch correction or time stretching was used.
+
+| Essay | Duration | Change from v2 | Final loudness | True peak |
+|---|---|---|---|---|
+| Because I Can Is Only Half the Answer | 4:04 | 8.1% longer | -19.27 LUFS | -2.98 dBTP |
+| The Rules of the Road Still Apply | 8:26 | 7.3% longer | -19.26 LUFS | -2.58 dBTP |
+
+Both final MP3s decode fully, retain their generated durations and match their saved hashes. Local Whisper small.en comparisons found no missing passages after normalizing number/name formatting and contractions. Two differences remain: `30`/`30th` and `conflict`/`conflicts`; these may be recognition errors. Transcription and timing checks do not establish natural cadence or exact pronunciation. Nino's listening approval remains required.
+
+All 16 approval/script/player tests pass, including the pronunciation correction, heading punctuation and rejection of invalid speed values before any provider request. The full site build passes. Production output contains no MP3s or private-review markers. Earlier rendered player checks remain applicable because player code did not change. Exact audio checks and processing settings are in `.tmp/listen-preview/cadence-v3-review.json`. The draft stays unmerged and the recordings unpublished.

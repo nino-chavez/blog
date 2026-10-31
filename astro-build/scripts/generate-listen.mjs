@@ -9,14 +9,17 @@ import { REVIEW_DIR, readManifest, readEssay, sourceHash, sha256, splitScript, l
 const { values } = parseArgs({ options: {
   'voice-id': { type: 'string' }, generate: { type: 'boolean', default: false },
   'max-characters': { type: 'string', default: '18000' },
+  speed: { type: 'string', default: '1' },
 } });
 if (!values['voice-id'] || !/^[a-zA-Z0-9]+$/.test(values['voice-id'])) throw new Error('Provide the saved personal clone with --voice-id.');
 const budget = Number(values['max-characters']);
 if (!Number.isSafeInteger(budget) || budget < 1) throw new Error('Invalid character limit.');
+const speed = Number(values.speed);
+if (!Number.isFinite(speed) || speed < 0.7 || speed > 1.2) throw new Error('Speed must be between 0.7 and 1.2.');
 const manifest = readManifest();
 const settings = {
   voiceId: values['voice-id'], modelId: 'eleven_multilingual_v2', outputFormat: 'mp3_44100_128',
-  voiceSettings: { stability: 0.6, similarity_boost: 0.75, style: 0, use_speaker_boost: true, speed: 1 },
+  voiceSettings: { stability: 0.6, similarity_boost: 0.75, style: 0, use_speaker_boost: true, speed },
 };
 const cacheDir = join(REVIEW_DIR, 'cache');
 mkdirSync(cacheDir, { recursive: true });

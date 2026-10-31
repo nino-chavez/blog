@@ -21,8 +21,8 @@ const essays = FIRST_ESSAYS.map((slug) => {
 writeFileSync(join(REVIEW_DIR, 'manifest.json'), JSON.stringify({
   version: 1, createdAt: new Date().toISOString(), essays,
   scriptNotes: ['Title and author are spoken.', 'Link text is retained; URLs are not spoken.',
-    'The standalone Read the letter link is omitted.', '630 is pronounced Six Thirty.',
-    'Section dividers become pauses; headings remain spoken.'],
+    'The standalone Read the letter link is omitted.', '630 is pronounced six-three-oh.',
+    'Section dividers become pauses; headings remain spoken with ending punctuation.'],
 }, null, 2) + '\n');
 console.log(`Prepared ${essays.length} scripts (${essays.reduce((n, essay) => n + essay.characters, 0)} characters) in ${REVIEW_DIR}`);
 console.log('No audio generated and no publication metadata changed.');
