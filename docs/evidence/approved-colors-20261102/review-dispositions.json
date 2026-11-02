@@ -1,0 +1,18 @@
+{
+  "verdict": "PASS after source-frame verification",
+  "reviewId": "c4ddd02a-1c8d-4b3d-b764-d899e96e0a20",
+  "finding": {
+    "claim": "Blog desktop loses roughly 32px below header",
+    "disposition": "Not reproduced; rejected against primary images",
+    "evidence": "Parent reopened native and approved 1440px frames. Blog home intro ink begins at y126 in both; lead image top is y195 in both. Article title begins at y212 in both and audio panel at y483. Centering differs by about 8px because the reference includes a classic scrollbar; there is no vertical compression."
+  },
+  "otherFindings": "No other material new visual defects reported. Approved header coverage and existing Visual Guide overlap retained. Backend unavailable and lazy-image full-page capture states do not change source geometry.",
+  "limits": "Headless Chromium, no physical-phone or authenticated Analytics review.",
+  "codeReviewFixes": [
+    {
+      "issue": "Unlisted posts have no public theme variables",
+      "fix": "Shared header has safe light-surface fallbacks. Footer inherits light text from its dark page instead of restoring dark-on-dark legacy colors.",
+      "verification": "Rendered the actual built private template through a neutral local address at desktop and phone widths. Exported only shared navigation crops. Background, keyboard outline and footer contrast checks passed without exposing the private article or access path."
+    }
+  ]
+}

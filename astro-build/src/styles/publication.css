@@ -8,15 +8,15 @@
  */
 
 :is(.publication-theme, .article-theme) {
-  --publication-ground: #f4f0e8;
-  --publication-surface: #fbf8f1;
-  --publication-surface-muted: #e4edf2;
-  --publication-text: #122a3c;
-  --publication-muted: #536373;
-  --publication-rule: rgb(18 42 60 / 0.24);
-  --publication-ink: #07131d;
-  --publication-action: #0d5a93;
-  --publication-action-quiet: #e4edf2;
+  --publication-ground: #FAF3EB;
+  --publication-surface: #FAF3EB;
+  --publication-surface-muted: #F0E2DE;
+  --publication-text: #30262B;
+  --publication-muted: #6C5B60;
+  --publication-rule: #D6C6C6;
+  --publication-ink: #30262B;
+  --publication-action: #883B4C;
+  --publication-action-quiet: #F0E2DE;
   min-height: 100vh;
   background: var(--publication-ground);
   color: var(--publication-text);
@@ -26,8 +26,8 @@
 
 .publication-theme ::selection,
 .article-theme ::selection {
-  background: var(--publication-action-quiet, #e4edf2);
-  color: var(--publication-ink, #07131d);
+  background: var(--publication-action-quiet, #F0E2DE);
+  color: var(--publication-ink, #30262B);
 }
 
 .publication-theme main {
@@ -48,8 +48,8 @@
 .article-theme #search-modal :focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px var(--publication-ground, #f4f0e8),
-    0 0 0 4px var(--publication-action, #0d5a93);
+    0 0 0 2px var(--publication-ground, #FAF3EB),
+    0 0 0 4px var(--publication-action, #883B4C);
 }
 
 .publication-theme main h1,
@@ -404,7 +404,7 @@
   margin-inline: -1rem;
   padding: 1rem;
   border-block: 1px solid var(--publication-rule);
-  background: rgb(240 241 244 / 0.96);
+  background: rgb(250 243 235 / 0.96);
   backdrop-filter: blur(12px);
 }
 
@@ -660,34 +660,34 @@ body[data-page-path="/blog/tags"] main section a[class*="rounded"] {
 
 .publication-theme #search-modal > div:last-child > div,
 .article-theme #search-modal > div:last-child > div {
-  border: 1px solid var(--publication-rule, #b9bec6) !important;
+  border: 1px solid var(--publication-rule, #D6C6C6) !important;
   border-radius: 2px !important;
-  background: var(--publication-surface, #f7f8fa) !important;
-  color: var(--publication-text, #14202e);
+  background: var(--publication-surface, #FAF3EB) !important;
+  color: var(--publication-text, #30262B);
   box-shadow: 0 18px 48px rgb(14 25 40 / 0.24) !important;
 }
 
 .publication-theme #search-modal > div:last-child > div > div:first-child,
 .article-theme #search-modal > div:last-child > div > div:first-child {
-  border-color: var(--publication-rule, #b9bec6) !important;
+  border-color: var(--publication-rule, #D6C6C6) !important;
 }
 
 .publication-theme #search-close,
 .article-theme #search-close {
-  border: 1px solid var(--publication-rule, #b9bec6);
+  border: 1px solid var(--publication-rule, #D6C6C6);
   border-radius: 2px;
   background: transparent;
-  color: var(--publication-text, #14202e) !important;
+  color: var(--publication-text, #30262B) !important;
 }
 
 .publication-theme #pagefind-search,
 .article-theme #pagefind-search {
   --pagefind-ui-scale: 0.9;
-  --pagefind-ui-primary: #14679e;
-  --pagefind-ui-text: #14202e;
-  --pagefind-ui-background: #f7f8fa;
-  --pagefind-ui-border: #b9bec6;
-  --pagefind-ui-tag: #d9e5ef;
+  --pagefind-ui-primary: var(--publication-action, #883B4C);
+  --pagefind-ui-text: var(--publication-text, #30262B);
+  --pagefind-ui-background: var(--publication-surface, #FAF3EB);
+  --pagefind-ui-border: var(--publication-rule, #D6C6C6);
+  --pagefind-ui-tag: var(--publication-action-quiet, #F0E2DE);
   --pagefind-ui-border-width: 1px;
   --pagefind-ui-border-radius: 2px;
   --pagefind-ui-font: 'Inter Variable', Inter, system-ui, sans-serif;
@@ -695,25 +695,25 @@ body[data-page-path="/blog/tags"] main section a[class*="rounded"] {
 
 .publication-theme #pagefind-search .pagefind-ui__result-title a,
 .article-theme #pagefind-search .pagefind-ui__result-title a {
-  color: var(--publication-text, #14202e);
+  color: var(--publication-text, #30262B);
 }
 
 .publication-theme #pagefind-search .pagefind-ui__result-title a:hover,
 .article-theme #pagefind-search .pagefind-ui__result-title a:hover {
-  color: var(--publication-action, #14679e);
+  color: var(--publication-action, #883B4C);
 }
 
 .publication-theme #pagefind-search .pagefind-ui__result-excerpt,
 .article-theme #pagefind-search .pagefind-ui__result-excerpt,
 .publication-theme #pagefind-search .search-unavailable,
 .article-theme #pagefind-search .search-unavailable {
-  color: var(--publication-muted, #5a6472);
+  color: var(--publication-muted, #6C5B60);
 }
 
 .publication-theme #pagefind-search mark,
 .article-theme #pagefind-search mark {
-  background: var(--publication-action-quiet, #d9e5ef);
-  color: var(--publication-ink, #0e1928);
+  background: var(--publication-action-quiet, #F0E2DE);
+  color: var(--publication-ink, #30262B);
 }
 
 @media (min-width: 760px) {
