@@ -7,3 +7,5 @@ This selection preserves Signal Dispatch’s serif editorial identity. The appro
 Nino approved both the proposed color and design on November 2, 2026. Profile is outside this change.
 
 Native build captures are saved in [the review evidence](../evidence/approved-colors-20261102/). The Blog home and an article were rendered at 1440, 390, and 320 pixels. They have no horizontal overflow, missing visible images, or uncaught page errors. The full build, listen tests, and post API tests passed. Local static review does not exercise the runtime audio endpoint; the existing seeking fix and audio logic are unchanged.
+
+The shared header and footer retain their original color fallbacks on unlisted posts, which do not use the public theme. The actual built unlisted template was rendered locally at desktop and phone widths through a neutral test address; only header and dropdown crops were exported. Their backgrounds and keyboard focus outlines passed. No private article text or access path is included in the evidence.

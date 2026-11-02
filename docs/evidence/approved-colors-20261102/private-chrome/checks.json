@@ -1,0 +1,18 @@
+[
+  {
+    "width": 1440,
+    "publicTheme": false,
+    "headerBackground": "rgb(251, 248, 241)",
+    "menuBackground": "rgb(251, 248, 241)",
+    "outlineStyle": "solid",
+    "outlineWidth": "2px"
+  },
+  {
+    "width": 390,
+    "publicTheme": false,
+    "headerBackground": "rgb(251, 248, 241)",
+    "menuBackground": "rgb(251, 248, 241)",
+    "outlineStyle": "solid",
+    "outlineWidth": "2px"
+  }
+]
