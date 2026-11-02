@@ -5,7 +5,24 @@
     "headerBackground": "rgb(251, 248, 241)",
     "menuBackground": "rgb(251, 248, 241)",
     "outlineStyle": "solid",
-    "outlineWidth": "2px"
+    "outlineWidth": "2px",
+    "footerRGB": [
+      255,
+      255,
+      255
+    ],
+    "footerLinkRGB": [
+      255,
+      255,
+      255
+    ],
+    "footerBackgroundPixel": [
+      16,
+      16,
+      19
+    ],
+    "footerTextContrast": 19.0,
+    "footerLinkContrast": 19.0
   },
   {
     "width": 390,
@@ -13,6 +30,23 @@
     "headerBackground": "rgb(251, 248, 241)",
     "menuBackground": "rgb(251, 248, 241)",
     "outlineStyle": "solid",
-    "outlineWidth": "2px"
+    "outlineWidth": "2px",
+    "footerRGB": [
+      255,
+      255,
+      255
+    ],
+    "footerLinkRGB": [
+      255,
+      255,
+      255
+    ],
+    "footerBackgroundPixel": [
+      16,
+      16,
+      19
+    ],
+    "footerTextContrast": 19.0,
+    "footerLinkContrast": 19.0
   }
 ]
