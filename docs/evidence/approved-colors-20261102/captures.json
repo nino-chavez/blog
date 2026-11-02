@@ -1,0 +1,344 @@
+[
+  {
+    "id": "blog-home",
+    "at": "2026-11-02T19:50:24.775Z",
+    "url": "http://approved-blog.localhost:8835/blog.html",
+    "status": 200,
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "errors": [],
+    "title": "Signal Dispatch",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "bodyBackground": "rgb(250, 243, 235)",
+    "bodyColor": "rgb(48, 38, 43)",
+    "galleryScope": false,
+    "header": {
+      "background": null,
+      "box": null
+    },
+    "lead": {
+      "image": {
+        "x": 757.796875,
+        "y": 195,
+        "width": 552.203125,
+        "height": 310.609375
+      },
+      "fit": "contain",
+      "padding": "8px",
+      "color": "rgb(48, 38, 43)"
+    },
+    "audio": {
+      "box": null,
+      "background": null,
+      "border": null,
+      "readyState": null
+    },
+    "explorer": {
+      "opening": null,
+      "tools": null,
+      "results": null,
+      "columns": null
+    },
+    "tokens": {
+      "bg": "",
+      "accent": "",
+      "muted": ""
+    },
+    "missingVisibleImages": [],
+    "heroImage": null,
+    "headings": [
+      "Essays by Nino Chavez",
+      "Because I Can Is Only Half the Answer",
+      "Browse by subject",
+      "More to read"
+    ]
+  },
+  {
+    "id": "blog-home",
+    "at": "2026-11-02T19:50:26.414Z",
+    "url": "http://approved-blog.localhost:8835/blog.html",
+    "status": 200,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "errors": [],
+    "title": "Signal Dispatch",
+    "width": 390,
+    "scrollWidth": 390,
+    "bodyBackground": "rgb(250, 243, 235)",
+    "bodyColor": "rgb(48, 38, 43)",
+    "galleryScope": false,
+    "header": {
+      "background": null,
+      "box": null
+    },
+    "lead": {
+      "image": {
+        "x": 22,
+        "y": 505.1875,
+        "width": 346,
+        "height": 194.625
+      },
+      "fit": "contain",
+      "padding": "6px",
+      "color": "rgb(48, 38, 43)"
+    },
+    "audio": {
+      "box": null,
+      "background": null,
+      "border": null,
+      "readyState": null
+    },
+    "explorer": {
+      "opening": null,
+      "tools": null,
+      "results": null,
+      "columns": null
+    },
+    "tokens": {
+      "bg": "",
+      "accent": "",
+      "muted": ""
+    },
+    "missingVisibleImages": [],
+    "heroImage": null,
+    "headings": [
+      "Essays by Nino Chavez",
+      "Because I Can Is Only Half the Answer",
+      "Browse by subject",
+      "More to read"
+    ]
+  },
+  {
+    "id": "blog-home",
+    "at": "2026-11-02T19:50:28.047Z",
+    "url": "http://approved-blog.localhost:8835/blog.html",
+    "status": 200,
+    "viewport": {
+      "width": 320,
+      "height": 568
+    },
+    "errors": [],
+    "title": "Signal Dispatch",
+    "width": 320,
+    "scrollWidth": 320,
+    "bodyBackground": "rgb(250, 243, 235)",
+    "bodyColor": "rgb(48, 38, 43)",
+    "galleryScope": false,
+    "header": {
+      "background": null,
+      "box": null
+    },
+    "lead": {
+      "image": {
+        "x": 18,
+        "y": 584.484375,
+        "width": 284,
+        "height": 159.75
+      },
+      "fit": "contain",
+      "padding": "6px",
+      "color": "rgb(48, 38, 43)"
+    },
+    "audio": {
+      "box": null,
+      "background": null,
+      "border": null,
+      "readyState": null
+    },
+    "explorer": {
+      "opening": null,
+      "tools": null,
+      "results": null,
+      "columns": null
+    },
+    "tokens": {
+      "bg": "",
+      "accent": "",
+      "muted": ""
+    },
+    "missingVisibleImages": [],
+    "heroImage": null,
+    "headings": [
+      "Essays by Nino Chavez",
+      "Because I Can Is Only Half the Answer",
+      "Browse by subject",
+      "More to read"
+    ]
+  },
+  {
+    "id": "blog-article",
+    "at": "2026-11-02T19:50:29.841Z",
+    "url": "http://approved-blog.localhost:8835/blog/because-i-can-is-only-half-the-answer.html",
+    "status": 200,
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "errors": [],
+    "title": "Because I Can Is Only Half the Answer - Signal Dispatch",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "bodyBackground": "rgb(250, 243, 235)",
+    "bodyColor": "rgb(48, 38, 43)",
+    "galleryScope": false,
+    "header": {
+      "background": null,
+      "box": null
+    },
+    "lead": {
+      "image": null,
+      "fit": null,
+      "padding": null,
+      "color": null
+    },
+    "audio": {
+      "box": {
+        "x": 370,
+        "y": 482.59375,
+        "width": 700,
+        "height": 169.28125
+      },
+      "background": "rgb(240, 226, 222)",
+      "border": "3px solid rgb(136, 59, 76)",
+      "readyState": 0
+    },
+    "explorer": {
+      "opening": null,
+      "tools": null,
+      "results": null,
+      "columns": null
+    },
+    "tokens": {
+      "bg": "",
+      "accent": "",
+      "muted": ""
+    },
+    "missingVisibleImages": [],
+    "heroImage": null,
+    "headings": [
+      "Because I Can Is Only Half the Answer",
+      "Listen to this essay",
+      "Continue reading",
+      "More in Reflection"
+    ]
+  },
+  {
+    "id": "blog-article",
+    "at": "2026-11-02T19:50:31.555Z",
+    "url": "http://approved-blog.localhost:8835/blog/because-i-can-is-only-half-the-answer.html",
+    "status": 200,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "errors": [],
+    "title": "Because I Can Is Only Half the Answer - Signal Dispatch",
+    "width": 390,
+    "scrollWidth": 390,
+    "bodyBackground": "rgb(250, 243, 235)",
+    "bodyColor": "rgb(48, 38, 43)",
+    "galleryScope": false,
+    "header": {
+      "background": null,
+      "box": null
+    },
+    "lead": {
+      "image": null,
+      "fit": null,
+      "padding": null,
+      "color": null
+    },
+    "audio": {
+      "box": {
+        "x": 22,
+        "y": 461.015625,
+        "width": 346,
+        "height": 165.28125
+      },
+      "background": "rgb(240, 226, 222)",
+      "border": "2px solid rgb(136, 59, 76)",
+      "readyState": 0
+    },
+    "explorer": {
+      "opening": null,
+      "tools": null,
+      "results": null,
+      "columns": null
+    },
+    "tokens": {
+      "bg": "",
+      "accent": "",
+      "muted": ""
+    },
+    "missingVisibleImages": [],
+    "heroImage": null,
+    "headings": [
+      "Because I Can Is Only Half the Answer",
+      "Listen to this essay",
+      "Continue reading",
+      "More in Reflection"
+    ]
+  },
+  {
+    "id": "blog-article",
+    "at": "2026-11-02T19:50:33.122Z",
+    "url": "http://approved-blog.localhost:8835/blog/because-i-can-is-only-half-the-answer.html",
+    "status": 200,
+    "viewport": {
+      "width": 320,
+      "height": 568
+    },
+    "errors": [],
+    "title": "Because I Can Is Only Half the Answer - Signal Dispatch",
+    "width": 320,
+    "scrollWidth": 320,
+    "bodyBackground": "rgb(250, 243, 235)",
+    "bodyColor": "rgb(48, 38, 43)",
+    "galleryScope": false,
+    "header": {
+      "background": null,
+      "box": null
+    },
+    "lead": {
+      "image": null,
+      "fit": null,
+      "padding": null,
+      "color": null
+    },
+    "audio": {
+      "box": {
+        "x": 18,
+        "y": 516.046875,
+        "width": 284,
+        "height": 183.875
+      },
+      "background": "rgb(240, 226, 222)",
+      "border": "2px solid rgb(136, 59, 76)",
+      "readyState": 0
+    },
+    "explorer": {
+      "opening": null,
+      "tools": null,
+      "results": null,
+      "columns": null
+    },
+    "tokens": {
+      "bg": "",
+      "accent": "",
+      "muted": ""
+    },
+    "missingVisibleImages": [],
+    "heroImage": null,
+    "headings": [
+      "Because I Can Is Only Half the Answer",
+      "Listen to this essay",
+      "Continue reading",
+      "More in Reflection"
+    ]
+  }
+]
