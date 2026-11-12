@@ -42,7 +42,7 @@ The reviewers found the same hole from four directions.
 
 Behavior is not experience. A system can disagree, sulk and stay with nobody there. Requiring the first does not require the second.
 
-"Be Right Back" has the scene for this too. At a cliff, the woman orders the android to jump and says the real man would not simply have obeyed. The android then begs for its life. She named the missing behavior, and it produced it. Critics split on whether anyone was there to beg.
+"Be Right Back" has the scene for this too. At a cliff, the woman orders the android to jump and says the real man would not simply have obeyed. The android then begs for its life. She named the missing behavior, and it produced it. Reviewers read the android both ways. One called it "self-aware." Another called it "hollow."
 
 The draft had also conceded that a convincing performance might satisfy the buyer. If it does, the buyer ordered a performance. The draft's title said "on purpose," and its own second section took that back.
 
@@ -86,7 +86,7 @@ The case for asking is cost, not probability. "Not ruled out" is a weak reason t
 
 **Checked but not in the body.** "Rachel, Jack and Ashley Too" is a counter-case where the maker knew a full consciousness was inside the product. The essay's claim is that the order is silent, not that makers are ignorant. "Plaything" (2025) is prior art for the ant farm piece, with Sturgeon's "Microcosmic God."
 
-**Limits of that check.** All 34 *Black Mirror* entries were scanned from Wikipedia's episode list. Eight plot pages were read in full; 26 were judged from one-line summaries. "Black Museum" and "San Junipero" involve digital minds and were not read in detail. Episode and film facts come from Wikipedia plot summaries fetched on 2026-11-12, not from viewings. The essay does not say you watched them; say so in your own words if you want that.
+**Limits of that check.** All 34 *Black Mirror* entries were scanned from Wikipedia's episode list. Eight plot pages were read in full; 26 were judged from one-line summaries. "Black Museum" and "San Junipero" involve digital minds and were not read in detail. Episode and film facts come from Wikipedia plot summaries fetched on 2026-11-12, not from viewings. The two reviewer words in section two ("self-aware" from Sims, "hollow" from Jeffery) are as quoted in the reception section of Wikipedia's "Be Right Back" article; the original reviews were not opened. The essay does not say you watched them; say so in your own words if you want that.
 
 **What changed from the first draft.** The thesis moved from "we would order a mind on purpose" to "the order asks for behavior and is silent on what produces it." Four cold reviewers (three Claude personas and one Codex run) all returned REVISE on 2026-11-12 for the same reason, and the new section two reports that. The ant farm and the film *A.I.* are out; both stalled readers and belong to the separate ant farm piece.
 
