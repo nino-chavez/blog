@@ -56,7 +56,7 @@ console.log(`Narrator: ${manifest.voiceSelection.name}; model ${modelId}; speed 
 console.log(`${manifest.essays.length} essays; ${characters} uncached text characters; maximum ${budget}.`);
 if (characters > budget) throw new Error('Character allowance exceeded. No requests sent.');
 if (!values.generate) {
-  console.log('Dry run only. Add --generate after the selected voice is saved and scripts are reviewed.');
+  console.log('Dry run only. Add --generate after reviewing the prepared scripts.');
   process.exit(0);
 }
 // Check local prerequisites before spending credits. 1Password output stays in memory.

@@ -51,7 +51,7 @@ Keep previously shared MP3 paths unchanged when revising. Archive the prior mani
 
 ## Listen locally
 
-Run `npm run build`, then `npm run listen:preview`. Open `http://127.0.0.1:4328`. The listening room shows the selected recordings when available and links to each essay with the same player used by the public article. It binds only to loopback, sends no-store and noindex headers, and is not an Astro route. Public builds cannot include it.
+Run `npm run build`, then `npm run listen:preview`. Open `http://127.0.0.1:4328`. For a draft, review the MP3 with its prepared text script; the essay-preview link needs a published article in the local build. The listening room shows the selected recordings when available and links to each essay with the same player used by the public article. It binds only to loopback, sends no-store and noindex headers, and is not an Astro route. Public builds cannot include it.
 
 The public player appears below the byline. Native controls support play, pause and seeking without JavaScript; the browser may also offer playback speed. A small enhancement makes Space work consistently when the player has focus and explains playback failures. Nothing autoplays or preloads before playback. A download link remains available as an explicitly fallible recovery action after an error, and the essay below supplies the transcript. The visible label identifies AI narration and the selected narrator, without implying that the author recorded a designed voice.
 
