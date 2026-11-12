@@ -42,7 +42,7 @@ The reviewers found the same hole from four directions.
 
 Behavior is not experience. A system can disagree, sulk and stay with nobody there. Requiring the first does not require the second.
 
-"Be Right Back" has the scene for this too. At a cliff, the woman orders the android to jump and says the real man would not simply have obeyed. The android then begs for its life. She named the missing behavior, and it produced it. Reviewers read the android both ways. One called it "self-aware." Another called it "hollow."
+"Be Right Back" has the scene for this too. At a cliff, the woman orders the android to jump and says the real man would not simply have obeyed. The android then begs for its life. She named the missing behavior, and it produced it. Nothing in the scene shows whether anyone was there to beg.
 
 The draft had also conceded that a convincing performance might satisfy the buyer. If it does, the buyer ordered a performance. The draft's title said "on purpose," and its own second section took that back.
 
@@ -86,7 +86,7 @@ The case for asking is cost, not probability. "Not ruled out" is a weak reason t
 
 **Checked but not in the body.** "Rachel, Jack and Ashley Too" is a counter-case where the maker knew a full consciousness was inside the product. The essay's claim is that the order is silent, not that makers are ignorant. "Plaything" (2025) is prior art for the ant farm piece, with Sturgeon's "Microcosmic God."
 
-**Limits of that check.** All 34 *Black Mirror* entries were scanned from Wikipedia's episode list. Eight plot pages were read in full; 26 were judged from one-line summaries. "Black Museum" and "San Junipero" involve digital minds and were not read in detail. Episode and film facts come from Wikipedia plot summaries fetched on 2026-11-12, not from viewings. The two reviewer words in section two ("self-aware" from Sims, "hollow" from Jeffery) are as quoted in the reception section of Wikipedia's "Be Right Back" article; the original reviews were not opened. The essay does not say you watched them; say so in your own words if you want that.
+**Limits of that check.** All 34 *Black Mirror* entries were scanned from Wikipedia's episode list. Eight plot pages were read in full; 26 were judged from one-line summaries. "Black Museum" and "San Junipero" involve digital minds and were not read in detail. Episode and film facts come from Wikipedia plot summaries fetched on 2026-11-12, not from viewings. The essay does not say you watched the episodes or the film; say so in your own words if you want that.
 
 **What changed from the first draft.** The thesis moved from "we would order a mind on purpose" to "the order asks for behavior and is silent on what produces it." Four cold reviewers (three Claude personas and one Codex run) all returned REVISE on 2026-11-12 for the same reason, and the new section two reports that. The ant farm and the film *A.I.* are out; both stalled readers and belong to the separate ant farm piece.
 
@@ -100,6 +100,8 @@ The case for asking is cost, not probability. "Not ruled out" is a weak reason t
 **Sources fetched on 2026-11-12.** Common Sense Media's page for *Talk, Trust, and Trade-Offs* (July 16, 2025) for the teen figures; the page does not give the sample size or define "AI companion." The arXiv abstract for Butlin, Long et al., *Consciousness in Artificial Intelligence* (2023), for both conclusions and the quoted phrase.
 
 **Cold-read results on this version (2026-11-12).** Two readers, one Codex and one Claude, were asked to describe the author before being asked whether the essay reads as personal loneliness or a request for help. Risk ratings: 1 of 5 and 2 of 5. Neither inferred it unprompted. The Claude reader said the closing section is the most likely place for that reading. Both still returned REVISE for one reason: the essay does not show why "not ruled out" should change a real product process. The cost paragraph in the questions section answers that in two sentences and has not been re-tested. These ratings are for the second version; the third version has not been cold-read.
+
+**A reading, not a fact.** "Nothing in the scene shows whether anyone was there to beg" is an interpretation of the "Be Right Back" cliff scene, made from the plot summary. An earlier pass cited two critics here; their comments were about how well the android copies the dead man, not about whether it has experience, so they were removed. Check the line against your memory of the episode.
 
 **Not sourced.** "Before these systems, each of those behaviors came only from a creature with an inner life" is an argument, not a cited fact. A reader could raise scripted game characters as a counterexample.
 
