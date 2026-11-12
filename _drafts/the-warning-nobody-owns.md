@@ -79,7 +79,7 @@ In 1908 Arrhenius revised his own estimate, from thousands of years to hundreds.
 
 **Fixes after the seventh version was merged (2026-11-12).** A review of the seventh version found that the essay claimed the owner as its own idea after reading only the 2024 paper's abstract. The full paper (section 3.4) already recommends "a DRI (directly responsible individual) for AI welfare," which it calls "an AI welfare officer." The body now credits that, adds Anthropic's 2024 hire as an example, and limits the essay's own addition to the trigger and to companion apps. The 2024 paper's claim is restored to "conscious and/or robustly agentic"; the seventh version had dropped the agency half. The 1979 range was rechecked against the raw Wikipedia source and quotes the report as "between 2 °C and 3.5 °C."
 
-**A conflict to weigh: Anthropic.** This draft was written with Claude, which Anthropic makes, and it now names Anthropic as the one company shown taking the step the essay recommends. The fact is sourced to TechCrunch (April 24, 2025), which also reports criticism of the program from Mustafa Suleyman. Decide whether to keep the example, add a second company, or cut it to "at least one AI developer has done something like it."
+**Anthropic example: kept (your decision, 2026-11-12).** This draft was written with Claude, which Anthropic makes, and it names Anthropic as the one company shown taking the step the essay recommends. You chose to keep the example as written after that conflict was disclosed, over adding a second company or cutting it to "at least one AI developer has done something like it." The fact is sourced to TechCrunch (April 24, 2025), which also reports criticism of the program from Mustafa Suleyman. The body does not mention that criticism.
 
 **Homepage quotes: name and link, or keep anonymous.** Three of four readers in the fifth round said the two homepage quotes cannot be checked because no company is named or linked. Naming them makes the quotes checkable and puts two companies' marketing next to a question about AI welfare. Keeping them anonymous leaves the quotes unverifiable. This is your call.
 
@@ -99,7 +99,7 @@ In 1908 Arrhenius revised his own estimate, from thousands of years to hundreds.
 
 - "I had assumed we industrialized without knowing about the greenhouse effect." Your message said "we didn't know we'd have green house effect when we moved fast for industrialization."
 - "I started on this subject by asking whether I would be a god to an ant farm if the ants were sentient." Your first message in the session.
-- "What I'd add is smaller: a name and a trigger" and the three-part job are the essay's position on your behalf. Confirm you hold it.
+- "What I'd add is smaller: the trigger, and where to apply it" and the three-part job are the essay's position on your behalf. Confirm you hold it.
 - "Neither homepage I quoted says who." Claude fetched both homepages at your request. Read them yourself before publishing under this line.
 
 **Your point that is not in the essay.** You said we are "there again with data centers and ai security issues." Neither is in the draft because neither has been sourced. They could be later essays with this one as the pattern.
