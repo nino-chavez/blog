@@ -81,4 +81,14 @@ Nino listened to the private 8:20 preview and explicitly approved publication of
 - Generation: selected saved voice, Eleven v3, speed 1, stability 0.5; linear volume adjustment only. No background music, EQ, compression, pitch correction or time stretching.
 - Private scripts, unprocessed audio, provider receipts, transcript comparisons and approval receipt remain at `/Users/nino/Workspace/dev/sites/nino/blog/.artifacts/listen/2026-11-12-expertise/`. Only the exact approved finished MP3 is public.
 
-The new audio frontmatter leaves the article body and existing LinkedIn post unchanged. Source-review hashes were refreshed because the metadata changed; no LinkedIn distribution is part of this audio release. Live delivery checks follow deployment.
+The new audio frontmatter leaves the article body and existing LinkedIn post unchanged. Source-review hashes were refreshed because the metadata changed; no LinkedIn distribution is part of this audio release. Live verification completed after deployment, as recorded below.
+
+### Live read-aloud verification
+
+Released in [PR #98](https://github.com/nino-chavez/blog/pull/98), merge `0d5a69877bbd65e38653d03e85546cb747afb04a`, via Cloudflare Pages deployment `6022d037-10ec-4408-aff8-61c8ae85aa7b`. All 29 Listen tests and the full production build passed before release.
+
+The production delivery checker passed for all three approved recordings. For this essay it confirmed one player and the narrator disclosure, the exact approved MP3 checksum, correct HEAD length, initial/middle/suffix byte ranges (206), and rejection of an unsatisfiable range (416).
+
+A separate headless Chromium check of the live article confirmed playback advanced, pause worked, seeking to 2:00 succeeded, and playback resumed beyond that point without a media error. Reported duration was 500.64 seconds. The player was returned to the start and left paused. The check was muted; the user's prior listening approval and the exact-byte check establish which recording was delivered. The initial shared hidden tab deferred loading; the dedicated headless browser reported a visible page and passed. No production code change was needed for that test-environment difference.
+
+Receipts are retained under `/Users/nino/Workspace/dev/sites/nino/blog/.artifacts/listen/2026-11-12-expertise/`: `publication-live-check.json`, `live-browser-check.json`, `live-player.png`, and the build/test logs. No LinkedIn post was created or edited during this audio release.
