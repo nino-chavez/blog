@@ -56,3 +56,16 @@ The final edit was compared with the original supplied draft and the actual auth
 Nino authorized publishing the final revised article and cross-posting to LinkedIn. The body is unchanged from the checked draft. Publication sets the status and actual timestamp, adds the repository-generated feature illustration and its 600px sibling, and adds a native LinkedIn caption with the source URL in the first comment. Existing queue entries and schedules are preserved; only this new item is selected for immediate LinkedIn delivery. Substack delivery is outside this request.
 
 The full production build passed, including the reader-contract and caption checks. The generated article HTML contains the revised argument and responsive feature-image reference. The LinkedIn dry run confirmed the correct signed-in account and a caption within the platform limit without opening a composer.
+
+## Publication receipt
+
+Published on November 12, 2026 with Nino's explicit authorization.
+
+- Blog: https://ninochavez.co/blog/which-expertise-carries-forward
+- Publication PR: https://github.com/nino-chavez/blog/pull/96; merge `835f8b47ec0ef78bf7ac30edfefa32271bc82244`.
+- Cloudflare Pages production deployment `53d2bd60-4457-468c-ab35-ee6df6a30a07` reached successful deploy at `2026-11-12T21:58:37.764624Z`. The public page returned HTTP 200 and displayed the revised opening and ending, correct canonical URL, and decoded 1200px feature image.
+- LinkedIn: https://www.linkedin.com/feed/update/urn:li:activity:7526765797298372609/
+- The source URL is present in the first Author comment. Independent `check-linkedin-post.mjs` verification succeeded; a separate live DOM read matched every final caption paragraph under Nino Chavez. No second publishing attempt was made.
+- The caption initially passed independent source review (Operator dispatch `f2c293a7-0e47-43c6-a49b-5960c3fc9f52`, matching requested/reported `gpt-5.6-terra`, medium effort). Post-commit review then caught a closing generalization broader than the essay; it was removed. Source-fidelity checks and the semantic receipt were rerun; final publication HEAD `017b0f0` received `VERDICT: PASS`.
+- Evidence snapshots retained locally in `/Users/nino/Workspace/dev/sites/nino/blog/.artifacts/expertise-transfer-review/`: `blog-live.png`, `linkedin-composer.png`, `linkedin-comment.png`, and `linkedin-live.png`. These are external-reference receipts; the composer snapshot alone is not proof of publication.
+- Existing syndication items and schedules were preserved. No Substack delivery was performed.
