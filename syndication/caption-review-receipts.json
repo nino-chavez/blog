@@ -198,6 +198,17 @@
         "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
         "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
       }
+    },
+    "blog/which-expertise-carries-forward": {
+      "reviewedAt": "2026-11-12T21:51:57.906Z",
+      "reviewedBy": "Codex: source voice reader-contract and reference-caption comparison",
+      "hashes": {
+        "caption": "74151a8b7ae26a35367fb522d61e96fd5a50e97df39435ea72df89bd690f96e2",
+        "source": "76c978562c0b7343fe8655af6cfd6577bd49d8797e480f9cdc05f0d1d3a56fa3",
+        "voiceGuide": "009458279b9e0b6c3390bf69cb4b39afebf4c6a79ac34a64d89b091070524823",
+        "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
+        "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
+      }
     }
   }
 }
