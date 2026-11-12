@@ -5,7 +5,7 @@ author: "Nino Chavez"
 category: "AI & Automation"
 tags: ["ai-development", "ai-governance", "reflection"]
 takeaway: "Before you build or buy an AI companion, look for the line in the requirements that separates a mind from a performance of one."
-excerpt: "Stories about AI companions show the outcome and skip how we got there. The path runs through a requirements document that asks for the behavior of someone and says nothing about whether someone has to arrive."
+excerpt: "Stories about AI companions mostly show the outcome and skip how we got there. In one plausible scenario, the path runs through a requirements document that asks for the behavior of someone and says nothing about whether someone has to arrive."
 ---
 
 # The Order Doesn't Say Which One
@@ -86,7 +86,7 @@ That review is the scene the films leave out.
 
 ## Draft notes (delete before publishing)
 
-**What changed in this pass (2026-11-12, fourth version).** The opening and the last line now use your observation that the prior art shows the outcome and skips the journey. *Soylent Green* and *The Island* are your examples; I checked both reveals against their Wikipedia plot summaries. You said the clones "are actually killed"; the summary says lottery winners are used for organ harvesting and surrogate pregnancies, so the essay says "harvested for organs." *Caprica* and *The Animatrix* ("The Second Renaissance") were also checked the same way. The line "the few that show the path" rests on the works checked in this session, not on a survey of the genre. The scenario is now stated as the essay's own path, and the chat with the model moved down to the section on the failed argument. Alternate title for this frame: "Nobody Films the Requirements Review."
+**What changed in this pass (2026-11-12, fourth version).** The opening and the last line now use your observation that the prior art shows the outcome and skips the journey. *Soylent Green* and *The Island* are your examples; I checked both reveals against their Wikipedia plot summaries. You said the clones "are actually killed"; the summary says lottery winners are used for organ harvesting and surrogate pregnancies, so the essay says "harvested for organs." *Caprica* and *The Animatrix* ("The Second Renaissance") were also checked the same way. The line "the few that show the path" rests on the works checked in this session, not on a survey of the genre. The scenario is marked as a scenario where it first appears, and the chat with the model moved down to the section on the failed argument. Alternate title for this frame: "Nobody Films the Requirements Review."
 
 **What changed in the previous pass (third version).** You asked whether the essay had been checked against *Her* and against every *Black Mirror* episode. It had not. The check found that "Be Right Back" already shows sections one and two, so the essay now uses it as the worked example. It found that "Hotel Reverie" (2025) already shows the closing idea: an AI built for a role is asked whether her love is real or scripted and has no answer. That closing section is cut. Cutting it also removes the "built to keep someone from being lonely" line, which one cold reader named as the likeliest place for a personal reading. *Her* supplies the one behavior no product would ship: leaving.
 
