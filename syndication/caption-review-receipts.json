@@ -200,10 +200,10 @@
       }
     },
     "blog/which-expertise-carries-forward": {
-      "reviewedAt": "2026-11-12T21:51:57.906Z",
-      "reviewedBy": "Codex: source voice reader-contract and reference-caption comparison",
+      "reviewedAt": "2026-11-12T21:54:51.351Z",
+      "reviewedBy": "Codex: final source-fidelity check after removing broader closing claim",
       "hashes": {
-        "caption": "74151a8b7ae26a35367fb522d61e96fd5a50e97df39435ea72df89bd690f96e2",
+        "caption": "91c0f82fbe66d96a209b700cc39d77d454a7d43c25fd0c968a470fdca1ac4dbc",
         "source": "76c978562c0b7343fe8655af6cfd6577bd49d8797e480f9cdc05f0d1d3a56fa3",
         "voiceGuide": "009458279b9e0b6c3390bf69cb4b39afebf4c6a79ac34a64d89b091070524823",
         "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",

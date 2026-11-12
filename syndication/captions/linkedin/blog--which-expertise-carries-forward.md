@@ -14,7 +14,5 @@ That experience does not establish how much it explains about my results with ag
 
 On a recurring assignment, I can identify which interventions should become reusable instructions or checks, then see whether the next run needs less repair without losing evidence.
 
-AI gives expertise and taste another application. A title or years of experience leave much of that preparation unexplained.
-
 --- first-comment ---
 https://ninochavez.co/blog/which-expertise-carries-forward
