@@ -2,6 +2,9 @@
 
 The first two recordings are **Because I Can Is Only Half the Answer** (**5:08**) and **The Rules of the Road Still Apply** (**10:20**). After reviewing his own clone and three original narrator auditions, Nino selected **candidate 1**, saved as **Signal Dispatch - British Narrator**. This is an original designed voice, disclosed as **Original British narrator**. Both recordings use Eleven v3, native speed 1, punctuated headings and **six-three-oh** as the pronunciation of `630`; only volume was adjusted locally. Nino heard both full recordings and explicitly approved publishing them on **October 30, 2026**. Their exact approved bytes are in `public/blog/audio/`, with matching audio metadata on both essays. Earlier voice references, auditions and takes remain private.
 
+
+**November 12, 2026:** Nino also approved the actual **8:20** recording of **Which Expertise Carries Forward?** and explicitly requested publication and live playback verification. It uses the same selected Original British narrator, Eleven v3 at native speed 1, with linear volume adjustment only. The essay-specific approval, exact asset and live checks are recorded in `docs/audits/2026-11-12-expertise-transfer-draft.md`.
+
 ## Set up the voice once
 
 Save the exact audition Nino selects, then read it back from ElevenLabs. Record its `voiceId`, `name`, `category` (`generated` or `cloned`), reader-facing `narrator` label and `selectedBy: Nino` in the private manifest's `voiceSelection`. The generator copies that narrator label to each completed essay; this is separate from its author. It rejects a different voice ID, name or category instead of silently changing narrators.
@@ -24,7 +27,7 @@ Generation is split at paragraph boundaries. A chunk is reused only when its scr
 
 Local review state and audio stay under `.tmp`, outside Astro's source and public directories. The manifest records source/script hashes, settings, durations and audio hashes; chunk receipts record request IDs. Keep this review directory until the recording is approved and promoted; removing it loses the local recordings and cache.
 
-Before removing a completed release worktree, retain its private review directory in the main repository's ignored `.artifacts/listen/<release-date>/` archive. The first release uses `.artifacts/listen/2026-10-30/`. Only the two approved finished MP3s belong in Git; source recordings, voice receipts, alternate takes and private transcripts stay in that local archive.
+Before removing a completed release worktree, retain its private review directory in the main repository's ignored `.artifacts/listen/<release-date>/` archive. The first release uses `.artifacts/listen/2026-10-30/`. Only approved finished MP3s belong in Git; source recordings, voice receipts, alternate takes and private transcripts stay in that local archive.
 
 Keep previously shared MP3 paths unchanged when revising. Archive the prior manifest and assign new `audioFile` names before generation; the generator writes to those destinations. The British narrator files end in `-british-v1.mp3`, while their unprocessed takes end in `-british-v1-raw.mp3`. Earlier files remain unchanged. Do not rerun generation against the finished manifest without first assigning new raw-output names. Local finishing can reuse unprocessed recordings without another ElevenLabs generation. Each essay's `postProcessing` record and `.tmp/listen-preview/british-v1-review.json` retain source/final hashes, finishing settings and measured levels. Earlier review receipts remain alongside them.
 
