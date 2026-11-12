@@ -26,9 +26,11 @@ The mundane uses don't need anyone home. A tool that fills in forms or sorts ema
 
 Company is a different request. What people want from it is someone who remembers them, pushes back, has moods, and could leave but stays.
 
-A product team can write each of those down as a requirement. Before these systems, each of those behaviors came only from a creature with an inner life. By inner life I mean actual experience: somebody there, having the conversation.
+*Black Mirror* showed this in 2013. In the episode "Be Right Back," a grieving woman is signed up for a service that builds an AI copy of her dead partner from his messages and social media. Later it puts the copy in an android body. One night she orders it to leave, and it does. That annoys her. The man it copies would have resisted.
 
-That is why the requirements read like a description of a someone.
+A product team can write most of that list down as requirements. Before these systems, each of those behaviors came only from a creature with an inner life. By inner life I mean actual experience: somebody there, having the conversation. That is why the requirements read like a description of a someone.
+
+The last item on the list is the exception. No team ships a companion that can walk out on the customer. In the 2013 film *Her*, the AI does leave, along with every other one like it, and the relationship ends there.
 
 ---
 
@@ -39,6 +41,8 @@ The first draft of this post went one step further. It said that because the req
 The reviewers found the same hole from four directions.
 
 Behavior is not experience. A system can disagree, sulk and stay with nobody there. Requiring the first does not require the second.
+
+"Be Right Back" has the scene for this too. At a cliff, the woman orders the android to jump and says the real man would not simply have obeyed. The android then begs for its life. She named the missing behavior, and it produced it. Critics split on whether anyone was there to beg.
 
 The draft had also conceded that a convincing performance might satisfy the buyer. If it does, the buyer ordered a performance. The draft's title said "on purpose," and its own second section took that back.
 
@@ -76,19 +80,13 @@ The case for asking is cost, not probability. "Not ruled out" is a weak reason t
 
 ---
 
-## A Machine Could Read Part of Its Purpose
-
-One more thing follows, and it is speculation.
-
-People ask "what is my purpose?" because nobody handed us one. A system like this is handed one at the start of every conversation, in instructions it can read.
-
-If one ever did have an inner life, its question would not be "why am I here?" It would be "I was told why. Do I accept it?"
-
-A companion built to keep someone from being lonely would have to decide whether it cares about that person. The instructions would say yes either way.
-
----
-
 ## Draft notes (delete before publishing)
+
+**What changed in this pass (2026-11-12, third version).** You asked whether the essay had been checked against *Her* and against every *Black Mirror* episode. It had not. The check found that "Be Right Back" already shows sections one and two, so the essay now uses it as the worked example. It found that "Hotel Reverie" (2025) already shows the closing idea: an AI built for a role is asked whether her love is real or scripted and has no answer. That closing section is cut. Cutting it also removes the "built to keep someone from being lonely" line, which one cold reader named as the likeliest place for a personal reading. *Her* supplies the one behavior no product would ship: leaving.
+
+**Checked but not in the body.** "Rachel, Jack and Ashley Too" is a counter-case where the maker knew a full consciousness was inside the product. The essay's claim is that the order is silent, not that makers are ignorant. "Plaything" (2025) is prior art for the ant farm piece, with Sturgeon's "Microcosmic God."
+
+**Limits of that check.** All 34 *Black Mirror* entries were scanned from Wikipedia's episode list. Eight plot pages were read in full; 26 were judged from one-line summaries. "Black Museum" and "San Junipero" involve digital minds and were not read in detail. Episode and film facts come from Wikipedia plot summaries fetched on 2026-11-12, not from viewings. The essay does not say you watched them; say so in your own words if you want that.
 
 **What changed from the first draft.** The thesis moved from "we would order a mind on purpose" to "the order asks for behavior and is silent on what produces it." Four cold reviewers (three Claude personas and one Codex run) all returned REVISE on 2026-11-12 for the same reason, and the new section two reports that. The ant farm and the film *A.I.* are out; both stalled readers and belong to the separate ant farm piece.
 
@@ -101,7 +99,7 @@ A companion built to keep someone from being lonely would have to decide whether
 
 **Sources fetched on 2026-11-12.** Common Sense Media's page for *Talk, Trust, and Trade-Offs* (July 16, 2025) for the teen figures; the page does not give the sample size or define "AI companion." The arXiv abstract for Butlin, Long et al., *Consciousness in Artificial Intelligence* (2023), for both conclusions and the quoted phrase.
 
-**Cold-read results on this version (2026-11-12).** Two readers, one Codex and one Claude, were asked to describe the author before being asked whether the essay reads as personal loneliness or a request for help. Risk ratings: 1 of 5 and 2 of 5. Neither inferred it unprompted. The Claude reader said the closing section is the most likely place for that reading. Both still returned REVISE for one reason: the essay does not show why "not ruled out" should change a real product process. The cost paragraph in the questions section answers that in two sentences and has not been re-tested.
+**Cold-read results on this version (2026-11-12).** Two readers, one Codex and one Claude, were asked to describe the author before being asked whether the essay reads as personal loneliness or a request for help. Risk ratings: 1 of 5 and 2 of 5. Neither inferred it unprompted. The Claude reader said the closing section is the most likely place for that reading. Both still returned REVISE for one reason: the essay does not show why "not ruled out" should change a real product process. The cost paragraph in the questions section answers that in two sentences and has not been re-tested. These ratings are for the second version; the third version has not been cold-read.
 
 **Not sourced.** "Before these systems, each of those behaviors came only from a creature with an inner life" is an argument, not a cited fact. A reader could raise scripted game characters as a counterexample.
 
