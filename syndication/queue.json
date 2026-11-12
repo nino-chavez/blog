@@ -30,11 +30,11 @@
  },
  "summary": {
   "linkedin": {
-   "posted": 65,
-   "queued": 10,
+   "posted": 66,
+   "queued": 9,
    "skipped": 270,
    "firstSlot": "2026-10-11",
-   "lastSlot": "2026-11-12"
+   "lastSlot": "2026-11-03"
   },
   "substack": {
    "posted": 293,
@@ -12387,12 +12387,17 @@
     },
     "linkedin": {
      "mode": "native",
-     "state": "eligible",
+     "state": "posted",
      "caption": "captions/linkedin/blog--which-expertise-carries-forward.md",
-     "postedAt": null,
+     "postedAt": "2026-11-12",
      "scheduledFor": "2026-11-12",
-     "url": null,
-     "pinnedFor": "2026-11-12"
+     "url": "https://www.linkedin.com/feed/update/urn:li:activity:7526765797298372609/",
+     "pinnedFor": "2026-11-12",
+     "firstCommentState": "posted",
+     "firstCommentText": "https://ninochavez.co/blog/which-expertise-carries-forward",
+     "verifiedAt": "2026-11-12T22:02:22+00:00",
+     "deliveryMethod": "post-linkedin.mjs via shared browser (CDP 9222)",
+     "verification": "Independent check-linkedin-post.mjs found the exact new post and source-link comment. Live post under Nino Chavez matched every caption paragraph."
     },
     "devto": {
      "mode": "skip",
