@@ -6,7 +6,15 @@ import matter from 'gray-matter';
 
 export const ROOT = fileURLToPath(new URL('../', import.meta.url));
 export const REVIEW_DIR = join(ROOT, '.tmp/listen-preview');
-export const FIRST_ESSAYS = ['because-i-can-is-only-half-the-answer', 'the-rules-of-the-road-still-apply'];
+// Nino selected this saved designed voice, then made it the new-post default.
+// A voice ID identifies the account asset; it is not an API credential.
+export const DEFAULT_NARRATION = Object.freeze({
+  voiceSelection: Object.freeze({
+    voiceId: 'OXlx3LzMzFwqIFNLjDzB', name: 'Signal Dispatch - British Narrator',
+    category: 'generated', narrator: 'Original British narrator', selectedBy: 'Nino',
+  }),
+  modelId: 'eleven_v3', speed: 1,
+});
 export const sha256 = (value) => createHash('sha256').update(value).digest('hex');
 export const sourceHash = ({ data, content }) => sha256(JSON.stringify({
   title: data.title, author: data.author || 'Nino Chavez', body: content.trim(),
@@ -67,7 +75,9 @@ export function narrationScript(essay) {
     .replace(/ +$/gm, '')
     .replace(/\n{3,}/g, '\n\n');
   if (/\]\(|\[\^|^\s*[-*+]\s/m.test(body)) throw new Error('Review unresolved Markdown before narration.');
-  return `${essay.data.title}.\n\nBy ${essay.data.author || 'Nino Chavez'}.\n\n${body}\n`;
+  const title = essay.data.title.trim();
+  const spokenTitle = /[.!?:…][\"”’']?$/.test(title) ? title : `${title}.`;
+  return `${spokenTitle}\n\nBy ${essay.data.author || 'Nino Chavez'}.\n\n${body}\n`;
 }
 
 export function splitScript(text, limit = 4500) {

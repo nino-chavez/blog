@@ -4,15 +4,16 @@ import { mkdirSync, readFileSync, writeFileSync, existsSync, copyFileSync } from
 import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { parseArgs } from 'node:util';
-import { REVIEW_DIR, readManifest, readEssay, sourceHash, sha256, splitScript, localFile, assertSelectedVoice } from './listen-lib.mjs';
+import { DEFAULT_NARRATION, REVIEW_DIR, readManifest, readEssay, sourceHash, sha256, splitScript, localFile, assertSelectedVoice } from './listen-lib.mjs';
 
 const { values } = parseArgs({ options: {
   'voice-id': { type: 'string' }, generate: { type: 'boolean', default: false },
   'max-characters': { type: 'string', default: '18000' },
-  speed: { type: 'string', default: '1' },
-  'model-id': { type: 'string', default: 'eleven_multilingual_v2' },
+  speed: { type: 'string', default: String(DEFAULT_NARRATION.speed) },
+  'model-id': { type: 'string', default: DEFAULT_NARRATION.modelId },
 } });
-if (!values['voice-id'] || !/^[a-zA-Z0-9]+$/.test(values['voice-id'])) throw new Error('Provide the selected saved narrator with --voice-id.');
+const voiceId = values['voice-id'] || DEFAULT_NARRATION.voiceSelection.voiceId;
+if (!/^[a-zA-Z0-9]+$/.test(voiceId)) throw new Error('Provide the selected saved narrator with --voice-id.');
 const budget = Number(values['max-characters']);
 if (!Number.isSafeInteger(budget) || budget < 1) throw new Error('Invalid character limit.');
 const speed = Number(values.speed);
@@ -20,9 +21,9 @@ if (!Number.isFinite(speed) || speed < 0.7 || speed > 1.2) throw new Error('Spee
 const modelId = values['model-id'];
 if (!['eleven_multilingual_v2', 'eleven_v3'].includes(modelId)) throw new Error('Unsupported narration model.');
 const manifest = readManifest();
-if (manifest.voiceSelection?.voiceId !== values['voice-id']) throw new Error('Voice ID must match the reviewed narrator selection.');
+if (manifest.voiceSelection?.voiceId !== voiceId) throw new Error('Voice ID must match the reviewed narrator selection.');
 const settings = {
-  voiceId: values['voice-id'], modelId, outputFormat: 'mp3_44100_128',
+  voiceId, modelId, outputFormat: 'mp3_44100_128',
   voiceSettings: modelId === 'eleven_v3' ? { stability: 0.5, speed } :
     { stability: 0.6, similarity_boost: 0.75, style: 0, use_speaker_boost: true, speed },
 };
@@ -51,6 +52,7 @@ const jobs = manifest.essays.map((essay) => {
   return { essay, chunks };
 });
 const characters = jobs.flatMap((job) => job.chunks).filter((chunk) => !chunk.cached).reduce((sum, chunk) => sum + chunk.input.text.length, 0);
+console.log(`Narrator: ${manifest.voiceSelection.name}; model ${modelId}; speed ${speed}.`);
 console.log(`${manifest.essays.length} essays; ${characters} uncached text characters; maximum ${budget}.`);
 if (characters > budget) throw new Error('Character allowance exceeded. No requests sent.');
 if (!values.generate) {

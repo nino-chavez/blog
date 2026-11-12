@@ -78,8 +78,9 @@ import { PullQuote } from '@/components/mdx/PullQuote';
 1. Create file in appropriate content directory
 2. Generate feature image: `node scripts/generate-illustration-images.js --dir {type} {filename}.mdx`
 3. For presentations: export HTML with `node scripts/export-presentation-html.js {slug}`
-4. Verify: `npm run build`
-5. Publish (if requested): commit and push
+4. **New blog posts include read-aloud by default**, using the selected Original British narrator. Follow [`docs/listen.md`](../docs/listen.md): prepare the final draft with `npm run listen:prepare -- --slug <slug>`, review the spoken script, and generate a private recording with the saved narrator defaults. Do not ask whether to include narration or choose the voice again. Obtain approval of the actual recording before public promotion; arrange article and audio review together. Complex MDX needs a reviewed spoken adaptation, never silent omission. An audio exception requires Nino's explicit direction.
+5. Verify: `npm run build` (and `npm run test:listen` when adding or changing audio).
+6. Publish (if requested): promote the exact approved recording and its source/audio hashes, commit, push and merge through the existing checks. After deployment, run `npm run listen:check-live` and verify browser play, pause, seek and resumed playback. Narration does not authorize extra social distribution.
 
 ## Post Status: Published, Draft, Unlisted
 

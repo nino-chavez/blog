@@ -1,12 +1,13 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import matter from 'gray-matter';
 import { checkAudio } from './check-listen-audio.mjs';
 import { sourceHash, sha256, narrationScript, splitScript, localFile, assertSelectedVoice } from './listen-lib.mjs';
+import { prepareReview } from './prepare-listen.mjs';
 import { renderEssayAudio } from '../src/utils/essay-audio.mjs';
 
 function fixture(t, { status = 'published', withAudio = true, withFile = true, audio = {}, body = 'A source paragraph.', recordedBody = body } = {}) {
@@ -91,4 +92,33 @@ test('player escapes text, supplies a fallback, and never autoplays', () => {
   assert.ok(html.includes('&lt;Nino&gt;'));
   assert.ok(html.includes('&lt;script&gt;'));
   assert.ok(!html.includes('autoplay'));
+});
+
+
+test('prepares a new draft with the selected narrator without public audio or approval', (t) => {
+  const root = fixture(t, { status: 'draft', withAudio: false, withFile: false, body: 'Draft prose.' });
+  const directory = join(root, '.tmp/review');
+  const manifest = prepareReview({ slugs: ['an-essay'], root, directory });
+  assert.equal(manifest.voiceSelection.name, 'Signal Dispatch - British Narrator');
+  assert.equal(manifest.voiceSelection.voiceId, 'OXlx3LzMzFwqIFNLjDzB');
+  assert.equal(manifest.voiceSelection.selectedBy, 'Nino');
+  assert.equal(manifest.essays[0].narrator, 'Original British narrator');
+  assert.equal(manifest.essays[0].status, 'awaiting-generation');
+  assert.match(readFileSync(join(directory, 'an-essay.txt'), 'utf8'), /Draft prose/);
+  assert.equal(checkAudio(root), 0);
+  const before = readFileSync(join(directory, 'manifest.json'), 'utf8');
+  assert.throws(() => prepareReview({ slugs: ['an-essay'], root, directory }), /already exists/);
+  assert.equal(readFileSync(join(directory, 'manifest.json'), 'utf8'), before);
+});
+test('requires explicit post selection and validates every post before creating a review', (t) => {
+  const root = fixture(t, { withAudio: false, withFile: false });
+  const directory = join(root, '.tmp/review');
+  assert.throws(() => prepareReview({ root, directory }), /--slug/);
+  assert.throws(() => prepareReview({ slugs: ['an-essay', 'missing'], root, directory }));
+  assert.throws(() => prepareReview({ slugs: ['an-essay', 'an-essay'], root, directory }), /only once/);
+  assert.throws(() => prepareReview({ slugs: ['../outside'], root, directory }), /Invalid essay slug/);
+  assert.equal(existsSync(directory), false);
+});
+test('question-mark titles do not acquire an extra spoken period', () => {
+  assert.ok(narrationScript({ data: { title: 'Which Expertise Carries Forward?' }, content: 'Text.' }).startsWith('Which Expertise Carries Forward?\n\n'));
 });

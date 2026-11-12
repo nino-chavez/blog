@@ -69,7 +69,7 @@ try {
         await page.screenshot({ path: path.join(evidence, `${engineName}-essay-${width}.png`) });
         results.push({ engine: engineName, width, state: 'play, pause, seek; no overflow; no autoplay' });
         await page.goto(base, { waitUntil: 'networkidle' });
-        assert.equal(await page.locator('audio').count(), 2);
+        assert.equal(await page.locator('audio').count(), manifest.essays.length);
         assert.ok(!(await page.locator('body').innerText()).includes('AI version of your voice'));
         assert.match(await page.locator('.essay-audio').first().innerText(), /AI narration · Original British narrator/);
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));

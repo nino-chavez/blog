@@ -5,6 +5,24 @@ The first two recordings are **Because I Can Is Only Half the Answer** (**5:08**
 
 **November 12, 2026:** Nino also approved the actual **8:20** recording of **Which Expertise Carries Forward?** and explicitly requested publication and live playback verification. It uses the same selected Original British narrator, Eleven v3 at native speed 1, with linear volume adjustment only. The essay-specific approval, exact asset and live checks are recorded in `docs/audits/2026-11-12-expertise-transfer-draft.md`.
 
+## Standard step for new blog posts
+
+As of November 12, 2026, new blog-post publishing includes read-aloud by default. Use **Signal Dispatch - British Narrator**, the saved original designed voice already selected by Nino. Its exact identity, Eleven v3 model and native speed 1 are owned by `DEFAULT_NARRATION` in `astro-build/scripts/listen-lib.mjs`; no private archive or repeat voice selection is needed on the other Mac.
+
+Prepare the final draft's narration as part of the publishing assignment without asking whether to include it. Arrange review of the article and actual recording together. The existing per-recording listening approval still applies before deployment. If Nino explicitly requests text-only publication, record that exception; unsupported MDX needs a reviewed spoken adaptation, not silent omission.
+
+Run these from `astro-build/`:
+
+```text
+npm run listen:prepare -- --slug <post-slug>
+npm run listen:generate                # offline dry run with selected defaults
+npm run listen:generate -- --generate   # generate the reviewed script privately
+```
+
+Repeat `--slug` to prepare a batch. Preparation accepts draft, unlisted and published posts; it never adds public audio or marks a recording approved. It refuses to overwrite an existing review. Archive that review under the repository's ignored `.artifacts/listen/` before preparing another. Generation is an authoring step, never part of a build or a public reader request.
+
+After actual listening approval, promote only the exact finished MP3 and matching audio/source hashes. Run the audio tests and production build, merge through the normal checks, then run the live delivery checker and verify play, pause, seek and resumed playback in a dedicated headless browser. Keep the player paused afterward. The publishing checklist in `.claude/CLAUDE.md` and `DEPLOY.md` points here.
+
 ## Set up the voice once
 
 Save the exact audition Nino selects, then read it back from ElevenLabs. Record its `voiceId`, `name`, `category` (`generated` or `cloned`), reader-facing `narrator` label and `selectedBy: Nino` in the private manifest's `voiceSelection`. The generator copies that narrator label to each completed essay; this is separate from its author. It rejects a different voice ID, name or category instead of silently changing narrators.
@@ -15,11 +33,11 @@ Voices stay in Nino's ElevenLabs account. Do not publish them to the voice libra
 
 ## Prepare and generate private recordings
 
-Run commands from `astro-build`. `npm run listen:prepare` extracts the two published essays into `.tmp/listen-preview/`. It refuses to overwrite an existing review. Read both text files before generating: URLs are removed while link text remains, headings are spoken with ending punctuation, section dividers become pauses, and `630` becomes `Six-three-oh`, as Nino specified. The standalone “Read the letter” link is omitted. The title and author are spoken first. Complex MDX fails instead of silently losing code, images or tables.
+Run commands from `astro-build`. `npm run listen:prepare -- --slug <post-slug>` extracts the selected post into `.tmp/listen-preview/` and records the selected narrator. It refuses to overwrite an existing review. Read every prepared text file before generating: URLs are removed while link text remains, headings are spoken with ending punctuation, section dividers become pauses, and `630` becomes `Six-three-oh`, as Nino specified. The standalone “Read the letter” link is omitted. The title and author are spoken first. Complex MDX fails instead of silently losing code, images or tables.
 
-`npm run listen:generate -- --voice-id SAVED_VOICE_ID --model-id eleven_v3` is the current offline dry run. It reports uncached characters and sends no requests. Add `--generate` to create the private recordings after the voice is saved, its selection recorded and the scripts read. The default allowance is 18,000 text characters per invocation. The first pair contains approximately 13,100 characters; the provider's actual credit charge remains authoritative.
+`npm run listen:generate` is the offline dry run using the selected British narrator, Eleven v3 and speed 1. Explicit `--voice-id`, `--model-id` and `--speed` options remain available for a separately authorized review; the exact selected-voice guard still applies. It reports uncached characters and sends no requests. Add `--generate` to create the private recordings after the voice is saved, its selection recorded and the scripts read. The default allowance is 18,000 text characters per invocation. The prepared review reports its uncached characters; the provider's actual credit charge remains authoritative.
 
-The authoring command reads the existing ElevenLabs credential from 1Password in process memory, or accepts `ELEVENLABS_API_KEY` already supplied by a secret injector. It never writes credentials. `ffmpeg` and `ffprobe` are required locally. The voice is checked before generating. Output is 44.1 kHz / 128 kbps MP3, with no background music. Supported models are Eleven v3 and Multilingual v2; the latter remains the command's default for compatibility. The v3 setting uses stability 0.5 and omits similarity and speaker boost controls that v3 does not support.
+The authoring command reads the existing ElevenLabs credential from 1Password in process memory, or accepts `ELEVENLABS_API_KEY` already supplied by a secret injector. It never writes credentials. `ffmpeg` and `ffprobe` are required locally. The voice is checked before generating. Output is 44.1 kHz / 128 kbps MP3, with no background music. Supported models are Eleven v3 and Multilingual v2; Eleven v3 is the standard publishing default. Multilingual v2 requires an explicit model choice. The v3 setting uses stability 0.5 and omits similarity and speaker boost controls that v3 does not support.
 
 Speed defaults to `1`, preserving the designed narrator's audition cadence; values outside ElevenLabs' supported `0.7`–`1.2` range are rejected before any request. Speed is part of the cache fingerprint. The earlier personal-clone review used `--speed 0.92` and sparse SSML pauses with Multilingual v2. Eleven v3 rejects those scripts because it does not support SSML breaks; its current scripts use natural punctuation and paragraph boundaries. See ElevenLabs' [pacing and pause guidance](https://elevenlabs.io/docs/overview/capabilities/text-to-speech/best-practices).
 
@@ -33,13 +51,13 @@ Keep previously shared MP3 paths unchanged when revising. Archive the prior mani
 
 ## Listen locally
 
-Run `npm run build`, then `npm run listen:preview`. Open `http://127.0.0.1:4328`. The listening room shows both recordings when available and links to each essay with the same player used by the public article. It binds only to loopback, sends no-store and noindex headers, and is not an Astro route. Public builds cannot include it.
+Run `npm run build`, then `npm run listen:preview`. Open `http://127.0.0.1:4328`. The listening room shows the selected recordings when available and links to each essay with the same player used by the public article. It binds only to loopback, sends no-store and noindex headers, and is not an Astro route. Public builds cannot include it.
 
 The public player appears below the byline. Native controls support play, pause and seeking without JavaScript; the browser may also offer playback speed. A small enhancement makes Space work consistently when the player has focus and explains playback failures. Nothing autoplays or preloads before playback. A download link remains available as an explicitly fallible recovery action after an error, and the essay below supplies the transcript. The visible label identifies AI narration and the selected narrator, without implying that the author recorded a designed voice.
 
 Production playback uses the dedicated `/blog/listen/*` runtime route; the approved files and download links remain under `/blog/audio/*`. Astro gives static files priority over endpoints at the same URL, so the player needs a separate delivery path. Cloudflare Pages' static file server [returns full files for range requests](https://developers.cloudflare.com/pages/configuration/serving-pages/#behavior), which prevented seeking during the first live check. The route stores the complete approved asset through Cloudflare's [Cache API](https://developers.cloudflare.com/workers/runtime-apis/cache/#match), then lets that API serve the requested bytes. The initial cache fill is awaited, so the first seek works too. If caching is unavailable, playback falls back to the complete file without advertising seeking. The files stay in the existing deployment; no separate storage service or credential is required.
 
-The listening room checks the current essay, built transcript and audio fingerprints. Changed text, an old build or replaced audio must be reconciled before listening. Check pronunciation, pace, paragraph joins and the ending of each actual recording. Pay particular attention to six-three-oh, LeagueApps, Hume Logan and the names cited in the second essay. Browser tests use an explicitly labelled test tone and do not establish voice quality. Nino must hear both real recordings before publication.
+The listening room checks the current essay, built transcript and audio fingerprints. Changed text, an old build or replaced audio must be reconciled before listening. Check pronunciation, pace, paragraph joins and the ending of each actual recording. Pay particular attention to six-three-oh, LeagueApps, Hume Logan and the names cited in the second essay. Browser tests use an explicitly labelled test tone and do not establish voice quality. Nino must hear each actual recording before its publication.
 
 ## Approval is a separate step
 
@@ -57,6 +75,6 @@ The first pair has Nino's listening and publication approval. For every future r
 
 `npm run test:listen` checks the approval boundary, stale recordings, paths, script preparation and player escaping. It also exercises the audio handler in Cloudflare's local runtime: cold and warm range requests, HEAD, conditional requests, missing files and cache failure. The build runs the public-audio check before Astro starts. `scripts/check-listen-player.mjs` accepts an installed Playwright package path, following the existing design runner's convention. It creates a quiet test tone in `.tmp`, then checks Chromium and WebKit at desktop, 390px and 320px widths, keyboard playback, seeking, missing-audio behavior, range requests and no-JavaScript markup. It never calls ElevenLabs.
 
-After deployment, run `npm run listen:check-live` from `astro-build`. It checks each approved article, exact recording bytes, HEAD and start/middle/suffix range responses against the public site. To check a local Cloudflare build, pass its origin with `npm run listen:check-live -- http://127.0.0.1:4330`. Also play and seek both actual recordings in a browser. A local preview passing its own range checks does not establish that the production host supports seeking.
+After deployment, run `npm run listen:check-live` from `astro-build`. It checks each approved article, exact recording bytes, HEAD and start/middle/suffix range responses against the public site. To check a local Cloudflare build, pass its origin with `npm run listen:check-live -- http://127.0.0.1:4330`. Also play, pause, seek and resume the newly published recording in a dedicated headless browser. A hidden shared tab can defer loading; use the project's headless browser tooling rather than bringing an operator tab to the foreground. A local preview passing its own range checks does not establish that the production host supports seeking.
 
 Current evidence and any remaining review findings are recorded in `docs/design/listen-review.md`.
