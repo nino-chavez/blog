@@ -27,6 +27,10 @@ await new Promise((resolve, reject) => {
   server.once('exit', (code) => { clearTimeout(timer); reject(new Error(`Preview exited: ${code}`)); });
 });
 const base = 'http://127.0.0.1:4329';
+const ground = fs.readFileSync(path.join(ROOT, 'src/styles/publication.css'), 'utf8')
+  .match(/--publication-ground:\s*#([a-f0-9]{6})/i)?.[1];
+assert.ok(ground, 'Publication background token must exist');
+const expectedBackground = `rgb(${[0, 2, 4].map((offset) => parseInt(ground.slice(offset, offset + 2), 16)).join(', ')})`;
 const results = [];
 try {
   const mp3 = `/audio/${manifest.essays[0].audioFile}`;
@@ -43,7 +47,7 @@ try {
         await page.goto(`${base}/essay/${manifest.essays[0].slug}`, { waitUntil: 'networkidle' });
         await page.evaluate(() => document.fonts.ready);
         assert.match(await page.locator('.article-title').evaluate((element) => getComputedStyle(element).fontFamily), /Georgia/);
-        assert.equal(await page.locator('body').evaluate((element) => getComputedStyle(element).backgroundColor), 'rgb(244, 240, 232)');
+        assert.equal(await page.locator('body').evaluate((element) => getComputedStyle(element).backgroundColor), expectedBackground);
         assert.equal(await page.locator('audio').count(), 1);
         assert.match(await page.locator('.essay-audio').innerText(), /AI narration · Original British narrator/);
         assert.equal(await page.locator('audio').getAttribute('autoplay'), null);
@@ -69,13 +73,15 @@ try {
         await page.screenshot({ path: path.join(evidence, `${engineName}-essay-${width}.png`) });
         results.push({ engine: engineName, width, state: 'play, pause, seek; no overflow; no autoplay' });
         await page.goto(base, { waitUntil: 'networkidle' });
-        assert.equal(await page.locator('audio').count(), 2);
+        assert.equal(await page.locator('audio').count(), manifest.essays.length);
         assert.ok(!(await page.locator('body').innerText()).includes('AI version of your voice'));
         assert.match(await page.locator('.essay-audio').first().innerText(), /AI narration · Original British narrator/);
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
         if (width === 390) await page.screenshot({ path: path.join(evidence, `${engineName}-review-${width}.png`) });
         // Missing-file behavior retains the transcript and direct download link.
         await page.goto(`${base}/essay/${manifest.essays[0].slug}`);
+        const transcript = await page.locator('.article-content').innerText();
+        assert.ok(transcript.trim().length > 0, 'The selected essay transcript is present');
         // WebKit's native media stack can bypass Playwright route interception.
         // Make the loopback server return a real 404 after rendering the player.
         const audioPath = path.join(directory, manifest.essays[0].audioFile);
@@ -87,7 +93,7 @@ try {
           await page.keyboard.press('Space');
           await page.locator('[data-audio-error]').waitFor({ state: 'visible', timeout: 8000 });
           assert.equal(await page.getByRole('link', { name: /Try downloading the MP3/ }).count(), 1);
-          assert.ok((await page.locator('.article-content').innerText()).startsWith('I’ve described'));
+          assert.equal(await page.locator('.article-content').innerText(), transcript);
           if (width === 390) await page.screenshot({ path: path.join(evidence, `${engineName}-error-${width}.png`) });
         } catch (error) {
           console.error('Failure-state probe', engineName, width, await page.locator('audio').evaluate((audio) => ({
