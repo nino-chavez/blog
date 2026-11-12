@@ -28,8 +28,6 @@ This is not a niche. Common Sense Media reported in July 2025 that ["nearly thre
 
 Each promise is a behavior. It answers. It remembers. It reacts. It has a personality. A team can build and test every one of those.
 
-[Placeholder for Nino: one or two sentences from your own requirements work, if you have a real case where a document specified a behavior and left its cause unstated. Delete this paragraph if nothing fits. Do not let anyone fill it in for you.]
-
 ---
 
 ## What Neither Page Says
@@ -68,7 +66,7 @@ If you are buying, ask the vendor for their version of that line. If they don't 
 
 **What this version is (2026-11-12, fifth version).** A narrowed rewrite. Three cold-read rounds (twelve reads, all REVISE) agreed that the philosophy was prior art and that the only new part, the requirements frame, had no real document behind it. This version keeps only that part and grounds it in two products' published promises. It has not been cold-read.
 
-**The placeholder in section one is for you.** I can quote public marketing. I cannot supply your experience of writing requirements. If you have a real case, it is the strongest sentence the essay could have. If not, delete the bracketed paragraph; the essay stands without it.
+**No personal example.** An earlier pass left a bracketed slot for a case from your own requirements work. You chose to delete it on 2026-11-12, so the essay rests on public evidence only.
 
 **Lines that speak for you.**
 
@@ -93,4 +91,4 @@ If you are buying, ask the vendor for their version of that line. If they don't 
 
 **What was cut and where it went.** The ant farm, *A.I.*, *Her*, "Be Right Back", *Soylent Green*, *The Island*, *Caprica*, *The Animatrix*, the failed-first-draft section, the model's quote about itself, and the three review questions are all gone from this essay. They remain in git history (blog PRs 85 to 88) and are raw material for the ant farm piece.
 
-**Still needed to publish.** Your read of the two homepages, the placeholder decision, a cold read, feature image, `publishedAt`, and the move to `astro-build/src/content/blog/` as `.mdx`.
+**Still needed to publish.** Your read of the two homepages, a cold read, feature image, `publishedAt`, and the move to `astro-build/src/content/blog/` as `.mdx`.
