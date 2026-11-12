@@ -69,3 +69,16 @@ Published on November 12, 2026 with Nino's explicit authorization.
 - The caption initially passed independent source review (Operator dispatch `f2c293a7-0e47-43c6-a49b-5960c3fc9f52`, matching requested/reported `gpt-5.6-terra`, medium effort). Post-commit review then caught a closing generalization broader than the essay; it was removed. Source-fidelity checks and the semantic receipt were rerun; final publication HEAD `017b0f0` received `VERDICT: PASS`.
 - Evidence snapshots retained locally in `/Users/nino/Workspace/dev/sites/nino/blog/.artifacts/expertise-transfer-review/`: `blog-live.png`, `linkedin-composer.png`, `linkedin-comment.png`, and `linkedin-live.png`. These are external-reference receipts; the composer snapshot alone is not proof of publication.
 - Existing syndication items and schedules were preserved. No Substack delivery was performed.
+
+## Approved read-aloud recording
+
+Nino listened to the private 8:20 preview and explicitly approved publication of that actual recording, followed by live playback verification. The exact candidate hash and unchanged essay-source hash were rechecked before promotion.
+
+- Approved asset: `/blog/audio/which-expertise-carries-forward-8ded007c8cee.mp3`.
+- SHA-256: `8ded007c8cee69c60507e6072bc471e859a3ad4d3a1aa1b74e252efa21903eeb`.
+- Essay source SHA-256: `ee551e7815ff95806ad8e2b4f194e149567637ca9a59e662b502c577ab6f0a4a`.
+- Duration: 500.64 seconds. Disclosure: **AI narration · Original British narrator.**
+- Generation: selected saved voice, Eleven v3, speed 1, stability 0.5; linear volume adjustment only. No background music, EQ, compression, pitch correction or time stretching.
+- Private scripts, unprocessed audio, provider receipts, transcript comparisons and approval receipt remain at `/Users/nino/Workspace/dev/sites/nino/blog/.artifacts/listen/2026-11-12-expertise/`. Only the exact approved finished MP3 is public.
+
+The new audio frontmatter leaves the article body and existing LinkedIn post unchanged. Source-review hashes were refreshed because the metadata changed; no LinkedIn distribution is part of this audio release. Live delivery checks follow deployment.
