@@ -6,14 +6,14 @@ Reader: a technically curious product, engineering, or business leader. Job: und
 
 ## Outcome
 
-Voice: mostly aligned. Clarity: automated reader-contract check passes; editorial improvements remain. Novelty: a distinct contribution, with meaningful overlap. This is a saved draft with review findings, not a publication-readiness verdict.
+Voice and clarity: the requested revision passes the editorial recheck and automated reader-contract check. The opening now names transferable judgment, assumptions requiring testing, and delegation/review experience within 150 words. The closing repetition is removed. Novelty remains a distinct contribution, with acknowledged overlap. The article remains an unpublished draft; these checks do not authorize publication.
 
-## Voice and clarity findings
+## Voice and clarity findings — resolved in the revision
 
-- “Years in a technical role tell us something about that preparation, but leave much of it unexplained.” The sentence does not identify which preparation matters. Smallest remedy: name delivery and delegation experience explicitly. The main idea appears within 150 words, but the distinction between transferable principles and assumptions needing revision becomes explicit later.
-- “The assignment determines whether the preparation is worthwhile.” The deciding condition is missing. Smallest remedy: name recurrence and the cost of preparation and verification.
-- “Some experience transfers directly. Some requires revision. Other experience becomes more useful than it was before.” The compact three-part summary is accurate but generic. Smallest remedy: let the concrete technical examples carry more of this work.
-- The closing section repeats coordination and reusable-method arguments. Smallest remedy: shorten that material and retain the recurring-assignment test as the practical expression of expertise transfer.
+- The vague sentence about “years in a technical role” is replaced with explicit technical judgment, assumptions needing testing, and practice delegating and reviewing work. The main distinction and agent-work consequence appear within 150 words.
+- The preparation tradeoff now names recurring investigations and the cost of writing and maintaining a method for a one-off task.
+- The generic three-part summary is replaced by one transition into the existing leadership example.
+- The closing section no longer repeats the spectrum of expert practices, the Muay Thai callback, or the final thesis restatement. It retains the prior-work links, the limit on reusable methods, and the concrete recurring-assignment test.
 
 The checkout example is concrete and preserves the difference between successful execution and sufficient evidence. Leadership's effect on agent utility remains a hypothesis. There is no invented fighter technique, dialogue, venue, date, or weight-class ranking.
 
@@ -32,13 +32,21 @@ Author evidence comes from Codex chat `01a1d19d-165f-74f0-8cd5-5629653ecace` and
 
 The technical examples were checked against [early HTTP design notes](https://www.w3.org/Protocols/DesignIssues.html) and [Apple's lifecycle guidance](https://developer.apple.com/documentation/uikit/managing-your-app-s-life-cycle). Neither source proves how particular veterans adapted; the draft states that limit.
 
-Review used the canonical voice guide, reader contract, repository voice-check prompts, and the [humanize-copy evaluation](https://raw.githubusercontent.com/millwright-labs/humanize-copy-skill/main/eval.md). Editorial concerns about generic passages and repetitive summary remain open; no blanket voice or humanization PASS is claimed. Formatting patterns are treated as contextual diagnostics under the canonical guide.
+Review used the canonical voice guide, reader contract, repository voice-check prompts, and the [humanize-copy evaluation](https://raw.githubusercontent.com/millwright-labs/humanize-copy-skill/main/eval.md). The current revision resolves the recorded opening and repetition findings. Formatting patterns remain contextual diagnostics under the canonical guide; no universal humanization score is claimed.
 
 Independent read-only review: Operator dispatch `aa5cd850-4bbd-4a41-9bdf-a91b7a4991f9`; receipt and runtime metadata both report `gpt-5.6-terra`, medium effort. The parent checked its findings against the actual draft, earlier posts, and author evidence. Findings are recorded above rather than used as an automatic readiness verdict.
 
+## Revision recheck
+
+Operator dispatch `9b9d4e7d-e375-45bb-b327-361ad301b9de` independently compared the revision with its source version. Receipt and runtime metadata agree on `gpt-5.6-terra`, medium effort. It confirmed the early payoff, removed summary loop, concrete ending, preserved novelty, and scoped leadership hypothesis.
+
+The parent rejected two additional provenance flags against the author's exact source: Nino explicitly described a “new amateur fighter” and watching different levels and weight classes. The draft reports those observations without ranking weight classes or attributing the skill differences to weight. No new anecdote details were added by this revision.
+
+The final edit was compared with the original supplied draft and the actual author messages. The anecdote, leadership history, technical examples, source links, and uncertainty are preserved. The revised outline progresses from observed skill differences, through changed technical conditions and delegation experience, to a concrete test on recurring work.
+
 ## Validation
 
-- Full production build passed, including takeaway, feature-image, public JSON, sitemap, reader-contract, and caption checks. Existing caption diagnostics concern other posts; syndication was untouched.
-- All six post API protection tests passed, including negative tests rejecting unsafe output and routing.
-- Explicit draft check found no article route and no slug reference in 382 public HTML/JSON/XML build artifacts. Internal server content is not a public route; runtime publication checks remain required.
+- Full production build rerun after the revision passed, including takeaway, feature-image, public JSON, sitemap, reader-contract, and caption checks. Existing caption diagnostics concern other posts; syndication was untouched.
+- All six post API protection tests passed during the initial save, including negative tests rejecting unsafe output and routing. This prose-only revision does not change those protections; the build reran the public JSON and routing checks.
+- Explicit draft check found no article route and no slug reference in 383 public HTML/JSON/XML build artifacts. Internal server content is not a public route; runtime publication checks remain required.
 - Only the draft and this review note are intended changes. No feature image was commissioned for this unpublished draft.
