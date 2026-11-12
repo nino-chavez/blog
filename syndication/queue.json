@@ -31,18 +31,18 @@
  "summary": {
   "linkedin": {
    "posted": 65,
-   "queued": 9,
+   "queued": 10,
    "skipped": 270,
    "firstSlot": "2026-10-11",
-   "lastSlot": "2026-11-03"
+   "lastSlot": "2026-11-12"
   },
   "substack": {
    "posted": 293,
-   "queued": 4,
+   "queued": 5,
    "backfill": 34,
    "skipped": 13,
    "firstSlot": "2026-10-11",
-   "lastSlot": "2026-11-01"
+   "lastSlot": "2026-11-13"
   },
   "devto": {
    "posted": 2,
@@ -12358,6 +12358,41 @@
      "postedAt": null,
      "scheduledFor": null,
      "url": null
+    },
+    "devto": {
+     "mode": "skip",
+     "state": "skip",
+     "postedAt": null,
+     "scheduledFor": null,
+     "url": null
+    }
+   }
+  },
+  {
+   "id": "blog/which-expertise-carries-forward",
+   "title": "Which Expertise Carries Forward?",
+   "url": "https://ninochavez.co/blog/which-expertise-carries-forward",
+   "publishedAt": "2026-11-12",
+   "collection": "blog",
+   "words": 1050,
+   "cluster": "which-expertise-carries-forward",
+   "tier": 2,
+   "routes": {
+    "substack": {
+     "mode": "full",
+     "state": "eligible",
+     "postedAt": null,
+     "scheduledFor": "2026-11-13",
+     "url": null
+    },
+    "linkedin": {
+     "mode": "native",
+     "state": "eligible",
+     "caption": "captions/linkedin/blog--which-expertise-carries-forward.md",
+     "postedAt": null,
+     "scheduledFor": "2026-11-12",
+     "url": null,
+     "pinnedFor": "2026-11-12"
     },
     "devto": {
      "mode": "skip",

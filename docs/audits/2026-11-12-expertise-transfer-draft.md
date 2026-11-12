@@ -1,6 +1,6 @@
 # Which Expertise Carries Forward? — draft review
 
-Reviewed 2026-11-12. The article remains `status: "draft"`; no syndication or publication changes are authorized. Source: `astro-build/src/content/blog/which-expertise-carries-forward.mdx`.
+Reviewed 2026-11-12. The draft review below records the prepublication state. Nino subsequently authorized publication and LinkedIn cross-posting on the same date. The article is now prepared with `status: "published"`; live delivery is recorded separately below. Source: `astro-build/src/content/blog/which-expertise-carries-forward.mdx`.
 
 Reader: a technically curious product, engineering, or business leader. Job: understand how a platform change can alter the usefulness of prior experience. Register: Thought Leadership; practitioner vocabulary. Preserve the supplied Muay Thai observation, leadership history, technical distinctions, and uncertainty about causation.
 
@@ -50,3 +50,9 @@ The final edit was compared with the original supplied draft and the actual auth
 - All six post API protection tests passed during the initial save, including negative tests rejecting unsafe output and routing. This prose-only revision does not change those protections; the build reran the public JSON and routing checks.
 - Explicit draft check found no article route and no slug reference in 383 public HTML/JSON/XML build artifacts. Internal server content is not a public route; runtime publication checks remain required.
 - Only the draft and this review note are intended changes. No feature image was commissioned for this unpublished draft.
+
+## Publication preparation
+
+Nino authorized publishing the final revised article and cross-posting to LinkedIn. The body is unchanged from the checked draft. Publication sets the status and actual timestamp, adds the repository-generated feature illustration and its 600px sibling, and adds a native LinkedIn caption with the source URL in the first comment. Existing queue entries and schedules are preserved; only this new item is selected for immediate LinkedIn delivery. Substack delivery is outside this request.
+
+The full production build passed, including the reader-contract and caption checks. The generated article HTML contains the revised argument and responsive feature-image reference. The LinkedIn dry run confirmed the correct signed-in account and a caption within the platform limit without opening a composer.
