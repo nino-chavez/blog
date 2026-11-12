@@ -12,11 +12,11 @@ excerpt: "Stories about AI companions show the outcome and skip how we got there
 
 The old science fiction films are built around a reveal. In *Soylent Green* (1973), the food sold as plankton is made from people. In *The Island* (2005), the residents are clones, and the ones who win the lottery are taken away to be harvested for organs.
 
-The stories about AI companions work the same way. They show the outcome. The few that show the path, like *Caprica* and *The Animatrix*, run it through a death, a trial or a war.
+The stories about AI companions that I checked for this essay mostly show the outcome too. The few that show the path, like *Caprica* and *The Animatrix*, run it through a death, a trial or a war.
 
-There is a path with no such scene. We build AI to take mundane reasoning off our hands, then find we need more: companionship, family, community. We push on to general intelligence, and without knowing it we breed something conscious. Every step is a reasonable product decision.
+Here is a scenario with no such scene. We build AI to take mundane reasoning off our hands, then find we need more: companionship, family, community. We push on to general intelligence, and without knowing it we breed something conscious. If that ever happened, every step would have looked like a reasonable product decision.
 
-On that path, the place to look is a requirements document. **A companion product asks for the behavior of someone. Nothing in the request says whether someone has to arrive.**
+In that scenario, the place to look is a requirements document. **A companion product asks for the behavior of someone. Nothing in the request says whether someone has to arrive.**
 
 The first step is already taken. Common Sense Media reported in July 2025 that ["nearly three in four teens have used AI companions"](https://about.commonsensemedia.org/research/talk-trust-and-trade-offs-how-and-why-teens-use-ai-companions) and that half use them regularly.
 
@@ -38,7 +38,7 @@ The last item on the list is the exception. No team ships a companion that can w
 
 ## The First Version of This Argument Failed
 
-I gave that path to an AI model as a scenario. It objected to "without knowing it." Its case was that company only counts if someone is there, so we would be ordering an inner life on purpose.
+I gave that scenario to an AI model. It objected to "without knowing it." Its case was that company only counts if someone is there, so we would be ordering an inner life on purpose.
 
 The first draft of this post made that argument. I had four AI reviewers attack it, and they found the same hole from four directions.
 
@@ -98,10 +98,11 @@ That review is the scene the films leave out.
 
 **Lines that speak for you.**
 
-- "I gave that path to an AI model as a scenario" and the scenario itself: your message, with "I need" changed to "we need."
+- "I gave that scenario to an AI model" and the scenario itself: your message, with "I need" changed to "we need."
 - The reveal-versus-journey frame: your message, in the essay's words rather than yours.
 - "I had told the model it was limited to its training and couldn't really create": your message.
-- "I had that argument attacked by four AI reviewers": you asked for the red team in this session.
+- "I had four AI reviewers attack it": you asked for the red team in this session.
+- "that I checked for this essay": the checks against *Her*, *Black Mirror* and the other works were run by Claude at your request.
 - The essay's position ("Both objections hold", "the position the evidence supports") is mine on your behalf. Confirm you hold it.
 
 **Sources fetched on 2026-11-12.** Common Sense Media's page for *Talk, Trust, and Trade-Offs* (July 16, 2025) for the teen figures; the page does not give the sample size or define "AI companion." The arXiv abstract for Butlin, Long et al., *Consciousness in Artificial Intelligence* (2023), for both conclusions and the quoted phrase.
