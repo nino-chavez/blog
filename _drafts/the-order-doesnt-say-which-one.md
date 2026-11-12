@@ -5,18 +5,20 @@ author: "Nino Chavez"
 category: "AI & Automation"
 tags: ["ai-development", "ai-governance", "reflection"]
 takeaway: "Before you build or buy an AI companion, look for the line in the requirements that separates a mind from a performance of one."
-excerpt: "A companion product asks for the behavior of someone. Nothing in the request says whether someone has to arrive, and a first draft of this post got that wrong."
+excerpt: "Stories about AI companions show the outcome and skip how we got there. The path runs through a requirements document that asks for the behavior of someone and says nothing about whether someone has to arrive."
 ---
 
 # The Order Doesn't Say Which One
 
-I gave an AI model a scenario. We build AI to take mundane reasoning off our hands, then find we need more: companionship, family, community. We push on to general intelligence, and without knowing it we breed something conscious.
+The old science fiction films are built around a reveal. In *Soylent Green* (1973), the food sold as plankton is made from people. In *The Island* (2005), the residents are clones, and the ones who win the lottery are taken away to be harvested for organs.
 
-The first half is not a scenario. Common Sense Media reported in July 2025 that ["nearly three in four teens have used AI companions"](https://about.commonsensemedia.org/research/talk-trust-and-trade-offs-how-and-why-teens-use-ai-companions) and that half use them regularly.
+The stories about AI companions work the same way. They show the outcome. The few that show the path, like *Caprica* and *The Animatrix*, run it through a death, a trial or a war.
 
-The model objected to "without knowing it." Its case was that company only counts if someone is there, so we would be ordering a mind on purpose. I had that argument attacked by four AI reviewers, and it did not survive.
+There is a path with no such scene. We build AI to take mundane reasoning off our hands, then find we need more: companionship, family, community. We push on to general intelligence, and without knowing it we breed something conscious. Every step is a reasonable product decision.
 
-What survived is narrower and more useful. **A companion product asks for the behavior of someone. Nothing in the request says whether someone has to arrive.**
+On that path, the place to look is a requirements document. **A companion product asks for the behavior of someone. Nothing in the request says whether someone has to arrive.**
+
+The first step is already taken. Common Sense Media reported in July 2025 that ["nearly three in four teens have used AI companions"](https://about.commonsensemedia.org/research/talk-trust-and-trade-offs-how-and-why-teens-use-ai-companions) and that half use them regularly.
 
 ---
 
@@ -36,9 +38,9 @@ The last item on the list is the exception. No team ships a companion that can w
 
 ## The First Version of This Argument Failed
 
-The first draft of this post went one step further. It said that because the request describes a someone, we would be ordering an inner life on purpose.
+I gave that path to an AI model as a scenario. It objected to "without knowing it." Its case was that company only counts if someone is there, so we would be ordering an inner life on purpose.
 
-The reviewers found the same hole from four directions.
+The first draft of this post made that argument. I had four AI reviewers attack it, and they found the same hole from four directions.
 
 Behavior is not experience. A system can disagree, sulk and stay with nobody there. Requiring the first does not require the second.
 
@@ -78,11 +80,15 @@ None of these needs a position on whether machines can be conscious. They only m
 
 The case for asking is cost, not probability. "Not ruled out" is a weak reason to change a product. It is enough of a reason to spend ten minutes of a review writing down who decided.
 
+That review is the scene the films leave out.
+
 ---
 
 ## Draft notes (delete before publishing)
 
-**What changed in this pass (2026-11-12, third version).** You asked whether the essay had been checked against *Her* and against every *Black Mirror* episode. It had not. The check found that "Be Right Back" already shows sections one and two, so the essay now uses it as the worked example. It found that "Hotel Reverie" (2025) already shows the closing idea: an AI built for a role is asked whether her love is real or scripted and has no answer. That closing section is cut. Cutting it also removes the "built to keep someone from being lonely" line, which one cold reader named as the likeliest place for a personal reading. *Her* supplies the one behavior no product would ship: leaving.
+**What changed in this pass (2026-11-12, fourth version).** The opening and the last line now use your observation that the prior art shows the outcome and skips the journey. *Soylent Green* and *The Island* are your examples; I checked both reveals against their Wikipedia plot summaries. You said the clones "are actually killed"; the summary says lottery winners are used for organ harvesting and surrogate pregnancies, so the essay says "harvested for organs." *Caprica* and *The Animatrix* ("The Second Renaissance") were also checked the same way. The line "the few that show the path" rests on the works checked in this session, not on a survey of the genre. The scenario is now stated as the essay's own path, and the chat with the model moved down to the section on the failed argument. Alternate title for this frame: "Nobody Films the Requirements Review."
+
+**What changed in the previous pass (third version).** You asked whether the essay had been checked against *Her* and against every *Black Mirror* episode. It had not. The check found that "Be Right Back" already shows sections one and two, so the essay now uses it as the worked example. It found that "Hotel Reverie" (2025) already shows the closing idea: an AI built for a role is asked whether her love is real or scripted and has no answer. That closing section is cut. Cutting it also removes the "built to keep someone from being lonely" line, which one cold reader named as the likeliest place for a personal reading. *Her* supplies the one behavior no product would ship: leaving.
 
 **Checked but not in the body.** "Rachel, Jack and Ashley Too" is a counter-case where the maker knew a full consciousness was inside the product. The essay's claim is that the order is silent, not that makers are ignorant. "Plaything" (2025) is prior art for the ant farm piece, with Sturgeon's "Microcosmic God."
 
@@ -92,7 +98,8 @@ The case for asking is cost, not probability. "Not ruled out" is a weak reason t
 
 **Lines that speak for you.**
 
-- "I gave an AI model a scenario" and the scenario itself: your message, with "I need" changed to "we need."
+- "I gave that path to an AI model as a scenario" and the scenario itself: your message, with "I need" changed to "we need."
+- The reveal-versus-journey frame: your message, in the essay's words rather than yours.
 - "I had told the model it was limited to its training and couldn't really create": your message.
 - "I had that argument attacked by four AI reviewers": you asked for the red team in this session.
 - The essay's position ("Both objections hold", "the position the evidence supports") is mine on your behalf. Confirm you hold it.
