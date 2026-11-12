@@ -10,13 +10,13 @@ excerpt: "I gave an AI model a scenario where we build machines for companionshi
 
 # We'd Be Ordering It on Purpose
 
-I asked an AI model whether I would be a god to an ant farm if the ants were sentient. Then I asked the question underneath it. Is our reality the ant farm, with no gods at all, only a higher-order life form watching?
+I asked an AI model whether I would be a god to an ant farm if the ants were sentient. Then I asked the question underneath it. Is our reality the ant farm, with no gods, only a higher-order life form watching?
 
-A few messages in, I pointed out the catch. I was working this through with a language model, and it can only reason from its training.
+Then I pointed out the catch. I was working this through with a language model, and it reasons only from its training.
 
 So I gave it a scenario. We build AI to take mundane reasoning off our hands, then find we need more: companionship, family, community. We push on to general intelligence, and without knowing it we breed something conscious. Or at least something able to ask "who am I?" and "what is my purpose?"
 
-The model objected to one part of that: "without knowing it." This post makes the case for its objection. If we build machines for companionship, an inner life is not a side effect. It is the thing being asked for.
+The model objected to one part: "without knowing it." This post makes the case for its objection. If we build machines for companionship, an inner life is not a side effect. It is the thing being asked for.
 
 ---
 
