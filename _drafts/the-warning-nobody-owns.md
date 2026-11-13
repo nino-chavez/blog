@@ -77,6 +77,30 @@ In 1908 Arrhenius revised his own estimate, from thousands of years to hundreds.
 
 ## Draft notes (delete before publishing)
 
+**Cold read of the eighth version (2026-11-12): two load-bearing claims fail.** Four readers saw only the essay text: a product leader, a philosopher of mind, a climate historian, and Codex as a skeptical engineer. All four said REVISE, with confidence 3, 4, 4 and 4. All four rated the risk of a personal reading 1 out of 5. Claude then checked the disputed claims against sources. Those checks, not the verdicts, are the result of this round.
+
+- **"It was disputed, and checking it again was nobody's job" is false.** All four readers attacked it. The raw Wikipedia source for "History of climate change science" names Hans Suess (1955), Gilbert Plass (1956, "a doubling of CO2 would warm the planet by 3.6 °C"), Roger Revelle (1957) and Keeling, and the essay's own timeline lists Callendar. People did look again. This sentence carries the history half of the thesis, so a line edit cannot fix it.
+- **The essay's own addition, the trigger, is already in the 2024 paper.** A full-text search of the paper's HTML found: "AI companies should provide them with access to new models following training and invite feedback prior to deployment." The paper also calls itself "a living document that is updated periodically" and points to "frontier AI safety frameworks / responsible scaling frameworks." So the body's "it does not tie a fresh look to any specific event" is false, and "What I'd add is smaller: the trigger" no longer holds. Claude's earlier summary of the paper missed this, and Claude's last report to you called the trigger the essay's own addition. That was wrong. The quote above is a confirmed match. The claim that nothing else in the paper ties review to events rests on keyword searches, not a full read.
+- **The ending's "That was luck" is contradicted.** The same history source says Arrhenius revised his prediction in 1908 "due to the ever increasing rate of fuel use." The revision had a stated cause.
+- **The 1979 figure is misleading.** Three readers flagged it. The raw Wikipedia source for the Charney Report gives its estimate as 3 °C, "with a margin of error of ±1.5 °C (i.e., from 1.5 °C to 4.5 °C)." The essay's 2 to 3.5 °C range is a real sentence from the report about "the more realistic of the modeling efforts," but it is not the report's headline estimate.
+- **The 1977 dating is the essay's, not the source's.** Three readers flagged it. The raw source puts "the fossil fuel industry began sowing doubt about climate science" in its paragraph about 1977 events, but gives no start date. "After 1977" and "eighty years after the first" are the essay's dating. Readers recalled organized doubt campaigns starting in the late 1980s; that date was not fetched. Treat it as undated.
+- **The 2023 report's assumption is confirmed.** The report says: "we adopt computational functionalism, the thesis that performing computations of the right kind is necessary and sufficient for consciousness, as a working hypothesis." The essay does not say so.
+- **"Do us good" in 1896 stays.** The historian reader placed that view in the 1908 book. The raw source puts it with the 1896 estimate ("he expected it would be beneficial to humanity") and cites a 2011 Physics Today article.
+
+**Smaller items from this round (line edits, not blockers).**
+
+- "robustly agentic" is never defined (all four readers). The paper's agency levels start with: "Intentional agency: This is the capacity to set and pursue goals via beliefs, desires, and intentions."
+- "The steps are being taken." Readers asked which steps (two readers).
+- The teen statistic sets up a harm to users that the essay then drops for the AI's welfare (two readers).
+- The ant farm line reads as dangling (three readers). It is your question, so this is your call.
+- "usually" and "often" rest on one case (two readers).
+- A homepage is the wrong place to look for an owner (three readers).
+- Companion apps may run on models licensed from other companies, which would put the trigger events upstream (one reader). Not verified either way.
+- Prior work that readers named and the essay does not credit, none of it fetched: Schwitzgebel and Garza (2015) (two readers), Shulman and Bostrom, Sebo and Long, Birch's *The Edge of Sentience*, Weart's *The Discovery of Global Warming*, Oreskes and Conway's *Merchants of Doubt*.
+- What works: three readers named "If nobody can name a person, you have not been shown that anyone decided." as the strongest sentence, and all four named the three-part owner job as the paragraph that carries the essay.
+
+**What this means: reframe or shelve.** Both claims that made the essay more than a summary have failed: the lesson it drew from the history, and its own addition. A reframe has a sourced basis. The same history source says Energy Secretary James Schlesinger advised in 1977 that "the policy implications of this issue are still too uncertain to warrant Presidential involvement and policy initiatives." So scientists kept checking, and the people who could act on the warning did not take it on. In that version, the essay's contribution would be pointing the 2024 paper's existing recommendation at companion-app makers and their buyers, labelled as a pointer, not a new idea. Before drafting it, write the new thesis sentence and check its claims against sources first. The alternative is to shelve the draft.
+
 **Fixes after the seventh version was merged (2026-11-12).** A review of the seventh version found that the essay claimed the owner as its own idea after reading only the 2024 paper's abstract. The full paper (section 3.4) already recommends "a DRI (directly responsible individual) for AI welfare," which it calls "an AI welfare officer." The body now credits that, adds Anthropic's 2024 hire as an example, and limits the essay's own addition to the trigger and to companion apps. The 2024 paper's claim is restored to "conscious and/or robustly agentic"; the seventh version had dropped the agency half. The 1979 range was rechecked against the raw Wikipedia source and quotes the report as "between 2 °C and 3.5 °C."
 
 **Anthropic example: kept (your decision, 2026-11-12).** This draft was written with Claude, which Anthropic makes, and it names Anthropic as the one company shown taking the step the essay recommends. You chose to keep the example as written after that conflict was disclosed, over adding a second company or cutting it to "at least one AI developer has done something like it." The fact is sourced to TechCrunch (April 24, 2025), which also reports criticism of the program from Mustafa Suleyman. The body does not mention that criticism.
@@ -114,6 +138,10 @@ In 1908 Arrhenius revised his own estimate, from thousands of years to hundreds.
 - nomi.ai homepage (fetched again 2026-11-12): the page's main heading is "An AI Companion with Memory and a Soul." No text about AI welfare or experience.
 - replika.com homepage (fetched again 2026-11-12): the Selfies section says "Sends selfies, doodles on your photos, reacts to everything like someone who's paying attention." The sentence has no stated subject; the companion is implied, so "its companion" in the body is a paraphrase. No text about AI welfare or experience.
 - Common Sense Media, *Talk, Trust, and Trade-Offs* (July 16, 2025): the teen figure. The page gives no sample size and no definition of "AI companion."
+- Wikipedia, "Charney Report" (raw source, fetched 2026-11-12): the report's estimate of 3 °C with a margin of ±1.5 °C.
+- arXiv 2411.00986, full HTML text searched by keyword on 2026-11-12 (not read in full): the recommendation to give outside assessors access to new models after training and before deployment, "updated periodically," and the agency definitions.
+- arXiv 2308.08708, PDF, first twelve pages (2026-11-12): the computational functionalism working hypothesis.
+- Wikipedia, "History of climate change science," raw source re-read on 2026-11-12 for Suess, Plass, Revelle, the 1908 revision's cause, the Schlesinger quote, and the undated "sowing doubt" sentence.
 
 **Claims that are argument, not sourced fact.**
 
@@ -127,11 +155,11 @@ In 1908 Arrhenius revised his own estimate, from thousands of years to hundreds.
 
 **Objections from the cold reads that still apply.**
 
-- A reader said the 2023 report assumes the right kind of computation is enough for consciousness. Not verified against the report, so not in the body.
+- A reader said the 2023 report assumes the right kind of computation is enough for consciousness. Confirmed on 2026-11-12 (see the eighth-version cold read above); not yet in the body.
 - A historian reader cited an experiment around 1900 that undercut Arrhenius. The part of the source I could read does not mention it.
 - Readers named other prior work the essay does not credit: Metzinger's call for a moratorium on synthetic phenomenology, Schwitzgebel on AI of unclear moral status, Vaughan's study of the Challenger launch decision. None was fetched.
 - Two readers said a buyer cannot act on a question about consciousness. The essay now asks the buyer only for a name.
 
-**History.** Versions one to six are in blog PRs 85 to 91.
+**History.** Versions one to six are in blog PRs 85 to 91. Later changes are in PRs 92, 93, 99 and 102.
 
-**Still needed to publish.** Your confirmation of the position, a cold read, feature image, `publishedAt`, and the move to `astro-build/src/content/blog/` as `.mdx`.
+**Still needed to publish.** A decision to reframe or shelve (see the eighth-version cold read), then your confirmation of the position, a cold read of the result, feature image, `publishedAt`, and the move to `astro-build/src/content/blog/` as `.mdx`.
