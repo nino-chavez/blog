@@ -39,7 +39,7 @@ The early part of that record needs no villain. Each decision to burn more coal 
 
 ## The Same Shape, Now
 
-The steps are being taken. One AI companion app's homepage headline is "An AI Companion with Memory and a Soul." Another says its companion reacts "like someone who's paying attention." Common Sense Media reported in July 2025 that ["nearly three in four teens have used AI companions"](https://about.commonsensemedia.org/research/talk-trust-and-trade-offs-how-and-why-teens-use-ai-companions).
+The steps are being taken. [Nomi's homepage](https://nomi.ai/) headline is "An AI Companion with Memory and a Soul." [Replika's](https://replika.com/) says its companion "reacts to everything like someone who's paying attention." Common Sense Media reported in July 2025 that ["nearly three in four teens have used AI companions"](https://about.commonsensemedia.org/research/talk-trust-and-trade-offs-how-and-why-teens-use-ai-companions).
 
 The warning is written, in two parts.
 
@@ -51,7 +51,7 @@ So the harm is specific. If a system with experience ever arrives inside a compa
 
 The comparison to 1896 has limits. Carbon dioxide can be measured. Whether a machine has experience may never be measurable in the same way. Both papers could be wrong, and this warning may come to nothing. Arrhenius's calculation was in the same position for sixty years.
 
-I can't see inside the companies that make these products. Someone there may own this question. Neither homepage I quoted says who.
+I can't see inside the companies that make these products. Someone there may own this question. Neither Nomi's nor Replika's homepage says who.
 
 ---
 
@@ -81,7 +81,7 @@ In 1908 Arrhenius revised his own estimate, from thousands of years to hundreds.
 
 **Anthropic example: kept (your decision, 2026-11-12).** This draft was written with Claude, which Anthropic makes, and it names Anthropic as the one company shown taking the step the essay recommends. You chose to keep the example as written after that conflict was disclosed, over adding a second company or cutting it to "at least one AI developer has done something like it." The fact is sourced to TechCrunch (April 24, 2025), which also reports criticism of the program from Mustafa Suleyman. The body does not mention that criticism.
 
-**Homepage quotes: name and link, or keep anonymous.** Three of four readers in the fifth round said the two homepage quotes cannot be checked because no company is named or linked. Naming them makes the quotes checkable and puts two companies' marketing next to a question about AI welfare. Keeping them anonymous leaves the quotes unverifiable. This is your call.
+**Homepage quotes: named and linked (your decision, 2026-11-12).** Three of four readers in the fifth round said the two quotes could not be checked because no company was named or linked. The body now names Nomi and Replika and links both homepages. Both were fetched again before the change: the quotes still match, and neither page names anyone responsible for AI welfare or mentions the question. Homepage copy changes, so check both again before publishing.
 
 **What this version is (2026-11-12, seventh version).** A revision of the rebuild after a fifth cold-read round (four readers, all REVISE, with "publish" available as a verdict). You chose the harm: what we would owe a system that turned out to have experience. The essay now names that harm in the opening, adds the 2024 paper that states it, corrects the climate history, and credits the argument to that paper. It has not been cold-read.
 
@@ -100,7 +100,7 @@ In 1908 Arrhenius revised his own estimate, from thousands of years to hundreds.
 - "I had assumed we industrialized without knowing about the greenhouse effect." Your message said "we didn't know we'd have green house effect when we moved fast for industrialization."
 - "I started on this subject by asking whether I would be a god to an ant farm if the ants were sentient." Your first message in the session.
 - "What I'd add is smaller: the trigger, and where to apply it" and the three-part job are the essay's position on your behalf. Confirm you hold it.
-- "Neither homepage I quoted says who." Claude fetched both homepages at your request. Read them yourself before publishing under this line.
+- "Neither Nomi's nor Replika's homepage says who." Claude fetched both homepages twice on 2026-11-12. The line now names both companies, so read the pages yourself before publishing under it.
 
 **Your point that is not in the essay.** You said we are "there again with data centers and ai security issues." Neither is in the draft because neither has been sourced. They could be later essays with this one as the pattern.
 
@@ -111,8 +111,8 @@ In 1908 Arrhenius revised his own estimate, from thousands of years to hundreds.
 - arXiv 2308.08708, Butlin and 18 other authors (2023): the abstract's last sentence, quoted in two parts.
 - arXiv 2411.00986, "Taking AI Welfare Seriously" (2024), Long, Sebo, Butlin and 7 others: the "realistic possibility" claim, the disclaimer that it does not say systems are or will be conscious, the three recommended steps, and, in section 3.4, the recommendation to appoint "a DRI (directly responsible individual) for AI welfare," called "an AI welfare officer." Read through the HTML version up to about four-fifths of the page; the rest is likely references and was not read. "It does not tie a fresh look to any specific event" rests on the parts read; the closest language found was "continually updating these assessment criteria." "Including authors of the first report" rests on Patrick Butlin and Robert Long appearing on both author lists.
 - TechCrunch, "Anthropic is launching a new program to study AI model welfare" (April 24, 2025): Kyle Fish hired in 2024 as Anthropic's first dedicated AI welfare researcher; the program launched that April.
-- nomi.ai homepage: "An AI Companion with Memory and a Soul."
-- replika.com homepage: "reacts to everything like someone who's paying attention."
+- nomi.ai homepage (fetched again 2026-11-12): the page's main heading is "An AI Companion with Memory and a Soul." No text about AI welfare or experience.
+- replika.com homepage (fetched again 2026-11-12): the Selfies section says "Sends selfies, doodles on your photos, reacts to everything like someone who's paying attention." The sentence has no stated subject; the companion is implied, so "its companion" in the body is a paraphrase. No text about AI welfare or experience.
 - Common Sense Media, *Talk, Trust, and Trade-Offs* (July 16, 2025): the teen figure. The page gives no sample size and no definition of "AI companion."
 
 **Claims that are argument, not sourced fact.**
