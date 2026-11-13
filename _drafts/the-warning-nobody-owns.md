@@ -47,7 +47,7 @@ Later, by the same account, the fossil fuel industry spent tens of millions of d
 
 ## The Same Shape, Now
 
-Companion apps already make claims about what their products are. [Nomi's homepage](https://nomi.ai/) headline is "An AI Companion with Memory and a Soul." [Replika's](https://replika.com/) says its companion "reacts to everything like someone who's paying attention." Those claims reach a lot of people. Common Sense Media reported in July 2025 that ["nearly three in four teens have used AI companions"](https://about.commonsensemedia.org/research/talk-trust-and-trade-offs-how-and-why-teens-use-ai-companions).
+Companion apps already make claims about what their products are. [Nomi's homepage](https://nomi.ai/) headline is "An AI Companion with Memory and a Soul." [Replika's](https://replika.com/) says its companion "reacts to everything like someone who's paying attention." Products like these reach a lot of people. Common Sense Media reported in July 2025 that ["nearly three in four teens have used AI companions"](https://about.commonsensemedia.org/research/talk-trust-and-trade-offs-how-and-why-teens-use-ai-companions).
 
 The warning is written, in two parts.
 
@@ -79,7 +79,7 @@ An owner doesn't have to predict anything. The job has three parts.
 2. **Name the event that reopens it.** A change in the model, in what it remembers, or in how it is built. A new published assessment. If the product runs on a model licensed from another company, a change there counts too.
 3. **Decide now what a firmer answer would change.** What the marketing may claim. What the product may be made to do. Whether it can still be reset or shut down without anyone signing off.
 
-The first two parts are in the paper. The third is what the 1977 story is about. Checking the science again became somebody's job. What a firmer answer should change was left to compete with oil and energy security, and it made little headway for the rest of that term.
+All three parts follow the paper. The third is its "prepare" step, and the examples under it are this essay's. It is also the part the 1977 story is about. What a firmer answer should change was left to compete with oil and energy security, and it made little headway for the rest of that term.
 
 If you build one of these products, the owner is on your team. If you buy one, ask the vendor who theirs is. That second suggestion is mine, not the paper's. The actors the paper names are researchers, companies and governments. If nobody can name a person, you have not been shown that anyone decided.
 
@@ -96,8 +96,9 @@ In 1908 Arrhenius revised his own estimate, from thousands of years to hundreds,
 - **An earlier claim in these notes was wrong.** The reframe basis below said "the people who could act on the warning did not take it on." Press did take it on, in 1979. The body does not say that anyone failed to act; it quotes the Guardian's "did not make much progress on climate crisis mitigation during his presidency."
 - **The 2024 paper covers companion apps already.** It says its three steps "apply for any AI system whose architecture is complex enough to at least potentially have features associated with consciousness or robust agency." The essay says so and limits its gap to whether companion makers treat the officer recommendation, addressed to "top AI companies," as theirs.
 - **The paper's companion warning cuts the other way, and the body now says so.** It warns that people "might over-attribute for digital 'companions'." The body uses that to tie the Nomi and Replika claims and the teen figure to part three of the owner's job (what the marketing may claim), and says the essay's harm is the opposite mistake.
-- **Eighth-round defects resolved.** "Nobody's job" is gone. The trigger is credited to the paper ("The first two parts are in the paper"). "That was luck" is replaced by the 1908 cause from the source. 1979 now reads about 3 °C, give or take 1.5. The industry doubt sentence is dated only as "later," following the Guardian, which places it after Reagan's 1981 inauguration. The computational functionalism assumption is in the body. "Robustly agentic" is glossed with the paper's own definition. "Usually" and "often" are gone. "The steps are being taken" is replaced. The buyer suggestion is labelled as the essay's own, since the paper's named actors are researchers, companies and governments. The licensed-model point is in part two of the job as argument.
+- **Eighth-round defects resolved.** "Nobody's job" is gone. All three parts of the owner's job are credited to the paper ("All three parts follow the paper"). The marketing, reset and shutdown examples under part three are labelled as the essay's, because a keyword search of the paper found none of them. "That was luck" is replaced by the 1908 cause from the source. 1979 now reads about 3 °C, give or take 1.5. The industry doubt sentence is dated only as "later," following the Guardian, which places it after Reagan's 1981 inauguration. The computational functionalism assumption is in the body. "Robustly agentic" is glossed with the paper's own definition. "Usually" and "often" are gone. "The steps are being taken" is replaced. The buyer suggestion is labelled as the essay's own, since the paper's named actors are researchers, companies and governments. The licensed-model point is in part two of the job as argument.
 - **Kept as your call.** The ant farm line stays as written. Three readers in the eighth round called it dangling.
+- **For the next cold read.** Expect the historian to call the thesis too charitable to Schlesinger. The Guardian's headline says the memo "should have changed the world." That is a disagreement about framing, not a sourcing error. The ninth version is in PRs 104 and 105.
 
 **Cold read of the eighth version (2026-11-12): two load-bearing claims fail.** Four readers saw only the essay text: a product leader, a philosopher of mind, a climate historian, and Codex as a skeptical engineer. All four said REVISE, with confidence 3, 4, 4 and 4. All four rated the risk of a personal reading 1 out of 5. Claude then checked the disputed claims against sources. Those checks, not the verdicts, are the result of this round.
 
@@ -188,6 +189,6 @@ In 1908 Arrhenius revised his own estimate, from thousands of years to hundreds,
 - Readers named other prior work the essay does not credit: Metzinger's call for a moratorium on synthetic phenomenology, Schwitzgebel on AI of unclear moral status, Vaughan's study of the Challenger launch decision. None was fetched.
 - Two readers said a buyer cannot act on a question about consciousness. The essay now asks the buyer only for a name.
 
-**History.** Versions one to six are in blog PRs 85 to 91. Later changes are in PRs 92, 93, 99, 102 and 103. The ninth version (the reframe) is in PR 104.
+**History.** Versions one to six are in blog PRs 85 to 91. Later changes are in PRs 92, 93, 99, 102 and 103. The ninth version (the reframe) is in PRs 104 and 105.
 
 **Still needed to publish.** Your confirmation of the new title and the position lines above, a cold read of the ninth version (including the historian), feature image, `publishedAt`, and the move to `astro-build/src/content/blog/` as `.mdx`.
