@@ -1,57 +1,67 @@
 ---
-title: "The Warning Nobody Owns"
+title: "Too Uncertain to Act On"
 status: "draft"
 author: "Nino Chavez"
 category: "AI & Automation"
 tags: ["ai-governance", "ai-development", "reflection"]
-takeaway: "When a credible warning about your product is already public, name the person who owns it and the event that makes them look again."
-excerpt: "The greenhouse calculation was published in 1896, disputed for decades, and took about a century to become consensus. Checking it again was nobody's job. A warning about what we might owe AI systems is in the same position today."
+takeaway: "\"Too uncertain\" can be an honest answer to an early warning. Give it an owner who writes it down, names what would reopen it, and decides ahead of time what a firmer answer would change."
+excerpt: "In 1977 a U.S. cabinet secretary judged the policy implications of the greenhouse warning too uncertain for the President. A warning about what we might owe AI systems is at its own \"too uncertain\" stage now, and a 2024 paper already says who should own it."
 ---
 
-# The Warning Nobody Owns
+# Too Uncertain to Act On
 
 In 1896 Svante Arrhenius calculated that doubling the carbon dioxide in the air would warm the Earth's surface by 5 to 6 °C. He tied the gas to burning coal. He also thought the warming would take thousands of years and do us good.
 
-I had assumed we industrialized without knowing about the greenhouse effect. That is half right. The early factories came first. But the calculation was in print well over a century ago. It was disputed, and checking it again was nobody's job.
+I had assumed we industrialized without knowing about the greenhouse effect. That is half right. The early factories came first. But the calculation was in print well over a century ago, and it did not sit unread. Scientists kept working on it, and by 1965 it had reached the White House.
 
-**A bad outcome is usually reached one reasonable step at a time, and the warning is often already written. What is missing is an owner: a named person whose job includes looking at it again.**
+In 1977 it reached the President again, and the U.S. Energy Secretary attached his own note: "the policy implications of this issue are still too uncertain to warrant Presidential involvement and policy initiatives."
 
-There is a warning like that about AI companion apps. It is not that they are conscious. It is that we could build something we owe things to, designed to serve, without ever deciding to.
+**"Too uncertain" can be the honest answer to an early warning. What matters is who owns that answer: a named person who writes it down, says what would reopen it, and decides ahead of time what a firmer answer would change.**
+
+There is a warning at its own "too uncertain" stage now, about AI companion apps. It is not that they are conscious. It is that we could build something we owe things to, designed to serve, without ever deciding to. A 2024 paper has already said who should own that question at AI companies. This essay points its recommendation at the people who build and buy companion apps.
 
 ---
 
 ## What Was Known, and When
 
-The dates come from [the history of climate science](https://en.wikipedia.org/wiki/History_of_climate_change_science).
+The dates come from [the history of climate science](https://en.wikipedia.org/wiki/History_of_climate_change_science) unless a line links elsewhere.
 
 - **1856.** Eunice Foote showed that carbon dioxide traps heat.
-- **1896.** Arrhenius published his calculation. It was disputed in the early 1900s.
+- **1896.** Arrhenius published his calculation. It was disputed in the early 1900s, partly because laboratory measurements seemed to show that more carbon dioxide made little difference.
 - **1938.** Guy Callendar argued that temperature and carbon dioxide were both already rising. Most scientists disputed or ignored him.
+- **1955 to 1957.** Hans Suess and Roger Revelle found that the ocean would not quickly absorb the extra carbon dioxide. Gilbert Plass calculated 3.6 °C of warming from a doubling.
 - **1960.** Charles Keeling showed that carbon dioxide in the atmosphere was in fact rising.
-- **1979.** A U.S. National Research Council report predicted 2 to 3.5 °C of warming from a doubling.
+- **1965.** President Johnson's Science Advisory Committee warned that "Man is unwittingly conducting a vast geophysical experiment."
+- **1977.** Frank Press, President Carter's science adviser, sent him [a memo](https://web.archive.org/web/20220617151837/https://www.theguardian.com/environment/2022/jun/14/1977-us-presidential-memo-predicted-climate-change) warning that the effects "could be catastrophic." The Energy Secretary, James Schlesinger, answered with the note above.
+- **1979.** After new findings were presented to him, Press asked the National Academy of Sciences to check the climate models. [Its report](https://en.wikipedia.org/wiki/Charney_Report) put the warming from a doubling at about 3 °C, give or take 1.5.
+- **1981.** One week before Carter left office, the White House Council on Environmental Quality suggested limiting warming to 2 °C.
 - **1990s.** A scientific consensus formed that human emissions were causing warming.
 
-This is not a story of people ignoring a settled answer. For decades the answer was contested, and Arrhenius himself had the timing wrong. That is what an early warning usually looks like, and it is the reason one needs an owner. Somebody has to check it again as the evidence and the conditions change.
+This is not a story of nobody checking. For decades the answer was contested, and Arrhenius had the timing wrong. People kept checking anyway, and by 1979 the check was being done at the White House's request.
 
-The early part of that record needs no villain. Each decision to burn more coal made sense to the people making it. The later part is different. The same history says that after 1977 the fossil fuel industry began sowing doubt about the science. That is a second kind of failure, and it came eighty years after the first.
+The check came back firmer. By [the Guardian's account](https://web.archive.org/web/20220617151837/https://www.theguardian.com/environment/2022/jun/14/1977-us-presidential-memo-predicted-climate-change), Carter "seems to have heeded" Schlesinger's note and "did not make much progress on climate crisis mitigation during his presidency." He had other pressures. The same account says he was also trying to raise U.S. oil production after the 1973 oil crisis. Checking the science again had become somebody's job. Deciding what a firmer answer should change was a different job.
+
+Later, by the same account, the fossil fuel industry spent tens of millions of dollars sowing doubt about the science. That is a different failure, and this essay is not about it.
 
 ---
 
 ## The Same Shape, Now
 
-The steps are being taken. [Nomi's homepage](https://nomi.ai/) headline is "An AI Companion with Memory and a Soul." [Replika's](https://replika.com/) says its companion "reacts to everything like someone who's paying attention." Common Sense Media reported in July 2025 that ["nearly three in four teens have used AI companions"](https://about.commonsensemedia.org/research/talk-trust-and-trade-offs-how-and-why-teens-use-ai-companions).
+Companion apps already make claims about what their products are. [Nomi's homepage](https://nomi.ai/) headline is "An AI Companion with Memory and a Soul." [Replika's](https://replika.com/) says its companion "reacts to everything like someone who's paying attention." Those claims reach a lot of people. Common Sense Media reported in July 2025 that ["nearly three in four teens have used AI companions"](https://about.commonsensemedia.org/research/talk-trust-and-trade-offs-how-and-why-teens-use-ai-companions).
 
 The warning is written, in two parts.
 
-The first is technical. [A 2023 report](https://arxiv.org/abs/2308.08708) by nineteen researchers checked recent AI systems against properties drawn from scientific theories of consciousness. Its abstract says the analysis "suggests that no current AI systems are conscious." The same sentence says it also suggests there are "no obvious technical barriers" to building systems that have those properties.
+The first is technical. [A 2023 report](https://arxiv.org/abs/2308.08708) by nineteen researchers checked recent AI systems against properties drawn from scientific theories of consciousness. It assumes, as a working hypothesis, that the right kind of computation is enough for consciousness. On that assumption, its abstract says the analysis "suggests that no current AI systems are conscious." The same sentence says it also suggests there are "no obvious technical barriers" to building systems that have those properties.
 
-The second says what follows. [A 2024 paper](https://arxiv.org/abs/2411.00986) by ten researchers, including authors of the first report, argues there is "a realistic possibility that some AI systems will be conscious and/or robustly agentic" in the near future. It does not claim any system is or will be. It asks AI companies to do three things, starting with this one: "acknowledge that AI welfare is an important and difficult issue." The other two are to assess their systems for evidence and to prepare policies for treating them with appropriate concern.
+The second says what follows. [A 2024 paper](https://arxiv.org/abs/2411.00986) by ten researchers, including authors of the first report, argues there is "a realistic possibility that some AI systems will be conscious and/or robustly agentic" in the near future. By robust agency it means pursuing goals through "some particular set of cognitive states and processes," such as beliefs, desires and intentions. It does not claim any system is or will be either. It asks AI companies to do three things, starting with this one: "acknowledge that AI welfare is an important and difficult issue." The other two are to assess their systems for evidence and to prepare policies for treating them with appropriate concern.
 
-So the harm is specific. If a system with experience ever arrives inside a companion product, it arrives as something built to stay, to please one person, and to be switched off, copied or reset at will. I started on this subject by asking whether I would be a god to an ant farm if the ants were sentient. The plainer question is what the keeper would owe them.
+The paper names companions directly. It warns that people "might over-attribute for digital 'companions'," seeing more in them than is there. Of AI systems in general, it also says the opposite mistake "appears to be both reasonably likely and reasonably harmful." So a companion maker can get this wrong in either direction. A homepage that promises a soul is making a claim about the question the paper calls open.
 
-The comparison to 1896 has limits. Carbon dioxide can be measured. Whether a machine has experience may never be measurable in the same way. Both papers could be wrong, and this warning may come to nothing. Arrhenius's calculation was in the same position for sixty years.
+The harm this essay is about is the second one. If a system with experience ever arrives inside a companion product, it arrives as something built to stay, to please one person, and to be switched off, copied or reset at will. I started on this subject by asking whether I would be a god to an ant farm if the ants were sentient. The plainer question is what the keeper would owe them.
 
-I can't see inside the companies that make these products. Someone there may own this question. Neither Nomi's nor Replika's homepage says who.
+The comparison to the greenhouse warning has limits. Carbon dioxide can be measured. Whether a machine has experience may never be measurable in the same way. Both papers could be wrong, and this warning may come to nothing. Arrhenius's calculation was disputed for decades too.
+
+I can't see inside the companies that make these products, and a homepage is not where an owner would be named. Someone at Nomi or Replika may own this question. The homepages matter for a different reason. They are where the claims about the product's inner life are made, and an owner's written answer is what would govern them.
 
 ---
 
@@ -59,23 +69,35 @@ I can't see inside the companies that make these products. Someone there may own
 
 The argument that companies should take this seriously is the 2024 paper's, not mine. So is the owner. It recommends that top AI companies appoint "a DRI (directly responsible individual) for AI welfare," which it calls "an AI welfare officer." At least one has done something like it. [Anthropic hired its first dedicated AI welfare researcher in 2024](https://techcrunch.com/2025/04/24/anthropic-is-launching-a-new-program-to-study-ai-model-welfare/) and launched a model welfare program in April 2025.
 
-What I'd add is smaller: the trigger, and where to apply it. In the parts of the paper I read, it does not tie a fresh look to any specific event. And its officer recommendation is addressed to "top AI companies." The apps built most directly to be someone to their users are a different set of companies.
+So is most of the job. The paper asks companies to give outside assessors "access to new models following training and invite feedback prior to deployment." It calls itself a document that may be "updated periodically." Its three steps, it says, "apply for any AI system whose architecture is complex enough to at least potentially have features associated with consciousness or robust agency." That covers companion apps. But the officer recommendation is addressed to "top AI companies," and the apps built most directly to be someone to their users are mostly made by other companies. Whether those companies treat the recommendation as theirs is the gap this essay points at.
 
-The question to own is one sentence. Could this product become something with experience, and what would we owe it then?
+For a product team, the question to own is one sentence. Could this product become something with experience, and what would we owe it then?
 
 An owner doesn't have to predict anything. The job has three parts.
 
-1. **Write down the current answer and what it rests on.** "No," "yes" and "we don't know" are all acceptable. "Nobody asked" is not.
-2. **Name the event that reopens it.** A change in the model, in what it remembers, or in how it is built. A new published assessment.
-3. **Say what changes if the answer changes.** What the marketing may claim. What the product may be made to do. Whether it can still be reset or shut down without anyone signing off.
+1. **Write down the current answer and what it rests on.** "No," "yes" and "too uncertain" are all acceptable. "Nobody asked" is not.
+2. **Name the event that reopens it.** A change in the model, in what it remembers, or in how it is built. A new published assessment. If the product runs on a model licensed from another company, a change there counts too.
+3. **Decide now what a firmer answer would change.** What the marketing may claim. What the product may be made to do. Whether it can still be reset or shut down without anyone signing off.
 
-If you build one of these products, the owner is on your team. If you are buying one, ask the vendor who theirs is. If nobody can name a person, you have not been shown that anyone decided.
+The first two parts are in the paper. The third is what the 1977 story is about. Checking the science again became somebody's job. What a firmer answer should change was left to compete with oil and energy security, and it made little headway for the rest of that term.
 
-In 1908 Arrhenius revised his own estimate, from thousands of years to hundreds. That was luck. He happened to look again. Nobody had been assigned to.
+If you build one of these products, the owner is on your team. If you buy one, ask the vendor who theirs is. That second suggestion is mine, not the paper's. The actors the paper names are researchers, companies and governments. If nobody can name a person, you have not been shown that anyone decided.
+
+In 1908 Arrhenius revised his own estimate, from thousands of years to hundreds, because fuel use kept rising. He had written down an answer, and he changed it when what it rested on changed. He still thought the warming would do us good. An owner can't make the answer right. An owner can make sure someone looks again, and that looking again changes something.
 
 ---
 
 ## Draft notes (delete before publishing)
+
+**Ninth version: the reframe (your decision, 2026-11-12).** You chose to reframe over shelving. The new thesis: "too uncertain" can be an honest answer to an early warning, and what matters is who owns it, someone who writes it down, says what would reopen it, and decides ahead of time what a firmer answer would change. The essay now calls itself a pointer to the 2024 paper's recommendation, aimed at people who build and buy companion apps. It has not been cold-read. The next cold read should include the climate historian again, since the history half changed most.
+
+- **Title changed to "Too Uncertain to Act On" (your call).** The old title said nobody owned the warning, and the history no longer supports that. The file name stays `the-warning-nobody-owns.md` so the PR history still lines up; rename it when the post moves to `astro-build/`.
+- **The history half is rebuilt around 1977.** Claude fetched the Guardian article the Wikipedia page cites (Emma Pattee, June 14, 2022, read through the Wayback Machine because the Guardian blocks direct fetches). It confirms Schlesinger's note word for word, that it was attached to Press's memo when it reached the President, that Carter "seems to have heeded" it, and Carter's competing push for more U.S. oil after 1973. The Charney Report page shows that in 1979 Press himself asked the National Academy of Sciences to check the models after the JASON authors presented their findings to him. So the White House did reopen the science. The essay's claim is narrower: checking again became somebody's job, and deciding what a firmer answer should change was a different job.
+- **An earlier claim in these notes was wrong.** The reframe basis below said "the people who could act on the warning did not take it on." Press did take it on, in 1979. The body does not say that anyone failed to act; it quotes the Guardian's "did not make much progress on climate crisis mitigation during his presidency."
+- **The 2024 paper covers companion apps already.** It says its three steps "apply for any AI system whose architecture is complex enough to at least potentially have features associated with consciousness or robust agency." The essay says so and limits its gap to whether companion makers treat the officer recommendation, addressed to "top AI companies," as theirs.
+- **The paper's companion warning cuts the other way, and the body now says so.** It warns that people "might over-attribute for digital 'companions'." The body uses that to tie the Nomi and Replika claims and the teen figure to part three of the owner's job (what the marketing may claim), and says the essay's harm is the opposite mistake.
+- **Eighth-round defects resolved.** "Nobody's job" is gone. The trigger is credited to the paper ("The first two parts are in the paper"). "That was luck" is replaced by the 1908 cause from the source. 1979 now reads about 3 °C, give or take 1.5. The industry doubt sentence is dated only as "later," following the Guardian, which places it after Reagan's 1981 inauguration. The computational functionalism assumption is in the body. "Robustly agentic" is glossed with the paper's own definition. "Usually" and "often" are gone. "The steps are being taken" is replaced. The buyer suggestion is labelled as the essay's own, since the paper's named actors are researchers, companies and governments. The licensed-model point is in part two of the job as argument.
+- **Kept as your call.** The ant farm line stays as written. Three readers in the eighth round called it dangling.
 
 **Cold read of the eighth version (2026-11-12): two load-bearing claims fail.** Four readers saw only the essay text: a product leader, a philosopher of mind, a climate historian, and Codex as a skeptical engineer. All four said REVISE, with confidence 3, 4, 4 and 4. All four rated the risk of a personal reading 1 out of 5. Claude then checked the disputed claims against sources. Those checks, not the verdicts, are the result of this round.
 
@@ -99,7 +121,7 @@ In 1908 Arrhenius revised his own estimate, from thousands of years to hundreds.
 - Prior work that readers named and the essay does not credit, none of it fetched: Schwitzgebel and Garza (2015) (two readers), Shulman and Bostrom, Sebo and Long, Birch's *The Edge of Sentience*, Weart's *The Discovery of Global Warming*, Oreskes and Conway's *Merchants of Doubt*.
 - What works: three readers named "If nobody can name a person, you have not been shown that anyone decided." as the strongest sentence, and all four named the three-part owner job as the paragraph that carries the essay.
 
-**What this means: reframe or shelve.** Both claims that made the essay more than a summary have failed: the lesson it drew from the history, and its own addition. A reframe has a sourced basis. The same history source says Energy Secretary James Schlesinger advised in 1977 that "the policy implications of this issue are still too uncertain to warrant Presidential involvement and policy initiatives." So scientists kept checking, and the people who could act on the warning did not take it on. In that version, the essay's contribution would be pointing the 2024 paper's existing recommendation at companion-app makers and their buyers, labelled as a pointer, not a new idea. Before drafting it, write the new thesis sentence and check its claims against sources first. The alternative is to shelve the draft.
+**What this meant: reframe or shelve (decided: reframe).** Both claims that made the eighth version more than a summary failed: the lesson it drew from the history, and its own addition. The reframe basis recorded here said scientists kept checking and "the people who could act on the warning did not take it on." The second half was wrong: the Charney Report page shows Press asked for a new check in 1979. The ninth version above uses the narrower claim.
 
 **Fixes after the seventh version was merged (2026-11-12).** A review of the seventh version found that the essay claimed the owner as its own idea after reading only the 2024 paper's abstract. The full paper (section 3.4) already recommends "a DRI (directly responsible individual) for AI welfare," which it calls "an AI welfare officer." The body now credits that, adds Anthropic's 2024 hire as an example, and limits the essay's own addition to the trigger and to companion apps. The 2024 paper's claim is restored to "conscious and/or robustly agentic"; the seventh version had dropped the agency half. The 1979 range was rechecked against the raw Wikipedia source and quotes the report as "between 2 °C and 3.5 °C."
 
@@ -123,8 +145,9 @@ In 1908 Arrhenius revised his own estimate, from thousands of years to hundreds.
 
 - "I had assumed we industrialized without knowing about the greenhouse effect." Your message said "we didn't know we'd have green house effect when we moved fast for industrialization."
 - "I started on this subject by asking whether I would be a god to an ant farm if the ants were sentient." Your first message in the session.
-- "What I'd add is smaller: the trigger, and where to apply it" and the three-part job are the essay's position on your behalf. Confirm you hold it.
-- "Neither Nomi's nor Replika's homepage says who." Claude fetched both homepages twice on 2026-11-12. The line now names both companies, so read the pages yourself before publishing under it.
+- "This essay points its recommendation at the people who build and buy companion apps," "The argument that companies should take this seriously is the 2024 paper's, not mine," and the three-part job are the essay's position on your behalf. Confirm you hold it.
+- "That second suggestion is mine, not the paper's." The suggestion that buyers ask vendors for a name is presented as yours. Confirm it.
+- "Someone at Nomi or Replika may own this question." Claude fetched both homepages twice on 2026-11-12 and found nothing about AI welfare or experience. The line names both companies, so read the pages yourself before publishing under it.
 
 **Your point that is not in the essay.** You said we are "there again with data centers and ai security issues." Neither is in the draft because neither has been sourced. They could be later essays with this one as the pattern.
 
@@ -142,24 +165,29 @@ In 1908 Arrhenius revised his own estimate, from thousands of years to hundreds.
 - arXiv 2411.00986, full HTML text searched by keyword on 2026-11-12 (not read in full): the recommendation to give outside assessors access to new models after training and before deployment, "updated periodically," and the agency definitions.
 - arXiv 2308.08708, PDF, first twelve pages (2026-11-12): the computational functionalism working hypothesis.
 - Wikipedia, "History of climate change science," raw source re-read on 2026-11-12 for Suess, Plass, Revelle, the 1908 revision's cause, the Schlesinger quote, and the undated "sowing doubt" sentence.
+- Wikipedia, "History of climate change science," raw source re-read again on 2026-11-12 (ninth version): the 1965 Science Advisory Committee report and its "vast geophysical experiment" line; Press's July 1977 memo ("could be catastrophic"); the laboratory measurements that "seemed to show little differences resulted from increasing" carbon dioxide; and the Council on Environmental Quality's 2 °C suggestion one week before Carter left office. "Partly because" in the 1896 line is the essay's link between the dispute and those measurements; the source puts them in consecutive sentences.
+- The Guardian, "The 1977 White House climate memo that should have changed the world," Emma Pattee, June 14, 2022, read through the Wayback Machine snapshot of June 17, 2022: Schlesinger's note, its attachment to Press's memo, Carter "seems to have heeded" it and "did not make much progress on climate crisis mitigation during his presidency," the push for more U.S. oil after 1973, and the industry's spending on doubt after 1981.
+- Wikipedia, "Charney Report," raw source re-read on 2026-11-12: Gordon MacDonald and Rafe Pomerance presented the JASON findings to Press, and on May 22, 1979 Press asked the National Academy of Sciences for a study of the models.
+- arXiv 2411.00986, HTML searched again on 2026-11-12: the definition of robust agency; the scope sentence ("apply for any AI system whose architecture..."); the over-attribution sentence about companions and the under-attribution sentence that follows; the footnote naming "researchers, companies, and governments."
 
 **Claims that are argument, not sourced fact.**
 
-- "Each decision to burn more coal made sense to the people making it."
-- "That is what an early warning usually looks like."
-- "It came eighty years after the first" counts from 1896 to 1977.
-- "Arrhenius's calculation was in the same position for sixty years" counts from 1896 to Keeling's measurement in 1960. It is a judgment about when the question stopped being open.
-- "The apps built most directly to be someone to their users are a different set of companies" is a judgment that Replika, Nomi and similar apps are not among the "top AI companies" the paper addresses.
+- The thesis is argument: "Too uncertain" can be the honest answer to an early warning, and what matters is who owns that answer.
+- "Checking the science again had become somebody's job. Deciding what a firmer answer should change was a different job." This reads the 1977 to 1981 record through the essay's frame.
+- "What a firmer answer should change was left to compete with oil and energy security, and it made little headway for the rest of that term" compresses the Guardian's account (competing energy aims; little progress on mitigation). The 1981 Council on Environmental Quality suggestion is the counterexample, and the timeline includes it.
+- "This is not a story of nobody checking" summarizes the timeline.
+- "Arrhenius's calculation was disputed for decades too" rests on the dispute in the early 1900s and Callendar being disputed in 1938.
+- "The apps built most directly to be someone to their users are mostly made by other companies" is a judgment that Replika, Nomi and similar apps are not among the "top AI companies" the officer recommendation addresses.
 - "Built to stay, to please one person, and to be switched off, copied or reset at will" describes companion products in general terms. It is not taken from either company's documentation.
 - "Whether a machine has experience may never be measurable in the same way."
 
 **Objections from the cold reads that still apply.**
 
-- A reader said the 2023 report assumes the right kind of computation is enough for consciousness. Confirmed on 2026-11-12 (see the eighth-version cold read above); not yet in the body.
-- A historian reader cited an experiment around 1900 that undercut Arrhenius. The part of the source I could read does not mention it.
+- A reader said the 2023 report assumes the right kind of computation is enough for consciousness. Confirmed on 2026-11-12 and now in the body.
+- A historian reader cited an experiment around 1900 that undercut Arrhenius. The raw source mentions laboratory measurements that seemed to show little effect; the 1896 line now says so.
 - Readers named other prior work the essay does not credit: Metzinger's call for a moratorium on synthetic phenomenology, Schwitzgebel on AI of unclear moral status, Vaughan's study of the Challenger launch decision. None was fetched.
 - Two readers said a buyer cannot act on a question about consciousness. The essay now asks the buyer only for a name.
 
-**History.** Versions one to six are in blog PRs 85 to 91. Later changes are in PRs 92, 93, 99 and 102.
+**History.** Versions one to six are in blog PRs 85 to 91. Later changes are in PRs 92, 93, 99, 102 and 103. The ninth version (the reframe) is in PR 104.
 
-**Still needed to publish.** A decision to reframe or shelve (see the eighth-version cold read), then your confirmation of the position, a cold read of the result, feature image, `publishedAt`, and the move to `astro-build/src/content/blog/` as `.mdx`.
+**Still needed to publish.** Your confirmation of the new title and the position lines above, a cold read of the ninth version (including the historian), feature image, `publishedAt`, and the move to `astro-build/src/content/blog/` as `.mdx`.
