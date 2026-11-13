@@ -188,6 +188,6 @@ In 1908 Arrhenius revised his own estimate, from thousands of years to hundreds,
 - Readers named other prior work the essay does not credit: Metzinger's call for a moratorium on synthetic phenomenology, Schwitzgebel on AI of unclear moral status, Vaughan's study of the Challenger launch decision. None was fetched.
 - Two readers said a buyer cannot act on a question about consciousness. The essay now asks the buyer only for a name.
 
-**History.** Versions one to six are in blog PRs 85 to 91. Later changes are in PRs 92, 93, 99, 102 and 103. The ninth version (the reframe) is in PR PRNUM.
+**History.** Versions one to six are in blog PRs 85 to 91. Later changes are in PRs 92, 93, 99, 102 and 103. The ninth version (the reframe) is in PR 104.
 
 **Still needed to publish.** Your confirmation of the new title and the position lines above, a cold read of the ninth version (including the historian), feature image, `publishedAt`, and the move to `astro-build/src/content/blog/` as `.mdx`.
