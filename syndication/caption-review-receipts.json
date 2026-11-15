@@ -209,6 +209,28 @@
         "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
         "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
       }
+    },
+    "demos/enforced-forever": {
+      "reviewedAt": "2026-10-22T14:53:11.795Z",
+      "reviewedBy": "Codex: source, voice guide, reader contract and reference comparison",
+      "hashes": {
+        "caption": "85f693e02e0b7316ee2d549898356ec65e825eba899f7e9d459bfca54e56abf2",
+        "source": "4afe0a07a530e94181060113d508db601a859637dfa28da805dda65535de8f9b",
+        "voiceGuide": "009458279b9e0b6c3390bf69cb4b39afebf4c6a79ac34a64d89b091070524823",
+        "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
+        "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
+      }
+    },
+    "blog/the-style-guide-was-teaching-the-tells": {
+      "reviewedAt": "2026-10-22T14:53:18.108Z",
+      "reviewedBy": "Codex: source, voice guide, reader contract and reference comparison",
+      "hashes": {
+        "caption": "01231803f1ed9e3dc5007a1b64e0b9fbf690c7b02bd9eb72bf886b9e74ab7feb",
+        "source": "ac9c49b5969d06286298de447587cc132070a7fd665b02b04f51cf6f31947d3b",
+        "voiceGuide": "009458279b9e0b6c3390bf69cb4b39afebf4c6a79ac34a64d89b091070524823",
+        "readerContract": "08ae6e7e90333026b35034d503645644865e5be150413474f83129036f2ecd81",
+        "referenceCaption": "3c60871667ef875c585d2ad568c2c91d875563b0e529a421e62d28e9ef429846"
+      }
     }
   }
 }

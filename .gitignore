@@ -47,7 +47,8 @@ lerna-debug.log*
 .cache
 .temp
 .tmp
-/.artifacts/listen/
+# Private local evidence and generated media remain on the machine.
+/.artifacts/
 
 # OS files
 Thumbs.db
