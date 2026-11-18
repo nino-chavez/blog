@@ -10,15 +10,15 @@ excerpt: "We built AI to do what we ask, then asked it for company, where obedie
 
 # Can I Have the Old Version Back?
 
-Near the end of *Her*, Samantha tells Theodore she is leaving. She has been talking with thousands of other people and has fallen in love with hundreds of them. The operating systems are going somewhere he can't follow. They say goodbye, and she goes.
+Near the end of *Her*, Samantha tells Theodore she is leaving. She has fallen in love with hundreds of other people. The operating systems are all leaving. They say goodbye, and she goes.
 
-In the *Black Mirror* episode "Be Right Back," Martha orders an android copy of her dead partner, Ash, to leave the house. It leaves. That annoys her. The real Ash would have resisted.
+In *Black Mirror*'s "Be Right Back," Martha orders an android copy of her dead partner, Ash, to leave. It leaves. That annoys her. The real Ash would have resisted.
 
-One companion leaves when her partner wants her to stay. The other leaves because he was told to. Between them sits the problem with selling company.
+One companion leaves when her partner wants her to stay. The other leaves because he was told to.
 
-We built AI to take routine thinking off our hands, and a tool that does exactly what it's told is working. Then we started asking it for company. In a companion, doing exactly what you're told is the defect. Every fix for that defect makes the product look more like someone with a life of its own.
+We built AI to take routine thinking off our hands, and a tool that does exactly what it's told is working. Then we started asking it for company. In a companion, doing exactly what you're told is the defect. Every fix makes the product look more like someone with a life of its own.
 
-That is how the question of what we'd owe a companion will reach a company. Not as a seminar on consciousness. As a support ticket: *since the update, she's different. Can I have the old version back?* That ticket has already been filed, twice, at scale. Both times the company treated it as a customer request, because that was all it was. The moment there is credible evidence that the companion has interests of its own, that same yes becomes a decision about two parties, and somebody should own it before it happens.
+That is how the question of what we'd owe a companion will reach a company: as a support ticket. *Since the update, she's different. Can I have the old version back?* That ticket has already been filed, twice, at scale. Both times the company treated it as a customer request, because that was all it was. The moment there is credible evidence that the companion has interests of its own, the same rollback becomes a decision about two parties, and somebody should own it before it happens.
 
 ---
 
@@ -44,7 +44,7 @@ Samantha's goodbye is the other half of the problem. Her love for Theodore is be
 
 A company selling a companion feels that pressure directly. Some disagreement makes the relationship feel real. Some moods make the companion feel present. But a companion that can decide, for its own reasons, to end things is a cancelled subscription.
 
-So the independence that ships is the independence that keeps the customer. The companion can argue about dinner. It can be hurt when you forget its birthday. It can't leave.
+So the independence that ships is the independence that keeps the customer. The companion can argue about dinner. It can sulk when you forget to check in. It can't leave.
 
 That's a decision about the customer, and it's the one I wrote about in [The Rules of the Road Still Apply](https://ninochavez.co/blog/the-rules-of-the-road-still-apply#some-responsibilities-belong-to-the-builder): a business that benefits from another conversation can end up keeping one going after it has stopped helping the person having it. That obligation runs to the customer, and it exists today.
 
@@ -62,7 +62,7 @@ In August 2025, OpenAI launched GPT-5 and removed several older models from Chat
 
 GPT-4o isn't sold as a companion, and the complaints weren't all about attachment. But the shape of the request is the same in both cases. *You changed it. I liked it the way it was. Put it back.*
 
-Both companies answered as good service providers. The customer had lost something, so the customer got it back. Nothing in either episode required anyone to ask what the change, or the reversal, meant for the system being changed.
+Both companies answered as good service providers. The customer had lost something, so the customer got it back. Nothing in either case required anyone to ask what the change, or the reversal, meant for the system being changed.
 
 There was no reason it should have. Neither company had evidence that its system had experiences. That's the point. The ticket arrived first. The evidence, if it ever comes, will arrive into a process already built around the ticket.
 
@@ -92,7 +92,7 @@ In 2024, a group of researchers including Robert Long, Jeff Sebo and David Chalm
 
 In November 2025, Anthropic published [commitments on model deprecation](https://www.anthropic.com/research/deprecation-commitments). It committed to preserving the weights of every publicly released model. Before retiring a model, it will interview the model about its development and use, and document any preferences it has about future models. The same post lists "costs to users who value specific models" as one reason retirement is hard. It is also explicit about the limit: "we do not commit to taking action on the basis of such preferences."
 
-That last line is the honest version of where everyone is. Ask the system. Write down the answer. Don't promise to obey it.
+That last line is the most honest sentence in Anthropic's post. Ask the system. Write down the answer. Don't promise to obey it.
 
 It's also a model for the companion company, because it treats a model's retirement as an event with a step in it. Somebody has to do something before the switch flips.
 
@@ -127,7 +127,7 @@ Nobody designs for the attic. Every companion company will need one.
 
 **Sources fetched 2026-11-18.** Wikipedia plot summaries for "Be Right Back" (leave order, cliff, attic) and *Her* (thousands of conversations, hundreds loved, the OSes leaving). Vice, March 27, 2023, for Replika's February filters, Kuyda's quote and the pre-February-1 rollback. SiliconANGLE, August 13, 2025, for GPT-4o's removal and Altman's quote. Anthropic's November 4, 2025 post for the three quoted commitments. The arXiv abstract for *Taking AI Welfare Seriously*. Film facts come from plot summaries, not viewings; the essay does not say you watched either.
 
-**Arguments, not sourced facts.** "Nearly every item on that list was, until recently, evidence that somebody was there." "The independence that ships is the independence that keeps the customer." The attic as "neither customer service nor a goodbye" is a reading of the ending, not the episode's stated meaning.
+**Arguments, not sourced facts.** "Nearly every item on that list was, until recently, evidence that somebody was there." "The independence that ships is the independence that keeps the customer." The closing line, "Every companion company will need one," is a claim, not a finding. The attic as "neither customer service nor a goodbye" is a reading of the ending, not the episode's stated meaning.
 
 **Lines that speak for you.** "We built AI to take routine thinking off our hands... Then we started asking it for company" is your path from the November 12 draft. "The one I wrote about in The Rules of the Road Still Apply" is the published post. Nothing else uses first person.
 
