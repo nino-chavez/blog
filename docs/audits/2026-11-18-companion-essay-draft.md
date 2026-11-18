@@ -39,3 +39,9 @@ Operator dispatch `d73bdb4e-5d30-4bad-b191-15fb30879758`, read-only; receipt and
 - Payoff was at about word 190. The two-party point now lands at word 146.
 
 The revised text has not had a second cold read.
+
+## Publication
+
+On 2026-11-18 Nino explicitly directed: "Publish without audio." This is the text-only exception that `.claude/CLAUDE.md` and `docs/listen.md` require to be recorded. No recording was generated: ElevenLabs reported "Partial System Degradation" that day and authenticated requests timed out at the voice check, before any speech request, so nothing was charged. The prepared narration script was reviewed and is kept locally under `astro-build/.tmp/listen-preview/`. Adding audio later is a separate decision that needs a new recording and Nino's approval of it.
+
+Publication sets `status: "published"`, removes the private token, and sets `publishedAt` to 2026-11-18T16:16:00.000Z. No LinkedIn or Substack distribution was requested.
