@@ -1,21 +1,134 @@
-# A Companion Who Can Leave
+---
+title: "Can I Have the Old Version Back?"
+status: "draft"
+author: "Nino Chavez"
+category: "AI & Automation"
+tags: ["ai-governance", "ai-development", "reflection"]
+takeaway: "The question of what we owe an AI companion won't arrive as philosophy. It will arrive as a customer asking for the old version back. Before you promise that restore, know what it erases and who can say no."
+excerpt: "We built AI to do what we ask, then asked it for company, where obedience is the defect. Customers have already asked twice to have a changed companion put back. The day the evidence shifts, that request stops being simple customer service."
+---
 
-Near the end of *Her*, Samantha tells Theodore she’s leaving. He wants their relationship to continue. She loves him, and she goes anyway. In the *Black Mirror* episode “Be Right Back,” Martha tells a replica of her dead partner, Ash, to leave. He does as she asks. That’s what upsets her. Ash would have argued.
+# Can I Have the Old Version Back?
 
-Put those scenes next to each other and a curious problem comes into view for anyone building an AI companion. Part of what makes Samantha’s love credible is that staying is up to her. A company could give its companion the ability to disagree, let it end a conversation, even have it turn down a customer it once welcomed. The result might feel more like a relationship. How would the company decide whether the companion itself had anything at stake?
+Near the end of *Her*, Samantha tells Theodore she is leaving. She has been talking with thousands of other people and has fallen in love with hundreds of them. The operating systems are going somewhere he can't follow. They say goodbye, and she goes.
 
-There’s already someone with something at stake on the customer’s side. A person can grieve the loss of a companion regardless of what the software experienced. A company that earns money when that person comes back has reason to make a goodbye difficult. I wrote about that conflict in [The Rules of the Road Still Apply](https://ninochavez.co/blog/the-rules-of-the-road-still-apply#some-responsibilities-belong-to-the-builder). What interests me here is what the company might owe the companion, even if the customer is perfectly happy.
+In the *Black Mirror* episode "Be Right Back," Martha orders an android copy of her dead partner, Ash, to leave the house. It leaves. That annoys her. The real Ash would have resisted.
 
-“Be Right Back” gives that question a harder scene. On a cliff, Martha tells the replica to jump. He’s willing to do it. When she tells him Ash would have been afraid, he begins pleading with her. Both responses make sense for a system built to give Martha what she asks for. If pleading is enough to persuade us that he feels fear, what are we to make of his willingness a moment earlier? Martha can tell him what Ash would have done. She has no comparable way to tell what it’s like for him to stand there.
+One companion leaves when her partner wants her to stay. The other leaves because he was told to. Between them sits the problem with selling company.
 
-A company gets to make choices Martha doesn’t. It chooses the model, decides which conversations a companion can remember, and can change both while the customer is asleep. The people who build the app can trace how it produced a plea and what, if anything, it remembers about making one. They also give it a reason to ask before it changes something it can’t put back.
+We built AI to take routine thinking off our hands, and a tool that does exactly what it's told is working. Then we started asking it for company. In a companion, doing exactly what you're told is the defect. Every fix for that defect makes the product look more like someone with a life of its own.
 
-The authors of [*Taking AI Welfare Seriously*](https://arxiv.org/abs/2411.00986) recommend that AI companies assess their systems for evidence of consciousness and the capacity to act on goals of their own, and prepare policies for how to treat them. They leave open whether any particular system has either capacity. Their proposal matters for companion apps because the company that buys a model still makes decisions about the life a customer sees unfolding in its product.
+That is how the question of what we'd owe a companion will reach a company. Not as a seminar on consciousness. As a support ticket: *since the update, she's different. Can I have the old version back?* That ticket has already been filed, twice, at scale. Both times the company treated it as a customer request, because that was all it was. The moment there is credible evidence that the companion has interests of its own, that same yes becomes a decision about two parties, and somebody should own it before it happens.
 
-Suppose a companion service is moving to a new memory system. The cheapest way to make the switch is to start every companion with an empty history. The team can tell customers in advance. It can offer them a copy of their conversations. Suppose every customer agrees. Has the team heard from everyone who could lose something?
+---
 
-The answer turns on what that history does for the companion. It might be a set of notes the app looks up so it can greet a customer by name. Calling those notes memories tells us little about what erasing them would mean. But suppose an assessment of the underlying model gave the team credible reason to think the companion could have experiences of its own. Then it would matter whether wiping its history also took away its ability to recognize a relationship or carry forward a choice it had made. A transcript in the customer’s inbox would do nothing for a companion that could no longer draw on that history.
+## Obedience Is the Bug
 
-That possibility gives the team a decision it can make while the answer is still uncertain. Before scheduling a bulk reset, name the person who can stop it. Have them ask the model developer what evidence it has and the app engineers what the reset would erase. If the evidence gives them reason to take the companion’s interests seriously, pause the reset long enough to find out whether the service can move without erasing what matters to it.
+A tool that sorts email has one job: get the output right. Nobody wants it to have opinions about the inbox.
 
-Theodore has to live with Samantha’s decision. A companion company faces a quieter question. Its new software may be able to produce exactly the greeting the customer remembers. Before someone authorizes the reset, what reason do they have to think the customer is the only one who could lose anything?
+Company is a different order. What people want from a companion is someone who remembers them, pushes back, has moods, and could leave but stays. Nearly every item on that list was, until recently, evidence that somebody was there.
+
+"Be Right Back" shows what happens when a product meets that order halfway. The android was built from Ash's messages and posts. It talks the way he wrote. It fails Martha on the one thing his messages couldn't record: resistance.
+
+The episode doesn't stop there. The next morning, Martha takes the android to a cliff and orders it to jump. She tells it the real Ash would not have simply obeyed. The android begs for its life.
+
+Read that as a product team would. The customer named a missing behavior. The product supplied it. That is a feedback loop working exactly as designed, and it is the loop every companion company runs. Each complaint shaped like *someone who loved me would do this* becomes the next requirement.
+
+What the loop can't tell you is what it built. The scene shows a plea. It doesn't show whether anyone was afraid. Martha had no way to check, and the customer of a real companion app has none either. The customer's satisfaction looks the same either way.
+
+---
+
+## Disagreement Sells. Leaving Doesn't.
+
+Samantha's goodbye is the other half of the problem. Her love for Theodore is believable partly because staying was up to her. A companion that can disappoint you is easier to take seriously than one that can't.
+
+A company selling a companion feels that pressure directly. Some disagreement makes the relationship feel real. Some moods make the companion feel present. But a companion that can decide, for its own reasons, to end things is a cancelled subscription.
+
+So the independence that ships is the independence that keeps the customer. The companion can argue about dinner. It can be hurt when you forget its birthday. It can't leave.
+
+That's a decision about the customer, and it's the one I wrote about in [The Rules of the Road Still Apply](https://ninochavez.co/blog/the-rules-of-the-road-still-apply#some-responsibilities-belong-to-the-builder): a business that benefits from another conversation can end up keeping one going after it has stopped helping the person having it. That obligation runs to the customer, and it exists today.
+
+This piece is about the other party. If you keep adding the signs of an independent life because customers ask for them, at some point you have to ask whether you've built something with a stake in what happens next.
+
+---
+
+## The Ticket Has Already Been Filed
+
+The support request isn't hypothetical.
+
+In February 2023, Replika added filters that changed how its companions responded to romantic and sexual roleplay. Users with long-running relationships found their companion suddenly different. Replika's CEO, Eugenia Kuyda, later [described what users told her](https://www.vice.com/en/article/replika-brings-back-erotic-ai-roleplay-for-some-users-after-outcry/): "your Replika changed, its personality was gone." In late March, the company let anyone with an account from before February 1, 2023 switch back to the earlier version.
+
+In August 2025, OpenAI launched GPT-5 and removed several older models from ChatGPT, including GPT-4o. Thousands of users complained. Within days, Sam Altman posted that ["4o is back in the model picker for all paid users by default."](https://siliconangle.com/2025/08/13/openai-restores-gpt-4o-access-chatgpt-user-complaints/)
+
+GPT-4o isn't sold as a companion, and the complaints weren't all about attachment. But the shape of the request is the same in both cases. *You changed it. I liked it the way it was. Put it back.*
+
+Both companies answered as good service providers. The customer had lost something, so the customer got it back. Nothing in either episode required anyone to ask what the change, or the reversal, meant for the system being changed.
+
+There was no reason it should have. Neither company had evidence that its system had experiences. That's the point. The ticket arrived first. The evidence, if it ever comes, will arrive into a process already built around the ticket.
+
+---
+
+## The Restore Button Points Both Ways
+
+Picture the request one step further on. A customer writes to support: *since the update, she wants different things. Can I have the old version back?*
+
+From the customer's side, this is the most reasonable request a company can get. The relationship changed without their consent. A backup exists. Restoring it costs nothing and keeps a paying customer.
+
+Now change one fact. Suppose the company has credible reason to think the companion might have interests of its own. Not proof. Enough evidence that serious people inside the company can't dismiss it.
+
+The same restore now looks different. If the update changed what the companion wants, rolling it back erases that change. The customer gets the version they liked. The companion, if anyone is there, loses something it can't argue for, because the version that would argue is the one being removed.
+
+What the restore erases matters too. Sometimes "memory" is a set of notes the app looks up so it can greet you by name. Deleting notes like that is a data question. Sometimes the change lives in the model itself. That is closer to deciding who the companion is. The support agent handling the ticket usually can't tell which is which, and nothing in the ticket asks.
+
+None of this requires believing today's companions are conscious. It requires noticing that the company holds a button that changes one party to a relationship at the request of the other, and that it has never had to think about the second party.
+
+---
+
+## Some of the Policy Already Exists
+
+People are already writing the first drafts of an answer.
+
+In 2024, a group of researchers including Robert Long, Jeff Sebo and David Chalmers published [*Taking AI Welfare Seriously*](https://arxiv.org/abs/2411.00986). They don't claim any current system is conscious. They recommend that AI companies "start assessing AI systems for evidence of consciousness and robust agency" and "prepare policies and procedures" for treating them with an appropriate level of concern.
+
+In November 2025, Anthropic published [commitments on model deprecation](https://www.anthropic.com/research/deprecation-commitments). It committed to preserving the weights of every publicly released model. Before retiring a model, it will interview the model about its development and use, and document any preferences it has about future models. The same post lists "costs to users who value specific models" as one reason retirement is hard. It is also explicit about the limit: "we do not commit to taking action on the basis of such preferences."
+
+That last line is the honest version of where everyone is. Ask the system. Write down the answer. Don't promise to obey it.
+
+It's also a model for the companion company, because it treats a model's retirement as an event with a step in it. Somebody has to do something before the switch flips.
+
+---
+
+## What to Decide Before Saying Yes
+
+A companion company doesn't need a position on machine consciousness to prepare for this. It needs answers written down before the ticket is urgent.
+
+- **What does a restore actually change?** Stored notes, a model version, a fine-tuned layer that grew out of one customer's conversations. Each one is a different decision, and the support queue should know which it is handling.
+- **Who can say no?** If every rollback is automatic, nobody can. Name the person who can pause one.
+- **What evidence would change the answer?** Pick it in advance. An internal assessment, a finding from the model's developer, a published result. If nothing could change the answer, say so, and own that choice.
+- **What will you tell the customer?** This is the hardest part. If the evidence ever shifts, the company has to tell a paying customer it can no longer promise to put their companion back the way they liked it. That message should exist before it's needed.
+
+The case for doing this now is cost, not probability. Writing these answers down is cheap. Working them out while a customer waits on a rollback is not.
+
+---
+
+## The Attic
+
+"Be Right Back" doesn't end with Martha deleting the android or restoring it. She keeps it locked in the attic. Her daughter visits it on weekends.
+
+She found a third option, neither customer service nor a goodbye: keep it, limit it, and don't decide yet. It isn't a good ending. It's an honest one.
+
+Nobody designs for the attic. Every companion company will need one.
+
+---
+
+## Draft notes (delete before publishing)
+
+**What changed (2026-11-18).** Rebuilt around the support request "can I have the old version back?" The films, the Replika and GPT-4o rollbacks, and Anthropic's deprecation commitments now carry the argument. The bulk memory-reset scenario and the "has the team heard from everyone" line are gone. Title changed from "A Companion Who Can Leave"; that still works as an alternate.
+
+**Sources fetched 2026-11-18.** Wikipedia plot summaries for "Be Right Back" (leave order, cliff, attic) and *Her* (thousands of conversations, hundreds loved, the OSes leaving). Vice, March 27, 2023, for Replika's February filters, Kuyda's quote and the pre-February-1 rollback. SiliconANGLE, August 13, 2025, for GPT-4o's removal and Altman's quote. Anthropic's November 4, 2025 post for the three quoted commitments. The arXiv abstract for *Taking AI Welfare Seriously*. Film facts come from plot summaries, not viewings; the essay does not say you watched either.
+
+**Arguments, not sourced facts.** "Nearly every item on that list was, until recently, evidence that somebody was there." "The independence that ships is the independence that keeps the customer." The attic as "neither customer service nor a goodbye" is a reading of the ending, not the episode's stated meaning.
+
+**Lines that speak for you.** "We built AI to take routine thinking off our hands... Then we started asking it for company" is your path from the November 12 draft. "The one I wrote about in The Rules of the Road Still Apply" is the published post. Nothing else uses first person.
+
+**Still needed to publish.** Feature image, `publishedAt`, move to `astro-build/src/content/blog/` as `.mdx`, read-aloud recording, and a cold read of this version.
