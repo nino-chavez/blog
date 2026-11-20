@@ -1,8 +1,9 @@
 ---
 title: "Audit Your AI Coding Harness in Four Exercises"
 publishedAt: "2026-07-29T12:00:00.000Z"
+updatedAt: "2026-11-24T12:00:00.000Z"
 author: "Nino Chavez"
-excerpt: "Install a custom Claude Code command, run it against your own setup, and find out what's unused, what's slow, and what could vanish without a trace. Companion workshop to Nothing Broke. It Just Wasn't There."
+excerpt: "Run Claude Code's /doctor checkup, with one added check, against your own setup, and find out what's unused, what's slow, and what has no backup. Companion workshop to Nothing Broke. It Just Wasn't There. Includes a correction dated November 24, 2026."
 category: "Engineering"
 featureImage: "/images/generated/audit-your-ai-coding-harness.webp"
 tags: ["agentic-systems", "tutorial", "engineering"]
@@ -13,7 +14,7 @@ prerequisites:
   - "git installed"
   - "Read the companion post: Nothing Broke. It Just Wasn't There."
 objectives:
-  - "Install a custom Claude Code command from a public repo"
+  - "Install a command file from a public repo"
   - "Read a harness health report and understand what each section means"
   - "Identify extensions in your own setup with no version-control backing"
   - "Apply a recommended cleanup through Claude Code's confirmation gates, and know how to undo it"
@@ -28,9 +29,11 @@ import { Checkpoint } from '@/components/tutorials/Checkpoint';
 
 # Everything Loaded Into Your Session Has a Cost, and Some of It Has No Backup
 
-In [Nothing Broke. It Just Wasn't There.](/blog/nothing-broke-it-just-wasnt-there), a custom Claude Code command got built, ran successfully, fixed two real problems — and then disappeared within four days because it was never backed by version control. Nobody noticed until a transcript search went looking for it by name.
+> **Correction, November 24, 2026.** This workshop first said `/doctor` was a custom command that I built and then lost. That was wrong. `/doctor` is built into Claude Code, and has been a full setup checkup since version 2.1.205 (July 8, 2026). The file you install below is a copy of it with one check added: whether each extension is backed by version control. You can run the built-in `/doctor` without installing anything; only Exercise 3 needs the added check.
 
-This workshop is the hands-on half. You'll install the recovered, hardened version of that command — `/doctor` — and run it against your own AI coding setup. By the end you'll know what's loaded into every one of your Claude Code sessions, what's actually earning its place, and which pieces could vanish the same way the original did.
+Claude Code ships a `/doctor` command that checks your setup: what is installed, what loads into every session, and what never gets used. [Nothing Broke. It Just Wasn't There.](/blog/nothing-broke-it-just-wasnt-there) describes an audit of my own setup that used it, and now carries the same correction.
+
+This workshop is the hands-on half. You'll install a version of `/doctor` with one check added, and run it against your own AI coding setup. By the end you'll know what's loaded into every one of your Claude Code sessions, what's actually earning its place, and which pieces have no backup anywhere.
 
 A few terms, defined once so the rest of this reads clean:
 
@@ -46,11 +49,13 @@ A few terms, defined once so the rest of this reads clean:
 
 ## Why this matters
 
-Claude Code custom commands are just Markdown files in a specific folder. There's no package manager step, no build — you drop a file at `~/.claude/commands/<name>.md` and `/name` becomes available in your next session. That simplicity is exactly what let the original tool disappear without a trace: nothing about "drop a file in a folder" requires that folder to be backed up anywhere.
+Claude Code custom commands are just Markdown files in a specific folder. There's no package manager step, no build — you drop a file at `~/.claude/commands/<name>.md` and `/name` becomes available in your next session. That simplicity has a cost: nothing about "drop a file in a folder" requires that folder to be backed up anywhere.
 
 ## The structure
 
-`/doctor` lives in a public methodology repo: [`github.com/nino-chavez/agentic-ways-of-working`](https://github.com/nino-chavez/agentic-ways-of-working), at `commands/doctor.md`. The repo's own `install.sh` symlinks its commands, skills, and hooks into `~/.claude/` — which means installing this way gives you the fix for the vanishing problem for free: a symlink into a git-tracked repo, not a lone file with nothing behind it.
+`/doctor` lives in a public methodology repo: [`github.com/nino-chavez/agentic-ways-of-working`](https://github.com/nino-chavez/agentic-ways-of-working), at `commands/doctor.md`. The repo's own `install.sh` symlinks its commands, skills, and hooks into `~/.claude/`. A symlink into a git-tracked repo is better than a lone file with nothing behind it, but it is not the whole fix: the link itself stays untracked unless your `~/.claude` folder is in a repo. Exercise 3 comes back to this.
+
+Claude Code already has a built-in `/doctor`, so the names collide. On my setup the file wins: with it installed, my sessions load this file's version (checked on Claude Code 2.1.308, desktop app). You can tell which one ran: as of Claude Code 2.1.314, only this version reports extensions with no version-control backing.
 
 ## Your turn
 
@@ -116,18 +121,20 @@ Write down (even just to yourself) one specific finding from your own report and
 
 ## Why this matters
 
-This is the check that didn't exist when the original tool disappeared. Everything else in `/doctor` asks "is this earning its keep." This one asks a different question: "if your machine died tomorrow, would this still exist anywhere?"
+This is the check the built-in `/doctor` does not have, as of Claude Code 2.1.314. Everything else in `/doctor` asks "is this earning its keep." This one asks a different question: "if your machine died tomorrow, would this still exist anywhere?"
 
 ## The structure
 
-An **untracked** item is a file or symlink that's present on disk, fully loadable by your next session, and backed by nothing — never committed to git anywhere. If it's lost — a new machine, a careless cleanup command, a bad `git clean` in the wrong directory — there's no error, no log entry, nothing to `git diff` against. It's just gone, the same way the original command was.
+An **untracked** item is a file or symlink that's present on disk, fully loadable by your next session, and backed by nothing — never committed to git anywhere. If it's lost — a new machine, a careless cleanup command, a bad `git clean` in the wrong directory — there's no error, no log entry, nothing to `git diff` against. It's just gone.
 
 The subtle part: a lot of what's in `~/.claude/skills/` and `~/.claude/commands/` is symlinks, not real files — small pointers to a real file living elsewhere. A symlink can point at a perfectly legitimate, fully-committed repository while the *pointer itself* was never added to git. Checking where a symlink points isn't enough. The pointer needs its own entry tracked too, or the wiring disappears even if the target survives.
 
 That gives you two things to actually worry about, and they're not the same severity:
 
 - **Untracked and never used** — the easy case. Nothing is lost if it's gone; it's just clutter. Safe to remove or safe to ignore.
-- **Untracked and actively used** — the one worth taking seriously. Something you rely on, sitting with no recovery path. This is exactly the state the original `/doctor` command was in for the four days before it disappeared.
+- **Untracked and actively used** — the one worth taking seriously. Something you rely on, sitting with no recovery path.
+
+By this rule, the link you created in Exercise 1 is itself untracked unless your `~/.claude` folder is in a git repo. Count it when you do the next step.
 
 ## Your turn
 
@@ -177,14 +184,14 @@ Four exercises, each answering a different question about the same setup:
 
 | Exercise | Question | What it protects against |
 |---|---|---|
-| Install | Is the tool itself durable? | The exact failure that started this workshop |
+| Install | Is the tool itself durable? | A tool with nothing behind it |
 | Read the report | What's actually loaded, and why? | Guessing instead of measuring |
 | Find what could vanish | What has no backup? | Silent, undetected loss |
 | Apply a fix | What changed, and can I undo it? | Losing trust in the tool by over-applying it |
 
 ## Where This Is Heading
 
-`/doctor` only runs when you remember to run it. That's still true after this workshop — the check that would have caught the original failure is now real, but it's not automatic. Running it once, today, tells you about today. It doesn't tell you about the skill you add next month and forget to commit.
+`/doctor` only runs when you remember to run it. That's still true after this workshop — the check for untracked extensions is real, but it's not automatic. Running it once, today, tells you about today. It doesn't tell you about the skill you add next month and forget to commit.
 
 The honest next step isn't a bigger one-time audit. It's making this a habit — after installing something new, after a cleanup pass of your own, before you hand your setup to someone else the way this whole workshop started: a colleague asking what was actually worth reconstructing.
 

@@ -2,20 +2,30 @@
 title: "Nothing Broke. It Just Wasn't There."
 slug: "nothing-broke-it-just-wasnt-there"
 publishedAt: "2026-07-30T03:55:42.000Z"
-updatedAt: "2026-07-30T03:55:42.000Z"
+updatedAt: "2026-11-24T12:00:00.000Z"
 author: "Nino Chavez"
 status: "published"
-excerpt: "I went looking for a tool I'd built four days earlier and it was gone. It hadn't failed — it had run, found two real problems, and fixed both. Working correctly and existing durably turn out to be different properties, and running the thing only tests one of them."
+excerpt: "An audit of my AI coding setup measured where the tokens actually go and found a dozen extensions with no backup. Three of my four guesses about the waste were wrong. Includes a correction dated November 24, 2026."
 tags: ["ai-development", "deep-dive"]
 category: "AI Development"
 featureImage: "/images/generated/nothing-broke-it-just-wasnt-there.webp"
 seo:
   metaTitle: "Nothing Broke. It Just Wasn't There."
-  metaDescription: "An audit of my AI coding setup went hunting for token waste and found something worse: a working tool that had vanished in four days without producing a single error."
+  metaDescription: "An audit of my AI coding setup: where the tokens actually go, and a dozen extensions with no backup. Includes a correction dated November 24, 2026."
 ---
 
 import { Callout } from '@/components/mdx/Callout';
 import { PullQuote } from '@/components/mdx/PullQuote';
+
+<Callout type="warning" title="Correction, November 24, 2026">
+This essay says I built a tool and lost it within four days. That account is wrong.
+
+The tool was `/doctor`, a command built into Claude Code since before the events described here (version 2.1.205, July 8, 2026). It was never a file of mine, so there was nothing to lose.
+
+What I added is one check: whether each skill, command and hook is backed by version control. That check, the dozen untracked extensions it found, and the token measurements are not affected.
+
+The text below is as first published.
+</Callout>
 
 I went looking for a tool I'd built four days earlier. It wasn't anywhere.
 
