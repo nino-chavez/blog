@@ -32,6 +32,8 @@ In [Nothing Broke. It Just Wasn't There.](/blog/nothing-broke-it-just-wasnt-ther
 
 This workshop is the hands-on half of that measurement. If you've done the [companion `/doctor` workshop](/blog/tutorials/audit-your-ai-coding-harness), this covers the other clock: not the standing harness, but what accumulates inside every conversation you have with the model.
 
+*Note, November 24, 2026: the `/doctor` workshop and the companion essay now carry a correction about where `/doctor` came from. It does not change the measurements this workshop uses.*
+
 One idea worth having straight before you start: the agent API is stateless. Every single tool call resends your entire conversation so far, from the top. Nothing is free just because you already said it once. A token that lands early in a long session gets paid for again on every turn that follows it — which is why session length, not any one expensive-feeling action, tends to be the real driver.
 
 ---
