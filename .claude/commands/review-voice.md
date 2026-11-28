@@ -14,6 +14,7 @@ Then evaluate the draft on a scale of 1-10 for each dimension:
 - Distinguishes observed evidence, reported experience, and hypothesis
 - Preserves claim scope in both directions
 - Lets a reader state the point after the first 150 words
+- Makes the point Nino started from, when his starting words are provided, and not only a point the draft holds together around
 - Does not present session steering as a changed POV without changed evidence
 
 ## Structural Patterns (/10)
